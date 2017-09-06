@@ -1,0 +1,15 @@
+# IDE Specific
+*.csproj
+*.pidb
+*.sln
+*.userprefs
+*.unityproj
+*.suo
+OceanEmpire/Library/
+OceanEmpire/Temp/
+OceanEmpire/.vs/
+.vs/
+
+# SourceTree Patch against .gitignore_global on Windows
+!*.exe
+!*.dll
