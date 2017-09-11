@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Fixes your lerp (based on 120 fps)
 /// </summary>
-public class FixedLerp
+public static class FixedLerp
 {
     public const float defaultFPS = 120;
     private static float FPS

@@ -6,4 +6,4 @@ public class UpdateFullInspectorRootDirectory : fiSettingsProcessor
     {
         fiSettings.RootDirectory = "Assets/Plugins/FullInspector2/";
     }
-}
+}

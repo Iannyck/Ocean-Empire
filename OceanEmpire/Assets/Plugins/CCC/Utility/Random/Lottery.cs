@@ -1,123 +1,133 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CCC.Utility
+public interface IWeight
 {
-    public interface ILotteryItem
+    float Weight { get; }
+}
+
+public struct Lottery<T>
+{
+    List<IWeight> list;
+    float totalWeight;
+
+    private class Item : IWeight
     {
-        float Weight();
+        public float weight;
+        public T obj;
+        public float Weight { get { return weight; } set { weight = value; } }
+        public Item(T obj, float weight) { this.weight = weight; this.obj = obj; }
     }
 
-    // Structure de données permettant de choisir un élément ayant une chance d'être pigé
-    // parmis un lot d'éléments ayant également leur propre chance d'être pigé (weight)
-    public class Lottery
+    public Lottery(int capacity = 4)
     {
-        public Lottery() { }
-        public Lottery(ILotteryItem[] items)
+        totalWeight = 0;
+        list = new List<IWeight>(capacity);
+    }
+    public Lottery(IEnumerable<IWeight> c)
+    {
+        totalWeight = 0;
+        foreach (var item in c)
         {
-            list.AddRange(items);
+            totalWeight += item.Weight;
         }
-        private class LotteryItem : ILotteryItem
+        list = new List<IWeight>(c);
+    }
+
+    /// <summary>
+    /// Nombre d'éléments dans le lot
+    /// </summary>
+    public int Count
+    {
+        get
         {
-            // Constructeur d'un élément qui va faire parti du lot
-            public LotteryItem(object obj, float weight)
+            return list.Count;
+        }
+    }
+    /// <summary>
+    /// Le poid total de la lottery
+    /// </summary>
+    public float TotalWeight
+    {
+        get
+        {
+            return totalWeight;
+        }
+    }
+
+    /// <summary>
+    /// Ajout d'un objet dans le lot
+    /// </summary>
+    public void Add<U>(U obj) where U : IWeight, T
+    {
+        list.Add(obj);
+        totalWeight += obj.Weight;
+    }
+
+    /// <summary>
+    /// Ajout d'un objet dans le lot en fonction de sa chance d'être sélectionné
+    /// </summary>
+    public void Add(T obj, float weight)
+    {
+        list.Add(new Item(obj, weight));
+        totalWeight += weight;
+    }
+
+    public void AddRange(IEnumerable<IWeight> r)
+    {
+        foreach (var item in r)
+        {
+            totalWeight += item.Weight;
+        }
+        list.AddRange(r);
+    }
+
+    public void RemoveAt(int index)
+    {
+        if (index < 0 || index >= list.Count)
+            throw new System.Exception("Tried to remove lottery element out of range.");
+        totalWeight -= list[index].Weight;
+        list.RemoveAt(index);
+    }
+
+    /// <summary>
+    /// Sélection d'un élément de facon aléatoire en fonction de leurs chance d'être pigé
+    /// </summary>
+    public T Pick(out int pickedIndex)
+    {
+        pickedIndex = -1;
+
+        if (list.Count <= 0)
+        {
+            Debug.LogError("No lottery item to pick from. Add some before picking.");
+            return default(T);
+        }
+
+        float ticket = Random.Range(0, totalWeight);
+        float currentWeight = 0;
+        for (pickedIndex = 0; pickedIndex < list.Count; pickedIndex++)
+        {
+            currentWeight += list[pickedIndex].Weight;
+            if (ticket < currentWeight)
             {
-                this.obj = obj;
-                this.weight = weight;
-            }
-            public object obj = null;
-            public float weight = 1;
-
-            public float Weight()
-            {
-                return weight;
+                if (list[pickedIndex] is Item)
+                    return (list[pickedIndex] as Item).obj;          //Devrais toujours return ici
+                else
+                    return (T)list[pickedIndex];
             }
         }
 
-        ArrayList list = new ArrayList(); // Liste des objets du lot
+        Debug.LogError("Error in lottery.");
+        return default(T);
+    }
 
-        public void Add(ILotteryItem item)
-        {
-            list.Add(item);
-        }
-
-        public object At(int i)
-        {
-            return list[i];
-        }
-
-        public void RemoveAt(int i)
-        {
-            list.RemoveAt(i);
-        }
-
-        /// <summary>
-        /// Ajout d'un objet dans le lot en fonction de sa chance d'être sélectionné
-        /// </summary>
-        public void Add(object item, float weight)
-        {
-            Add(new LotteryItem(item, weight));
-        }
-
-        /// <summary>
-        /// Nombre d'éléments dans le lot
-        /// </summary>
-        public int Count
-        {
-            get
-            {
-                return list.Count;
-            }
-        }
-
-        /// <summary>
-        /// Sélection d'un élément de facon aléatoire en fonction de leurs chance d'être pigé
-        /// </summary>
-        public object Pick()
-        {
-            int bidon;
-            return Pick(out bidon);
-        }
-
-        /// <summary>
-        /// Sélection d'un élément de facon aléatoire en fonction de leurs chance d'être pigé
-        /// </summary>
-        public object Pick(out int index)
-        {
-            index = -1;
-
-            if (list.Count <= 0)
-            {
-                Debug.LogError("No lottery item to pick from. Add some before picking.");
-                return null;
-            }
-
-            float totalWeight = 0;
-            foreach (ILotteryItem item in list)
-            {
-                totalWeight += item.Weight();
-            }
-
-            index = 0;
-
-            float ticket = Random.Range(0, totalWeight);
-            float currentWeight = 0;
-            foreach (ILotteryItem item in list)
-            {
-                currentWeight += item.Weight();
-                if (ticket < currentWeight)
-                {
-                    if (item is LotteryItem)
-                        return (item as LotteryItem).obj;          //Devrais toujours return ici
-                    else
-                        return item;
-                }
-                index++;
-            }
-
-            Debug.LogError("Error in lotery.");
-            return null;
-        }
+    /// <summary>
+    /// Sélection d'un élément de facon aléatoire en fonction de leurs chance d'être pigé
+    /// </summary>
+    public T Pick()
+    {
+        int bidon;
+        return Pick(out bidon);
     }
 }
