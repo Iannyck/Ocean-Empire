@@ -2,14 +2,30 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using FullInspector;
 using UnityEngine.Events;
 
-public class PlayerInputs : MonoBehaviour {
+public class PlayerInputs : BaseBehavior {
 
-    public UnityEvent screenTouched = new UnityEvent();
-    public UnityEvent screenClicked = new UnityEvent();
+    public bool useTouch = false;
+    public bool useClick = true;
 
+    [System.Serializable]
+    public class InputEvent : UnityEvent<Vector2> { }
+
+    [InspectorShowIf("useTouch")]
+    public InputEvent screenTouched = new InputEvent();
+    [InspectorShowIf("useClick")]
+    public InputEvent screenClicked = new InputEvent();
+
+    [InspectorShowIf("useTouch")]
+    public UnityEvent inputTouched = new UnityEvent();
+    [InspectorShowIf("useClick")]
+    public UnityEvent inputClicked = new UnityEvent();
+
+    [InspectorShowIf("useTouch")]
     public MonoBehaviour externalScriptTouch;
+    [InspectorShowIf("useClick")]
     public MonoBehaviour externalScriptMouse;
 
     // Update is called once per frame
@@ -20,7 +36,8 @@ public class PlayerInputs : MonoBehaviour {
             // Get movement of the finger since last frame
             Vector2 touchDeltaPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
 
-            screenTouched.Invoke();
+            inputTouched.Invoke();
+            screenTouched.Invoke(touchDeltaPosition);
 
             if (externalScriptTouch == null)
                 return;
@@ -33,18 +50,19 @@ public class PlayerInputs : MonoBehaviour {
 
         } else if(Input.GetMouseButtonDown(0))
         {
-            Vector2 touchDeltaPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 clickDeltaPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            screenClicked.Invoke();
+            inputClicked.Invoke();
+            screenClicked.Invoke(clickDeltaPosition);
 
             if (externalScriptMouse == null)
                 return;
 
             // Send Position to a script and trigger the event
             if (externalScriptMouse.GetComponent<Interfaces.IClickInputs>() != null)
-                externalScriptMouse.GetComponent<Interfaces.IClickInputs>().OnClick(touchDeltaPosition);
+                externalScriptMouse.GetComponent<Interfaces.IClickInputs>().OnClick(clickDeltaPosition);
             else if(gameObject.GetComponent<Interfaces.IClickInputs>() != null)
-                GetComponent<Interfaces.IClickInputs>().OnClick(touchDeltaPosition);
+                GetComponent<Interfaces.IClickInputs>().OnClick(clickDeltaPosition);
         }
 	}
 }
