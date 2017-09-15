@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScript : MonoBehaviour
+public class TestScript : MonoBehaviour, Interfaces.IClickInputs
 {
     [System.Serializable]
     public struct A : IWeight
@@ -17,9 +17,11 @@ public class TestScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log("TesT");
-        }
+
+    }
+
+    public void OnClick(Vector2 position)
+    {
+        Debug.Log("Test");
     }
 }
