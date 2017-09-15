@@ -4,4 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Game/Recolte/Recolte_Map.unity
+    guid: f0c884b8cca1c1f45bfe40eb64a0b6c8
+  - enabled: 1
+    path: Assets/Game/Debug/Eric/Eric_TestMap.unity
+    guid: 0cb5c6574fc1eca43b40c094b0245921
+  - enabled: 1
+    path: Assets/Game/Debug/Alex's Stuff/Alex_TestMap.unity
+    guid: 2722d89de8236494297e067f3d8d72cb
+  - enabled: 1
+    path: Assets/Game/Debug/Fred/Fred_TestScene.unity
+    guid: 7f58dff1951099e4ca2477b313e623bc
+  - enabled: 1
+    path: Assets/Plugins/Scene Transition/LoadingScreen.unity
+    guid: 00000000000000000000000000000000
