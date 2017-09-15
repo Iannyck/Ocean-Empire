@@ -25,3 +25,6 @@ public class TestScript : MonoBehaviour, Interfaces.IClickInputs
         Debug.Log("Test");
     }
 }
+
+
+//trying out stuff
