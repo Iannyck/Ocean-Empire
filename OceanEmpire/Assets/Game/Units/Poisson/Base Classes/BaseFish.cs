@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : PublicSingleton<Game>
+public class BaseFish : MonoBehaviour
 {
+    public FishDescription description;
 }

@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScript_Fred : MonoBehaviour {
+public class TestScript_Fred : MonoBehaviour
+{
+    public FishDescription fd;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (fd.GetSprite() != null)
+                print(fd.GetSprite());
+        }
+    }
 }
