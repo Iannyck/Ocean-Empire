@@ -19,14 +19,7 @@ public class TestScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Lottery<A> lot = new Lottery<A>(elements.Length);
-            for (int i = 0; i < elements.Length; i++)
-            {
-                lot.Add(elements[i]);
-            }
-            lot.RemoveAt(4);
-            print(lot.Pick().value);
-            print("total weight: " + lot.TotalWeight);
+            Debug.Log("TesT");
         }
     }
 }
