@@ -28,6 +28,8 @@ public class PlayerInputs : MonoBehaviour {
             // Send Position to a script and trigger the event
             if (externalScriptTouch.GetComponent<Interfaces.ITouchInputs>() != null)
                 externalScriptTouch.GetComponent<Interfaces.ITouchInputs>().OnTouch(touchDeltaPosition);
+            else if(gameObject.GetComponent<Interfaces.ITouchInputs>() != null)
+                GetComponent<Interfaces.ITouchInputs>().OnTouch(touchDeltaPosition);
 
         } else if(Input.GetMouseButtonDown(0))
         {
@@ -41,7 +43,8 @@ public class PlayerInputs : MonoBehaviour {
             // Send Position to a script and trigger the event
             if (externalScriptMouse.GetComponent<Interfaces.IClickInputs>() != null)
                 externalScriptMouse.GetComponent<Interfaces.IClickInputs>().OnClick(touchDeltaPosition);
-            
+            else if(gameObject.GetComponent<Interfaces.IClickInputs>() != null)
+                GetComponent<Interfaces.IClickInputs>().OnClick(touchDeltaPosition);
         }
 	}
 }
