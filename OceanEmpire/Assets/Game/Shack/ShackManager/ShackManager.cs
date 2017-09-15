@@ -25,6 +25,7 @@ public class ShackManager : MonoBehaviour {
     public void GoToExploration()
     {
         // Load Scene
+        LoadingScreen.TransitionTo("Recolte_Map", null);
     }
 
 
