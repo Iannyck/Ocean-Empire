@@ -55,6 +55,7 @@ MonoBehaviour:
   _keys:
   - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
   - {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce, type: 2}
+  - {fileID: 11400000, guid: f27f46c8ce906b042a164b3695a23e1c, type: 2}
   _values:
   - _keys: []
     _values: []
@@ -64,6 +65,12 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce,
       type: 2}
+  - _keys:
+    - DefaultBehaviorEditor.locationButton.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    _target: {fileID: 11400000, guid: f27f46c8ce906b042a164b3695a23e1c, type: 2}
 --- !u!114 &114711524658704266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +85,7 @@ MonoBehaviour:
   _keys:
   - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
   - {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce, type: 2}
+  - {fileID: 11400000, guid: f27f46c8ce906b042a164b3695a23e1c, type: 2}
   _values:
   - _keys: []
     _values: []
@@ -87,3 +95,6 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce,
       type: 2}
+  - _keys: []
+    _values: []
+    _target: {fileID: 11400000, guid: f27f46c8ce906b042a164b3695a23e1c, type: 2}
