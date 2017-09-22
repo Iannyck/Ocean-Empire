@@ -16,4 +16,10 @@ public class BaseFishDriver : MonoBehaviour
         get { return rb.velocity; }
         set { rb.velocity = value; }
     }
+
+    public Vector2 Position
+    {
+        get { return rb.position; }
+        set { rb.position = value; }
+    }
 }
