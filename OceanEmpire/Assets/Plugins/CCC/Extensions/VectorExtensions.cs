@@ -11,6 +11,14 @@ public static class VectorExtensions
         return new Vector2(Mathf.Clamp(v.x, min.x, max.x),
                 Mathf.Clamp(v.y, min.y, max.y));
     }
+    public static Vector2 Capped(this Vector2 v, Vector2 max)
+    {
+        return new Vector2(v.x.Capped(max.x), v.y.Capped(max.y));
+    }
+    public static Vector2 Raised(this Vector2 v, Vector2 min)
+    {
+        return new Vector2(v.x.Raised(min.x), v.y.Raised(min.y));
+    }
     public static Vector3 Clamped(this Vector3 v, Vector3 min, Vector3 max)
     {
         return new Vector3(Mathf.Clamp(v.x, min.x, max.x),
