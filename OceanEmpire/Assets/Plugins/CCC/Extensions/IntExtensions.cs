@@ -21,7 +21,7 @@ public static class IntExtensions
     /// <summary>
     /// Augmente potentiellement la valeur
     /// </summary>
-    public static int Floored(this int value, int min)
+    public static int Raised(this int value, int min)
     {
         return Mathf.Max(value, min);
     }

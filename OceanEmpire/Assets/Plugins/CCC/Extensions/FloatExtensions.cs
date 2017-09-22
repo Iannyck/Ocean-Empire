@@ -40,7 +40,7 @@ public static class FloatExtensions
     /// <summary>
     /// Augmente potentiellement la valeur
     /// </summary>
-    public static float Floored(this float value, float min)
+    public static float Raised(this float value, float min)
     {
         return Mathf.Max(value, min);
     }
