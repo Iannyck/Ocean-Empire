@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class PlayerSpawn : MonoBehaviour {
 
-    public SubmarineMovement submarine;
+    public SubmarineMovement submarinePrefab;
     public GameObject spawnPoint;
 
     public float introAnimDuration = 1f;
@@ -13,19 +13,21 @@ public class PlayerSpawn : MonoBehaviour {
 
     public SubmarineMovement Spawn(Vector2 position)
     {
-        if (submarine == null)
+        if (submarinePrefab == null)
             return null;
 
-        return Instantiate(submarine.gameObject, (Vector3)position, Quaternion.identity).GetComponent<SubmarineMovement>();
+        return Instantiate(submarinePrefab.gameObject, (Vector3)position, Quaternion.identity).GetComponent<SubmarineMovement>();
     }
 
-    public void SpawnPlayer()
+    public SubmarineMovement SpawnPlayer()
     {
-        if (Spawn(new Vector2(0, 0)) == null)
+        SubmarineMovement newPlayer = Spawn(new Vector2(0, 0));
+        if (newPlayer == null)
             Debug.Log("Erreur Spawn Player");
+        return newPlayer;
     }
 
-    public void SpawnFromTop()
+    public SubmarineMovement SpawnFromTop()
     {
         SubmarineMovement newPlayer = Spawn(spawnPoint.transform.position);
         if (newPlayer == null)
@@ -35,5 +37,7 @@ public class PlayerSpawn : MonoBehaviour {
 
         // Physics
         //newPlayer.SetTarget(new Vector2(0, Game.instance.map.heightMax - introAnimFromTopOffset));
+
+        return newPlayer;
     }
 }

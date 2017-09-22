@@ -6,8 +6,10 @@ using CCC.Manager;
 public class Game : PublicSingleton<Game>
 {
     public MapInfo map;
-    public PlayerStats player;
+    public PlayerStats playerStats;
     public PlayerSpawn playerSpawn;
+    [HideInInspector]
+    public SubmarineMovement submarine;
 
     public float gameDuration = 10;
 
@@ -17,7 +19,7 @@ public class Game : PublicSingleton<Game>
         if(GetComponent<MapInfo>() != null)
             map = GetComponent<MapInfo>();
         MasterManager.Sync();
-        playerSpawn.SpawnFromTop();
+        submarine = playerSpawn.SpawnFromTop();
         DelayManager.LocalCallTo(End, gameDuration, this);
     }
 
