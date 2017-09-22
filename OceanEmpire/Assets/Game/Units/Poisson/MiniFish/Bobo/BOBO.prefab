@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4354569782890090}
   - component: {fileID: 212771005577804690}
+  - component: {fileID: 114930874317122786}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -138,7 +139,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.2
 --- !u!114 &114006607524244626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,7 +162,7 @@ MonoBehaviour:
   clampWander: 1
   changeDestIfCloserThan: 0.25
   angleRange: {x: -45, y: 45}
-  distanceRange: {x: 2.5, y: 4}
+  distanceRange: {x: 2.5, y: 5}
   currentBehaviour: 0
 --- !u!114 &114647200725526030
 MonoBehaviour:
@@ -215,6 +216,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: OnTrigger+OnTriggerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114930874317122786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306950366514508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af967a12586e2ef4e9cd54e5438864fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingRight: 1
+  rb: {fileID: 50708007439193562}
+  flipDuration: 0.4
+  flipEase: 4
 --- !u!212 &212771005577804690
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -249,7 +265,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d475902dd4352d04cb36c36eaa4f058f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.64, y: 0.64}
