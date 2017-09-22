@@ -29,20 +29,26 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs {
        
         Vector2 distance = currentTarget - new Vector2(transform.position.x, transform.position.y);
         Vector2 direction = distance.normalized;
+        Debug.Log(direction);
 
+        /*
+        float deceleration = -0.5f;
 
-        if (distance.magnitude < 4)
-        {
+        rb.AddForce(rb.velocity * deceleration);
+
+       ;
+       */
+
+        if (distance.magnitude < 2)
+        {            
             
-            Debug.Log(rb.velocity.magnitude);
-            /*
                         Vector2 deceleration = -rb.velocity;
 
                         if (rb.velocity.sqrMagnitude > 1)
                             deceleration = (-rb.velocity).normalized;
 
                         rb.AddForce(deceleration * accelerationRate);
-                        */
+                       
         }
 
         else if (Vector2.Dot(rb.velocity, direction) < maximumSpeed)
