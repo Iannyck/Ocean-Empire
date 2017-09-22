@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50751458136881890}
   - component: {fileID: 114467016133407704}
   m_Layer: 0
-  m_Name: Sous-Marin 1
+  m_Name: Sous-Marin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
