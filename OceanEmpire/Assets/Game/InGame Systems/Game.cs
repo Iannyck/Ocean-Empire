@@ -9,6 +9,8 @@ public class Game : PublicSingleton<Game>
     public PlayerStats player;
     public PlayerSpawn playerSpawn;
 
+    public float gameDuration = 10;
+
     public void Start()
     {
         Debug.Log("Game Init");
@@ -16,7 +18,7 @@ public class Game : PublicSingleton<Game>
             map = GetComponent<MapInfo>();
         MasterManager.Sync();
         playerSpawn.SpawnFromTop();
-        DelayManager.LocalCallTo(End, 10, this);
+        DelayManager.LocalCallTo(End, gameDuration, this);
     }
 
     public void End()

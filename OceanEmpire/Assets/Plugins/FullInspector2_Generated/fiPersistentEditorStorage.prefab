@@ -54,10 +54,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keys:
   - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
+  - {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce, type: 2}
   _values:
   - _keys: []
     _values: []
     _target: {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607,
+      type: 2}
+  - _keys: []
+    _values: []
+    _target: {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce,
       type: 2}
 --- !u!114 &114711524658704266
 MonoBehaviour:
@@ -72,8 +77,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keys:
   - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
+  - {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce, type: 2}
   _values:
   - _keys: []
     _values: []
     _target: {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607,
+      type: 2}
+  - _keys: []
+    _values: []
+    _target: {fileID: 114467016133407704, guid: 29c29de0634f88647bc84bea37008cce,
       type: 2}
