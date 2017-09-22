@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    public int score; // cash
-    public float depthRecord;
-    public List<BaseFish> fishInStock = new List<BaseFish>();
+    private int score; // cash
+    private float depthRecord;
+    private List<BaseFish> fishInStock = new List<BaseFish>();
 
     void Start ()
     {
