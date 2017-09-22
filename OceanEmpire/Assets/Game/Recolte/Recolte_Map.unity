@@ -1289,6 +1289,7 @@ GameObject:
   - component: {fileID: 1311441149}
   - component: {fileID: 1311441151}
   - component: {fileID: 1311441150}
+  - component: {fileID: 1311441152}
   m_Layer: 0
   m_Name: GAME
   m_TagString: Untagged
@@ -1366,6 +1367,61 @@ MonoBehaviour:
   spawnPoint: {fileID: 1660329141}
   introAnimDuration: 1
   introAnimFromTopOffset: 2
+--- !u!114 &1311441152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311441146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 148c79b48db3a3841ba0cff0b1c40b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys:
+  - fishTypeList
+  _serializedStateValues:
+  - '[{"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"minimumDepth":0.0,"maximumDepth":0.0,"fishDensity":0.0,"populationInfluence":0.0},{"repartition":null,"minimumDepth":0.0,"maximumDepth":0.0,"fishDensity":0.0,"populationInfluence":0.0}]'
+  fishTypeList:
+  - repartition:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    minimumDepth: 0
+    maximumDepth: 0
+    fishDensity: 0
+    populationInfluence: 0
+  - repartition:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    minimumDepth: 0
+    maximumDepth: 0
+    fishDensity: 0
+    populationInfluence: 0
 --- !u!1 &1351298374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,7 +1668,7 @@ GameObject:
   - component: {fileID: 1462984259}
   - component: {fileID: 1462984258}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Depth gages (Debug)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1741,8 +1797,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be205b8c5a2f88c408c5e5343719637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys: []
-  _values: []
+  _keys:
+  - {fileID: 1311441152}
+  _values:
+  - _keys: []
+    _values: []
+    _target: {fileID: 1311441152}
 --- !u!114 &1570689306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1754,8 +1814,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b5fe0e79f64584a83676f21be2d2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys: []
-  _values: []
+  _keys:
+  - {fileID: 1311441152}
+  _values:
+  - _keys: []
+    _values: []
+    _target: {fileID: 1311441152}
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0

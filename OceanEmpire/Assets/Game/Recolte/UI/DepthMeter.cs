@@ -29,7 +29,6 @@ public class DepthMeter : MonoBehaviour {
             return;
 
         }
-        print("in");
         tx.text = "Depth: " + (heightMax - submarine.transform.position.y) * depthScaling; 
     }
 }
