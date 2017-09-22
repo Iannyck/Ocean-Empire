@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class OnTrigger : MonoBehaviour
 {
+    [System.Serializable]
     public class OnTriggerEvent : UnityEvent<Collider2D> { }
 
     public List<ColliderInfo.ParentType> filter = new List<ColliderInfo.ParentType>();

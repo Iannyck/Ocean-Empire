@@ -10,8 +10,8 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (fd.GetSprite() != null)
-                print(fd.GetSprite());
+            if (fd.LoadSprite() != null)
+                print(fd.LoadSprite());
         }
     }
 }
