@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 1575534728}
   - component: {fileID: 1575534727}
   - component: {fileID: 1575534729}
+  - component: {fileID: 1575534730}
   m_Layer: 0
   m_Name: BOBO
   m_TagString: Untagged
@@ -468,6 +469,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: {fileID: 11400000, guid: a74a3a63904c8f74c827001c3597ae86, type: 2}
+--- !u!114 &1575534730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1575534726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bf0b66c9342d844844e9a6fc5a33d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 0.75
+  acceleration: 1.5
+  defaultBehaviour: 0
+  fleePlayer: 0
+  fleeDistance: 1
+  canBrainFreeze: 1
+  brainFreezeFrequence: {x: 4, y: 8}
+  brainFreezeDuration: {x: 1.5, y: 3}
+  changeDestIfCloserThan: 0.25
+  angleRange: {x: -45, y: 45}
+  distanceRange: {x: 2.5, y: 4}
+  currentBehaviour: 0
 --- !u!1 &1850772177
 GameObject:
   m_ObjectHideFlags: 1
