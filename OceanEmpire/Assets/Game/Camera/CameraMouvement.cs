@@ -27,11 +27,8 @@ public class CameraMouvement : MonoBehaviour {
             submarine = Game.instance.submarine;
             return;
         }
-
-        print("y");
         if (followPlayer && submarine != null && submarine.gameObject.activeSelf)
         {
-            print("x");
             float hg = Height;
 
             float playerHeight = submarine.transform.position.y;
@@ -55,7 +52,6 @@ public class CameraMouvement : MonoBehaviour {
 
     void SetToHeight(float y)
     {
-        print(y);
         tr.position = new Vector3(0, y, 0);
     }
     
