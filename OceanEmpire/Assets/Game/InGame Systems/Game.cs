@@ -7,7 +7,6 @@ public class Game : PublicSingleton<Game>
 {
     public MapInfo map;
     public PlayerStats player;
-    public 
 
     public void Start()
     {
