@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class SpriteFlipper : MonoBehaviour
+public class TransformFlipper : MonoBehaviour
 {
     private const float REPOS = 0.1f;
 
@@ -13,17 +12,7 @@ public class SpriteFlipper : MonoBehaviour
     public float flipDuration = 0.4f;
     public Ease flipEase = Ease.InOutSine;
 
-    private SpriteRenderer sprRenderer;
     private Tween flipTween;
-    private float scale;
-
-    private void Awake()
-    {
-        sprRenderer = GetComponent<SpriteRenderer>();
-        scale = transform.localScale.x;
-        if (!facingRight)
-            scale = -scale;
-    }
 
     private void Update()
     {
@@ -31,10 +20,10 @@ public class SpriteFlipper : MonoBehaviour
         {
             if (facingRight)
             {
-                if(rb.velocity.x < -REPOS)
+                if (rb.velocity.x < -REPOS)
                 {
                     facingRight = false;
-                    Flip(-scale);
+                    Flip();
                 }
             }
             else
@@ -42,16 +31,28 @@ public class SpriteFlipper : MonoBehaviour
                 if (rb.velocity.x > REPOS)
                 {
                     facingRight = true;
-                    Flip(scale);
+                    Flip();
                 }
             }
         }
     }
 
-    void Flip(float scale)
+    private bool flipToggle = false;
+
+    void Flip()
     {
-        if (flipTween != null && flipTween.IsActive())
-            flipTween.Kill();
-        flipTween = transform.DOScaleX(scale, flipDuration).SetEase(flipEase);
+        if (flipTween == null)
+        {
+            flipTween = transform.DOBlendableRotateBy(Vector3.up * 180, flipDuration, RotateMode.LocalAxisAdd).SetAutoKill(false);
+        }
+        else
+        {
+            if (flipToggle)
+                flipTween.PlayForward();
+            else
+                flipTween.PlayBackwards();
+
+            flipToggle = !flipToggle;
+        }
     }
 }
