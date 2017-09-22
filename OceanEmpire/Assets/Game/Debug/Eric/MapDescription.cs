@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MapDescription : MonoBehaviour {
 
-    public string zoneName;
-    public string sceneToLoad;
+    private string zoneName;
+    private string sceneToLoad;
 
     private List<FishDescription> fishList = new List<FishDescription>();
 
@@ -14,10 +14,10 @@ public class MapDescription : MonoBehaviour {
     {
 		
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    public string GetName()
     {
-		
-	}
+        return zoneName;
+    }
+	
 }
