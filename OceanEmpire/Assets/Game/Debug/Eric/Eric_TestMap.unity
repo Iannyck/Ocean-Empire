@@ -1041,6 +1041,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114094208953583798, guid: bdec013df68f11b48a8e3ac1758ba775,
+        type: 2}
+      propertyPath: m_Text
+      value: Pemet d'attraper pas mal plus de poissons
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdec013df68f11b48a8e3ac1758ba775, type: 2}
   m_IsPrefabParent: 0
