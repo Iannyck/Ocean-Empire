@@ -12,7 +12,7 @@ public class FishDescription : ScriptableObject
     public float baseValue;
     public string iconName;
 
-    public Sprite GetSprite()
+    public Sprite LoadSprite()
     {
         Object obj = Resources.Load(ImagePathPrefix + iconName, typeof(Sprite));
         if (obj != null)
