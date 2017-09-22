@@ -34,6 +34,6 @@ public class PlayerSpawn : MonoBehaviour {
         //newPlayer.transform.DOMove(new Vector3(0, Game.instance.map.heightMax - introAnimFromTopOffset), introAnimDuration);
 
         // Physics
-        newPlayer.SetTarget(new Vector2(0, Game.instance.map.heightMax - introAnimFromTopOffset));
+        //newPlayer.SetTarget(new Vector2(0, Game.instance.map.heightMax - introAnimFromTopOffset));
     }
 }
