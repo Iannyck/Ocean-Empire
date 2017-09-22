@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Recolte/Recolte_Map.unity
+    path: Assets/Game/Recolte/Recolte_Framework.unity
     guid: f0c884b8cca1c1f45bfe40eb64a0b6c8
   - enabled: 1
     path: Assets/Game/Debug/Eric/Eric_TestMap.unity
@@ -23,3 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Shack/Shack_Map.unity
     guid: 3365bf45c1118084088b800e6da71856
+  - enabled: 1
+    path: Assets/Game/Recolte/Maps/Caraibe/Map_Caraibe.unity
+    guid: dcee18e20d79cc647b01b6c7d0f04f40
+  - enabled: 1
+    path: Assets/Game/Recolte/UI/Recolte_UI.unity
+    guid: 00000000000000000000000000000000

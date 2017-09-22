@@ -22,7 +22,7 @@ public class CameraMouvement : MonoBehaviour {
     }
 
 
-    void Update () {
+    void FixedUpdate () {
         if (submarine == null && Game.instance != null) { 
             submarine = Game.instance.submarine;
             return;

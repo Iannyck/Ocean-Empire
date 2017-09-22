@@ -5,6 +5,18 @@ using FullInspector;
 
 public class MapFishContent : BaseBehavior {
 
+
+
+        //Fish Density is not an arbitraty number. It's rather the amount of fish per seocond that will spawn.
+    public float mapFishDensity;
+    public AnimationCurve mapFishReparition = new AnimationCurve(
+        new Keyframe(0.0f, 1f), new Keyframe(1f, 1f));
+
+
+    private float heightMax;
+    private float depthMax;
+    private float depthScaling;
+
     [System.Serializable]
     public struct FishType
     {
@@ -45,17 +57,36 @@ public class MapFishContent : BaseBehavior {
     }
 
     public List<FishType> fishTypeList;
-
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Lottery<BaseFish> fishLottery; 
     
 
+    void Start()
+    {
+        fishLottery = new Lottery<BaseFish>(fishTypeList.Count);
+    }
+
+
+    public BaseFish DrawAtFishLottery(float depth)
+    {
+        int lSize = fishTypeList.Count;
+        for ( int i = 0; i < lSize; i ++)
+        {
+            FishType fT = fishTypeList[i];
+            if (fT.minimumDepth > depth && fT.maximumDepth < depth)
+            {
+                float depthRatio = (fT.maximumDepth - depth) / (fT.maximumDepth - fT.minimumDepth);
+                float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio);
+                fishLottery.Add(fT.fish, fishProportion);
+            }
+
+        }
+        BaseFish bigBigWinner = fishLottery.Pick();
+        fishLottery.Clear();
+        return bigBigWinner;
+    }
+
+    public float getGeneralDensity(float depthRatio)
+    {
+        return mapFishReparition.Evaluate(depthRatio) * mapFishDensity;
+    }
 }
