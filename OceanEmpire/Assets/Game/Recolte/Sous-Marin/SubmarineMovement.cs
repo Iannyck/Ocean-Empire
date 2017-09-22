@@ -31,11 +31,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
         Vector2 distance = currentTarget - (Vector2)transform.position;
         Vector2 direction = distance.normalized;
-        Debug.Log(direction);
-
-        /**/
-
-
 
         Vector2 targetSpeed;
 

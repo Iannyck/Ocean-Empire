@@ -20,7 +20,7 @@ public class Game : PublicSingleton<Game>
             map = GetComponent<MapInfo>();
         MasterManager.Sync();
         submarine = playerSpawn.SpawnFromTop();
-        DelayManager.LocalCallTo(End, gameDuration, this);
+        //DelayManager.LocalCallTo(End, gameDuration, this);
     }
 
     public void End()
