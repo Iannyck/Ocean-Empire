@@ -7,7 +7,7 @@ public class Game : PublicSingleton<Game>
 {
     public MapInfo map;
     public PlayerStats player;
-    public 
+    public PlayerSpawn playerSpawn;
 
     public void Start()
     {
@@ -15,5 +15,13 @@ public class Game : PublicSingleton<Game>
         if(GetComponent<MapInfo>() != null)
             map = GetComponent<MapInfo>();
         MasterManager.Sync();
+        DelayManager.LocalCallTo(End, 10, this);
+    }
+
+    public void End()
+    {
+        // End Game Screen
+        // Save All
+        LoadingScreen.TransitionTo("Shack_Map", null);
     }
 }
