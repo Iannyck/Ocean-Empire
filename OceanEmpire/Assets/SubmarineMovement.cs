@@ -17,32 +17,36 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs {
 
     public Rigidbody2D rb;
 
-    // Use this for initialization
-    void Start() {
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
-        currentTarget = new Vector2(transform.position.x, transform.position.y);
     }
-
 
     void FixedUpdate()
     {
-       
+
         Vector2 distance = currentTarget - new Vector2(transform.position.x, transform.position.y);
         Vector2 direction = distance.normalized;
+        Debug.Log(direction);
 
+        /*
+        float deceleration = -0.5f;
 
-        if (distance.magnitude < 4)
-        {
+        rb.AddForce(rb.velocity * deceleration);
+
+       ;
+       */
+
+        if (distance.magnitude < 2)
+        {            
             
-            Debug.Log(rb.velocity.magnitude);
-            /*
                         Vector2 deceleration = -rb.velocity;
 
                         if (rb.velocity.sqrMagnitude > 1)
                             deceleration = (-rb.velocity).normalized;
 
                         rb.AddForce(deceleration * accelerationRate);
-                        */
+                       
         }
 
         else if (Vector2.Dot(rb.velocity, direction) < maximumSpeed)
@@ -60,14 +64,13 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs {
 
         }
     }
-    // Update is called once per frame
-    void Update() {
-
-       
-    }
-
 
     public void OnClick(Vector2 position)
+    {
+        SetTarget(position);
+    }
+
+    public void SetTarget(Vector2 position)
     {
         currentTarget = position;
     }

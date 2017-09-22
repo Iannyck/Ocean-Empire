@@ -9,19 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1968766841559682}
+  m_RootGameObject: {fileID: 1853673111068200}
   m_IsPrefabParent: 1
---- !u!1 &1968766841559682
+--- !u!1 &1853673111068200
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4860897417822710}
-  - component: {fileID: 212698179042715776}
-  - component: {fileID: 114866233115803458}
-  - component: {fileID: 50397993608084804}
+  - component: {fileID: 4389043993171966}
+  - component: {fileID: 212504051852353832}
+  - component: {fileID: 114071053288964254}
+  - component: {fileID: 50751458136881890}
+  - component: {fileID: 114467016133407704}
   m_Layer: 0
   m_Name: Sous-Marin
   m_TagString: Untagged
@@ -29,26 +30,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4860897417822710
+--- !u!4 &4389043993171966
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1968766841559682}
+  m_GameObject: {fileID: 1853673111068200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50397993608084804
+--- !u!50 &50751458136881890
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1968766841559682}
+  m_GameObject: {fileID: 1853673111068200}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -62,27 +63,77 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &114866233115803458
+--- !u!114 &114071053288964254
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1968766841559682}
+  m_GameObject: {fileID: 1853673111068200}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 527a1732d99a1174681851d8e90b1dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationRate: 0
-  maximumSpeed: 0
-  brakeRatio: 0
-  rb: {fileID: 0}
---- !u!212 &212698179042715776
+  accelerationRate: 10
+  maximumSpeed: 10
+  brakeRatio: 10
+  rb: {fileID: 50751458136881890}
+--- !u!114 &114467016133407704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853673111068200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d617d989a1fe8254388c87b1b5651de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys:
+  - screenTouched
+  - screenClicked
+  - inputTouched
+  - inputClicked
+  _serializedStateValues:
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"PlayerInputs+InputEvent, Assembly-CSharp,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"PlayerInputs+InputEvent, Assembly-CSharp,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"UnityEngine.Events.UnityEvent,
+    UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"UnityEngine.Events.UnityEvent,
+    UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  useTouch: 0
+  useClick: 1
+  screenTouched:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PlayerInputs+InputEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  screenClicked:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: PlayerInputs+InputEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  inputTouched:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  inputClicked:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  externalScriptTouch: {fileID: 0}
+  externalScriptMouse: {fileID: 114071053288964254}
+--- !u!212 &212504051852353832
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1968766841559682}
+  m_GameObject: {fileID: 1853673111068200}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -106,8 +157,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -382972847
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a82731e658dc64b4d853444d3a1d1adf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

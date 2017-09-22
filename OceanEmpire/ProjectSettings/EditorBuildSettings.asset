@@ -19,4 +19,7 @@ EditorBuildSettings:
     guid: 7f58dff1951099e4ca2477b313e623bc
   - enabled: 1
     path: Assets/Plugins/Scene Transition/LoadingScreen.unity
-    guid: 00000000000000000000000000000000
+    guid: 2515ee5371940174f90bd274f9d478d0
+  - enabled: 1
+    path: Assets/Game/Shack/Shack_Map.unity
+    guid: 3365bf45c1118084088b800e6da71856

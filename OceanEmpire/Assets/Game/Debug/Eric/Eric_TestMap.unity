@@ -142,7 +142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 77.8, y: -192.95001}
+  m_AnchoredPosition: {x: 77.8, y: 190.8}
   m_SizeDelta: {x: 75, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &70939404
@@ -487,6 +487,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 487754723}
+  - component: {fileID: 487754725}
+  - component: {fileID: 487754724}
   m_Layer: 0
   m_Name: fiPersistentEditorStorage
   m_TagString: Untagged
@@ -507,6 +509,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &487754724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487754722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be205b8c5a2f88c408c5e5343719637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keys: []
+  _values: []
+--- !u!114 &487754725
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 487754722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b5fe0e79f64584a83676f21be2d2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keys: []
+  _values: []
 --- !u!224 &675692920 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224147458578374758, guid: bdec013df68f11b48a8e3ac1758ba775,
