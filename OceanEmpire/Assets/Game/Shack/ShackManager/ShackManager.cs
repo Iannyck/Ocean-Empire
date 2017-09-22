@@ -10,6 +10,7 @@ public class ShackManager : MonoBehaviour {
     void Start()
     {
         upgradePannel.SetActive(false);
+        CCC.Manager.MasterManager.Sync();
     }
 
     // Update is called once per frame
