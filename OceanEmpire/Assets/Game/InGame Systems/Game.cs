@@ -15,6 +15,7 @@ public class Game : PublicSingleton<Game>
         if(GetComponent<MapInfo>() != null)
             map = GetComponent<MapInfo>();
         MasterManager.Sync();
+        playerSpawn.SpawnFromTop();
         DelayManager.LocalCallTo(End, 10, this);
     }
 

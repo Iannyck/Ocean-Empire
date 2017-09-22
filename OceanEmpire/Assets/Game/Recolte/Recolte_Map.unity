@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regionName: Region Test
-  heightMax: 0
+  heightMax: 3
   depthMax: 10000
 --- !u!4 &1311441148
 Transform:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e027e18ba77c6642bb9b9fad98ea71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  submarine: {fileID: 0}
+  submarine: {fileID: 1968766841559682, guid: 257fc284d58c447428c4a6ec681565c2, type: 2}
   spawnPoint: {fileID: 1660329141}
   introAnimDuration: 1
   introAnimFromTopOffset: 1
@@ -408,12 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be205b8c5a2f88c408c5e5343719637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys:
-  - {fileID: 0}
-  _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 0}
+  _keys: []
+  _values: []
 --- !u!114 &1570689306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,12 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b5fe0e79f64584a83676f21be2d2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys:
-  - {fileID: 0}
-  _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 0}
+  _keys: []
+  _values: []
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +534,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1660329141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 9.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
