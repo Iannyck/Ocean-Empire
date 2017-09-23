@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4354569782890090}
   - component: {fileID: 212771005577804690}
   - component: {fileID: 114930874317122786}
+  - component: {fileID: 114008773675957000}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -164,6 +165,21 @@ MonoBehaviour:
   angleRange: {x: -45, y: 45}
   distanceRange: {x: 2.5, y: 5}
   currentBehaviour: 0
+--- !u!114 &114008773675957000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306950366514508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa166e412c19b04da2afa92597b144f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 50708007439193562}
+  maxSpeed: 0.75
+  tiltSpeed: 60
+  angleRange: {x: -90, y: 90}
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
