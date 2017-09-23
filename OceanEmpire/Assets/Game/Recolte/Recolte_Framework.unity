@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1311441149}
   - component: {fileID: 1311441151}
   - component: {fileID: 1311441150}
-  - component: {fileID: 1311441152}
+  - component: {fileID: 1311441147}
   m_Layer: 0
   m_Name: GAME
   m_TagString: Untagged
@@ -168,6 +168,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1311441147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311441146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08cb89af05689f41a9e39ba8ddbc699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeSpawns: 5
+  spawnAreaHeight: 12
+  lateralSpawnOffest: 4
 --- !u!4 &1311441148
 Transform:
   m_ObjectHideFlags: 0
@@ -226,69 +240,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 1660329141}
   introAnimDuration: 1
   introAnimFromTopOffset: 2
---- !u!114 &1311441152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1311441146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 148c79b48db3a3841ba0cff0b1c40b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - mapFishReparition
-  - fishTypeList
-  - fishLottery
-  _serializedStateValues:
-  - '{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
-  - '[{"fish":null,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"minimumDepth":0.0,"maximumDepth":500.0,"fishDensity":100.0,"populationInfluence":0.0}]'
-  - '{}'
-  mapFishDensity: 1
-  mapFishReparition:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fishTypeList:
-  - fish: {fileID: 0}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    minimumDepth: 0
-    maximumDepth: 500
-    fishDensity: 100
-    populationInfluence: 0
 --- !u!1 &1570689303
 GameObject:
   m_ObjectHideFlags: 1
@@ -330,12 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be205b8c5a2f88c408c5e5343719637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys:
-  - {fileID: 1311441152}
-  _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 1311441152}
+  _keys: []
+  _values: []
 --- !u!114 &1570689306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,12 +294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b5fe0e79f64584a83676f21be2d2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys:
-  - {fileID: 1311441152}
-  _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 1311441152}
+  _keys: []
+  _values: []
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0
