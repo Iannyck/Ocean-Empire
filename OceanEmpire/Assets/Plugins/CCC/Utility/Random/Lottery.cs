@@ -91,6 +91,12 @@ public struct Lottery<T>
         list.RemoveAt(index);
     }
 
+    public void Clear()
+    {
+        list.Clear();
+        totalWeight = 0;
+    }
+
     /// <summary>
     /// Sélection d'un élément de facon aléatoire en fonction de leurs chance d'être pigé
     /// </summary>

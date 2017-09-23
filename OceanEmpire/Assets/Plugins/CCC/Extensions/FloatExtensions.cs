@@ -19,6 +19,12 @@ public static class FloatExtensions
         return Mathf.Round(value);
     }
 
+    public static float Rounded(this float value, int numberOfDecimal)
+    {
+        float mult = Mathf.Pow(10, numberOfDecimal);
+        return (value * mult).Rounded() / mult;
+    }
+
     public static float RoundedToInt(this float value)
     {
         return Mathf.RoundToInt(value);

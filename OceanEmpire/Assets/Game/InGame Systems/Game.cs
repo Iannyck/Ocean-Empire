@@ -2,25 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CCC.Manager;
+using UnityEngine.SceneManagement;
+
+public delegate void SimpleEvent();
 
 public class Game : PublicSingleton<Game>
 {
-    public MapInfo map;
+    public string mapName;
     public PlayerStats playerStats;
     public PlayerSpawn playerSpawn;
+
     [HideInInspector]
     public SubmarineMovement submarine;
+    [HideInInspector]
+    public MapInfo map;
+    [HideInInspector]
+    public Recolte_UI ui;
+    [HideInInspector]
+    public bool gameStarted = false;
 
-    public float gameDuration = 10;
+    public event SimpleEvent OnGameStart;
 
     public void Start()
     {
-        Debug.Log("Game Init");
-        if(GetComponent<MapInfo>() != null)
-            map = GetComponent<MapInfo>();
-        MasterManager.Sync();
+        MasterManager.Sync(Init);
+    }
+
+    private void Init()
+    {
+        Scenes.LoadAsync(mapName, LoadSceneMode.Additive, OnMapLoaded);
+        Scenes.LoadAsync(Recolte_UI.SCENENAME, LoadSceneMode.Additive, OnUILoaded);
+    }
+
+
+    bool mapLoaded = false;
+    bool uiLoaded = false;
+    void OnMapLoaded(Scene scene)
+    {
+        map = scene.FindRootObject<MapInfo>();
+
+        mapLoaded = true;
+        CheckStartGame();
+    }
+    void OnUILoaded(Scene scene)
+    {
+        ui = scene.FindRootObject<Recolte_UI>();
+
+        uiLoaded = true;
+        CheckStartGame();
+    }
+    void CheckStartGame()
+    {
+        if (!gameStarted && uiLoaded && mapLoaded)
+        {
+            StartGame();
+        }
+    }
+    void StartGame()
+    {
+        gameStarted = true;
+
+        //Spawn player
         submarine = playerSpawn.SpawnFromTop();
-        //DelayManager.LocalCallTo(End, gameDuration, this);
+        Debug.Log("Game started");
+
+        if (OnGameStart != null)
+        {
+            OnGameStart();
+            OnGameStart = null;
+        }
     }
 
     public void End()

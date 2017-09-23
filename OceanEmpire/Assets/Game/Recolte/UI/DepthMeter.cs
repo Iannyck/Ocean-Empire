@@ -25,10 +25,9 @@ public class DepthMeter : MonoBehaviour {
             heightMax = m.heightMax;
             depthScaling = MapInfo.DEPTHSCALING;
             submarine = Game.instance.submarine;
-            print("out");
             return;
 
         }
-        tx.text = "Depth: " + (heightMax - submarine.transform.position.y) * depthScaling; 
+        tx.text = "Depth: " + ((heightMax - submarine.transform.position.y) * depthScaling).Rounded(-1); 
     }
 }
