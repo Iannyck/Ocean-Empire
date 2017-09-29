@@ -109,9 +109,6 @@ public class MapInfo : BaseBehavior
                 float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
                 float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio);
                 fishLottery.Add(fT.fish, fishProportion);
-
-                print(yPos);
-               print(depthRatio);
             }
         }
 
