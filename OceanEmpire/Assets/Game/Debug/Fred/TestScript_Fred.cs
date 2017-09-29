@@ -11,11 +11,7 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            //float third = 1f / 3f;
-            //float test = (value) + 1f / 3f;
-
-            //print("third: " + third);
-            //print("test: " + (test- value));
+            print(fd.icon.GetSprite());
         }
     }
 }

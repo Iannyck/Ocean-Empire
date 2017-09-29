@@ -10,13 +10,6 @@ public class FishDescription : ScriptableObject
     public string fishName;
     public string description;
     public float baseValue;
-    public string iconName;
 
-    public Sprite LoadSprite()
-    {
-        Object obj = Resources.Load(ImagePathPrefix + iconName, typeof(Sprite));
-        if (obj != null)
-            return obj as Sprite;
-        return null;
-    }
+    public ResourceSprite icon = new ResourceSprite(ImagePathPrefix);
 }

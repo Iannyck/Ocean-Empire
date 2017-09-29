@@ -15,3 +15,6 @@ MonoBehaviour:
   description: C'est un poisson
   baseValue: 10
   iconName: bobo le poission
+  icon:
+    spriteName: bobo le poission
+    prefix: Images/Fish/
