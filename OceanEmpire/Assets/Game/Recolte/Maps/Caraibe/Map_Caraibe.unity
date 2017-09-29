@@ -997,9 +997,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53b2bb602fe5dc4bbe82cabad92b3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 114766056936082448, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
+  _serializedStateKeys:
+  - mapFishReparition
+  - fishTypeList
+  _serializedStateValues:
+  - '{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
+  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-100.0,"fishDensity":0.0,"populationInfluence":1.0}]'
   regionName: Caraibe
-  heightMax: 0
-  depthMax: 10000
+  mapTop: 0
+  mapBottom: -100
   depthAtYZero: 0
   mapFishDelay: 1
   mapFishReparition:
@@ -1026,36 +1034,24 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 0.033763885
-        value: 0.52708054
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.2308747
-        value: 0.9378304
-        inSlope: 0.80755186
-        outSlope: 0.80755186
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.6310315
-        value: 0.2550639
-        inSlope: 2.927712
-        outSlope: 2.927712
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.9958191
-        value: -0.012382507
+        time: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 0
-    minimumDepth: 0
-    maximumDepth: 3000
-    fishDensity: 1
-    populationInfluence: 0
+      m_RotationOrder: 4
+    highestSpawn: 0
+    lowestSpawn: -100
+    fishDensity: 0
+    populationInfluence: 1
 --- !u!4 &981076566
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,8 +1187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be205b8c5a2f88c408c5e5343719637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys: []
-  _values: []
+  _keys:
+  - {fileID: 981076565}
+  _values:
+  - _keys: []
+    _values: []
+    _target: {fileID: 981076565}
 --- !u!114 &1208142957
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1204,8 +1204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b5fe0e79f64584a83676f21be2d2a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keys: []
-  _values: []
+  _keys:
+  - {fileID: 981076565}
+  _values:
+  - _keys: []
+    _values: []
+    _target: {fileID: 981076565}
 --- !u!4 &1208142958
 Transform:
   m_ObjectHideFlags: 1

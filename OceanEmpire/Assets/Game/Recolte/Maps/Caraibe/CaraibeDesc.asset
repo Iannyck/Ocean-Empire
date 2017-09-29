@@ -8,10 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a2826170cbc33488276e21dfe6527f, type: 3}
-  m_Name: BoboLePoisson
+  m_Script: {fileID: 11500000, guid: 65903cec361d4f74587749428bb1bcd0, type: 3}
+  m_Name: CaraibeDesc
   m_EditorClassIdentifier: 
-  fishName: Bobo
-  description: C'est un poisson
-  baseValue: 10
-  iconName: bobo le poission
+  zoneName: Caraibe
+  sceneToLoad: Map_Caraibe
+  fishList:
+  - {fileID: 11400000, guid: a74a3a63904c8f74c827001c3597ae86, type: 2}

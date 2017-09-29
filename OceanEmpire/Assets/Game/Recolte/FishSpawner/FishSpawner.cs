@@ -44,7 +44,8 @@ public class FishSpawner : MonoBehaviour {
                 spawnPos.x = -lateralSpawnOffest;
 
             float y = submarine.transform.position.y;
-            spawnPos.y = +Random.Range(y - spawnAreaHeight / 2, (y + spawnAreaHeight / 2).Capped(map.depthAtYZero));
+
+            spawnPos.y = +Random.Range(y - spawnAreaHeight / 2, (y + spawnAreaHeight / 2).Capped(map.mapTop));
 
             spawnPos.z = -0.05f;
 

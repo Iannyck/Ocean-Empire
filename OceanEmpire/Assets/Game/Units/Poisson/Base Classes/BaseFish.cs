@@ -1,10 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class BaseFish : MonoBehaviour
 {
     public FishDescription description;
+    public UnityEvent captureEvent;
+
+
+    public void Start()
+    {
+        captureEvent.AddListener(Capture);
+    }
+
 
     public bool HasBeenCaptured
     {
@@ -14,15 +23,19 @@ public abstract class BaseFish : MonoBehaviour
 
     public void Capture()
     {
+        
         if (hasBeenCaptured)
             return;
         hasBeenCaptured = true;
 
         OnCapture();
+        
     }
 
     protected virtual void OnCapture()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
+        captureEvent.RemoveAllListeners();
     }
 }
