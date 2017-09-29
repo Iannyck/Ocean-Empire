@@ -108,7 +108,7 @@ public class MapInfo : BaseBehavior
                 nbStraws++;
                 float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
                 float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio);
-                fishLottery.Add(fT.fish, fishProportion);
+                fishLottery.Add(fT.fish, fishProportion.Clamped(0f,1f));
             }
         }
 
