@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class PlayerSpawn : MonoBehaviour {
 
@@ -21,22 +22,30 @@ public class PlayerSpawn : MonoBehaviour {
 
     public SubmarineMovement SpawnPlayer()
     {
-        SubmarineMovement newPlayer = Spawn(new Vector2(0, 0));
+        SubmarineMovement newPlayer = Spawn(spawnPoint.transform.position);
         if (newPlayer == null)
             Debug.Log("Erreur Spawn Player");
         return newPlayer;
     }
 
-    public SubmarineMovement SpawnFromTop()
+    public SubmarineMovement SpawnFromTop(Action onIntroAnimComplete)
     {
         SubmarineMovement newPlayer = Spawn(spawnPoint.transform.position);
         if (newPlayer == null)
             Debug.Log("Erreur Spawn Player");
-        // Anim
-        //newPlayer.transform.DOMove(new Vector3(0, Game.instance.map.heightMax - introAnimFromTopOffset), introAnimDuration);
 
         // Physics
-        //newPlayer.SetTarget(new Vector2(0, Game.instance.map.heightMax - introAnimFromTopOffset));
+        newPlayer.enabled = false;
+
+        // Anim
+        newPlayer.transform.DOMove(new Vector3(0, 
+            Game.instance.map.heightMax - introAnimFromTopOffset), 
+            introAnimDuration).OnComplete(delegate() {
+                onIntroAnimComplete();
+                newPlayer.enabled = true;
+            });
+
+
 
         return newPlayer;
     }
