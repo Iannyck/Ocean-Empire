@@ -5,13 +5,17 @@ using UnityEngine;
 public class TestScript_Fred : MonoBehaviour
 {
     public FishDescription fd;
+    public float value;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (fd.LoadSprite() != null)
-                print(fd.LoadSprite());
+            //float third = 1f / 3f;
+            //float test = (value) + 1f / 3f;
+
+            //print("third: " + third);
+            //print("test: " + (test- value));
         }
     }
 }
