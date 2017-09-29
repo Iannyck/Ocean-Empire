@@ -16,6 +16,7 @@ public class ToRecolteMessage : SceneMessage
     public void OnLoaded(Scene scene)
     {
         Debug.Log("Message transmission");
+        //scene.FindRootObject<GameBuilder>().
     }
 
     public void OnOutroComplete()
