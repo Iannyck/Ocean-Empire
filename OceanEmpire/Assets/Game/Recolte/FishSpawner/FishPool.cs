@@ -7,10 +7,8 @@ public class FishPool : MonoBehaviour {
 
     public BaseFish SetFishAt(BaseFish fishPrefab, Vector3 spawnPos)
     {
-        print("0");
         if (fishPrefab != null)
         {
-            print("1");
             BaseFish fishInstance;
             try
             {
@@ -18,12 +16,10 @@ public class FishPool : MonoBehaviour {
                 fishInstance.transform.position = spawnPos;
                 fishInstance.transform.rotation = Quaternion.identity;
                 fishInstance.gameObject.SetActive(true);
-                print("2a");
             }
             catch
             {
-                fishInstance = Instantiate(fishPrefab.gameObject, spawnPos, Quaternion.identity).GetComponent<BaseFish>();
-                print("2b");
+                fishInstance = Game.Spawner.Spawn(fishPrefab, spawnPos);
             }
             fishInstance.captureEvent += AddToPool;
             return fishInstance;
