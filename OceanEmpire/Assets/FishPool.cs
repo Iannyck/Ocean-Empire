@@ -5,7 +5,7 @@ using UnityEngine;
 public class FishPool : MonoBehaviour {
     Dictionary<FishDescription, Queue<BaseFish>> DesactivatedFishes = new Dictionary<FishDescription, Queue<BaseFish>>() ;
 
-    public BaseFish SetFishAt(BaseFish fishPrefab, Vector2 spawnPos)
+    public BaseFish SetFishAt(BaseFish fishPrefab, Vector3 spawnPos)
     {
         print("0");
         if (fishPrefab != null)
