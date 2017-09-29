@@ -8,6 +8,8 @@ public delegate void SimpleEvent();
 
 public class Game : PublicSingleton<Game>
 {
+    static public string SCENENAME = "Recolte_Framework";
+
     public string mapName;
     public PlayerStats playerStats;
     public PlayerSpawn playerSpawn;
