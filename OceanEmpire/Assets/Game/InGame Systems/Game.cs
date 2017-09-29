@@ -36,14 +36,44 @@ public class Game : PublicSingleton<Game>
     [HideInInspector]
     public bool gameReady = false;
     bool playerSpawned = false;
-    static public event SimpleEvent OnGameReady;
-    static public event SimpleEvent OnGameStart;
+    static private event SimpleEvent onGameReady;
+    static private event SimpleEvent onGameStart;
+
+    static public event SimpleEvent OnGameReady
+    {
+        add
+        {
+            if (instance != null && instance.gameReady)
+                value();
+            else
+                onGameReady += value;
+        }
+        remove
+        {
+            onGameReady -= value;
+        }
+    }
+
+    static public event SimpleEvent OnGameStart
+    {
+        add
+        {
+            if (instance != null && instance.gameStarted)
+                value();
+            else
+                onGameStart += value;
+        }
+        remove
+        {
+            onGameStart -= value;
+        }
+    }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        OnGameReady = null;
-        OnGameStart = null;
+        onGameReady = null;
+        onGameStart = null;
     }
 
     public void InitGame()
@@ -75,10 +105,10 @@ public class Game : PublicSingleton<Game>
 
         LoadingScreen.OnNewSetupComplete();
 
-        if (OnGameReady != null)
+        if (onGameReady != null)
         {
-            OnGameReady();
-            OnGameReady = null;
+            onGameReady();
+            onGameReady = null;
         }
     }
 
@@ -92,17 +122,17 @@ public class Game : PublicSingleton<Game>
         Debug.Log("Game started");
 
         // Init Game Start Events
-        if (OnGameStart != null)
+        if (onGameStart != null)
         {
-            OnGameStart();
-            OnGameStart = null;
+            onGameStart();
+            onGameStart = null;
         }
     }
 
-    public void End()
+    public void EndGame()
     {
         // End Game Screen
         // Save All
-        LoadingScreen.TransitionTo("Shack_Map", null);
+        LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(/* METTRE LE RAPPORT */));
     }
 }

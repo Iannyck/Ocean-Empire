@@ -34,11 +34,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
         rb = GetComponent<Rigidbody2D>();
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
-        if (Game.instance.gameStarted == true)
-            Init();
-        else if (Game.instance != null)
-            Game.OnGameStart += Init;
-
+        Game.OnGameStart += Init;
     }
 
     void Init()
@@ -46,9 +42,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
         MapInfo m = Game.instance.map;
         upBound = m.mapTop;
         downBound = m.mapBottom;
-
-
-        Game.OnGameStart -= Init;
         return;
     }
 

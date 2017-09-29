@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToRecolteMessage : SceneMessage
+public struct ToRecolteMessage : SceneMessage
 {
     private MapDescription mapDescription;
 

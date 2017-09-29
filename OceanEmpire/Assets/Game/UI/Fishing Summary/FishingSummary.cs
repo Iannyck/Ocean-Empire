@@ -18,6 +18,6 @@ public class FishingSummary : MonoBehaviour
 
     public void GoBackToShack()
     {
-        LoadingScreen.TransitionTo(ShackManager.SCENENAME, null);
+        LoadingScreen.TransitionTo(ShackManager.SCENENAME, new ToShackMessage());
     }
 }
