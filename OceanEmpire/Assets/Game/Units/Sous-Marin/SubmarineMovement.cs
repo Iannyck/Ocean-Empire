@@ -13,7 +13,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
     public float brakeDistance = 1.5f;
 
-    private Vector2 currentTarget;
+    public Vector2 currentTarget;
 
     private Rigidbody2D rb;
     //private float 

@@ -978,6 +978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981076566}
   - component: {fileID: 981076565}
+  - component: {fileID: 981076567}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1068,6 +1069,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981076567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 981076564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9491cdc3eb5c443bee03442a3dcf99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapName: Map_Caraibe
 --- !u!1 &1044891455
 GameObject:
   m_ObjectHideFlags: 0

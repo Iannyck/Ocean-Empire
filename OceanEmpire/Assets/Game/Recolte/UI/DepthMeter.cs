@@ -21,6 +21,9 @@ public class DepthMeter : MonoBehaviour {
 
         if (Game.instance != null && (submarine == null))
         {
+            if (Game.instance.map == null)
+                return;
+
             MapInfo m = Game.instance.map;
             depthStart = m.depthAtYZero;
             depthScaling = MapInfo.DEPTHSCALING;
@@ -28,6 +31,8 @@ public class DepthMeter : MonoBehaviour {
             return;
 
         }
-        tx.text = "Depth: " + (( - submarine.transform.position.y) * depthScaling).Rounded(-1); 
+
+        if(submarine != null)
+            tx.text = "Depth: " + (( - submarine.transform.position.y) * depthScaling).Rounded(-1); 
     }
 }

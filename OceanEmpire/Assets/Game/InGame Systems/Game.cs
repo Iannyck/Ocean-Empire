@@ -8,64 +8,68 @@ public delegate void SimpleEvent();
 
 public class Game : PublicSingleton<Game>
 {
-    public string mapName;
+    // GAME COMPONENT
+    public CameraMouvement cameraMouvement;
     public PlayerStats playerStats;
     public PlayerSpawn playerSpawn;
-
     [HideInInspector]
     public SubmarineMovement submarine;
     [HideInInspector]
     public MapInfo map;
     [HideInInspector]
     public Recolte_UI ui;
+
+    // GAME STATE
     [HideInInspector]
     public bool gameStarted = false;
+    bool playerSpawned = false;
+    static public event SimpleEvent OnGameReady;
+    static public event SimpleEvent OnGameStart;
 
-    public event SimpleEvent OnGameStart;
-
-    public void Start()
+    protected override void OnDestroy()
     {
-        MasterManager.Sync(Init);
+        base.OnDestroy();
+        OnGameReady = null;
+        OnGameStart = null;
     }
 
-    private void Init()
+    public void InitGame()
     {
-        Scenes.LoadAsync(mapName, LoadSceneMode.Additive, OnMapLoaded);
-        Scenes.LoadAsync(Recolte_UI.SCENENAME, LoadSceneMode.Additive, OnUILoaded);
-    }
+        //Spawn player
+        cameraMouvement.followPlayer = false;
+        submarine = playerSpawn.SpawnFromTop(delegate ()
+        {
+            cameraMouvement.followPlayer = true;
+            playerSpawned = true;
+            CheckStartGame();
+        });
 
+        // Init other things in game
+        // if Async put another CheckStartGame
 
-    bool mapLoaded = false;
-    bool uiLoaded = false;
-    void OnMapLoaded(Scene scene)
-    {
-        map = scene.FindRootObject<MapInfo>();
-
-        mapLoaded = true;
         CheckStartGame();
     }
-    void OnUILoaded(Scene scene)
-    {
-        ui = scene.FindRootObject<Recolte_UI>();
 
-        uiLoaded = true;
-        CheckStartGame();
-    }
     void CheckStartGame()
     {
-        if (!gameStarted && uiLoaded && mapLoaded)
+        if (!gameStarted && playerSpawned)
         {
+            if(OnGameReady != null)
+            {
+                OnGameReady();
+                OnGameReady = null;
+            }
             StartGame();
         }
     }
+
     void StartGame()
     {
         gameStarted = true;
 
-        //Spawn player
-        submarine = playerSpawn.SpawnFromTop();
         Debug.Log("Game started");
 
+        // Init Game Start Events
         if (OnGameStart != null)
         {
             OnGameStart();

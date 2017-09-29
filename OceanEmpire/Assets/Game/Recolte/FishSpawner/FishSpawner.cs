@@ -17,8 +17,7 @@ public class FishSpawner : MonoBehaviour {
 
     void Start () {
         lastSpawn = delayBeforeSpawns;
-        if (Game.instance != null)
-            Game.instance.OnGameStart += Init;
+        Game.OnGameStart += Init;
     }
 
     void Init()
@@ -26,7 +25,7 @@ public class FishSpawner : MonoBehaviour {
         MapInfo m = Game.instance.map;
         submarine = Game.instance.submarine;
         map = Game.instance.map;
-        Game.instance.OnGameStart -= Init;
+        Game.OnGameStart -= Init;
         return;    
     }
 	
