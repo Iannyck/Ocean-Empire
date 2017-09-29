@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FullInspector;
 
-public class MapInfo : MonoBehaviour
+public class MapInfo : BaseBehavior
 {
         //contain distribution of a fish species
     [System.Serializable]
@@ -17,9 +17,10 @@ public class MapInfo : MonoBehaviour
         [InspectorCategory("Depth")]
         public AnimationCurve repartition;
         [InspectorCategory("Depth")]
-        public float minimumDepth;
+        public float highestSpawn;
         [InspectorCategory("Depth")]
-        public float maximumDepth;
+        public float lowestSpawn;
+
         [InspectorButton, InspectorCategory("Depth")]
         public void DefaultRepartition()
         {
@@ -56,9 +57,10 @@ public class MapInfo : MonoBehaviour
     [InspectorCategory("General")]
     public string regionName = "YourRegionName";
     [InspectorCategory("General")]
-    public float heightMax = 0;
+    public float mapTop = 0;
     [InspectorCategory("General")]
-    public float depthMax = 10000;
+    public float mapBottom = -100;
+
     [InspectorCategory("General")]
     public float depthAtYZero = 0;
 
@@ -93,24 +95,24 @@ public class MapInfo : MonoBehaviour
     public BaseFish DrawAtFishLottery(float yPos)
     {
    
-        float depth = -yPos * DEPTHSCALING - depthAtYZero;
         int lSize = fishTypeList.Count;
         print("size :" + lSize);
         int nbStraws = 0;
+
         for (int i = 0; i < lSize; i++)
         {
             FishType fT = fishTypeList[i];
-            if (fT.minimumDepth < depth && fT.maximumDepth > depth)
+            if (fT.highestSpawn > yPos && fT.lowestSpawn < yPos)
             {
                
                 nbStraws++;
-                float depthRatio = (fT.maximumDepth - depth) / (fT.maximumDepth - fT.minimumDepth);
+                float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
                 float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio);
                 fishLottery.Add(fT.fish, fishProportion);
+
+                print(yPos);
+               print(depthRatio);
             }
-            print("min: " +fT.minimumDepth);
-            print("max: " +fT.maximumDepth);
-            print("depth: " + depth);
         }
 
         if (nbStraws != 0)
@@ -126,9 +128,9 @@ public class MapInfo : MonoBehaviour
     }
 
         //Get the spawn rate for this specific depth
-    public float GetGeneralDensity(float depth)
+    public float GetGeneralDensity(float position)
     {
-        float deRatio = depth / (depthMax - depthAtYZero);
+        float deRatio = (mapTop - position) / (mapTop - mapBottom);
         return mapFishReparition.Evaluate(deRatio) * mapFishDelay;
     }
 

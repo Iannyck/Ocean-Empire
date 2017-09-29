@@ -10,6 +10,12 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     public float accelerationRate;
     //Maximium attainable speed
     public float maximumSpeed;
+    public float leftBound;
+    public float rightBound;
+
+    private float upBound;
+    private float downBound;
+
 
     public float brakeDistance = 1.5f;
 
@@ -23,6 +29,8 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     {
         rb = GetComponent<Rigidbody2D>();
         currentTarget = new Vector2(transform.position.x, transform.position.y);
+
+
     }
 
 
