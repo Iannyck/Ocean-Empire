@@ -10,11 +10,14 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     public float accelerationRate;
     //Maximium attainable speed
     public float maximumSpeed;
+
+    public float distanceFromBound;
     public float leftBound;
     public float rightBound;
 
     private float upBound;
     private float downBound;
+
 
 
     public float brakeDistance = 1.5f;
@@ -25,12 +28,28 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     //private float 
 
     // Use this for initialization
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
+        if (Game.instance.gameStarted == true)
+            Init();
+        else   if (Game.instance != null)
+            Game.instance.OnGameStart += Init;
 
+    }
+
+    void Init()
+    {
+        MapInfo m = Game.instance.map;
+        upBound = m.mapTop;
+        downBound = m.mapBottom;
+       
+        
+        Game.instance.OnGameStart -= Init;
+        return;
     }
 
 
@@ -41,10 +60,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
         Vector2 direction = distance.normalized;
 
         Vector2 targetSpeed;
-
-
-       
-
 
         if (distance.magnitude < brakeDistance)
         {
@@ -72,6 +87,9 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
     public void OnClick(Vector2 position)
     {
-        currentTarget = position;
+        float d = distanceFromBound;
+
+        currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
+        currentTarget.y = position.y.Clamped(downBound + d, upBound -d);
     }
 }

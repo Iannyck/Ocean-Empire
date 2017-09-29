@@ -96,7 +96,7 @@ public class MapInfo : BaseBehavior
     {
    
         int lSize = fishTypeList.Count;
-        print("size :" + lSize);
+
         int nbStraws = 0;
 
         for (int i = 0; i < lSize; i++)
@@ -119,8 +119,7 @@ public class MapInfo : BaseBehavior
             
             return bigBigWinner;
         }
-        else
-            
+        else          
         return null;
     }
 
