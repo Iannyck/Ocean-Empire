@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class FishSpawner : MonoBehaviour {
 
+    public FishPool fishPool;
+
     public float delayBeforeSpawns = 2;
     public float spawnAreaHeight = 10;
     public float lateralSpawnOffest = 4;
 
     private float lastSpawn;
+
 
     // Use this for initialization
     private SubmarineMovement submarine;
@@ -48,13 +51,22 @@ public class FishSpawner : MonoBehaviour {
 
             spawnPos.y = +Random.Range(y - spawnAreaHeight / 2, (y + spawnAreaHeight / 2).Capped(map.mapTop));
 
-            spawnPos.z = -0.05f;
+            spawnPos.z = -0.2f;
 
             BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
+
+
+            if( fishPool != null && newFish != null)
+            {
+                fishPool.SetFishAt(newFish, spawnPos);
+
+            }
+            /*
             if (newFish != null)
             {
                 Instantiate(newFish.gameObject, spawnPos, Quaternion.identity);
             }
+            */
 
             lastSpawn = map.GetGeneralDensity(spawnPos.y);
         }

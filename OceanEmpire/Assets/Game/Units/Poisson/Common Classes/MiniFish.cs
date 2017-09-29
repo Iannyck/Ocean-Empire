@@ -9,8 +9,6 @@ public class MiniFish : BaseFish
     public void OnPlayerTouch(Collider2D collider)
     {
         //Self kill
-        //Capture();
-
-        captureEvent.Invoke();
+        Capture();
     }
 }
