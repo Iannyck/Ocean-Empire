@@ -151,6 +151,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationRate: 0.5
   maximumSpeed: 2.5
+  distanceFromBound: 0.4
+  leftBound: -2.81
+  rightBound: 2.81
   brakeDistance: 1.75
 --- !u!114 &114467016133407704
 MonoBehaviour:

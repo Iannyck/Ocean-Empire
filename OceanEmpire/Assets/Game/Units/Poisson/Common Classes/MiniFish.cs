@@ -10,5 +10,6 @@ public class MiniFish : BaseFish
     {
         //Self kill
         Capture();
+       // capturedEvent.Invoke();
     }
 }
