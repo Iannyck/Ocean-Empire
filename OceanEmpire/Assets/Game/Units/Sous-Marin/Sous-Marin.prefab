@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   rb: {fileID: 50751458136881890}
-  flipDuration: 0.4
+  flipDuration: 0.15
   flipEase: 4
 --- !u!114 &114071053288964254
 MonoBehaviour:
@@ -172,6 +172,7 @@ MonoBehaviour:
   leftBound: -2.81
   rightBound: 2.81
   brakeDistance: 1.75
+  currentTarget: {x: 0, y: 0}
 --- !u!114 &114424785887848696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,9 +185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 50751458136881890}
-  maxSpeed: 2
-  tiltSpeed: 10
-  angleRange: {x: -20, y: 20}
+  maxSpeed: 2.5
+  tiltSpeed: 80
+  angleRange: {x: -25, y: 25}
 --- !u!114 &114467016133407704
 MonoBehaviour:
   m_ObjectHideFlags: 1
