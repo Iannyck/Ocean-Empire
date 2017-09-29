@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShackManager : MonoBehaviour {
+public class ShackManager : MonoBehaviour
+{
+    public const string SCENENAME = "Shack";
 
     public GameObject upgradePannel;
     public GameObject zonePannel;
     public GameObject mapInformationPannel;
 
-
-    // Use this for initialization
+    
     void Start()
     {
         upgradePannel.SetActive(false);
         zonePannel.SetActive(false);
 
         CCC.Manager.MasterManager.Sync();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
 
     public void ToggleUpgradePannel()
@@ -44,8 +40,8 @@ public class ShackManager : MonoBehaviour {
 
     public void LoadDataMapInformation(/*MapDescription map = null*/)
     {
-       // if (map != null)
-            // Methode de la MapDescription
+        // if (map != null)
+        // Methode de la MapDescription
 
         mapInformationPannel.SetActive(!mapInformationPannel.activeInHierarchy);
         zonePannel.SetActive(false);
