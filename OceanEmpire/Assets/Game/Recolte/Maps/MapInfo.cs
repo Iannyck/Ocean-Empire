@@ -5,7 +5,7 @@ using FullInspector;
 
 public class MapInfo : BaseBehavior
 {
-        //contain distribution of a fish species
+    //contain distribution of a fish species
     [System.Serializable]
     public struct FishType
     {
@@ -42,10 +42,6 @@ public class MapInfo : BaseBehavior
         public float populationInfluence;
     }
 
-
-
-
-
     public const float MAP_WIDTH = 5;
     public const float MAP_RIGHT = MAP_WIDTH / 2;
     public const float MAP_LEFT = MAP_WIDTH / -2;
@@ -66,9 +62,6 @@ public class MapInfo : BaseBehavior
 
     public const float DEPTHSCALING = 100;
 
-
-
-
     //Overall map Fish density
     [InspectorCategory("fish")]
     public float mapFishDelay;
@@ -84,14 +77,18 @@ public class MapInfo : BaseBehavior
         //Fish Lottery
     private Lottery<BaseFish> fishLottery;
 
-
-        //Set lottery
     void Start()
+    {
+        Game.OnGameReady += Init;
+    }
+
+    //Set lottery
+    public void Init()
     {
         fishLottery = new Lottery<BaseFish>(fishTypeList.Count);
     }
 
-        //Each fish draw a straw, the fish with the shortest straw spawns
+    //Each fish draw a straw, the fish with the shortest straw spawns
     public BaseFish DrawAtFishLottery(float yPos)
     {
    
