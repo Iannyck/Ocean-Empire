@@ -5,6 +5,8 @@ using UnityEngine;
 public class FishPool : MonoBehaviour {
     Dictionary<FishDescription, Queue<BaseFish>> DesactivatedFishes = new Dictionary<FishDescription, Queue<BaseFish>>() ;
 
+
+
     public BaseFish SetFishAt(BaseFish fishPrefab, Vector3 spawnPos)
     {
         if (fishPrefab != null)
@@ -21,7 +23,9 @@ public class FishPool : MonoBehaviour {
             {
                 fishInstance = Game.Spawner.Spawn(fishPrefab, spawnPos);
             }
-            fishInstance.captureEvent += AddToPool;
+            fishInstance.deathEvent += AddToPool;
+            fishInstance.RemiseEnLiberté();
+
             return fishInstance;
         }
         else return null;
@@ -34,15 +38,4 @@ public class FishPool : MonoBehaviour {
 
         DesactivatedFishes[fish.description].Enqueue(fish);
     }
-
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

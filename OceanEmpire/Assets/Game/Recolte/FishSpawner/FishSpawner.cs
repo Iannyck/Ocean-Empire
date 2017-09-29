@@ -58,8 +58,9 @@ public class FishSpawner : MonoBehaviour {
             if( fishPool != null && newFish != null)
             {
                 fishPool.SetFishAt(newFish, spawnPos);
-
             }
+
+
             /*
             if (newFish != null)
             {
