@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4729834400856544}
   - component: {fileID: 212060819460365560}
+  - component: {fileID: 114050367843227536}
+  - component: {fileID: 114424785887848696}
   m_Layer: 0
   m_Name: hull Spr
   m_TagString: Untagged
@@ -69,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853673111068200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0.05804181, y: 0.8273895, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4729834400856544}
@@ -138,6 +140,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &114050367843227536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696698978887844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af967a12586e2ef4e9cd54e5438864fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingRight: 1
+  rb: {fileID: 50751458136881890}
+  flipDuration: 0.4
+  flipEase: 4
 --- !u!114 &114071053288964254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,6 +172,21 @@ MonoBehaviour:
   leftBound: -2.81
   rightBound: 2.81
   brakeDistance: 1.75
+--- !u!114 &114424785887848696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696698978887844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa166e412c19b04da2afa92597b144f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 50751458136881890}
+  maxSpeed: 2
+  tiltSpeed: 10
+  angleRange: {x: -20, y: 20}
 --- !u!114 &114467016133407704
 MonoBehaviour:
   m_ObjectHideFlags: 1
