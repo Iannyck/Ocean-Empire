@@ -22,4 +22,9 @@ public class BaseFishDriver : MonoBehaviour
         get { return rb.position; }
         set { rb.position = value; }
     }
+
+    public virtual void ClearMind()
+    {
+
+    }
 }

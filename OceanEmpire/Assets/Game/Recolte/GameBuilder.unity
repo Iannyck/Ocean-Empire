@@ -254,6 +254,7 @@ MonoBehaviour:
   cameraMouvement: {fileID: 1699934080}
   playerStats: {fileID: 1311441150}
   playerSpawn: {fileID: 1311441151}
+  gameCamera: {fileID: 1699934081}
   submarine: {fileID: 0}
   map: {fileID: 0}
   ui: {fileID: 0}
@@ -486,6 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1699934079}
   - component: {fileID: 1699934080}
+  - component: {fileID: 1699934081}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -521,3 +523,15 @@ MonoBehaviour:
   followPlayer: 1
   acceleration: 16
   decelerationSpeedFactor: 3
+--- !u!114 &1699934081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1699934078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8cb106e034f7149be3154463151dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1586854660}

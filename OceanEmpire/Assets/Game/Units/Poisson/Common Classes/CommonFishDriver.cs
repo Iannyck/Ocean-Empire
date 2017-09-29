@@ -8,7 +8,7 @@ public class CommonFishDriver : BaseFishDriver
     [Header("General")]
     public float maxSpeed = 1;
     public float acceleration = 3;
-    public Behaviour defaultBehaviour;
+    public Behaviour defaultBehaviour = Behaviour.Wander;
 
     [Header("Flee")]
     public bool fleePlayer;
@@ -45,7 +45,7 @@ public class CommonFishDriver : BaseFishDriver
 
         changeDestIfCloserThanSQR = changeDestIfCloserThan * changeDestIfCloserThan;
         fleeDistanceSQR = fleeDistance * fleeDistance;
-        targetPosition = Position;
+        ClearMind();
     }
 
     private void Update()
@@ -132,5 +132,14 @@ public class CommonFishDriver : BaseFishDriver
         return pos;
     }
 
+    public override void ClearMind()
+    {
+        base.ClearMind();
 
+        brainFreeze = false;
+        brainFreezeTimer = 0;
+        brainFreezeRemainingDuration = 0;
+        currentBehaviour = Behaviour.Wander;
+        targetPosition = Position;
+    }
 }
