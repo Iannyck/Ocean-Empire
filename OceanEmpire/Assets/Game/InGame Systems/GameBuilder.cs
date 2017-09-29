@@ -22,7 +22,6 @@ public class GameBuilder : MonoBehaviour {
     void Build()
     {
         // Load All Scenes
-        Debug.Log(Scenes.Exists(mapName));
         if (!Scenes.Exists(mapName))
             Scenes.LoadAsync(mapName, LoadSceneMode.Additive, OnMapLoaded);
         else

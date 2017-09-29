@@ -4,7 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
-public class PlayerSpawn : MonoBehaviour {
+public class PlayerSpawn : MonoBehaviour
+{
 
     public SubmarineMovement submarinePrefab;
     public GameObject spawnPoint;
@@ -17,7 +18,7 @@ public class PlayerSpawn : MonoBehaviour {
         if (submarinePrefab == null)
             return null;
 
-        return Instantiate(submarinePrefab.gameObject, (Vector3)position, Quaternion.identity).GetComponent<SubmarineMovement>();
+        return Game.Spawner.Spawn(submarinePrefab, position);
     }
 
     public SubmarineMovement SpawnPlayer()
@@ -28,25 +29,22 @@ public class PlayerSpawn : MonoBehaviour {
         return newPlayer;
     }
 
-    public SubmarineMovement SpawnFromTop(Action onIntroAnimComplete)
+    public SubmarineMovement AnimatePlayerFromTop(SubmarineMovement player, Action onIntroAnimComplete)
     {
-        SubmarineMovement newPlayer = Spawn(spawnPoint.transform.position);
-        if (newPlayer == null)
-            Debug.Log("Erreur Spawn Player");
-
         // Physics
-        newPlayer.enabled = false;
+        player.enabled = false;
 
         // Anim
-        newPlayer.transform.DOMove(new Vector3(0, 
-            Game.instance.map.heightMax - introAnimFromTopOffset), 
-            introAnimDuration).OnComplete(delegate() {
+        player.transform.DOMove(new Vector3(0,
+            Game.instance.map.mapTop - introAnimFromTopOffset),
+            introAnimDuration).OnComplete(delegate ()
+            {
+                player.enabled = true;
                 onIntroAnimComplete();
-                newPlayer.enabled = true;
             });
 
 
 
-        return newPlayer;
+        return player;
     }
 }

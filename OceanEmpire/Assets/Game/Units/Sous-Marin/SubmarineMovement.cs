@@ -36,8 +36,8 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
         if (Game.instance.gameStarted == true)
             Init();
-        else   if (Game.instance != null)
-            Game.instance.OnGameStart += Init;
+        else if (Game.instance != null)
+            Game.OnGameStart += Init;
 
     }
 
@@ -46,9 +46,9 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
         MapInfo m = Game.instance.map;
         upBound = m.mapTop;
         downBound = m.mapBottom;
-       
-        
-        Game.instance.OnGameStart -= Init;
+
+
+        Game.OnGameStart -= Init;
         return;
     }
 
@@ -71,16 +71,10 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
         }
 
         Vector2 Speed = Vector2.Lerp(
-            rb.velocity, 
-            targetSpeed, 
+            rb.velocity,
+            targetSpeed,
             FixedLerp.Fix(0.1f * accelerationRate));
         rb.velocity = Speed;
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
 
     }
 
@@ -90,6 +84,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
         float d = distanceFromBound;
 
         currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
-        currentTarget.y = position.y.Clamped(downBound + d, upBound -d);
+        currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
     }
 }

@@ -9,9 +9,20 @@ public delegate void SimpleEvent();
 public class Game : PublicSingleton<Game>
 {
     // GAME COMPONENT
-    public CameraMouvement cameraMouvement;
-    public PlayerStats playerStats;
-    public PlayerSpawn playerSpawn;
+    public static CameraMouvement CameraMouvement { get { return instance.cameraMouvement; } }
+    public static PlayerStats PlayerStats { get { return instance.playerStats; } }
+    public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
+    public static Spawner Spawner { get { return instance.spawner; } }
+
+    [SerializeField]
+    private Spawner spawner;
+    [SerializeField]
+    private CameraMouvement cameraMouvement;
+    [SerializeField]
+    private PlayerStats playerStats;
+    [SerializeField]
+    private PlayerSpawn playerSpawn;
+
     [HideInInspector]
     public SubmarineMovement submarine;
     [HideInInspector]
@@ -22,6 +33,8 @@ public class Game : PublicSingleton<Game>
     // GAME STATE
     [HideInInspector]
     public bool gameStarted = false;
+    [HideInInspector]
+    public bool gameReady = false;
     bool playerSpawned = false;
     static public event SimpleEvent OnGameReady;
     static public event SimpleEvent OnGameStart;
@@ -35,36 +48,45 @@ public class Game : PublicSingleton<Game>
 
     public void InitGame()
     {
-        //Spawn player
         cameraMouvement.followPlayer = false;
-        submarine = playerSpawn.SpawnFromTop(delegate ()
-        {
-            cameraMouvement.followPlayer = true;
-            playerSpawned = true;
-            CheckStartGame();
-        });
 
-        // Init other things in game
-        // if Async put another CheckStartGame
+        //Spawn player
+        submarine = playerSpawn.SpawnPlayer();
 
-        CheckStartGame();
+        //Ready up !
+        ReadyGame();
+
+        //Intro
+        playerSpawn.AnimatePlayerFromTop(submarine,
+            delegate ()
+            {
+                cameraMouvement.followPlayer = true;
+                playerSpawned = true;
+                StartGame();
+            });
     }
 
-    void CheckStartGame()
+    void ReadyGame()
     {
-        if (!gameStarted && playerSpawned)
+        if (gameReady)
+            return;
+
+        gameReady = true;
+
+        LoadingScreen.OnNewSetupComplete();
+
+        if (OnGameReady != null)
         {
-            if(OnGameReady != null)
-            {
-                OnGameReady();
-                OnGameReady = null;
-            }
-            StartGame();
+            OnGameReady();
+            OnGameReady = null;
         }
     }
 
     void StartGame()
     {
+        if (gameStarted || !playerSpawned)
+            return;
+
         gameStarted = true;
 
         Debug.Log("Game started");
