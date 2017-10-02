@@ -25,7 +25,7 @@ public static class FloatExtensions
         return (value * mult).Rounded() / mult;
     }
 
-    public static float RoundedToInt(this float value)
+    public static int RoundedToInt(this float value)
     {
         return Mathf.RoundToInt(value);
     }
