@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followAnchor: {fileID: 0}
   arrowHolder: {fileID: 4611551124677052}
+  maxLength: 2.5
 --- !u!114 &114424785887848696
 MonoBehaviour:
   m_ObjectHideFlags: 1

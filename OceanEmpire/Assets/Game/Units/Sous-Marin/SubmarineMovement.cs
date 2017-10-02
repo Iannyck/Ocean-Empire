@@ -29,12 +29,16 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     private Rigidbody2D rb;
     //private float 
 
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     // Use this for initialization
 
     void Start()
     {
         deadZoneRadiusSQR = deadZoneRadius * deadZoneRadius;
-        rb = GetComponent<Rigidbody2D>();
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
         Game.OnGameStart += Init;
