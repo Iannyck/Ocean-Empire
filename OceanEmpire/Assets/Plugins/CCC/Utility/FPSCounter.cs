@@ -7,13 +7,32 @@ namespace CCC.Utility
     public class FPSCounter : SlowBehaviour
     {
         public Text display;
-        
+        public bool cummulateOverSkippedFrames = true;
+
+        private float cummulatedFPS;
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (cummulateOverSkippedFrames)
+                cummulatedFPS += GetFPS() / (skippedUpdates + 1);
+        }
+
         protected override void SlowUpdate()
         {
             base.SlowUpdate();
             if (display != null)
             {
-                int fps = (int)GetFPS();
+                int fps = 0;
+                if (cummulateOverSkippedFrames)
+                {
+                    fps = cummulatedFPS.RoundedToInt();
+                    cummulatedFPS = 0;
+                }
+                else
+                    fps = (int)GetFPS();
+
 
                 display.text = fps.ToString();
             }

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using DG.Tweening;
-using UnityEngine.Events;
 using UnityEngine.Audio;
+using FullInspector;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,29 +16,42 @@ namespace CCC.Manager
     public class SoundManager : BaseManager<SoundManager>
     {
         [System.Serializable]
-        public class VolumeSave
+        public struct SoundSettings
         {
-            //Value '0' is the default setting. 
-            public float master = 0;
-            public float voice = 0;
-            public float sfx = 0;
-            public float music = 0;
-            public bool activeSfx = true;
-            public bool activeMusic = true;
+            public Setting master;
+            public Setting voice;
+            public Setting sfx;
+            public Setting music;
+            public SoundSettings(Setting master, Setting voice, Setting sfx, Setting music)
+            {
+                this.master = master;
+                this.voice = voice;
+                this.sfx = sfx;
+                this.music = music;
+            }
+        }
+        [System.Serializable]
+        public struct Setting
+        {
+            public float dbBoost;
+            public bool muted;
+            public Setting(float dbBoost, bool enabled)
+            {
+                this.dbBoost = dbBoost;
+                this.muted = enabled;
+            }
         }
 
-        public AudioSource stdSource;
+        public OpenSavesButton openSavesLocation;
+        public bool printLogs = false;
+        public AudioSource SFXSource;
+        public AudioSource staticSFXSource;
         public AudioSource musicSource;
+        public AudioSource voiceSource;
         public AudioMixer mixer;
-        public VolumeSave save;
+        public SoundSettings settings;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            instance = this;
-            save.activeSfx = true;
-            save.activeMusic = true;
-        }
+        public AudioMixerSnapshot[] snapshots;
 
         public override void Init()
         {
@@ -48,54 +62,84 @@ namespace CCC.Manager
         /// <summary>
         /// Plays the audioclip. Leave source to 'null' to play on the standard 2D SFX audiosource.
         /// </summary>
-        public static void PlaySFX(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
+        static public void PlayStaticSFX(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-
-            if (!instance.save.activeSfx)
-                return;
-
-            if (clip == null) return;
-            if (delay > 0)
-            {
-                instance.StartCoroutine(instance.PlayIn(clip, delay, volume, source));
-                return;
-            }
-            AudioSource theSource = source;
-            if (theSource == null) theSource = instance.stdSource;
-            
-            theSource.PlayOneShot(clip, volume); //avant stdSource.PlayOneShot(clip, delay); 
+            if (CheckResources_Instance())
+                PlayNonMusic(clip, delay, volume, source, instance.staticSFXSource);
         }
 
-        public static void PlayMusic(AudioClip clip, bool looping = true, float volume = 1, bool faded = false)
+        /// <summary>
+        /// Plays the audioclip. Leave source to 'null' to play on the standard 2D Voice audiosource.
+        /// </summary>
+        static public void PlayVoice(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
+            if (CheckResources_Instance())
+                PlayNonMusic(clip, delay, volume, source, instance.voiceSource);
+        }
 
-            if (!instance.save.activeMusic)
+        /// <summary>
+        /// Plays the audioclip. Leave source to 'null' to play on the standard 2D SFX audiosource.
+        /// </summary>
+        static public void PlaySFX(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
+        {
+            if (CheckResources_Instance())
+                PlayNonMusic(clip, delay, volume, source, instance.SFXSource);
+        }
+
+        private static void PlayNonMusic(AudioClip clip, float delay, float volume, AudioSource source, AudioSource defaultSource)
+        {
+            if (clip == null)
                 return;
 
-            if (faded)
+            AudioSource theSource = source;
+            if (theSource == null) theSource = defaultSource;
+
+            if (delay > 0)
+            {
+                instance.StartCoroutine(PlayNonMusicIn(clip, delay, volume, theSource));
+                return;
+            }
+            else
+            {
+                theSource.PlayOneShot(clip, volume);
+            }
+        }
+
+        private static IEnumerator PlayNonMusicIn(AudioClip clip, float delay, float volume, AudioSource source)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            source.PlayOneShot(clip, volume);
+        }
+
+        static public void PlayMusic(AudioClip clip, bool looping = true, float volume = 1, bool fadePrevious = true)
+        {
+            if (!CheckResources_Instance() || !CheckResources_MusicSource())
+                return;
+
+            if (fadePrevious)
             {
                 StopMusic(true, delegate ()
                 {
-                    PlayMusic(clip, looping, volume);
+                    PlayMusic(clip, looping, volume, false);
                 });
             }
             else
             {
+                StopMusic(false, null);
+
                 instance.musicSource.volume = volume;
-                StopMusic();
                 instance.musicSource.clip = clip;
                 instance.musicSource.loop = looping;
                 instance.musicSource.Play();
             }
         }
 
-        public static void StopMusic(bool faded = false, TweenCallback onComplete = null)
+        static public void StopMusic(bool faded = false, Action onComplete = null)
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
+            if (!CheckResources_Instance() || !CheckResources_MusicSource())
+                return;
 
-            if (faded)
+            if (faded && IsPlayingMusic())
             {
                 DOTween.To(() => instance.musicSource.volume, x => instance.musicSource.volume = x, 0, 0.5f).OnComplete(delegate ()
                 {
@@ -105,190 +149,343 @@ namespace CCC.Manager
             else
             {
                 instance.musicSource.Stop();
-                if (onComplete != null) onComplete.Invoke();
+                if (onComplete != null) onComplete();
             }
-        }
-
-        IEnumerator PlayIn(AudioClip clip, float delay, float volume = 1, AudioSource source = null)
-        {
-            yield return new WaitForSecondsRealtime(delay);
-            PlaySFX(clip, 0, volume, source);
         }
 
         static public bool IsPlayingMusic()
         {
+            if (!CheckResources_Instance() || !CheckResources_MusicSource())
+                return false;
+
             return instance.musicSource.isPlaying;
         }
 
-        #region Volume Set
-
-        public static void SetMaster(float value)
+        static public void SlowMotionEffect(bool state, float timeToReach = 0.75f)
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-            if (instance.mixer == null) return;
-
-            instance.save.master = value;
-            instance.mixer.SetFloat("master", value);
-        }
-        public static void SetVoice(float value)
-        {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-            if (instance.mixer == null) return;
-
-            instance.save.voice = value;
-            instance.mixer.SetFloat("voice", value);
-        }
-        public static void SetMusic(float value)
-        {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-            if (instance.mixer == null) return;
-
-            instance.save.music = value;
-            instance.mixer.SetFloat("music", value);
-        }
-        public static void SetSfx(float value)
-        {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-            if (instance.mixer == null) return;
-
-            instance.save.sfx = value;
-            instance.mixer.SetFloat("sfx", value);
-        }
-        public static void SetActiveSFX(bool value)
-        {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-            if (instance.mixer == null) return;
-
-            instance.save.activeSfx = value;
-        }
-        public static void SetActiveMusic(bool value)
-        {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-            if (instance.mixer == null) return;
-
-            instance.save.activeMusic = value;
+            if (CheckResources_Instance() && CheckResources_Mixer())
+                instance.mixer.TransitionToSnapshots(
+                    instance.snapshots,
+                    state ? new float[] { 0, 1 } : new float[] { 1, 0 },
+                    timeToReach);
         }
 
-        public static float GetMaster()
+        #region Settings Get/Set
+
+        public static void SetMaster(float dbBoost)
         {
-            return instance.save.master;
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.master.dbBoost = dbBoost;
+            instance.ApplyMaster();
+        }
+        public static void SetMaster(bool muted)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.master.muted = muted;
+            instance.ApplyMaster();
+        }
+        public static void SetSFX(float dbBoost)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.sfx.dbBoost = dbBoost;
+            instance.ApplySFX();
+        }
+        public static void SetSFX(bool muted)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.sfx.muted = muted;
+            instance.ApplySFX();
+        }
+        public static void SetVoice(float dbBoost)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.voice.dbBoost = dbBoost;
+            instance.ApplyVoice();
+        }
+        public static void SetVoice(bool muted)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.voice.muted = muted;
+            instance.ApplyVoice();
+        }
+        public static void SetMusic(float dbBoost)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.music.dbBoost = dbBoost;
+            instance.ApplyMusic();
+        }
+        public static void SetMusic(bool muted)
+        {
+            if (!CheckResources_Instance())
+                return;
+
+            instance.settings.music.muted = muted;
+            instance.ApplyMusic();
         }
 
-        public static float GetMusic()
+        public static Setting GetSFXSetting()
         {
-            return instance.save.music;
+            if (CheckResources_Instance())
+                return instance.settings.sfx;
+            else
+                return new Setting();
+        }
+        public static Setting GetMusicSetting()
+        {
+            if (CheckResources_Instance())
+                return instance.settings.music;
+            else
+                return new Setting();
+        }
+        public static Setting GetMasterSetting()
+        {
+            if (CheckResources_Instance())
+                return instance.settings.master;
+            else
+                return new Setting();
+        }
+        public static Setting GetVoiceSetting()
+        {
+            if (CheckResources_Instance())
+                return instance.settings.voice;
+            else
+                return new Setting();
         }
 
-        public static float GetVoice()
+        private bool MusicMuted()
         {
-            return instance.save.voice;
+            return settings.music.muted || MasterMuted();
         }
-
-        public static float GetSfx()
+        private bool SFXMuted()
         {
-            return instance.save.sfx;
+            return settings.sfx.muted || MasterMuted();
         }
-
-        public static bool GetActiveSfx()
+        private bool VoiceMuted()
         {
-            return instance.save.activeSfx;
+            return settings.voice.muted || MasterMuted();
         }
-
-        public static bool GetActiveMusic()
+        private bool MasterMuted()
         {
-            return instance.save.activeMusic;
-        }
-
-        private void ApplyAll()
-        {
-            if (instance.mixer == null) return;
-
-            mixer.SetFloat("master", save.master);
-            mixer.SetFloat("sfx", save.sfx);
-            mixer.SetFloat("voice", save.voice);
-            mixer.SetFloat("music", save.music);
+            return settings.master.muted;
         }
 
         #endregion
 
+        #region Apply
+        [InspectorButton]
+        private void ApplyAll()
+        {
+            ApplyMaster();
+            ApplyMusic();
+            ApplySFX();
+            ApplyVoice();
+        }
+        private void ApplyMaster()
+        {
+            if (CheckResources_Mixer())
+            {
+                float val = MasterMuted() ? -80 : settings.master.dbBoost;
+                mixer.SetFloat("master", val);
+            }
+            //if (CheckResources_MusicSource())
+            //    musicSource.mute = MusicMuted();
+            //if (CheckResources_SFXSource())
+            //    sfxStdSource.mute = SFXMuted();
+            //if (CheckResources_VoiceSource())
+            //    voiceSource.mute = VoiceMuted();
+        }
+        private void ApplySFX()
+        {
+            if (CheckResources_Mixer())
+            {
+                float val = SFXMuted() ? -80 : settings.sfx.dbBoost;
+                mixer.SetFloat("sfx", val);
+                mixer.SetFloat("static sfx", val);
+            }
+            //if (CheckResources_SFXSource())
+            //    sfxStdSource.mute = MusicMuted();
+        }
+        private void ApplyVoice()
+        {
+            if (CheckResources_Mixer())
+            {
+                float val = VoiceMuted() ? -80 : settings.voice.dbBoost;
+                mixer.SetFloat("voice", val);
+            }
+            //if (CheckResources_VoiceSource())
+            //    voiceSource.mute = VoiceMuted();
+        }
+        private void ApplyMusic()
+        {
+            if (CheckResources_Mixer())
+            {
+                float val = MusicMuted() ? -80 : settings.music.dbBoost;
+                mixer.SetFloat("music", val);
+            }
+            //if (CheckResources_MusicSource())
+            //    musicSource.mute = MusicMuted();
+        }
+        #endregion
+
         #region Load/Save
+        private const string SaveExtension = "/Sound_v2.dat";
 
         public static void Load()
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-
-            string savePath = Application.persistentDataPath + "/Sound.dat";
+            if (!CheckResources_Instance())
+                return;
+            instance.Load_Instance();
+        }
+        [InspectorButton, InspectorName("Load")]
+        private void Load_Instance()
+        {
+            string savePath = Application.persistentDataPath + SaveExtension;
             if (File.Exists(savePath))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 FileStream file = File.Open(savePath, FileMode.Open);
-                VolumeSave saveCopy = (VolumeSave)bf.Deserialize(file);
-                instance.save.master = saveCopy.master;
-                instance.save.voice = saveCopy.voice;
-                instance.save.sfx = saveCopy.sfx;
-                instance.save.music = saveCopy.music;
-                instance.save.activeMusic = saveCopy.activeMusic;
-                instance.save.activeSfx = saveCopy.activeSfx;
+                SoundSettings saveCopy = (SoundSettings)bf.Deserialize(file);
+
+                settings = saveCopy;
+
                 file.Close();
+
+                ApplyAll();
+                Log("Sound settings loaded.");
             }
             else
             {
-                instance.save = new VolumeSave();
-                Save();
+                SetDefaults_Instance();
+                Save_Instance();
             }
-
-            instance.ApplyAll();
         }
 
         public static void Save()
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
-
-            string savePath = Application.persistentDataPath + "/Sound.dat";
+            if (!CheckResources_Instance())
+                return;
+            instance.Save_Instance();
+        }
+        [InspectorButton, InspectorName("Save")]
+        private void Save_Instance()
+        {
+            string savePath = Application.persistentDataPath + SaveExtension;
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(savePath, FileMode.OpenOrCreate);
-            bf.Serialize(file, instance.save);
+            bf.Serialize(file, settings);
             file.Close();
+            Log("Sound settings saved.");
         }
 
-        public static void Clear()
+        public static void SetDefaults()
         {
-            if (instance == null) { Debug.LogError("SoundManager instance is null"); return; }
+            if (!CheckResources_Instance())
+                return;
+            instance.SetDefaults_Instance();
+        }
+        [InspectorButton, InspectorName("Set Defaults")]
+        private void SetDefaults_Instance()
+        {
+            settings = GetDefaultSettings();
+            Log("Default sound settings.");
 
-            instance.save = new VolumeSave();
-            Save();
+            ApplyAll();
         }
 
+
+        private static SoundSettings GetDefaultSettings()
+        {
+            return new SoundSettings(
+                new Setting(0, false),       //Master
+                new Setting(0, false),       //Voice
+                new Setting(0, false),       //SFX
+                new Setting(0, false));      //Music
+        }
         #endregion
 
-
-#if UNITY_EDITOR
-        [CustomEditor(typeof(SoundManager))]
-        public class SoundManagerEditor : Editor
+        #region Check Resources
+        private static bool CheckResources_Mixer()
         {
-            public override void OnInspectorGUI()
+            if (instance.mixer == null)
             {
-                base.OnInspectorGUI();
-
-                //SoundManager manager = target as SoundManager;
-
-                if (Application.isPlaying)
-                {
-                    if (GUILayout.Button("Clear"))
-                    {
-                        SoundManager.Clear();
-                    }
-                    if (GUILayout.Button("Save"))
-                    {
-                        SoundManager.Save();
-                    }
-                    if (GUILayout.Button("Load"))
-                    {
-                        SoundManager.Load();
-                    }
-                }
+                Debug.LogError("Aucun AudioMixer sur l'instance de SoundManager");
+                return false;
             }
+
+            return true;
         }
-#endif
+        private static bool CheckResources_MusicSource()
+        {
+            if (instance.musicSource == null)
+            {
+                Debug.LogError("Aucune 'Music' AudioSource sur l'instance de SoundManager");
+                return false;
+            }
+
+            return true;
+        }
+        private static bool CheckResources_VoiceSource()
+        {
+            if (instance.voiceSource == null)
+            {
+                Debug.LogError("Aucune 'Voice' AudioSource sur l'instance de SoundManager");
+                return false;
+            }
+
+            return true;
+        }
+        private static bool CheckResources_SFXSource()
+        {
+            if (instance.SFXSource == null)
+            {
+                Debug.LogError("Aucune 'SFX' AudioSource sur l'instance de SoundManager");
+                return false;
+            }
+
+            return true;
+        }
+        private static bool CheckResources_Instance()
+        {
+            if (instance == null)
+            {
+                Debug.LogError("Aucune instance de Sound manager.");
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
+
+        #region Log
+        private void Log(string message)
+        {
+            if (printLogs)
+                message.Log();
+        }
+        private void LogWarning(string message)
+        {
+            if (printLogs)
+                message.LogWarning();
+        }
+        private void LogError(string message)
+        {
+            if (printLogs)
+                message.LogError();
+        }
+        #endregion
     }
 }
