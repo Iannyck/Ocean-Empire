@@ -9,14 +9,19 @@ public class GameBuilder : MonoBehaviour {
     public const string SCENENAME = "GameBuilder";
 
     [HideInInspector]
-    string mapName = "Map_Caraibe";
+    public static string mapName = "Map_Caraibe";
     bool mapLoaded = false;
     bool uiLoaded = false;
 
     public void Init(string mapName)
     {
-        this.mapName = mapName;
+        SetMapLoadedName(mapName);
         MasterManager.Sync(Build);
+    }
+
+    public static void SetMapLoadedName(string name)
+    {
+        mapName = name;
     }
 
     void Build()
