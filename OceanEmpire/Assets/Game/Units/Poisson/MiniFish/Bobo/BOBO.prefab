@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212771005577804690}
   - component: {fileID: 114930874317122786}
   - component: {fileID: 114008773675957000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114766056936082448}
   - component: {fileID: 114006607524244626}
   - component: {fileID: 114021408903366914}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BOBO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 58109501744363240}
   - component: {fileID: 114647200725526030}
   - component: {fileID: 114780919155577168}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190b5d0d759f6c04e95469ad912f3616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentType: 1
+  parentType: 2
+  parent: {fileID: 1365461041918330}
 --- !u!114 &114766056936082448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a2793b9149e794eb21a18d51db1855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filter: 00000000
+  filter: 1
   onEnter:
     m_PersistentCalls:
       m_Calls:
