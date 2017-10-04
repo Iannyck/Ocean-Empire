@@ -43,8 +43,6 @@ public class PlayerSpawn : MonoBehaviour
                 onIntroAnimComplete();
             });
 
-
-
         return player;
     }
 }

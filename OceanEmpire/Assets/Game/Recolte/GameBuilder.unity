@@ -263,6 +263,7 @@ MonoBehaviour:
   ui: {fileID: 0}
   gameStarted: 0
   gameReady: 0
+  gameOver: 0
 --- !u!114 &1311441150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171f4b9d49f52c244a3d92c0b4cea32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infiniteTime: 1
+  remainingTimeAtStart: 5
+  remainingTime: 0
 --- !u!114 &1311441151
 MonoBehaviour:
   m_ObjectHideFlags: 0

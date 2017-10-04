@@ -41,6 +41,8 @@ public class Game : PublicSingleton<Game>
     public bool gameStarted = false;
     [HideInInspector]
     public bool gameReady = false;
+    [HideInInspector]
+    public bool gameOver = false;
     bool playerSpawned = false;
     static private event SimpleEvent onGameReady;
     static private event SimpleEvent onGameStart;
@@ -85,6 +87,7 @@ public class Game : PublicSingleton<Game>
     public void InitGame()
     {
         cameraMouvement.followPlayer = false;
+        Time.timeScale = 1;
 
         //Spawn player
         submarine = playerSpawn.SpawnPlayer();
@@ -98,7 +101,7 @@ public class Game : PublicSingleton<Game>
             {
                 cameraMouvement.followPlayer = true;
                 playerSpawned = true;
-                StartGame();
+                ui.feedbacks.ShowGo(StartGame);
             });
     }
 
@@ -139,6 +142,12 @@ public class Game : PublicSingleton<Game>
     {
         // End Game Screen
         // Save All
-        LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(/* METTRE LE RAPPORT */));
+        if (gameOver)
+            return;
+        gameOver = true;
+        ui.feedbacks.ShowTimeUp(delegate ()
+        {
+            LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(/* METTRE LE RAPPORT */));
+        });
     }
 }
