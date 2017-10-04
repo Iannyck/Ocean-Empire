@@ -52,11 +52,11 @@ public class DragDetection : MonoBehaviour
 
         if(wasState == DragProfile.State.Pressed && newState == DragProfile.State.Dragged)
         {
-            onStartDrag.Invoke(touchPos);
+            onStartDrag.Invoke(drag.lastRecordedPosition);
         }
         else if (wasState == DragProfile.State.Dragged && newState != DragProfile.State.Dragged)
         {
-            onReleaseDrag.Invoke(touchPos);
+            onReleaseDrag.Invoke(drag.lastRecordedPosition);
         }
     }
 
@@ -87,33 +87,33 @@ public class DragDetection : MonoBehaviour
 public struct DragProfile
 {
     public Vector2 startPosition;
-    public Vector2 currentPosition;
+    public Vector2 lastRecordedPosition;
     public enum State { Pressed = 0, Dragged = 1, Released = 2 }
     public State state;
 
     public DragProfile(Vector2 touch)
     {
         startPosition = touch;
-        currentPosition = startPosition;
+        lastRecordedPosition = startPosition;
         state = State.Pressed;
     }
 
-    public void UpdateState(Vector2 touch, float dragMinSQRDist)
+    public void UpdateState(Vector2 touchPos, float dragMinSQRDist)
     {
         switch (state)
         {
             case State.Pressed:
-                if ((currentPosition - startPosition).sqrMagnitude > dragMinSQRDist)
+                if ((lastRecordedPosition - startPosition).sqrMagnitude > dragMinSQRDist)
                 {
                     state = State.Dragged;
                 }
                 break;
             case State.Released:
-                startPosition = touch;
+                startPosition = touchPos;
                 state = State.Pressed;
                 break;
         }
-        currentPosition = touch;
+        lastRecordedPosition = touchPos;
     }
 
     public void UpdateState()
