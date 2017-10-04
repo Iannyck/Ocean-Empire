@@ -226,6 +226,8 @@ MonoBehaviour:
   delayBeforeSpawns: 5
   spawnAreaHeight: 12
   lateralSpawnOffest: 4
+  maxFishPerUnit: 1.5
+  palierHeigth: 1
 --- !u!4 &1311441148
 Transform:
   m_ObjectHideFlags: 0
@@ -254,6 +256,7 @@ MonoBehaviour:
   cameraMouvement: {fileID: 1699934080}
   playerStats: {fileID: 1311441150}
   playerSpawn: {fileID: 1311441151}
+  fishSpawner: {fileID: 1311441147}
   gameCamera: {fileID: 1699934081}
   submarine: {fileID: 0}
   map: {fileID: 0}
