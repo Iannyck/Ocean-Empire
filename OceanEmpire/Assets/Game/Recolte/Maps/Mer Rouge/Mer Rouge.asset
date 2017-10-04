@@ -9,11 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65903cec361d4f74587749428bb1bcd0, type: 3}
-  m_Name: CaraibeDesc
+  m_Name: Mer Rouge
   m_EditorClassIdentifier: 
-  zoneName: Caraibes
-  zoneDescription: "Pirates et bi\xE8res \xE0 volont\xE9!"
-  sceneToLoad: Map_Caraibe
+  zoneName: Mer Rouge
+  zoneDescription: Rouge !
+  sceneToLoad: 
   fishList:
   - {fileID: 11400000, guid: 2293aef96192c3a4db5601f448a7160f, type: 2}
   - {fileID: 11400000, guid: 93eb35febf2207d4a9d212a2773a7efc, type: 2}
+  - {fileID: 11400000, guid: d715883bdee6d7c4ba9515a5c2af8906, type: 2}
