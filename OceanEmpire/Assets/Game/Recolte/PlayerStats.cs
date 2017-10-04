@@ -8,8 +8,9 @@ public class PlayerStats : MonoBehaviour {
     private float depthRecord;
     private List<BaseFish> fishInStock = new List<BaseFish>();
 
+    public bool infiniteTime = false;
     public float remainingTimeAtStart = 30;
-    [HideInInspector]
+    [ReadOnly]
     public float remainingTime;
 
     void Start ()
@@ -23,7 +24,15 @@ public class PlayerStats : MonoBehaviour {
     {
         if (Game.instance == null)
             return;
-        remainingTime -= Time.deltaTime;
+
+        if (!infiniteTime && Game.instance.gameStarted)
+            UpdateTimer();
+    }
+
+    void UpdateTimer()
+    {
+        remainingTime = (remainingTime - Time.deltaTime).Raised(0);
+
         if (remainingTime <= 0 && !Game.instance.gameOver)
             Game.instance.EndGame();
     }

@@ -11,6 +11,7 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     public override void Init()
     {
         Money = GameSaves.instance.GetInt(GameSaves.Type.Shop, SAVE_KEY_MONEY);
+        CompleteInit();
     }
 
     private int money;
