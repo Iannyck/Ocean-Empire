@@ -12,6 +12,7 @@ public class Game : PublicSingleton<Game>
     public static CameraMouvement CameraMouvement { get { return instance.cameraMouvement; } }
     public static PlayerStats PlayerStats { get { return instance.playerStats; } }
     public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
+    public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
     public static Spawner Spawner { get { return instance.spawner; } }
     public static GameCamera GameCamera { get { return instance.gameCamera; } }
 
@@ -23,6 +24,8 @@ public class Game : PublicSingleton<Game>
     private PlayerStats playerStats;
     [SerializeField]
     private PlayerSpawn playerSpawn;
+    [SerializeField]
+    private FishSpawner fishSpawner;
     [SerializeField]
     private GameCamera gameCamera;
 

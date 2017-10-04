@@ -137,9 +137,10 @@ public class CommonFishDriver : BaseFishDriver
         base.ClearMind();
 
         brainFreeze = false;
-        brainFreezeTimer = 0;
+        brainFreezeTimer = Random.Range(brainFreezeFrequence.x, brainFreezeFrequence.y);
         brainFreezeRemainingDuration = 0;
         currentBehaviour = Behaviour.Wander;
         targetPosition = Position;
+        
     }
 }
