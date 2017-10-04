@@ -6,6 +6,8 @@ using UnityEngine;
 public class MapDescription : ScriptableObject
 {
     public string zoneName;
+    public string zoneDescription; 
+
     public string sceneToLoad;
 
     public List<FishDescription> fishList = new List<FishDescription>();
@@ -14,6 +16,11 @@ public class MapDescription : ScriptableObject
     public string GetName()
     {
         return zoneName;
+    }
+
+    public string GetDescription()
+    {
+        return zoneDescription;
     }
 	
 }
