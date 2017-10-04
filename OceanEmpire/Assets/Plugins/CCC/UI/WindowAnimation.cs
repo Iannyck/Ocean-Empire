@@ -30,6 +30,7 @@ namespace CCC.UI
         [Header("Exit")]
         public float exitTime = 0.35f;
         public Ease exitEase = Ease.InSine;
+        public bool instantHideContent = false;
 
         [Header("Size")]
         public bool autoDetectSize = true;
@@ -108,14 +109,17 @@ namespace CCC.UI
         {
             isOpen = false;
 
-            float delay = content == null ? 0 : exitTime * 0.75f;
+            float delay = content == null || instantHideContent ? 0 : exitTime * 0.75f;
 
 
             //Le content se fade-out en premier
             if (content != null)
             {
                 content.DOKill();
-                content.DOFade(0, exitTime * 0.75f).SetEase(exitEase).SetUpdate(true);
+                if (instantHideContent)
+                    content.alpha = 0;
+                else
+                    content.DOFade(0, exitTime * 0.75f).SetEase(exitEase).SetUpdate(true);
                 content.blocksRaycasts = false;
             }
 
@@ -183,7 +187,7 @@ namespace CCC.UI
                 bgImage.SetAlpha(fadeStart);
             }
 
-            if(backBg != null)
+            if (backBg != null)
             {
                 backBg.DOKill();
                 backBg.SetAlpha(0);

@@ -1,0 +1,27 @@
+Adobe After Effects v10.5.1 (Windows 64) render log for project “Slingshot.aep”
+
+Rendering started on 2017-10-02 at 18:27:57
+
+
+  2017-10-02 18:27:57: Starting composition “Slingshot Anchor”.
+
+
+  Output To: C:\Users\etudiant\Documents\Ocean Empire\Art\Slingshot\Slingshot Anchor Big.png
+  
+  2017-10-02 18:27:57: Finished composition “Slingshot Anchor”.
+
+
+
+  2017-10-02 18:27:57: Starting composition “Slingshot Arrow”.
+
+
+  Output To: C:\Users\etudiant\Documents\Ocean Empire\Art\Slingshot\Slingshot Arrow Big.png
+  
+  2017-10-02 18:27:57: Finished composition “Slingshot Arrow”.
+
+
+
+  Total Time Elapsed: 0 Seconds
+
+Log closed on 2017-10-02 at 18:27:57
+

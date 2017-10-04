@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 {
+    public float deadZoneRadius = 0.75f;
 
     //Proportionnal to the acceleration rate
     public float accelerationRate;
@@ -17,6 +18,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
     private float upBound;
     private float downBound;
+    private float deadZoneRadiusSQR;
 
 
 
@@ -27,11 +29,16 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     private Rigidbody2D rb;
     //private float 
 
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
     // Use this for initialization
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        deadZoneRadiusSQR = deadZoneRadius * deadZoneRadius;
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
         Game.OnGameStart += Init;
@@ -74,9 +81,12 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
     public void OnClick(Vector2 position)
     {
-        float d = distanceFromBound;
+        if((position - rb.position).sqrMagnitude> deadZoneRadiusSQR)
+        {
+            float d = distanceFromBound;
 
-        currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
-        currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
+            currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
+            currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
+        }
     }
 }

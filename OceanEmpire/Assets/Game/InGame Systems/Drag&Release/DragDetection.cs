@@ -30,6 +30,8 @@ public class DragDetection : MonoBehaviour
         Vector2 touchPos;
         bool isTouching = GetTouchPosition(out touchPos);
 
+        DragProfile.State wasState = drag.state;
+
         if (isTouching)
         {
             if (drag.state == DragProfile.State.Released)
@@ -44,6 +46,17 @@ public class DragDetection : MonoBehaviour
         else
         {
             drag.UpdateState();
+        }
+
+        DragProfile.State newState = drag.state;
+
+        if(wasState == DragProfile.State.Pressed && newState == DragProfile.State.Dragged)
+        {
+            onStartDrag.Invoke(touchPos);
+        }
+        else if (wasState == DragProfile.State.Dragged && newState != DragProfile.State.Dragged)
+        {
+            onReleaseDrag.Invoke(touchPos);
         }
     }
 

@@ -28,7 +28,7 @@ public static class IntExtensions
 
     public static int Sign(this int value)
     {
-        return value > 0 ?  1 : -1;
+        return value > 0 ? 1 : -1;
     }
 
     public static int Clamped(this int value, int min, int max)
@@ -40,11 +40,12 @@ public static class IntExtensions
     {
         if (modulo < 1)
             return 0;
-
+        
         if (value < 0)
-            value = 0;
-        else
-            return value % modulo;
-        return value;
+        {
+            value += Mathf.CeilToInt((float)value.Abs() / modulo) * modulo;
+        }
+
+        return value % modulo;
     }
 }

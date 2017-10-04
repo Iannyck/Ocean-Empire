@@ -64,6 +64,15 @@ public static class VectorExtensions
         return Vector3.MoveTowards(v, target, maxDistanceDelta);
     }
 
+    public static Vector2 Lerpped(this Vector2 v, Vector2 target, float t)
+    {
+        return Vector2.Lerp(v, target, t);
+    }
+    public static Vector3 Lerpped(this Vector3 v, Vector3 target, float t)
+    {
+        return Vector3.Lerp(v, target, t);
+    }
+
     /// <summary>
     /// Multiplie les parametre par ceux du 'scale'
     /// </summary>
