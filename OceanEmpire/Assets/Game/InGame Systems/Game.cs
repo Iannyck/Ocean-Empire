@@ -13,6 +13,7 @@ public class Game : PublicSingleton<Game>
     public static PlayerStats PlayerStats { get { return instance.playerStats; } }
     public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
     public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
+    public static FishingReport FishingReport { get { return instance.fishingReport; } }
     public static Spawner Spawner { get { return instance.spawner; } }
     public static GameCamera GameCamera { get { return instance.gameCamera; } }
 
@@ -31,6 +32,8 @@ public class Game : PublicSingleton<Game>
 
     [HideInInspector]
     public SubmarineMovement submarine;
+    [HideInInspector]
+    public FishingReport fishingReport;
     [HideInInspector]
     public MapInfo map;
     [HideInInspector]
@@ -88,6 +91,9 @@ public class Game : PublicSingleton<Game>
     {
         cameraMouvement.followPlayer = false;
         Time.timeScale = 1;
+
+        //Create a fishingReport
+        fishingReport = new FishingReport();
 
         //Spawn player
         submarine = playerSpawn.SpawnPlayer();
