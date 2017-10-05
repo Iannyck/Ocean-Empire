@@ -200,6 +200,7 @@ public class FishSpawner : MonoBehaviour {
         float nb3 = Random.Range(cam.Left, cam.Right);
 
         spawnPos.y = GetPalierPosition(palierIte) + (nb1 + nb2) * palierHeigth;
+        spawnPos.y = spawnPos.y.Clamped(map.mapBottom, map.mapTop);
         spawnPos.x = nb3;
 
         BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
