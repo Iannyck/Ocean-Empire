@@ -12,7 +12,7 @@ public abstract class BaseFish : MonoBehaviour, IKillable
     public event FishEvent captureEvent;
     public event FishEvent deathEvent;
 
-    private int currentPalier;
+    private int currentPalier = -1;
     private FishSpawner spawner;
     private GameCamera cam;
 
@@ -52,8 +52,6 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         gameObject.SetActive(false);
 
         ClearEvents();
-
-        "Receive".Log();
     }
 
     protected virtual void ClearEvents()
@@ -64,6 +62,11 @@ public abstract class BaseFish : MonoBehaviour, IKillable
 
     public void RemiseEnLiberté()
     {
+        if (spawner!= null && currentPalier >= 0)
+            UnsuscribePalier();
+
+        currentPalier = -1;
+
         hasBeenKilled = false;
         hasBeenCaptured = false;
 
@@ -77,10 +80,6 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         return hasBeenCaptured;
     }
 
-
-
-
-
     public void Start()
     {
         Game.OnGameStart += Init;
@@ -90,9 +89,6 @@ public abstract class BaseFish : MonoBehaviour, IKillable
     {
         spawner = Game.FishSpawner;
         cam = Game.GameCamera;
-
-        currentPalier = -1;
-        ChangePalier(spawner.GetClosestPalier(transform.position.y));
     }
 
     public void Update()
@@ -100,63 +96,65 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         CheckPalier();
     }
 
+
+
+
+
     public void CheckPalier()
     {
-        float position = transform.position.y;
-        int closestPalier = spawner.GetClosestPalier(position);
+        float fishPosition = transform.position.y;
+        int closestPalier = spawner.GetClosestPalier(fishPosition);
         float closestPalierPosition = spawner.GetPalierPosition(closestPalier);
 
-        //Doesn't Move
+        if (currentPalier == -1)
+        {
+            SetPalier(closestPalier);
+            return;
+        }
         if (currentPalier == closestPalier)
             return;
 
-        //Move Up
-        if (currentPalier < closestPalier)                                  
+        if ((spawner.GetPalierPosition(currentPalier) - fishPosition).Abs() > spawner.palierHeigth)
         {
-            //don't change if in palier SpawnRange (prevent auto-despawn)
-            if (position < closestPalierPosition)       
-                ChangePalier(closestPalier);
-            return;
-        }
-
-        //Move Down;
-        if (currentPalier > closestPalier)
-        {
-            if (position > closestPalierPosition)
-                ChangePalier(closestPalier);
-            return;
+            SetPalier(closestPalier);
         }
     }
 
-    public void ChangePalier(int newPalierIte)
+    public void SetPalier(int newPalierIte)
     {
-        if (currentPalier != -1)
-            RemovePalier();
-        AddPalier(newPalierIte);
-    }
+        if(currentPalier == -1)
+        {
+            currentPalier = newPalierIte;
+            SuscribePalier();
+            return;
+        }
 
-    private void RemovePalier()
-    {
-        FishPalier oldPalier = spawner.GetPalier(currentPalier);
-        oldPalier.UnSuscribeFish(this);
-        oldPalier.palierDespawnEvent -= Kill;
-    }
+        if (spawner.GetPalier(newPalierIte).isActive == false)
+        {
 
-    private void AddPalier(int newPalierIte)
-    {
-        FishPalier newPalier = spawner.GetPalier(newPalierIte);
-
-        if (newPalier.isActive == false)
-        { 
             Kill();
             return;
         }
-        else
-        {
-            newPalier.SuscribeFish(this);
-            newPalier.palierDespawnEvent += Kill;
-            return;
-        }
+
+        UnsuscribePalier();
+        currentPalier = newPalierIte;
+        SuscribePalier();
     }
+
+    public void SuscribePalier()
+    {
+        FishPalier fiP = spawner.GetPalier(currentPalier);
+        fiP.SuscribeFish(this);
+        fiP.palierDespawnEvent += Kill;
+    }
+
+    public void UnsuscribePalier()
+    {
+        FishPalier fiP = spawner.GetPalier(currentPalier);
+        fiP.UnsuscribeFish(this);
+        fiP.palierDespawnEvent -= Kill;
+    }
+
+
 
 }

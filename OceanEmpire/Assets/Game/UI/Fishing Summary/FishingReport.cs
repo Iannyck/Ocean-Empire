@@ -4,5 +4,11 @@ using UnityEngine;
 
 public struct FishingReport
 {
-    //A remplir
+    Dictionary<FishDescription, int> CapturedFish;
+    /*
+    FishingReport()
+    {
+
+    }
+    */
 }

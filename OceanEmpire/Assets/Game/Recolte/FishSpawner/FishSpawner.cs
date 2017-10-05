@@ -8,11 +8,12 @@ public class FishSpawner : MonoBehaviour {
 
     public FishPool fishPool;
 
-    public float delayBeforeSpawns = 2;
-    public float spawnAreaHeight = 10;
-    public float lateralSpawnOffest = 4;
     public float maxFishPerUnit = 1.5f;
     public float palierHeigth = 1;
+    public float FishReplenishTime = 120;
+    public float timeBetweenSideSpawn = 10;
+
+    private int palierSpawnedOutsideCamera = 3;
 
     private float lastSpawn;
 
@@ -40,7 +41,7 @@ public class FishSpawner : MonoBehaviour {
     }
 
     void Start () {
-        lastSpawn = delayBeforeSpawns;
+        lastSpawn = 0;
         Game.OnGameStart += Init;
     }
 
@@ -53,6 +54,8 @@ public class FishSpawner : MonoBehaviour {
         map = Game.instance.map;
         Game.OnGameStart -= Init;
         cam = Game.GameCamera;
+
+        FishPalier.repopulationCycle = 120;
 
         StartPalierSystem();
         return;    
@@ -67,9 +70,7 @@ public class FishSpawner : MonoBehaviour {
 
         float maxFishPerPalier = (maxFishPerUnit * palierHeigth);
         
-       
 
-   
         for (int i = 0; i < palierNumber; i++)
         {
             FishPalier newPalier = new FishPalier();
@@ -81,18 +82,16 @@ public class FishSpawner : MonoBehaviour {
 
 
         palierRange lastActivePaliers = new palierRange();
-        lastActivePaliers.start = GetClosestPalier(cam.Top + palierHeigth);
-        lastActivePaliers.finish = GetClosestPalier(cam.Bottom - palierHeigth);
 
-        print("start: " + lastActivePaliers.start + " finish: " + lastActivePaliers.finish);
-
-        
+        lastActivePaliers.start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera);
+        lastActivePaliers.finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera);
+        /*
         for (int i = lastActivePaliers.start; i <= lastActivePaliers.finish; i++)
         {
 
             SpawnPalier(i);
         }
-      
+      */
     }
 
 
@@ -106,7 +105,7 @@ public class FishSpawner : MonoBehaviour {
     {
         ypos = ypos.Raised(map.mapBottom);
         ypos = ypos.Capped(map.mapTop);
-        int palier = (int)Mathf.Ceil((map.mapTop - ypos) / palierHeigth);
+        int palier = (int)Mathf.Round(( (map.mapTop - ypos) + (palierHeigth/2) ) / palierHeigth);
         return palier;
     }
 
@@ -120,74 +119,53 @@ public class FishSpawner : MonoBehaviour {
 
         SpawnSideFish();
         UpdatePalier();
+
         timeCounter += Time.deltaTime;     
     }
 
 
     void UpdatePalier()
     {
- 
-
         palierRange newPalier = new palierRange();
 
-        newPalier.start = GetClosestPalier(cam.Top + palierHeigth);
-        newPalier.finish = GetClosestPalier(cam.Bottom - palierHeigth);
+        newPalier.start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera);
+        newPalier.finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera);
 
         //Spawn
         while (newPalier.start < lastActivePaliers.start)
         {
-            SpawnPalier(newPalier.start);
+           //start up
             lastActivePaliers.start -= 1;
+            SpawnPalier(lastActivePaliers.start);         
         }
         while (newPalier.finish > lastActivePaliers.finish)
         {
-            SpawnPalier(newPalier.finish);
+            //finish down
             lastActivePaliers.finish += 1;
+            SpawnPalier(lastActivePaliers.finish);
         }
 
         //Despawn
         while (newPalier.start > lastActivePaliers.start)
         {
-            DespawnPalier(newPalier.start);
+            //start down
+            DespawnPalier(lastActivePaliers.start);
             lastActivePaliers.start += 1;
         }
         while (newPalier.finish < lastActivePaliers.finish)
         {
-            DespawnPalier(newPalier.finish);
+            //finish up
+            DespawnPalier(lastActivePaliers.finish);
             lastActivePaliers.finish -= 1;
         }
+
+        lastActivePaliers = newPalier;
     }
 
-
-
-    void SpawnSideFish()
+    public void DespawnPalier(int i)
     {
-        fishCount += 1;
-        if (lastSpawn <= 0)
-        {
-            Vector3 spawnPos = Vector3.zero;
-
-            Random.InitState(fishCount);
-            float leftRight = Random.Range(0.0f, 1.0f);
-            if (leftRight > 0.5f)
-                spawnPos.x = lateralSpawnOffest;
-            else
-                spawnPos.x = -lateralSpawnOffest;
-
-            float y = submarine.transform.position.y;
-
-            spawnPos.y = +Random.Range(y - spawnAreaHeight / 2, (y + spawnAreaHeight / 2).Capped(map.mapTop));
-
-            BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
-
-            if (fishPool != null && newFish != null)
-            {
-                fishPool.SetFishAt(newFish, spawnPos);
-            }
-            lastSpawn = map.GetGeneralDensity(spawnPos.y);
-            
-        }
-        else lastSpawn -= Time.deltaTime;
+        GetPalier(i).isActive = false;
+        GetPalier(i).Despawn(timeCounter);
     }
 
 
@@ -228,17 +206,45 @@ public class FishSpawner : MonoBehaviour {
         if (fishPool != null && newFish != null)
         {
             BaseFish someFish = fishPool.SetFishAt(newFish, spawnPos);
-            GetPalier(palierIte).SuscribeFish(someFish);
+            //GetPalier(palierIte).SuscribeFish(someFish);
         }
     }
 
 
 
 
-    public void DespawnPalier(int i)
-    {
-        GetPalier(i).Despawn(timeCounter);
-        GetPalier(i).isActive = false;
-    }
 
+    void SpawnSideFish()
+    {
+        fishCount += 1;
+        if (lastSpawn <= 0)
+        {
+            float spawnAreaHeight = cam.Height;
+            float lateralSpawnOffest = 1.2f * cam.HalfWidth;
+
+
+            Vector3 spawnPos = Vector3.zero;
+
+            Random.InitState(fishCount);
+            float leftRight = Random.Range(0.0f, 1.0f);
+            if (leftRight > 0.5f)
+                spawnPos.x = lateralSpawnOffest;
+            else
+                spawnPos.x = -lateralSpawnOffest;
+
+            float y = submarine.transform.position.y;
+
+            spawnPos.y = +Random.Range(y - spawnAreaHeight / 2, (y + spawnAreaHeight / 2).Capped(map.mapTop));
+
+            BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
+
+            if (fishPool != null && newFish != null)
+            {
+                fishPool.SetFishAt(newFish, spawnPos);
+            }
+            lastSpawn = map.GetGeneralDensity(spawnPos.y) * timeBetweenSideSpawn;
+
+        }
+        else lastSpawn -= Time.deltaTime;
+    }
 }

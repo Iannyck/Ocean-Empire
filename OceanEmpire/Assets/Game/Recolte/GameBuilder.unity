@@ -223,11 +223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishPool: {fileID: 1311441154}
-  delayBeforeSpawns: 5
-  spawnAreaHeight: 12
-  lateralSpawnOffest: 4
   maxFishPerUnit: 1.5
-  palierHeigth: 1
+  palierHeigth: 2
+  FishReplenishTime: 100
+  timeBetweenSideSpawn: 6
 --- !u!4 &1311441148
 Transform:
   m_ObjectHideFlags: 0

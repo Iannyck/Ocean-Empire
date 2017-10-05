@@ -8,6 +8,7 @@ public class FishPalier{
     public bool isActive = false;
 
     public static float repopulationCycle;
+
     private float lastActivationTime;
 
     private float AbsoluteFishLimit;
@@ -26,20 +27,10 @@ public class FishPalier{
 
     public void Despawn(float time)
     {
-        "Called".Log();
         if (palierDespawnEvent != null)
-            palierDespawnEvent.Invoke();
+            palierDespawnEvent();
 
         lastActivationTime = time;
-     
-        /*
-        float count = currentFishes.Count;
-        for (int i = 0; i < count; i++)
-        { 
-            currentFishes[i].Kill();
-        }
-        currentFishes.Clear();
-        */
     }
      
     public void SuscribeFish(BaseFish fish)
@@ -47,7 +38,7 @@ public class FishPalier{
         fish.captureEvent += CaptureFish;
     }
 
-    public void UnSuscribeFish(BaseFish fish)
+    public void UnsuscribeFish(BaseFish fish)
     {
         fish.captureEvent -= CaptureFish;
     }
@@ -58,8 +49,11 @@ public class FishPalier{
     public float GetFishDensity(float currentTime)
     {
         float regenRate = ((currentTime - lastActivationTime) / repopulationCycle).Capped(1.0f);
+
         int additionnalFishes = (int)(AbsoluteFishLimit * regenRate).Raised(0.0f);
+
         currentFishLimit = (currentFishLimit + additionnalFishes).Capped(AbsoluteFishLimit);
+
         return currentFishLimit;
     }
 
@@ -68,5 +62,6 @@ public class FishPalier{
     public void CaptureFish(BaseFish fish)
     {
         currentFishLimit -= (currentFishLimit > 0 ? 1 : 0);
+
     }
 }
