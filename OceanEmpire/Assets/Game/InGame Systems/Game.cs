@@ -153,7 +153,7 @@ public class Game : PublicSingleton<Game>
         gameOver = true;
         ui.feedbacks.ShowTimeUp(delegate ()
         {
-            LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(/* METTRE LE RAPPORT */));
+            LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(fishingReport));
         });
     }
 }
