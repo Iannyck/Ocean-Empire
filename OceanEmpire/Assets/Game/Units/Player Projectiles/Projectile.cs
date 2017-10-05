@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
 
     public void Shoot_Velocity(Vector2 velocity)
     {
+        transform.rotation = Quaternion.Euler(Vector3.forward * velocity.ToAngle());
         rb.velocity = velocity;
     }
     public void Shoot_Direction(Vector2 direction)

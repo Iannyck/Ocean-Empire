@@ -474,17 +474,17 @@ namespace CCC.Manager
         private void Log(string message)
         {
             if (printLogs)
-                message.Log();
+                Debug.Log(message);
         }
         private void LogWarning(string message)
         {
             if (printLogs)
-                message.LogWarning();
+                Debug.LogWarning(message);
         }
         private void LogError(string message)
         {
             if (printLogs)
-                message.LogError();
+                Debug.LogError(message);
         }
         #endregion
     }
