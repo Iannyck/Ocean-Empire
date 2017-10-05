@@ -26,7 +26,7 @@ public class FishPalier{
 
     public void Despawn(float time)
     {
-        "Called".Log();
+        //"Called".Log();
         if (palierDespawnEvent != null)
             palierDespawnEvent.Invoke();
 

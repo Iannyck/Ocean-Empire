@@ -35,7 +35,7 @@ public class Harpoon : Projectile, IKillable
 
         if (bigFish == null)
         {
-            "Le harpoon a frappé un objet qui n'est pas un big fish.".LogError();
+            Debug.LogError("Le harpoon a frappé un objet qui n'est pas un big fish.");
             return;
         }
 

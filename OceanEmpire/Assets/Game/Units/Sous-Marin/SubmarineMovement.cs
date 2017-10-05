@@ -27,14 +27,14 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
     public Vector2 currentTarget;
 
     private Rigidbody2D rb;
-    //private float 
+    private float realBrakeDistance = -1;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        realBrakeDistance = brakeDistance;
     }
-    // Use this for initialization
 
     void Start()
     {
@@ -61,7 +61,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
         Vector2 targetSpeed;
 
-        if (distance.magnitude < brakeDistance)
+        if (distance.magnitude < realBrakeDistance)
         {
             targetSpeed = distance.Capped(Vector2.one * maximumSpeed);
         }
@@ -81,12 +81,15 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
     public void OnClick(Vector2 position)
     {
-        if((position - rb.position).sqrMagnitude> deadZoneRadiusSQR)
+        float sqrMag = (position - rb.position).sqrMagnitude;
+        if (sqrMag > deadZoneRadiusSQR)
         {
             float d = distanceFromBound;
 
             currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
             currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
+
+            realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
         }
     }
 }

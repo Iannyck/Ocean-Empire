@@ -52,8 +52,6 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         gameObject.SetActive(false);
 
         ClearEvents();
-
-        "Receive".Log();
     }
 
     protected virtual void ClearEvents()
