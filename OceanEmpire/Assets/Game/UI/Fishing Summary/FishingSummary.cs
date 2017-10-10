@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class FishingSummary : MonoBehaviour
 {
-    public Text test;
     public const string SCENENAME = "FishingSummary";
+
     private FishingReport fishingReport;
+
+    public Text total;
+    public string baseText;
+    public GameObject fishSummaryPrefab;
+    public Transform countainer;
 
     private void Start()
     {
@@ -17,17 +22,20 @@ public class FishingSummary : MonoBehaviour
     public void ShowReport(FishingReport report)
     {
         fishingReport = report;
+
         int  fishes = 0;
         foreach (KeyValuePair<FishDescription, int> entry in report.CapturedFish)
         {
+            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary( entry.Value, 
+                                                                                    entry.Key.icon.GetSprite(),
+                                                                                    entry.Key.fishName);
             fishes += entry.Value;
         }
-        test.text = "Wow, good job.\n" + fishes + "\npoissons capturés! \n\nUn vrai champion!";
-
+        total.text = baseText + fishes;
     }
 
     public void GoBackToShack()
     {
-        LoadingScreen.TransitionTo(ShackManager.SCENENAME, new ToShackMessage());
+        LoadingScreen.TransitionTo(ShackManager.SCENENAME, new ToShackMessage(fishingReport));
     }
 }
