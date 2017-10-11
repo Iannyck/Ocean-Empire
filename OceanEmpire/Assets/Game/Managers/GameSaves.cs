@@ -20,6 +20,7 @@ public class GameSaves : BaseManager<GameSaves>
         public Dictionary<string, float> floats = new Dictionary<string, float>();
         public Dictionary<string, string> strings = new Dictionary<string, string>();
         public Dictionary<string, bool> bools = new Dictionary<string, bool>();
+        public Dictionary<string, DateTime> dateTimes = new Dictionary<string, DateTime>();
     }
 
     public override void Init()
@@ -72,6 +73,18 @@ public class GameSaves : BaseManager<GameSaves>
         else
             return defaultVal;
     }
+
+    public DateTime GetDateTime(Type type, string key, DateTime defaultVal = new DateTime())
+    {
+        Data data = TypeToData(type);
+        if (data.dateTimes.ContainsKey(key))
+            return data.dateTimes[key];
+        else
+            return defaultVal;
+    }
+
+
+
     #endregion
 
     #region Set Value
@@ -107,6 +120,17 @@ public class GameSaves : BaseManager<GameSaves>
         else
             data.bools.Add(key, value);
     }
+
+    public void SetDateTime(Type type, string key, DateTime value)
+    {
+        Data data = TypeToData(type);
+        if (data.dateTimes.ContainsKey(key))
+            data.dateTimes[key] = value;
+        else
+            data.dateTimes.Add(key, value);
+    }
+
+
     #endregion
 
     #region Contains ?
@@ -133,6 +157,14 @@ public class GameSaves : BaseManager<GameSaves>
         Data data = TypeToData(type);
         return data.bools.ContainsKey(key);
     }
+
+    public bool ContainsDateTime(Type type, string key)
+    {
+        Data data = TypeToData(type);
+        return data.dateTimes.ContainsKey(key);
+    }
+
+
     #endregion
 
     #region Save/Load
@@ -141,6 +173,7 @@ public class GameSaves : BaseManager<GameSaves>
         InitQueue queue = new InitQueue(onComplete);
         LoadDataAsync(Type.Shop, queue.Register());
         LoadDataAsync(Type.Tutorial, queue.Register());
+        LoadDataAsync(Type.FishPop, queue.Register());
 
         queue.MarkEnd();
     }
@@ -149,6 +182,7 @@ public class GameSaves : BaseManager<GameSaves>
     {
         LoadData(Type.Shop);
         LoadData(Type.Tutorial);
+        LoadData(Type.FishPop);
     }
 
     public void SaveAllAsync(Action onComplete)
@@ -156,6 +190,7 @@ public class GameSaves : BaseManager<GameSaves>
         InitQueue queue = new InitQueue(onComplete);
         SaveDataAsync(Type.Shop, queue.Register());
         SaveDataAsync(Type.Tutorial, queue.Register());
+        SaveDataAsync(Type.FishPop, queue.Register());
 
         queue.MarkEnd();
     }
@@ -165,6 +200,7 @@ public class GameSaves : BaseManager<GameSaves>
     {
         SaveData(Type.Shop);
         SaveData(Type.Tutorial);
+        SaveData(Type.FishPop);
 #if UNITY_EDITOR
         Debug.Log("All Data Saved");
 #endif
@@ -202,6 +238,7 @@ public class GameSaves : BaseManager<GameSaves>
         if (Saves.Exists(path))
         {
             object graph = Saves.InstantLoad(GetPath() + ext);
+            print(GetPath() + ext);
             ApplyDataByType(type, (Data)graph);
         }
         else
@@ -231,6 +268,7 @@ public class GameSaves : BaseManager<GameSaves>
     {
         ClearSave(Type.Shop);
         ClearSave(Type.Tutorial);
+        ClearSave(Type.FishPop);
     }
 
     [InspectorButton()]
@@ -249,6 +287,14 @@ public class GameSaves : BaseManager<GameSaves>
         Debug.Log("Tutorial Cleared");
 #endif
     }
+    [InspectorButton()]
+    public void ClearFishPop()
+    {
+        ClearSave(Type.FishPop);
+#if UNITY_EDITOR
+        Debug.Log("FishPop Cleared");
+#endif
+    }
 
     public void ClearSave(Type type)
     {
@@ -262,13 +308,16 @@ public class GameSaves : BaseManager<GameSaves>
 
     private const string SHOP_FILE = "shop.dat";
     private const string TUTORIAL_FILE = "tutorial.dat";
+    private const string FISHPOP_FILE = "fishpop.dat";
 
-    public enum Type { Shop, Tutorial}
+    public enum Type { Shop, Tutorial, FishPop}
 
     [ShowInInspector]
     private Data shopData = new Data();
     [ShowInInspector]
     private Data tutorialData = new Data();
+    [ShowInInspector]
+    private Data fishPopData = new Data();
 
     private string TypeToFileName(Type type)
     {
@@ -278,6 +327,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return SHOP_FILE;
             case Type.Tutorial:
                 return TUTORIAL_FILE;
+            case Type.FishPop:
+                return FISHPOP_FILE;
             default:
                 return "";
         }
@@ -291,6 +342,9 @@ public class GameSaves : BaseManager<GameSaves>
                 return shopData;
             case Type.Tutorial:
                 return tutorialData;
+            case Type.FishPop:
+                return fishPopData;
+
             default:
                 return null;
         }
@@ -306,6 +360,10 @@ public class GameSaves : BaseManager<GameSaves>
             case Type.Tutorial:
                 tutorialData = newData;
                 break;
+            case Type.FishPop:
+                fishPopData = newData;
+                break;
+
             default:
                 break;
         }
@@ -321,6 +379,10 @@ public class GameSaves : BaseManager<GameSaves>
             case Type.Tutorial:
                 tutorialData = new Data();
                 break;
+            case Type.FishPop:
+                fishPopData = new Data();
+                break;
+
             default:
                 break;
         }

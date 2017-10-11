@@ -20,6 +20,7 @@ public class MoneyDisplay : MonoBehaviour {
 		if(PlayerCurrency.instance != null)
             text.text = startDisplay + PlayerCurrency.Money + "$";
 
+
         if (Input.GetKeyDown(KeyCode.M))
         {
             PlayerCurrency.Add = 1;
