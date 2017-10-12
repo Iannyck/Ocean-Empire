@@ -43,7 +43,7 @@ public class InGameOptions : WindowAnimation, SceneMessage
 
     public void BackToShack()
     {
-        LoadingScreen.TransitionTo(ShackManager.SCENENAME, null);
+        LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(Game.FishingReport));
     }
 
     public void Exit()

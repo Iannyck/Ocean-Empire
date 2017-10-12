@@ -64,7 +64,7 @@ public class MapInfo : BaseBehavior
 
     //Overall map Fish density
     [InspectorCategory("fish")]
-    public float mapFishDelay;
+    public float mapFishDensity;
     //Overall Distribution by depth 
     [InspectorCategory("fish")]
     public AnimationCurve mapFishReparition = new AnimationCurve(
@@ -124,7 +124,7 @@ public class MapInfo : BaseBehavior
     public float GetGeneralDensity(float position)
     {
         float deRatio = (mapTop - position) / (mapTop - mapBottom);
-        return mapFishReparition.Evaluate(deRatio) * mapFishDelay;
+        return mapFishReparition.Evaluate(deRatio) * mapFishDensity * FishPopulation.PopulationRate;
     }
 
 

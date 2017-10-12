@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Bobo
   description: C'est un poisson
-  baseValue: 10
-  iconName: bobo le poission
+  baseMonetaryValue: 100
+  populationValue: 1
   icon:
     spriteName: bobo le poission
     prefix: Images/Fish/

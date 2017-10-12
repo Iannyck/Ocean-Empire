@@ -36,6 +36,19 @@ public class FishingSummary : MonoBehaviour
 
     public void GoBackToShack()
     {
+        UpdateFishPopulation();
         LoadingScreen.TransitionTo(ShackManager.SCENENAME, new ToShackMessage(fishingReport));
     }
+
+    public void UpdateFishPopulation()
+    {
+        float CapturedValue = 0;
+        foreach (KeyValuePair<FishDescription, int> entry in fishingReport.CapturedFish)
+        {
+            CapturedValue += entry.Value * entry.Key.populationValue;
+        }
+
+        FishPopulation.instance.UpdateOnFishing(CapturedValue);
+    }
+
 }

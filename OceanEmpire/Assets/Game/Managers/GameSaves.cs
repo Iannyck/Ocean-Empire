@@ -238,7 +238,6 @@ public class GameSaves : BaseManager<GameSaves>
         if (Saves.Exists(path))
         {
             object graph = Saves.InstantLoad(GetPath() + ext);
-            print(GetPath() + ext);
             ApplyDataByType(type, (Data)graph);
         }
         else

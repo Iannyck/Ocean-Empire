@@ -32,7 +32,7 @@ public class FishingReport
             int FishRemaining = CapturedFish.Count;
             foreach (KeyValuePair<FishDescription, int> entry in CapturedFish)
             {
-                if (entry.Key.baseValue > maxValue)
+                if (entry.Key.baseMonetaryValue > maxValue)
                     maxFish = entry.Key;
             }
             CapturedFish.Remove(maxFish);
