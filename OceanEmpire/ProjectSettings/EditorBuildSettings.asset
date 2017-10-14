@@ -35,3 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Recolte/UI/InGameOptions/InGameOptions.unity
     guid: 0ae8c2ca2d7da724cb33e55e32737fe3
+  - enabled: 1
+    path: Assets/Game/InGame Systems/Exercice/Windows/Demande/AskWindow.unity
+    guid: 7190ad829dcddf24fae71ab9e4facae3
+  - enabled: 1
+    path: Assets/Game/InGame Systems/Exercice/Windows/Attente/WaitWindow.unity
+    guid: 70aaec503ca4045479c021cf40983bdc
