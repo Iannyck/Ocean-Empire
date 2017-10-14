@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class WidgetFishPop : MonoBehaviour {
 
-    public Image gageMeter;
+    public Slider gageMeter;
 
 	// Update is called once per frame
 	void Update () {
 
         FishPopulation.instance.RefreshPopulation();
-       gageMeter.rectTransform.localScale = new Vector3(FishPopulation.PopulationRate, 1 ,1) ;
+        gageMeter.value = FishPopulation.PopulationRate;
 
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
