@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
+public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfaces.ITouchInputs
 {
     public float deadZoneRadius = 0.75f;
 
@@ -91,5 +91,10 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs
 
             realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
         }
+    }
+
+    public void OnTouch(Vector2 position)
+    {
+        OnClick(position);
     }
 }
