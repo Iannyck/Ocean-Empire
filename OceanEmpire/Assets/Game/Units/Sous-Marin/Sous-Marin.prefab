@@ -350,7 +350,7 @@ MonoBehaviour:
     UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"UnityEngine.Events.UnityEvent,
     UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
-  useTouch: 0
+  useTouch: 1
   useClick: 1
   screenTouched:
     m_PersistentCalls:
@@ -372,7 +372,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  externalScriptTouch: {fileID: 0}
+  externalScriptTouch: {fileID: 114071053288964254}
   externalScriptMouse: {fileID: 114071053288964254}
 --- !u!114 &114517759041208734
 MonoBehaviour:

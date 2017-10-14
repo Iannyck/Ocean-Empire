@@ -5,8 +5,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class LoadingScreenAnimation : MonoBehaviour {
-
+public class LoadingScreenAnimation : MonoBehaviour
+{
     public Image bg;
     public Camera cam;
 
@@ -14,7 +14,9 @@ public class LoadingScreenAnimation : MonoBehaviour {
     {
         bg.DOFade(1, 1).OnComplete(delegate ()
         {
-            Camera.main.gameObject.SetActive(false);
+            Camera currentCam = Camera.main;
+            if (currentCam != null)
+                currentCam.gameObject.SetActive(false);
             cam.gameObject.SetActive(true);
             onComplete();
         }).SetUpdate(true);
