@@ -10,7 +10,7 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
 
     public override void Init()
     {
-        Money = GameSaves.instance.GetInt(GameSaves.Type.Shop, SAVE_KEY_MONEY);
+        Money = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_MONEY);
         CompleteInit();
     }
 
@@ -65,7 +65,7 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
 
     private static void Save()
     {
-        GameSaves.instance.SetInt(GameSaves.Type.Shop, SAVE_KEY_MONEY, Money);
-        GameSaves.instance.SaveData(GameSaves.Type.Shop);
+        GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_MONEY, Money);
+        GameSaves.instance.SaveData(GameSaves.Type.Currency);
     }
 }
