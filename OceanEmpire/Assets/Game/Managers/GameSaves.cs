@@ -171,7 +171,7 @@ public class GameSaves : BaseManager<GameSaves>
     public void LoadAllAsync(Action onComplete)
     {
         InitQueue queue = new InitQueue(onComplete);
-        LoadDataAsync(Type.Shop, queue.Register());
+        LoadDataAsync(Type.Currency, queue.Register());
         LoadDataAsync(Type.Tutorial, queue.Register());
         LoadDataAsync(Type.FishPop, queue.Register());
 
@@ -180,7 +180,7 @@ public class GameSaves : BaseManager<GameSaves>
 
     public void LoadAll()
     {
-        LoadData(Type.Shop);
+        LoadData(Type.Currency);
         LoadData(Type.Tutorial);
         LoadData(Type.FishPop);
     }
@@ -188,7 +188,7 @@ public class GameSaves : BaseManager<GameSaves>
     public void SaveAllAsync(Action onComplete)
     {
         InitQueue queue = new InitQueue(onComplete);
-        SaveDataAsync(Type.Shop, queue.Register());
+        SaveDataAsync(Type.Currency, queue.Register());
         SaveDataAsync(Type.Tutorial, queue.Register());
         SaveDataAsync(Type.FishPop, queue.Register());
 
@@ -198,7 +198,7 @@ public class GameSaves : BaseManager<GameSaves>
     [InspectorButton()]
     public void SaveAll()
     {
-        SaveData(Type.Shop);
+        SaveData(Type.Currency);
         SaveData(Type.Tutorial);
         SaveData(Type.FishPop);
 #if UNITY_EDITOR
@@ -265,7 +265,7 @@ public class GameSaves : BaseManager<GameSaves>
 
     public void ClearAllSaves()
     {
-        ClearSave(Type.Shop);
+        ClearSave(Type.Currency);
         ClearSave(Type.Tutorial);
         ClearSave(Type.FishPop);
     }
@@ -273,7 +273,7 @@ public class GameSaves : BaseManager<GameSaves>
     [InspectorButton()]
     public void ClearShop()
     {
-        ClearSave(Type.Shop);
+        ClearSave(Type.Currency);
 #if UNITY_EDITOR
         Debug.Log("Shop Cleared");
 #endif
@@ -305,14 +305,14 @@ public class GameSaves : BaseManager<GameSaves>
 
     #region ADD NEW CATEGORIES HERE
 
-    private const string SHOP_FILE = "shop.dat";
+    private const string CURRENCY_FILE = "currency.dat";
     private const string TUTORIAL_FILE = "tutorial.dat";
     private const string FISHPOP_FILE = "fishpop.dat";
 
-    public enum Type { Shop, Tutorial, FishPop}
+    public enum Type { Currency, Tutorial, FishPop}
 
     [ShowInInspector]
-    private Data shopData = new Data();
+    private Data currencyData = new Data();
     [ShowInInspector]
     private Data tutorialData = new Data();
     [ShowInInspector]
@@ -322,8 +322,8 @@ public class GameSaves : BaseManager<GameSaves>
     {
         switch (type)
         {
-            case Type.Shop:
-                return SHOP_FILE;
+            case Type.Currency:
+                return CURRENCY_FILE;
             case Type.Tutorial:
                 return TUTORIAL_FILE;
             case Type.FishPop:
@@ -337,8 +337,8 @@ public class GameSaves : BaseManager<GameSaves>
     {
         switch (type)
         {
-            case Type.Shop:
-                return shopData;
+            case Type.Currency:
+                return currencyData;
             case Type.Tutorial:
                 return tutorialData;
             case Type.FishPop:
@@ -353,8 +353,8 @@ public class GameSaves : BaseManager<GameSaves>
     {
         switch (type)
         {
-            case Type.Shop:
-                shopData = newData;
+            case Type.Currency:
+                currencyData = newData;
                 break;
             case Type.Tutorial:
                 tutorialData = newData;
@@ -372,8 +372,8 @@ public class GameSaves : BaseManager<GameSaves>
     {
         switch (type)
         {
-            case Type.Shop:
-                shopData = new Data();
+            case Type.Currency:
+                currencyData = new Data();
                 break;
             case Type.Tutorial:
                 tutorialData = new Data();
