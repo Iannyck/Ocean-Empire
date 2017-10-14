@@ -18,12 +18,12 @@ public class MoneyDisplay : MonoBehaviour {
 	void Update ()
     {
 		if(PlayerCurrency.instance != null)
-            text.text = startDisplay + PlayerCurrency.Money + "$";
+            text.text = startDisplay + PlayerCurrency.GetCoins() + "$";
 
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            PlayerCurrency.Add = 1;
+            PlayerCurrency.AddCoins(1);
         }
 	}
 }

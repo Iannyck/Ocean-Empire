@@ -6,66 +6,102 @@ using System;
 
 public class PlayerCurrency : BaseManager<PlayerCurrency>
 {
-    private const string SAVE_KEY_MONEY = "money";
+    private const string SAVE_KEY_COINS = "coins";
+    private const string SAVE_KEY_TICKETS = "tickets";
 
     public override void Init()
     {
-        Money = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_MONEY);
+        Load();
         CompleteInit();
     }
 
-    private int money;
+    [SerializeField, ReadOnly]
+    private int coins;
+    [SerializeField, ReadOnly]
+    private int tickets;
 
-    public static int Money
+    public static int GetCoins()
     {
-        private set
-        {
-            instance.money = value;
-            Save();
-        }
-
-        get
-        {
-            return instance.money;
-        }
+        return instance.coins;
     }
 
-    public static int Add
+    private static void AddCoinsAndSave(int amount)
     {
-        set
-        {
-            instance.add(value);
-        }
+        instance.coins += amount;
+        Save();
     }
 
-    public static int Substract
+    /// <summary>
+    /// Ajoute des coins ET sauvegarde. Retourne FALSE si la transaction a échoué.
+    /// </summary>
+    public static bool AddCoins(int amount)
     {
-        set
-        {
-            instance.remove(value);
-        }
+        //On empeche le joueur d'aller dans l'argent négatif
+        if (amount < 0 && amount.Abs() > GetCoins())
+            return false;
+
+        //On ne fait rien si le montant a ajouté == 0
+        if (amount == 0)
+            return true;
+
+        AddCoinsAndSave(amount);
+        return true;
     }
 
-    public void remove(int amount)
+    /// <summary>
+    /// Ajoute des coins ET sauvegarde. Retourne FALSE si la transaction a échoué.
+    /// </summary>
+    public static bool RemoveCoins(int amount)
     {
-        if ((Money - amount) >= 0)
-        {
-            Money = 0;
-            return;
-        }
-        Money -= amount;
+        return AddCoins(-amount);
     }
 
-    public void add(int amount)
+
+    public static int GetTickets()
     {
-        if (amount <= 0)
-            return;
-        Money += amount;
+        return instance.tickets;
+    }
+
+    private static void AddTicketsAndSave(int amount)
+    {
+        instance.tickets += amount;
+        Save();
+    }
+
+    /// <summary>
+    /// Ajoute des tickets ET sauvegarde. Retourne FALSE si la transaction a échoué.
+    /// </summary>
+    public static bool AddTickets(int amount)
+    {
+        //On empeche le joueur d'aller dans les tickets négatif
+        if (amount < 0 && amount.Abs() > GetTickets())
+            return false;
+
+        //On ne fait rien si le montant a ajouté == 0
+        if (amount == 0)
+            return true;
+
+        AddTicketsAndSave(amount);
+        return true;
+    }
+
+    /// <summary>
+    /// Ajoute des tickets ET sauvegarde. Retourne FALSE si la transaction a échoué.
+    /// </summary>
+    public static bool RemoveTickets(int amount)
+    {
+        return AddTickets(-amount);
     }
 
     private static void Save()
     {
-        GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_MONEY, Money);
+        GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_TICKETS, GetTickets());
+        GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_COINS, GetCoins());
         GameSaves.instance.SaveData(GameSaves.Type.Currency);
+    }
+
+    private static void Load()
+    {
+        instance.coins = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_COINS);
     }
 }
