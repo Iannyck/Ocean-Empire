@@ -190,7 +190,7 @@ MonoBehaviour:
   mapTop: 0
   mapBottom: -100
   depthAtYZero: 0
-  mapFishDelay: 1
+  mapFishDensity: 1
   mapFishReparition:
     serializedVersion: 2
     m_Curve:
