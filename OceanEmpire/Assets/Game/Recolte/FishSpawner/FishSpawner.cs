@@ -37,7 +37,8 @@ public class FishSpawner : MonoBehaviour {
 
     public FishPalier GetPalier(int i)
     {
-        return listPaliers[i];
+        int n = i.Clamped(0, listPaliers.Count - 1);
+        return listPaliers[n];
     }
 
     void Start () {
