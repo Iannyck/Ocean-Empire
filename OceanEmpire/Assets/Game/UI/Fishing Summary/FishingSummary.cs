@@ -13,10 +13,12 @@ public class FishingSummary : MonoBehaviour
     public string baseText;
     public GameObject fishSummaryPrefab;
     public Transform countainer;
+    public WidgetFishPop widgetFishPop;
 
     private void Start()
     {
         CCC.Manager.MasterManager.Sync();
+        Time.timeScale = 1;
     }
 
     public void ShowReport(FishingReport report)
@@ -33,7 +35,8 @@ public class FishingSummary : MonoBehaviour
         }
         total.text = baseText + fishes;
 
-        UpdateFishPopulation();
+        CCC.Manager.DelayManager.LocalCallTo(delegate () { UpdateFishPopulation();  }, 1f , this);
+        
     }
 
     public void GoBackToShack()
@@ -49,7 +52,13 @@ public class FishingSummary : MonoBehaviour
             CapturedValue += entry.Value * entry.Key.populationValue;
         }
 
-        FishPopulation.instance.UpdateOnFishing(CapturedValue);
+       
+        if (widgetFishPop != null)
+        {
+            float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
+            widgetFishPop.DecrementRate(capturedRate);
+        }
+        else
+            FishPopulation.instance.UpdateOnFishing(CapturedValue);
     }
-
 }

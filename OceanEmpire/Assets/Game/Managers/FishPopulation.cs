@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using System;
 
 
@@ -11,10 +12,24 @@ public class FishPopulation : BaseManager<FishPopulation>
     private const string SAVE_KEY_POPULATION = "population";
 
     private const float limitPopulation = 50;
-    private TimeSpan refreshingTime = new TimeSpan(0, 24, 0, 0);   
+    private TimeSpan refreshingTime = new TimeSpan(0, 24, 0, 0);
 
     private float population;
     private DateTime lastUpdate;
+
+    private float time = 0;
+
+    public void FixedUpdate()
+    {
+        if (time < 0)
+        {
+            print(population);
+            time = 30;
+        }
+        time -= 1;
+    }
+
+
 
     public override void Init()
     {
@@ -36,6 +51,11 @@ public class FishPopulation : BaseManager<FishPopulation>
     public void AddRate(float value)
     {
         PopulationRate += value;
+    }
+
+    public float FishNumberToRate(float fishes)
+    {
+        return fishes / limitPopulation;
     }
 
     public static float PopulationRate
@@ -87,6 +107,7 @@ public class FishPopulation : BaseManager<FishPopulation>
     }
 
 
+
     public void UpdateOnExercise(float exerciseRateValue)
     {
         RefreshPopulation();
@@ -94,4 +115,15 @@ public class FishPopulation : BaseManager<FishPopulation>
 
         Save();
     }
+
+    public void DebugInGameExercice()
+    {
+        UpdateOnExercise(50);
+        if (Game.instance != null)
+            if (Game.FishSpawner != null)
+                Game.FishSpawner.SetPalierFishLimit();
+    }
+
+
+
 }

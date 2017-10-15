@@ -331,6 +331,7 @@ MonoBehaviour:
   fishSummaryPrefab: {fileID: 1924171844714458, guid: da3799ebb51905040add5c9474872962,
     type: 2}
   countainer: {fileID: 1783320327}
+  widgetFishPop: {fileID: 599655201}
 --- !u!1 &356914073
 GameObject:
   m_ObjectHideFlags: 0

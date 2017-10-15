@@ -52,7 +52,7 @@ public class AskWindow : MonoBehaviour {
         Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
             scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
                 " l'effet dans l'océan sera instantément appliqué",delegate() {
-                    //Game.FishSpawner
+                    FishPopulation.instance.UpdateOnExercise(0.50f);    
                     Exit();
                 });
         });

@@ -62,7 +62,7 @@ public class FishSpawner : MonoBehaviour {
     }
 
 
-    void SetPalierFishLimit()
+    public void SetPalierFishLimit()
     {
         int palierNumber = (int)Mathf.Ceil((map.mapTop - map.mapBottom) / palierHeigth);
         float maxFishPerPalier = (maxFishPerUnit * palierHeigth);
