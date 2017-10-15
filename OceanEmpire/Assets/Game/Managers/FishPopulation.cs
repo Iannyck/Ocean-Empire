@@ -10,8 +10,8 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     private const string SAVE_KEY_POPULATION = "population";
 
-    private const float limitPopulation = 300;
-    private TimeSpan refreshingTime = new TimeSpan(0, 0, 0, 60);   
+    private const float limitPopulation = 50;
+    private TimeSpan refreshingTime = new TimeSpan(0, 24, 0, 0);   
 
     private float population;
     private DateTime lastUpdate;
@@ -78,7 +78,7 @@ public class FishPopulation : BaseManager<FishPopulation>
         Save();
     }
 
-    public void UpdateOnFishing(float capturedValue)
+    public void UpdateOnFishing(float capturedFishes)
     {
         LastUpdate = System.DateTime.Now;
         Population -= capturedValue.Raised(0.0f);
@@ -87,10 +87,10 @@ public class FishPopulation : BaseManager<FishPopulation>
     }
 
 
-    public void UpdateOnExercise(float exerciseValue)
+    public void UpdateOnExercise(float exerciseRateValue)
     {
         RefreshPopulation();
-        Population += exerciseValue.Capped(limitPopulation);
+        PopulationRate += exerciseRateValue.Capped(limitPopulation);
 
         Save();
     }
