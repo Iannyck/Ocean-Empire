@@ -118,7 +118,7 @@ public class FishSpawner : MonoBehaviour {
     }
 
 
-    void UpdatePalier()
+    public void UpdatePalier()
     {
         palierRange newPalier = new palierRange();
 
