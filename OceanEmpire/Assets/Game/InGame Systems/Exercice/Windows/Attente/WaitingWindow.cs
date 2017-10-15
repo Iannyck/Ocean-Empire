@@ -21,6 +21,7 @@ public class WaitingWindow : MonoBehaviour {
 
     void Start()
     {
+        Time.timeScale = 0;
         if (debug)
             InitDisplay("À faire: Courrir ta vie");
     }
@@ -38,6 +39,7 @@ public class WaitingWindow : MonoBehaviour {
 
     public void Hide()
     {
+        Time.timeScale = 1;
         windowAnim.Close();
         Scenes.UnloadAsync(SCENE_NAME);
         if(onCompleteEvent != null)

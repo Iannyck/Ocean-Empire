@@ -184,8 +184,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1281871769}
-        m_MethodName: DebugComplete
+      - m_Target: {fileID: 851668923}
+        m_MethodName: Hide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -332,8 +332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2, y: -45.35}
-  m_SizeDelta: {x: 90.3, y: -183.8}
+  m_AnchoredPosition: {x: -0.000007391, y: -46}
+  m_SizeDelta: {x: 137, y: -208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &603845037
 MonoBehaviour:
@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 851668921}
   - component: {fileID: 851668920}
   - component: {fileID: 851668919}
+  - component: {fileID: 851668923}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -474,6 +475,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &851668923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851668918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d966c4cb8489746ab70d4d5a782680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: {fileID: 1710273094}
+  exercice: {fileID: 2061046837}
+  enAttente: {fileID: 1038996071}
+  waitAnimation: {fileID: 603845039}
+  windowAnim: {fileID: 1281871767}
+  debug: 0
 --- !u!1 &1021139897
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +592,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2, y: -103.5}
-  m_SizeDelta: {x: 75.2, y: -220.3}
+  m_AnchoredPosition: {x: 2, y: -153.2}
+  m_SizeDelta: {x: 88, y: -306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038996071
 MonoBehaviour:
@@ -702,7 +720,6 @@ GameObject:
   - component: {fileID: 1281871765}
   - component: {fileID: 1281871768}
   - component: {fileID: 1281871767}
-  - component: {fileID: 1281871769}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -731,8 +748,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4, y: 9}
-  m_SizeDelta: {x: -96, y: -413}
+  m_AnchoredPosition: {x: -4, y: 60}
+  m_SizeDelta: {x: -111, y: -516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281871765
 MonoBehaviour:
@@ -803,23 +820,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1281871769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1281871763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d966c4cb8489746ab70d4d5a782680, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: {fileID: 1710273094}
-  exercice: {fileID: 2061046837}
-  enAttente: {fileID: 1038996071}
-  waitAnimation: {fileID: 603845039}
-  windowAnim: {fileID: 1281871767}
-  debug: 0
 --- !u!1 &1710273092
 GameObject:
   m_ObjectHideFlags: 0
