@@ -1,0 +1,27 @@
+Adobe After Effects v10.5.1 (Windows 64) render log for project “Coin and Ticket.aep”
+
+Rendering started on 2017-10-15 at 3:30:24 PM
+
+
+  2017-10-15 3:30:24 PM: Starting composition “Coins”.
+
+
+  Output To: D:\Documents\GitHub\Ocean Empire\Art\UI\Currency\coin.png
+  
+  2017-10-15 3:30:24 PM: Finished composition “Coins”.
+
+
+
+  2017-10-15 3:30:24 PM: Starting composition “Ticket”.
+
+
+  Output To: D:\Documents\GitHub\Ocean Empire\Art\UI\Currency\t_Ticket.png
+  
+  2017-10-15 3:30:24 PM: Finished composition “Ticket”.
+
+
+
+  Total Time Elapsed: 0 Seconds
+
+Log closed on 2017-10-15 at 3:30:24 PM
+
