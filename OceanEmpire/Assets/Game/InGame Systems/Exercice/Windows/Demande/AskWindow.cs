@@ -8,16 +8,18 @@ using UnityEngine.UI;
 
 public class AskWindow : MonoBehaviour {
 
-    public const string SCENE_NAME = "WaitWindow";
+    public const string SCENE_NAME = "AskWindow";
 
     public Text description;
     public Text option1;
+    public Button option1Button;
     public Text option2;
     public WindowAnimation windowAnim;
     public bool debug = false;
 
     void Start()
     {
+        Time.timeScale = 0;
         if (debug)
         {
             MasterManager.Sync();
@@ -25,11 +27,14 @@ public class AskWindow : MonoBehaviour {
         }
     }
 
+    // Envtuellement a rendre plus generique
     public void InitDisplay(string description, string option1 = "Utiliser un Ticket", string option2 = "Faire un exercice")
     {
         this.description.text = description;
         this.option1.text = option1;
         this.option2.text = option2;
+        if (PlayerCurrency.GetTickets() < 1)
+            option1Button.interactable = false;
         windowAnim.Open();
     }
 
@@ -37,13 +42,20 @@ public class AskWindow : MonoBehaviour {
     {
         windowAnim.Close();
         Scenes.UnloadAsync(SCENE_NAME);
+        Time.timeScale = 1;
     }
 
     public void DoExercice()
     {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
-        Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive);
+        Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
+            scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
+                " l'effet dans l'océan sera instantément appliqué",delegate() {
+                    //Game.FishSpawner
+                    Exit();
+                });
+        });
     }
 
     public void OnWaitWindowLoad(Scene scene)
