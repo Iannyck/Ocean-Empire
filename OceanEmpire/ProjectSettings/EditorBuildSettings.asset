@@ -47,3 +47,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/InGame Systems/Exercice/Windows/Attente/WaitWindow.unity
     guid: 70aaec503ca4045479c021cf40983bdc
+  - enabled: 1
+    path: Assets/Game/InGame Systems/Exercice/Windows/Demande/AskWindowWithGage.unity
+    guid: 00000000000000000000000000000000
