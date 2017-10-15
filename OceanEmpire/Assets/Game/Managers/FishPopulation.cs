@@ -81,7 +81,7 @@ public class FishPopulation : BaseManager<FishPopulation>
     public void UpdateOnFishing(float capturedFishes)
     {
         LastUpdate = System.DateTime.Now;
-        Population -= capturedValue.Raised(0.0f);
+        Population -= capturedFishes.Raised(0.0f);
 
         Save();
     }
