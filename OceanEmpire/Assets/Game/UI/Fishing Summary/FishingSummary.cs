@@ -32,11 +32,12 @@ public class FishingSummary : MonoBehaviour
             fishes += entry.Value;
         }
         total.text = baseText + fishes;
+
+        UpdateFishPopulation();
     }
 
     public void GoBackToShack()
     {
-        UpdateFishPopulation();
         LoadingScreen.TransitionTo(ShackManager.SCENENAME, new ToShackMessage(fishingReport));
     }
 
