@@ -29,7 +29,6 @@ public class FishSpawner : MonoBehaviour {
 
     private palierRange lastActivePaliers;
    
-
     // Use this for initialization
     private SubmarineMovement submarine;
     private MapInfo map;
@@ -63,14 +62,10 @@ public class FishSpawner : MonoBehaviour {
     }
 
 
-
-    void StartPalierSystem()
+    void SetPalierFishLimit()
     {
-        listPaliers = new List<FishPalier>();
         int palierNumber = (int)Mathf.Ceil((map.mapTop - map.mapBottom) / palierHeigth);
-
         float maxFishPerPalier = (maxFishPerUnit * palierHeigth);
-        
 
         for (int i = 0; i < palierNumber; i++)
         {
@@ -78,21 +73,19 @@ public class FishSpawner : MonoBehaviour {
             listPaliers.Add(newPalier);
 
             float fishLimit = maxFishPerPalier * map.GetGeneralDensity(GetPalierPosition(i));
-            newPalier.Init(fishLimit);
+            newPalier.InitLimit(fishLimit);
         }
+    }
 
+
+    void StartPalierSystem()
+    {
+        listPaliers = new List<FishPalier>();
+        SetPalierFishLimit();
 
         palierRange lastActivePaliers = new palierRange();
-
         lastActivePaliers.start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera);
         lastActivePaliers.finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera);
-        /*
-        for (int i = lastActivePaliers.start; i <= lastActivePaliers.finish; i++)
-        {
-
-            SpawnPalier(i);
-        }
-      */
     }
 
 
@@ -191,6 +184,13 @@ public class FishSpawner : MonoBehaviour {
         }
     }
 
+    public void SpawnFish(int palier)
+    {
+
+    }
+
+
+
     public void SpawnPalierFish(int palierIte)
     {
         fishCount += 1;
@@ -214,8 +214,6 @@ public class FishSpawner : MonoBehaviour {
 
 
 
-
-
     void SpawnSideFish()
     {
         fishCount += 1;
@@ -224,29 +222,33 @@ public class FishSpawner : MonoBehaviour {
             float spawnAreaHeight = cam.Height;
             float lateralSpawnOffest = 1.2f * cam.HalfWidth;
 
-
             Vector3 spawnPos = Vector3.zero;
-
             Random.InitState(fishCount);
+
             float leftRight = Random.Range(0.0f, 1.0f);
             if (leftRight > 0.5f)
                 spawnPos.x = lateralSpawnOffest;
             else
                 spawnPos.x = -lateralSpawnOffest;
-
             float y = submarine.transform.position.y;
-
             spawnPos.y = +Random.Range(y - spawnAreaHeight / 2, (y + spawnAreaHeight / 2).Capped(map.mapTop));
 
-            BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
 
-            if (fishPool != null && newFish != null)
+            FishPalier closestPalier = GetPalier(GetClosestPalier(spawnPos.y));
+
+            if (closestPalier.GetFishDensity(timeCounter) > 1 || Random.Range(0.0f, 1.0f) > 0)
             {
-                fishPool.SetFishAt(newFish, spawnPos);
+                BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
+                if (fishPool != null && newFish != null)
+                {
+                    fishPool.SetFishAt(newFish, spawnPos);
+                }          
             }
-            lastSpawn = map.GetGeneralDensity(spawnPos.y) * timeBetweenSideSpawn;
-
+            lastSpawn = timeBetweenSideSpawn;
         }
+
         else lastSpawn -= Time.deltaTime;
     }
+
+
 }

@@ -14,11 +14,13 @@ public class FishPalier{
     private float AbsoluteFishLimit;
     private float currentFishLimit;
 
-    public void Init(float limit)
+    public void InitLimit(float limit)
     {
         currentFishLimit = AbsoluteFishLimit = limit;
         lastActivationTime = 0;
     }
+
+
 
     public void UpdateActivationTime(float aTime)
     {
@@ -44,8 +46,6 @@ public class FishPalier{
     }
 
 
-
-
     public float GetFishDensity(float currentTime)
     {
         float regenRate = ((currentTime - lastActivationTime) / repopulationCycle).Capped(1.0f);
@@ -56,6 +56,7 @@ public class FishPalier{
 
         return currentFishLimit;
     }
+
 
 
 
