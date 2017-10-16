@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+using CCC.Manager;
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,12 +51,9 @@ public class AskWindowWithGage : MonoBehaviour
     {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
-        Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene) {
-            scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée" +
-                " l'effet dans l'océan sera instantément appliqué", delegate () {
-                    widgetGage.IncrementRate(0.5f);
-                    widgetGage.AnimComplete += Exit;
-                });
+        Scenes.LoadAsync(InstantExerciseChoice.SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
+        {
+            scene.FindRootObject<InstantExerciseChoice>().Init(false, Exit);
         });
     }
 

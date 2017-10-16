@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+using CCC.Manager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,14 +19,19 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     private float time = 0;
 
-    public void FixedUpdate()
+    public bool periodicLogs = false;
+
+    public void Update()
     {
+        if (!periodicLogs)
+            return;
+
         if (time < 0)
         {
             print(population);
-            time = 30;
+            time = 4;
         }
-        time -= 1;
+        time -= Time.deltaTime;
     }
 
 

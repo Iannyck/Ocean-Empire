@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+using CCC.Manager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +12,7 @@ public class ExerciceDemand : MonoBehaviour {
     {
         Game.OnGameReady += delegate ()
         {
-            if (FishPopulation.PopulationRate <= 1)
+            if (FishPopulation.PopulationRate < 1)
             {
                 Scenes.LoadAsync(AskWindowWithGage.SCENE_NAME, LoadSceneMode.Additive,delegate(Scene scene) {
                     scene.FindRootObject<AskWindowWithGage>().InitDisplay("Votre densité de poisson est faible. Vous pouvez la remettre pleine via ces deux options: ");

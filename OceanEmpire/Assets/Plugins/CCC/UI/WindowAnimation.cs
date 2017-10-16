@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
+using CCC.Manager;
 
 namespace CCC.UI
 {
@@ -201,6 +202,19 @@ namespace CCC.UI
                 content.alpha = 0;
                 content.gameObject.SetActive(false);
             }
+        }
+
+        public virtual void QuitScene()
+        {
+            if (isOpen)
+                Close(UnloadScene);
+            else
+                UnloadScene();
+        }
+
+        private void UnloadScene()
+        {
+            Scenes.UnloadAsync(gameObject.scene.name);
         }
 
         public bool IsOpen() { return isOpen; }
