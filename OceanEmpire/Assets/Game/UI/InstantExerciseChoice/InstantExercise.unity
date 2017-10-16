@@ -1481,6 +1481,13 @@ MonoBehaviour:
   instantHideContent: 0
   autoDetectSize: 1
   size: {x: 0, y: 0}
+  rewardDisplays:
+  - {fileID: 770386692}
+  - {fileID: 970561301}
+  - {fileID: 364474026}
+  - {fileID: 120102685}
+  - {fileID: 1928573187}
+  - {fileID: 463111415}
 --- !u!114 &1563025684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,7 +1518,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 480, y: 845}
+  m_ReferenceResolution: {x: 480, y: 854}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
