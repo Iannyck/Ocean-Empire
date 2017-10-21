@@ -53,7 +53,10 @@ public class AskWindowWithGage : MonoBehaviour
         // On le mettre ailleur et passer une action dans le init
         Scenes.LoadAsync(InstantExerciseChoice.SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
         {
-            scene.FindRootObject<InstantExerciseChoice>().Init(false, Exit);
+            scene.FindRootObject<InstantExerciseChoice>().Init(false, ()=> {
+                widgetGage.IncrementRate(0.5f);
+                widgetGage.AnimComplete += Exit;
+            });
         });
     }
 

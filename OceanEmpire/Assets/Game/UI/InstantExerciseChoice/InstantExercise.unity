@@ -384,7 +384,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Veillez choisir un exercice pamis les suivants
+  m_Text: Veuillez choisir un exercice pamis les suivants
 --- !u!222 &251307627
 CanvasRenderer:
   m_ObjectHideFlags: 0
