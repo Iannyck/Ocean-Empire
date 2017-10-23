@@ -20,7 +20,7 @@ public class ShackManager : BaseBehavior
 
     public MapDescription selectedMap;
 
-    private float spaceBetweenZoneProposition = 85;
+    //private float spaceBetweenZoneProposition = 85;
 
     void Start()
     {

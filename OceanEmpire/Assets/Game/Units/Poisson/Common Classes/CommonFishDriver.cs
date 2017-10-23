@@ -13,7 +13,7 @@ public class CommonFishDriver : BaseFishDriver
     [Header("Flee")]
     public bool fleePlayer;
     public float fleeDistance;
-    private float fleeDistanceSQR;
+    //private float fleeDistanceSQR;
 
     [Header("Brain Freeze")]
     public bool canBrainFreeze;
@@ -44,7 +44,7 @@ public class CommonFishDriver : BaseFishDriver
         base.Awake();
 
         changeDestIfCloserThanSQR = changeDestIfCloserThan * changeDestIfCloserThan;
-        fleeDistanceSQR = fleeDistance * fleeDistance;
+        //fleeDistanceSQR = fleeDistance * fleeDistance;
         ClearMind();
     }
 

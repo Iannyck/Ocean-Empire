@@ -14,7 +14,7 @@ public abstract class BaseFish : MonoBehaviour, IKillable
 
     private int currentPalier = -1;
     private FishSpawner spawner;
-    private GameCamera cam;
+    //private GameCamera cam;
 
     public bool HasBeenCaptured
     {
@@ -88,7 +88,7 @@ public abstract class BaseFish : MonoBehaviour, IKillable
     public void Init()
     {
         spawner = Game.FishSpawner;
-        cam = Game.GameCamera;
+        //cam = Game.GameCamera;
     }
 
     public void Update()
@@ -104,7 +104,7 @@ public abstract class BaseFish : MonoBehaviour, IKillable
     {
         float fishPosition = transform.position.y;
         int closestPalier = spawner.GetClosestPalier(fishPosition);
-        float closestPalierPosition = spawner.GetPalierPosition(closestPalier);
+        //float closestPalierPosition = spawner.GetPalierPosition(closestPalier);
 
         if (currentPalier == -1)
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum HappyRating
 {
+    None = -1,
     VeryNegative = 0,
     Negative = 1,
     Ok = 2,

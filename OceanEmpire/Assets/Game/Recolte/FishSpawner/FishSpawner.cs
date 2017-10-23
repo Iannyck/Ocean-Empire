@@ -49,7 +49,6 @@ public class FishSpawner : MonoBehaviour {
     {
         Active = true;
 
-        MapInfo m = Game.instance.map;
         submarine = Game.instance.submarine;
         map = Game.instance.map;
         Game.OnGameStart -= Init;
@@ -207,7 +206,7 @@ public class FishSpawner : MonoBehaviour {
         BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
         if (fishPool != null && newFish != null)
         {
-            BaseFish someFish = fishPool.SetFishAt(newFish, spawnPos);
+            /*BaseFish someFish = */fishPool.SetFishAt(newFish, spawnPos);
             //GetPalier(palierIte).SuscribeFish(someFish);
         }
     }

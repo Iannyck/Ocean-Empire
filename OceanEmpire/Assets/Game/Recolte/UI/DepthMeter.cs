@@ -6,7 +6,7 @@ using UnityEngine;
 public class DepthMeter : MonoBehaviour {
 
     private SubmarineMovement submarine;
-    private float depthStart;
+    //private float depthStart;
     private float depthScaling;
     private Text tx;
 
@@ -24,8 +24,8 @@ public class DepthMeter : MonoBehaviour {
             if (Game.instance.map == null)
                 return;
 
-            MapInfo m = Game.instance.map;
-            depthStart = m.depthAtYZero;
+            //MapInfo m = Game.instance.map;
+            //depthStart = m.depthAtYZero;
             depthScaling = MapInfo.DEPTHSCALING;
             submarine = Game.instance.submarine;
             return;

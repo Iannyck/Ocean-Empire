@@ -32,6 +32,28 @@ public static class ExerciseComponents
                 return "";
         }
     }
+    public static ExerciseTracker GetTracker(ExerciseType type)
+    {
+        switch (type)
+        {
+            case ExerciseType.Walk:
+                return new WalkTracker();
+            case ExerciseType.Run:
+                return null;
+            case ExerciseType.Stairs:
+                return null;
+            default:
+                return null;
+        }
+    }
 
-    //Tout autre info/classe relié à un exercice
+    public static List<ExerciseType> GetAllTypes()
+    {
+        return new List<ExerciseType>()
+        {
+            ExerciseType.Walk,
+            ExerciseType.Run,
+            ExerciseType.Stairs
+        };
+    }
 }

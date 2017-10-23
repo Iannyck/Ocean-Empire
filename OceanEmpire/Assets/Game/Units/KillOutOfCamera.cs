@@ -42,13 +42,13 @@ public class KillOutOfCamera : MonoBehaviour
 
         if (checkY)
         {
-            if (IsOut(transform.position.y, cam.YPos, cam.HalfHeight))
+            if (IsOut(tr.position.y, cam.YPos, cam.HalfHeight))
                 shallWeKill = true;
         }
 
         if(!shallWeKill && checkX)
         {
-            if (IsOut(transform.position.x, cam.XPos, cam.HalfWidth))
+            if (IsOut(tr.position.x, cam.XPos, cam.HalfWidth))
                 shallWeKill = true;
         }
 

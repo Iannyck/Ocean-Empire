@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    private int score; // cash
+    //private int score; // cash
     private float depthRecord;
     private List<BaseFish> fishInStock = new List<BaseFish>();
 
@@ -15,7 +15,7 @@ public class PlayerStats : MonoBehaviour {
 
     void Start ()
     {
-        score = 0;
+        //score = 0;
         remainingTime = remainingTimeAtStart;
         // load depthRecord for this level
     }
