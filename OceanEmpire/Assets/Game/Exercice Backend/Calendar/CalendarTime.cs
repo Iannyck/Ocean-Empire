@@ -35,4 +35,9 @@ public struct CalendarTime
     {
         return !c1.Equals(c2);
     }
+
+    public bool IsInTheFuture()
+    {
+        return dateTime > DateTime.Now;
+    }
 }
