@@ -32,12 +32,12 @@ public static class ListExtensions
             }
             else if (result < 0)
             {
-                //Doit etre inséré avant
+                //Doit etre insï¿½rï¿½ avant
                 count = Mathf.FloorToInt(count / 2f);
             }
             else
             {
-                //Doit etre inséré apres
+                //Doit etre insï¿½rï¿½ apres
                 count = Mathf.CeilToInt(count / 2f) - 1;
                 bottom = index + 1;
             }
@@ -66,12 +66,12 @@ public static class ListExtensions
             }
             else if (result < 0)
             {
-                //Doit etre inséré avant
+                //Doit etre insï¿½rï¿½ avant
                 count = Mathf.FloorToInt(count / 2f);
             }
             else
             {
-                //Doit etre inséré apres
+                //Doit etre insï¿½rï¿½ apres
                 count = Mathf.CeilToInt(count / 2f) - 1;
                 bottom = index + 1;
             }

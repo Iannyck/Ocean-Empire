@@ -7,7 +7,10 @@ using UnityEngine;
 public struct CalendarTime
 {
     public DateTime dateTime;
-    //Autre chose, si necessaire
+    public CalendarTime(DateTime dateTime)
+    {
+        this.dateTime = dateTime;
+    }
 
     public override bool Equals(object obj)
     {
