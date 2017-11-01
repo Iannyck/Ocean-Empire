@@ -40,6 +40,7 @@ public class Calendar
             monthOfYear = around.Month;
             year = around.Year;
         }
+        public DateTime GetAnchorDateTime() { return new DateTime(year, monthOfYear, dayOfMonth); }
 
         public override bool Equals(object obj)
         {
@@ -56,78 +57,74 @@ public class Calendar
             return dayOfMonth + monthOfYear + year;
         }
     }
-    public class Week
+
+    public static List<Day> GetDaysFrom(Day startingDay, int numberOfDays)
     {
-        public Day[] days;
-        public Week(DateTime around)
+        return GetDaysFrom(startingDay.GetAnchorDateTime(), numberOfDays);
+    }
+    public static List<Day> GetDaysFrom(DateTime startingDay, int numberOfDays)
+    {
+        List<Day> days = new List<Day>(numberOfDays);
+        for (int i = 0; i < numberOfDays; i++)
         {
-            days = new Day[7];
-            FillDaysData(around);
+            days.Add(new Day(startingDay.AddDays(i)));
         }
-        public Week(Week week, int weeksOffset)
-        {
-            days = new Day[7];
-            FillDaysData(week.GetDateTimeAnchor().AddWeeks(weeksOffset));
-        }
-
-        public DateTime GetDateTimeAnchor()
-        {
-            return new DateTime(days[0].year, days[0].monthOfYear, days[0].dayOfMonth);
-        }
-
-        private void FillDaysData(DateTime around)
-        {
-            int index = (int)around.DayOfWeek;
-            for (int i = 0; i < days.Length; i++)
-            {
-                days[i] = new Day(around.AddDays(i - index));
-            }
-        }
+        return days;
     }
 
-    /// <summary>
-    /// Retourne 4 semaine
-    /// </summary>
-    /// <param name="time">La date qui servira a identifier la semaine de depart</param>
-    /// <param name="offset">Offset de semaine. + = futur   - = pass�</param>
-    public static List<Week> GetFiveWeeksFrom(DateTime time, int offset = 0)
+    public static List<Day> GetDaysOfMonth(DateTime someDayOfTheMonth, int numberOfDays, int monthOffset = 0)
     {
-        List<Week> weeks = new List<Week>(4)
-        {
-            GetWeekAround(time, offset),
-            GetWeekAround(time, 1 + offset),
-            GetWeekAround(time, 2 + offset),
-            GetWeekAround(time, 3 + offset)
-        };
-        return weeks;
+        DateTime firstDayOfMonth = GetDayOfMonth(someDayOfTheMonth.AddMonths(monthOffset), 1);
+        return GetDaysFrom(firstDayOfMonth, numberOfDays);
     }
 
-    /// <summary>
-    /// Retourne les meme 5 semaine que le calendrier Windows
-    /// </summary>
-    public static List<Week> GetFiveWeeksOfTheMonth(DateTime time)
+    public static List<Day> GetWeeksOfMonth(DateTime someDayOfTheMonth, int numberOfWeeks, int monthOffset = 0)
     {
-        return GetFiveWeeksOfTheMonth(time.Year, time.Month);
+        DateTime firstDayOfMonth = GetDayOfMonth(someDayOfTheMonth.AddMonths(monthOffset), 1);
+        DateTime firstDayOfTheWeek = GetDayOfWeek(firstDayOfMonth, DayOfWeek.Sunday);
+        return GetDaysFrom(firstDayOfTheWeek, 7 * numberOfWeeks);
     }
 
-    /// <summary>
-    /// Retourne les meme 5 semaine que le calendrier Windows
-    /// </summary>
-    public static List<Week> GetFiveWeeksOfTheMonth(int year, int month)
+    public static List<Day> GetDaysOfWeek(DateTime someDayOfTheWeek, int numberOfDays = 7)
     {
-        DateTime firstDay = new DateTime(year, month, 1);
-        return GetFiveWeeksFrom(firstDay, 0);
+        return GetDaysFrom(GetDayOfWeek(someDayOfTheWeek, DayOfWeek.Sunday), numberOfDays);
     }
 
-    public static Week GetWeekAround(DateTime time)
+    #region Get Day Of Month
+    public static Day GetDayOfMonth_Convert(DateTime someDayOfTheMonth, int requestedDay)
     {
-        return new Week(time);
+        return new Day(GetDayOfMonth(someDayOfTheMonth, requestedDay));
     }
+    public static DateTime GetDayOfMonth_Convert(Day someDayOfTheMonth, int requestedDay)
+    {
+        return GetDayOfMonth(someDayOfTheMonth.GetAnchorDateTime(), requestedDay);
+    }
+    public static DateTime GetDayOfMonth(DateTime someDayOfTheMonth, int requestedDay)
+    {
+        return someDayOfTheMonth.AddDays(requestedDay - someDayOfTheMonth.Day);
+    }
+    public static Day GetDayOfMonth(Day someDayOfTheMonth, int requestedDay)
+    {
+        return GetDayOfMonth_Convert(someDayOfTheMonth.GetAnchorDateTime(), requestedDay);
+    }
+    #endregion
 
-    public static Week GetWeekAround(DateTime time, int weekOffset)
+    #region Get Day Of Week
+    public static DateTime GetDayOfWeek_Convert(Day someDayOfTheWeek, DayOfWeek requestedDay)
     {
-        if (weekOffset == 0)
-            return GetWeekAround(time);
-        return new Week(time.AddWeeks(weekOffset));
+        return GetDayOfWeek(someDayOfTheWeek.GetAnchorDateTime(), requestedDay);
     }
+    public static Day GetDayOfWeek_Convert(DateTime someDayOfTheWeek, DayOfWeek requestedDay)
+    {
+        return new Day(GetDayOfWeek(someDayOfTheWeek, requestedDay));
+    }
+    public static Day GetDayOfWeek(Day someDayOfTheWeek, DayOfWeek requestedDay)
+    {
+        return GetDayOfWeek_Convert(someDayOfTheWeek.GetAnchorDateTime(), requestedDay);
+    }
+    public static DateTime GetDayOfWeek(DateTime someDayOfTheWeek, DayOfWeek requestedDay)
+    {
+        return someDayOfTheWeek.AddDays((int)requestedDay - (int)someDayOfTheWeek.DayOfWeek);
+    }
+    #endregion
 }
