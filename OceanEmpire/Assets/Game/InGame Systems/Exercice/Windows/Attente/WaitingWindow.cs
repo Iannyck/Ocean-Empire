@@ -16,6 +16,8 @@ public class WaitingWindow : MonoBehaviour {
     public WaitAnimation waitAnimation;
     public WindowAnimation windowAnim;
     public bool debug = false;
+    public GameObject debugInfoPrefab;
+    public Transform debugInfoCountainer;
 
     private Action onCompleteEvent;
 
@@ -35,6 +37,15 @@ public class WaitingWindow : MonoBehaviour {
         windowAnim.Open(delegate() {
             waitAnimation.DoAnimation();
         });
+    }
+
+    public void AddDebugInfo(List<string> infos)
+    {
+        foreach (string info in infos)
+        {
+            GameObject newDebugInfo = Instantiate(debugInfoPrefab, debugInfoCountainer);
+            //newDebugInfo.GetComponent<>
+        }
     }
 
     public void Hide()
