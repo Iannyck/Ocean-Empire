@@ -52,4 +52,7 @@ EditorBuildSettings:
     guid: 511a5fe7e3ff53140bc5f2e96f77359b
   - enabled: 1
     path: Assets/Game/UI/InstantExerciseChoice/InstantExercise.unity
-    guid: 00000000000000000000000000000000
+    guid: 34d9395ae2381f14eab93439ce5cce77
+  - enabled: 1
+    path: Assets/Game/InGame Systems/Exercice/Windows/Rating/Rating.unity
+    guid: 5bc2be3cb9da2294ab6ae09d31e86ab4

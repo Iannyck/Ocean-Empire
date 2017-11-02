@@ -42,9 +42,11 @@ public class AskWindowWithGage : MonoBehaviour
 
     public void Hide()
     {
-        windowAnim.Close();
-        Scenes.UnloadAsync(SCENE_NAME);
-        Time.timeScale = 1;
+        windowAnim.Close(delegate()
+        {
+            Scenes.UnloadAsync(SCENE_NAME);
+            Time.timeScale = 1;
+        });
     }
 
     public void DoExercice()
