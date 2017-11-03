@@ -24,7 +24,7 @@ public class CalendarScroll_Day : MonoBehaviour
         dayNumber.text = day.dayOfMonth.ToString();
         image.color = isToday ? todayColor : stdColor;
 
-        ShowMonthLabel = day.dayOfMonth == 1;
+        ShowMonthLabel = day.dayOfWeek == System.DayOfWeek.Sunday;
     }
 
     public bool ShowMonthLabel

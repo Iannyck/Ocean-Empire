@@ -9,6 +9,7 @@ public class CalendarScroll_Controller : MonoBehaviour
 {
     public ScrollRect scroller;
     public RectTransform content;
+    public int currentWeekIndex = 0;
 
     [Header("List")]
     public List<CalendarScroll_Week> weeks = new List<CalendarScroll_Week>();
@@ -26,7 +27,7 @@ public class CalendarScroll_Controller : MonoBehaviour
     public void Fill(Calendar calendar)
     {
         this.calendar = calendar;
-        int weekIndex = -2;
+        int weekIndex = -1 - currentWeekIndex;
         DateTime now = DateTime.Now;
         for (int i = 0; i < weeks.Count; i++)
         {
