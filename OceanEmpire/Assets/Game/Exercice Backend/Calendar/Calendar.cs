@@ -56,6 +56,14 @@ public class Calendar
         {
             return dayOfMonth + monthOfYear + year;
         }
+        public static bool operator ==(Day a, Day b)
+        {
+            return a.Equals(b);
+        }
+        public static bool operator !=(Day a, Day b)
+        {
+            return !(a == b);
+        }
     }
 
     public static List<Day> GetDaysFrom(Day startingDay, int numberOfDays)
@@ -72,6 +80,18 @@ public class Calendar
         return days;
     }
 
+    public static List<Day> GetWeeksFrom(DateTime dayOfFirstWeek, int numberOfWeeks, int weekOffset)
+    {
+        int numberOfDays = numberOfWeeks * 7;
+        List<Day> days = new List<Day>(numberOfDays);
+        DateTime firstDay = GetDayOfWeek(dayOfFirstWeek.AddDays(weekOffset * 7), DayOfWeek.Sunday);
+
+        for (int i = 0; i < numberOfDays; i++)
+        {
+            days.Add(new Day(firstDay.AddDays(i)));
+        }
+        return days;
+    }
     public static List<Day> GetDaysOfMonth(DateTime someDayOfTheMonth, int numberOfDays, int monthOffset = 0)
     {
         DateTime firstDayOfMonth = GetDayOfMonth(someDayOfTheMonth.AddMonths(monthOffset), 1);

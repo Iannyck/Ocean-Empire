@@ -5,19 +5,27 @@ using System;
 
 public class TestScript_Fred : MonoBehaviour
 {
-    public CalendarDisplay display;
+    public CalendarScroll_Controller scroller;
     public Calendar calendar = new Calendar();
 
     void Start()
     {
-        display.DisplayCalendar(calendar);
+        scroller.Fill(calendar);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            display.UpdateDisplay();
+            scroller.Fill(calendar);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            scroller.GoBackwardOneWeek();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            scroller.GoForwardOneWeek();
         }
     }
 }

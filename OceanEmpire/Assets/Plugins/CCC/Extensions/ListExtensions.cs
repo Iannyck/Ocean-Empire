@@ -9,13 +9,29 @@ public static class ListExtensions
     {
         return list.RemoveAll((x) => x == null);
     }
+    public static void RemoveLast<T>(this List<T> list)
+    {
+        int index = list.LastIndex();
+        if(index >= 0)
+        {
+            list.RemoveAt(index);
+        }
+    }
+    public static T Last<T>(this List<T> list)
+    {
+        return list[list.Count - 1];
+    }
+    public static int LastIndex<T>(this List<T> list)
+    {
+        return list.Count - 1;
+    }
     public static void SortedAdd<T>(this List<T> list, T item) where T : IComparable
     {
         int count = list.Count;
         int bottom = 0;
         while (true)
         {
-            if(count == 0)
+            if (count == 0)
             {
                 list.Insert(bottom, item);
                 return;
