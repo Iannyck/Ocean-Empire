@@ -10,6 +10,8 @@ public class CalendarScroll_Day : MonoBehaviour
     public Image image;
     public Color stdColor = Color.white;
     public Color todayColor = Color.blue;
+    public delegate void DayEvent(CalendarScroll_Day day);
+    public DayEvent onClick;
 
     private Calendar.Day data;
 
@@ -25,6 +27,12 @@ public class CalendarScroll_Day : MonoBehaviour
         image.color = isToday ? todayColor : stdColor;
 
         ShowMonthLabel = day.dayOfWeek == System.DayOfWeek.Sunday;
+    }
+
+    public void Click()
+    {
+        if (onClick != null)
+            onClick(this);
     }
 
     public bool ShowMonthLabel
