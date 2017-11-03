@@ -34,9 +34,13 @@ public class InstantExerciseChoice : WindowAnimation
             scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée" +
                 " l'effet dans l'océan sera instantément appliqué", delegate ()
                 {
-                    if (onCompleteAction != null)
-                        onCompleteAction();
-                    QuitScene();
+                    RatingWindow.ShowRatingWindow(delegate (HappyRating rating)
+                    {
+                        // Utiliser le rating pour le rapport
+                        if (onCompleteAction != null)
+                            onCompleteAction();
+                        QuitScene();
+                    });
                 });
         });
     }
