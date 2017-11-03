@@ -491,7 +491,6 @@ MonoBehaviour:
   enAttente: {fileID: 1038996071}
   waitAnimation: {fileID: 603845039}
   windowAnim: {fileID: 1281871767}
-  debug: 0
   debugInfoPrefab: {fileID: 0}
   debugInfoCountainer: {fileID: 0}
 --- !u!1 &1021139897

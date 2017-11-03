@@ -1,0 +1,4 @@
+#Fri Nov 03 17:17:17 EDT 2017
+base.0=C\:\\Users\\etudiant\\Documents\\Ocean-Empire\\AndroidProject\\OceanEmpire\\build\\intermediates\\transforms\\dexMerger\\debug\\9
+renamed.0=classes.dex
+file.0=C\:\\Users\\etudiant\\Documents\\Ocean-Empire\\AndroidProject\\OceanEmpire\\build\\intermediates\\transforms\\dexMerger\\debug\\9\\classes.dex
