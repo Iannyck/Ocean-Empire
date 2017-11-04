@@ -26,6 +26,11 @@ public static class IntExtensions
         return Mathf.Max(value, min);
     }
 
+    public static float Powed(this int value, float exponent)
+    {
+        return Mathf.Pow(value, exponent);
+    }
+
     public static int Sign(this int value)
     {
         return value > 0 ? 1 : -1;

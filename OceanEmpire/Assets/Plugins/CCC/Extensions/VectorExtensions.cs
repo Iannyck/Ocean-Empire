@@ -64,6 +64,11 @@ public static class VectorExtensions
         return Vector3.MoveTowards(v, target, maxDistanceDelta);
     }
 
+    public static Quaternion ToEulerRotation(this Vector3 v)
+    {
+        return Quaternion.Euler(v);
+    }
+
     public static Vector2 Lerpped(this Vector2 v, Vector2 target, float t)
     {
         return Vector2.Lerp(v, target, t);
