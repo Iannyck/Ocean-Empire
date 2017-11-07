@@ -19,6 +19,11 @@ public static class FloatExtensions
         return Mathf.Round(value);
     }
 
+    public static float Powed(this float value, float exponent)
+    {
+        return Mathf.Pow(value, exponent);
+    }
+
     public static float Rounded(this float value, int numberOfDecimal)
     {
         float mult = Mathf.Pow(10, numberOfDecimal);
@@ -30,17 +35,17 @@ public static class FloatExtensions
         return Mathf.RoundToInt(value);
     }
 
+    public static float Sign(this float value)
+    {
+        return Mathf.Sign(value);
+    }
+
     /// <summary>
     /// Reduis potentiellement la valeur
     /// </summary>
     public static float Capped(this float value, float max)
     {
         return Mathf.Min(value, max);
-    }
-    
-    public static float Sign(this float value)
-    {
-        return Mathf.Sign(value);
     }
 
     /// <summary>
@@ -72,9 +77,10 @@ public static class FloatExtensions
             return 0;
 
         if (value < 0)
-            value = 0;
-        else
-            return value % modulo;
-        return value;
+        {
+            value += Mathf.Ceil(value.Abs() / modulo) * modulo;
+        }
+
+        return value % modulo;
     }
 }

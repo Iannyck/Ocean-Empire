@@ -1,0 +1,4 @@
+Fix Task builder retourne des marche task
+Aller chercher les marches task dans le task builder dans le UI
+Wait Window a la tache et la track
+Le tracker retourne que la tache est complété

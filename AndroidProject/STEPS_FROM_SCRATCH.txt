@@ -1,0 +1,47 @@
+==============
+A FAIRE APRES CHAQUE EXPORT
+
+- Fix build.gradle
+- Fix manifest
+==============
+- Ouvrir le projet Android Studio
+- S'il build pas à chause de gradle check project structure -> project > gradle version 3.4.1 et android plugin version 2.3.3
+
+- ajouter dans build.gradle dans la section dependencies compile 'com.google.android.gms:play-services:8.4.0'
+
+- ajouter 
+	<service android:name=".ActivityRecognizedService" /> entre activity et application
+	<uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" /> avant application
+
+- UnityPlayerActivity -> ajouter 
+	 implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+
+- OnCreate -> ajouter
+	mApiClient = new GoogleApiClient.Builder(this)
+                .addApi(ActivityRecognition.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+
+        mApiClient.connect();
+
+- A la fin de la classe UnityPlayerActivity
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Intent intent = new Intent( this, ActivityDetection.class );
+        PendingIntent pendingIntent = PendingIntent.getService( this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates( mApiClient, 3000, pendingIntent );
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+- Ajouter le fichier ActivityDetection.java dans com.UQAC.OceanEmpire
