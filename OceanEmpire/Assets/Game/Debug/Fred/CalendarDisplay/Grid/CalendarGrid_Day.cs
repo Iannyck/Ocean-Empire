@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CalendarScroll_Day : MonoBehaviour
+public class CalendarGrid_Day : MonoBehaviour
 {
     public Text dayNumber;
     public Text monthLabel;
     public Image image;
     public Color stdColor = Color.white;
     public Color todayColor = Color.blue;
-    public delegate void DayEvent(CalendarScroll_Day day);
+    public delegate void DayEvent(CalendarGrid_Day day);
     public DayEvent onClick;
 
     private Calendar.Day data;

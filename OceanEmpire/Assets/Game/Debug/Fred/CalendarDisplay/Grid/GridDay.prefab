@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 224501695713840238}
   - component: {fileID: 114763230632065618}
   m_Layer: 5
-  m_Name: Day
+  m_Name: GridDay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

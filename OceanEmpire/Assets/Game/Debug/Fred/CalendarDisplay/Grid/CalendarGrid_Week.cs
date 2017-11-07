@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CalendarScroll_Week : MonoBehaviour
+public class CalendarGrid_Week : MonoBehaviour
 {
-    public CalendarScroll_Day[] days;
+    public CalendarGrid_Day[] days;
     public void Fill(List<Calendar.Day> days)
     {
         DateTime now = DateTime.Now;

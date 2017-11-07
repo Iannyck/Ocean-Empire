@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CalendarScroll_Scroller : MonoBehaviour
+public class CalendarGrid_Scroller : MonoBehaviour
 {
     public float scrollDuration = 0.4f;
     public Ease scrollEase = Ease.InOutSine;
     public ScrollRect scroller;
 
     [Header("List")]
-    public List<CalendarScroll_Week> weeks = new List<CalendarScroll_Week>();
+    public List<CalendarGrid_Week> weeks = new List<CalendarGrid_Week>();
 
     public bool IsAnimating() { return tween != null && tween.IsActive(); }
 
@@ -44,9 +44,9 @@ public class CalendarScroll_Scroller : MonoBehaviour
         scroller.verticalNormalizedPosition = 0.5f;
     }
 
-    public CalendarScroll_Week PutTopAtBottom()
+    public CalendarGrid_Week PutTopAtBottom()
     {
-        CalendarScroll_Week transitioningWeek = weeks[0];
+        CalendarGrid_Week transitioningWeek = weeks[0];
         weeks.RemoveAt(0);
         weeks.Add(transitioningWeek);
         transitioningWeek.transform.SetAsLastSibling();
@@ -54,9 +54,9 @@ public class CalendarScroll_Scroller : MonoBehaviour
         return transitioningWeek;
     }
 
-    public CalendarScroll_Week PutBottomAtTop()
+    public CalendarGrid_Week PutBottomAtTop()
     {
-        CalendarScroll_Week transitioningWeek = weeks.Last();
+        CalendarGrid_Week transitioningWeek = weeks.Last();
         weeks.RemoveLast();
         weeks.Insert(0, transitioningWeek);
         transitioningWeek.transform.SetAsFirstSibling();

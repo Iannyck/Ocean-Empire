@@ -5,17 +5,17 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 
-public class CalendarScroll_Controller : MonoBehaviour
+public class CalendarGrid_Controller : MonoBehaviour
 {
     public int currentWeekIndex = 0;
-    public CalendarScroll_Scroller scroller;
+    public CalendarGrid_Scroller scroller;
     
     private Calendar calendar;
 
     private void Awake()
     {
         //Add 'onClick' listeners
-        List<CalendarScroll_Week> weeks = scroller.weeks;
+        List<CalendarGrid_Week> weeks = scroller.weeks;
         for (int i = 0; i < weeks.Count; i++)
         {
             for (int j = 0; j < weeks[i].days.Length; j++)
@@ -25,7 +25,7 @@ public class CalendarScroll_Controller : MonoBehaviour
         }
     }
 
-    private void OnDayClick(CalendarScroll_Day day)
+    private void OnDayClick(CalendarGrid_Day day)
     {
 
     }
@@ -36,7 +36,7 @@ public class CalendarScroll_Controller : MonoBehaviour
         int weekIndex = -1 - currentWeekIndex;
         DateTime now = DateTime.Now;
 
-        List<CalendarScroll_Week> weeks = scroller.weeks;
+        List<CalendarGrid_Week> weeks = scroller.weeks;
         for (int i = 0; i < weeks.Count; i++)
         {
             weeks[i].Fill(Calendar.GetDaysOfWeek(now.AddWeeks(weekIndex)));
@@ -56,13 +56,13 @@ public class CalendarScroll_Controller : MonoBehaviour
 
     void SnapAndUpdate()
     {
-        List<CalendarScroll_Week> weeks = scroller.weeks;
+        List<CalendarGrid_Week> weeks = scroller.weeks;
 
         //Build new weeks
         if (scroller.scroller.verticalNormalizedPosition < 0.5f)
         {
             //On replace le premier en dernier
-            CalendarScroll_Week newWeek = scroller.PutTopAtBottom();
+            CalendarGrid_Week newWeek = scroller.PutTopAtBottom();
 
             //Construit celui en bas
             newWeek.Fill(
@@ -72,7 +72,7 @@ public class CalendarScroll_Controller : MonoBehaviour
         else
         {
             //On replace le dernier en premier
-            CalendarScroll_Week newWeek = scroller.PutBottomAtTop();
+            CalendarGrid_Week newWeek = scroller.PutBottomAtTop();
 
             //Construit celui en haut
             newWeek.Fill(

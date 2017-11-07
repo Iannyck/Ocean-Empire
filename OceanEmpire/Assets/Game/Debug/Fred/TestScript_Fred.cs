@@ -5,7 +5,7 @@ using System;
 
 public class TestScript_Fred : MonoBehaviour
 {
-    public CalendarScroll_Controller scroller;
+    public CalendarGrid_Controller scroller;
     public Calendar calendar = new Calendar();
 
     void Start()
