@@ -19,6 +19,11 @@ public static class FloatExtensions
         return Mathf.Round(value);
     }
 
+    public static float RoundedTo(this float value, float stepSize)
+    {
+        return (value/stepSize).Rounded() * stepSize;
+    }
+
     public static float Powed(this float value, float exponent)
     {
         return Mathf.Pow(value, exponent);

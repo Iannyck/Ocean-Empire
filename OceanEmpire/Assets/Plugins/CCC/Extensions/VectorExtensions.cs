@@ -83,7 +83,9 @@ public static class VectorExtensions
     /// </summary>
     public static Vector2 Scaled(this Vector2 v, Vector2 scale)
     {
-        return new Vector2(v.x * scale.x, v.y * scale.y);
+        v.x *= scale.x;
+        v.y *= scale.y;
+        return v;
     }
 
     /// <summary>
@@ -91,6 +93,44 @@ public static class VectorExtensions
     /// </summary>
     public static Vector2 ScaledInv(this Vector2 v, Vector2 invertedScale)
     {
-        return new Vector2(v.x / invertedScale.x, v.y / invertedScale.y);
+        v.x /= invertedScale.x;
+        v.y /= invertedScale.y;
+        return v;
+    }
+    /// <summary>
+    /// Multiplie les parametre par ceux du 'scale'
+    /// </summary>
+    public static Vector3 Scaled(this Vector3 v, Vector3 scale)
+    {
+        v.x *= scale.x;
+        v.y *= scale.y;
+        v.z *= scale.z;
+        return v;
+    }
+
+    /// <summary>
+    /// Divise les parametre par ceux du 'invertedScale'
+    /// </summary>
+    public static Vector3 ScaledInv(this Vector3 v, Vector3 invertedScale)
+    {
+        v.x /= invertedScale.x;
+        v.y /= invertedScale.y;
+        v.z /= invertedScale.z;
+        return v;
+    }
+
+    public static Vector2 Abs(this Vector2 v)
+    {
+        v.x = v.x.Abs();
+        v.y = v.y.Abs();
+        return v;
+    }
+
+    public static Vector3 Abs(this Vector3 v)
+    {
+        v.x = v.x.Abs();
+        v.y = v.y.Abs();
+        v.z = v.z.Abs();
+        return v;
     }
 }
