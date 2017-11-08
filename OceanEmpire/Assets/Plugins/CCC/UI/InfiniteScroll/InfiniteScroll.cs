@@ -15,6 +15,7 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
 {
     public ScrollRect scrollRect;
 
+    [System.Serializable]
     public class RewindEvent : UnityEvent<int> { }
 
     public RewindEvent onHorizontalRewind = new RewindEvent();

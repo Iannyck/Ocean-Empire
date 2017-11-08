@@ -43,42 +43,11 @@ public class CalendarGrid_Day : MonoBehaviour
             monthLabel.enabled = value;
             if (monthLabel.enabled)
             {
-                monthLabel.text = GetMonthToLabel();
+                monthLabel.text = Calendar.GetMonthAbbreviation(data.monthOfYear);
             }
         }
     }
-    private string GetMonthToLabel()
-    {
-        switch (data.monthOfYear)
-        {
-            case 1:
-                return "Jan";
-            case 2:
-                return "F\u00E9v";
-            case 3:
-                return "Mar";
-            case 4:
-                return "Avr";
-            case 5:
-                return "Mai";
-            case 6:
-                return "Jun";
-            case 7:
-                return "Jul";
-            case 8:
-                return "Ao\u00FB";
-            case 9:
-                return "Sep";
-            case 10:
-                return "Oct";
-            case 11:
-                return "Nov";
-            case 12:
-                return "D\u00E9c";
-            default:
-                return "NaM";
-        }
-    }
+
     public Calendar.Day GetCalendarDay()
     {
         return data;

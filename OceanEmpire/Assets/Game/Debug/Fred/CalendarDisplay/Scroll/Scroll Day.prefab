@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222374642064740816}
   - component: {fileID: 114807345342286752}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,8 +71,9 @@ GameObject:
   m_Component:
   - component: {fileID: 224101529283572046}
   - component: {fileID: 114133159556572356}
+  - component: {fileID: 114346743033794812}
   m_Layer: 5
-  m_Name: Day V2 Test
+  m_Name: Scroll Day
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,6 +131,21 @@ MonoBehaviour:
   m_PreferredHeight: 228.7
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+--- !u!114 &114346743033794812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686029081556198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87dfe6acbdd78f54680b2a257406b485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monthText: {fileID: 114870089341390186}
+  bg: {fileID: 114807345342286752}
+  dayText: {fileID: 114962545796306166}
+  todayColor: {r: 0.4627451, g: 0.84313726, b: 1, a: 1}
 --- !u!114 &114363510082352800
 MonoBehaviour:
   m_ObjectHideFlags: 1

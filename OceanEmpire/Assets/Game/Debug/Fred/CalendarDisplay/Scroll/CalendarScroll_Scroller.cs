@@ -1,134 +1,98 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
-using UnityEngine.EventSystems;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-public class CalendarScroll_Scroller : MonoBehaviour, IDragHandler
+public class CalendarScroll_Scroller : MonoBehaviour
 {
-    public ScrollRect scroller;
-    public VerticalLayoutGroup containerLayoutGroup;
+    [Header("Links")]
+    public CanvasGroupBehaviour backToTopButton;
+    public CanvasGroupBehaviour backToBottomButton;
+    public ScrollRect scrollRect;
+    public RectTransform container;
+    public List<CalendarScroll_Day> days;
 
-    [SerializeField, ReadOnly]
-    private float itemSize = -1;
-    [SerializeField, ReadOnly]
-    float viewportSize = -1;
-    [SerializeField, ReadOnly]
-    int shownItemsAtATime = -1;
-    [SerializeField, ReadOnly]
-    float deplacementMaxDuScroll = -1;
+    int cumulativeRewinds;
 
-    PointerEventData lastDragEvent;
-
-    private void Start()
+    void Awake()
     {
-        if (!HasFetchedData())
+        backToTopButton.HideInstant();
+        backToBottomButton.HideInstant();
+    }
+
+    public void Fill(List<Calendar.Day> list)
+    {
+        Calendar.Day today = new Calendar.Day(DateTime.Now);
+
+        int c = Mathf.Min(list.Count, days.Count);
+        for (int i = 0; i < c; i++)
         {
-            Debug.LogWarning("On doit fetch les donnees sur le Calendar Scroller d'abord.");
-            gameObject.SetActive(false);
+            days[i].Fill(list[i], list[i] == today);
+        }
+
+        scrollRect.verticalNormalizedPosition = 1;
+        cumulativeRewinds = 0;
+        UpdateResetButtons();
+    }
+
+    public void Rewind(int amount)
+    {
+        bool bottomToTop = amount > 0;
+        int c = amount.Abs();
+        for (int i = 0; i < c; i++)
+        {
+            SetSiblingAndFill(!bottomToTop);
+        }
+
+        cumulativeRewinds += amount;
+        UpdateResetButtons();
+    }
+
+    void UpdateResetButtons()
+    {
+
+        bool toTopState = cumulativeRewinds < -7;
+        bool toBottomState = cumulativeRewinds > 7;
+
+        if (backToBottomButton.IsShown != toBottomState)
+        {
+            if (toBottomState)
+                backToBottomButton.Show();
+            else
+                backToBottomButton.Hide();
+        }
+
+        if (backToTopButton.IsShown != toTopState)
+        {
+            if (toTopState)
+                backToTopButton.Show();
+            else
+                backToTopButton.Hide();
+        }
+    }
+
+    private void SetSiblingAndFill(bool putLast)
+    {
+        int childIndex = putLast ? 0 : days.Count - 1;
+        CalendarScroll_Day dayItem = days[childIndex];
+        Calendar.Day day;
+
+        if (putLast)
+        {
+            day = new Calendar.Day(days.Last().GetDay().GetAnchorDateTime().AddDays(1));
+            dayItem.transform.SetAsLastSibling();
+            days.RemoveAt(childIndex);
+            days.Add(dayItem);
         }
         else
         {
-            scroller.onValueChanged.AddListener(OnScrollValueChanged);
+            day = new Calendar.Day(days[0].GetDay().GetAnchorDateTime().AddDays(-1));
+            dayItem.transform.SetAsFirstSibling();
+            days.RemoveAt(childIndex);
+            days.Insert(0, dayItem);
         }
-    }
 
-    void OnScrollValueChanged(Vector2 normalizedPosition)
-    {
-        if (normalizedPosition.y < 0)
-        {
-            Vector2 velocity = scroller.velocity;
-
-            float a = (shownItemsAtATime * itemSize);
-            if (containerLayoutGroup != null)
-                a -= containerLayoutGroup.spacing;
-
-            float decalage = a - viewportSize;
-            float normalizedDecalage = decalage.Abs() / deplacementMaxDuScroll;
-
-            //On kill le drag s'il y a lieu
-            if (lastDragEvent.dragging)
-                scroller.OnEndDrag(lastDragEvent);
-
-            scroller.verticalNormalizedPosition = 1 - normalizedDecalage;
-
-            //On reanime le drag d'entre les morts s'il y a lieu
-            if (lastDragEvent.dragging)
-                scroller.OnBeginDrag(lastDragEvent);
-
-            //Re-apply velocity
-            scroller.velocity = velocity;
-        }
-    }
-
-    void IDragHandler.OnDrag(PointerEventData eventData)
-    {
-        lastDragEvent = eventData;
-    }
-
-    public void NormalizedPositionToZero()
-    {
-        scroller.verticalNormalizedPosition = 0;
-    }
-
-    public bool HasFetchedData()
-    {
-        return itemSize != -1 && deplacementMaxDuScroll != -1 && viewportSize != -1 && shownItemsAtATime != -1;
-    }
-
-    public void FetchedData()
-    {
-        RectTransform viewport = scroller.viewport;
-        RectTransform content = scroller.content;
-
-        //La grosseur du viewport
-        viewportSize = viewport.rect.size.y;
-
-        //La grosseur total du content - le viewport
-        deplacementMaxDuScroll = content.rect.size.y - viewportSize;
-
-        //On calcul l'espace pris pas 1 enfant (1 jour du calendrier)
-        RectTransform child0 = content.GetChild(0) as RectTransform;
-        RectTransform child1 = content.GetChild(1) as RectTransform;
-        itemSize = (child1.anchoredPosition.y - child0.anchoredPosition.y).Abs();
-
-        //On calcul combien d'element est montrer a la fois
-        shownItemsAtATime = Mathf.CeilToInt(viewportSize / itemSize);
+        dayItem.Fill(day, day == new Calendar.Day(DateTime.Now));
     }
 }
-
-
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(CalendarScroll_Scroller))]
-public class CalendarScroll_ScrollerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        CalendarScroll_Scroller scroller = target as CalendarScroll_Scroller;
-
-
-        Color guiColor = GUI.color;
-
-
-        if (!scroller.HasFetchedData())
-            GUI.color = Color.red;
-
-        if (GUILayout.Button("Fetch layout data"))
-        {
-            scroller.FetchedData();
-            EditorSceneManager.MarkSceneDirty(scroller.gameObject.scene);
-        }
-
-
-
-        GUI.color = guiColor;
-    }
-}
-#endif

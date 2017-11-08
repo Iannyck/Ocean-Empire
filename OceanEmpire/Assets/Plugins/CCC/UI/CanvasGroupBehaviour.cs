@@ -7,9 +7,12 @@ public class CanvasGroupBehaviour : MonoBehaviour
 {
     [Header("Canvas group")]
     public CanvasGroup canvasGroup;
-    [SerializeField, ReadOnlyInPlayMode]
-    private float fadeDuration;
+
+    [Header("Settings"), SerializeField, ReadOnlyInPlayMode]
+    private float fadeDuration = 0.35f;
     public Ease ease = Ease.Linear;
+    public bool setInteractable;
+    public bool setBlocksRaycast;
 
     public bool isIndependantUpdate = false;
 
@@ -17,11 +20,25 @@ public class CanvasGroupBehaviour : MonoBehaviour
     private bool keepTheSameTween = false;
 
     private Tween keepTween;
-    private bool isshown = true;
+    private bool _isShown = true;
+
+    public bool IsShown
+    {
+        get { return _isShown; }
+        private set
+        {
+            _isShown = value;
+
+            if (setBlocksRaycast)
+                canvasGroup.blocksRaycasts = _isShown;
+            if (setInteractable)
+                canvasGroup.interactable = _isShown;
+        }
+    }
 
     public virtual void Hide()
     {
-        isshown = false;
+        IsShown = false;
 
         if (keepTheSameTween)
         {
@@ -33,11 +50,16 @@ public class CanvasGroupBehaviour : MonoBehaviour
             KillIfActive();
             CheckLaunchTween(0);
         }
+
+        if (setBlocksRaycast)
+            canvasGroup.blocksRaycasts = false;
+        if (setInteractable)
+            canvasGroup.interactable = false;
     }
 
     public virtual void Show()
     {
-        isshown = true;
+        IsShown = true;
 
         if (keepTheSameTween)
         {
@@ -49,11 +71,16 @@ public class CanvasGroupBehaviour : MonoBehaviour
             KillIfActive();
             CheckLaunchTween(1);
         }
+
+        if (setBlocksRaycast)
+            canvasGroup.blocksRaycasts = true;
+        if (setInteractable)
+            canvasGroup.interactable = true;
     }
 
     public virtual void HideInstant()
     {
-        isshown = false;
+        IsShown = false;
 
         if (keepTheSameTween)
         {
@@ -72,11 +99,16 @@ public class CanvasGroupBehaviour : MonoBehaviour
             KillIfActive();
             canvasGroup.alpha = 0;
         }
+
+        if (setBlocksRaycast)
+            canvasGroup.blocksRaycasts = false;
+        if (setInteractable)
+            canvasGroup.interactable = false;
     }
 
     public virtual void ShowInstant()
     {
-        isshown = true;
+        IsShown = true;
 
         if (keepTheSameTween)
         {
@@ -95,11 +127,6 @@ public class CanvasGroupBehaviour : MonoBehaviour
             KillIfActive();
             canvasGroup.alpha = 1;
         }
-    }
-
-    public bool IsVisible()
-    {
-        return isshown;
     }
 
     protected virtual void OnDestroy()

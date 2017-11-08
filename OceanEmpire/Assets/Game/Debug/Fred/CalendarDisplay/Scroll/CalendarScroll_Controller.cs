@@ -1,16 +1,34 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CalendarScroll_Controller : MonoBehaviour {
+public class CalendarScroll_Controller : MonoBehaviour
+{
+    [Header("Links")]
+    public CalendarScroll_Scroller scroller;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Header("Settings")]
+    public int startingDayIndex = 1;
+
+    void Start()
+    {
+        Refill();
+    }
+
+    private void Refill()
+    {
+        scroller.Fill(Calendar.GetDaysFrom(DateTime.Now.AddDays(-startingDayIndex), scroller.days.Count));
+    }
+
+    public void BackToTop()
+    {
+        Refill();
+    }
+
+    public void BackToBottom()
+    {
+        Refill();
+    }
 }
