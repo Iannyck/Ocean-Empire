@@ -174,6 +174,7 @@ public class GameSaves : BaseManager<GameSaves>
         LoadDataAsync(Type.Currency, queue.Register());
         LoadDataAsync(Type.Tutorial, queue.Register());
         LoadDataAsync(Type.FishPop, queue.Register());
+        LoadDataAsync(Type.Items, queue.Register());
 
         queue.MarkEnd();
     }
@@ -183,6 +184,7 @@ public class GameSaves : BaseManager<GameSaves>
         LoadData(Type.Currency);
         LoadData(Type.Tutorial);
         LoadData(Type.FishPop);
+        LoadData(Type.Items);
     }
 
     public void SaveAllAsync(Action onComplete)
@@ -191,6 +193,7 @@ public class GameSaves : BaseManager<GameSaves>
         SaveDataAsync(Type.Currency, queue.Register());
         SaveDataAsync(Type.Tutorial, queue.Register());
         SaveDataAsync(Type.FishPop, queue.Register());
+        SaveDataAsync(Type.Items, queue.Register());
 
         queue.MarkEnd();
     }
@@ -201,6 +204,7 @@ public class GameSaves : BaseManager<GameSaves>
         SaveData(Type.Currency);
         SaveData(Type.Tutorial);
         SaveData(Type.FishPop);
+        SaveData(Type.Items);
 #if UNITY_EDITOR
         Debug.Log("All Data Saved");
 #endif
@@ -268,6 +272,7 @@ public class GameSaves : BaseManager<GameSaves>
         ClearSave(Type.Currency);
         ClearSave(Type.Tutorial);
         ClearSave(Type.FishPop);
+        ClearSave(Type.Items);
     }
 
     [InspectorButton()]
@@ -294,12 +299,21 @@ public class GameSaves : BaseManager<GameSaves>
         Debug.Log("FishPop Cleared");
 #endif
     }
+    [InspectorButton()]
+    public void ClearItems()
+    {
+        ClearSave(Type.Items);
+#if UNITY_EDITOR
+        Debug.Log("Items Cleared");
+#endif
+    }
 
     public void ClearSave(Type type)
     {
         Saves.Delete(GetPath() + TypeToFileName(type));
         NewOfType(type);
     }
+
 
     #endregion
 
@@ -308,8 +322,9 @@ public class GameSaves : BaseManager<GameSaves>
     private const string CURRENCY_FILE = "currency.dat";
     private const string TUTORIAL_FILE = "tutorial.dat";
     private const string FISHPOP_FILE = "fishpop.dat";
+    private const string ITEMS_FILE = "items.dat";
 
-    public enum Type { Currency, Tutorial, FishPop}
+    public enum Type { Currency, Tutorial, FishPop, Items}
 
     [ShowInInspector]
     private Data currencyData = new Data();
@@ -317,6 +332,8 @@ public class GameSaves : BaseManager<GameSaves>
     private Data tutorialData = new Data();
     [ShowInInspector]
     private Data fishPopData = new Data();
+    [ShowInInspector]
+    private Data itemsData = new Data();
 
     private string TypeToFileName(Type type)
     {
@@ -328,6 +345,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return TUTORIAL_FILE;
             case Type.FishPop:
                 return FISHPOP_FILE;
+            case Type.Items:
+                return ITEMS_FILE;
             default:
                 return "";
         }
@@ -343,6 +362,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return tutorialData;
             case Type.FishPop:
                 return fishPopData;
+            case Type.Items:
+                return itemsData;
 
             default:
                 return null;
@@ -362,6 +383,9 @@ public class GameSaves : BaseManager<GameSaves>
             case Type.FishPop:
                 fishPopData = newData;
                 break;
+            case Type.Items:
+                itemsData = newData;
+                break;
 
             default:
                 break;
@@ -380,6 +404,9 @@ public class GameSaves : BaseManager<GameSaves>
                 break;
             case Type.FishPop:
                 fishPopData = new Data();
+                break;
+            case Type.Items:
+                itemsData = new Data();
                 break;
 
             default:

@@ -42,6 +42,14 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
         Game.OnGameStart += Init;
+
+        Thruster thruster = gameObject.GetComponent<SubmarinParts>().GetThruster();
+        if(thruster != null)
+        {
+            maximumSpeed = thruster.GetSpeed();
+            accelerationRate = thruster.GetAcceleration();
+        }
+
     }
 
     void Init()

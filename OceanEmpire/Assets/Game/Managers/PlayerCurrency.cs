@@ -15,6 +15,16 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
         CompleteInit();
     }
 
+    [SerializeField]
+    private Sprite moneyIcon;
+    [SerializeField]
+    private Sprite ticketIcon;
+
+    public static Sprite GetMoneyIcon()    {   return instance.moneyIcon;  }
+    public static Sprite GetTicketIcon()   {   return instance.ticketIcon;  }
+
+
+
     [SerializeField, ReadOnly]
     private int coins;
     [SerializeField, ReadOnly]
