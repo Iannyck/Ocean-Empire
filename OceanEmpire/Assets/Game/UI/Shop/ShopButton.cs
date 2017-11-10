@@ -11,8 +11,8 @@ public class ShopButton : MonoBehaviour {
     public Text buttonText;
     public Image currencyIcon;
 
-    private const string equipText = "Déja équipé";
-    private const string ownedText = "Équiper";
+    private const string equipText = "Équipé";
+    private const string ownedText = "Utiliser";
 
     void Start () {
         //gameObject.SetActive(false);

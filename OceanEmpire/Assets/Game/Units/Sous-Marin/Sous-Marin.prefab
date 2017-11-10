@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 114467016133407704}
   - component: {fileID: 114517759041208734}
   - component: {fileID: 114894073798485186}
+  - component: {fileID: 114318520299589712}
   m_Layer: 8
   m_Name: Sous-Marin
   m_TagString: Untagged
@@ -295,6 +296,18 @@ MonoBehaviour:
   rightBound: 2.81
   brakeDistance: 1.5
   currentTarget: {x: 0, y: 0}
+--- !u!114 &114318520299589712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853673111068200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebdf9642f58aa741b16ac29d232bb4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thruster: {fileID: 0}
 --- !u!114 &114379696085279956
 MonoBehaviour:
   m_ObjectHideFlags: 1
