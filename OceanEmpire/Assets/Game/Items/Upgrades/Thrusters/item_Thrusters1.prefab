@@ -54,7 +54,7 @@ MonoBehaviour:
   _objectReferences: []
   _serializedStateKeys: []
   _serializedStateValues: []
-  description: {fileID: 0}
+  description: {fileID: 11400000, guid: 5d761e2802438ac4c8f82fb10ed2d20d, type: 2}
   itemID: thruster1
   subMarineSpeed: 1.5
   subMarineAcceleration: 0.5
