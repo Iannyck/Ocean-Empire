@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
 using System;
 
 public class CalendarGrid_Controller : MonoBehaviour
 {
+    public const string SCENENAME = "CalendarGrid";
+
     public int currentWeekIndex = 0;
     public CalendarGrid_Scroller scroller;
     

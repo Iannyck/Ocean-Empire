@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CalendarScroll_Controller : MonoBehaviour
 {
+    public const string SCENENAME = "CalendarScroll";
+
     [Header("Links")]
     public CalendarScroll_Scroller scroller;
 

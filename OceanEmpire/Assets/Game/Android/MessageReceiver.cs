@@ -12,6 +12,7 @@ public class MessageReceiver : BaseManager<MessageReceiver> {
     public override void Init()
     {
         JavaMessage(GetAndroidMessage());
+        CompleteInit();
     }
 
     public void JavaMessage(string message)
