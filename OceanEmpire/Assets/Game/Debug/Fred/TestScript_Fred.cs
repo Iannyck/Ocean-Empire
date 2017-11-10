@@ -5,27 +5,17 @@ using System;
 
 public class TestScript_Fred : MonoBehaviour
 {
-    public CalendarGrid_Controller scroller;
-    public Calendar calendar = new Calendar();
-
-    void Start()
-    {
-        scroller.Fill(calendar);
-    }
+    public CanvasGroupBehaviour g;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            scroller.Fill(calendar);
+            g.Hide(() => print("hide complete"));
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            scroller.GoBackwardOneWeek();
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            scroller.GoForwardOneWeek();
+            g.Show(() => print("show complete"));
         }
     }
 }

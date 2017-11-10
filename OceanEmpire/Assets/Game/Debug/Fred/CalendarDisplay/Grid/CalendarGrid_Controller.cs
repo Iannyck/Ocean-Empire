@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using System;
 
-public class CalendarGrid_Controller : MonoBehaviour
+public class CalendarGrid_Controller : CanvasGroupBehaviour
 {
     public const string SCENENAME = "CalendarGrid";
 
     public int currentWeekIndex = 0;
     public CalendarGrid_Scroller scroller;
-    
+
     private Calendar calendar;
 
     private void Awake()
@@ -23,6 +24,8 @@ public class CalendarGrid_Controller : MonoBehaviour
                 weeks[i].days[j].onClick = OnDayClick;
             }
         }
+
+        HideInstant();
     }
 
     private void OnDayClick(CalendarGrid_Day day)

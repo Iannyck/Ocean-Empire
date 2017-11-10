@@ -17,7 +17,7 @@ public class CanvasGroupBehaviour : MonoBehaviour
     public bool isIndependantUpdate = false;
 
     [SerializeField, ReadOnlyInPlayMode]
-    private bool keepTheSameTween = false;
+    private bool keepTheSameTween = true;
 
     private Tween keepTween;
     private bool _isShown = true;
@@ -36,13 +36,18 @@ public class CanvasGroupBehaviour : MonoBehaviour
         }
     }
 
-    public virtual void Hide()
+    public void Hide()
+    {
+        Hide(null);
+    }
+
+    public virtual void Hide(TweenCallback onComplete)
     {
         IsShown = false;
 
         if (keepTheSameTween)
         {
-            CheckLaunchTween(0);
+            BuildKeepTween();
             keepTween.PlayForward();
         }
         else
@@ -50,20 +55,21 @@ public class CanvasGroupBehaviour : MonoBehaviour
             KillIfActive();
             CheckLaunchTween(0);
         }
-
-        if (setBlocksRaycast)
-            canvasGroup.blocksRaycasts = false;
-        if (setInteractable)
-            canvasGroup.interactable = false;
+        keepTween.OnComplete(onComplete);
     }
 
-    public virtual void Show()
+    public void Show()
+    {
+        Show(null);
+    }
+
+    public virtual void Show(TweenCallback onComplete)
     {
         IsShown = true;
 
         if (keepTheSameTween)
         {
-            CheckLaunchTween(0);
+            BuildKeepTween();
             keepTween.PlayBackwards();
         }
         else
@@ -72,10 +78,7 @@ public class CanvasGroupBehaviour : MonoBehaviour
             CheckLaunchTween(1);
         }
 
-        if (setBlocksRaycast)
-            canvasGroup.blocksRaycasts = true;
-        if (setInteractable)
-            canvasGroup.interactable = true;
+        keepTween.OnRewind(onComplete);
     }
 
     public virtual void HideInstant()
@@ -84,7 +87,7 @@ public class CanvasGroupBehaviour : MonoBehaviour
 
         if (keepTheSameTween)
         {
-            if (keepTween != null && keepTween.IsActive())
+            if (keepTween != null)
             {
                 keepTween.PlayForward();
                 keepTween.Complete();
@@ -99,11 +102,6 @@ public class CanvasGroupBehaviour : MonoBehaviour
             KillIfActive();
             canvasGroup.alpha = 0;
         }
-
-        if (setBlocksRaycast)
-            canvasGroup.blocksRaycasts = false;
-        if (setInteractable)
-            canvasGroup.interactable = false;
     }
 
     public virtual void ShowInstant()
@@ -112,7 +110,7 @@ public class CanvasGroupBehaviour : MonoBehaviour
 
         if (keepTheSameTween)
         {
-            if (keepTween != null && keepTween.IsActive())
+            if (keepTween != null)
             {
                 keepTween.Goto(0);
                 keepTween.PlayBackwards();
@@ -138,6 +136,18 @@ public class CanvasGroupBehaviour : MonoBehaviour
     {
         if (keepTween == null || !keepTween.IsActive())
             keepTween = AdjustTween(canvasGroup.DOFade(alpha, fadeDuration));
+    }
+
+    private void BuildKeepTween()
+    {
+        if(keepTween == null)
+        {
+            float a = canvasGroup.alpha;
+            canvasGroup.alpha = 1;
+            keepTween = AdjustTween(canvasGroup.DOFade(0, fadeDuration));
+            keepTween.ForceInit();
+            canvasGroup.alpha = a;
+        }
     }
 
     private void KillIfActive()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CalendarScroll_Controller : MonoBehaviour
+public class CalendarScroll_Controller : CanvasGroupBehaviour
 {
     public const string SCENENAME = "CalendarScroll";
 
@@ -13,6 +13,11 @@ public class CalendarScroll_Controller : MonoBehaviour
 
     [Header("Settings")]
     public int startingDayIndex = 1;
+
+    private void Awake()
+    {
+        HideInstant();
+    }
 
     void Start()
     {

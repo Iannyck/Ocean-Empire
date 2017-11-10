@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Game/UI/Shack/Shack.unity
     guid: 3365bf45c1118084088b800e6da71856
   - enabled: 1
-    path: Assets/Game/Debug/Fred/CalendarDisplay/Grid/CalendarGrid.unity
-    guid: fd69804324636c2408b48de87674d8c1
-  - enabled: 1
     path: Assets/Game/Recolte/GameBuilder.unity
     guid: f0c884b8cca1c1f45bfe40eb64a0b6c8
   - enabled: 1
@@ -65,3 +62,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Shop/Shop.unity
     guid: 8381ec2cfa9bbd14f8705e13980c74fa
+  - enabled: 1
+    path: Assets/Game/Debug/Fred/CalendarDisplay/Grid/CalendarGrid.unity
+    guid: fd69804324636c2408b48de87674d8c1
+  - enabled: 1
+    path: Assets/Game/Debug/Fred/CalendarDisplay/Root Calendar Scene/CalendarRootScene.unity
+    guid: 95ee84cd2da80144ca59dbc833066d7c
+  - enabled: 1
+    path: Assets/Game/Debug/Fred/CalendarDisplay/Scroll/CalendarScroll.unity
+    guid: 8503dc2e047ca6d49b648b9c0be68b90
+  - enabled: 1
+    path: Assets/Game/Debug/Fred/CalendarDisplay/Day Inspector/DayInspector.unity
+    guid: 00000000000000000000000000000000
