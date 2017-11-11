@@ -8,11 +8,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa93ab00c55c89542b120f18cd8a10a3, type: 3}
-  m_Name: Thruster2
+  m_Script: {fileID: 11500000, guid: 58137be365474a14ba9fb45a1e1b8d10, type: 3}
+  m_Name: Thruster3
   m_EditorClassIdentifier: 
-  itemName: "Bon R\xE9acteur"
-  itemDescription: Augmente la Vitesse du sous-marin
+  itemName: "Turbo R\xE9acteur"
+  itemDescription: Augmente beaucoup la vitesse du sous-marin
   moneyCost: 200
   ticketCost: 10
   itemImage: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
+  itemFileName: item_Thrusters3
+  itemID: thruster3

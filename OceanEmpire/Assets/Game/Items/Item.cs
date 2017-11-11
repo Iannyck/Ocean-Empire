@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using FullInspector;
 
-public class Item : BaseBehavior
+[CreateAssetMenu(menuName = "Ocean Empire/Item")]
+public class Item : ScriptableObject
 {
-    private void Start()
-    {
-        
-    }
     public ItemDescription description;
 
-    [SerializeField, ReadOnly]
-    private string itemID;
     public string GetItemID()
     {
-        return itemID;
+        return description.GetItemID();
     }
+
 }

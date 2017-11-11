@@ -51,21 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92dec1d8716437428bf7fa6bfdfe7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences:
-  - {fileID: 114111325364712164, guid: 8ae20ca8fa8052d4ea9f3d0a48b96fef, type: 2}
-  - {fileID: 114205220668525348, guid: 23fc7a26f84172547be73a439ef825b6, type: 2}
-  - {fileID: 114183395054711540, guid: 2b05eecda386ef84f8395f6aa2f55f43, type: 2}
-  - {fileID: 114205220668525348, guid: 8ad3085f09e2ab347b879d08a23223d0, type: 2}
+  _objectReferences: []
   _serializedStateKeys:
   - onCompleteInit
-  - upgradeList
+  - upgradePaths
   - ownedUpgrades
   _serializedStateValues:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
-  - '{"thruster1":0,"thruster2":1,"testitem":2,"thruster3":3}'
+  - '{"thruster1":"Items/Upgrades/Thrusters/Description/Thruster1","thruster2":"Items/Upgrades/Thrusters/Description/Thruster2","thruster3":"Items/Upgrades/Thrusters/Description/Thruster3"}'
   - 
   initComplete: 0
-  equipedThruster: {fileID: 0}
-  defaultThruster: {fileID: 114111325364712164, guid: 8ae20ca8fa8052d4ea9f3d0a48b96fef,
-    type: 2}
+  equipedThruster: 
+  defaultThruster: thruster1
