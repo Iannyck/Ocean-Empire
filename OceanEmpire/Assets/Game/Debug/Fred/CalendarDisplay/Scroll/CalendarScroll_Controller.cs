@@ -14,9 +14,14 @@ public class CalendarScroll_Controller : CanvasGroupBehaviour
     [Header("Settings")]
     public int startingDayIndex = 1;
 
+    [ReadOnly]
+    public CalendarRootScene root;
+
     private void Awake()
     {
         HideInstant();
+        List<CalendarScroll_Day> days = scroller.days;
+        days.ForEach((x) => x.onClick += OnDayClick);
     }
 
     void Start()
@@ -27,6 +32,11 @@ public class CalendarScroll_Controller : CanvasGroupBehaviour
     private void Refill()
     {
         scroller.Fill(Calendar.GetDaysFrom(DateTime.Now.AddDays(-startingDayIndex), scroller.days.Count));
+    }
+
+    public void OnDayClick(CalendarScroll_Day day)
+    {
+        root.dayInspector.Show(day.GetDay());
     }
 
     public void BackToTop()

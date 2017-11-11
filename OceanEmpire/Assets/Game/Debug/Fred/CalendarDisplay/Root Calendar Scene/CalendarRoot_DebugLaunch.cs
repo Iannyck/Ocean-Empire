@@ -10,7 +10,7 @@ public class CalendarRoot_DebugLaunch : MonoBehaviour
     {
         MasterManager.Sync(() =>
         {
-            if(Scenes.SceneCount() == 1)
+            if(Scenes.SceneCount() == 2)
             {
                 Scenes.Load(CalendarRootScene.SCENENAME, LoadSceneMode.Additive
                     ,(x)=>x.FindRootObject<CalendarRootScene>());

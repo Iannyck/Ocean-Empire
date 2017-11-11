@@ -13,6 +13,8 @@ public class CalendarRootScene : MonoBehaviour
     public CalendarGrid_Controller gridCalendar;
     [ReadOnly]
     public CalendarScroll_Controller scrollCalendar;
+    [ReadOnly]
+    public DayInspector dayInspector;
 
     public enum CalendarType { Scroll = 0, Grid = 1 }
     public CalendarType defaultType = CalendarType.Scroll;
@@ -21,19 +23,17 @@ public class CalendarRootScene : MonoBehaviour
     {
         MasterManager.Sync(() =>
         {
-            InitQueue queue = new InitQueue(OnCalendarsLoaded);
+            InitQueue queue = new InitQueue(AllScenesLoaded);
 
-            if (!IsCalendarTypeLoaded(CalendarType.Scroll))
-                FetchCalendarType(CalendarType.Scroll, queue.Register());
-
-            if (!IsCalendarTypeLoaded(CalendarType.Grid))
-                FetchCalendarType(CalendarType.Grid, queue.Register());
+            FetchCalendarType(CalendarType.Scroll, queue.Register());
+            FetchCalendarType(CalendarType.Grid, queue.Register());
+            FetchDayInspector(queue.Register());
 
             queue.MarkEnd();
         });
     }
 
-    private void OnCalendarsLoaded()
+    private void AllScenesLoaded()
     {
         switch (defaultType)
         {
@@ -46,6 +46,25 @@ public class CalendarRootScene : MonoBehaviour
                     gridCalendar.Show();
                 break;
         }
+
+        gridCalendar.root = this;
+        scrollCalendar.root = this;
+        dayInspector.root = this;
+    }
+
+    private void FetchDayInspector(Action onComplete)
+    {
+        Action<Scene> fetcher = (Scene scene) =>
+        {
+            dayInspector = scene.FindRootObject<DayInspector>();
+            if (onComplete != null)
+                onComplete();
+        };
+
+        if (!Scenes.Exists(DayInspector.SCENENAME))
+            Scenes.Load(DayInspector.SCENENAME, LoadSceneMode.Additive, fetcher);
+        else
+            fetcher(Scenes.GetActive(DayInspector.SCENENAME));
     }
 
     private void FetchCalendarType(CalendarType type, Action onComplete)
