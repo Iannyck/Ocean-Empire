@@ -2,35 +2,45 @@
 buildscript {
 	repositories {
 		jcenter()
-	}
+        google()
+    }
 
 	dependencies {
 		classpath 'com.android.tools.build:gradle:3.0.0'
+		classpath 'com.google.gms:google-services:3.0.0'
 	}
 }
 
 allprojects {
-   repositories {
-      flatDir {
-        dirs 'libs'
-      }
-   }
+	repositories {
+		flatDir {
+			dirs 'libs'
+		}
+        google()
+    }
 }
 
 apply plugin: 'com.android.application'
 
 dependencies {
-    compile 'com.google.android.gms:play-services:8.4.0'
+	compile files('libs/unity-classes.jar')
+	compile(name:'testmodule-debug', ext:'aar')
+	compile 'com.google.android.gms:play-services:8.4.0'
 	compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 android {
-	compileSdkVersion 25
+	compileSdkVersion 26
 	buildToolsVersion '26.0.2'
 
 	defaultConfig {
-		targetSdkVersion 25
+        minSdkVersion 15
+        targetSdkVersion 26
 		applicationId 'com.UQAC.OceanEmpire'
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
 
 	lintOptions {

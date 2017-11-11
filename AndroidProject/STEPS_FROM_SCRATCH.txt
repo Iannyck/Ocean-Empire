@@ -5,7 +5,7 @@ A FAIRE APRES CHAQUE EXPORT
 - Fix manifest
 ==============
 - Ouvrir le projet Android Studio
-- S'il build pas à chause de gradle check project structure -> project > gradle version 3.4.1 et android plugin version 2.3.3
+- S'il build pas à chause de gradle check project structure -> project > gradle version 4.1 et android plugin version 2.3.3
 
 - ajouter dans build.gradle dans la section dependencies compile 'com.google.android.gms:play-services:8.4.0'
 
@@ -15,6 +15,7 @@ A FAIRE APRES CHAQUE EXPORT
 
 - UnityPlayerActivity -> ajouter 
 	 implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+	local variable -> public GoogleApiClient mApiClient;
 
 - OnCreate -> ajouter
 	mApiClient = new GoogleApiClient.Builder(this)

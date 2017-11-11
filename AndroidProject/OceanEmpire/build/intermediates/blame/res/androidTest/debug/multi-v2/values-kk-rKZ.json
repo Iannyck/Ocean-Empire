@@ -4,58 +4,7 @@
             "outputFile": "C:\\Users\\etudiant\\Documents\\Ocean-Empire\\AndroidProject\\OceanEmpire\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-kk-rKZ\\values-kk-rKZ.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-23.0.0.aar\\f61abd5f1fa5267e50a7b8e91649573f\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "282,396,509,613,715,840,938,1034,1155,1268,1352",
-                        "endColumns": "113,112,103,101,124,97,95,120,112,83,96",
-                        "endOffsets": "391,504,608,710,835,933,1029,1150,1263,1347,1444"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55,56,57,58",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "6478,6592,6705,6809,6911,7036,7134,7230,7351,7464,7548",
-                        "endColumns": "113,112,103,101,124,97,95,120,112,83,96",
-                        "endOffsets": "6587,6700,6804,6906,7031,7129,7225,7346,7459,7543,7640"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\3f351644a33a430a6a5410c215793697\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "280,392,500,623,726,836,921,1027,1146,1227,1330,1435,1533,1640,1749,1849,1964,2063",
-                        "endColumns": "111,107,122,102,109,84,105,118,80,102,104,97,106,108,99,114,98,100",
-                        "endOffsets": "387,495,618,721,831,916,1022,1141,1222,1325,1430,1528,1635,1744,1844,1959,2058,2159"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,61",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,217,325,448,551,661,746,852,971,1052,1155,1260,1358,1465,1574,1674,1789,7846",
-                        "endColumns": "111,107,122,102,109,84,105,118,80,102,104,97,106,108,99,114,98,100",
-                        "endOffsets": "212,320,443,546,656,741,847,966,1047,1150,1255,1353,1460,1569,1669,1784,1883,7942"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-location-8.4.0.aar\\f72851e35a5c58ccebfbfe1edc37dda5\\res\\values-kk-rKZ\\location_strings.xml",
-                    "from": {
-                        "startLines": "6,5",
-                        "startColumns": "4,4",
-                        "startOffsets": "325,230",
-                        "endColumns": "105,94",
-                        "endOffsets": "426,320"
-                    },
-                    "to": {
-                        "startLines": "59,60",
-                        "startColumns": "4,4",
-                        "startOffsets": "7645,7751",
-                        "endColumns": "105,94",
-                        "endOffsets": "7746,7841"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.4.0.aar\\030d20eb16480a7b3918f5b94246eb41\\res\\values-kk-rKZ\\base_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.4.0.aar\\9110ff8008b51c53ae06d8d5b41e012e\\res\\values-kk-rKZ\\base_strings.xml",
                     "from": {
                         "startLines": "24,10,9,8,7,5,6,4,19,18,17,16,3,28,27,26,25,21,20,22,12,11,15,14,13,23,29,30",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -72,7 +21,58 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.4.0.aar\\1587be376b7146703f5a9b8cf7fd2de7\\res\\values-kk-rKZ\\common_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-23.0.0.aar\\61ec4c6e1965f9e2529c860a06278f4a\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "282,396,509,613,715,840,938,1034,1155,1268,1352",
+                        "endColumns": "113,112,103,101,124,97,95,120,112,83,96",
+                        "endOffsets": "391,504,608,710,835,933,1029,1150,1263,1347,1444"
+                    },
+                    "to": {
+                        "startLines": "48,49,50,51,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "6478,6592,6705,6809,6911,7036,7134,7230,7351,7464,7548",
+                        "endColumns": "113,112,103,101,124,97,95,120,112,83,96",
+                        "endOffsets": "6587,6700,6804,6906,7031,7129,7225,7346,7459,7543,7640"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\dd997b68448ec12efb851cd2b67bc940\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "280,392,500,623,726,836,921,1027,1146,1227,1330,1435,1533,1640,1749,1849,1964,2063",
+                        "endColumns": "111,107,122,102,109,84,105,118,80,102,104,97,106,108,99,114,98,100",
+                        "endOffsets": "387,495,618,721,831,916,1022,1141,1222,1325,1430,1528,1635,1744,1844,1959,2058,2159"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,61",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,217,325,448,551,661,746,852,971,1052,1155,1260,1358,1465,1574,1674,1789,7846",
+                        "endColumns": "111,107,122,102,109,84,105,118,80,102,104,97,106,108,99,114,98,100",
+                        "endOffsets": "212,320,443,546,656,741,847,966,1047,1150,1255,1353,1460,1569,1669,1784,1883,7942"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-location-8.4.0.aar\\2f02b2c24a6d726cee528aade82d2408\\res\\values-kk-rKZ\\location_strings.xml",
+                    "from": {
+                        "startLines": "6,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "325,230",
+                        "endColumns": "105,94",
+                        "endOffsets": "426,320"
+                    },
+                    "to": {
+                        "startLines": "59,60",
+                        "startColumns": "4,4",
+                        "startOffsets": "7645,7751",
+                        "endColumns": "105,94",
+                        "endOffsets": "7746,7841"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.4.0.aar\\9e03bad3e4b47c314896e715ffcde60d\\res\\values-kk-rKZ\\common_strings.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",

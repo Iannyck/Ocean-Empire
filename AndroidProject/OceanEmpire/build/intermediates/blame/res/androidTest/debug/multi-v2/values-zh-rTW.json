@@ -4,24 +4,7 @@
             "outputFile": "C:\\Users\\etudiant\\Documents\\Ocean-Empire\\AndroidProject\\OceanEmpire\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-23.0.0.aar\\f61abd5f1fa5267e50a7b8e91649573f\\res\\values-zh-rTW\\values-zh-rTW.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "282,385,486,579,678,788,881,973,1082,1176,1258",
-                        "endColumns": "102,100,92,98,109,92,91,108,93,81,88",
-                        "endOffsets": "380,481,574,673,783,876,968,1077,1171,1253,1342"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55,56,57,58",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "5609,5712,5813,5906,6005,6115,6208,6300,6409,6503,6585",
-                        "endColumns": "102,100,92,98,109,92,91,108,93,81,88",
-                        "endOffsets": "5707,5808,5901,6000,6110,6203,6295,6404,6498,6580,6669"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.4.0.aar\\030d20eb16480a7b3918f5b94246eb41\\res\\values-zh-rTW\\base_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.4.0.aar\\9110ff8008b51c53ae06d8d5b41e012e\\res\\values-zh-rTW\\base_strings.xml",
                     "from": {
                         "startLines": "24,10,9,8,7,5,6,4,19,18,17,16,3,28,27,26,25,21,20,22,12,11,15,14,13,23,29,30",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-wallet-8.4.0.aar\\5aa6586d9ce158e32c8fc9b48d30dba2\\res\\values-zh-rTW\\wallet_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-location-8.4.0.aar\\2f02b2c24a6d726cee528aade82d2408\\res\\values-zh-rTW\\location_strings.xml",
+                    "from": {
+                        "startLines": "6,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "322,230",
+                        "endColumns": "94,91",
+                        "endOffsets": "412,317"
+                    },
+                    "to": {
+                        "startLines": "59,60",
+                        "startColumns": "4,4",
+                        "startOffsets": "6674,6769",
+                        "endColumns": "94,91",
+                        "endOffsets": "6764,6856"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-wallet-8.4.0.aar\\d6a9bd82f25222df7fa371c79edf5db1\\res\\values-zh-rTW\\wallet_strings.xml",
                     "from": {
                         "startLines": "5",
                         "startColumns": "4",
@@ -55,7 +55,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\3f351644a33a430a6a5410c215793697\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-23.0.0.aar\\61ec4c6e1965f9e2529c860a06278f4a\\res\\values-zh-rTW\\values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "282,385,486,579,678,788,881,973,1082,1176,1258",
+                        "endColumns": "102,100,92,98,109,92,91,108,93,81,88",
+                        "endOffsets": "380,481,574,673,783,876,968,1077,1171,1253,1342"
+                    },
+                    "to": {
+                        "startLines": "48,49,50,51,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "5609,5712,5813,5906,6005,6115,6208,6300,6409,6503,6585",
+                        "endColumns": "102,100,92,98,109,92,91,108,93,81,88",
+                        "endOffsets": "5707,5808,5901,6000,6110,6203,6295,6404,6498,6580,6669"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\dd997b68448ec12efb851cd2b67bc940\\res\\values-zh-rTW\\values-zh-rTW.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -72,7 +89,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.4.0.aar\\1587be376b7146703f5a9b8cf7fd2de7\\res\\values-zh-rTW\\common_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.4.0.aar\\9e03bad3e4b47c314896e715ffcde60d\\res\\values-zh-rTW\\common_strings.xml",
                     "from": {
                         "startLines": "3",
                         "startColumns": "4",
@@ -86,23 +103,6 @@
                         "startOffsets": "4041",
                         "endColumns": "181",
                         "endOffsets": "4218"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-location-8.4.0.aar\\f72851e35a5c58ccebfbfe1edc37dda5\\res\\values-zh-rTW\\location_strings.xml",
-                    "from": {
-                        "startLines": "6,5",
-                        "startColumns": "4,4",
-                        "startOffsets": "322,230",
-                        "endColumns": "94,91",
-                        "endOffsets": "412,317"
-                    },
-                    "to": {
-                        "startLines": "59,60",
-                        "startColumns": "4,4",
-                        "startOffsets": "6674,6769",
-                        "endColumns": "94,91",
-                        "endOffsets": "6764,6856"
                     }
                 }
             ]

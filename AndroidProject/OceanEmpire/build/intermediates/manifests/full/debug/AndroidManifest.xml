@@ -3,11 +3,11 @@
     package="com.UQAC.OceanEmpire"
     android:installLocation="preferExternal"
     android:versionCode="1"
-    android:versionName="2" >
+    android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="25" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="26" />
 
     <supports-screens
         android:anyDensity="true"
@@ -69,8 +69,6 @@
                 android:name="unityplayer.UnityActivity"
                 android:value="true" />
         </activity>
-
-        <service android:name="com.UQAC.OceanEmpire.ActivityDetection" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

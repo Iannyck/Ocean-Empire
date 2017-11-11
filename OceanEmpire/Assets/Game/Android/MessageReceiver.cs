@@ -11,7 +11,7 @@ public class MessageReceiver : BaseManager<MessageReceiver> {
 
     public override void Init()
     {
-        JavaMessage(GetAndroidMessage());
+        CompleteInit();
     }
 
     public void JavaMessage(string message)
@@ -21,15 +21,17 @@ public class MessageReceiver : BaseManager<MessageReceiver> {
             DelayManager.LocalCallTo(delegate ()
             {
                 Scenes.UnloadAsync(SCENE_NAME);
-            }, 1, this);
+            }, 5, this);
         });
     }
 
-    public static string GetAndroidMessage()
+    public string GetAndroidMessage()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
-        AndroidJavaClass myClass = new AndroidJavaClass("com.UQAC.OceanEmpire.ActivityDetection");
-        return myClass.Call<string>("GetCurrentState", new object[] { });
+        var ajc = new AndroidJavaClass("com.oceanempire.uqac.testmodule.Communication"); //(1)
+        ajc.CallStatic<string>("DoSthInAndroid");                                                //(2)
+
+        return "WORK";
 #else
         return "";
 #endif

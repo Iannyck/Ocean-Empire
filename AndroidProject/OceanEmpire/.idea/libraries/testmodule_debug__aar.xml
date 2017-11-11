@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="testmodule-debug:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/testmodule-debug.aar/6d5297cad86cc34c2585c2845d1f1b7f/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/testmodule-debug.aar/6d5297cad86cc34c2585c2845d1f1b7f/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/testmodule-debug.aar/6d5297cad86cc34c2585c2845d1f1b7f/jars/libs/unity-classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/testmodule-debug.aar/6d5297cad86cc34c2585c2845d1f1b7f/jars/libs/classes-2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

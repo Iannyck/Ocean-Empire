@@ -4,41 +4,24 @@
             "outputFile": "C:\\Users\\etudiant\\Documents\\Ocean-Empire\\AndroidProject\\OceanEmpire\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ml-rIN\\values-ml-rIN.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\3f351644a33a430a6a5410c215793697\\res\\values-ml-rIN\\values-ml-rIN.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.4.0.aar\\9e03bad3e4b47c314896e715ffcde60d\\res\\values-ml-rIN\\common_strings.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "280,399,507,630,748,864,957,1062,1194,1276,1387,1493,1591,1705,1806,1917,2045,2146",
-                        "endColumns": "118,107,122,117,115,92,104,131,81,110,105,97,113,100,110,127,100,100",
-                        "endOffsets": "394,502,625,743,859,952,1057,1189,1271,1382,1488,1586,1700,1801,1912,2040,2141,2242"
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "170",
+                        "endColumns": "273",
+                        "endOffsets": "439"
                     },
                     "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,61",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,224,332,455,573,689,782,887,1019,1101,1212,1318,1416,1530,1631,1742,1870,8230",
-                        "endColumns": "118,107,122,117,115,92,104,131,81,110,105,97,113,100,110,127,100,100",
-                        "endOffsets": "219,327,450,568,684,777,882,1014,1096,1207,1313,1411,1525,1626,1737,1865,1966,8326"
+                        "startLines": "36",
+                        "startColumns": "4",
+                        "startOffsets": "4834",
+                        "endColumns": "269",
+                        "endOffsets": "5099"
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-23.0.0.aar\\f61abd5f1fa5267e50a7b8e91649573f\\res\\values-ml-rIN\\values-ml-rIN.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "282,399,517,636,744,870,984,1086,1207,1320,1408",
-                        "endColumns": "116,117,118,107,125,113,101,120,112,87,95",
-                        "endOffsets": "394,512,631,739,865,979,1081,1202,1315,1403,1499"
-                    },
-                    "to": {
-                        "startLines": "48,49,50,51,52,53,54,55,56,57,58",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "6800,6917,7035,7154,7262,7388,7502,7604,7725,7838,7926",
-                        "endColumns": "116,117,118,107,125,113,101,120,112,87,95",
-                        "endOffsets": "6912,7030,7149,7257,7383,7497,7599,7720,7833,7921,8017"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-location-8.4.0.aar\\f72851e35a5c58ccebfbfe1edc37dda5\\res\\values-ml-rIN\\location_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-location-8.4.0.aar\\2f02b2c24a6d726cee528aade82d2408\\res\\values-ml-rIN\\location_strings.xml",
                     "from": {
                         "startLines": "6,5",
                         "startColumns": "4,4",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.4.0.aar\\030d20eb16480a7b3918f5b94246eb41\\res\\values-ml-rIN\\base_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.4.0.aar\\9110ff8008b51c53ae06d8d5b41e012e\\res\\values-ml-rIN\\base_strings.xml",
                     "from": {
                         "startLines": "24,10,9,8,7,5,6,4,19,18,17,16,3,28,27,26,25,21,20,22,12,11,15,14,13,23,29,30",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -72,20 +55,37 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.4.0.aar\\1587be376b7146703f5a9b8cf7fd2de7\\res\\values-ml-rIN\\common_strings.xml",
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-23.0.0.aar\\61ec4c6e1965f9e2529c860a06278f4a\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "170",
-                        "endColumns": "273",
-                        "endOffsets": "439"
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "282,399,517,636,744,870,984,1086,1207,1320,1408",
+                        "endColumns": "116,117,118,107,125,113,101,120,112,87,95",
+                        "endOffsets": "394,512,631,739,865,979,1081,1202,1315,1403,1499"
                     },
                     "to": {
-                        "startLines": "36",
-                        "startColumns": "4",
-                        "startOffsets": "4834",
-                        "endColumns": "269",
-                        "endOffsets": "5099"
+                        "startLines": "48,49,50,51,52,53,54,55,56,57,58",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "6800,6917,7035,7154,7262,7388,7502,7604,7725,7838,7926",
+                        "endColumns": "116,117,118,107,125,113,101,120,112,87,95",
+                        "endOffsets": "6912,7030,7149,7257,7383,7497,7599,7720,7833,7921,8017"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\etudiant\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\dd997b68448ec12efb851cd2b67bc940\\res\\values-ml-rIN\\values-ml-rIN.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "280,399,507,630,748,864,957,1062,1194,1276,1387,1493,1591,1705,1806,1917,2045,2146",
+                        "endColumns": "118,107,122,117,115,92,104,131,81,110,105,97,113,100,110,127,100,100",
+                        "endOffsets": "394,502,625,743,859,952,1057,1189,1271,1382,1488,1586,1700,1801,1912,2040,2141,2242"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,61",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,224,332,455,573,689,782,887,1019,1101,1212,1318,1416,1530,1631,1742,1870,8230",
+                        "endColumns": "118,107,122,117,115,92,104,131,81,110,105,97,113,100,110,127,100,100",
+                        "endOffsets": "219,327,450,568,684,777,882,1014,1096,1207,1313,1411,1525,1626,1737,1865,1966,8326"
                     }
                 }
             ]

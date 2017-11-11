@@ -2532,60 +2532,61 @@ public final class R {
     public static final int abc_shareactionprovider_share_with_application=0x7f0b000f;
     public static final int abc_toolbar_collapse_description=0x7f0b0010;
     public static final int accept=0x7f0b0011;
-    public static final int auth_google_play_services_client_facebook_display_name=0x7f0b0012;
-    public static final int auth_google_play_services_client_google_display_name=0x7f0b0013;
-    public static final int cast_notification_connected_message=0x7f0b0014;
-    public static final int cast_notification_connecting_message=0x7f0b0015;
-    public static final int cast_notification_disconnect=0x7f0b0016;
-    public static final int common_google_play_services_api_unavailable_text=0x7f0b0017;
-    public static final int common_google_play_services_enable_button=0x7f0b0018;
-    public static final int common_google_play_services_enable_text=0x7f0b0019;
-    public static final int common_google_play_services_enable_title=0x7f0b001a;
-    public static final int common_google_play_services_install_button=0x7f0b001b;
-    public static final int common_google_play_services_install_text_phone=0x7f0b001c;
-    public static final int common_google_play_services_install_text_tablet=0x7f0b001d;
-    public static final int common_google_play_services_install_title=0x7f0b001e;
-    public static final int common_google_play_services_invalid_account_text=0x7f0b001f;
-    public static final int common_google_play_services_invalid_account_title=0x7f0b0020;
-    public static final int common_google_play_services_network_error_text=0x7f0b0021;
-    public static final int common_google_play_services_network_error_title=0x7f0b0022;
-    public static final int common_google_play_services_notification_ticker=0x7f0b0023;
-    public static final int common_google_play_services_restricted_profile_text=0x7f0b0024;
-    public static final int common_google_play_services_restricted_profile_title=0x7f0b0025;
-    public static final int common_google_play_services_sign_in_failed_text=0x7f0b0026;
-    public static final int common_google_play_services_sign_in_failed_title=0x7f0b0027;
-    public static final int common_google_play_services_unknown_issue=0x7f0b0028;
-    public static final int common_google_play_services_unsupported_text=0x7f0b0029;
-    public static final int common_google_play_services_unsupported_title=0x7f0b002a;
-    public static final int common_google_play_services_update_button=0x7f0b002b;
-    public static final int common_google_play_services_update_text=0x7f0b002c;
-    public static final int common_google_play_services_update_title=0x7f0b002d;
-    public static final int common_google_play_services_updating_text=0x7f0b002e;
-    public static final int common_google_play_services_updating_title=0x7f0b002f;
-    public static final int common_google_play_services_wear_update_text=0x7f0b0030;
-    public static final int common_open_on_phone=0x7f0b0031;
-    public static final int common_signin_button_text=0x7f0b0032;
-    public static final int common_signin_button_text_long=0x7f0b0033;
-    public static final int create_calendar_message=0x7f0b0034;
-    public static final int create_calendar_title=0x7f0b0035;
-    public static final int decline=0x7f0b0036;
-    public static final int mr_media_route_button_content_description=0x7f0b0037;
-    public static final int mr_media_route_chooser_searching=0x7f0b0038;
-    public static final int mr_media_route_chooser_title=0x7f0b0039;
-    public static final int mr_media_route_controller_disconnect=0x7f0b003a;
-    public static final int mr_media_route_controller_no_info_available=0x7f0b003b;
-    public static final int mr_media_route_controller_pause=0x7f0b003c;
-    public static final int mr_media_route_controller_play=0x7f0b003d;
-    public static final int mr_media_route_controller_settings_description=0x7f0b003e;
-    public static final int mr_media_route_controller_stop=0x7f0b003f;
-    public static final int mr_system_route_name=0x7f0b0040;
-    public static final int mr_user_route_category_name=0x7f0b0041;
-    public static final int place_autocomplete_clear_button=0x7f0b0042;
-    public static final int place_autocomplete_search_hint=0x7f0b0043;
-    public static final int status_bar_notification_info_overflow=0x7f0b0044;
-    public static final int store_picture_message=0x7f0b0045;
-    public static final int store_picture_title=0x7f0b0046;
-    public static final int wallet_buy_button_place_holder=0x7f0b0047;
+    public static final int app_name=0x7f0b0012;
+    public static final int auth_google_play_services_client_facebook_display_name=0x7f0b0013;
+    public static final int auth_google_play_services_client_google_display_name=0x7f0b0014;
+    public static final int cast_notification_connected_message=0x7f0b0015;
+    public static final int cast_notification_connecting_message=0x7f0b0016;
+    public static final int cast_notification_disconnect=0x7f0b0017;
+    public static final int common_google_play_services_api_unavailable_text=0x7f0b0018;
+    public static final int common_google_play_services_enable_button=0x7f0b0019;
+    public static final int common_google_play_services_enable_text=0x7f0b001a;
+    public static final int common_google_play_services_enable_title=0x7f0b001b;
+    public static final int common_google_play_services_install_button=0x7f0b001c;
+    public static final int common_google_play_services_install_text_phone=0x7f0b001d;
+    public static final int common_google_play_services_install_text_tablet=0x7f0b001e;
+    public static final int common_google_play_services_install_title=0x7f0b001f;
+    public static final int common_google_play_services_invalid_account_text=0x7f0b0020;
+    public static final int common_google_play_services_invalid_account_title=0x7f0b0021;
+    public static final int common_google_play_services_network_error_text=0x7f0b0022;
+    public static final int common_google_play_services_network_error_title=0x7f0b0023;
+    public static final int common_google_play_services_notification_ticker=0x7f0b0024;
+    public static final int common_google_play_services_restricted_profile_text=0x7f0b0025;
+    public static final int common_google_play_services_restricted_profile_title=0x7f0b0026;
+    public static final int common_google_play_services_sign_in_failed_text=0x7f0b0027;
+    public static final int common_google_play_services_sign_in_failed_title=0x7f0b0028;
+    public static final int common_google_play_services_unknown_issue=0x7f0b0029;
+    public static final int common_google_play_services_unsupported_text=0x7f0b002a;
+    public static final int common_google_play_services_unsupported_title=0x7f0b002b;
+    public static final int common_google_play_services_update_button=0x7f0b002c;
+    public static final int common_google_play_services_update_text=0x7f0b002d;
+    public static final int common_google_play_services_update_title=0x7f0b002e;
+    public static final int common_google_play_services_updating_text=0x7f0b002f;
+    public static final int common_google_play_services_updating_title=0x7f0b0030;
+    public static final int common_google_play_services_wear_update_text=0x7f0b0031;
+    public static final int common_open_on_phone=0x7f0b0032;
+    public static final int common_signin_button_text=0x7f0b0033;
+    public static final int common_signin_button_text_long=0x7f0b0034;
+    public static final int create_calendar_message=0x7f0b0035;
+    public static final int create_calendar_title=0x7f0b0036;
+    public static final int decline=0x7f0b0037;
+    public static final int mr_media_route_button_content_description=0x7f0b0038;
+    public static final int mr_media_route_chooser_searching=0x7f0b0039;
+    public static final int mr_media_route_chooser_title=0x7f0b003a;
+    public static final int mr_media_route_controller_disconnect=0x7f0b003b;
+    public static final int mr_media_route_controller_no_info_available=0x7f0b003c;
+    public static final int mr_media_route_controller_pause=0x7f0b003d;
+    public static final int mr_media_route_controller_play=0x7f0b003e;
+    public static final int mr_media_route_controller_settings_description=0x7f0b003f;
+    public static final int mr_media_route_controller_stop=0x7f0b0040;
+    public static final int mr_system_route_name=0x7f0b0041;
+    public static final int mr_user_route_category_name=0x7f0b0042;
+    public static final int place_autocomplete_clear_button=0x7f0b0043;
+    public static final int place_autocomplete_search_hint=0x7f0b0044;
+    public static final int status_bar_notification_info_overflow=0x7f0b0045;
+    public static final int store_picture_message=0x7f0b0046;
+    public static final int store_picture_title=0x7f0b0047;
+    public static final int wallet_buy_button_place_holder=0x7f0b0048;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0c0000;
@@ -2999,19 +3000,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -4003,19 +4004,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -4037,9 +4038,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:layout_height
@@ -4069,9 +4070,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:layout_width
@@ -4106,19 +4107,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -4618,8 +4619,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>all</td><td>1</td><td></td></tr>
+     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>single</td><td>2</td><td></td></tr>
      * </table>
      *
@@ -5177,6 +5178,14 @@ public final class R {
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>auto</td><td>10</td><td></td></tr>
+     * </table>
      *
      * @attr name android:focusable
      */
@@ -5191,7 +5200,6 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>normal</td><td>0</td><td></td></tr>
      * <tr><td>actionDone</td><td>6</td><td></td></tr>
      * <tr><td>actionGo</td><td>2</td><td></td></tr>
      * <tr><td>actionNext</td><td>5</td><td></td></tr>
@@ -5207,6 +5215,8 @@ public final class R {
      * <tr><td>flagNoEnterAction</td><td>40000000</td><td></td></tr>
      * <tr><td>flagNoExtractUi</td><td>10000000</td><td></td></tr>
      * <tr><td>flagNoFullscreen</td><td>2000000</td><td></td></tr>
+     * <tr><td>flagNoPersonalizedLearning</td><td>1000000</td><td></td></tr>
+     * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
      * @attr name android:imeOptions
@@ -5222,9 +5232,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>date</td><td>14</td><td></td></tr>
      * <tr><td>datetime</td><td>4</td><td></td></tr>
+     * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>number</td><td>2</td><td></td></tr>
      * <tr><td>numberDecimal</td><td>2002</td><td></td></tr>
      * <tr><td>numberPassword</td><td>12</td><td></td></tr>
@@ -5533,9 +5543,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * <tr><td>fill_parent</td><td>ffffffff</td><td></td></tr>
      * <tr><td>match_parent</td><td>ffffffff</td><td></td></tr>
+     * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
      * @attr name android:dropDownWidth
@@ -5790,9 +5800,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>normal</td><td>0</td><td></td></tr>
      * <tr><td>bold</td><td>1</td><td></td></tr>
      * <tr><td>italic</td><td>2</td><td></td></tr>
+     * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
      * @attr name android:textStyle
@@ -7498,19 +7508,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-     * <tr><td>end</td><td>800005</td><td></td></tr>
-     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>bottom</td><td>50</td><td></td></tr>
      * <tr><td>center</td><td>11</td><td></td></tr>
      * <tr><td>center_horizontal</td><td>1</td><td></td></tr>
      * <tr><td>center_vertical</td><td>10</td><td></td></tr>
      * <tr><td>clip_horizontal</td><td>8</td><td></td></tr>
      * <tr><td>clip_vertical</td><td>80</td><td></td></tr>
+     * <tr><td>end</td><td>800005</td><td></td></tr>
      * <tr><td>fill</td><td>77</td><td></td></tr>
      * <tr><td>fill_horizontal</td><td>7</td><td></td></tr>
      * <tr><td>fill_vertical</td><td>70</td><td></td></tr>
      * <tr><td>left</td><td>3</td><td></td></tr>
      * <tr><td>right</td><td>5</td><td></td></tr>
+     * <tr><td>start</td><td>800003</td><td></td></tr>
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
@@ -7951,6 +7961,14 @@ public final class R {
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
+     * <p>Must be one of the following constant values.</p>
+     * <table>
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <colgroup align="left" />
+     * <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+     * <tr><td>auto</td><td>10</td><td></td></tr>
+     * </table>
      *
      * @attr name android:focusable
      */

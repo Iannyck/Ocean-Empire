@@ -1,28 +1,21 @@
 package com.UQAC.OceanEmpire;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.ActivityRecognition;
+import com.oceanempire.uqac.testmodule.Communication;
 import com.unity3d.player.*;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class UnityPlayerActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
+public class UnityPlayerActivity extends Activity
 {
     protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
-
-    public GoogleApiClient mApiClient;
 
     // Setup activity layout
     @Override protected void onCreate (Bundle savedInstanceState)
@@ -36,13 +29,7 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
         setContentView(mUnityPlayer);
         mUnityPlayer.requestFocus();
 
-        mApiClient = new GoogleApiClient.Builder(this)
-                .addApi(ActivityRecognition.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-
-        mApiClient.connect();
+        Communication.SendUnityMessage();
     }
 
     @Override protected void onNewIntent(Intent intent)
@@ -120,22 +107,4 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
     @Override public boolean onKeyDown(int keyCode, KeyEvent event)   { return mUnityPlayer.injectEvent(event); }
     @Override public boolean onTouchEvent(MotionEvent event)          { return mUnityPlayer.injectEvent(event); }
     /*API12*/ public boolean onGenericMotionEvent(MotionEvent event)  { return mUnityPlayer.injectEvent(event); }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        Intent intent = new Intent( this, ActivityDetection.class );
-        PendingIntent pendingIntent = PendingIntent.getService( this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
-        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates( mApiClient, 3000, pendingIntent );
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 }
