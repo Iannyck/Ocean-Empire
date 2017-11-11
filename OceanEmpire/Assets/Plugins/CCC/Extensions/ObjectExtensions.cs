@@ -11,6 +11,34 @@ public static class ObjectExtensions
     {
         return GameObject.Instantiate(original.gameObject).GetComponent<T>();
     }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static T DuplicateGO<T>(this T original, Transform parent) where T : Component
+    {
+        return GameObject.Instantiate(original.gameObject, parent).GetComponent<T>();
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static T DuplicateGO<T>(this T original, Transform parent, bool instantiateInWorldSpace) where T : Component
+    {
+        return GameObject.Instantiate(original.gameObject, parent, instantiateInWorldSpace).GetComponent<T>();
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static T DuplicateGO<T>(this T original, Vector3 position, Quaternion rotation) where T : Component
+    {
+        return GameObject.Instantiate(original.gameObject, position, rotation).GetComponent<T>();
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static T DuplicateGO<T>(this T original, Vector3 position, Quaternion rotation, Transform parent) where T : Component
+    {
+        return GameObject.Instantiate(original.gameObject, position, rotation, parent).GetComponent<T>();
+    }
 
     /// <summary>
     ///Instantiate une copie du gameobject
@@ -18,6 +46,34 @@ public static class ObjectExtensions
     public static GameObject Duplicate(this GameObject original)
     {
         return GameObject.Instantiate(original.gameObject);
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static GameObject Duplicate(this GameObject original, Transform parent)
+    {
+        return GameObject.Instantiate(original.gameObject, parent);
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static GameObject Duplicate(this GameObject original, Transform parent, bool instantiateInWorldSpace)
+    {
+        return GameObject.Instantiate(original.gameObject, parent, instantiateInWorldSpace);
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static GameObject Duplicate(this GameObject original, Vector3 position, Quaternion rotation)
+    {
+        return GameObject.Instantiate(original.gameObject, position, rotation);
+    }
+    /// <summary>
+    ///Instantiate une copie du gameobject
+    /// </summary>
+    public static GameObject Duplicate(this GameObject original, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        return GameObject.Instantiate(original.gameObject, position, rotation, parent);
     }
 
     #region Destroy gameobject

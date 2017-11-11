@@ -15,16 +15,26 @@ public class ItemsList : BaseManager<ItemsList>
     }
 
 
-    public Dictionary<string, Item> upgradeList;
+    public Dictionary<string, string> upgradePaths;
+
     [HideInInspector]
     public Dictionary<string, bool> ownedUpgrades;
 
     [SerializeField, ReadOnly]
-    private Thruster equipedThruster;
-    public Thruster defaultThruster;
-
+    private string equipedThruster;
+    public string defaultThruster;
 
     private const string SAVE_KEY_THRUSTER = "equipedthruster";
+
+
+    virtual public T GetItem<T>(string itemID) where T : UnityEngine.Object
+    {
+        if (upgradePaths.ContainsKey(itemID))
+            return Instantiate(Resources.Load(upgradePaths[itemID])) as T;
+        else
+            return null;
+    }
+
 
     public static bool ItemOwned(string itemID)
     {
@@ -33,17 +43,20 @@ public class ItemsList : BaseManager<ItemsList>
         else
             return false;
     }
+
+
     public bool IsEquiped(string itemID)
     {
-        if (equipedThruster.GetItemID() == itemID)
+        if (equipedThruster == itemID)
             return true;
         else
             return false;
     }
 
 
-    public static Thruster GetEquipThruster()   {
-        return instance.equipedThruster;
+    public static ThrusterDescription GetEquipThruster()
+    {
+        return instance.GetItem<ThrusterDescription>(instance.equipedThruster);
     }
 
     public static void BuyUpgrade(string itemID)
@@ -53,16 +66,15 @@ public class ItemsList : BaseManager<ItemsList>
     }
 
 
-    public static void EquipUpgrade(string itemID)
+
+    public static void EquipUpgrade( UpgradeDescription upgrade)
     {
+        string id = upgrade.GetItemID();
 
-        if (instance.ownedUpgrades.ContainsKey(itemID) && instance.ownedUpgrades[itemID] == true)
+        if (instance.ownedUpgrades.ContainsKey(id) && instance.ownedUpgrades[id] == true)
         {
-            if (instance.upgradeList[itemID] is Thruster)
-            {
-                instance.equipedThruster = (Thruster)instance.upgradeList[itemID];
-            }
-
+            if (upgrade is ThrusterDescription)
+                instance.equipedThruster = upgrade.GetItemID();
         }
         Save();
     }
@@ -96,10 +108,10 @@ public class ItemsList : BaseManager<ItemsList>
     {
         if (instance.ownedUpgrades == null)
             instance.ownedUpgrades = new Dictionary<string, bool>();
-
-        foreach (KeyValuePair<string, Item> containedIem in instance.upgradeList)
+        
+        foreach (KeyValuePair<string, string> containedIem in instance.upgradePaths)
         {
-            string itemID = containedIem.Value.GetItemID();
+            string itemID = containedIem.Key;
             if (instance.ownedUpgrades.ContainsKey(itemID) == false)
             {
                 bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID);
@@ -108,6 +120,7 @@ public class ItemsList : BaseManager<ItemsList>
         }
 
         LoadThruster();
+        
     }       
 
 
@@ -115,19 +128,16 @@ public class ItemsList : BaseManager<ItemsList>
     {
         string thrusterID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER);
 
-        if (instance.upgradeList.ContainsKey(thrusterID) == true && instance.upgradeList[thrusterID] is Thruster)
+        if (instance.upgradePaths.ContainsKey(thrusterID) == true)
         {
-            instance.equipedThruster = (Thruster)instance.upgradeList[thrusterID];
-            if (instance.ownedUpgrades.ContainsKey(thrusterID))
-                instance.ownedUpgrades[thrusterID] = true;
+            instance.equipedThruster = thrusterID;
         }
         else
         {
             instance.equipedThruster = instance.defaultThruster;
-
-            string defaultID = instance.defaultThruster.GetItemID();
-            if (instance.ownedUpgrades.ContainsKey(defaultID))
-                instance.ownedUpgrades[defaultID] = true;
+            thrusterID = instance.defaultThruster;
         }
+        if (instance.ownedUpgrades.ContainsKey(thrusterID))
+            instance.ownedUpgrades[thrusterID] = true;
     }
 }

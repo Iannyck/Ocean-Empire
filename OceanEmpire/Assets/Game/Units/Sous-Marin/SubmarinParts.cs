@@ -10,7 +10,7 @@ public class SubmarinParts : MonoBehaviour
     public Thruster GetThruster() { return thruster; }
     void Start()
     {
-        thruster = ItemsList.GetEquipThruster();
+        thruster = ItemsList.GetEquipThruster().GetItem<Thruster>();
     }
 
 }

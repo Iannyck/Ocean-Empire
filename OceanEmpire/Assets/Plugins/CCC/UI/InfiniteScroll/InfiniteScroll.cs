@@ -9,6 +9,7 @@ using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 #endif
 
 public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
@@ -60,7 +61,7 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
             Vector2 velocity = scrollRect.velocity;
 
             //On kill le drag s'il y a lieu
-            if (lastDragEvent.dragging)
+            if (lastDragEvent != null && lastDragEvent.dragging)
             {
                 scrollRect.OnEndDrag(lastDragEvent);
             }
@@ -72,7 +73,7 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
                 RewindHorizontal(normalizedPosition.x);
 
             //On reanime le drag d'entre les morts s'il y a lieu
-            if (lastDragEvent.dragging)
+            if (lastDragEvent != null && lastDragEvent.dragging)
             {
                 scrollRect.OnBeginDrag(lastDragEvent);
             }

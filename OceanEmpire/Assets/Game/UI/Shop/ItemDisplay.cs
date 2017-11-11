@@ -15,7 +15,7 @@ public class ItemDisplay : MonoBehaviour {
     public ShopButton ticketCostButton;
 
 
-    public Item item;
+    public ItemDescription item;
 
     public Text itemName;
     public Text itemDescription;
@@ -29,10 +29,10 @@ public class ItemDisplay : MonoBehaviour {
     void Start()
     {
 
-        itemName.text = item.description.GetName();
-        itemDescription.text = item.description.GetDescription();
+        itemName.text = item.GetName();
+        itemDescription.text = item.GetDescription();
 
-        itemImage.sprite = item.description.GetImage();
+        itemImage.sprite = item.GetImage();
 
         OnEquip += Equip;
         OnBuyWithMoney += BuyWithMoney;
@@ -53,8 +53,8 @@ public class ItemDisplay : MonoBehaviour {
                 ButtonOwned();
         }
         else {
-            int moneyCost = item.description.GetMoneyCost();
-            int ticketCost = item.description.GetTicketCost();
+            int moneyCost = item.GetMoneyCost();
+            int ticketCost = item.GetTicketCost();
 
             if (moneyCost >= 0 && ticketCost >= 0)
                 ButtonTicketAndMoneyCost();
@@ -86,8 +86,8 @@ public class ItemDisplay : MonoBehaviour {
 
     public void ButtonTicketAndMoneyCost()
     {
-        moneyCostButton.MoneyButton(OnBuyWithMoney, item.description.GetMoneyCost());
-        ticketCostButton.TicketButton(OnBuyWithTicket, item.description.GetTicketCost());
+        moneyCostButton.MoneyButton(OnBuyWithMoney, item.GetMoneyCost());
+        ticketCostButton.TicketButton(OnBuyWithTicket, item.GetTicketCost());
         fullButton.DisableButton();
     }
 
@@ -95,21 +95,19 @@ public class ItemDisplay : MonoBehaviour {
     {
         moneyCostButton.DisableButton();
         ticketCostButton.DisableButton();
-        fullButton.MoneyButton(OnBuyWithMoney, item.description.GetMoneyCost());
-
+        fullButton.MoneyButton(OnBuyWithMoney, item.GetMoneyCost());
     }
 
     public void ButtonTickeyCostOnly()
     {
         moneyCostButton.DisableButton();
         ticketCostButton.DisableButton();
-        fullButton.TicketButton(OnBuyWithTicket, item.description.GetTicketCost());
+        fullButton.TicketButton(OnBuyWithTicket, item.GetTicketCost());
     }
 
     public void Equip()
     {
-        ItemsList.EquipUpgrade(item.GetItemID());
-
+        ItemsList.EquipUpgrade(item as UpgradeDescription);
         GetComponentInParent<ShopUI>().UpdateDisplay();
     }
 

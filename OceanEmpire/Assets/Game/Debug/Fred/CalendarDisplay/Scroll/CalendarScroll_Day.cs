@@ -9,9 +9,13 @@ public class CalendarScroll_Day : MonoBehaviour
     public Text monthText;
     public Image bg;
     public Text dayText;
+    public Button button;
 
     [Header("Settings")]
     public Color todayColor = Color.white;
+
+    public delegate void ElementEvent(CalendarScroll_Day day);
+    public ElementEvent onClick;
 
     private Color notTodayColor;
     private Calendar.Day day;
@@ -19,6 +23,13 @@ public class CalendarScroll_Day : MonoBehaviour
     void Awake()
     {
         notTodayColor = bg.color;
+        button.onClick.AddListener(OnClick);
+    }
+
+    private void OnClick()
+    {
+        if (onClick != null)
+            onClick(this);
     }
     
     public void Fill(Calendar.Day day, bool isToday)
