@@ -11,7 +11,7 @@ public class ShopUI : BaseBehavior {
     public  struct shopTab
     {
         public string tabName;
-        public List<Item> coutainedItems;
+        public List<ItemDescription> coutainedItems;
     }
     public Button tabButton;
     public ItemDisplay shopItem;

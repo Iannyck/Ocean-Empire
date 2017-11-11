@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4105012494731838}
-  - component: {fileID: 114205220668525348}
+  - component: {fileID: 114183395054711540}
   m_Layer: 0
-  m_Name: item_Thrusters3
+  m_Name: item_test2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114205220668525348
+--- !u!114 &114183395054711540
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,13 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1462112714181568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73dba37df5d1f4448f4ed90d340601c, type: 3}
+  m_Script: {fileID: 11500000, guid: 95acd1dfe9b2f764caa8a1663604f3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys: []
   _serializedStateValues: []
-  description: {fileID: 11400000, guid: 5eee670a6c2ef0740af9b684714006c2, type: 2}
-  itemID: thruster3
-  subMarineSpeed: 3.5
-  subMarineAcceleration: 1
+  description: {fileID: 11400000, guid: c194793b244445c4390a985095a34a5d, type: 2}
+  itemID: 746573746974656d
