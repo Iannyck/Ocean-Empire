@@ -544,10 +544,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 67c118589f74ec74eb62eb5d0354cd40, type: 2}
   - {fileID: 11400000, guid: 272302c59e8566b478f00c74795b1281, type: 2}
   - {fileID: 11400000, guid: 2ca130654ca082d41bb9dc562eb066bd, type: 2}
+  - {fileID: 11400000, guid: f88bd620dc332584c93607edf3e5b58a, type: 2}
+  - {fileID: 11400000, guid: 4d019a29d3b2b564eb812cf42b3a9758, type: 2}
   _serializedStateKeys:
   - tabsList
   _serializedStateValues:
-  - '[{"tabName":"Moteurs","coutainedItems":[0,1,2]},{"tabName":"LL","coutainedItems":[]}]'
+  - '[{"tabName":"Moteurs","coutainedItems":[0,1,2]},{"tabName":"Harpons","coutainedItems":[3,4]}]'
   tabButton: {fileID: 114190889422522664, guid: 8cdd4e2f4f26a7b4fb467ce3278a4f96,
     type: 2}
   shopItem: {fileID: 114133397074277352, guid: 7bb2f5139c83df946a4f290ea7586301, type: 2}
@@ -559,8 +561,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 67c118589f74ec74eb62eb5d0354cd40, type: 2}
     - {fileID: 11400000, guid: 272302c59e8566b478f00c74795b1281, type: 2}
     - {fileID: 11400000, guid: 2ca130654ca082d41bb9dc562eb066bd, type: 2}
-  - tabName: LL
-    coutainedItems: []
+  - tabName: Harpons
+    coutainedItems:
+    - {fileID: 11400000, guid: f88bd620dc332584c93607edf3e5b58a, type: 2}
+    - {fileID: 11400000, guid: 4d019a29d3b2b564eb812cf42b3a9758, type: 2}
 --- !u!114 &381292075
 MonoBehaviour:
   m_ObjectHideFlags: 0

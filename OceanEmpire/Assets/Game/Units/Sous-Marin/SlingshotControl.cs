@@ -27,6 +27,16 @@ public class SlingshotControl : MonoBehaviour
 
     public void StartDrag(Vector2 screenPosition)
     {
+        if (harpoonPrefab == null)
+        {
+            HarpoonThrower ht = GetComponent<SubmarinParts>().GetHarpoonThrower();
+
+            if (ht != null)
+                harpoonPrefab = ht.harpoonPrefab;
+            else
+                return;
+        };
+
         ConvertToWorldPos(screenPosition);
         if ((worldPosition - (Vector2)transform.position).sqrMagnitude <= toucheRadiusSQR)
         {

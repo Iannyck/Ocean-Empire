@@ -308,6 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thruster: {fileID: 0}
+  harpoonThrower: {fileID: 0}
 --- !u!114 &114379696085279956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,8 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTouchRadius: 0.75
   slingshotInstance: {fileID: 114379696085279956}
-  harpoonPrefab: {fileID: 114421981925445368, guid: afeb9d6af433f4c42ab677c5566152fa,
-    type: 2}
+  harpoonPrefab: {fileID: 0}
   isDragging: 0
   worldPosition: {x: 0, y: 0}
 --- !u!114 &114922179210201468

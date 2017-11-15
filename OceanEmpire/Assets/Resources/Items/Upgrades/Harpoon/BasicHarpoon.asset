@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e9bc0f376472d4cba8ac1f86c2d0c2, type: 3}
+  m_Name: BasicHarpoon
+  m_EditorClassIdentifier: 
+  description: {fileID: 11400000, guid: f88bd620dc332584c93607edf3e5b58a, type: 2}
+  harpoonPrefab: {fileID: 114421981925445368, guid: afeb9d6af433f4c42ab677c5566152fa,
+    type: 2}

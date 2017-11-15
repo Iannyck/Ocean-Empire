@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 
-[CreateAssetMenu(menuName = "Ocean Empire/Item Description")]
+[CreateAssetMenu(menuName = "Ocean Empire/Item/Item Description")]
 public class ItemDescription : ScriptableObject
 {
     [SerializeField]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FullInspector;
 
-[CreateAssetMenu(menuName = "Ocean Empire/Item")]
+[CreateAssetMenu(menuName = "Ocean Empire/Item/Item")]
 public class Item : ScriptableObject
 {
     public ItemDescription description;

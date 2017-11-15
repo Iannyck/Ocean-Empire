@@ -22,10 +22,14 @@ public class ItemsList : BaseManager<ItemsList>
 
     [SerializeField, ReadOnly]
     private string equipedThruster;
+
+    [SerializeField, ReadOnly]
+    private string equipedHarpoon;
+
     public string defaultThruster;
 
     private const string SAVE_KEY_THRUSTER = "equipedthruster";
-
+    private const string SAVE_KEY_HARPOON = "equipedharpoon";
 
     virtual public T GetItem<T>(string itemID) where T : UnityEngine.Object
     {
@@ -47,16 +51,21 @@ public class ItemsList : BaseManager<ItemsList>
 
     public bool IsEquiped(string itemID)
     {
-        if (equipedThruster == itemID)
+        if (equipedThruster == itemID || equipedHarpoon == itemID)
             return true;
         else
-            return false;
+        return false;
     }
 
 
     public static ThrusterDescription GetEquipThruster()
     {
         return instance.GetItem<ThrusterDescription>(instance.equipedThruster);
+    }
+
+    public static HarpoonThrowerDescription GetEquipHarpoonThrower()
+    {
+        return instance.GetItem<HarpoonThrowerDescription>(instance.equipedHarpoon);
     }
 
     public static void BuyUpgrade(string itemID)
@@ -75,6 +84,10 @@ public class ItemsList : BaseManager<ItemsList>
         {
             if (upgrade is ThrusterDescription)
                 instance.equipedThruster = upgrade.GetItemID();
+
+            if (upgrade is HarpoonThrowerDescription)
+                instance.equipedHarpoon = upgrade.GetItemID();
+
         }
         Save();
     }
@@ -85,20 +98,20 @@ public class ItemsList : BaseManager<ItemsList>
 
 
         /*
-         * 
-         * Override pour pouvoir plus facilement tester
-         * 
-         * 
-         * 
-         * 
-         * 
+         
+
+        Override pour pouvoir plus facilement tester
+        
+        
+
+
         foreach (KeyValuePair<string, bool> containedIem in instance.ownedUpgrades)
         {
             GameSaves.instance.SetBool(GameSaves.Type.Items, containedIem.Key, containedIem.Value);
         }
 
         GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER, instance.equipedThruster.GetItemID());
-
+        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_HARPOON, instance.equipedHarpoon.GetItemID());
         GameSaves.instance.SaveData(GameSaves.Type.Items);
         */
     }
@@ -120,7 +133,7 @@ public class ItemsList : BaseManager<ItemsList>
         }
 
         LoadThruster();
-        
+        LoadHarpoon();
     }       
 
 
@@ -140,4 +153,21 @@ public class ItemsList : BaseManager<ItemsList>
         if (instance.ownedUpgrades.ContainsKey(thrusterID))
             instance.ownedUpgrades[thrusterID] = true;
     }
+
+    private static void LoadHarpoon()
+    {
+        string harpoonID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_HARPOON);
+
+        if (instance.upgradePaths.ContainsKey(harpoonID) == true)
+        {
+            instance.equipedHarpoon = harpoonID;
+        }
+        else
+        {
+            instance.equipedHarpoon = null;
+            harpoonID = "";
+        }
+    }
 }
+
+
