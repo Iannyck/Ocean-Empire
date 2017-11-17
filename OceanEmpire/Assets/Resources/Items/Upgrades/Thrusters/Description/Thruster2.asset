@@ -18,3 +18,4 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
   itemFileName: item_Thrusters2
   itemID: thruster2
+  upgradeLevel: 2

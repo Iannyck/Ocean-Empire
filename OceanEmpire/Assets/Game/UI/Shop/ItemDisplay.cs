@@ -105,22 +105,43 @@ public class ItemDisplay : MonoBehaviour {
         fullButton.TicketButton(OnBuyWithTicket, item.GetTicketCost());
     }
 
+    public void BuyWithMoney()
+    {
+        Buy();
+    }
+
+    public void BuyWithTicket()
+    {
+
+        Buy();
+    }
+
+    public void Buy()
+    {
+        if (item is UpgradeDescription)
+        {
+            ItemsList.BuyUpgrade(item.GetItemID());
+            Equip();
+        }
+        if (item is ShopMapDescription)
+        {
+            ItemsList.BuyMap(item.GetItemID());
+        }
+        UpdateShop();
+    }
+
+
     public void Equip()
     {
         ItemsList.EquipUpgrade(item as UpgradeDescription);
+        UpdateShop();
+    }
+
+
+
+    public void UpdateShop()
+    {
         GetComponentInParent<ShopUI>().UpdateDisplay();
     }
 
-    public void BuyWithMoney()
-    {
-        ItemsList.BuyUpgrade(item.GetItemID());
-
-        Equip();
-    }
-    public void BuyWithTicket()
-    {
-        ItemsList.BuyUpgrade(item.GetItemID());
-
-        Equip();
-    }
 }

@@ -43,40 +43,86 @@ public class ShopUI : BaseBehavior {
         items = new List<ItemDisplay>();
         if (tabsList.Count > 0)
             OpenTab(0);
-
+        
     }
 	
+
     void OpenTab(int ite)
     {
+        /*
         if (ite == openedTab)
-            return;
+            return;*/
         openedTab = ite;
 
         for (int i = 0; i < items.Count; ++i)
-        {
             Destroy(items[i].gameObject);
-        }
-
+      
         items.Clear();
+        int itemCount = tabsList[ite].coutainedItems.Count;
 
-        for (int i = 0; i < tabsList[ite].coutainedItems.Count; ++i)
+        for (int i = 0; i < itemCount; ++i)
+            DisplayItem(ite, tabsList[ite].coutainedItems[i]);       
+    }
+
+    void DisplayItem(int tab, ItemDescription itemDescription)
+    {
+        if (ItemIsRelevant(itemDescription))
         {
-            ItemDisplay newItem = Instantiate(shopItem, shopItemLayout.transform);
-            newItem.item = tabsList[ite].coutainedItems[i];
-            items.Insert(i, newItem);
+            if (itemDescription is UpgradeDescription )
+            {        
+                    ItemDisplay newItem = Instantiate(shopItem, shopItemLayout.transform);
+                    newItem.item = itemDescription;
+                    items.Add(newItem);
+            }
+            if (itemDescription is ShopMapDescription)
+            {        
+                    ItemDisplay newItem = Instantiate(shopItem, shopItemLayout.transform);
+                    newItem.item = itemDescription;
+                    items.Add(newItem);        
+            }
         }
     }
+
+
+    public bool ItemIsRelevant(ItemDescription item)
+    {
+        if (item is UpgradeDescription)
+            return UpgradeIsRelevant(item as UpgradeDescription);
+        else if (item is ShopMapDescription)
+            return !ItemsList.ItemOwned(item.GetItemID());
+        return false;
+    }
+
+    public bool UpgradeIsRelevant(UpgradeDescription item)
+    {
+        int CurrentLevel = -1;
+
+        if (item is ThrusterDescription && ItemsList.GetEquipThruster())
+            CurrentLevel = ItemsList.GetEquipThruster().GetUpgradeLevel();
+        else if (item is HarpoonThrowerDescription && ItemsList.GetEquipHarpoonThrower())
+            CurrentLevel = ItemsList.GetEquipHarpoonThrower().GetUpgradeLevel();
+
+        if (item.GetUpgradeLevel() >= CurrentLevel)
+            return true;
+        else
+            return false;
+    }
+
 
     public void UpdateDisplay()
     {
+        OpenTab(openedTab);
+        /*
         for (int i = 0; i < items.Count; ++i)
         {
-            items[i].UpdateButton();
-        }
+            if (items[i].item is UpgradeDescription && !UpgradeIsRelevant(items[i].item as UpgradeDescription))
+            {
+                ItemDisplay temp = items[i];
+                items.RemoveAt(i);
+                Destroy(temp);
+            }
+            else
+                items[i].UpdateButton();
+        }*/
     }
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

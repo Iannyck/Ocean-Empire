@@ -16,9 +16,14 @@ public class ItemsList : BaseManager<ItemsList>
 
 
     public Dictionary<string, string> upgradePaths;
+    public Dictionary<string, string> mapsPaths;
 
     [HideInInspector]
     public Dictionary<string, bool> ownedUpgrades;
+    [HideInInspector]
+    public Dictionary<string, bool> ownedMaps;
+
+    public string defaultMap;
 
     [SerializeField, ReadOnly]
     private string equipedThruster;
@@ -28,13 +33,21 @@ public class ItemsList : BaseManager<ItemsList>
 
     public string defaultThruster;
 
+
+
     private const string SAVE_KEY_THRUSTER = "equipedthruster";
     private const string SAVE_KEY_HARPOON = "equipedharpoon";
 
-    virtual public T GetItem<T>(string itemID) where T : UnityEngine.Object
+    static public T GetItem<T>(string itemID) where T : UnityEngine.Object
     {
-        if (upgradePaths.ContainsKey(itemID))
-            return Instantiate(Resources.Load(upgradePaths[itemID])) as T;
+        if (itemID == null) return null;
+
+        if (instance.upgradePaths.ContainsKey(itemID))
+            return Instantiate(Resources.Load(instance.upgradePaths[itemID])) as T;
+
+        else if (instance.ownedMaps.ContainsKey(itemID))
+            return Instantiate(Resources.Load(instance.mapsPaths[itemID])) as T;
+
         else
             return null;
     }
@@ -42,9 +55,14 @@ public class ItemsList : BaseManager<ItemsList>
 
     public static bool ItemOwned(string itemID)
     {
+        if (itemID == null) return false;
+
         if (instance.ownedUpgrades.ContainsKey(itemID))
             return instance.ownedUpgrades[itemID];
-        else
+
+        else if (instance.ownedMaps.ContainsKey(itemID))
+                return instance.ownedMaps[itemID];
+        else 
             return false;
     }
 
@@ -60,20 +78,27 @@ public class ItemsList : BaseManager<ItemsList>
 
     public static ThrusterDescription GetEquipThruster()
     {
-        return instance.GetItem<ThrusterDescription>(instance.equipedThruster);
+        return GetItem<ThrusterDescription>(instance.equipedThruster);
     }
 
     public static HarpoonThrowerDescription GetEquipHarpoonThrower()
     {
-        return instance.GetItem<HarpoonThrowerDescription>(instance.equipedHarpoon);
+        return GetItem<HarpoonThrowerDescription>(instance.equipedHarpoon);
     }
 
     public static void BuyUpgrade(string itemID)
     {
+
         if (instance.ownedUpgrades.ContainsKey(itemID))
             instance.ownedUpgrades[itemID] = true;
     }
 
+    public static void BuyMap(string itemID)
+    {
+
+        if (instance.ownedMaps.ContainsKey(itemID))
+            instance.ownedMaps[itemID] = true;
+    }
 
 
     public static void EquipUpgrade( UpgradeDescription upgrade)
@@ -119,9 +144,35 @@ public class ItemsList : BaseManager<ItemsList>
 
     private static void Load()
     {
+
+        LoadUpgrades();
+        LoadMaps();
+    }
+
+    private static void LoadMaps()
+    {
+        if (instance.ownedMaps == null)
+            instance.ownedMaps = new Dictionary<string, bool>();
+
+        foreach (KeyValuePair<string, string> containedIem in instance.mapsPaths)
+        {
+            string itemID = containedIem.Key;
+            if (instance.ownedMaps.ContainsKey(itemID) == false)
+            {
+                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID);
+                instance.ownedMaps.Add(itemID, owned);
+            }
+        }
+
+        if (instance.ownedMaps.ContainsKey(instance.defaultMap))
+            instance.ownedMaps[instance.defaultMap] = true;
+    }
+
+    private static void LoadUpgrades()
+    {
         if (instance.ownedUpgrades == null)
             instance.ownedUpgrades = new Dictionary<string, bool>();
-        
+
         foreach (KeyValuePair<string, string> containedIem in instance.upgradePaths)
         {
             string itemID = containedIem.Key;
@@ -134,8 +185,7 @@ public class ItemsList : BaseManager<ItemsList>
 
         LoadThruster();
         LoadHarpoon();
-    }       
-
+    }
 
     private static void LoadThruster()
     {

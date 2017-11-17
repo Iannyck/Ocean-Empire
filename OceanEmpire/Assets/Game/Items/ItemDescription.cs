@@ -55,15 +55,21 @@ public class ItemDescription : ScriptableObject
         return itemID;
     }
 
-    public string GetName()  {
+    virtual public string GetName()  {
         return itemName;
     }
 
-    public string GetDescription(){
+    virtual public string GetDescription(){
         return itemDescription;
     }
 
-    public int GetMoneyCost(){
+    virtual public Sprite GetImage()
+    {
+        return itemImage;
+    }
+
+    public int GetMoneyCost()
+    {
         return moneyCost;
     }
 
@@ -71,7 +77,4 @@ public class ItemDescription : ScriptableObject
         return ticketCost;
     }
 
-    public Sprite GetImage(){
-        return itemImage;
-    }
 }
