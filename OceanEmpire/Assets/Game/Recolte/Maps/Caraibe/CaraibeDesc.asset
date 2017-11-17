@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneName: Caraibes
   zoneDescription: "Pirates et bi\xE8res \xE0 volont\xE9!"
+  mapIcon: {fileID: 21300000, guid: a3b06cd6366e63d4c985579d1b12b8fa, type: 3}
   sceneToLoad: Map_Caraibe
   fishList:
   - {fileID: 11400000, guid: 2293aef96192c3a4db5601f448a7160f, type: 2}

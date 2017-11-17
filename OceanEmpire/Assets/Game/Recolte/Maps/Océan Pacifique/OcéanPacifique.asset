@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneName: "Oc\xE9an Pacifique"
   zoneDescription: "Pas si pacifique que \xE7a finalement..."
+  mapIcon: {fileID: 21300000, guid: 8108e3eae87d05d488e7309ceb31317e, type: 3}
   sceneToLoad: Map_Caraibe
   fishList:
   - {fileID: 11400000, guid: 2293aef96192c3a4db5601f448a7160f, type: 2}

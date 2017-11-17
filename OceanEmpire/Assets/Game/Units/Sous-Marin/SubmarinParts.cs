@@ -13,9 +13,14 @@ public class SubmarinParts : MonoBehaviour
     public HarpoonThrower GetHarpoonThrower() { return harpoonThrower; }
 
     void Start()
-    {
-        thruster = ItemsList.GetEquipThruster().GetItem<Thruster>();
-        harpoonThrower = ItemsList.GetEquipHarpoonThrower().GetItem<HarpoonThrower>();
+    {     
+        ThrusterDescription TD = ItemsList.GetEquipThruster();
+        HarpoonThrowerDescription HPD = ItemsList.GetEquipHarpoonThrower();
+
+        if (TD != null)
+            thruster = TD.GetItem<Thruster>();
+        if (HPD != null)
+            harpoonThrower = HPD.GetItem<HarpoonThrower>();
     }
 
 }

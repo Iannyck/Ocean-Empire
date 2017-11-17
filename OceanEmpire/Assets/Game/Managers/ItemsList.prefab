@@ -62,10 +62,11 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '{"thruster1":"Items/Upgrades/Thrusters/Description/Thruster1","thruster2":"Items/Upgrades/Thrusters/Description/Thruster2","thruster3":"Items/Upgrades/Thrusters/Description/Thruster3","harpoon1":"Items/Upgrades/Harpoon/Description/harpoon1","harpoon2":"Items/Upgrades/Harpoon/Description/harpoon2"}'
-  - '{"Caraibes":"MapsDescriptions/CaraibeDesc","Pacifique":"MapsDescriptions/Oc\u00e9anPacifique"}'
+  - '{"caraibe":"MapsDescriptions/CaraibeDesc","pacifique":"MapsDescriptions/Oc\u00e9anPacifique"}'
   - 
   - 
   initComplete: 0
+  defaultMap: caraibe
   equipedThruster: 
   equipedHarpoon: 
   defaultThruster: thruster1

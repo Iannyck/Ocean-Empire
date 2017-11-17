@@ -66,6 +66,22 @@ public class ItemsList : BaseManager<ItemsList>
             return false;
     }
 
+    public static List<MapDescription> GetAllOwnedMaps()
+    {
+        List<MapDescription> ownedMaps = new List<MapDescription>();
+
+        foreach (KeyValuePair<string, bool> containedIem in instance.ownedMaps)
+        {
+            if (containedIem.Value == true && instance.mapsPaths.ContainsKey(containedIem.Key))
+            {
+                ShopMapDescription shopMap = GetItem<ShopMapDescription>(containedIem.Key);
+                ownedMaps.Add(shopMap.GetMapDescription());
+            }
+        }
+
+        return ownedMaps;
+    }
+
 
     public bool IsEquiped(string itemID)
     {

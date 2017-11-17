@@ -31,4 +31,9 @@ public class ShopMapDescription : ItemDescription
     {
         return mapDescription.GetImage();
     }
+
+    public MapDescription GetMapDescription()
+    {
+        return mapDescription;
+    }
 }
