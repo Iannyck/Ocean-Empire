@@ -9,7 +9,6 @@ using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 #endif
 
 public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
