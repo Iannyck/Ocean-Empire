@@ -2,10 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WalkTask : Task
+public class WalkTask : Task
 {
+    public float minutesOfWalk;
+
     public override ExerciseType GetExerciseType()
     {
         return ExerciseType.Walk;
+    }
+
+    public WalkTask(float minutesOfWalk)
+    {
+        this.minutesOfWalk = minutesOfWalk;
+    }
+
+    public static WalkTask Build(float difficulty)
+    {
+        return new WalkTask(2);
     }
 }

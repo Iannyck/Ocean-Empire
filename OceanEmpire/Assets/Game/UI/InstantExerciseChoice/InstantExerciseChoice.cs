@@ -14,17 +14,28 @@ public class InstantExerciseChoice : WindowAnimation
 
     private Action onCompleteAction;
 
-    public void Init(bool showRewards, Action action)
+    /// <summary>
+    /// Load la scene et propose 3 taches
+    /// </summary>
+    /// <param name="rewardType"></param>
+    public static void ProposeTasks(int rewardType = -1)
     {
-        this.onCompleteAction = action;
-
-        if (!showRewards)
+        if (Scenes.Exists(SCENENAME))
         {
-            for (int i = 0; i < rewardDisplays.Length; i++)
-            {
-                rewardDisplays[i].SetActive(false);
-            }
+            Scenes.GetActive(SCENENAME).FindRootObject<InstantExerciseChoice>().Init(rewardType);
         }
+        else
+        {
+            Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
+            {
+                scene.FindRootObject<InstantExerciseChoice>().Init(rewardType);
+            });
+        }
+    }
+
+    private void Init(int rewardType = -1)
+    {
+        //TaskBuilder.Build(ExerciseType.Walk)
     }
 
     public void LaunchExercise_TEMP()

@@ -19,7 +19,8 @@ public class ExercicePanel : WindowAnimation
         //A CHANGER
         Scenes.LoadAsync(InstantExerciseChoice.SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
         {
-            scene.FindRootObject<InstantExerciseChoice>().Init(true, Quit);
+            Debug.LogWarning("A changer");
+            //scene.FindRootObject<InstantExerciseChoice>().Init(true, Quit);
         });
     }
 }
