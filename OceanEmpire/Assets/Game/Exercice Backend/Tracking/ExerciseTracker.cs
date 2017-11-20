@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,5 +16,9 @@ public abstract class ExerciseTracker
         throw new System.NotImplementedException();
     }
 
+    public abstract ActivityAnalyser.Report UpdateTracking(TimedTask task, DateTime startedWhen);
+
     public abstract ExerciseType GetExerciseType();
+
+    public abstract ActivityAnalyser.Report ForceCompletion(TimedTask task);
 }

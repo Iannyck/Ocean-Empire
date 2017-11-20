@@ -7,6 +7,6 @@ public class InstantTask : TimedTask
 {
     public override TaskReport BuildReport()
     {
-        throw new NotImplementedException();
+        return new TaskReport(null, DateTime.Now, plannedOn.dateTime);
     }
 }

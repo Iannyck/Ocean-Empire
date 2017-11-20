@@ -45,6 +45,7 @@ public class InstantExerciseChoice : WindowAnimation
 
     private void OnItemClick(InstantExerciseChoice_Item item)
     {
+        //item.assignedTask
         print("touch: " + item.transform.GetSiblingIndex());
     }
 

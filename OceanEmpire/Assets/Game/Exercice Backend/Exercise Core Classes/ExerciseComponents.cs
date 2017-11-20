@@ -37,7 +37,8 @@ public static class ExerciseComponents
         switch (type)
         {
             case ExerciseType.Walk:
-                return new WalkTracker();
+                //return new WalkTracker();
+                return new TimedWalkingTracker();
             case ExerciseType.Run:
                 return null;
             case ExerciseType.Stairs:

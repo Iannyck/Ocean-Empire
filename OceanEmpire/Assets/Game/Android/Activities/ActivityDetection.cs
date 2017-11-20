@@ -27,43 +27,29 @@ public class ActivityDetection : MonoBehaviour {
         }
     }
 
+    // File Path
     const string filePath = "/data/user/0/com.UQAC.OceanEmpire/files/activities.txt";
 
-    public List<Activity> lastActivities = new List<Activity>();
-
     // Debug
-    public Text affichage;
-    string exempleFile = "0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:34:14 EST 2017\n\r";
+    const string exempleFile = "0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:40:00 EST 2017\n\r0|Fri Nov 17 14:45:14 EST 2017\n\r";
 
-    void Start()
-    {
-#if UNITY_ANDROID && !UNITY_EDITOR
-        lastActivities = LoadActivities(ReadDocument());
-        return;
-#endif
-        lastActivities = LoadActivities(exempleFile);
-        //Debug.Log(lastActivities[0].probability);
-        //Debug.Log(lastActivities[0].time);
-    }
-
-    string ReadDocument()
+    private static string ReadDocument()
     {
         StreamReader reader = new StreamReader(filePath);
         string result = reader.ReadToEnd();
         reader.Close();
         return result;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            affichage.text = GetAllActivites();
-        }
-    }
 
-    List<Activity> LoadActivities(String document)
+    public static List<Activity> LoadActivities()
     {
+        string document;
+#if UNITY_ANDROID && !UNITY_EDITOR
+        document = ReadDocument();
+#else
+        document = exempleFile;
+#endif
+
         List<Activity> result = new List<Activity>(); 
 
         bool readingDate = false;
@@ -100,7 +86,7 @@ public class ActivityDetection : MonoBehaviour {
         return result;
     }
 
-    public static int IntParseFast(string value)
+    private static int IntParseFast(string value)
     {
         int result = 0;
         for (int i = 0; i < value.Length; i++)
@@ -111,19 +97,9 @@ public class ActivityDetection : MonoBehaviour {
         return result;
     }
 
-    public static DateTime ConvertStringToDate(string value)
+    private static DateTime ConvertStringToDate(string value)
     {
         string modifiedValue = value.Replace(" EST", "");
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
-    }
-
-    string GetAllActivites()
-    {
-        string result = "";
-        for (int i = 0; i < lastActivities.Count; i++)
-        {
-            result += lastActivities[i].probability + "|" + lastActivities[i].time + "\n\r";
-        }
-        return result;
     }
 }
