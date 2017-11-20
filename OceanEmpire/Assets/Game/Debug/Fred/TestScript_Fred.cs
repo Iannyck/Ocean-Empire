@@ -11,11 +11,10 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            g.Hide();
+            InstantExerciseChoice.ProposeTasks();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            //g.Show();
         }
     }
 }

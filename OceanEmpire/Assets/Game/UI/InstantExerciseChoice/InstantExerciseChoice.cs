@@ -1,16 +1,13 @@
 using CCC.Manager;
 using CCC.UI;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class InstantExerciseChoice : WindowAnimation
 {
     public const string SCENENAME = "InstantExercise";
 
-    public GameObject[] rewardDisplays;
+    public InstantExerciseChoice_Item[] taskDisplays;
 
     private Action onCompleteAction;
 
@@ -20,22 +17,50 @@ public class InstantExerciseChoice : WindowAnimation
     /// <param name="rewardType"></param>
     public static void ProposeTasks(int rewardType = -1)
     {
-        if (Scenes.Exists(SCENENAME))
+        MasterManager.Sync(() =>
         {
-            Scenes.GetActive(SCENENAME).FindRootObject<InstantExerciseChoice>().Init(rewardType);
-        }
-        else
-        {
-            Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
+            if (Scenes.Exists(SCENENAME))
             {
-                scene.FindRootObject<InstantExerciseChoice>().Init(rewardType);
-            });
+                Scenes.GetActive(SCENENAME).FindRootObject<InstantExerciseChoice>().Init(rewardType);
+            }
+            else
+            {
+                Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
+                {
+                    scene.FindRootObject<InstantExerciseChoice>().Init(rewardType);
+                });
+            }
+        });
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        for (int i = 0; i < taskDisplays.Length; i++)
+        {
+            taskDisplays[i].onClick = OnItemClick;
         }
+    }
+
+    private void OnItemClick(InstantExerciseChoice_Item item)
+    {
+        print("touch: " + item.transform.GetSiblingIndex());
     }
 
     private void Init(int rewardType = -1)
     {
-        //TaskBuilder.Build(ExerciseType.Walk)
+        int taskCount = taskDisplays.Length;
+        float difficultyStart = 0;
+        float difficultyEnd = 1;
+        float increment = (difficultyEnd - difficultyStart) / taskCount;
+
+        float currentDifficulty = difficultyStart;
+        for (int i = 0; i < taskCount; i++)
+        {
+            taskDisplays[i].DisplayTask(TaskBuilder.Build(ExerciseType.Walk, currentDifficulty));
+            currentDifficulty += increment;
+        }
     }
 
     public void LaunchExercise_TEMP()
