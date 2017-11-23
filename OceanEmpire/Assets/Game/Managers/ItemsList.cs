@@ -7,7 +7,7 @@ using FullInspector;
 
 public class ItemsList : BaseManager<ItemsList>
 {
-   
+
     public override void Init()
     {
         Load();
@@ -61,8 +61,8 @@ public class ItemsList : BaseManager<ItemsList>
             return instance.ownedUpgrades[itemID];
 
         else if (instance.ownedMaps.ContainsKey(itemID))
-                return instance.ownedMaps[itemID];
-        else 
+            return instance.ownedMaps[itemID];
+        else
             return false;
     }
 
@@ -88,7 +88,7 @@ public class ItemsList : BaseManager<ItemsList>
         if (equipedThruster == itemID || equipedHarpoon == itemID)
             return true;
         else
-        return false;
+            return false;
     }
 
 
@@ -107,6 +107,7 @@ public class ItemsList : BaseManager<ItemsList>
 
         if (instance.ownedUpgrades.ContainsKey(itemID))
             instance.ownedUpgrades[itemID] = true;
+        Save();
     }
 
     public static void BuyMap(string itemID)
@@ -114,10 +115,11 @@ public class ItemsList : BaseManager<ItemsList>
 
         if (instance.ownedMaps.ContainsKey(itemID))
             instance.ownedMaps[itemID] = true;
+        Save();
     }
 
 
-    public static void EquipUpgrade( UpgradeDescription upgrade)
+    public static void EquipUpgrade(UpgradeDescription upgrade)
     {
         string id = upgrade.GetItemID();
 
@@ -136,25 +138,19 @@ public class ItemsList : BaseManager<ItemsList>
 
     private static void Save()
     {
-
-
-        /*
-         
-
-        Override pour pouvoir plus facilement tester
-        
-        
-
-
-        foreach (KeyValuePair<string, bool> containedIem in instance.ownedUpgrades)
+        foreach (KeyValuePair<string, bool> containedItem in instance.ownedUpgrades)
         {
-            GameSaves.instance.SetBool(GameSaves.Type.Items, containedIem.Key, containedIem.Value);
+            GameSaves.instance.SetBool(GameSaves.Type.Items, containedItem.Key, containedItem.Value);
+        }
+        foreach (KeyValuePair<string, bool> containedMap in instance.ownedMaps)
+        {
+            GameSaves.instance.SetBool(GameSaves.Type.Items, containedMap.Key, containedMap.Value);
         }
 
-        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER, instance.equipedThruster.GetItemID());
-        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_HARPOON, instance.equipedHarpoon.GetItemID());
+        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER, instance.equipedThruster);
+        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_HARPOON, instance.equipedHarpoon);
+
         GameSaves.instance.SaveData(GameSaves.Type.Items);
-        */
     }
 
 
@@ -207,7 +203,7 @@ public class ItemsList : BaseManager<ItemsList>
     {
         string thrusterID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER);
 
-        if (instance.upgradePaths.ContainsKey(thrusterID) == true)
+        if (thrusterID != null && instance.upgradePaths.ContainsKey(thrusterID) == true)
         {
             instance.equipedThruster = thrusterID;
         }
@@ -223,8 +219,7 @@ public class ItemsList : BaseManager<ItemsList>
     private static void LoadHarpoon()
     {
         string harpoonID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_HARPOON);
-
-        if (instance.upgradePaths.ContainsKey(harpoonID) == true)
+        if (harpoonID != null && instance.upgradePaths.ContainsKey(harpoonID) == true)
         {
             instance.equipedHarpoon = harpoonID;
         }
@@ -234,6 +229,35 @@ public class ItemsList : BaseManager<ItemsList>
             harpoonID = "";
         }
     }
+
+
+    public static void ResetToDefaults()
+    {
+
+
+        Dictionary<string, bool> copy = new Dictionary< string, bool> (instance.ownedUpgrades);
+        foreach (KeyValuePair<string, bool> containedItem in copy)
+        {
+            instance.ownedUpgrades[containedItem.Key] = false;
+        }
+
+        copy = new Dictionary<string, bool>(instance.ownedMaps); 
+        foreach (KeyValuePair<string, bool> containedItem2 in copy)
+        {
+            instance.ownedMaps[containedItem2.Key] = false;
+        }
+
+        instance.equipedThruster = instance.defaultThruster;
+
+        if (instance.ownedUpgrades.ContainsKey(instance.equipedThruster))
+            instance.ownedUpgrades[instance.equipedThruster] = true;
+
+        instance.equipedHarpoon = null;
+
+        if (instance.ownedMaps.ContainsKey(instance.defaultMap))
+            instance.ownedMaps[instance.defaultMap] = true;
+
+        Save();
+    }
+
 }
-
-

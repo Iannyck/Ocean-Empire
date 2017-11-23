@@ -107,13 +107,20 @@ public class ItemDisplay : MonoBehaviour {
 
     public void BuyWithMoney()
     {
-        Buy();
+        if (PlayerCurrency.GetCoins() > item.GetMoneyCost())
+        {
+            PlayerCurrency.RemoveCoins(item.GetMoneyCost());
+            Buy();
+        }
     }
 
     public void BuyWithTicket()
     {
-
-        Buy();
+        if (PlayerCurrency.GetTickets() > item.GetTicketCost())
+        {
+            PlayerCurrency.RemoveTickets(item.GetTicketCost());
+            Buy();
+        }
     }
 
     public void Buy()

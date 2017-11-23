@@ -129,6 +129,11 @@ public class FishPopulation : BaseManager<FishPopulation>
                 Game.FishSpawner.SetPalierFishLimit();
     }
 
+    public static void ResetToDefaults()
+    {
+        instance.population = limitPopulation;
+        instance.lastUpdate = System.DateTime.Now;
 
-
+        Save();
+    }
 }

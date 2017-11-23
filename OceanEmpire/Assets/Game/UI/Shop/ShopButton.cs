@@ -52,7 +52,11 @@ public class ShopButton : MonoBehaviour {
 
         buttonText.text = moneyCost.ToString();
 
-        button.interactable = true;
+        if (PlayerCurrency.GetCoins() > moneyCost)
+            button.interactable = true;
+        else
+            button.interactable = false;
+
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(OnBuyWithMoney);
 
@@ -67,7 +71,11 @@ public class ShopButton : MonoBehaviour {
 
         buttonText.text = ticketCost.ToString();
 
-        button.interactable = true;
+        if (PlayerCurrency.GetTickets() > ticketCost)
+            button.interactable = true;
+        else
+            button.interactable = false;
+
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(OnBuyWithTicket);
 

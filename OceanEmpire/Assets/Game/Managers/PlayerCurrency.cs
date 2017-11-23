@@ -9,6 +9,9 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private const string SAVE_KEY_COINS = "coins";
     private const string SAVE_KEY_TICKETS = "tickets";
 
+
+    public static event SimpleEvent CurrencyUpdate;
+
     public override void Init()
     {
         Load();
@@ -38,6 +41,12 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private static void AddCoinsAndSave(int amount)
     {
         instance.coins += amount;
+    
+        if (CurrencyUpdate != null)
+        {
+            CurrencyUpdate();
+        }
+
         Save();
     }
 
@@ -75,6 +84,12 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private static void AddTicketsAndSave(int amount)
     {
         instance.tickets += amount;
+
+        if (CurrencyUpdate != null)
+        {
+            CurrencyUpdate();
+        }
+
         Save();
     }
 
@@ -113,5 +128,18 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private static void Load()
     {
         instance.coins = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_COINS);
+    }
+
+    public static void ResetToDefaults()
+    {
+        instance.coins = 0;
+        instance.tickets = 0;
+
+        if (CurrencyUpdate != null)
+        {
+            CurrencyUpdate();
+        }
+
+        Save();
     }
 }

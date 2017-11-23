@@ -43,9 +43,15 @@ public class ShopUI : BaseBehavior {
         items = new List<ItemDisplay>();
         if (tabsList.Count > 0)
             OpenTab(0);
-        
+
+
+        PlayerCurrency.CurrencyUpdate += UpdateDisplay;
     }
-	
+
+    private void OnDestroy()
+    {
+        PlayerCurrency.CurrencyUpdate -= UpdateDisplay;
+    }
 
     void OpenTab(int ite)
     {

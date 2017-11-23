@@ -31,9 +31,14 @@ public class FishingSummary : MonoBehaviour
             Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary( entry.Value, 
                                                                                     entry.Key.icon.GetSprite(),
                                                                                     entry.Key.fishName);
+
+            PlayerCurrency.AddCoins(entry.Value * (int)entry.Key.baseMonetaryValue);
+
             fishes += entry.Value;
         }
         total.text = baseText + fishes;
+
+
 
         CCC.Manager.DelayManager.LocalCallTo(delegate () { UpdateFishPopulation();  }, 1f , this);
         
