@@ -40,27 +40,29 @@ public class AskWindow : MonoBehaviour {
 
     public void Hide()
     {
-        windowAnim.Close();
-        Scenes.UnloadAsync(SCENE_NAME);
-        Time.timeScale = 1;
+        windowAnim.Close(delegate ()
+        {
+            Scenes.UnloadAsync(SCENE_NAME);
+            Time.timeScale = 1;
+        });
     }
 
     public void DoExercice()
     {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
-        Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
-            scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
-                " l'effet dans l'océan sera instantément appliqué",delegate() {
+        Scenes.LoadAsync(TrackingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
+            scene.FindRootObject<TrackingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
+                " l'effet dans l'océan sera instantément appliqué",null,null,delegate(ExerciseTrackingReport tracker) {
                     FishPopulation.instance.UpdateOnExercise(0.50f);    
-                    Exit();
+                    Exit(null);
                 });
         });
     }
 
     public void OnWaitWindowLoad(Scene scene)
     {
-        scene.FindRootObject<WaitingWindow>().InitDisplay("A faire : Marcher 1 km", Exit);
+        scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km",null,null, Exit);
         // ajouter un listener en parametre. Le WaitingWindow doit aller ecouter a se qui doit etre fait
         // et se ferme quand le listener est executer
     }
@@ -70,10 +72,10 @@ public class AskWindow : MonoBehaviour {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
         if (PlayerCurrency.RemoveTickets(1))
-            Exit();
+            Exit(null);
     }
 
-    public void Exit()
+    public void Exit(ExerciseTrackingReport tracker)
     {
         Hide();
     }

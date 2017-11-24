@@ -23,7 +23,7 @@ avant application
 
 	 implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 
-	local variable -> ajouter
+local variable -> ajouter
 
 	public GoogleApiClient mApiClient;
 
