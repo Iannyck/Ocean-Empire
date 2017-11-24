@@ -26,12 +26,20 @@ public class Reward_Tickets : Reward
         return RewardType.Tickets;
     }
 
+<<<<<<< .merge_file_a16912
     public Reward_Tickets BuildReverse(int value)
+=======
+    public static Reward_Tickets BuildReverse(int value)
+>>>>>>> .merge_file_a11320
     {
         return new Reward_Tickets(Mathf.RoundToInt(value / RewardComponents.GetBaseValue(RewardType.Tickets)));
     }
 
+<<<<<<< .merge_file_a16912
     public Reward_Tickets Build(int ticketAmount)
+=======
+    public static Reward_Tickets Build(int ticketAmount)
+>>>>>>> .merge_file_a11320
     {
         return new Reward_Tickets(ticketAmount);
     }

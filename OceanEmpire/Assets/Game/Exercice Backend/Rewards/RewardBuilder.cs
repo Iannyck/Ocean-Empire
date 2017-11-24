@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< .merge_file_a15784
 public class RewardBuilder : MonoBehaviour {
 
 	// Use this for initialization
@@ -13,4 +14,8 @@ public class RewardBuilder : MonoBehaviour {
 	void Update () {
 		
 	}
+=======
+public static class RewardBuilder
+{
+>>>>>>> .merge_file_a11320
 }

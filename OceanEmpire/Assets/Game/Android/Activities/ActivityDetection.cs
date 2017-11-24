@@ -41,6 +41,14 @@ public class ActivityDetection : MonoBehaviour {
         return result;
     }
 
+    public static void ResetActivitiesSave()
+    {
+        if (Directory.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+    }
+
     public static List<Activity> LoadActivities()
     {
         string document;

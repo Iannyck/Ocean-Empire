@@ -6,5 +6,6 @@ public abstract class TimedTask
 {
     public Task task;
     public CalendarTime plannedOn;
+
     public abstract TaskReport BuildReport();
 }

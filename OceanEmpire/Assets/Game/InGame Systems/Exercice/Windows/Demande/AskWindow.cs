@@ -40,27 +40,47 @@ public class AskWindow : MonoBehaviour {
 
     public void Hide()
     {
+<<<<<<< .merge_file_a16640
         windowAnim.Close();
         Scenes.UnloadAsync(SCENE_NAME);
         Time.timeScale = 1;
+=======
+        windowAnim.Close(delegate ()
+        {
+            Scenes.UnloadAsync(SCENE_NAME);
+            Time.timeScale = 1;
+        });
+>>>>>>> .merge_file_a10088
     }
 
     public void DoExercice()
     {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
+<<<<<<< .merge_file_a16640
         Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
             scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
                 " l'effet dans l'océan sera instantément appliqué",delegate() {
                     FishPopulation.instance.UpdateOnExercise(0.50f);    
                     Exit();
+=======
+        Scenes.LoadAsync(TrackingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
+            scene.FindRootObject<TrackingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
+                " l'effet dans l'océan sera instantément appliqué",null,null,delegate(ExerciseTrackingReport tracker) {
+                    FishPopulation.instance.UpdateOnExercise(0.50f);    
+                    Exit(null);
+>>>>>>> .merge_file_a10088
                 });
         });
     }
 
     public void OnWaitWindowLoad(Scene scene)
     {
+<<<<<<< .merge_file_a16640
         scene.FindRootObject<WaitingWindow>().InitDisplay("A faire : Marcher 1 km", Exit);
+=======
+        scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km",null,null, Exit);
+>>>>>>> .merge_file_a10088
         // ajouter un listener en parametre. Le WaitingWindow doit aller ecouter a se qui doit etre fait
         // et se ferme quand le listener est executer
     }
@@ -70,10 +90,17 @@ public class AskWindow : MonoBehaviour {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
         if (PlayerCurrency.RemoveTickets(1))
+<<<<<<< .merge_file_a16640
             Exit();
     }
 
     public void Exit()
+=======
+            Exit(null);
+    }
+
+    public void Exit(ExerciseTrackingReport tracker)
+>>>>>>> .merge_file_a10088
     {
         Hide();
     }

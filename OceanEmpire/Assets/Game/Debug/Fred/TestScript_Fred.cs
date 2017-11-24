@@ -7,6 +7,14 @@ public class TestScript_Fred : MonoBehaviour
 {
     public DayInspector g;
 
+    void Start()
+    {
+        Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
+
+
+        InstantExerciseChoice.ProposeTasks();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
