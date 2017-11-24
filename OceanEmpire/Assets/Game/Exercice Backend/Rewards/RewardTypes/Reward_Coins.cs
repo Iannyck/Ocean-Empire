@@ -25,12 +25,12 @@ public class Reward_Coins : Reward
         return RewardType.Coins;
     }
 
-    public Reward_Coins BuildReverse(int value)
+    public static Reward_Coins BuildReverse(int value)
     {
         return new Reward_Coins(Mathf.RoundToInt(value / RewardComponents.GetBaseValue(RewardType.Coins)));
     }
 
-    public Reward_Coins Build(int coinAmount)
+    public static Reward_Coins Build(int coinAmount)
     {
         return new Reward_Coins(coinAmount);
     }

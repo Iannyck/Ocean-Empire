@@ -26,12 +26,12 @@ public class Reward_Tickets : Reward
         return RewardType.Tickets;
     }
 
-    public Reward_Tickets BuildReverse(int value)
+    public static Reward_Tickets BuildReverse(int value)
     {
         return new Reward_Tickets(Mathf.RoundToInt(value / RewardComponents.GetBaseValue(RewardType.Tickets)));
     }
 
-    public Reward_Tickets Build(int ticketAmount)
+    public static Reward_Tickets Build(int ticketAmount)
     {
         return new Reward_Tickets(ticketAmount);
     }
