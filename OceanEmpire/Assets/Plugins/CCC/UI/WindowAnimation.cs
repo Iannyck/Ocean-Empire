@@ -32,10 +32,7 @@ namespace CCC.UI
         public float exitTime = 0.35f;
         public Ease exitEase = Ease.InSine;
         public bool instantHideContent = false;
-
-        [Header("Size")]
-        public bool autoDetectSize = true;
-        public Vector2 size;
+        public bool exitSceneOnHide = false;
 
 
         Vector2 smallV;
@@ -56,8 +53,12 @@ namespace CCC.UI
             if (backBg)
                 backBgAlpha = backBg.color.a;
 
-            bigV = autoDetectSize ? bgTr.sizeDelta : size;
-            smallV = new Vector2(bigV.x * horizontalStart, bigV.y * verticalStart);
+            //bigV = autoDetectSize ? bgTr.sizeDelta : size;
+            //smallV = new Vector2(bigV.x * horizontalStart, bigV.y * verticalStart);
+
+            bigV = bgTr.sizeDelta;
+            Vector2 delta = bgTr.rect.size;
+            smallV = new Vector2(bigV.x - ((1 - horizontalStart) * delta.x), bigV.y - ((1 - verticalStart) * delta.y));
 
             InstantClose();
 
@@ -141,6 +142,7 @@ namespace CCC.UI
             bgTr.DOSizeDelta(smallV, exitTime).SetDelay(delay).SetEase(exitEase).OnComplete(delegate ()
             {
                 bgTr.gameObject.SetActive(false);
+                OnCloseComplete();
                 if (onComplete != null)
                     onComplete.Invoke();
             }).SetUpdate(true);
@@ -202,17 +204,16 @@ namespace CCC.UI
                 content.alpha = 0;
                 content.gameObject.SetActive(false);
             }
+            OnCloseComplete();
         }
 
-        public virtual void QuitScene()
+        protected virtual void OnCloseComplete()
         {
-            if (isOpen)
-                Close(UnloadScene);
-            else
+            if (exitSceneOnHide)
                 UnloadScene();
         }
 
-        private void UnloadScene()
+        protected void UnloadScene()
         {
             Scenes.UnloadAsync(gameObject.scene.name);
         }

@@ -14,7 +14,6 @@ public class InstantExerciseChoice : WindowAnimation
     /// <summary>
     /// Load la scene et propose 3 taches
     /// </summary>
-    /// <param name="rewardType"></param>
     public static void ProposeTasks(int rewardType = -1)
     {
         MasterManager.Sync(() =>
@@ -45,7 +44,12 @@ public class InstantExerciseChoice : WindowAnimation
 
     private void OnItemClick(InstantExerciseChoice_Item item)
     {
-        //item.assignedTask
+        ConfirmInstantExercise.OpenWindowAndConfirm(item.assignedTask, (hasConfirmed) =>
+        {
+            if (hasConfirmed)
+                Calendar.instance.AddScheduledTask(new InstantTask(item.assignedTask));
+            print(hasConfirmed);
+        });
         print("touch: " + item.transform.GetSiblingIndex());
     }
 
@@ -62,23 +66,5 @@ public class InstantExerciseChoice : WindowAnimation
             taskDisplays[i].DisplayTask(TaskBuilder.Build(ExerciseType.Walk, currentDifficulty));
             currentDifficulty += increment;
         }
-    }
-
-    public void LaunchExercise_TEMP()
-    {
-        Scenes.LoadAsync(WaitingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene)
-        {
-            scene.FindRootObject<WaitingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée" +
-                " l'effet dans l'océan sera instantément appliqué", delegate ()
-                {
-                    RatingWindow.ShowRatingWindow(delegate (HappyRating rating)
-                    {
-                        // Utiliser le rating pour le rapport
-                        if (onCompleteAction != null)
-                            onCompleteAction();
-                        QuitScene();
-                    });
-                });
-        });
     }
 }

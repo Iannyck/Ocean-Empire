@@ -2,28 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
+using CCC.Manager;
+using UnityEngine;
 
-public class Calendar
+public class Calendar : BaseManager<Calendar>
 {
+    [SerializeField]
     private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
 
     public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
 
     public bool AddScheduledTask(ScheduledTask task)
     {
-        if (task.plannedOn.IsInTheFuture())
-        {
-            scheduledTasks.SortedAdd(task, (a, b) => a.plannedOn.dateTime.CompareTo(a.plannedOn.dateTime));
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+
+
+        scheduledTasks.SortedAdd(task, (a, b) => a.plannedOn.dateTime.CompareTo(a.plannedOn.dateTime));
+        return true;
     }
+
     public bool RemoveScheduledTask(ScheduledTask task)
     {
         return scheduledTasks.Remove(task);
+    }
+
+    public bool IsTimeSlutAvailable()
+    {
+
+    }
+
+    public override void Init()
+    {
+        CompleteInit();
     }
 
     public struct Day

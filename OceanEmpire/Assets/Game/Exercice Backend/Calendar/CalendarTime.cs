@@ -7,9 +7,12 @@ using UnityEngine;
 public struct CalendarTime
 {
     public DateTime dateTime;
-    public CalendarTime(DateTime dateTime)
+    public TimeSpan duration;
+
+    public CalendarTime(DateTime dateTime, TimeSpan duration)
     {
         this.dateTime = dateTime;
+        this.duration = duration;
     }
 
     public override bool Equals(object obj)
