@@ -4,28 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class TaskReport
+public class TimedTaskReport
 {
     public ExerciseTrackingReport exerciseReport;
     public HappyRating rating;
 
-    public CalendarTime createdAt;
-    public CalendarTime plannedFor;
+    public DateTime reportCreatedOn;
+    public DateTime taskCreatedOn;
+    public CalendarTime taskPlannedFor;
+    public bool wasInstantTask;
 
-    public TaskReport(){}
+    public TimedTaskReport(){}
 
-    public TaskReport(ExerciseTrackingReport exerciseReport, DateTime createdAt, DateTime plannedFor, HappyRating rating = HappyRating.None)
+    public TimedTaskReport(ExerciseTrackingReport exerciseReport, DateTime taskCreatedOn, CalendarTime plannedFor, bool isInstantTask, HappyRating rating = HappyRating.None)
     {
         this.exerciseReport = exerciseReport;
         this.rating = rating;
-        this.createdAt = new CalendarTime(createdAt);
-        this.plannedFor = new CalendarTime(plannedFor);
+        reportCreatedOn = DateTime.Now;
+        taskPlannedFor = plannedFor;
+        this.taskCreatedOn = taskCreatedOn;
     }
 
-    public bool WasInstantTask()
-    {
-        return plannedFor == createdAt;
-    }
     public bool WasCancelled()
     {
         return exerciseReport == null;

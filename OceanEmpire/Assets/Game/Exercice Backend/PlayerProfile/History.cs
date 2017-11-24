@@ -9,13 +9,13 @@ using System.Collections.ObjectModel;
 [System.Serializable]
 public class History
 {
-    private List<TaskReport> taskReports = new List<TaskReport>();
+    private List<TimedTaskReport> taskReports = new List<TimedTaskReport>();
 
-    public ReadOnlyCollection<TaskReport> GetTaskReports()
+    public ReadOnlyCollection<TimedTaskReport> GetTaskReports()
     {
         return taskReports.AsReadOnly();
     }
-    public void AddReport(TaskReport report)
+    public void AddReport(TimedTaskReport report)
     { 
         taskReports.Add(report);
     }

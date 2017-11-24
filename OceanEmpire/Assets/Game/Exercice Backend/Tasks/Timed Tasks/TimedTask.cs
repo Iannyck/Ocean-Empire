@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,9 @@ using UnityEngine;
 public abstract class TimedTask
 {
     public Task task;
-    public CalendarTime plannedOn;
+    public CalendarTime timeSlot;
+    public DateTime createdOn;
 
-    public abstract TaskReport BuildReport();
+    public abstract TimedTaskReport BuildReport();
     public abstract bool IsVisibleInCalendar();
 }

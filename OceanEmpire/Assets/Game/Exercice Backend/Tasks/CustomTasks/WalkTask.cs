@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ using UnityEngine;
 public class WalkTask : Task
 {
     public float minutesOfWalk;
+    public TimeSpan timeOfWalk;
 
     public override ExerciseType GetExerciseType()
     {
@@ -15,10 +17,17 @@ public class WalkTask : Task
     public WalkTask(float minutesOfWalk)
     {
         this.minutesOfWalk = minutesOfWalk;
+        timeOfWalk = new TimeSpan(0, (int)minutesOfWalk, 0);
     }
 
     public static WalkTask Build(float difficulty)
     {
         return new WalkTask(2);
+    }
+
+    public override TimeSpan GetAllocatedTime()
+    {
+        double exerciseTime = timeOfWalk.TotalSeconds * 1.5;
+        return new TimeSpan(0, 15, 0) + TimeSpan.FromSeconds(exerciseTime);
     }
 }

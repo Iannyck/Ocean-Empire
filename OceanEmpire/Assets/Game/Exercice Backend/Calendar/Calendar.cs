@@ -16,7 +16,7 @@ public class Calendar : BaseManager<Calendar>
     {
 
 
-        scheduledTasks.SortedAdd(task, (a, b) => a.plannedOn.dateTime.CompareTo(a.plannedOn.dateTime));
+        scheduledTasks.SortedAdd(task, (a, b) => a.timeSlot.dateTime.CompareTo(a.timeSlot.dateTime));
         return true;
     }
 
@@ -27,7 +27,7 @@ public class Calendar : BaseManager<Calendar>
 
     public bool IsTimeSlutAvailable()
     {
-
+        return true;
     }
 
     public override void Init()

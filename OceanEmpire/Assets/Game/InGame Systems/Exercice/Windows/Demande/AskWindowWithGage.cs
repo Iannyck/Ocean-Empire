@@ -65,7 +65,7 @@ public class AskWindowWithGage : MonoBehaviour
 
     public void OnWaitWindowLoad(Scene scene)
     {
-        scene.FindRootObject<WaitingWindow>().InitDisplay("A faire : Marcher 1 km", Exit);
+        scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km",null,null, Exit);
         // ajouter un listener en parametre. Le WaitingWindow doit aller ecouter a se qui doit etre fait
         // et se ferme quand le listener est executer
     }
@@ -75,10 +75,10 @@ public class AskWindowWithGage : MonoBehaviour
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
         if (PlayerCurrency.RemoveTickets(1))
-            Exit();
+            Exit(null);
     }
 
-    public void Exit()
+    public void Exit(ExerciseTrackingReport tracker)
     {
         Hide();
     }

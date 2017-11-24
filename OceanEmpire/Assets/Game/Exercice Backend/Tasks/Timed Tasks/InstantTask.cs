@@ -6,9 +6,9 @@ using UnityEngine;
 [Serializable]
 public class InstantTask : ScheduledTask
 {
-    public override TaskReport BuildReport()
+    public override TimedTaskReport BuildReport()
     {
-        return new TaskReport(null, DateTime.Now, plannedOn.dateTime);
+        return new TimedTaskReport(null, createdOn, timeSlot, true);
     }
 
     public InstantTask(Task task) : base(task, DateTime.Now)

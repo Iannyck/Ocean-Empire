@@ -14,6 +14,7 @@ public class InstantExerciseChoice : WindowAnimation
     /// <summary>
     /// Load la scene et propose 3 taches
     /// </summary>
+    /// <param name="rewardType"></param>
     public static void ProposeTasks(int rewardType = -1)
     {
         MasterManager.Sync(() =>
@@ -36,6 +37,8 @@ public class InstantExerciseChoice : WindowAnimation
     {
         base.Awake();
 
+        ActivityDetection.ResetActivitiesSave();
+
         for (int i = 0; i < taskDisplays.Length; i++)
         {
             taskDisplays[i].onClick = OnItemClick;
@@ -44,13 +47,24 @@ public class InstantExerciseChoice : WindowAnimation
 
     private void OnItemClick(InstantExerciseChoice_Item item)
     {
+        //item.assignedTask
         ConfirmInstantExercise.OpenWindowAndConfirm(item.assignedTask, (hasConfirmed) =>
         {
             if (hasConfirmed)
+            {
                 Calendar.instance.AddScheduledTask(new InstantTask(item.assignedTask));
-            print(hasConfirmed);
+                InstantTask task = new InstantTask(item.assignedTask);
+
+                TrackingWindow.ShowWaitingWindow("", task, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
+                    print("EXERCICE COMPLETED : " + report.completionRate);
+                    for (int i = 0; i < report.probabilities.Count; i++)
+                    {
+                        print(report.probabilities);
+                    }
+                });
+            }
+            print("Has confirmed: " + hasConfirmed);
         });
-        print("touch: " + item.transform.GetSiblingIndex());
     }
 
     private void Init(int rewardType = -1)

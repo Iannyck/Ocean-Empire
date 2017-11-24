@@ -19,10 +19,15 @@ public class TimedWalkingTracker : WalkTracker {
             return null;
         }
 
+        return ActivityAnalyser.VerifyCompletion(task);
+
+        /*
         // Temps courrant - Temps au debut est plus grand que le Temps au debut + minutesOfWalk
-        if((DateTime.Now.Subtract(startedWhen)).CompareTo(startedWhen.AddMinutes(((WalkTask)task.task).minutesOfWalk)) >= 1)
+        TimeSpan toCompare = (startedWhen.AddMinutes(((WalkTask)task.task).minutesOfWalk)).Subtract(startedWhen);
+        if ((DateTime.Now.Subtract(startedWhen)).CompareTo(toCompare) >= 1)
             return ActivityAnalyser.VerifyCompletion(task);
         return null;
+        */
     }
 
     public override ActivityAnalyser.Report ForceCompletion(TimedTask task)
