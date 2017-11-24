@@ -63,6 +63,5 @@ public class FishPalier{
     public void CaptureFish(BaseFish fish)
     {
         currentFishLimit -= (currentFishLimit > 0 ? 1 : 0);
-
     }
 }

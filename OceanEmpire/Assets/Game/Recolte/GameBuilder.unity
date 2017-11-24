@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infiniteTime: 1
-  remainingTimeAtStart: 5
+  remainingTimeAtStart: 10
   remainingTime: 0
 --- !u!114 &1311441151
 MonoBehaviour:

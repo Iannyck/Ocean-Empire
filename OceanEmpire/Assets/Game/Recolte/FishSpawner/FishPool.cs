@@ -22,7 +22,9 @@ public class FishPool : MonoBehaviour {
                 fishInstance = Game.Spawner.Spawn(fishPrefab, spawnPos);
             }
             fishInstance.deathEvent += AddToPool;
+
             Game.FishingReport.KeepTrack(fishInstance);
+
             fishInstance.RemiseEnLiberté();
        
 
