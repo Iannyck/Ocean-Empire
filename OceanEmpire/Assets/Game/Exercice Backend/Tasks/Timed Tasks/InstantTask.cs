@@ -3,20 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class InstantTask : ScheduledTask
 {
-    public override TimedTaskReport BuildReport()
+
+    public override TimedTaskReport BuildReport(ExerciseTrackingReport trackingReport, HappyRating happyRating)
     {
-        return new TimedTaskReport(null, createdOn, timeSlot, true);
+        return new TimedTaskReport(trackingReport, createdOn, timeSlot, true, happyRating);
     }
 
-    public InstantTask(Task task) : base(task, DateTime.Now)
+    public InstantTask(Task task)
+        :base(task, DateTime.Now)
     {
-    }
-
-    public override bool IsVisibleInCalendar()
-    {
-        return false;
     }
 }

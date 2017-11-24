@@ -7,9 +7,9 @@ using UnityEngine;
 public abstract class TimedTask
 {
     public Task task;
-    public CalendarTime timeSlot;
+    public TimeSlot timeSlot;
     public DateTime createdOn;
 
-    public abstract TimedTaskReport BuildReport();
+    public abstract TimedTaskReport BuildReport(ExerciseTrackingReport trackingReport, HappyRating happyRating);
     public abstract bool IsVisibleInCalendar();
 }

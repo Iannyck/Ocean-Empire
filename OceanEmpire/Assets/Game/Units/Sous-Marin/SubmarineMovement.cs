@@ -29,6 +29,9 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
     private Rigidbody2D rb;
     private float realBrakeDistance = -1;
 
+    private Thruster thruster;
+    private FishContainer fishContainer;
+ 
 
     private void Awake()
     {
@@ -43,13 +46,15 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
         Game.OnGameStart += Init;
 
-        Thruster thruster = gameObject.GetComponent<SubmarinParts>().GetThruster();
+        SubmarinParts parts = gameObject.GetComponent<SubmarinParts>();
+        thruster = parts.GetThruster();
         if(thruster != null)
         {
             maximumSpeed = thruster.GetSpeed();
             accelerationRate = thruster.GetAcceleration();
         }
 
+        fishContainer = parts.GetFishContainer();
     }
 
     void Init()
@@ -104,5 +109,10 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
     public void OnTouch(Vector2 position)
     {
         OnClick(position);
+    }
+
+    FishContainer GetFishContainer()
+    {
+        return fishContainer;
     }
 }

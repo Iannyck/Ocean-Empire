@@ -11,7 +11,7 @@ public class ScheduledTask : TimedTask
         return new TimeSpan(0, 15, 0);
     }
 
-    public override TimedTaskReport BuildReport()
+    public override TimedTaskReport BuildReport(ExerciseTrackingReport trackingReport, HappyRating happyRating)
     {
         throw new NotImplementedException();
     }
@@ -20,7 +20,7 @@ public class ScheduledTask : TimedTask
     {
         this.task = task;
         createdOn = DateTime.Now;
-        timeSlot = new CalendarTime(plannedOn, task.GetAllocatedTime());
+        timeSlot = new TimeSlot(plannedOn, task.GetAllocatedTime());
     }
     
     public override bool IsVisibleInCalendar()

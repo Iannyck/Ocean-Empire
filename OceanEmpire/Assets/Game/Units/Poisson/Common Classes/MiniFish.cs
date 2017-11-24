@@ -6,9 +6,9 @@ using UnityEngine;
 public class MiniFish : BaseFish
 {
 
-    public void OnPlayerTouch(Collider2D collider)
+    public void OnPlayerTouch()
     {
-        //Self kill
-        Capture();
+        Game.SubmarinParts.GetFishContainer().TryCapture(this);
+        //Capture();
     }
 }

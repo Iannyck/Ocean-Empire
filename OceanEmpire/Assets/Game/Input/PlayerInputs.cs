@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FullInspector;
 using UnityEngine.Events;
 
-public class PlayerInputs : BaseBehavior {
+public class PlayerInputs : MonoBehaviour {
 
     public bool useTouch = false;
     public bool useClick = true;
@@ -12,19 +11,14 @@ public class PlayerInputs : BaseBehavior {
     [System.Serializable]
     public class InputEvent : UnityEvent<Vector2> { }
 
-    [InspectorShowIf("useTouch")]
+    [Header("If use touch")]
     public InputEvent screenTouched = new InputEvent();
-    [InspectorShowIf("useClick")]
-    public InputEvent screenClicked = new InputEvent();
-
-    [InspectorShowIf("useTouch")]
     public UnityEvent inputTouched = new UnityEvent();
-    [InspectorShowIf("useClick")]
-    public UnityEvent inputClicked = new UnityEvent();
-
-    [InspectorShowIf("useTouch")]
     public MonoBehaviour externalScriptTouch;
-    [InspectorShowIf("useClick")]
+
+    [Header("If use click")]
+    public InputEvent screenClicked = new InputEvent();
+    public UnityEvent inputClicked = new UnityEvent();
     public MonoBehaviour externalScriptMouse;
 
     // Update is called once per frame

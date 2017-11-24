@@ -11,18 +11,20 @@ public class TimedTaskReport
 
     public DateTime reportCreatedOn;
     public DateTime taskCreatedOn;
-    public CalendarTime taskPlannedFor;
+    public TimeSlot taskPlannedFor;
     public bool wasInstantTask;
 
     public TimedTaskReport(){}
 
-    public TimedTaskReport(ExerciseTrackingReport exerciseReport, DateTime taskCreatedOn, CalendarTime plannedFor, bool isInstantTask, HappyRating rating = HappyRating.None)
+    public TimedTaskReport(ExerciseTrackingReport exerciseReport, DateTime taskCreatedOn, TimeSlot plannedTimeSlot, bool isInstantTask, HappyRating rating = HappyRating.None)
     {
         this.exerciseReport = exerciseReport;
         this.rating = rating;
-        reportCreatedOn = DateTime.Now;
-        taskPlannedFor = plannedFor;
+        taskPlannedFor = plannedTimeSlot;//s
         this.taskCreatedOn = taskCreatedOn;
+
+
+        reportCreatedOn = DateTime.Now;
     }
 
     public bool WasCancelled()

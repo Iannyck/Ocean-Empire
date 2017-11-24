@@ -23,7 +23,7 @@ public class ItemsList : BaseManager<ItemsList>
     [HideInInspector]
     public Dictionary<string, bool> ownedMaps;
 
-    public string defaultMap;
+
 
     [SerializeField, ReadOnly]
     private string equipedThruster;
@@ -31,12 +31,21 @@ public class ItemsList : BaseManager<ItemsList>
     [SerializeField, ReadOnly]
     private string equipedHarpoon;
 
+    [SerializeField, ReadOnly]
+    private string equipedFishContainer;
+
+    [SerializeField, ReadOnly]
+    private string equipedGazTank;
+
     public string defaultThruster;
-
-
+    public string defaultMap;
+    public string defaultFishContainer;
+    public string defaultGazTank;
 
     private const string SAVE_KEY_THRUSTER = "equipedthruster";
     private const string SAVE_KEY_HARPOON = "equipedharpoon";
+    private const string SAVE_KEY_FISHCONTAINER = "equipedfishcontainer";
+    private const string SAVE_KEY_GAZTANK = "equipedgaztank";
 
     static public T GetItem<T>(string itemID) where T : UnityEngine.Object
     {
@@ -91,6 +100,10 @@ public class ItemsList : BaseManager<ItemsList>
             return false;
     }
 
+    public static FishContainerDescription GetEquipFishContainer()
+    {
+        return GetItem<FishContainerDescription>(instance.equipedFishContainer);
+    }
 
     public static ThrusterDescription GetEquipThruster()
     {
@@ -100,6 +113,11 @@ public class ItemsList : BaseManager<ItemsList>
     public static HarpoonThrowerDescription GetEquipHarpoonThrower()
     {
         return GetItem<HarpoonThrowerDescription>(instance.equipedHarpoon);
+    }
+
+    public static GazTankDescription GetEquipGazTank()
+    {
+        return GetItem<GazTankDescription>(instance.equipedGazTank);
     }
 
     public static void BuyUpgrade(string itemID)
@@ -131,6 +149,11 @@ public class ItemsList : BaseManager<ItemsList>
             if (upgrade is HarpoonThrowerDescription)
                 instance.equipedHarpoon = upgrade.GetItemID();
 
+            if (upgrade is FishContainerDescription)
+                instance.equipedFishContainer = upgrade.GetItemID();
+
+            if (upgrade is GazTankDescription)
+                instance.equipedGazTank = upgrade.GetItemID();
         }
         Save();
     }
@@ -149,6 +172,8 @@ public class ItemsList : BaseManager<ItemsList>
 
         GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER, instance.equipedThruster);
         GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_HARPOON, instance.equipedHarpoon);
+        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_FISHCONTAINER, instance.equipedFishContainer);
+        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_GAZTANK, instance.equipedGazTank);
 
         GameSaves.instance.SaveData(GameSaves.Type.Items);
     }
@@ -197,7 +222,47 @@ public class ItemsList : BaseManager<ItemsList>
 
         LoadThruster();
         LoadHarpoon();
+        LoadFishContainer();
+        LoadGazTank();
     }
+
+
+    private static void LoadGazTank()
+    {
+        string gazTankID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_GAZTANK);
+
+        if (gazTankID != null && instance.upgradePaths.ContainsKey(gazTankID) == true)
+        {
+            instance.equipedGazTank = gazTankID;
+        }
+        else
+        {
+            instance.equipedGazTank = instance.defaultGazTank;
+            gazTankID = instance.defaultGazTank;
+        }
+        if (instance.ownedUpgrades.ContainsKey(gazTankID))
+            instance.ownedUpgrades[gazTankID] = true;
+
+    }
+
+    private static void LoadFishContainer()
+    {
+        string fishContainerID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_FISHCONTAINER);
+
+        if (fishContainerID != null && instance.upgradePaths.ContainsKey(fishContainerID) == true)
+        {
+            instance.equipedFishContainer = fishContainerID;
+        }
+        else
+        {
+            instance.equipedFishContainer = instance.defaultFishContainer;
+            fishContainerID = instance.defaultFishContainer;
+        }
+        if (instance.ownedUpgrades.ContainsKey(fishContainerID))
+            instance.ownedUpgrades[fishContainerID] = true;
+
+    }
+
 
     private static void LoadThruster()
     {
@@ -247,13 +312,15 @@ public class ItemsList : BaseManager<ItemsList>
             instance.ownedMaps[containedItem2.Key] = false;
         }
 
-        instance.equipedThruster = instance.defaultThruster;
+        instance.equipedFishContainer = instance.defaultFishContainer;
+        if (instance.ownedUpgrades.ContainsKey(instance.equipedFishContainer))
+            instance.ownedUpgrades[instance.equipedFishContainer] = true;
 
+        instance.equipedThruster = instance.defaultThruster;
         if (instance.ownedUpgrades.ContainsKey(instance.equipedThruster))
             instance.ownedUpgrades[instance.equipedThruster] = true;
 
         instance.equipedHarpoon = null;
-
         if (instance.ownedMaps.ContainsKey(instance.defaultMap))
             instance.ownedMaps[instance.defaultMap] = true;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(menuName = "Ocean Empire/Item/Harpoon Thrower Description")]
+[CreateAssetMenu(menuName = "Ocean Empire/Item/Description/Harpoon Thrower Description")]
 public class HarpoonThrowerDescription : UpgradeDescription
 {
     private const string HarpoonFolderName = "Harpoon";
