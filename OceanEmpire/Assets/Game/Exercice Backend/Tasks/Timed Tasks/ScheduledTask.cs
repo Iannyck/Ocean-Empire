@@ -9,4 +9,10 @@ public class ScheduledTask : TimedTask
     {
         throw new NotImplementedException();
     }
+
+    public ScheduledTask(Task task, CalendarTime plannedOn)
+    {
+        this.task = task;
+        this.plannedOn = plannedOn;
+    }
 }
