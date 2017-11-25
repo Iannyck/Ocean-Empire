@@ -42,7 +42,7 @@ public class ActivityAnalyser
         switch (task.task.GetExerciseType())
         {
             case ExerciseType.Walk:
-                List<ActivityDetection.Activity> activites = GetAllActiviesInTimeStamp(task.timeSlot.dateTime, until);
+                List<ActivityDetection.Activity> activites = GetAllActiviesInTimeStamp(task.timeSlot.start, until);
                 if (activites == null)
                     break;
                 Report result = new Report(task);

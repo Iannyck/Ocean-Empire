@@ -6,12 +6,13 @@ using UnityEngine;
 [System.Serializable]
 public struct TimeSlot
 {
-    public DateTime dateTime;
+    public DateTime start;
     public TimeSpan duration;
+    public DateTime end { get { return start + duration; } }
 
     public TimeSlot(DateTime dateTime, TimeSpan duration)
     {
-        this.dateTime = dateTime;
+        this.start = dateTime;
         this.duration = duration;
     }
 
@@ -24,12 +25,12 @@ public struct TimeSlot
 
         var objCT = (TimeSlot)obj;
 
-        return objCT.dateTime == dateTime;
+        return objCT.start == start;
     }
 
     public override int GetHashCode()
     {
-        return dateTime.GetHashCode();
+        return start.GetHashCode();
     }
 
     public static bool operator ==(TimeSlot c1, TimeSlot c2)
@@ -44,6 +45,29 @@ public struct TimeSlot
 
     public bool IsInTheFuture()
     {
-        return dateTime > DateTime.Now;
+        return start > DateTime.Now;
+    }
+
+    public int IsOverlappingWith(ref TimeSlot timeslot)
+    {
+        DateTime end = this.end;
+        DateTime otherEnd = timeslot.end;
+        DateTime otherStart = timeslot.start;
+
+        if (start < otherStart)
+        {
+            if (end < otherStart)
+                return -1;
+            else
+                return 0;
+        }
+        else
+        {
+            if (start >= otherEnd)
+                return 1;
+            else
+                return 0;
+        }
+
     }
 }

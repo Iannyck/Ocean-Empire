@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
@@ -7,17 +7,31 @@ using UnityEngine;
 
 public class Calendar : BaseManager<Calendar>
 {
+    /// <summary>
+    /// Ordonner du plus vieux au plus recent
+    /// </summary>
     [SerializeField]
     private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
+    public bool log = true;
 
     public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
 
     public bool AddScheduledTask(ScheduledTask task)
     {
-
-
-        scheduledTasks.SortedAdd(task, (a, b) => a.timeSlot.dateTime.CompareTo(a.timeSlot.dateTime));
-        return true;
+        if (IsTimeSlutAvailable(task.timeSlot))
+        {
+            scheduledTasks.SortedAdd(task, (a, b) => a.timeSlot.start.CompareTo(b.timeSlot.start));
+            if (log)
+                Debug.Log("ScheduledTask ajouter au calendrier avec succes.");
+            return true;
+        }
+        else
+        {
+            if (log)
+                Debug.LogWarning("La ScheduledTask n'a pas pu être ajouter au calendrier. " +
+                    "La Timeslot est deja utilisé.");
+            return false;
+        }
     }
 
     public bool RemoveScheduledTask(ScheduledTask task)
@@ -25,8 +39,20 @@ public class Calendar : BaseManager<Calendar>
         return scheduledTasks.Remove(task);
     }
 
-    public bool IsTimeSlutAvailable()
+    /// <summary>
+    /// ( ͡° ͜ʖ ͡°)
+    /// </summary>
+    public bool IsTimeSlutAvailable(TimeSlot timeslot)
     {
+        for (int i = 0; i < scheduledTasks.Count; i++)
+        {
+            int result = timeslot.IsOverlappingWith(ref scheduledTasks[i].timeSlot);
+            if (result == 0)
+                return false;
+            else if (result == -1)
+                return true;
+        }
+
         return true;
     }
 

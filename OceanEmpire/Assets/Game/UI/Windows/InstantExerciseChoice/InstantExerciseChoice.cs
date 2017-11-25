@@ -45,25 +45,33 @@ public class InstantExerciseChoice : WindowAnimation
         }
     }
 
+    void Start()
+    {
+        if (Scenes.SceneCount() == 1)
+            ProposeTasks();
+    }
+
     private void OnItemClick(InstantExerciseChoice_Item item)
     {
         //item.assignedTask
         ConfirmInstantExercise.OpenWindowAndConfirm(item.assignedTask, (hasConfirmed) =>
         {
+            print("Has confirmed: " + hasConfirmed);
             if (hasConfirmed)
             {
-                Calendar.instance.AddScheduledTask(new InstantTask(item.assignedTask));
-                InstantTask task = new InstantTask(item.assignedTask);
+                InstantTask instantTask = new InstantTask(item.assignedTask);
+                if (Calendar.instance.AddScheduledTask(instantTask))
+                {
 
-                TrackingWindow.ShowWaitingWindow("", task, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
-                    print("EXERCICE COMPLETED : " + report.completionRate);
-                    for (int i = 0; i < report.probabilities.Count; i++)
-                    {
-                        print(report.probabilities);
-                    }
-                });
+                    TrackingWindow.ShowWaitingWindow("", instantTask, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
+                        print("EXERCICE COMPLETED : " + report.completionRate);
+                        for (int i = 0; i < report.probabilities.Count; i++)
+                        {
+                            print(report.probabilities);
+                        }
+                    });
+                }
             }
-            print("Has confirmed: " + hasConfirmed);
         });
     }
 

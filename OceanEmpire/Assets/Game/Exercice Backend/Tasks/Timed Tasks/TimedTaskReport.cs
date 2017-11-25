@@ -20,7 +20,7 @@ public class TimedTaskReport
     {
         this.exerciseReport = exerciseReport;
         this.rating = rating;
-        taskPlannedFor = plannedTimeSlot;//s
+        taskPlannedFor = plannedTimeSlot;
         this.taskCreatedOn = taskCreatedOn;
 
 
