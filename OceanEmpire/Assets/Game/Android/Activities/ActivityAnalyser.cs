@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivityAnalyser
-{
+public class ActivityAnalyser {
 
     public const float achieveGap = 50;
 
@@ -20,8 +19,7 @@ public class ActivityAnalyser
 
         public Report() { }
 
-        public Report(TimedTask task)
-        {
+        public Report(TimedTask task) {
             complete = false;
             this.task = task;
             activityRate = 0;
@@ -46,7 +44,7 @@ public class ActivityAnalyser
                 if (activites == null)
                     break;
                 Report result = new Report(task);
-                GetReport(activites, ref result);
+                GetReport(activites,ref result);
                 return result;
             case ExerciseType.Run:
                 // TODO
@@ -60,7 +58,7 @@ public class ActivityAnalyser
         return new Report(task);
     }
 
-    private static void GetReport(List<ActivityDetection.Activity> activites, ref Report result)
+    private static void GetReport(List<ActivityDetection.Activity> activites,ref Report result)
     {
         result.probabilities = new List<float>();
 
@@ -74,46 +72,28 @@ public class ActivityAnalyser
         {
             float prob = activites[i].probability;
             // On est en train de faire un exercice
-            if (prob >= achieveGap)
+            if (prob > achieveGap)
             {
                 numberOfCompletion++;
                 // On vient de commencer
                 if (!doingExercice)
                 {
                     doingExercice = true;
-                } // On est en train de continuer
-                else
-                {
-                    result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                    Debug.Log("" + activites[i].time.Subtract(lastExercice).Hours + activites[i].time.Subtract(lastExercice).Minutes + activites[i].time.Subtract(lastExercice).Seconds);
-                    if (result.timeSpendingExercice.CompareTo(new TimeSpan(0, (int)((WalkTask)result.task.task).minutesOfWalk, 0)) == 1)
-                    {
-                        result.exerciceEnd = activites[i].time;
-                        result.complete = true;
-
-                        if (numberOfActivities == 0)
-                            result.activityRate = 0;
-                        else
-                            result.activityRate = (numberOfCompletion / numberOfActivities);
-
-                        result.produceTime = DateTime.Now;
-
-                        return;
-                    }
+                    lastExercice = activites[i].time;
                 }
-                lastExercice = activites[i].time;
             }
             else
             {
                 // On vient d'arrêter de faire un exercice
                 if (doingExercice)
                 {
-                    numberOfCompletion++;
-                    result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                    Debug.Log("" + activites[i].time.Subtract(lastExercice).Hours + activites[i].time.Subtract(lastExercice).Minutes + activites[i].time.Subtract(lastExercice).Seconds);
+                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
+                    Debug.Log("WALKED : " + activites[i].time.Subtract(lastExercice));
                     doingExercice = false;
                     if (result.timeSpendingExercice.CompareTo(new TimeSpan(0, (int)((WalkTask)result.task.task).minutesOfWalk, 0)) == 1)
                     {
+                        Debug.Log("ANALYSE COMPLETED");
+
                         result.exerciceEnd = activites[i].time;
                         result.complete = true;
 
@@ -126,10 +106,6 @@ public class ActivityAnalyser
 
                         return;
                     }
-                }
-                else
-                {
-                    // on est en pause
                 }
             }
             result.probabilities.Add(prob);
@@ -138,7 +114,7 @@ public class ActivityAnalyser
 
     public static List<ActivityDetection.Activity> GetAllActiviesInTimeStamp(DateTime start, DateTime end, ExerciseType type = ExerciseType.Walk)
     {
-        if (start.CompareTo(end) >= 1)
+        if(start.CompareTo(end) >= 1)
             return null;
         if (end.CompareTo(DateTime.Now) >= 1)
             return null;
@@ -157,7 +133,7 @@ public class ActivityAnalyser
             switch (result[i].type)
             {
                 case ActivityDetection.Activity.ActivityType.Walking:
-                    if (type != ExerciseType.Walk)
+                    if(type != ExerciseType.Walk)
                     {
                         result.Remove(result[i]);
                         i--;
@@ -175,11 +151,11 @@ public class ActivityAnalyser
 
     public static ExerciseTrackingReport ProduceReport(Report report, ExerciseTrackingReport.State state)
     {
-        return new ExerciseTrackingReport(state,
-            report.probabilities,
+        return new ExerciseTrackingReport(state, 
+            report.probabilities, 
             report.timeSpendingExercice, 
             report.activityRate, 
-            new TimeSlot(),
+            new TimeSlot(), 
             new TimeSlot());
     }
 }

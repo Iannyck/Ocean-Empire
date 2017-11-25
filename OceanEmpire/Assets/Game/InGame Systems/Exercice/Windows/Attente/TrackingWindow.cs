@@ -89,11 +89,13 @@ public class TrackingWindow : MonoBehaviour {
                 Hide(ActivityAnalyser.ProduceReport(currentReport, ExerciseTrackingReport.State.Completed)); // exercise complete ! state=ExerciseTrackingReport.State 
             else
                 UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
+            Debug.Log("TIME WALKING :" + currentReport.timeSpendingExercice);
         }
     }
 
     public void Hide(ExerciseTrackingReport trackingReport)
     {
+        startTrackingUpdate = false;
         windowAnim.Close(delegate() {
             Scenes.UnloadAsync(SCENE_NAME);
             if (onCompleteEvent != null)
@@ -124,11 +126,12 @@ public class TrackingWindow : MonoBehaviour {
 
     private void UpdateExerciceCompletion(TimeSpan timeDone, TimeSpan timeToDo)
     {
-        int totalTimeDone = (timeDone.Hours * 60 * 60) + timeDone.Minutes * 60 + timeDone.Seconds; // secondes
-        int totalTimeToDo = (timeToDo.Hours * 60 * 60) + timeToDo.Minutes * 60 + timeToDo.Seconds; // secondes
-        float completion = totalTimeDone / totalTimeToDo;
+        double totalTimeDone = timeDone.TotalSeconds; // secondes
+        double totalTimeToDo = timeToDo.TotalSeconds; // secondes
+        double completion = totalTimeDone / totalTimeToDo;
+        Debug.Log("COMPLETION :" + (completion * 100) + "%");
         if (completionState != null)
-            completionState.value = completion;
+            completionState.value = (float)completion;
         currentTimeUI.text = "" + timeDone.Minutes.ToString() + ":" + timeDone.Seconds.ToString();
     }
 }
