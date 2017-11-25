@@ -72,5 +72,5 @@ MonoBehaviour:
   equipedGazTank: 
   defaultThruster: thruster1
   defaultMap: caraibe
-  defaultFishContainer: 
-  defaultGazTank: 
+  defaultFishContainer: fishContainer0
+  defaultGazTank: gaztank1
