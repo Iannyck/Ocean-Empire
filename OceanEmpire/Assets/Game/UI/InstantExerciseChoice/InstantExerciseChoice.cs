@@ -48,9 +48,7 @@ public class InstantExerciseChoice : WindowAnimation
     private void OnItemClick(InstantExerciseChoice_Item item)
     {
         //item.assignedTask
-        ScheduledTask task = new ScheduledTask();
-        task.task = item.assignedTask;
-        task.plannedOn = new CalendarTime(DateTime.Now);
+        ScheduledTask task = new ScheduledTask(item.assignedTask, new CalendarTime(DateTime.Now));
         TrackingWindow.ShowWaitingWindow("", task, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
             print("EXERCICE COMPLETED : " + report.completionRate);
             for (int i = 0; i < report.probabilities.Count; i++)

@@ -12,6 +12,7 @@ public class ActivityAnalyser {
         public float activityRate; // dans toute le temps que ta passé a faire de l'exercice, à quel point t'en a vraiment faites
         public List<float> probabilities;
         public DateTime produceTime;
+        public DateTime exerciceEnd;
         public TimedTask task;
         public TimeSpan timeSpendingExercice;
         public bool complete;
@@ -23,7 +24,9 @@ public class ActivityAnalyser {
             this.task = task;
             activityRate = 0;
             probabilities = new List<float>();
+            exerciceEnd = DateTime.Now;
             produceTime = DateTime.Now;
+            timeSpendingExercice = new TimeSpan(0, 0, 0);
         }
     }
 
@@ -68,32 +71,45 @@ public class ActivityAnalyser {
         for (int i = 0; i < numberOfActivities; i++)
         {
             float prob = activites[i].probability;
-            if (prob >= achieveGap)
+            // On est en train de faire un exercice
+            if (prob > achieveGap)
             {
-                if (!doingExercice)
-                    doingExercice = true;
-                else
-                    result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                lastExercice = activites[i].time;
                 numberOfCompletion++;
+                // On vient de commencer
+                if (!doingExercice)
+                {
+                    doingExercice = true;
+                    lastExercice = activites[i].time;
+                }
             }
             else
             {
-                result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                doingExercice = false;
+                // On vient d'arrêter de faire un exercice
+                if (doingExercice)
+                {
+                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
+                    Debug.Log("WALKED : " + activites[i].time.Subtract(lastExercice));
+                    doingExercice = false;
+                    if (result.timeSpendingExercice.CompareTo(new TimeSpan(0, (int)((WalkTask)result.task.task).minutesOfWalk, 0)) == 1)
+                    {
+                        Debug.Log("ANALYSE COMPLETED");
+
+                        result.exerciceEnd = activites[i].time;
+                        result.complete = true;
+
+                        if (numberOfActivities == 0)
+                            result.activityRate = 0;
+                        else
+                            result.activityRate = (numberOfCompletion / numberOfActivities);
+
+                        result.produceTime = DateTime.Now;
+
+                        return;
+                    }
+                }
             }
             result.probabilities.Add(prob);
         }
-
-        if (numberOfActivities == 0)
-            result.activityRate = 0;
-        else
-            result.activityRate = (numberOfCompletion / numberOfActivities);
-
-        if (result.timeSpendingExercice.CompareTo(new TimeSpan(0,(int)((WalkTask)result.task.task).minutesOfWalk,0)) == 1)
-            result.complete = true;
-
-        result.produceTime = DateTime.Now;
     }
 
     public static List<ActivityDetection.Activity> GetAllActiviesInTimeStamp(DateTime start, DateTime end, ExerciseType type = ExerciseType.Walk)
