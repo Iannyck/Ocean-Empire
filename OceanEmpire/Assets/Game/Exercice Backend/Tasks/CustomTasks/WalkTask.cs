@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class WalkTask : Task
 {
     public float minutesOfWalk;
@@ -22,5 +23,11 @@ public class WalkTask : Task
     public static WalkTask Build(float difficulty)
     {
         return new WalkTask(2);
+    }
+
+    public override TimeSpan GetAllocatedTime()
+    {
+        double exerciseTime = timeOfWalk.TotalSeconds * 1.5;
+        return new TimeSpan(0, 15, 0) + TimeSpan.FromSeconds(exerciseTime);
     }
 }

@@ -7,11 +7,11 @@ public abstract class ExerciseTracker
 {
     // Deux exemple de fonction qui pourrait se retrouver ici.
 
-    public CalendarTime GetTimeSinceStart()
+    public TimeSlot GetTimeSinceStart()
     {
         throw new System.NotImplementedException();
     }
-    public CalendarTime GetStartTime()
+    public TimeSlot GetStartTime()
     {
         throw new System.NotImplementedException();
     }

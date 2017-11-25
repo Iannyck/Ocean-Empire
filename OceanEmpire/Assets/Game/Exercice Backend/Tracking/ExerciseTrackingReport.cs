@@ -10,12 +10,12 @@ public class ExerciseTrackingReport
 
     public float completionRate;
     public State state;
-    public CalendarTime startTime;
-    public CalendarTime endTime;
+    public TimeSlot startTime;
+    public TimeSlot endTime;
     public List<float> probabilities;
     public TimeSpan timeSpendingExercice;
 
-    public ExerciseTrackingReport(State state, List<float> probabilities, TimeSpan timeSpendingExercice, float completionRate, CalendarTime startTime, CalendarTime endTime)
+    public ExerciseTrackingReport(State state, List<float> probabilities, TimeSpan timeSpendingExercice, float completionRate, TimeSlot startTime, TimeSlot endTime)
     {
         this.state = state;
         this.completionRate = completionRate;

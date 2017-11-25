@@ -48,13 +48,22 @@ public class InstantExerciseChoice : WindowAnimation
     private void OnItemClick(InstantExerciseChoice_Item item)
     {
         //item.assignedTask
-        ScheduledTask task = new ScheduledTask(item.assignedTask, new CalendarTime(DateTime.Now));
-        TrackingWindow.ShowWaitingWindow("", task, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
-            print("EXERCICE COMPLETED : " + report.completionRate);
-            for (int i = 0; i < report.probabilities.Count; i++)
+        ConfirmInstantExercise.OpenWindowAndConfirm(item.assignedTask, (hasConfirmed) =>
+        {
+            if (hasConfirmed)
             {
-                print(report.probabilities);
+                Calendar.instance.AddScheduledTask(new InstantTask(item.assignedTask));
+                InstantTask task = new InstantTask(item.assignedTask);
+
+                TrackingWindow.ShowWaitingWindow("", task, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
+                    print("EXERCICE COMPLETED : " + report.completionRate);
+                    for (int i = 0; i < report.probabilities.Count; i++)
+                    {
+                        print(report.probabilities);
+                    }
+                });
             }
+            print("Has confirmed: " + hasConfirmed);
         });
     }
 
@@ -71,23 +80,5 @@ public class InstantExerciseChoice : WindowAnimation
             taskDisplays[i].DisplayTask(TaskBuilder.Build(ExerciseType.Walk, currentDifficulty));
             currentDifficulty += increment;
         }
-    }
-
-    public void LaunchExercise_TEMP()
-    {
-        Scenes.LoadAsync(TrackingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene)
-        {
-            scene.FindRootObject<TrackingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée" +
-                " l'effet dans l'océan sera instantément appliqué",null,null, delegate (ExerciseTrackingReport tracker)
-                {
-                    RatingWindow.ShowRatingWindow(delegate (HappyRating rating)
-                    {
-                        // Utiliser le rating pour le rapport
-                        if (onCompleteAction != null)
-                            onCompleteAction();
-                        QuitScene();
-                    });
-                });
-        });
     }
 }

@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class InstantTask : ScheduledTask
 {
-    public override TaskReport BuildReport()
+
+    public override TimedTaskReport BuildReport(ExerciseTrackingReport trackingReport, HappyRating happyRating)
     {
-        return new TaskReport(null, DateTime.Now, plannedOn.dateTime);
+        return new TimedTaskReport(trackingReport, createdOn, timeSlot, true, happyRating);
     }
 
     public InstantTask(Task task)
-        :base(task, new CalendarTime(DateTime.Now))
+        :base(task, DateTime.Now)
     {
     }
 }

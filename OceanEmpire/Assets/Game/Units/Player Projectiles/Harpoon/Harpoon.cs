@@ -39,7 +39,8 @@ public class Harpoon : Projectile, IKillable
             return;
         }
 
-        bigFish.Capture();
+        //bigFish.Capture();
+        Game.SubmarinParts.GetFishContainer().TryCapture(bigFish);
         Kill();
     }
 

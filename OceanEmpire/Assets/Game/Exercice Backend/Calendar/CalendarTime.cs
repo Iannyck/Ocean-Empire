@@ -4,22 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct CalendarTime
+public struct TimeSlot
 {
     public DateTime dateTime;
-    public CalendarTime(DateTime dateTime)
+    public TimeSpan duration;
+
+    public TimeSlot(DateTime dateTime, TimeSpan duration)
     {
         this.dateTime = dateTime;
+        this.duration = duration;
     }
 
     public override bool Equals(object obj)
     {
-        if (!(obj is CalendarTime))
+        if (!(obj is TimeSlot))
         {
             return false;
         }
 
-        var objCT = (CalendarTime)obj;
+        var objCT = (TimeSlot)obj;
 
         return objCT.dateTime == dateTime;
     }
@@ -29,12 +32,12 @@ public struct CalendarTime
         return dateTime.GetHashCode();
     }
 
-    public static bool operator ==(CalendarTime c1, CalendarTime c2)
+    public static bool operator ==(TimeSlot c1, TimeSlot c2)
     {
         return c1.Equals(c2);
     }
 
-    public static bool operator !=(CalendarTime c1, CalendarTime c2)
+    public static bool operator !=(TimeSlot c1, TimeSlot c2)
     {
         return !c1.Equals(c2);
     }

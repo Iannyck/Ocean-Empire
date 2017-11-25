@@ -19,6 +19,7 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
+            InstantExerciseChoice.ProposeTasks();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {

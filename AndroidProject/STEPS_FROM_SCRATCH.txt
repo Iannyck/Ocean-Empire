@@ -23,7 +23,11 @@ avant application
 
 	 implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 
+<<<<<<< .merge_file_a16440
+	local variable -> ajouter
+=======
 local variable -> ajouter
+>>>>>>> .merge_file_a11428
 
 	public GoogleApiClient mApiClient;
 

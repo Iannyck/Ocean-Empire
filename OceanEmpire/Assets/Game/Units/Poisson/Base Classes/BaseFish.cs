@@ -50,7 +50,6 @@ public abstract class BaseFish : MonoBehaviour, IKillable
             deathEvent(this);
 
         gameObject.SetActive(false);
-
         ClearEvents();
     }
 
