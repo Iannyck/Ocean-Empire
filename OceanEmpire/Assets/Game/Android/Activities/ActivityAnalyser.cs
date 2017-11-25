@@ -40,7 +40,7 @@ public class ActivityAnalyser {
         switch (task.task.GetExerciseType())
         {
             case ExerciseType.Walk:
-                List<ActivityDetection.Activity> activites = GetAllActiviesInTimeStamp(task.plannedOn.dateTime, until);
+                List<ActivityDetection.Activity> activites = GetAllActiviesInTimeStamp(task.timeSlot.dateTime, until);
                 if (activites == null)
                     break;
                 Report result = new Report(task);
@@ -151,6 +151,11 @@ public class ActivityAnalyser {
 
     public static ExerciseTrackingReport ProduceReport(Report report, ExerciseTrackingReport.State state)
     {
-        return new ExerciseTrackingReport(state, report.probabilities, report.timeSpendingExercice, report.activityRate, report.task.plannedOn, new CalendarTime(report.produceTime));
+        return new ExerciseTrackingReport(state, 
+            report.probabilities, 
+            report.timeSpendingExercice, 
+            report.activityRate, 
+            new TimeSlot(), 
+            new TimeSlot());
     }
 }
