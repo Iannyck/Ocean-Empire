@@ -211,7 +211,6 @@ MonoBehaviour:
   openDuration: 0.4
   openEase: 15
   startHorizontal: 0
-  stayDuration: 1.5
   hideDuration: 0.5
   hideEase: 2
 --- !u!114 &436117056
@@ -253,7 +252,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1001
   m_TargetDisplay: 0
 --- !u!224 &436117058
 RectTransform:
@@ -414,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.547}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.841}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:

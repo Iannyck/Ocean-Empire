@@ -63,13 +63,19 @@ public class InstantExerciseChoice : WindowAnimation
                 if (Calendar.instance.AddScheduledTask(instantTask))
                 {
 
-                    TrackingWindow.ShowWaitingWindow("", instantTask, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
-                        print("EXERCICE COMPLETED : " + report.completionRate);
-                        for (int i = 0; i < report.probabilities.Count; i++)
-                        {
-                            print(report.probabilities);
-                        }
-                    });
+                    //TrackingWindow.ShowWaitingWindow("", instantTask, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report) {
+                    //    print("EXERCICE COMPLETED : " + report.completionRate);
+                    //    for (int i = 0; i < report.probabilities.Count; i++)
+                    //    {
+                    //        print(report.probabilities);
+                    //    }
+                    //});
+                }
+                else
+                {
+                    MessagePopup.DisplayMessage("La plage horaire est d" + TextCharacters.E_Aigue + "j" + TextCharacters.A_Grave +
+                        " occup" + TextCharacters.E_Aigue +
+                        " par un autre exercice.");
                 }
             }
         });

@@ -13,7 +13,7 @@ public class MessagePopup : MonoBehaviour
     [SerializeField]
     private Image bgImage;
 
-    [SerializeField, Header("Settings")]
+    [SerializeField, Header("Animation Settings")]
     private float openDuration = 0.35f;
     [SerializeField]
     private Ease openEase = Ease.OutQuad;
@@ -21,12 +21,14 @@ public class MessagePopup : MonoBehaviour
     private float startHorizontal = 0.5f;
 
     [SerializeField]
-    private float stayDuration = 1.5f;
-
-    [SerializeField]
     private float hideDuration;
     [SerializeField]
     private Ease hideEase = Ease.InSine;
+
+
+    [SerializeField, Header("Durations")]
+    private const float baseStayDuration = 0.5f;
+    private const float durationPerCharacter = 0.05f;
 
     private Vector2 destinedSizeDelta;
 
@@ -64,7 +66,7 @@ public class MessagePopup : MonoBehaviour
 
 
         //Pause
-        sq.AppendInterval(stayDuration);
+        sq.AppendInterval(baseStayDuration + message.Length * durationPerCharacter);
 
 
         //Bg disappear;
@@ -82,6 +84,6 @@ public class MessagePopup : MonoBehaviour
             Scenes.UnloadAsync(gameObject.scene);
         });
 
-        
+
     }
 }
