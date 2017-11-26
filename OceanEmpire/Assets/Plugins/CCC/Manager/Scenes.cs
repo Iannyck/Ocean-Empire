@@ -58,10 +58,9 @@ namespace CCC.Manager
             SceneManager.LoadSceneAsync(name, mode);
         }
 
-        static public void UnloadAsync(string name)
-        {
-            SceneManager.UnloadSceneAsync(name);
-        }
+        static public void UnloadAsync(string name) { SceneManager.UnloadSceneAsync(name); }
+        static public void UnloadAsync(Scene scene) { SceneManager.UnloadSceneAsync(scene); }
+        static public void UnloadAsync(int sceneBuildIndex) { SceneManager.UnloadSceneAsync(sceneBuildIndex); }
 
         static public bool Exists(string sceneName)
         {
@@ -85,10 +84,7 @@ namespace CCC.Manager
             throw new System.Exception("No active scene by that name: " + sceneName);
         }
 
-        static public int SceneCount()
-        {
-            return SceneManager.sceneCount;
-        }
+        static public int SceneCount { get { return SceneManager.sceneCount; } }
 
         #endregion
 

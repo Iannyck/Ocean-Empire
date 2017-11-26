@@ -20,42 +20,9 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            InstantExerciseChoice.ProposeTasks();
+            char e = TextCharacters.E_Aigue;
+            char a = TextCharacters.A_Grave;
+            MessagePopup.DisplayMessage("La plage horaire est d" + e + "j" + a + " utilis" + e + ".");
         }
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    bool result = Calendar.instance.AddScheduledTask(new ScheduledTask(WalkTask.Build(1), DateTime.Now.AddMinutes(-50)));
-        //    print(result);
-        //    if (result)
-        //        Calendar.instance.test.SortedAdd(-2);
-        //}
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    bool result = Calendar.instance.AddScheduledTask(new ScheduledTask(WalkTask.Build(1), DateTime.Now.AddMinutes(-10)));
-        //    print(result);
-        //    if (result)
-        //        Calendar.instance.test.SortedAdd(-1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    bool result = Calendar.instance.AddScheduledTask(new ScheduledTask(WalkTask.Build(1), DateTime.Now));
-        //    print(result);
-        //    if (result)
-        //        Calendar.instance.test.SortedAdd(0);
-        //}
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    bool result = Calendar.instance.AddScheduledTask(new ScheduledTask(WalkTask.Build(1), DateTime.Now.AddMinutes(10)));
-        //    print(result);
-        //    if (result)
-        //        Calendar.instance.test.SortedAdd(1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    bool result = Calendar.instance.AddScheduledTask(new ScheduledTask(WalkTask.Build(1), DateTime.Now.AddMinutes(50)));
-        //    print(result);
-        //    if (result)
-        //        Calendar.instance.test.SortedAdd(2);
-        //}
     }
 }

@@ -47,7 +47,7 @@ public class InstantExerciseChoice : WindowAnimation
 
     void Start()
     {
-        if (Scenes.SceneCount() == 1)
+        if (Scenes.SceneCount == 1)
             ProposeTasks();
     }
 
