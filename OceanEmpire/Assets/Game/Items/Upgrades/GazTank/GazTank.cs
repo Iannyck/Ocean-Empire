@@ -10,6 +10,7 @@ public class GazTank : Upgrade
     [SerializeField, ReadOnly]
     private float GazTimeRemaining = 0;
 
+
     public void UpdateTimer()
     {
         GazTimeRemaining = (GazTimeRemaining - Time.deltaTime).Raised(0);
@@ -25,6 +26,6 @@ public class GazTank : Upgrade
 
     public float GetGazRatio()
     {
-        return (GazDuration - GazTimeRemaining) / GazDuration;
+        return 1 - ( (GazDuration - GazTimeRemaining) / GazDuration );
     }
 }

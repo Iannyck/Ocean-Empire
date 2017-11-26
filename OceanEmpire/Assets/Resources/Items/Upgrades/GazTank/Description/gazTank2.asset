@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad144232e99bed94898e34a166e493d6, type: 3}
-  m_Name: gazTank1
+  m_Name: gazTank2
   m_EditorClassIdentifier: 
-  itemName: mini-bidon
-  itemDescription: "Reservoir d'essence par d\xE9faut"
-  moneyCost: 0
-  ticketCost: 0
+  itemName: reservoir medium
+  itemDescription: Reservoir d'essence plus gros
+  moneyCost: 20
+  ticketCost: 5
   itemImage: {fileID: 0}
-  itemFileName: item_gazTank1
-  itemID: gaztank1
-  upgradeLevel: 1
+  itemFileName: item_gazTank2
+  itemID: gaztank2
+  upgradeLevel: 2

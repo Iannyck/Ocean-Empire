@@ -25,9 +25,26 @@ public class ShopUI : BaseBehavior {
     private List<ItemDisplay> items;
     private int openedTab = -1;
 
-    // Use this for initialization
-    void Start () {
+    bool init = false;
 
+    // Use this for initialization
+    void Start ()
+    {
+            Init();  
+    }
+
+    private void Update()
+    {
+        if (init == false)
+            Init();
+    }
+
+    private void Init()
+    {
+        if (ItemsList.instance == null)
+            return;
+
+        init = true;
 
         tabs = new List<Button>();
         for (int i = 0; i < tabsList.Count; ++i)
@@ -36,7 +53,7 @@ public class ShopUI : BaseBehavior {
 
             newTab.GetComponentInChildren<Text>().text = tabsList[i].tabName;
             int number = i;
-            newTab.onClick.AddListener( () => { OpenTab(number); } );
+            newTab.onClick.AddListener(() => { OpenTab(number); });
             tabs.Insert(i, newTab.GetComponent<Button>());
         }
 
@@ -107,6 +124,10 @@ public class ShopUI : BaseBehavior {
             CurrentLevel = ItemsList.GetEquipThruster().GetUpgradeLevel();
         else if (item is HarpoonThrowerDescription && ItemsList.GetEquipHarpoonThrower())
             CurrentLevel = ItemsList.GetEquipHarpoonThrower().GetUpgradeLevel();
+        else if (item is FishContainerDescription && ItemsList.GetEquipFishContainer())
+            CurrentLevel = ItemsList.GetEquipFishContainer().GetUpgradeLevel();
+        else if (item is GazTankDescription && ItemsList.GetEquipGazTank())
+            CurrentLevel = ItemsList.GetEquipGazTank().GetUpgradeLevel();
 
         if (item.GetUpgradeLevel() >= CurrentLevel)
             return true;

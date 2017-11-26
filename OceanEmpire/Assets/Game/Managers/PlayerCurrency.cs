@@ -128,18 +128,14 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private static void Load()
     {
         instance.coins = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_COINS);
-    }
-
-    public static void ResetToDefaults()
-    {
-        instance.coins = 0;
-        instance.tickets = 0;
-
         if (CurrencyUpdate != null)
         {
             CurrencyUpdate();
         }
+    }
 
-        Save();
+    public static void Reload()
+    {
+        Load();
     }
 }

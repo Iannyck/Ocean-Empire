@@ -94,7 +94,7 @@ public class ItemsList : BaseManager<ItemsList>
 
     public bool IsEquiped(string itemID)
     {
-        if (equipedThruster == itemID || equipedHarpoon == itemID)
+        if (equipedThruster == itemID || equipedHarpoon == itemID || equipedGazTank == itemID || equipedFishContainer == itemID )
             return true;
         else
             return false;
@@ -188,15 +188,16 @@ public class ItemsList : BaseManager<ItemsList>
 
     private static void LoadMaps()
     {
-        if (instance.ownedMaps == null)
-            instance.ownedMaps = new Dictionary<string, bool>();
+        if (instance.ownedMaps != null)
+            instance.ownedMaps.Clear();
+        instance.ownedMaps = new Dictionary<string, bool>();
 
         foreach (KeyValuePair<string, string> containedIem in instance.mapsPaths)
         {
             string itemID = containedIem.Key;
             if (instance.ownedMaps.ContainsKey(itemID) == false)
             {
-                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID);
+                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID, false);
                 instance.ownedMaps.Add(itemID, owned);
             }
         }
@@ -207,15 +208,16 @@ public class ItemsList : BaseManager<ItemsList>
 
     private static void LoadUpgrades()
     {
-        if (instance.ownedUpgrades == null)
-            instance.ownedUpgrades = new Dictionary<string, bool>();
+        if (instance.ownedUpgrades != null)
+            instance.ownedUpgrades.Clear();
+        instance.ownedUpgrades = new Dictionary<string, bool>();
 
         foreach (KeyValuePair<string, string> containedIem in instance.upgradePaths)
         {
             string itemID = containedIem.Key;
             if (instance.ownedUpgrades.ContainsKey(itemID) == false)
             {
-                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID);
+                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID, false);
                 instance.ownedUpgrades.Add(itemID, owned);
             }
         }
@@ -296,35 +298,8 @@ public class ItemsList : BaseManager<ItemsList>
     }
 
 
-    public static void ResetToDefaults()
+    public static void Reload()
     {
-
-
-        Dictionary<string, bool> copy = new Dictionary< string, bool> (instance.ownedUpgrades);
-        foreach (KeyValuePair<string, bool> containedItem in copy)
-        {
-            instance.ownedUpgrades[containedItem.Key] = false;
-        }
-
-        copy = new Dictionary<string, bool>(instance.ownedMaps); 
-        foreach (KeyValuePair<string, bool> containedItem2 in copy)
-        {
-            instance.ownedMaps[containedItem2.Key] = false;
-        }
-
-        instance.equipedFishContainer = instance.defaultFishContainer;
-        if (instance.ownedUpgrades.ContainsKey(instance.equipedFishContainer))
-            instance.ownedUpgrades[instance.equipedFishContainer] = true;
-
-        instance.equipedThruster = instance.defaultThruster;
-        if (instance.ownedUpgrades.ContainsKey(instance.equipedThruster))
-            instance.ownedUpgrades[instance.equipedThruster] = true;
-
-        instance.equipedHarpoon = null;
-        if (instance.ownedMaps.ContainsKey(instance.defaultMap))
-            instance.ownedMaps[instance.defaultMap] = true;
-
-        Save();
+        Load();
     }
-
 }
