@@ -6,29 +6,90 @@ using UnityEngine;
 [System.Serializable]
 public class TimedTaskReport
 {
-    public ExerciseTrackingReport exerciseReport;
-    public HappyRating rating;
-
+    /// <summary>
+    /// Pas besoin de set cette variable manuellement.
+    /// </summary>
     public DateTime reportCreatedOn;
+
+    public enum State { Cancelled = 0, InterruptedInProgress = 1, Completed = 2 }
+
+    //Mendatoire
+    public State state;
+    public ExerciseType exerciseType;
     public DateTime taskCreatedOn;
     public TimeSlot taskPlannedFor;
     public bool wasInstantTask;
 
-    public TimedTaskReport(){}
+    //Optionnel
+    public ExerciseTrackingReport trackingReport;
+    public HappyRating rating;
+
+    public TimedTaskReport()
+    {
+        reportCreatedOn = DateTime.Now;
+    }
+
+    public static TimedTaskReport BuildFromCancelled(TimedTask timedTask)
+    {
+        TimedTaskReport report = new TimedTaskReport
+        {
+            state = State.Cancelled,
+            trackingReport = null,
+            rating = HappyRating.None,
+            exerciseType = timedTask.task.GetExerciseType(),
+            taskCreatedOn = timedTask.createdOn,
+            taskPlannedFor = timedTask.timeSlot,
+            wasInstantTask = timedTask is InstantTask
+        };
+
+        return report;
+    }
+
+    public static TimedTaskReport BuildFromInterrupted(TimedTask timedTask, ExerciseTrackingReport trackingReport)
+    {
+        TimedTaskReport report = new TimedTaskReport
+        {
+            state = State.InterruptedInProgress,
+            trackingReport = trackingReport,
+            rating = HappyRating.None,
+            exerciseType = timedTask.task.GetExerciseType(),
+            taskCreatedOn = timedTask.createdOn,
+            taskPlannedFor = timedTask.timeSlot,
+            wasInstantTask = timedTask is InstantTask,
+        };
+
+        return report;
+    }
+
+    public static TimedTaskReport BuildFromCompleted(TimedTask timedTask, ExerciseTrackingReport trackingReport, HappyRating happyRating)
+    {
+        TimedTaskReport report = new TimedTaskReport
+        {
+            state = State.Completed,
+            trackingReport = trackingReport,
+            rating = happyRating,
+            exerciseType = timedTask.task.GetExerciseType(),
+            taskCreatedOn = timedTask.createdOn,
+            taskPlannedFor = timedTask.timeSlot,
+            wasInstantTask = timedTask is InstantTask,
+        };
+
+        return report;
+    }
 
     public TimedTaskReport(ExerciseTrackingReport exerciseReport, DateTime taskCreatedOn, TimeSlot plannedTimeSlot, bool isInstantTask, HappyRating rating = HappyRating.None)
     {
-        this.exerciseReport = exerciseReport;
+        reportCreatedOn = DateTime.Now;
+
+
+        this.trackingReport = exerciseReport;
         this.rating = rating;
         taskPlannedFor = plannedTimeSlot;
         this.taskCreatedOn = taskCreatedOn;
-
-
-        reportCreatedOn = DateTime.Now;
     }
 
     public bool WasCancelled()
     {
-        return exerciseReport == null;
+        return trackingReport == null;
     }
 }

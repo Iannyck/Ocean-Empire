@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Calendar : BaseManager<Calendar>
 {
+    private const string CALENDAR_FILE = "calendar.dat";
+
     /// <summary>
     /// Ordonner du plus vieux au plus recent
     /// </summary>
@@ -34,9 +36,24 @@ public class Calendar : BaseManager<Calendar>
         }
     }
 
+    /// <summary>
+    /// ON NE DEVRAIS GÉNÉRALLEMENT PAS PASSSER PAR ICI
+    /// </summary>
     public bool RemoveScheduledTask(ScheduledTask task)
     {
+        Debug.LogWarning("Attention, on ne devrais generalement pas passer par ici pour conclure une scheduled task");
         return scheduledTasks.Remove(task);
+    }
+
+    public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
+    {
+        if (scheduledTasks.Remove(task))
+        {
+            Debug.LogWarning("A FAIRE: Ajouter le report a l'historique");
+
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
