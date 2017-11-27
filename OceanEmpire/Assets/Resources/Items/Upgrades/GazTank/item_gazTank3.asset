@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a0052832ca3e1446be71b22c7db81b2, type: 3}
-  m_Name: defaultGazTank
+  m_Name: item_gazTank3
   m_EditorClassIdentifier: 
-  description: {fileID: 0}
-  GazDuration: 20
+  description: {fileID: 11400000, guid: 35ab6a94b556028488f0db5009932669, type: 2}
+  GazDuration: 60
   GazTimeRemaining: 0

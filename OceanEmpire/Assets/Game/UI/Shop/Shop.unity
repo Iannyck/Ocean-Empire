@@ -424,12 +424,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ca130654ca082d41bb9dc562eb066bd, type: 2}
   - {fileID: 11400000, guid: f88bd620dc332584c93607edf3e5b58a, type: 2}
   - {fileID: 11400000, guid: 4d019a29d3b2b564eb812cf42b3a9758, type: 2}
+  - {fileID: 11400000, guid: 9b87e0bf60cecd744944131c3cf9e649, type: 2}
+  - {fileID: 11400000, guid: 42c072a75385b2f41890fc26bbd0a511, type: 2}
+  - {fileID: 11400000, guid: 35ab6a94b556028488f0db5009932669, type: 2}
   - {fileID: 11400000, guid: 35a842b984b8f8a4587363aaf915c0aa, type: 2}
   - {fileID: 11400000, guid: 0fd2a9cdc58f425468f9f3492157f5ab, type: 2}
   _serializedStateKeys:
   - tabsList
   _serializedStateValues:
-  - '[{"tabName":"Moteurs","coutainedItems":[0,1,2]},{"tabName":"Harpons","coutainedItems":[3,4]},{"tabName":"cartes","coutainedItems":[5,6]}]'
+  - '[{"tabName":"Moteurs","coutainedItems":[0,1,2]},{"tabName":"Harpons","coutainedItems":[3,4]},{"tabName":"Essence","coutainedItems":[5,6,7]},{"tabName":"cartes","coutainedItems":[8,9]}]'
   tabButton: {fileID: 114190889422522664, guid: 8cdd4e2f4f26a7b4fb467ce3278a4f96,
     type: 2}
   shopItem: {fileID: 114133397074277352, guid: 7bb2f5139c83df946a4f290ea7586301, type: 2}
@@ -445,6 +448,11 @@ MonoBehaviour:
     coutainedItems:
     - {fileID: 11400000, guid: f88bd620dc332584c93607edf3e5b58a, type: 2}
     - {fileID: 11400000, guid: 4d019a29d3b2b564eb812cf42b3a9758, type: 2}
+  - tabName: Essence
+    coutainedItems:
+    - {fileID: 11400000, guid: 9b87e0bf60cecd744944131c3cf9e649, type: 2}
+    - {fileID: 11400000, guid: 42c072a75385b2f41890fc26bbd0a511, type: 2}
+    - {fileID: 11400000, guid: 35ab6a94b556028488f0db5009932669, type: 2}
   - tabName: cartes
     coutainedItems:
     - {fileID: 11400000, guid: 35a842b984b8f8a4587363aaf915c0aa, type: 2}
@@ -550,8 +558,7 @@ MonoBehaviour:
   exitTime: 0.35
   exitEase: 2
   instantHideContent: 0
-  autoDetectSize: 1
-  size: {x: 0, y: 0}
+  exitSceneOnHide: 0
 --- !u!1001 &747360696
 Prefab:
   m_ObjectHideFlags: 0

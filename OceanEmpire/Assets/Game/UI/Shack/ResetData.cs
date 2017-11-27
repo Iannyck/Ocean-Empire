@@ -6,15 +6,20 @@ public class ResetData : MonoBehaviour {
 
 	public void ResetDataToDefault()
     {
+        if (GameSaves.instance != null)
+            GameSaves.instance.ClearAllSaves();
+
         if (ItemsList.instance != null)
-            ItemsList.ResetToDefaults();
+           ItemsList.Reload();
 
         if (PlayerCurrency.instance != null)
-            PlayerCurrency.ResetToDefaults();
+            PlayerCurrency.Reload();
 
         if(FishPopulation.instance != null)
-            FishPopulation.ResetToDefaults();
+            FishPopulation.Reload();
     }
+
+
     public void ShowMeTheMoney()    //Cheat code StarCraft xD
     {
         if (PlayerCurrency.instance != null)
