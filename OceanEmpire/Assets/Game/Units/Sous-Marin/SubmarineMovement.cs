@@ -20,8 +20,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
     private float downBound;
     private float deadZoneRadiusSQR;
 
-
-
     public float brakeDistance = 1.5f;
 
     public Vector2 currentTarget;
@@ -31,7 +29,8 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     private Thruster thruster;
     private FishContainer fishContainer;
- 
+
+    public bool movementEnable = false;
 
     private void Awake()
     {
@@ -68,6 +67,11 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     void FixedUpdate()
     {
+        if (movementEnable == false)
+        { 
+            rb.velocity = Vector2.zero;
+            return;
+        }
 
         Vector2 distance = currentTarget - (Vector2)transform.position;
         Vector2 direction = distance.normalized;

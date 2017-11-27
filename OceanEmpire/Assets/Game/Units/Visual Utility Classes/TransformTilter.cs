@@ -13,17 +13,27 @@ public class TransformTilter : MonoBehaviour
     private float maxSpeedSQR;
     private Transform tr;
 
+    private Vector2 velocity;
+    private Vector3 lastFramePostion = Vector3.zero;
+
     private void Awake()
     {
         maxSpeedSQR = maxSpeed;
         tr = transform;
     }
 
+    private void FixedUpdate()
+    {
+        Vector3 currentPostion = tr.position;
+        velocity = (currentPostion - lastFramePostion) / Time.fixedDeltaTime;
+        lastFramePostion = currentPostion;
+    }
+
     private void Update()
     {
         if (rb != null)
         {
-            Vector2 vel = rb.velocity;
+            Vector2 vel = velocity;
             float sqrMag = vel.sqrMagnitude;
 
             float targetAngle = 0;
