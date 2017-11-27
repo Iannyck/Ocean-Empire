@@ -38,6 +38,11 @@ public class TrackingWindow : MonoBehaviour {
         });
     }
 
+    public static bool IsTrackingSomething()
+    {
+        return Scenes.Exists(SCENE_NAME);
+    }
+
     private void Awake()
     {
         startTrackingUpdate = false;
