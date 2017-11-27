@@ -37,9 +37,23 @@ public class PlayerStats : MonoBehaviour {
             Game.instance.EndGame();
     }
 
-    public void AddFishToStock(BaseFish fish)
+    public void TryCapture(BaseFish fish)
     {
-        fishInStock.Add(fish);
-        // Add score
+        FishContainer container = Game.SubmarinParts.GetFishContainer();
+        if ( container.HasRoom())
+        {
+            fish.Capture();
+            container.AddFish(fish);
+
+            CallCoinsPopUp(fish);
+        }
+    }
+
+    private void CallCoinsPopUp(BaseFish fish)
+    {
+        int fishWorth = fish.description.baseMonetaryValue.RoundedToInt();
+        Vector3 fishPostion = fish.transform.position;
+
+        Game.Recolte_UI.GetComponent<SpawnCoinsPopUp>().SpawnPopUp(fishPostion, fishWorth);
     }
 }

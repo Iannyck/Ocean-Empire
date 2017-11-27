@@ -16,6 +16,7 @@ public class Game : PublicSingleton<Game>
     public static FishingReport FishingReport { get { return instance.fishingReport; } }
     public static Spawner Spawner { get { return instance.spawner; } }
     public static GameCamera GameCamera { get { return instance.gameCamera; } }
+    public static Recolte_UI Recolte_UI { get { return instance.ui; } }
 
     public static SubmarineMovement SubmarineMouvement { get { return instance.submarine; } }
     public static SubmarinParts SubmarinParts { get { return (instance.submarine == null ? null : instance.submarine.gameObject.GetComponent<SubmarinParts>()); } }

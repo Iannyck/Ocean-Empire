@@ -15,13 +15,14 @@ public class FishContainer : Upgrade {
         return fishCapacity;
     }
 
-    public void TryCapture(BaseFish fish)
+    public bool HasRoom()
     {
-        if (fishContained < fishCapacity)
-        {
-            fish.Capture();
-            fishContained += fish.description.populationValue;
-        }
+        return (fishContained < fishCapacity);
+    }
+
+    public void AddFish(BaseFish fish)
+    { 
+        fishContained += fish.description.populationValue;   
     }
 
     public void ResetContainedFish()

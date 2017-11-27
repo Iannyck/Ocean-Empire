@@ -8,7 +8,7 @@ public class MiniFish : BaseFish
 
     public void OnPlayerTouch()
     {
-        Game.SubmarinParts.GetFishContainer().TryCapture(this);
+        Game.PlayerStats.TryCapture(this);
         //Capture();
     }
 }

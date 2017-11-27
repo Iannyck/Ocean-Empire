@@ -873,6 +873,7 @@ GameObject:
   - component: {fileID: 1533438432}
   - component: {fileID: 1533438436}
   - component: {fileID: 1533438437}
+  - component: {fileID: 1533438438}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -986,6 +987,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: Map_Caraibe
+--- !u!114 &1533438438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1533438431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ae4ec2add138f468b91a8893b1983f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsPopUpPrefab: {fileID: 114038013904753118, guid: 49b0ff1b139aeaf47b5ebf26782c23b5,
+    type: 2}
 --- !u!1 &1542161066
 GameObject:
   m_ObjectHideFlags: 0
