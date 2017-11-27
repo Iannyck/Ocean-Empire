@@ -45,8 +45,9 @@ public class InstantExerciseChoice : WindowAnimation
         }
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         if (Scenes.SceneCount == 1)
             ProposeTasks();
     }

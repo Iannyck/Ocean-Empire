@@ -12,7 +12,7 @@ public class TestScript_Fred : MonoBehaviour
         CCC.Manager.MasterManager.Sync();
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
 
-
+        Update();
         //InstantExerciseChoice.ProposeTasks();
     }
 

@@ -11,12 +11,17 @@ public class TrackingReminder : MonoBehaviour
     // On écoute aux update du calendrier
     private void OnEnable()
     {
-        if(Calendar.instance != null)
-        {
-            CheckCalendar(true);
-            Calendar.instance.onTaskAdded += CheckCalendar;
-            Calendar.instance.onTaskConcluded += CheckCalendar;
-        }
+        if (Calendar.instance != null)
+            Listen();
+        else
+            CCC.Manager.MasterManager.Sync(Listen);
+    }
+
+    private void Listen()
+    {
+        CheckCalendar(true);
+        Calendar.instance.onTaskAdded += CheckCalendar;
+        Calendar.instance.onTaskConcluded += CheckCalendar;
     }
 
     // On écoute aux update du calendrier

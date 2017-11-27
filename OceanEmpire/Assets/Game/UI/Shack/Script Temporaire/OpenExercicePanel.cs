@@ -13,7 +13,7 @@ public class OpenExercicePanel : MonoBehaviour
 
     public void Open()
     {
-        Scenes.LoadAsync(ExercicePanel.SCENENAME, LoadSceneMode.Additive, OnSceneLoaded);
+        InstantExerciseChoice.ProposeTasks(-1);
     }
 
     void OnSceneLoaded(Scene scene)

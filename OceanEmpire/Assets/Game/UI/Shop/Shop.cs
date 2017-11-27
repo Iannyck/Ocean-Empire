@@ -8,8 +8,9 @@ public class Shop : WindowAnimation
 {
     public const string SCENENAME = "Shop";
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         CCC.Manager.MasterManager.Sync();
     }
     public void Quit()

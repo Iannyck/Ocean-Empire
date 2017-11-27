@@ -8,8 +8,9 @@ public class RegionSelection : WindowAnimation
 {
     public const string SCENENAME = "RegionSelection";
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         CCC.Manager.MasterManager.Sync();
     }
 

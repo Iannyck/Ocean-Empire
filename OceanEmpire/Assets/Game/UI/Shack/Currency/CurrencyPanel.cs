@@ -9,8 +9,6 @@ public class CurrencyPanel : MonoBehaviour
     public Text moneyAmount;
     public Text tickeyAmount;
 
-    private bool ready = false;
-
     void OnEnable()
     {
         if (PlayerCurrency.instance == null)

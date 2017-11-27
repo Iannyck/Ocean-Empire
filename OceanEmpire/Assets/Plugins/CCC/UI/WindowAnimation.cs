@@ -43,6 +43,7 @@ namespace CCC.UI
         private float bgImageAlpha;
         private bool isOpen = false;
         private float backBgAlpha;
+        private bool canAutoUnloadScene = false;
 
         protected virtual void Awake()
         {
@@ -52,21 +53,24 @@ namespace CCC.UI
                 bgImageAlpha = bgImage.color.a;
             if (backBg)
                 backBgAlpha = backBg.color.a;
+        }
 
-            //bigV = autoDetectSize ? bgTr.sizeDelta : size;
-            //smallV = new Vector2(bigV.x * horizontalStart, bigV.y * verticalStart);
-
+        protected virtual void Start()
+        {
+            Canvas.ForceUpdateCanvases();
             bigV = bgTr.sizeDelta;
-            Vector2 delta = bgTr.rect.size;
+            Vector2 delta = bgTr.GetAnchoredSizeDelta();
             smallV = new Vector2(bigV.x - ((1 - horizontalStart) * delta.x), bigV.y - ((1 - verticalStart) * delta.y));
 
             InstantClose();
 
             if (openOnAwake)
                 Open();
+            canAutoUnloadScene = true;
         }
 
-        public void Open(TweenCallback onComplete = null)
+        public void Open() { Open(null); }
+        public void Open(TweenCallback onComplete)
         {
             isOpen = true;
             bgTr.gameObject.SetActive(true);
@@ -107,7 +111,8 @@ namespace CCC.UI
             }
         }
 
-        public void Close(TweenCallback onComplete = null)
+        public void Close() { Close(null); }
+        public void Close(TweenCallback onComplete)
         {
             isOpen = false;
 
@@ -209,7 +214,7 @@ namespace CCC.UI
 
         protected virtual void OnCloseComplete()
         {
-            if (exitSceneOnHide)
+            if (exitSceneOnHide && canAutoUnloadScene)
                 UnloadScene();
         }
 

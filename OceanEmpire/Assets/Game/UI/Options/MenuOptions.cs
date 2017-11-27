@@ -49,7 +49,7 @@ public class MenuOptions : WindowAnimation
         }
     }
 
-    public static void Open()
+    public static void OpenWindow()
     {
         if (Game.instance != null)
         {

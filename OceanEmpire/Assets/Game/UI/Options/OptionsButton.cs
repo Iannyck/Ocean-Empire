@@ -16,10 +16,10 @@ public class OptionsButton : MonoBehaviour
         switch (type)
         {
             case Type.Menu:
-                MenuOptions.Open();
+                MenuOptions.OpenWindow();
                 break;
             case Type.InGame:
-                InGameOptions.Open();
+                InGameOptions.OpenWindow();
                 break;
         }
     }

@@ -14,7 +14,7 @@ public class CalendarGrid_Controller : CanvasGroupBehaviour
     [ReadOnly]
     public CalendarRootScene root;
 
-    private Calendar calendar;
+    //private Calendar calendar;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class CalendarGrid_Controller : CanvasGroupBehaviour
 
     public void Fill(Calendar calendar)
     {
-        this.calendar = calendar;
+        //this.calendar = calendar;
         int weekIndex = -1 - currentWeekIndex;
         DateTime now = DateTime.Now;
 

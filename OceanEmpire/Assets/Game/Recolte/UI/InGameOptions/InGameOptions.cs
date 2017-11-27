@@ -16,12 +16,7 @@ public class InGameOptions : WindowAnimation, SceneMessage
 
     private bool isQuitting = false;
 
-    private GameBuilder gameBuilder; 
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    private GameBuilder gameBuilder;
 
     public void Confirm()
     {
@@ -71,7 +66,7 @@ public class InGameOptions : WindowAnimation, SceneMessage
         }
     }
 
-    public static void Open()
+    public static void OpenWindow()
     {
         if (Game.instance == null)
         {
