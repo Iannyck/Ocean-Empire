@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TrackingWindow : MonoBehaviour {
+public class TrackingWindow : MonoBehaviour
+{
 
     public const string SCENE_NAME = "TrackingWindow";
 
@@ -25,16 +26,15 @@ public class TrackingWindow : MonoBehaviour {
     private TimeSpan currentRemaining;
     private bool startTrackingUpdate;
     private DateTime trackingStart;
-    private TimedTask currentTask;
+    private ScheduledTask currentTask;
     private ActivityAnalyser.Report currentReport;
     private List<GameObject> infoObjects = new List<GameObject>();
 
-    private Action<ExerciseTrackingReport> onCompleteEvent;
-
-    public static void ShowWaitingWindow(string exerciceDescription, TimedTask task, ExerciseTracker tracker, Action<ExerciseTrackingReport> onComplete = null, string enAttente = "En Attente...", string title = "Faire l'exercice")
+    public static void ShowWaitingWindow(string exerciceDescription, ScheduledTask task, string enAttente = "En Attente...", string title = "Faire l'exercice")
     {
-        Scenes.LoadAsync(SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene) {
-            scene.FindRootObject<TrackingWindow>().InitDisplay(exerciceDescription, task, tracker, onComplete, enAttente,title);
+        Scenes.LoadAsync(SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene)
+        {
+            scene.FindRootObject<TrackingWindow>().InitDisplay(exerciceDescription, task, enAttente, title);
         });
     }
 
@@ -49,16 +49,16 @@ public class TrackingWindow : MonoBehaviour {
         currentRemaining = new TimeSpan(0, 0, 0);
     }
 
-    public void InitDisplay(string exerciceDescription, TimedTask task, ExerciseTracker tracker, Action<ExerciseTrackingReport> onComplete = null, string enAttente = "En Attente...", string title = "Faire l'exercice")
+    public void InitDisplay(string exerciceDescription, ScheduledTask task, string enAttente = "En Attente...", string title = "Faire l'exercice")
     {
         this.title.text = title;
         exercice.text = exerciceDescription;
         this.enAttente.text = enAttente;
-        onCompleteEvent = onComplete;
-        this.tracker = tracker;
+        tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
         trackingStart = DateTime.Now;
         currentTask = task;
-        windowAnim.Open(delegate() {
+        windowAnim.Open(delegate ()
+        {
             startTrackingUpdate = true;
             waitAnimation.DoAnimation();
         });
@@ -91,33 +91,45 @@ public class TrackingWindow : MonoBehaviour {
         {
             currentReport = tracker.UpdateTracking(currentTask, trackingStart); // task=TimedTask, startedWhen=DateTime
             if (currentReport.complete)
-                Hide(ActivityAnalyser.ProduceReport(currentReport, ExerciseTrackingReport.State.Completed)); // exercise complete ! state=ExerciseTrackingReport.State 
+            {
+                ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
+                Hide(); // exercise complete ! state=ExerciseTrackingReport.State 
+            }
             else
+            {
                 UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
+            }
             Debug.Log("TIME WALKING :" + currentReport.timeSpendingExercice);
         }
     }
 
-    public void Hide(ExerciseTrackingReport trackingReport)
+    public void Hide()
     {
         startTrackingUpdate = false;
-        windowAnim.Close(delegate() {
+        windowAnim.Close(delegate ()
+        {
             Scenes.UnloadAsync(SCENE_NAME);
-            if (onCompleteEvent != null)
-                onCompleteEvent.Invoke(trackingReport);
         });
     }
-    
-	public void ForceComplete()
+
+    private void ConcludeTask(ExerciseTrackingReport trackingReport)
     {
-        currentReport = tracker.ForceCompletion(currentTask);
-        Hide(ActivityAnalyser.ProduceReport(currentReport, ExerciseTrackingReport.State.UserSaidItWasCompleted));
+        TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(currentTask, trackingReport, HappyRating.None);
+        Calendar.instance.ConcludeScheduledTask(currentTask, taskReport);
+    }
+
+    public void ForceComplete()
+    {
+        currentReport = tracker.EvaluateTask(currentTask);
+        ConcludeTask(ExerciseTrackingReport.BuildFrom_UserSaidItWasCompleted(currentReport));
+        Hide();
     }
 
     public void ForceStop()
     {
-        currentReport = tracker.ForceCompletion(currentTask);
-        Hide(ActivityAnalyser.ProduceReport(currentReport, ExerciseTrackingReport.State.Stopped));
+        currentReport = tracker.EvaluateTask(currentTask);
+        ConcludeTask(ExerciseTrackingReport.BuildFromAbandonned(currentReport));
+        Hide();
     }
 
     private void UpdateTimeExercice()

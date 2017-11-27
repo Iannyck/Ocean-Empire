@@ -55,7 +55,7 @@ public class AskWindowWithGage : MonoBehaviour
         // On le mettre ailleur et passer une action dans le init
         Scenes.LoadAsync(InstantExerciseChoice.SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
         {
-            Debug.LogWarning("A changer");
+            Debug.LogError("Mon ti chnappant, cossé tu fa icite ? FARME LA CRISS DE PORTE PI RVIENS PU !");
             //scene.FindRootObject<InstantExerciseChoice>().Init(false, ()=> {
             //    widgetGage.IncrementRate(0.5f);
             //    widgetGage.AnimComplete += Exit;
@@ -65,7 +65,8 @@ public class AskWindowWithGage : MonoBehaviour
 
     public void OnWaitWindowLoad(Scene scene)
     {
-        scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km",null,null, Exit);
+        Debug.LogError("Mon ti chnappant, cossé tu fa icite ? FARME LA CRISS DE PORTE PI RVIENS PU !");
+        //scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km",null,null, Exit);
         // ajouter un listener en parametre. Le WaitingWindow doit aller ecouter a se qui doit etre fait
         // et se ferme quand le listener est executer
     }

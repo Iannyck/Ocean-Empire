@@ -15,7 +15,7 @@ public class WalkTracker : ExerciseTracker
         return null;
     }
 
-    public override ActivityAnalyser.Report ForceCompletion(TimedTask task)
+    public override ActivityAnalyser.Report EvaluateTask(TimedTask task)
     {
         return null;
     }

@@ -45,21 +45,6 @@ public class Calendar : BaseManager<Calendar>
         }
     }
 
-    public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
-    {
-        if (scheduledTasks.Remove(task))
-        {
-            if (onTaskConcluded != null)
-                onTaskConcluded();
-
-            Debug.LogWarning("A FAIRE: Ajouter le report a l'historique");
-
-            ApplyToGameSaves(true);
-            return true;
-        }
-        return false;
-    }
-
     /// <summary>
     /// ( ͡° ͜ʖ ͡°)
     /// </summary>
@@ -81,6 +66,60 @@ public class Calendar : BaseManager<Calendar>
     {
         ReadFromGameSaves();
         CompleteInit();
+    }
+
+    /// <summary>
+    /// Retire la tache du calendrier, l'ajoute a l'historique ET donne la reward si applicable
+    /// </summary>
+    public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
+    {
+        if (scheduledTasks.Remove(task))
+        {
+            if (onTaskConcluded != null)
+                onTaskConcluded();
+
+            Debug.LogWarning("A FAIRE: Ajouter le report a l'historique");
+
+            ApplyToGameSaves(true);
+            return true;
+        }
+        return false;
+    }
+
+    List<ScheduledTask> ConcludePastTasks()
+    {
+        List<ScheduledTask> cancelledTasks = new List<ScheduledTask>();
+
+        DateTime now = DateTime.Now;
+        for (int i = 0; i < scheduledTasks.Count; i++)
+        {
+            ScheduledTask task = scheduledTasks[i];
+            if (ConcludePastTask(task))
+            {
+                cancelledTasks.Add(task);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return cancelledTasks;
+    }
+
+    bool ConcludePastTask(ScheduledTask task)
+    {
+        if (!task.timeSlot.IsInThePast())
+            return false;
+
+        ExerciseTracker tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
+        ActivityAnalyser.Report analyserReport = tracker.EvaluateTask(task);
+        ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromNonInterrupted(analyserReport);
+        TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(task, trackingReport, HappyRating.None);
+
+        ConcludeScheduledTask(task, taskReport);
+
+        return true;
     }
 
     private void ApplyToGameSaves(bool andSave)

@@ -148,14 +148,4 @@ public class ActivityAnalyser {
 
         return result;
     }
-
-    public static ExerciseTrackingReport ProduceReport(Report report, ExerciseTrackingReport.State state)
-    {
-        return new ExerciseTrackingReport(state, 
-            report.probabilities, 
-            report.timeSpendingExercice, 
-            report.activityRate, 
-            new TimeSlot(), 
-            new TimeSlot());
-    }
 }

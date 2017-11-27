@@ -6,22 +6,61 @@ using UnityEngine;
 [System.Serializable]
 public class ExerciseTrackingReport
 {
-    public enum State { Stopped = 0, Completed = 1, UserSaidItWasCompleted = 2 }
+    public enum State { Abandonned = 0, Completed = 1, UserSaidItWasCompleted = 2, Incomplete = 3 }
 
-    public float completionRate;
+    /// <summary>
+    /// Pourcentage d'activité (50% = à été actif pendant la moitié du temps)
+    /// </summary>
+    public float activityRate;
+
+    /// <summary>
+    /// L'état de la tache
+    /// </summary>
     public State state;
-    public TimeSlot startTime;
-    public TimeSlot endTime;
-    public List<float> probabilities;
-    public TimeSpan timeSpendingExercice;
 
-    public ExerciseTrackingReport(State state, List<float> probabilities, TimeSpan timeSpendingExercice, float completionRate, TimeSlot startTime, TimeSlot endTime)
+    /// <summary>
+    /// Le début de la tache, et la durée total que ça a pris pour completer l'exercice
+    /// </summary>
+    public TimeSlot timeSlot;
+
+    /// <summary>
+    /// Liste des probabilités
+    /// </summary>
+    public List<float> probabilities;
+
+    private ExerciseTrackingReport() { }
+
+    public static ExerciseTrackingReport BuildFromNonInterrupted(ActivityAnalyser.Report activityReport)
     {
-        this.state = state;
-        this.completionRate = completionRate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.probabilities = probabilities;
-        this.timeSpendingExercice = timeSpendingExercice;
+        DateTime taskStartTime = activityReport.task.timeSlot.start;
+        return new ExerciseTrackingReport()
+        {
+            activityRate = activityReport.activityRate,
+            state = activityReport.complete ? State.Completed : State.Incomplete,
+            timeSlot = new TimeSlot(taskStartTime, activityReport.exerciceEnd - taskStartTime),
+            probabilities = activityReport.probabilities
+        };
+    }
+    public static ExerciseTrackingReport BuildFromAbandonned(ActivityAnalyser.Report activityReport)
+    {
+        DateTime taskStartTime = activityReport.task.timeSlot.start;
+        return new ExerciseTrackingReport()
+        {
+            activityRate = activityReport.activityRate,
+            state =  State.Abandonned,
+            timeSlot = new TimeSlot(taskStartTime, activityReport.exerciceEnd - taskStartTime),
+            probabilities = activityReport.probabilities
+        };
+    }
+    public static ExerciseTrackingReport BuildFrom_UserSaidItWasCompleted(ActivityAnalyser.Report activityReport)
+    {
+        DateTime taskStartTime = activityReport.task.timeSlot.start;
+        return new ExerciseTrackingReport()
+        {
+            activityRate = activityReport.activityRate,
+            state = State.UserSaidItWasCompleted,
+            timeSlot = new TimeSlot(taskStartTime, activityReport.exerciceEnd - taskStartTime),
+            probabilities = activityReport.probabilities
+        };
     }
 }
