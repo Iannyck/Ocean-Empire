@@ -46,7 +46,7 @@ public class FishingSummary : MonoBehaviour
 
     public void GoBackToShack()
     {
-        LoadingScreen.TransitionTo(ShackManager.SCENENAME, new ToShackMessage(fishingReport));
+        LoadingScreen.TransitionTo(Shack.SCENENAME, new ToShackMessage(fishingReport));
     }
 
     public void UpdateFishPopulation()
