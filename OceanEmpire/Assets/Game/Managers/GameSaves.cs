@@ -21,6 +21,7 @@ public class GameSaves : BaseManager<GameSaves>
         public Dictionary<string, string> strings = new Dictionary<string, string>();
         public Dictionary<string, bool> bools = new Dictionary<string, bool>();
         public Dictionary<string, DateTime> dateTimes = new Dictionary<string, DateTime>();
+        public Dictionary<string, object> objects = new Dictionary<string, object>();
     }
 
     public override void Init()
@@ -83,6 +84,15 @@ public class GameSaves : BaseManager<GameSaves>
             return defaultVal;
     }
 
+    public object GetObject(Type type, string key, object defaultVal = null)
+    {
+        Data data = TypeToData(type);
+        if (data.objects.ContainsKey(key))
+            return data.objects[key];
+        else
+            return defaultVal;
+    }
+
 
 
     #endregion
@@ -130,6 +140,15 @@ public class GameSaves : BaseManager<GameSaves>
             data.dateTimes.Add(key, value);
     }
 
+    public void SetObject(Type type, string key, object value)
+    {
+        Data data = TypeToData(type);
+        if (data.objects.ContainsKey(key))
+            data.objects[key] = value;
+        else
+            data.objects.Add(key, value);
+    }
+
 
     #endregion
 
@@ -164,6 +183,12 @@ public class GameSaves : BaseManager<GameSaves>
         return data.dateTimes.ContainsKey(key);
     }
 
+    public bool ContainsObject(Type type, string key)
+    {
+        Data data = TypeToData(type);
+        return data.objects.ContainsKey(key);
+    }
+
 
     #endregion
 
@@ -175,6 +200,7 @@ public class GameSaves : BaseManager<GameSaves>
         LoadDataAsync(Type.Tutorial, queue.Register());
         LoadDataAsync(Type.FishPop, queue.Register());
         LoadDataAsync(Type.Items, queue.Register());
+        LoadDataAsync(Type.Calendar, queue.Register());
 
         queue.MarkEnd();
     }
@@ -185,6 +211,7 @@ public class GameSaves : BaseManager<GameSaves>
         LoadData(Type.Tutorial);
         LoadData(Type.FishPop);
         LoadData(Type.Items);
+        LoadData(Type.Calendar);
     }
 
     public void SaveAllAsync(Action onComplete)
@@ -194,6 +221,7 @@ public class GameSaves : BaseManager<GameSaves>
         SaveDataAsync(Type.Tutorial, queue.Register());
         SaveDataAsync(Type.FishPop, queue.Register());
         SaveDataAsync(Type.Items, queue.Register());
+        SaveDataAsync(Type.Calendar, queue.Register());
 
         queue.MarkEnd();
     }
@@ -205,6 +233,7 @@ public class GameSaves : BaseManager<GameSaves>
         SaveData(Type.Tutorial);
         SaveData(Type.FishPop);
         SaveData(Type.Items);
+        SaveData(Type.Calendar);
 
 #if UNITY_EDITOR
         Debug.Log("All Data Saved");
@@ -274,6 +303,7 @@ public class GameSaves : BaseManager<GameSaves>
         ClearSave(Type.Tutorial);
         ClearSave(Type.FishPop);
         ClearSave(Type.Items);
+        ClearSave(Type.Calendar);
     }
 
     [InspectorButton()]
@@ -308,6 +338,14 @@ public class GameSaves : BaseManager<GameSaves>
         Debug.Log("Items Cleared");
 #endif
     }
+    [InspectorButton()]
+    public void ClearCalendar()
+    {
+        ClearSave(Type.Calendar);
+#if UNITY_EDITOR
+        Debug.Log("Calendar Cleared");
+#endif
+    }
 
     public void ClearSave(Type type)
     {
@@ -324,8 +362,9 @@ public class GameSaves : BaseManager<GameSaves>
     private const string TUTORIAL_FILE = "tutorial.dat";
     private const string FISHPOP_FILE = "fishpop.dat";
     private const string ITEMS_FILE = "items.dat";
+    private const string CALENDAR_FILE = "calendar.dat";
 
-    public enum Type { Currency = 0, Tutorial = 1, FishPop = 2, Items = 3}
+    public enum Type { Currency = 0, Tutorial = 1, FishPop = 2, Items = 3, Calendar = 4 }
 
     [ShowInInspector]
     private Data currencyData = new Data();
@@ -335,6 +374,8 @@ public class GameSaves : BaseManager<GameSaves>
     private Data fishPopData = new Data();
     [ShowInInspector]
     private Data itemsData = new Data();
+    [ShowInInspector]
+    private Data calendarData = new Data();
 
     private string TypeToFileName(Type type)
     {
@@ -348,6 +389,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return FISHPOP_FILE;
             case Type.Items:
                 return ITEMS_FILE;
+            case Type.Calendar:
+                return CALENDAR_FILE;
             default:
                 return "";
         }
@@ -365,6 +408,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return fishPopData;
             case Type.Items:
                 return itemsData;
+            case Type.Calendar:
+                return calendarData;
             default:
                 return null;
         }
@@ -386,6 +431,9 @@ public class GameSaves : BaseManager<GameSaves>
             case Type.Items:
                 itemsData = newData;
                 break;
+            case Type.Calendar:
+                calendarData = newData;
+                break;
             default:
                 break;
         }
@@ -406,6 +454,9 @@ public class GameSaves : BaseManager<GameSaves>
                 break;
             case Type.Items:
                 itemsData = new Data();
+                break;
+            case Type.Calendar:
+                calendarData = new Data();
                 break;
             default:
                 break;

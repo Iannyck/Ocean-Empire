@@ -2,46 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CCC.Manager;
 
-public class CurrencyPanel : MonoBehaviour {
-
+public class CurrencyPanel : MonoBehaviour
+{
     public Text moneyAmount;
     public Text tickeyAmount;
 
     private bool ready = false;
 
-    // Use this for initialization
-    void Start () {
-        Init();
-    }
-
-    private void Init()
+    void OnEnable()
     {
-        if (PlayerCurrency.instance != null)
-        {
-            UpdateCurrencyValues();
-            PlayerCurrency.CurrencyUpdate += UpdateCurrencyValues;
-            ready = true;
-        }
+        if (PlayerCurrency.instance == null)
+            MasterManager.Sync(Listen);
+        else
+            Listen();
     }
 
-    void Update()
+    void Listen()
     {
-        if (ready == false)
-            Init();
+        UpdateCurrencyValues();
+        PlayerCurrency.CurrencyUpdate += UpdateCurrencyValues;
     }
 
 
-    void UpdateCurrencyValues ()
+    void UpdateCurrencyValues()
     {
         moneyAmount.text = PlayerCurrency.GetCoins().ToString();
         tickeyAmount.text = PlayerCurrency.GetTickets().ToString();
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
-        PlayerCurrency.CurrencyUpdate -= UpdateCurrencyValues;
+        if (PlayerCurrency.instance != null)
+            PlayerCurrency.CurrencyUpdate -= UpdateCurrencyValues;
     }
-
-
 }

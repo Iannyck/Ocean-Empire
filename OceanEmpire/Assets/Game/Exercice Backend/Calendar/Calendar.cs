@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Calendar : BaseManager<Calendar>
 {
-    private const string CALENDAR_FILE = "calendar.dat";
+    private const string SAVE_KEY_ST = "scheduledTasks";
 
     /// <summary>
     /// Ordonner du plus vieux au plus recent
@@ -15,6 +15,8 @@ public class Calendar : BaseManager<Calendar>
     [SerializeField]
     private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
     public bool log = true;
+    public event SimpleEvent onTaskAdded;
+    public event SimpleEvent onTaskConcluded;
 
     public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
 
@@ -23,8 +25,15 @@ public class Calendar : BaseManager<Calendar>
         if (IsTimeSlutAvailable(task.timeSlot))
         {
             scheduledTasks.SortedAdd(task, (a, b) => a.timeSlot.start.CompareTo(b.timeSlot.start));
+
+            ApplyToGameSaves(true);
+
             if (log)
                 Debug.Log("ScheduledTask ajouter au calendrier avec succes.");
+
+            if (onTaskAdded != null)
+                onTaskAdded();
+
             return true;
         }
         else
@@ -36,21 +45,16 @@ public class Calendar : BaseManager<Calendar>
         }
     }
 
-    /// <summary>
-    /// ON NE DEVRAIS GÉNÉRALLEMENT PAS PASSSER PAR ICI
-    /// </summary>
-    public bool RemoveScheduledTask(ScheduledTask task)
-    {
-        Debug.LogWarning("Attention, on ne devrais generalement pas passer par ici pour conclure une scheduled task");
-        return scheduledTasks.Remove(task);
-    }
-
     public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
     {
         if (scheduledTasks.Remove(task))
         {
+            if (onTaskConcluded != null)
+                onTaskConcluded();
+
             Debug.LogWarning("A FAIRE: Ajouter le report a l'historique");
 
+            ApplyToGameSaves(true);
             return true;
         }
         return false;
@@ -63,7 +67,7 @@ public class Calendar : BaseManager<Calendar>
     {
         for (int i = 0; i < scheduledTasks.Count; i++)
         {
-            int result = timeslot.IsOverlappingWith(ref scheduledTasks[i].timeSlot);
+            int result = timeslot.IsOverlappingWith(scheduledTasks[i].timeSlot);
             if (result == 0)
                 return false;
             else if (result == -1)
@@ -75,8 +79,29 @@ public class Calendar : BaseManager<Calendar>
 
     public override void Init()
     {
+        ReadFromGameSaves();
         CompleteInit();
     }
+
+    private void ApplyToGameSaves(bool andSave)
+    {
+        GameSaves.instance.SetObject(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
+        if (andSave)
+            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, null);
+    }
+
+    private void ReadFromGameSaves()
+    {
+        scheduledTasks = GameSaves.instance.GetObject(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<ScheduledTask>;
+        if (scheduledTasks == null)
+            scheduledTasks = new List<ScheduledTask>();
+    }
+
+
+
+
+
+
 
     public struct Day
     {
