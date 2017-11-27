@@ -101,6 +101,7 @@ public class Game : PublicSingleton<Game>
 
         //Spawn player
         submarine = playerSpawn.SpawnPlayer();
+        submarine.movementEnable = false;
 
         //Ready up !
         ReadyGame();
@@ -110,8 +111,10 @@ public class Game : PublicSingleton<Game>
             delegate ()
             {
                 cameraMouvement.followPlayer = true;
+                submarine.movementEnable = true;
                 playerSpawned = true;
                 ui.feedbacks.ShowGo(StartGame);
+                
             });
     }
 
@@ -155,6 +158,11 @@ public class Game : PublicSingleton<Game>
         if (gameOver)
             return;
         gameOver = true;
+
+        cameraMouvement.followPlayer = false;
+        submarine.movementEnable = false;
+        playerSpawn.AnimatePlayerGoToTop(submarine);
+
         ui.feedbacks.ShowTimeUp(delegate ()
         {
             LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(fishingReport));

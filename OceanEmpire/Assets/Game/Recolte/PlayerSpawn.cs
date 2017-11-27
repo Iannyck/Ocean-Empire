@@ -11,6 +11,7 @@ public class PlayerSpawn : MonoBehaviour
     public GameObject spawnPoint;
 
     public float introAnimDuration = 1f;
+    public float concluAnimDuration = 1.5f;
     public float introAnimFromTopOffset = 1;
 
     public SubmarineMovement Spawn(Vector2 position)
@@ -42,6 +43,20 @@ public class PlayerSpawn : MonoBehaviour
                 player.enabled = true;
                 onIntroAnimComplete();
             });
+
+        return player;
+    }
+
+    public SubmarineMovement AnimatePlayerGoToTop(SubmarineMovement player)
+    {
+        // Physics
+        player.enabled = false;
+        
+        Vector3 position = player.transform.position;
+        position.y += 10;
+        // Anim
+        player.transform.DOMove(position,
+            concluAnimDuration);
 
         return player;
     }
