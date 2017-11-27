@@ -13,7 +13,7 @@ public class TrackingReminder : MonoBehaviour
     {
         if(Calendar.instance != null)
         {
-            CheckCalendar();
+            CheckCalendar(true);
             Calendar.instance.onTaskAdded += CheckCalendar;
             Calendar.instance.onTaskConcluded += CheckCalendar;
         }
@@ -30,7 +30,8 @@ public class TrackingReminder : MonoBehaviour
     }
 
     //Mise a jour du calendrier
-    void CheckCalendar()
+    void CheckCalendar() { CheckCalendar(false); }
+    void CheckCalendar(bool forceUpdate)
     {
 
         ScheduledTask taskWeShouldLookAt = null;
@@ -53,7 +54,7 @@ public class TrackingReminder : MonoBehaviour
             }
         }
 
-        if(taskWeShouldLookAt != currentlyShownTask)
+        if(taskWeShouldLookAt != currentlyShownTask || forceUpdate)
         {
             SetTask(taskWeShouldLookAt);
         }
@@ -69,11 +70,11 @@ public class TrackingReminder : MonoBehaviour
 
     void Show(ScheduledTask task)
     {
-
+        gameObject.SetActive(true);
     }
 
     void Hide()
     {
-
+        gameObject.SetActive(false);
     }
 }

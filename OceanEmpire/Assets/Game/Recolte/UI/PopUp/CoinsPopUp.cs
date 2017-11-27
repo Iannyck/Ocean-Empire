@@ -17,6 +17,7 @@ public class CoinsPopUp : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        transform.localScale = Vector3.one;
         Color imageColor = coinsImage.color;
         Color moneyColor = moneyText.color;
 
@@ -35,8 +36,8 @@ public class CoinsPopUp : MonoBehaviour
 
     private void SetPostion()
     {
-        Vector3 screenPostion = Game.GameCamera.cam.GetComponent<Camera>().WorldToScreenPoint(worldPosition);
-        (transform as RectTransform).anchoredPosition = screenPostion;
+        Vector3 screenPostion = Game.GameCamera.cam.WorldToScreenPoint(worldPosition);
+        transform.position = screenPostion;
     }
 
     public void SetMoneyAmount(int amount)
