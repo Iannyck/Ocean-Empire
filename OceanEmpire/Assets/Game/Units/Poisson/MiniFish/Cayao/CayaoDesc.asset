@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Cayao
   description: C'est un poisson orange... c'est pas mal ca.
-  baseMonetaryValue: 3
+  baseMonetaryValue: 1
   populationValue: 1
   icon:
     spriteName: t_Cayoa
