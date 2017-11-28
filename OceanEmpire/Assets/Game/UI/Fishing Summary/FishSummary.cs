@@ -5,30 +5,14 @@ using UnityEngine.UI;
 
 public class FishSummary : MonoBehaviour {
 
-    public Image fishIcon;
-    public Text fishName;
-    public Text fishValue;
     public Text amount;
+    public Image icon;
+    public Text reward;
 
-    private int fishAmount;
-
-    [SerializeField, ReadOnly]
-    public FishDescription description;
-
-    public void SetFishSummary(FishDescription desc, int amount)
+	public void SetFishSummary(int amount, Sprite iconImage, string reward)
     {
-        description = desc;
-        fishIcon.sprite = desc.icon.GetSprite();
-        fishName.text = desc.name;
-        fishValue.text = desc.baseMonetaryValue.ToString();
-
-        fishAmount = amount;
-        this.amount.text = fishAmount.ToString();
-    }
-
-    public void AddFish()
-    {
-        fishAmount++;
-        this.amount.text = fishAmount.ToString();
+        this.amount.text = amount + "x";
+        icon.sprite = iconImage;
+        this.reward.text = reward;
     }
 }
