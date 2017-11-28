@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 286f5076b2e78f84380f8fcb09f5a956, type: 3}
-  m_Name: harpoon2
+  m_Name: harpoon3
   m_EditorClassIdentifier: 
   itemName: Harpon de base
-  itemDescription: "Tir \xE0 la vitesse de l'\xE9clair"
-  moneyCost: 80
+  itemDescription: tir 5 harpons a la fois
+  moneyCost: 150
   ticketCost: 20
   itemImage: {fileID: 21300000, guid: dd4884a83a0980e4389924e80d947052, type: 3}
-  itemFileName: FastHarpoon
-  itemID: harpoon2
-  upgradeLevel: 2
+  itemFileName: MulitHarpoon
+  itemID: harpoon3
+  upgradeLevel: 3

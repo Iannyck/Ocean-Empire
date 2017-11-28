@@ -61,7 +61,7 @@ MonoBehaviour:
   _serializedStateValues:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
-  - '{"thruster1":"Items/Upgrades/Thrusters/Description/Thruster1","thruster2":"Items/Upgrades/Thrusters/Description/Thruster2","thruster3":"Items/Upgrades/Thrusters/Description/Thruster3","harpoon1":"Items/Upgrades/Harpoon/Description/harpoon1","harpoon2":"Items/Upgrades/Harpoon/Description/harpoon2","fishContainer0":"Items/Upgrades/FishContainer/Description/container1","gaztank1":"Items/Upgrades/GazTank/Description/gazTank1","gaztank2":"Items/Upgrades/GazTank/Description/gazTank2","gaztank3":"Items/Upgrades/GazTank/Description/gazTank3"}'
+  - '{"thruster1":"Items/Upgrades/Thrusters/Description/Thruster1","thruster2":"Items/Upgrades/Thrusters/Description/Thruster2","thruster3":"Items/Upgrades/Thrusters/Description/Thruster3","harpoon1":"Items/Upgrades/Harpoon/Description/harpoon1","harpoon2":"Items/Upgrades/Harpoon/Description/harpoon2","fishContainer0":"Items/Upgrades/FishContainer/Description/container1","gaztank1":"Items/Upgrades/GazTank/Description/gazTank1","gaztank2":"Items/Upgrades/GazTank/Description/gazTank2","gaztank3":"Items/Upgrades/GazTank/Description/gazTank3","harpoon3":"Items/Upgrades/Harpoon/Description/harpoon3"}'
   - '{"caraibe":"Items/Shop Map/Caraibe","pacifique":"Items/Shop Map/Pacifique"}'
   - 
   - 

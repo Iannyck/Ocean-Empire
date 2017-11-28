@@ -7,5 +7,6 @@ using UnityEngine;
 public class HarpoonThrower : Upgrade
 {
     public Harpoon harpoonPrefab;   // On va changer ça lors qu'on aura plusieurs weapons
+    public int amountThrown = 1;
 }
 

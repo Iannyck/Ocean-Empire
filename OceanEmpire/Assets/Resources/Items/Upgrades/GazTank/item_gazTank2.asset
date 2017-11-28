@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: item_gazTank2
   m_EditorClassIdentifier: 
   description: {fileID: 11400000, guid: 42c072a75385b2f41890fc26bbd0a511, type: 2}
-  GazDuration: 120
+  GazDuration: 60
   GazTimeRemaining: 0

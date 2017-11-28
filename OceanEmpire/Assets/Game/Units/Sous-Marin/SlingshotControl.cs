@@ -18,6 +18,8 @@ public class SlingshotControl : MonoBehaviour
     private float toucheRadiusSQR;
     private Transform tr;
 
+    private int harpoonThrownAtOnce = 1;
+
     private void Start()
     {
         Game.OnGameReady += () => cam = Game.GameCamera.cam;
@@ -30,9 +32,12 @@ public class SlingshotControl : MonoBehaviour
         if (harpoonPrefab == null)
         {
             HarpoonThrower ht = GetComponent<SubmarinParts>().GetHarpoonThrower();
-
+            harpoonThrownAtOnce = ht.amountThrown;
             if (ht != null)
+            {
+                harpoonThrownAtOnce = ht.amountThrown;
                 harpoonPrefab = ht.harpoonPrefab;
+            }             
             else
                 return;
         };
@@ -56,7 +61,37 @@ public class SlingshotControl : MonoBehaviour
             slingshotInstance.Hide();
 
             //Shoot !
-            ShootHarpoon((Vector2)tr.position - worldPosition);
+            ShootMultipleHarrpons((Vector2)tr.position - worldPosition);
+        }
+    }
+
+    void ShootMultipleHarrpons(Vector2 direction)
+    {
+        const float angleoffset = 5;
+        float middleAngle = direction.ToAngle();
+
+        bool nombrePair = (harpoonThrownAtOnce % 2 == 0);
+
+        float currentOffset = 0;
+        int impair = 0;
+
+        if (nombrePair)
+        {
+            currentOffset = angleoffset / 2;
+            impair = 0;
+        }
+        else
+        {
+            currentOffset = 0;
+            impair = 1;
+        }
+
+        for (int i = 0 + impair; i < harpoonThrownAtOnce + impair; ++i)
+        {
+            ShootHarpoon((middleAngle + currentOffset).ToVector());
+
+            currentOffset = -currentOffset;
+            if (i % 2 == 1) currentOffset += angleoffset;
         }
     }
 
