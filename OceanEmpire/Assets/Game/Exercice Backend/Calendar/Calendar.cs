@@ -78,7 +78,14 @@ public class Calendar : BaseManager<Calendar>
             if (onTaskConcluded != null)
                 onTaskConcluded();
 
-            Debug.LogWarning("A FAIRE: Ajouter le report a l'historique");
+            if (PendingReports.instance != null)
+            {
+                PendingReports.instance.AddPendingReport(task, report);
+            }
+            else
+            {
+                Debug.LogWarning("L'instance de Pending reports est null. On vient de perdre le rapport");
+            }
 
             ApplyToGameSaves(true);
             return true;

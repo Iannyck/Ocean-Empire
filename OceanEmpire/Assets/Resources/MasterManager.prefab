@@ -54,13 +54,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   managersPrefab:
-  - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
+  - {fileID: 114388996010884506, guid: 62f1bf5069e5808419e80102f0bee502, type: 2}
   - {fileID: 114433543006935660, guid: 499c63aba491c7143b5b3b40c61a94ac, type: 2}
   - {fileID: 114467485633564090, guid: 060e12aa357e85f4cb7ad09b4b602ccc, type: 2}
   - {fileID: 114154190448646074, guid: dd6c9f514d26ff245936e3d037035d5c, type: 2}
   - {fileID: 114601011516906360, guid: 7b4cb462677bf1544af62c558f68bd57, type: 2}
   - {fileID: 114941931716701618, guid: d2b459f73651b294a839ff919f1bc158, type: 2}
+  - {fileID: 114891387732453912, guid: 323f31d39e30f534cb06606b2e09314e, type: 2}
   - {fileID: 114169703373621136, guid: df86fa405b660c94f8611de34f83d419, type: 2}
+  - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
   managers: []
 --- !u!114 &114331226706513050
 MonoBehaviour:
