@@ -7,7 +7,7 @@ using DG.Tweening;
 public class WidgetFishPop : MonoBehaviour {
 
     public Slider gageMeter;
-    private float fullRefillAnimLenght = 2;
+    public float fullRefillAnimLenght = 2;
 
     public event SimpleEvent AnimComplete;
 
@@ -29,7 +29,7 @@ public class WidgetFishPop : MonoBehaviour {
         float target = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
         float animDelay = (rateDifference * fullRefillAnimLenght).Abs();
 
-        Tweener refillAnim = gageMeter.DOValue(target, animDelay).SetUpdate(true);
+        Tweener refillAnim = gageMeter.DOValue(target, fullRefillAnimLenght).SetUpdate(true);
 
         refillAnim.OnComplete(() => {
             if (AnimComplete != null)
@@ -46,6 +46,7 @@ public class WidgetFishPop : MonoBehaviour {
     public void DecrementRate(float rateDifference)
     {
         IncrementRate(-rateDifference);
+
     }
 
         // Update is called once per frame

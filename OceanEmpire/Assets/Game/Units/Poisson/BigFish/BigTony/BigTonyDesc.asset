@@ -16,5 +16,5 @@ MonoBehaviour:
   baseMonetaryValue: 5
   populationValue: 1.5
   icon:
-    spriteName: Big Tony
+    spriteName: t_bigTony
     prefix: Images/Fish/

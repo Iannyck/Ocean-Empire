@@ -16,5 +16,5 @@ MonoBehaviour:
   baseMonetaryValue: 1
   populationValue: 1
   icon:
-    spriteName: bobo le poission
+    spriteName: t_bobo 1
     prefix: Images/Fish/
