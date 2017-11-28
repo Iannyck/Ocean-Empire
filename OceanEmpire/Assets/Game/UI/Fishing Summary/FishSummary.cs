@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class FishSummary : MonoBehaviour {
 
     public Text amount;
-    public string baseText;
     public Image icon;
-    public Text poissonName;
+    public Text reward;
 
-	public void SetFishSummary(int amount, Sprite iconImage, string poissonName)
+	public void SetFishSummary(int amount, Sprite iconImage, string reward)
     {
-        this.amount.text = baseText + amount;
+        this.amount.text = amount + "x";
         icon.sprite = iconImage;
-        this.poissonName.text = poissonName;
+        this.reward.text = reward;
     }
 }

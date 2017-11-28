@@ -9,10 +9,11 @@ public class FishingSummary : MonoBehaviour
 
     private FishingReport fishingReport;
 
-    public Text total;
-    public string baseText;
+    public float delayToShowPopulationChanges = 1f;
+
     public GameObject fishSummaryPrefab;
     public Transform countainer;
+
     public WidgetFishPop widgetFishPop;
 
     private void Start()
@@ -30,23 +31,15 @@ public class FishingSummary : MonoBehaviour
         {
             Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary( entry.Value, 
                                                                                     entry.Key.icon.GetSprite(),
-                                                                                    entry.Key.fishName);
+                                                                                    (entry.Key.baseMonetaryValue * entry.Value).ToString());
 
             PlayerCurrency.AddCoins(entry.Value * (int)entry.Key.baseMonetaryValue);
 
             fishes += entry.Value;
         }
-        total.text = baseText + fishes;
 
-
-
-        CCC.Manager.DelayManager.LocalCallTo(delegate () { UpdateFishPopulation();  }, 1f , this);
+        CCC.Manager.DelayManager.LocalCallTo(delegate () { UpdateFishPopulation();  }, delayToShowPopulationChanges, this);
         
-    }
-
-    public void GoBackToShack()
-    {
-        LoadingScreen.TransitionTo(Shack.SCENENAME, new ToShackMessage(fishingReport));
     }
 
     public void UpdateFishPopulation()
@@ -56,8 +49,7 @@ public class FishingSummary : MonoBehaviour
         {
             CapturedValue += entry.Value * entry.Key.populationValue;
         }
-
-       
+        
         if (widgetFishPop != null)
         {
             float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
@@ -65,5 +57,10 @@ public class FishingSummary : MonoBehaviour
         }
         else
             FishPopulation.instance.UpdateOnFishing(CapturedValue);
+    }
+
+    public void GoBackToShack()
+    {
+        LoadingScreen.TransitionTo(Shack.SCENENAME, new ToShackMessage(fishingReport));
     }
 }
