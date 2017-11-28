@@ -45,12 +45,12 @@ EditorBuildSettings:
     path: Assets/Game/UI/Region Selection/RegionSelection.unity
     guid: 54e304449a7866f40bee2b81594bbe22
   - enabled: 1
-    path: Assets/Game/InGame Systems/Exercice/Windows/Demande/AskWindow.unity
+    path: Assets/Game/InGame Systems/Exercice/Windows/Demande/ProposeRefill.unity
     guid: 7190ad829dcddf24fae71ab9e4facae3
   - enabled: 1
     path: Assets/Game/InGame Systems/Exercice/Windows/Attente/TrackingWindow.unity
     guid: 70aaec503ca4045479c021cf40983bdc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/InGame Systems/Exercice/Windows/Demande/AskWindowWithGage.unity
     guid: 511a5fe7e3ff53140bc5f2e96f77359b
   - enabled: 1

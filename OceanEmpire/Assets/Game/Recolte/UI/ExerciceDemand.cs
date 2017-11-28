@@ -12,11 +12,9 @@ public class ExerciceDemand : MonoBehaviour {
     {
         Game.OnGameReady += delegate ()
         {
-            if (FishPopulation.PopulationRate < 1)
+            if (FishPopulation.PopulationRate <= 25)
             {
-                Scenes.LoadAsync(AskWindowWithGage.SCENE_NAME, LoadSceneMode.Additive,delegate(Scene scene) {
-                    scene.FindRootObject<AskWindowWithGage>().InitDisplay("Votre densité de poisson est faible. Vous pouvez la remettre pleine via ces deux options: ");
-                });
+                Scenes.LoadAsync(ProposeRefillWindow.SCENE_NAME, LoadSceneMode.Additive,null);
             }
         };
 	}

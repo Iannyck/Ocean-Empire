@@ -29,7 +29,7 @@ public class FishingSummary : MonoBehaviour
         int  fishes = 0;
         foreach (KeyValuePair<FishDescription, int> entry in report.CapturedFish)
         {
-            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary( entry.Value, 
+            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary(entry.Value, 
                                                                                     entry.Key.icon.GetSprite(),
                                                                                     (entry.Key.baseMonetaryValue * entry.Value).ToString());
 

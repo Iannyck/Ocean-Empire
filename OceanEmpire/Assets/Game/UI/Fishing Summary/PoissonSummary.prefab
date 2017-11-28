@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c041ad48fadc3bf4cae48dbb84ad2379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: {fileID: 114592113831232038}
+  amount: {fileID: 114408943142440862}
   icon: {fileID: 114998357747554378}
   reward: {fileID: 114592113831232038}
 --- !u!114 &114998357747554378
