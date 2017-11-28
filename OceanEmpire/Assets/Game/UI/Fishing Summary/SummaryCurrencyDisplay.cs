@@ -63,16 +63,21 @@ public class SummaryCurrencyDisplay : MonoBehaviour
         int newMoney = money + ((float)(targetMoney - money) * (timeCoutner / fillTime)).RoundedToInt();
         int newTicket = ticket + ((float)(targetTicket - ticket) * (timeCoutner / fillTime)).RoundedToInt();
 
-        moneyAmount.text = newMoney.ToString();
-        tickeyAmount.text = newTicket.ToString();
+        if (moneyAmount != null)
+            moneyAmount.text = newMoney.ToString();
+        if (tickeyAmount != null)
+            tickeyAmount.text = newTicket.ToString();
     }
     
     void SetCurrencyValues()
     {
         money = PlayerCurrency.GetCoins();
         ticket = PlayerCurrency.GetTickets();
-        moneyAmount.text = money.ToString();
-        tickeyAmount.text = ticket.ToString();
+
+        if (moneyAmount != null)
+            moneyAmount.text = money.ToString();
+        if (tickeyAmount != null)
+            tickeyAmount.text = ticket.ToString();
     }
 
 
