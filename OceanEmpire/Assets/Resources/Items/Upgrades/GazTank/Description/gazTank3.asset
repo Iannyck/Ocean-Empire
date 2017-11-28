@@ -14,7 +14,7 @@ MonoBehaviour:
   itemName: gros reservoir
   itemDescription: Reservoir d'essence pas mal plus gros
   moneyCost: 80
-  ticketCost: 15
+  ticketCost: 20
   itemImage: {fileID: 21300000, guid: 6f52f5fee94df764bb3b2f392f0abeb2, type: 3}
   itemFileName: item_gazTank3
   itemID: gaztank3

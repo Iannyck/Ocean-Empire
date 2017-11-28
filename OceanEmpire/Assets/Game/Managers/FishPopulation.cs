@@ -11,8 +11,8 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     private const string SAVE_KEY_POPULATION = "population";
 
-    private const float limitPopulation = 50;
-    private TimeSpan refreshingTime = new TimeSpan(0, 24, 0, 0);
+    private const float limitPopulation = 150;
+    private TimeSpan refreshingTime = new TimeSpan(0, 0, 30, 0);
 
     private float population;
     private DateTime lastUpdate;

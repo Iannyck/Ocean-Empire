@@ -38,8 +38,7 @@ public class MapInfo : BaseBehavior
             //Fish denstity
         [InspectorCategory("Density")]
         public float fishDensity;
-        [InspectorCategory("Density")]
-        public float populationInfluence;
+
     }
 
     public const float MAP_WIDTH = 5;
@@ -104,7 +103,7 @@ public class MapInfo : BaseBehavior
                
                 nbStraws++;
                 float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
-                float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio);
+                float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio) * fishTypeList[i].fishDensity;
                 fishLottery.Add(fT.fish, fishProportion.Clamped(0f,1f));
             }
         }

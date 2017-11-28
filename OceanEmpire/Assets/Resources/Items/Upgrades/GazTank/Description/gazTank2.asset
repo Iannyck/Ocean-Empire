@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: reservoir medium
   itemDescription: Reservoir d'essence plus gros
-  moneyCost: 20
-  ticketCost: 5
+  moneyCost: 30
+  ticketCost: 8
   itemImage: {fileID: 0}
   itemFileName: item_gazTank2
   itemID: gaztank2

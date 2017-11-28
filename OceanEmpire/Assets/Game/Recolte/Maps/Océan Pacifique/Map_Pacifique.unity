@@ -1930,12 +1930,13 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 114766056936082448, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
   - {fileID: 114287080000692136, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
+  - {fileID: 114766056936082448, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
   _serializedStateKeys:
   - mapFishReparition
   - fishTypeList
   _serializedStateValues:
-  - '{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
-  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-100.0,"fishDensity":0.0,"populationInfluence":1.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-100.0,"fishDensity":0.0,"populationInfluence":1.0}]'
+  - '{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
+  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":2.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.9975891,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.66,"value":0.0,"tangentMode":136,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0}]'
   regionName: Caraibe
   mapTop: 0
   mapBottom: -64
@@ -1952,7 +1953,7 @@ MonoBehaviour:
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1980,10 +1981,37 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     highestSpawn: 0
-    lowestSpawn: -100
-    fishDensity: 0
-    populationInfluence: 1
+    lowestSpawn: -64
+    fishDensity: 2
   - fish: {fileID: 114287080000692136, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
+    repartition:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.33
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0.9975891
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    highestSpawn: 0
+    lowestSpawn: -64
+    fishDensity: 1
+  - fish: {fileID: 114766056936082448, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
     repartition:
       serializedVersion: 2
       m_Curve:
@@ -1994,8 +2022,14 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
+        time: 0.66
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
         time: 1
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2003,9 +2037,8 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     highestSpawn: 0
-    lowestSpawn: -100
-    fishDensity: 0
-    populationInfluence: 1
+    lowestSpawn: -64
+    fishDensity: 1
 --- !u!4 &981076566
 Transform:
   m_ObjectHideFlags: 0

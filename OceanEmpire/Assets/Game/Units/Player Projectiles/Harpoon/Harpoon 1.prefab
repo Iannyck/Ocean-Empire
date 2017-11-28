@@ -114,7 +114,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1.25
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d978da077167fc84d8f70a960f0bcc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 25
+  defaultSpeed: 20
   killAfter: 5
 --- !u!212 &212000747143019798
 SpriteRenderer:

@@ -223,10 +223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishPool: {fileID: 1311441154}
-  maxFishPerUnit: 1.5
-  palierHeigth: 2
+  maxFishPerUnit: 0.66
+  palierHeigth: 5
   FishReplenishTime: 100
-  timeBetweenSideSpawn: 6
+  timeBetweenSideSpawn: 4
 --- !u!4 &1311441148
 Transform:
   m_ObjectHideFlags: 0
@@ -292,6 +292,7 @@ MonoBehaviour:
     type: 2}
   spawnPoint: {fileID: 1660329141}
   introAnimDuration: 1
+  concluAnimDuration: 1.5
   introAnimFromTopOffset: 0
 --- !u!114 &1311441152
 MonoBehaviour:

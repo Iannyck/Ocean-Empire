@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4145104544778900}
-  - component: {fileID: 114216562670068294}
+  - component: {fileID: 114601011516906360}
   m_Layer: 0
   m_Name: FishPopulation
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114216562670068294
+--- !u!114 &114601011516906360
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -58,3 +58,4 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   initComplete: 0
+  periodicLogs: 0
