@@ -30,7 +30,7 @@ public class TimedWalkingTracker : WalkTracker {
         */
     }
 
-    public override ActivityAnalyser.Report ForceCompletion(TimedTask task)
+    public override ActivityAnalyser.Report EvaluateTask(TimedTask task)
     {
         return ActivityAnalyser.VerifyCompletion(task);
     }

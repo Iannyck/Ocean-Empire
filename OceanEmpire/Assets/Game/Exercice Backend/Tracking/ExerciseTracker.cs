@@ -20,5 +20,5 @@ public abstract class ExerciseTracker
 
     public abstract ExerciseType GetExerciseType();
 
-    public abstract ActivityAnalyser.Report ForceCompletion(TimedTask task);
+    public abstract ActivityAnalyser.Report EvaluateTask(TimedTask task);
 }

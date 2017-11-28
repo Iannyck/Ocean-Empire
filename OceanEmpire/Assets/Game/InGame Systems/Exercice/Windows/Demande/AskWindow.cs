@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class AskWindow : MonoBehaviour {
+public class AskWindow : MonoBehaviour
+{
 
     public const string SCENE_NAME = "AskWindow";
 
@@ -51,18 +52,22 @@ public class AskWindow : MonoBehaviour {
     {
         // Eventuellement a changer si on veut
         // On le mettre ailleur et passer une action dans le init
-        Scenes.LoadAsync(TrackingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate(Scene scene) {
-            scene.FindRootObject<TrackingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée"+
-                " l'effet dans l'océan sera instantément appliqué",null,null,delegate(ExerciseTrackingReport tracker) {
-                    FishPopulation.instance.UpdateOnExercise(0.50f);    
-                    Exit(null);
-                });
-        });
+        Debug.LogError("Mon ti chnappant, cossé tu fa icite ? FARME LA CRISS DE PORTE PI RVIENS PU !");
+        //Scenes.LoadAsync(TrackingWindow.SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene)
+        //{
+        //    scene.FindRootObject<TrackingWindow>().InitDisplay("Faites une marche de au moins 5 minutes dans votre quartier. Après cette durée" +
+        //        " l'effet dans l'océan sera instantément appliqué", null, null, delegate (ExerciseTrackingReport tracker)
+        //        {
+        //            FishPopulation.instance.UpdateOnExercise(0.50f);
+        //            Exit(null);
+        //        });
+        //});
     }
 
     public void OnWaitWindowLoad(Scene scene)
     {
-        scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km",null,null, Exit);
+        Debug.LogError("Mon ti chnappant, cossé tu fa icite ? FARME LA CRISS DE PORTE PI RVIENS PU !");
+        //scene.FindRootObject<TrackingWindow>().InitDisplay("A faire : Marcher 1 km", null, null, Exit);
         // ajouter un listener en parametre. Le WaitingWindow doit aller ecouter a se qui doit etre fait
         // et se ferme quand le listener est executer
     }

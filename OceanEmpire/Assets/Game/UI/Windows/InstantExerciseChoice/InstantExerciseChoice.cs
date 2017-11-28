@@ -64,14 +64,8 @@ public class InstantExerciseChoice : WindowAnimation
                 if (Calendar.instance.AddScheduledTask(instantTask))
                 {
 
-                    TrackingWindow.ShowWaitingWindow("", instantTask, ExerciseComponents.GetTracker(ExerciseType.Walk), delegate (ExerciseTrackingReport report)
-                    {
-                        print("EXERCICE COMPLETED : " + report.completionRate);
-                        for (int i = 0; i < report.probabilities.Count; i++)
-                        {
-                            print(report.probabilities);
-                        }
-                    });
+                    TrackingWindow.ShowWaitingWindow("", instantTask);
+                    Close();
                 }
                 else
                 {

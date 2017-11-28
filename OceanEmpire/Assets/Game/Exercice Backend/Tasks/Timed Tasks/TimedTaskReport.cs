@@ -11,7 +11,7 @@ public class TimedTaskReport
     /// </summary>
     public DateTime reportCreatedOn;
 
-    public enum State { Cancelled = 0, InterruptedInProgress = 1, Completed = 2 }
+    public enum State { PreemptivelyCancelled = 0, Skipped = 3, InterruptedInProgress = 1, Completed = 2 }
 
     //Mendatoire
     public State state;
@@ -33,7 +33,7 @@ public class TimedTaskReport
     {
         TimedTaskReport report = new TimedTaskReport
         {
-            state = State.Cancelled,
+            state = State.PreemptivelyCancelled,
             trackingReport = null,
             rating = HappyRating.None,
             exerciseType = timedTask.task.GetExerciseType(),
@@ -86,10 +86,5 @@ public class TimedTaskReport
         this.rating = rating;
         taskPlannedFor = plannedTimeSlot;
         this.taskCreatedOn = taskCreatedOn;
-    }
-
-    public bool WasCancelled()
-    {
-        return trackingReport == null;
     }
 }
