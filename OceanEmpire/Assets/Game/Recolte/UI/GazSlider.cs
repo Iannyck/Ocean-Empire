@@ -29,7 +29,6 @@ public class GazSlider : MonoBehaviour {
         else
         { 
             gageMeter.value = 1;
-            Debug.Log("wassa");
         }
     }
 }

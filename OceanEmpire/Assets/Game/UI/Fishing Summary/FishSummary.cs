@@ -5,15 +5,30 @@ using UnityEngine.UI;
 
 public class FishSummary : MonoBehaviour {
 
+    public Image fishIcon;
+    public Text fishName;
+    public Text fishValue;
     public Text amount;
-    public string baseText;
-    public Image icon;
-    public Text poissonName;
 
-	public void SetFishSummary(int amount, Sprite iconImage, string poissonName)
+    private int fishAmount;
+
+    [SerializeField, ReadOnly]
+    public FishDescription description;
+
+    public void SetFishSummary(FishDescription desc, int amount)
     {
-        this.amount.text = baseText + amount;
-        icon.sprite = iconImage;
-        this.poissonName.text = poissonName;
+        description = desc;
+        fishIcon.sprite = desc.icon.GetSprite();
+        fishName.text = desc.name;
+        fishValue.text = desc.baseMonetaryValue.ToString();
+
+        fishAmount = amount;
+        this.amount.text = fishAmount.ToString();
+    }
+
+    public void AddFish()
+    {
+        fishAmount++;
+        this.amount.text = fishAmount.ToString();
     }
 }

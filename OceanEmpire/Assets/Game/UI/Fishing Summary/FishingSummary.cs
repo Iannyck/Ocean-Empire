@@ -9,11 +9,14 @@ public class FishingSummary : MonoBehaviour
 
     private FishingReport fishingReport;
 
-    public Text total;
-    public string baseText;
     public GameObject fishSummaryPrefab;
-    public Transform countainer;
+    public Transform fishSummaryContainer;
+
     public WidgetFishPop widgetFishPop;
+    public SummaryCurrencyDisplay widgetCurrency;
+
+    public float delayBeforeStart = 1.5f;
+
 
     private void Start()
     {
@@ -25,45 +28,56 @@ public class FishingSummary : MonoBehaviour
     {
         fishingReport = report;
 
-        int  fishes = 0;
+        float populationValue = 0;
+        int monetaryValue = 0;
+
         foreach (KeyValuePair<FishDescription, int> entry in report.CapturedFish)
         {
-            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary( entry.Value, 
-                                                                                    entry.Key.icon.GetSprite(),
-                                                                                    entry.Key.fishName);
+            FishSummary newSummary = Instantiate(fishSummaryPrefab, fishSummaryContainer).GetComponent<FishSummary>();
+            newSummary.SetFishSummary(entry.Key, entry.Value);
 
-            PlayerCurrency.AddCoins(entry.Value * (int)entry.Key.baseMonetaryValue);
-
-            fishes += entry.Value;
+            populationValue += entry.Key.populationValue * entry.Value;
+            monetaryValue += (entry.Key.baseMonetaryValue * entry.Value).RoundedToInt();
         }
-        total.text = baseText + fishes;
 
+        CCC.Manager.DelayManager.LocalCallTo( () =>
+        {
+            updateCurrency(monetaryValue);
+            updatePopulation(populationValue);
 
-
-        CCC.Manager.DelayManager.LocalCallTo(delegate () { UpdateFishPopulation();  }, 1f , this);
-        
+        }, delayBeforeStart, this);
     }
+
 
     public void GoBackToShack()
     {
         LoadingScreen.TransitionTo(Shack.SCENENAME, new ToShackMessage(fishingReport));
     }
 
-    public void UpdateFishPopulation()
-    {
-        float CapturedValue = 0;
-        foreach (KeyValuePair<FishDescription, int> entry in fishingReport.CapturedFish)
-        {
-            CapturedValue += entry.Value * entry.Key.populationValue;
-        }
 
-       
+
+    private void updatePopulation(float populationValue)
+    {
         if (widgetFishPop != null)
         {
-            float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
+            float capturedRate = FishPopulation.instance.FishNumberToRate(populationValue);
             widgetFishPop.DecrementRate(capturedRate);
         }
         else
-            FishPopulation.instance.UpdateOnFishing(CapturedValue);
+            FishPopulation.instance.UpdateOnFishing(populationValue);
     }
+
+    private void updateCurrency(int monetaryValue)
+    {
+        if (widgetCurrency != null)
+            widgetCurrency.IncrementValues(monetaryValue, 0);
+        PlayerCurrency.AddCoins(monetaryValue);
+    }
+
+
+    public void testIncrementMoney()
+    {
+        widgetCurrency.IncrementValues(500, 10);
+    }
+
 }
