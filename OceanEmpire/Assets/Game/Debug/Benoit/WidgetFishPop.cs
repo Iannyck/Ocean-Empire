@@ -46,6 +46,7 @@ public class WidgetFishPop : MonoBehaviour {
     public void DecrementRate(float rateDifference)
     {
         IncrementRate(-rateDifference);
+
     }
 
         // Update is called once per frame
