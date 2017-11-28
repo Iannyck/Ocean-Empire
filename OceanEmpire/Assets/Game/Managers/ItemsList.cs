@@ -302,4 +302,16 @@ public class ItemsList : BaseManager<ItemsList>
     {
         Load();
     }
+
+    public static void UnlockAll()
+    {
+        foreach (KeyValuePair<string, bool> containedItem in instance.ownedUpgrades)
+        {
+            instance.ownedUpgrades[containedItem.Key] = true;
+        }
+        foreach (KeyValuePair<string, bool> containedMap in instance.ownedMaps)
+        {
+            instance.ownedMaps[containedMap.Key] = true;
+        }
+    }
 }

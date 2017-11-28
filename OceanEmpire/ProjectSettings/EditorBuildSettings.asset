@@ -80,3 +80,6 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Game/Recolte/Maps/Oc\xE9an Pacifique/Map_Pacifique.unity"
     guid: 447972ceb2ca45d4a9299125d2870195
+  - enabled: 1
+    path: Assets/Game/UI/Options/MenuOptions.unity
+    guid: 54efd1a1935fafa4f96034b56c2ad4a8

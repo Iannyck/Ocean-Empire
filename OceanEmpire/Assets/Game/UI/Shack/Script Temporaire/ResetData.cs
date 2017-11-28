@@ -24,7 +24,13 @@ public class ResetData : MonoBehaviour {
     {
         if (PlayerCurrency.instance != null)
         {
-            PlayerCurrency.AddCoins(1000);
+            PlayerCurrency.AddCoins(200);
         }           
+    }
+
+    public void UnlockAll()    //Cheat code StarCraft xD
+    {
+        if (ItemsList.instance != null)
+            ItemsList.UnlockAll();
     }
 }

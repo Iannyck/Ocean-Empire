@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuOptions : WindowAnimation
-{
+{ 
     public const string SCENENAME = "MenuOptions";
+
     private bool isQuitting = false;
 
     public void Confirm()
