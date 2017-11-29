@@ -32,7 +32,6 @@ public class SlingshotControl : MonoBehaviour
         if (harpoonPrefab == null)
         {
             HarpoonThrower ht = GetComponent<SubmarinParts>().GetHarpoonThrower();
-            harpoonThrownAtOnce = ht.amountThrown;
             if (ht != null)
             {
                 harpoonThrownAtOnce = ht.amountThrown;
