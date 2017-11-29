@@ -16,7 +16,7 @@ public class OptionsButton : MonoBehaviour
         switch (type)
         {
             case Type.Menu:
-                MenuOptions.OpenWindow();
+                CheatsWindow.OpenWindow();
                 break;
             case Type.InGame:
                 InGameOptions.OpenWindow();

@@ -9,8 +9,6 @@ public class InstantExerciseChoice : WindowAnimation
 
     public InstantExerciseChoice_Item[] taskDisplays;
 
-    private Action onCompleteAction;
-
     /// <summary>
     /// Load la scene et propose 3 taches
     /// </summary>

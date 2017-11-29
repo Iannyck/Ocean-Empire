@@ -6,8 +6,17 @@ using UnityEngine;
 [System.Serializable]
 public class Reward_OceanRefill : Reward
 {
-    public override void Apply()
+    public override bool Apply()
     {
+        if (FishPopulation.instance != null)
+        {
+            FishPopulation.instance.AddRate(1);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override float GetValue()

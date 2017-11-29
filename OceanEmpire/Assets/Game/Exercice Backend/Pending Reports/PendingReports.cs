@@ -19,17 +19,32 @@ public class PendingReports : BaseManager<PendingReports>
     [SerializeField]
     private List<PendingReport> pendingReports = new List<PendingReport>();
     public bool log = true;
-    public event SimpleEvent onPendingReportAdded;
-    public event SimpleEvent onPendingReportRemoved;
 
     public override void Init()
     {
         ReadFromGameSaves();
         CompleteInit();
+
+        MasterManager.Sync(CheckAndConcludeNextReport);
+    }
+
+    void CheckAndConcludeNextReport()
+    {
+        if (pendingReports != null && pendingReports.Count > 0)
+        {
+            PendingReport pending = pendingReports[0];
+            TaskConclusionWindow.ConcludeTask(pending.task, pending.incompleteReport,
+                () =>
+                {
+                    RemovePendingReport(pending);
+                });
+        }
     }
 
     public void AddPendingReport(ScheduledTask task, TimedTaskReport incompleteReport)
     {
+        if (pendingReports == null)
+            pendingReports = new List<PendingReport>();
         pendingReports.Add(new PendingReport() { task = task, incompleteReport = incompleteReport });
 
         ApplyToGameSaves(true);
@@ -37,8 +52,7 @@ public class PendingReports : BaseManager<PendingReports>
         if (log)
             Debug.Log("Ajout d'un nouveau 'pending report'.");
 
-        if (onPendingReportAdded != null)
-            onPendingReportAdded();
+        CheckAndConcludeNextReport();
     }
 
     private void RemovePendingReport(PendingReport report)
@@ -50,14 +64,12 @@ public class PendingReports : BaseManager<PendingReports>
 
             if (log)
                 Debug.Log("Retrait d'un 'pending report'.");
-
-            if (onPendingReportRemoved != null)
-                onPendingReportRemoved();
         }
         else
         {
             Debug.LogWarning("On a essayer de retirer un 'pending report' qui n'etait pas dans la liste.");
         }
+        CheckAndConcludeNextReport();
     }
 
 

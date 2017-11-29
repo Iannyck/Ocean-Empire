@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using CCC.Manager;
 using UnityEngine.SceneManagement;
 
 
-public class OpenOptions : MonoBehaviour {
+public class OpenCheats : MonoBehaviour
+{
     private void Start()
     {
         MasterManager.Sync();
@@ -13,7 +13,7 @@ public class OpenOptions : MonoBehaviour {
 
     public void Open()
     {
-        Scenes.LoadAsync(MenuOptions.SCENENAME, LoadSceneMode.Additive, OnSceneLoaded);
+        Scenes.LoadAsync(CheatsWindow.SCENENAME, LoadSceneMode.Additive, OnSceneLoaded);
     }
 
     void OnSceneLoaded(Scene scene)
