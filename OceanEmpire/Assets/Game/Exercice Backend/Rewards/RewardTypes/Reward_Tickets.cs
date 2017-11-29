@@ -37,4 +37,9 @@ public class Reward_Tickets : Reward
     {
         return new Reward_Tickets(ticketAmount);
     }
+
+    public override string ToString()
+    {
+        return amount + " tickets";
+    }
 }

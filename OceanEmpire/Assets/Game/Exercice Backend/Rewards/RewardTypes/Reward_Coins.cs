@@ -36,4 +36,9 @@ public class Reward_Coins : Reward
     {
         return new Reward_Coins(coinAmount);
     }
+
+    public override string ToString()
+    {
+        return amount + " coins";
+    }
 }

@@ -25,11 +25,11 @@ namespace CCC.UI
         public bool openOnAwake = true;
 
         [Header("Open")]
-        public float openTime = 0.35f;
+        public float openTime = 0.25f;
         public Ease openEase = Ease.OutSine;
 
         [Header("Exit")]
-        public float exitTime = 0.35f;
+        public float exitTime = 0.25f;
         public Ease exitEase = Ease.InSine;
         public bool instantHideContent = true;
         public bool exitSceneOnHide = false;
