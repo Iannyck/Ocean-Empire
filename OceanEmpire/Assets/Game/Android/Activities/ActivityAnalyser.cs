@@ -88,12 +88,9 @@ public class ActivityAnalyser {
                 if (doingExercice)
                 {
                     result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                    Debug.Log("WALKED : " + activites[i].time.Subtract(lastExercice));
                     doingExercice = false;
                     if (result.timeSpendingExercice.CompareTo(new TimeSpan(0, (int)((WalkTask)result.task.task).minutesOfWalk, 0)) == 1)
                     {
-                        Debug.Log("ANALYSE COMPLETED");
-
                         result.exerciceEnd = activites[i].time;
                         result.complete = true;
 
