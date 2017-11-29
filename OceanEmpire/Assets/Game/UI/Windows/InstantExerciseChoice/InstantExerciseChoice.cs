@@ -35,8 +35,6 @@ public class InstantExerciseChoice : WindowAnimation
     {
         base.Awake();
 
-        ActivityDetection.ResetActivitiesSave();
-
         for (int i = 0; i < taskDisplays.Length; i++)
         {
             taskDisplays[i].onClick = OnItemClick;

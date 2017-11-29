@@ -14,11 +14,14 @@ public class TrackingWindow : MonoBehaviour
     // UI
     public Text currentTimeUI;
     public Slider completionState;
+    public Text lastProb;
+    public Text timeSinceStart;
 
     // Animation
     public WindowAnimation windowAnim;
 
     // Tracking Initialisation
+    private DateTime startTime;
     private ExerciseTracker tracker;
     private TimeSpan currentRemaining;
     private bool startTrackingUpdate;
@@ -44,6 +47,7 @@ public class TrackingWindow : MonoBehaviour
     {
         startTrackingUpdate = false;
         currentRemaining = new TimeSpan(0, 0, 0);
+
     }
 
     public void InitDisplay(string exerciceDescription, ScheduledTask task, string enAttente = "En Attente...", string title = "Faire l'exercice")
@@ -52,6 +56,7 @@ public class TrackingWindow : MonoBehaviour
         trackingStart = DateTime.Now;
         currentTask = task;
         startTrackingUpdate = true;
+        startTime = DateTime.Now;
     }
 
     public void UpdateInfo(int index, string info)
@@ -64,14 +69,11 @@ public class TrackingWindow : MonoBehaviour
         if (startTrackingUpdate)
         {
             currentReport = tracker.UpdateTracking(currentTask, trackingStart); // task=TimedTask, startedWhen=DateTime
+            UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
             if (currentReport.complete)
             {
                 ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
                 Hide(); // exercise complete ! state=ExerciseTrackingReport.State 
-            }
-            else
-            {
-                UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
             }
         }
     }
@@ -107,6 +109,10 @@ public class TrackingWindow : MonoBehaviour
 
     private void UpdateExerciceCompletion(TimeSpan timeDone, TimeSpan timeToDo)
     {
+        lastProb.text = currentReport.probabilities.Last().ToString() + "%";
+
+        timeSinceStart.text = DateTime.Now.Subtract(startTime).ToString();
+
         double totalTimeDone = timeDone.TotalSeconds; // secondes
         double totalTimeToDo = timeToDo.TotalSeconds; // secondes
         double completion = totalTimeDone / totalTimeToDo;

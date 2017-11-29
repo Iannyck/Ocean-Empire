@@ -33,7 +33,7 @@ public class ActivityDetection : MonoBehaviour {
     // Debug
     const string exempleFile = "0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:40:00 EST 2017\n\r0|Fri Nov 17 14:45:14 EST 2017\n\r";
 
-    private static string ReadDocument()
+    public static string ReadDocument()
     {
         StreamReader reader = new StreamReader(filePath);
         string result = reader.ReadToEnd();
