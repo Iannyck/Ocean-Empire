@@ -30,6 +30,9 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
     private Thruster thruster;
     private FishContainer fishContainer;
 
+    private SlingshotControl slingshotControl;
+
+
     public bool movementEnable = false;
 
     private void Awake()
@@ -44,6 +47,8 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
         Game.OnGameStart += Init;
+
+        slingshotControl = GetComponent<SlingshotControl>();
 
         SubmarinParts parts = gameObject.GetComponent<SubmarinParts>();
         thruster = parts.GetThruster();
@@ -67,6 +72,8 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     void FixedUpdate()
     {
+        GetDraggingPosition();
+
         if (movementEnable == false)
         { 
             rb.velocity = Vector2.zero;
@@ -95,9 +102,29 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     }
 
+    public void GetDraggingPosition()
+    {
+        Vector2 position;
+        if (DragDetection.GetTouchPosition(out position) && slingshotControl.isDragging == false)
+        {
+            position = Game.GameCamera.cam.ScreenToWorldPoint(position);
+
+            float sqrMag = (position - rb.position).sqrMagnitude;
+            if (sqrMag > deadZoneRadiusSQR)
+            {
+                float d = distanceFromBound;
+
+                currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
+                currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
+
+                realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
+            }
+        }
+    }
+
 
     public void OnClick(Vector2 position)
-    {
+    {/*
         float sqrMag = (position - rb.position).sqrMagnitude;
         if (sqrMag > deadZoneRadiusSQR)
         {
@@ -107,7 +134,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
             currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
 
             realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
-        }
+        }*/
     }
 
     public void OnTouch(Vector2 position)

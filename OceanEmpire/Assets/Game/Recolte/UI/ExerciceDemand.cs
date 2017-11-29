@@ -12,7 +12,7 @@ public class ExerciceDemand : MonoBehaviour {
     {
         Game.OnGameReady += delegate ()
         {
-            if (FishPopulation.PopulationRate <= 25)
+            if (FishPopulation.PopulationRate <= 0.25f)
             {
                 Scenes.LoadAsync(ProposeRefillWindow.SCENE_NAME, LoadSceneMode.Additive,null);
             }
