@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: item_Thrusters3
   m_EditorClassIdentifier: 
   description: {fileID: 11400000, guid: 2ca130654ca082d41bb9dc562eb066bd, type: 2}
-  subMarineSpeed: 4.5
+  subMarineSpeed: 3.5
   subMarineAcceleration: 1.5
