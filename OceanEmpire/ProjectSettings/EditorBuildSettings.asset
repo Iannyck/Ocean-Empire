@@ -82,4 +82,7 @@ EditorBuildSettings:
     guid: 54efd1a1935fafa4f96034b56c2ad4a8
   - enabled: 1
     path: Assets/Plugins/CCC/UI/Generic Windows/Message Popup/MessagePopup.unity
+    guid: beb86ce867a9fa8468e6e7ce726c2539
+  - enabled: 1
+    path: Assets/Game/UI/Windows/Task Conclusion/Task Conclusion Window.unity
     guid: 00000000000000000000000000000000

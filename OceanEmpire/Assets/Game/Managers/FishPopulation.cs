@@ -52,7 +52,9 @@ public class FishPopulation : BaseManager<FishPopulation>
         GameSaves.instance.SaveData(GameSaves.Type.FishPop);
     }
 
-
+    /// <summary>
+    /// 0 = 0%      1 = 100%
+    /// </summary>
     public void AddRate(float value)
     {
         PopulationRate += value;

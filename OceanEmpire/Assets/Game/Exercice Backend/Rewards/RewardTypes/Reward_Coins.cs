@@ -7,8 +7,9 @@ public class Reward_Coins : Reward
 {
     public int amount;
 
-    public override void Apply()
+    public override bool Apply()
     {
+        return PlayerCurrency.AddCoins(amount);
     }
 
     public override float GetValue()
