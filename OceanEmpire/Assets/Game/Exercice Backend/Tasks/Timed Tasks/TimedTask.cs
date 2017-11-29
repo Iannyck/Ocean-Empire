@@ -10,6 +10,5 @@ public abstract class TimedTask
     public TimeSlot timeSlot;
     public DateTime createdOn;
 
-    public abstract TimedTaskReport BuildReport(ExerciseTrackingReport trackingReport, HappyRating happyRating);
     public abstract bool IsVisibleInCalendar();
 }

@@ -11,11 +11,6 @@ public class ScheduledTask : TimedTask
         return new TimeSpan(0, 15, 0);
     }
 
-    public override TimedTaskReport BuildReport(ExerciseTrackingReport trackingReport, HappyRating happyRating)
-    {
-        throw new NotImplementedException();
-    }
-
     public ScheduledTask(Task task, DateTime plannedOn)
     {
         this.task = task;
