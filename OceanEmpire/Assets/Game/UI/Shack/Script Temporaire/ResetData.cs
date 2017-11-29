@@ -17,6 +17,8 @@ public class ResetData : MonoBehaviour {
 
         if(FishPopulation.instance != null)
             FishPopulation.Reload();
+
+        ActivityDetection.ResetActivitiesSave();
     }
 
 

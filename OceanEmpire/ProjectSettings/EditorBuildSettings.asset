@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Game/UI/Shack/Shack.unity
+    guid: 3365bf45c1118084088b800e6da71856
+  - enabled: 1
     path: Assets/Game/UI/Windows/InstantExerciseChoice/InstantExercise.unity
     guid: 34d9395ae2381f14eab93439ce5cce77
   - enabled: 1
     path: Assets/Game/Debug/Alex's Stuff/Alex_TestMap.unity
     guid: 2722d89de8236494297e067f3d8d72cb
-  - enabled: 1
-    path: Assets/Game/UI/Shack/Shack.unity
-    guid: 3365bf45c1118084088b800e6da71856
   - enabled: 1
     path: Assets/Game/Recolte/GameBuilder.unity
     guid: f0c884b8cca1c1f45bfe40eb64a0b6c8
@@ -48,7 +48,7 @@ EditorBuildSettings:
     path: Assets/Game/InGame Systems/Exercice/Windows/Demande/ProposeRefill.unity
     guid: 7190ad829dcddf24fae71ab9e4facae3
   - enabled: 1
-    path: Assets/Game/InGame Systems/Exercice/Windows/Attente/TrackingWindow.unity
+    path: Assets/Game/InGame Systems/Exercice/Windows/Tracking/TrackingWindow.unity
     guid: 70aaec503ca4045479c021cf40983bdc
   - enabled: 0
     path: Assets/Game/InGame Systems/Exercice/Windows/Demande/AskWindowWithGage.unity
@@ -82,4 +82,4 @@ EditorBuildSettings:
     guid: 54efd1a1935fafa4f96034b56c2ad4a8
   - enabled: 1
     path: Assets/Plugins/CCC/UI/Generic Windows/Message Popup/MessagePopup.unity
-    guid: 00000000000000000000000000000000
+    guid: beb86ce867a9fa8468e6e7ce726c2539
