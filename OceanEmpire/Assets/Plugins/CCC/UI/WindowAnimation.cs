@@ -31,7 +31,7 @@ namespace CCC.UI
         [Header("Exit")]
         public float exitTime = 0.35f;
         public Ease exitEase = Ease.InSine;
-        public bool instantHideContent = false;
+        public bool instantHideContent = true;
         public bool exitSceneOnHide = false;
 
 
@@ -69,8 +69,8 @@ namespace CCC.UI
             canAutoUnloadScene = true;
         }
 
-        public void Open() { Open(null); }
-        public void Open(TweenCallback onComplete)
+        public virtual void Open() { Open(null); }
+        public virtual void Open(TweenCallback onComplete)
         {
             isOpen = true;
             bgTr.gameObject.SetActive(true);
@@ -111,8 +111,8 @@ namespace CCC.UI
             }
         }
 
-        public void Close() { Close(null); }
-        public void Close(TweenCallback onComplete)
+        public virtual void Close() { Close(null); }
+        public virtual void Close(TweenCallback onComplete)
         {
             isOpen = false;
 
@@ -153,7 +153,7 @@ namespace CCC.UI
             }).SetUpdate(true);
         }
 
-        public void InstantOpen()
+        public virtual void InstantOpen()
         {
             bgTr.DOKill();
             bgTr.sizeDelta = bigV;
@@ -182,7 +182,7 @@ namespace CCC.UI
             isOpen = true;
         }
 
-        public void InstantClose()
+        public virtual void InstantClose()
         {
             isOpen = false;
             bgTr.DOKill();

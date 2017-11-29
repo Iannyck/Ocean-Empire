@@ -8,8 +8,9 @@ public class Reward_Tickets : Reward
 {
     public int amount;
 
-    public override void Apply()
+    public override bool Apply()
     {
+        return PlayerCurrency.AddTickets(amount);
     }
 
     public override float GetValue()

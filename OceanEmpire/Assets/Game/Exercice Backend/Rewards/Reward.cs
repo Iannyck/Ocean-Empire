@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Reward
 {
-    public abstract void Apply();
+    public abstract bool Apply();
     public abstract RewardType GetRewardType();
     public abstract float GetValue();
 }

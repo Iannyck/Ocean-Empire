@@ -299,15 +299,15 @@ public class GameSaves : BaseManager<GameSaves>
 
     public void ClearAllSaves()
     {
-        ClearSave(Type.Currency);
-        ClearSave(Type.Tutorial);
-        ClearSave(Type.FishPop);
-        ClearSave(Type.Items);
-        ClearSave(Type.Calendar);
+        ClearCurrency();
+        ClearTutorial();
+        ClearFishPop();
+        ClearItems();
+        ClearCalendar();
     }
 
     [InspectorButton()]
-    public void ClearShop()
+    public void ClearCurrency()
     {
         ClearSave(Type.Currency);
 #if UNITY_EDITOR
@@ -342,6 +342,10 @@ public class GameSaves : BaseManager<GameSaves>
     public void ClearCalendar()
     {
         ClearSave(Type.Calendar);
+
+        if (Calendar.instance)
+            Calendar.instance.Reload();
+
 #if UNITY_EDITOR
         Debug.Log("Calendar Cleared");
 #endif

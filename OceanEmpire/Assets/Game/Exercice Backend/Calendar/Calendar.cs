@@ -129,6 +129,11 @@ public class Calendar : BaseManager<Calendar>
         return true;
     }
 
+    public void Reload()
+    {
+        ReadFromGameSaves();
+    }
+
     private void ApplyToGameSaves(bool andSave)
     {
         GameSaves.instance.SetObject(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
