@@ -22,4 +22,11 @@ public class ScheduledTask : TimedTask
     {
         return true;
     }
+
+    public override string ToString()
+    {
+        return "Task:\n" + task.ToString() + "\n\n"
+                + "Timeslot:\n" + timeSlot.ToString() + "\n\n"
+                + "Created On:\n" + createdOn.ToString();
+    }
 }

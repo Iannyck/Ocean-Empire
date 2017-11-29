@@ -10,4 +10,9 @@ public class InstantTask : ScheduledTask
         :base(task, DateTime.Now)
     {
     }
+
+    public override string ToString()
+    {
+        return "INSTANT " + base.ToString();
+    }
 }

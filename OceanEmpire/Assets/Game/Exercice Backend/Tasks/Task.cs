@@ -14,4 +14,9 @@ public abstract class Task
     }
     public abstract ExerciseType GetExerciseType();
     public abstract TimeSpan GetAllocatedTime();
+
+    public override string ToString()
+    {
+        return "Reward:\n" + reward.ToString();
+    }
 }
