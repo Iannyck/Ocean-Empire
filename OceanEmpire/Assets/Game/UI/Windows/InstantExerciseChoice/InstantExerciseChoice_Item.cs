@@ -34,9 +34,11 @@ public class InstantExerciseChoice_Item : MonoBehaviour
         {
             case RewardType.Coins:
                 coinDisplay.SetActive(true);
+                coinText.text = "" + (reward as Reward_Coins).amount;
                 break;
             case RewardType.Tickets:
                 ticketDisplay.SetActive(true);
+                ticketText.text = "" + (reward as Reward_Tickets).amount;
                 break;
             case RewardType.OceanRefill:
                 oceanRefillDisplay.SetActive(true);
