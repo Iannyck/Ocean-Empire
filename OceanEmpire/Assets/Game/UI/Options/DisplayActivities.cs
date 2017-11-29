@@ -13,7 +13,15 @@ public class DisplayActivities : MonoBehaviour {
     {
         anim.Open(delegate ()
         {
-            display.text = ActivityDetection.ReadDocument();
+            string allActivities = "";
+            foreach (var activity in ActivityAnalyser.instance.activites)
+            {
+                allActivities += activity.probability;
+                allActivities += "->";
+                allActivities += activity.time;
+                allActivities += "|";
+            }
+            display.text = allActivities;
         });
     }
 
