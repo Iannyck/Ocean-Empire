@@ -48,11 +48,8 @@ EditorBuildSettings:
     path: Assets/Game/InGame Systems/Exercice/Windows/Demande/ProposeRefill.unity
     guid: 7190ad829dcddf24fae71ab9e4facae3
   - enabled: 1
-    path: Assets/Game/InGame Systems/Exercice/Windows/Attente/TrackingWindow.unity
+    path: Assets/Game/InGame Systems/Exercice/Windows/Tracking/TrackingWindow.unity
     guid: 70aaec503ca4045479c021cf40983bdc
-  - enabled: 0
-    path: Assets/Game/InGame Systems/Exercice/Windows/Demande/AskWindowWithGage.unity
-    guid: 511a5fe7e3ff53140bc5f2e96f77359b
   - enabled: 1
     path: Assets/Game/InGame Systems/Exercice/Windows/Rating/Rating.unity
     guid: 5bc2be3cb9da2294ab6ae09d31e86ab4
@@ -85,4 +82,4 @@ EditorBuildSettings:
     guid: beb86ce867a9fa8468e6e7ce726c2539
   - enabled: 1
     path: Assets/Game/UI/Windows/Task Conclusion/Task Conclusion Window.unity
-    guid: 00000000000000000000000000000000
+    guid: 816990f090c25b2438617a65ed9c9cc9
