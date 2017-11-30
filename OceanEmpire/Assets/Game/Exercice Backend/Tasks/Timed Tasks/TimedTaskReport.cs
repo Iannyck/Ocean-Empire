@@ -94,9 +94,9 @@ public class TimedTaskReport
             "\nExercise type: " + exerciseType.ToString() +
             "\nReport created on: " + reportCreatedOn.ToString() +
             "\nTask created on: " + taskCreatedOn.ToString() +
-            "\nTask planned for:\n" + taskPlannedFor.ToString() +
-            "\nWas instant task: " + wasInstantTask.ToString() +
-            "\nHappy rating:" + rating.ToString() +
-            "\nTracking report:\n" + trackingReport.ToString();
+            "\n---Task planned for---\n" + taskPlannedFor.ToString() + "\n---"
+            + "\nWas instant task: " + wasInstantTask.ToString() +
+            "\nHappy rating: " + rating.ToString() +
+            "\n---Tracking report---\n" + trackingReport.ToString() + "\n---";
     }
 }
