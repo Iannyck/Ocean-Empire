@@ -9,6 +9,9 @@ public class Calendar : BaseManager<Calendar>
 {
     private const string SAVE_KEY_ST = "scheduledTasks";
 
+    [SerializeField]
+    private float checkForPastTasksEvery = 4;
+
     /// <summary>
     /// Ordonner du plus vieux au plus recent
     /// </summary>
@@ -66,6 +69,16 @@ public class Calendar : BaseManager<Calendar>
     {
         ReadFromGameSaves();
         CompleteInit();
+        StartCoroutine(CheckPastTasksLoop());
+    }
+
+    IEnumerator CheckPastTasksLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
+            ConcludePastTasks();
+        }
     }
 
     /// <summary>

@@ -33,4 +33,9 @@ public class Reward_OceanRefill : Reward
     {
         return RewardType.OceanRefill;
     }
+
+    public override string ToString()
+    {
+        return "Ocean refill";
+    }
 }

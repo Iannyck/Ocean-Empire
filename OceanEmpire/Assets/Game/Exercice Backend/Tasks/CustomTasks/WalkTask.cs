@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class WalkTask : Task
 {
-    public float minutesOfWalk;
+    public float minutesOfWalk { get { return (float)timeOfWalk.TotalSeconds / 60f; } }
     public TimeSpan timeOfWalk;
 
     public override ExerciseType GetExerciseType()
@@ -16,8 +16,7 @@ public class WalkTask : Task
 
     public WalkTask(float minutesOfWalk)
     {
-        this.minutesOfWalk = minutesOfWalk;
-        timeOfWalk = new TimeSpan(0, (int)minutesOfWalk, 0);
+        timeOfWalk = new TimeSpan(0, 0, minutesOfWalk.RoundedToInt() * 60);
     }
 
     public static WalkTask Build(float difficulty)
@@ -28,6 +27,12 @@ public class WalkTask : Task
     public override TimeSpan GetAllocatedTime()
     {
         double exerciseTime = timeOfWalk.TotalSeconds * 1.5;
-        return new TimeSpan(0, 15, 0) + TimeSpan.FromSeconds(exerciseTime);
+        //return new TimeSpan(0, 15, 0) + TimeSpan.FromSeconds(exerciseTime);
+        return new TimeSpan(0, 0, 15); // TEMPORAIRE
+    }
+
+    public override string ToString()
+    {
+        return minutesOfWalk + "min walk:\n" + base.ToString();
     }
 }

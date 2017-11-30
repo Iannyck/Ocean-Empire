@@ -6,12 +6,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CheatsWindow : WindowAnimation
-{ 
+{
     public const string SCENENAME = "CheatsWindow";
 
     public static void OpenWindow()
     {
         Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive);
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        MasterManager.Sync();
     }
 
 
@@ -30,15 +36,27 @@ public class CheatsWindow : WindowAnimation
             FishPopulation.Reload();
 
         ActivityDetection.ResetActivitiesSave();
-        PlayerProfile.ResetPlayerProfil();
     }
 
 
-    public void ShowMeTheMoney()    //Cheat code StarCraft xD
+    public void ShowMeTheMoney(int amount)    //Cheat code StarCraft xD
     {
         if (PlayerCurrency.instance != null)
         {
-            PlayerCurrency.AddCoins(200);
+            if (amount < 0)
+                PlayerCurrency.RemoveCoins(amount.Abs());
+            else
+                PlayerCurrency.AddCoins(amount);
+        }
+    }
+    public void GiveTickets(int amount)    //Cheat code StarCraft xD
+    {
+        if (PlayerCurrency.instance != null)
+        {
+            if (amount < 0)
+                PlayerCurrency.RemoveTickets(amount.Abs());
+            else
+                PlayerCurrency.AddTickets(amount);
         }
     }
 

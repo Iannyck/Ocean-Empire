@@ -109,7 +109,10 @@ public class TrackingWindow : MonoBehaviour
 
     private void UpdateExerciceCompletion(TimeSpan timeDone, TimeSpan timeToDo)
     {
-        lastProb.text = currentReport.probabilities.Last().ToString() + "%";
+        if (currentReport.probabilities.Count > 0)
+            lastProb.text = currentReport.probabilities.Last().ToString() + "%";
+        else
+            lastProb.text = "NO PROB %";
 
         timeSinceStart.text = DateTime.Now.Subtract(startTime).ToString();
 

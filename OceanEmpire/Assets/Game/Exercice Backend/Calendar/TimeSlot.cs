@@ -93,4 +93,10 @@ public struct TimeSlot
             return 1;
         }
     }
+
+    public override string ToString()
+    {
+        return "Start: " + start.ToString()
+            + "\nEnd: " + end.ToString();
+    }
 }
