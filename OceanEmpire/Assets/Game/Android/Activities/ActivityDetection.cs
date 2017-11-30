@@ -72,7 +72,7 @@ public class ActivityDetection : MonoBehaviour
             Debug.Log("DELETING FILE");
             using (File.Create(filePath)) ;
             FileInfo info = new FileInfo(filePath);
-            if (info.Length > 10)
+            if (info.Length > 0)
             {
                 if (MainThread.instance == null)
                     Debug.Log("MainThread.cs not in the scene.");
