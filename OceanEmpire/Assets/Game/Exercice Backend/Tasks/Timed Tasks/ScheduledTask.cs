@@ -29,4 +29,13 @@ public class ScheduledTask : TimedTask
                 + "Timeslot:\n" + timeSlot.ToString() + "\n\n"
                 + "Created On:\n" + createdOn.ToString();
     }
+
+    public bool SuccesfullyCompleted()
+    {
+        Reward reward = task.GetReward();
+        bool applyResult = reward.Apply();
+
+        PlayerProfile.updatePlayerLevel(task);
+        return applyResult;
+    }
 }

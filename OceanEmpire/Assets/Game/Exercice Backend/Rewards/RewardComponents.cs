@@ -11,9 +11,9 @@ public static class RewardComponents
             case RewardType.Coins:
                 return 1;
             case RewardType.Tickets:
-                return 10;
+                return 5;
             case RewardType.OceanRefill:
-                return 30;
+                return 15;
         }
         return -1;
     }

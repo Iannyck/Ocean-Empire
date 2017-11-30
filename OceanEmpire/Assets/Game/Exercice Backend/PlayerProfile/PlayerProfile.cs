@@ -19,12 +19,13 @@ public class PlayerProfile : BaseManager<PlayerProfile>
 
     [SerializeField, ReadOnly]
     private int level;
+    public float rewardScale = 1;
 
     public Preferences preferences;
 
     public static void IncrementLevel(int value)
     {
-        Level = (Level + value).Capped(TaskDifficulty.MaxLevel); 
+        Level = (Level + value).Capped(taskDifficulty.MaxLevel); 
     }
 
     public static void DecrementLevel(int value)
@@ -52,6 +53,14 @@ public class PlayerProfile : BaseManager<PlayerProfile>
         level = GameSaves.instance.GetInt(GameSaves.Type.PlayerProfile, SAVE_KEY_LEVEL, 0);
     }
 
+    public static void updatePlayerLevel(Task completedTask)
+    {
+        if (taskDifficulty.GetTaskLevel(completedTask) < Level)
+            DecrementLevel(1);
+        else if (taskDifficulty.GetTaskLevel(completedTask) > Level)
+            IncrementLevel(1);
+        return;
+    }
     
     public static void Reload()
     {

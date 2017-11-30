@@ -108,8 +108,8 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
         if (rewardGiven)
             return;
 
-        Reward reward = task.task.GetReward();
-        bool applyResult = reward.Apply();
+        bool applyResult = task.SuccesfullyCompleted();
+
         concludeCallback();
 
         if (!applyResult)
