@@ -27,8 +27,8 @@ public class WalkTask : Task
     public override TimeSpan GetAllocatedTime()
     {
         double exerciseTime = timeOfWalk.TotalSeconds * 1.5;
-        //return new TimeSpan(0, 15, 0) + TimeSpan.FromSeconds(exerciseTime);
-        return new TimeSpan(0, 0, 15); // TEMPORAIRE
+        return new TimeSpan(0, 15, 0) + TimeSpan.FromSeconds(exerciseTime);
+        //return new TimeSpan(0, 0, 15); // TEMPORAIRE
     }
 
     public override string ToString()
