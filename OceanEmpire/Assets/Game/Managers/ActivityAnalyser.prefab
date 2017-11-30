@@ -54,7 +54,7 @@ MonoBehaviour:
   _objectReferences: []
   _serializedStateKeys:
   - onCompleteInit
-  - activites
+  - activities
   _serializedStateValues:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
@@ -62,3 +62,4 @@ MonoBehaviour:
   initComplete: 0
   achieveGap: 50
   timeBetweenUpdate: 2
+  waitingForDataUpdate: 0
