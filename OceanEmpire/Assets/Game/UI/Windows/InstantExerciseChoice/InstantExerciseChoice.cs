@@ -1,4 +1,6 @@
 using CCC.Manager;
+using System.Collections;
+using System.Collections.Generic;
 using CCC.UI;
 using System;
 using UnityEngine.SceneManagement;
@@ -76,6 +78,15 @@ public class InstantExerciseChoice : WindowAnimation
     private void Init(int rewardType = -1)
     {
         int taskCount = taskDisplays.Length;
+
+        List<Task> tasks = ExercisePropositionMaker.GetExercisePropositions(taskCount);
+
+        for (int i = 0; i < taskCount; i++)
+        {
+           taskDisplays[i].DisplayTask(tasks[i]);
+        }
+        /*
+        int taskCount = taskDisplays.Length;
         float difficultyStart = 0;
         float difficultyEnd = 1;
         float increment = (difficultyEnd - difficultyStart) / taskCount;
@@ -85,6 +96,6 @@ public class InstantExerciseChoice : WindowAnimation
         {
             taskDisplays[i].DisplayTask(TaskBuilder.Build(ExerciseType.Walk, currentDifficulty));
             currentDifficulty += increment;
-        }
+        }*/
     }
 }
