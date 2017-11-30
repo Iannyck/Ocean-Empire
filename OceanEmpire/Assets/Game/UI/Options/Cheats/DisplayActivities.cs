@@ -13,7 +13,8 @@ public class DisplayActivities : MonoBehaviour {
     {
         anim.Open(delegate ()
         {
-            int iterationMax = 50;
+            MessagePopup.DisplayMessage("Showing The Activity File");
+            int iterationMax = 105;
             string allActivities = "";
             List<ActivityDetection.Activity> activities = ActivityAnalyser.instance.activities;
             for (int i = 0; i < activities.Count; i++)

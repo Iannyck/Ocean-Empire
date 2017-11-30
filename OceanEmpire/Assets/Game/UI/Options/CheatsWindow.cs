@@ -36,6 +36,7 @@ public class CheatsWindow : WindowAnimation
             FishPopulation.Reload();
 
         ActivityDetection.ResetActivitiesSave();
+        ActivityAnalyser.instance.ResetActivities();
     }
 
 

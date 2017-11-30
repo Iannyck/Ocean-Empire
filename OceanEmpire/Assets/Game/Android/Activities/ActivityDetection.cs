@@ -69,8 +69,22 @@ public class ActivityDetection : MonoBehaviour
     public static void ResetActivitiesSave()
     {
         Thread t = new Thread(new ThreadStart(() => {
-            File.Delete(filePath);
             Debug.Log("DELETING FILE");
+            using (File.Create(filePath)) ;
+            FileInfo info = new FileInfo(filePath);
+            if (info.Length > 10)
+            {
+                if (MainThread.instance == null)
+                    Debug.Log("MainThread.cs not in the scene.");
+
+                lock (MainThread.instance)
+                {
+                    MainThread.AddAction(ResetActivitiesSave);
+                }
+            } else
+            {
+                MessagePopup.DisplayMessageFromThread("File Deleted - Good job !");
+            }
         }));
         t.Start();
     }
