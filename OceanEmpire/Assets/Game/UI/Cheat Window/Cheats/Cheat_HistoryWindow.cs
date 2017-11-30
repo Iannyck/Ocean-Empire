@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Collections.ObjectModel;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class Cheat_CalendarDataWindow : MonoBehaviour
+public class Cheat_HistoryWindow : MonoBehaviour
 {
     public Text displayText;
 
@@ -13,10 +13,10 @@ public class Cheat_CalendarDataWindow : MonoBehaviour
         if (Calendar.instance == null)
             return;
 
-        ReadOnlyCollection<ScheduledTask> tasks = Calendar.instance.GetScheduledTasks();
+        ReadOnlyCollection<TimedTaskReport> tasks = History.instance.GetTaskReports();
 
-        string completeText = "Tasks:\n\n";
-        for (int i = 0; i < tasks.Count; i++)
+        string completeText = "Task Reports:\n\n";
+        for (int i = tasks.Count - 1; i >= 0; i--)
         {
             completeText += tasks[i].ToString() + "\n\n\n";
         }
