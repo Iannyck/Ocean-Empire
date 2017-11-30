@@ -31,7 +31,7 @@ public class TrackingWindow : MonoBehaviour
         Scenes.LoadAsync(SCENE_NAME, LoadSceneMode.Additive, delegate (Scene scene)
         {
             scene.FindRootObject<TrackingWindow>().InitDisplay(exerciceDescription, task, enAttente, title);
-        });
+        }, true);
     }
 
     public static bool IsTrackingSomething()
