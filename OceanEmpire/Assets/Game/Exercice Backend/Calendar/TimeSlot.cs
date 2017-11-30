@@ -25,7 +25,7 @@ public struct TimeSlot
 
         var objCT = (TimeSlot)obj;
 
-        return objCT.start == start;
+        return objCT.start == start && objCT.duration == duration;
     }
 
     public override int GetHashCode()

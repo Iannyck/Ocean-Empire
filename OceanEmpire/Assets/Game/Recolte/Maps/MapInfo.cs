@@ -5,6 +5,18 @@ using FullInspector;
 
 public class MapInfo : BaseBehavior
 {
+
+    [InspectorCategory("General")]
+    public float PopulationRateVariation = 4;
+
+
+    [InspectorCategory("General")]
+    public Transform boatLocation;
+    [InspectorCategory("General")]
+    public Transform TopLocation;
+    [InspectorCategory("General")]
+    public Transform WaterLocation;
+
     //contain distribution of a fish species
     [System.Serializable]
     public struct FishType
@@ -123,7 +135,10 @@ public class MapInfo : BaseBehavior
     public float GetGeneralDensity(float position)
     {
         float deRatio = (mapTop - position) / (mapTop - mapBottom);
-        return mapFishReparition.Evaluate(deRatio) * mapFishDensity * FishPopulation.PopulationRate;
+
+        float fishRate = Mathf.Pow(FishPopulation.PopulationRate, PopulationRateVariation);
+
+        return mapFishReparition.Evaluate(deRatio) * mapFishDensity * fishRate;
     }
 
 
