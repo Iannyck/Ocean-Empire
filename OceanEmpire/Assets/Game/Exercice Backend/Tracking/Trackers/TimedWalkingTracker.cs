@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TimedWalkingTracker : WalkTracker {
 
-    public override ActivityAnalyser.Report UpdateTracking(TimedTask task, DateTime startedWhen)
+    public override ActivityAnalyser.Report Track(TimedTask task, bool untilNow = true)
     {
         if (task == null)
         {
@@ -19,11 +19,11 @@ public class TimedWalkingTracker : WalkTracker {
             return null;
         }
 
-        return ActivityAnalyser.instance.VerifyCompletion(task);
-    }
+        // TODO FAIRE LA LOGIQUE TU TEMPS ICI
 
-    public override ActivityAnalyser.Report EvaluateTask(TimedTask task)
-    {
-        return ActivityAnalyser.instance.VerifyCompletion(task);
+        if(untilNow)
+            return ActivityAnalyser.instance.VerifyCompletion(task);
+        else
+            return ActivityAnalyser.instance.VerifyCompletion(task, task.timeSlot.end);
     }
 }

@@ -53,13 +53,15 @@ public class TrackingWindow : MonoBehaviour
 
     private void Update()
     {
-        currentReport = tracker.UpdateTracking(currentTask, trackingStart); // task=TimedTask, startedWhen=DateTime
+        currentReport = tracker.Track(currentTask);
         UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
         if (currentReport.complete)
         {
             ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
-            Hide(); // exercise complete ! state=ExerciseTrackingReport.State 
+            Hide();
         }
+        if(DateTime.Now.CompareTo(currentTask.timeSlot.end) > 1)
+            ForceStop();
     }
 
     public void Hide()
@@ -78,14 +80,14 @@ public class TrackingWindow : MonoBehaviour
 
     public void ForceComplete()
     {
-        currentReport = tracker.EvaluateTask(currentTask);
+        currentReport = tracker.Track(currentTask);
         ConcludeTask(ExerciseTrackingReport.BuildFrom_UserSaidItWasCompleted(currentReport));
         Hide();
     }
 
     public void ForceStop()
     {
-        currentReport = tracker.EvaluateTask(currentTask);
+        currentReport = tracker.Track(currentTask);
         ConcludeTask(ExerciseTrackingReport.BuildFromAbandonned(currentReport));
         Hide();
     }
