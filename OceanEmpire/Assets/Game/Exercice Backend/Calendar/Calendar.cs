@@ -163,7 +163,7 @@ public class Calendar : BaseManager<Calendar>
             return false;
 
         ExerciseTracker tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
-        ActivityAnalyser.Report analyserReport = tracker.EvaluateTask(task);
+        ActivityAnalyser.Report analyserReport = tracker.Track(task,false);
         ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromNonInterrupted(analyserReport);
         TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(task, trackingReport, HappyRating.None);
 

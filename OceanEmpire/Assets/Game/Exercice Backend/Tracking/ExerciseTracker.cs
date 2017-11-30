@@ -16,9 +16,7 @@ public abstract class ExerciseTracker
         throw new System.NotImplementedException();
     }
 
-    public abstract ActivityAnalyser.Report UpdateTracking(TimedTask task, DateTime startedWhen);
+    public abstract ActivityAnalyser.Report Track(TimedTask task, bool untilNow = true);
 
     public abstract ExerciseType GetExerciseType();
-
-    public abstract ActivityAnalyser.Report EvaluateTask(TimedTask task);
 }

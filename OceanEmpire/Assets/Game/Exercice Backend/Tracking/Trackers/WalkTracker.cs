@@ -10,12 +10,7 @@ public class WalkTracker : ExerciseTracker
         return ExerciseType.Walk;
     }
 
-    public override ActivityAnalyser.Report UpdateTracking(TimedTask task, DateTime startedWhen)
-    {
-        return null;
-    }
-
-    public override ActivityAnalyser.Report EvaluateTask(TimedTask task)
+    public override ActivityAnalyser.Report Track(TimedTask task, bool untilNow = true)
     {
         return null;
     }

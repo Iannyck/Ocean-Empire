@@ -5,6 +5,13 @@ using FullInspector;
 
 public class MapInfo : BaseBehavior
 {
+    [InspectorCategory("General")]
+    public Transform boatLocation;
+    [InspectorCategory("General")]
+    public Transform TopLocation;
+    [InspectorCategory("General")]
+    public Transform WaterLocation;
+
     //contain distribution of a fish species
     [System.Serializable]
     public struct FishType
