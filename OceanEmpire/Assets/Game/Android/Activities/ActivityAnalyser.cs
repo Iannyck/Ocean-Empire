@@ -219,4 +219,9 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
             onComplete.Invoke(result);
         });
     }
+
+    public void ResetActivities()
+    {
+        activities = new List<ActivityDetection.Activity>();
+    }
 }
