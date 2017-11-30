@@ -13,7 +13,28 @@ public class DisplayActivities : MonoBehaviour {
     {
         anim.Open(delegate ()
         {
-            display.text = ActivityDetection.ReadDocument();
+            int iterationMax = 50;
+            string allActivities = "";
+            List<ActivityDetection.Activity> activities = ActivityAnalyser.instance.activities;
+            for (int i = 0; i < activities.Count; i++)
+            {
+                if (i > iterationMax)
+                    break;
+                allActivities += activities[i].probability;
+                allActivities += "->";
+                allActivities += activities[i].time;
+                allActivities += "|";
+                if(i+1 < activities.Count)
+                {
+                    allActivities += activities[i + 1].probability;
+                    allActivities += "->";
+                    allActivities += activities[i + 1].time;
+                    allActivities += "|";
+                    allActivities += "\n";
+                    i++; // oui, c'est voulu
+                }
+            }
+            display.text = allActivities;
         });
     }
 

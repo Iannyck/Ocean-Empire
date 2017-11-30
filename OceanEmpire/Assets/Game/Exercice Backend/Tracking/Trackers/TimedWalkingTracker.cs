@@ -19,30 +19,11 @@ public class TimedWalkingTracker : WalkTracker {
             return null;
         }
 
-        return ActivityAnalyser.VerifyCompletion(task);
-
-        /*
-        // Temps courrant - Temps au debut est plus grand que le Temps au debut + minutesOfWalk
-        TimeSpan toCompare = (startedWhen.AddMinutes(((WalkTask)task.task).minutesOfWalk)).Subtract(startedWhen);
-        if ((DateTime.Now.Subtract(startedWhen)).CompareTo(toCompare) >= 1)
-            return ActivityAnalyser.VerifyCompletion(task);
-        return null;
-        */
+        return ActivityAnalyser.instance.VerifyCompletion(task);
     }
 
     public override ActivityAnalyser.Report EvaluateTask(TimedTask task)
     {
-        return ActivityAnalyser.VerifyCompletion(task);
+        return ActivityAnalyser.instance.VerifyCompletion(task);
     }
-
-    // Exemple de tracking
-    //
-    // START
-    // ExerciseTracker tracker = ExerciseComponents.GetTracker(ExerciseType.Walk)
-    // 
-    // UPDATE
-    // ActivityAnalyser.Report currentReport = tracker.UpdateTracking(task, startedWhen) // task=TimedTask, startedWhen=DateTime
-    // if(currentReport != null)
-    //     REPORT = ActivityAnalyser.ProduceReport(currentReport,state) // exercise complete ! state=ExerciseTrackingReport.State 
-    // finito
 }
