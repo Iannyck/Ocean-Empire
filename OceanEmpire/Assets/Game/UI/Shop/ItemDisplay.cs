@@ -109,8 +109,19 @@ public class ItemDisplay : MonoBehaviour {
     {
         if (PlayerCurrency.GetCoins() > item.GetMoneyCost())
         {
-            PlayerCurrency.RemoveCoins(item.GetMoneyCost());
-            Buy();
+            ConfirmBuy.OpenWindowAndConfirm(item, true, (hasConfirmed) =>
+            {
+                if (hasConfirmed)
+                {
+                    PlayerCurrency.RemoveCoins(item.GetMoneyCost());
+                    Buy();
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            });
         }
     }
 
@@ -118,8 +129,19 @@ public class ItemDisplay : MonoBehaviour {
     {
         if (PlayerCurrency.GetTickets() > item.GetTicketCost())
         {
-            PlayerCurrency.RemoveTickets(item.GetTicketCost());
-            Buy();
+            ConfirmBuy.OpenWindowAndConfirm(item, false, (hasConfirmed) =>
+            {
+                if (hasConfirmed)
+                {
+                    PlayerCurrency.RemoveTickets(item.GetTicketCost());
+                    Buy();
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            });
         }
     }
 

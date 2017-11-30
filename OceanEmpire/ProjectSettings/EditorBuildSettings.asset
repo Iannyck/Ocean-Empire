@@ -75,7 +75,7 @@ EditorBuildSettings:
     path: "Assets/Game/Recolte/Maps/Oc\xE9an Pacifique/Map_Pacifique.unity"
     guid: 447972ceb2ca45d4a9299125d2870195
   - enabled: 1
-    path: Assets/Game/UI/Options/CheatsWindow.unity
+    path: Assets/Game/UI/Windows/Cheat Window/CheatsWindow.unity
     guid: 54efd1a1935fafa4f96034b56c2ad4a8
   - enabled: 1
     path: Assets/Plugins/CCC/UI/Generic Windows/Message Popup/MessagePopup.unity
@@ -83,3 +83,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Windows/Task Conclusion/Task Conclusion Window.unity
     guid: 816990f090c25b2438617a65ed9c9cc9
+  - enabled: 1
+    path: Assets/Game/UI/Shop/Confirm/ShopConfirm.unity
+    guid: 456281001804c8143939b454fa7eaaed
