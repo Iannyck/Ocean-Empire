@@ -483,8 +483,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 379.90002
-  m_PreferredHeight: 159.4
+  m_PreferredWidth: -1
+  m_PreferredHeight: 410
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
 --- !u!114 &114058871817378266
@@ -1564,7 +1564,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 450}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224097025029869324
 RectTransform:
