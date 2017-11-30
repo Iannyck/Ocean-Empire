@@ -9,6 +9,9 @@ public class Calendar : BaseManager<Calendar>
 {
     private const string SAVE_KEY_ST = "scheduledTasks";
 
+    [SerializeField]
+    private float checkForPastTasksEvery = 4;
+
     /// <summary>
     /// Ordonner du plus vieux au plus recent
     /// </summary>
@@ -66,6 +69,16 @@ public class Calendar : BaseManager<Calendar>
     {
         ReadFromGameSaves();
         CompleteInit();
+        StartCoroutine(CheckPastTasksLoop());
+    }
+
+    IEnumerator CheckPastTasksLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
+            ConcludePastTasks();
+        }
     }
 
     /// <summary>
@@ -136,14 +149,14 @@ public class Calendar : BaseManager<Calendar>
 
     private void ApplyToGameSaves(bool andSave)
     {
-        GameSaves.instance.SetObject(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
+        GameSaves.instance.SetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
         if (andSave)
             GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, null);
     }
 
     private void ReadFromGameSaves()
     {
-        scheduledTasks = GameSaves.instance.GetObject(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<ScheduledTask>;
+        scheduledTasks = GameSaves.instance.GetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<ScheduledTask>;
         if (scheduledTasks == null)
             scheduledTasks = new List<ScheduledTask>();
     }

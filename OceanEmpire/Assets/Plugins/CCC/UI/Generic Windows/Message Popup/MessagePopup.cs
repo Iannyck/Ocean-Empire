@@ -41,6 +41,13 @@ public class MessagePopup : MonoBehaviour
             scene.FindRootObject<MessagePopup>().DisplayText(message, onComplete);
         }, false);
     }
+    public static void DisplayMessageFromThread(string message, TweenCallback onComplete = null)
+    {
+        lock (MainThread.instance)
+        {
+            MainThread.AddAction(() => DisplayMessage(message, onComplete));
+        }
+    }
 
     private void Awake()
     {
