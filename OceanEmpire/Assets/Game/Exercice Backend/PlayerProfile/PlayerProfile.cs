@@ -59,7 +59,7 @@ public class PlayerProfile : BaseManager<PlayerProfile>
     }
     public static void ResetPlayerProfil()
     {
-        GameSaves.instance.ClearPlayerProfil();
+        GameSaves.instance.ClearPlayerProfile();
         Reload();
     }
 }

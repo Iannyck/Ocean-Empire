@@ -309,6 +309,7 @@ public class GameSaves : BaseManager<GameSaves>
         ClearItems();
         ClearCalendar();
         ClearHistory();
+        ClearPlayerProfile();
     }
 
     [InspectorButton()]
@@ -367,6 +368,18 @@ public class GameSaves : BaseManager<GameSaves>
         Debug.Log("History Cleared");
 #endif
     }
+    [InspectorButton()]
+    public void ClearPlayerProfile()
+    {
+        ClearSave(Type.PlayerProfile);
+
+        if (PlayerProfile.instance)
+            PlayerProfile.Reload();
+
+#if UNITY_EDITOR
+        Debug.Log("Player Profile Cleared");
+#endif
+    }
 
     public void ClearSave(Type type)
     {
@@ -385,8 +398,9 @@ public class GameSaves : BaseManager<GameSaves>
     private const string ITEMS_FILE = "items.dat";
     private const string CALENDAR_FILE = "calendar.dat";
     private const string HISTORY_FILE = "history.dat";
+    private const string PLAYERPROFILE_FILE = "playerProfile.dat";
 
-    public enum Type { Currency = 0, Tutorial = 1, FishPop = 2, Items = 3, Calendar = 4, History = 5 }
+    public enum Type { Currency = 0, Tutorial = 1, FishPop = 2, Items = 3, Calendar = 4, History = 5, PlayerProfile = 6 }
 
     [ShowInInspector]
     private Data currencyData = new Data();
@@ -400,6 +414,8 @@ public class GameSaves : BaseManager<GameSaves>
     private Data calendarData = new Data();
     [ShowInInspector]
     private Data historyData = new Data();
+    [ShowInInspector]
+    private Data playerProfileData = new Data();
 
     private string TypeToFileName(Type type)
     {
@@ -417,6 +433,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return CALENDAR_FILE;
             case Type.History:
                 return HISTORY_FILE;
+            case Type.PlayerProfile:
+                return PLAYERPROFILE_FILE;
             default:
                 return "";
         }
@@ -438,6 +456,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return calendarData;
             case Type.History:
                 return historyData;
+            case Type.PlayerProfile:
+                return playerProfileData;
             default:
                 return null;
         }
@@ -465,6 +485,9 @@ public class GameSaves : BaseManager<GameSaves>
             case Type.History:
                 historyData = newData;
                 break;
+            case Type.PlayerProfile:
+                playerProfileData = newData;
+                break;
             default:
                 break;
         }
@@ -491,6 +514,9 @@ public class GameSaves : BaseManager<GameSaves>
                 break;
             case Type.History:
                 historyData = new Data();
+                break;
+            case Type.PlayerProfile:
+                playerProfileData = new Data();
                 break;
             default:
                 break;
