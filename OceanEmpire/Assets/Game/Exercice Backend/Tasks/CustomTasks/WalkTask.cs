@@ -22,7 +22,7 @@ public class WalkTask : Task
 
     public static WalkTask Build(float difficulty)
     {
-        return new WalkTask(2);
+        return new WalkTask(difficulty);
     }
 
     public override TimeSpan GetAllocatedTime()

@@ -30,6 +30,7 @@ public class CheatsWindow : WindowAnimation
             FishPopulation.Reload();
 
         ActivityDetection.ResetActivitiesSave();
+        PlayerProfile.ResetPlayerProfil();
     }
 
 

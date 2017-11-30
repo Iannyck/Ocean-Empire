@@ -201,6 +201,7 @@ public class GameSaves : BaseManager<GameSaves>
         LoadDataAsync(Type.FishPop, queue.Register());
         LoadDataAsync(Type.Items, queue.Register());
         LoadDataAsync(Type.Calendar, queue.Register());
+        LoadDataAsync(Type.PlayerProfile, queue.Register());
 
         queue.MarkEnd();
     }
@@ -212,6 +213,7 @@ public class GameSaves : BaseManager<GameSaves>
         LoadData(Type.FishPop);
         LoadData(Type.Items);
         LoadData(Type.Calendar);
+        LoadData(Type.PlayerProfile);
     }
 
     public void SaveAllAsync(Action onComplete)
@@ -222,6 +224,7 @@ public class GameSaves : BaseManager<GameSaves>
         SaveDataAsync(Type.FishPop, queue.Register());
         SaveDataAsync(Type.Items, queue.Register());
         SaveDataAsync(Type.Calendar, queue.Register());
+        SaveDataAsync(Type.PlayerProfile, queue.Register());
 
         queue.MarkEnd();
     }
@@ -234,6 +237,7 @@ public class GameSaves : BaseManager<GameSaves>
         SaveData(Type.FishPop);
         SaveData(Type.Items);
         SaveData(Type.Calendar);
+        SaveData(Type.PlayerProfile);
 
 #if UNITY_EDITOR
         Debug.Log("All Data Saved");
@@ -350,6 +354,18 @@ public class GameSaves : BaseManager<GameSaves>
         Debug.Log("Calendar Cleared");
 #endif
     }
+    [InspectorButton()]
+    public void ClearPlayerProfil()
+    {
+        ClearSave(Type.PlayerProfile);
+
+        if (global::PlayerProfile.instance)
+            global::PlayerProfile.Reload();
+
+#if UNITY_EDITOR
+        Debug.Log("Player Profile Cleared");
+#endif
+    }
 
     public void ClearSave(Type type)
     {
@@ -367,8 +383,9 @@ public class GameSaves : BaseManager<GameSaves>
     private const string FISHPOP_FILE = "fishpop.dat";
     private const string ITEMS_FILE = "items.dat";
     private const string CALENDAR_FILE = "calendar.dat";
+    private const string PLAYERPROFIL_FILE = "playerprofil.dat";
 
-    public enum Type { Currency = 0, Tutorial = 1, FishPop = 2, Items = 3, Calendar = 4 }
+    public enum Type { Currency = 0, Tutorial = 1, FishPop = 2, Items = 3, Calendar = 4 , PlayerProfile = 5}
 
     [ShowInInspector]
     private Data currencyData = new Data();
@@ -380,6 +397,8 @@ public class GameSaves : BaseManager<GameSaves>
     private Data itemsData = new Data();
     [ShowInInspector]
     private Data calendarData = new Data();
+    [ShowInInspector]
+    private Data PlayerProfile = new Data();
 
     private string TypeToFileName(Type type)
     {
@@ -395,6 +414,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return ITEMS_FILE;
             case Type.Calendar:
                 return CALENDAR_FILE;
+            case Type.PlayerProfile:
+                return PLAYERPROFIL_FILE;
             default:
                 return "";
         }
@@ -414,6 +435,8 @@ public class GameSaves : BaseManager<GameSaves>
                 return itemsData;
             case Type.Calendar:
                 return calendarData;
+            case Type.PlayerProfile:
+                return PlayerProfile;
             default:
                 return null;
         }
@@ -438,6 +461,9 @@ public class GameSaves : BaseManager<GameSaves>
             case Type.Calendar:
                 calendarData = newData;
                 break;
+            case Type.PlayerProfile:
+                PlayerProfile = newData;
+                break;
             default:
                 break;
         }
@@ -461,6 +487,9 @@ public class GameSaves : BaseManager<GameSaves>
                 break;
             case Type.Calendar:
                 calendarData = new Data();
+                break;
+            case Type.PlayerProfile:
+                PlayerProfile = new Data();
                 break;
             default:
                 break;
