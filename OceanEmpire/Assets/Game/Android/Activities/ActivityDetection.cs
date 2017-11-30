@@ -1,13 +1,15 @@
-﻿using System;
+﻿using CCC.Manager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActivityDetection : MonoBehaviour {
-
+public class ActivityDetection : MonoBehaviour
+{
     public class Activity
     {
         public enum ActivityType
@@ -19,7 +21,7 @@ public class ActivityDetection : MonoBehaviour {
         public DateTime time;
         public ActivityType type;
 
-        public Activity(int probability,DateTime time,ActivityType type = ActivityType.Walking)
+        public Activity(int probability, DateTime time, ActivityType type = ActivityType.Walking)
         {
             this.probability = probability;
             this.time = time;
@@ -33,32 +35,101 @@ public class ActivityDetection : MonoBehaviour {
     // Debug
     const string exempleFile = "0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:40:00 EST 2017\n\r0|Fri Nov 17 14:45:14 EST 2017\n\r";
 
-    public static string ReadDocument()
+    public static void ReadDocument(Action<string> onComplete = null)
     {
-        StreamReader reader = new StreamReader(filePath);
-        string result = reader.ReadToEnd();
-        reader.Close();
-        return result;
+        Thread t = new Thread(new ThreadStart(() => ThreadReadDocument(onComplete)));
+        t.Start();
+    }
+
+    public static void ThreadReadDocument(Action<string> onComplete = null)
+    {
+        string result = null;
+        if (File.Exists(filePath))
+        {
+            StreamReader reader = new StreamReader(filePath);
+            if (reader.BaseStream.CanRead)
+            {
+                result = reader.ReadToEnd();
+                Debug.Log("READING FILE");
+            }
+            reader.Close();
+        }
+        if (MainThread.instance == null)
+            Debug.Log("MainThread.cs not in the scene.");
+
+        lock (MainThread.instance)
+        {
+            MainThread.AddAction(delegate ()
+            {
+                onComplete.Invoke(result);
+            });
+        }
     }
 
     public static void ResetActivitiesSave()
     {
-        if (Directory.Exists(filePath))
-        {
+        Thread t = new Thread(new ThreadStart(() => {
             File.Delete(filePath);
-        }
+            Debug.Log("DELETING FILE");
+        }));
+        t.Start();
     }
 
-    public static List<Activity> LoadActivities()
+    public static void LoadActivities(Action<List<Activity>> onComplete = null)
     {
-        string document;
 #if UNITY_ANDROID && !UNITY_EDITOR
-        document = ReadDocument();
-#else
-        document = exempleFile;
-#endif
+        ReadDocument(delegate(string output){
+            string document = output;
 
-        List<Activity> result = new List<Activity>(); 
+            if(document == null)
+            {
+                onComplete.Invoke(null);
+                return;
+            }
+
+            List<Activity> result = new List<Activity>();
+
+            bool readingDate = false;
+            string currentProbability = "";
+            string currentDateTime = "";
+
+            for (int i = 0; i < document.Length; i++)
+            {
+                char currentChar = document[i];
+                if (currentChar == '|')
+                {
+                    readingDate = true;
+                    currentDateTime = "";
+                    continue;
+                }
+                else if (currentChar == '\r')
+                {
+                    readingDate = false;
+                    result.Add(new Activity(IntParseFast(currentProbability), ConvertStringToDate(currentDateTime)));
+                    currentProbability = "";
+                    continue;
+                }
+                else if (currentChar == '\n')
+                    continue;
+
+                if (readingDate)
+                {
+                    currentDateTime += currentChar;
+                    continue;
+                }
+                else
+                {
+                    currentProbability += currentChar;
+                    continue;
+                }
+            }
+            Debug.Log("ACTIVITIES LOADED");
+            onComplete.Invoke(result);
+        });
+#else
+        string document = exempleFile;
+
+        List<Activity> result = new List<Activity>();
 
         bool readingDate = false;
         string currentProbability = "";
@@ -67,31 +138,36 @@ public class ActivityDetection : MonoBehaviour {
         for (int i = 0; i < document.Length; i++)
         {
             char currentChar = document[i];
-            if(currentChar == '|')
+            if (currentChar == '|')
             {
                 readingDate = true;
                 currentDateTime = "";
                 continue;
-            } else if(currentChar == '\r'){
+            }
+            else if (currentChar == '\r')
+            {
                 readingDate = false;
                 result.Add(new Activity(IntParseFast(currentProbability), ConvertStringToDate(currentDateTime)));
                 currentProbability = "";
                 continue;
-            } else if (currentChar == '\n')
+            }
+            else if (currentChar == '\n')
                 continue;
 
             if (readingDate)
             {
                 currentDateTime += currentChar;
                 continue;
-            } else
+            }
+            else
             {
                 currentProbability += currentChar;
                 continue;
             }
         }
 
-        return result;
+        onComplete.Invoke(result);
+#endif
     }
 
     private static int IntParseFast(string value)

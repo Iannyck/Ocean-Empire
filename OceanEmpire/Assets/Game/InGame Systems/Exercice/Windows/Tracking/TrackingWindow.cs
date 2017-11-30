@@ -14,6 +14,7 @@ public class TrackingWindow : MonoBehaviour
     // UI
     public Text currentTimeUI;
     public Slider completionState;
+    public Text timeWaiting;
 
     // Animation
     public WindowAnimation windowAnim;
@@ -91,13 +92,12 @@ public class TrackingWindow : MonoBehaviour
 
     private void UpdateExerciceCompletion(TimeSpan timeDone, TimeSpan timeToDo)
     {
+        TimeSpan time = DateTime.Now.Subtract(trackingStart);
+        timeWaiting.text = time.Hours + ":" + time.Minutes + ":" + time.Seconds;
+
         double totalTimeDone = timeDone.TotalSeconds; // secondes
         double totalTimeToDo = timeToDo.TotalSeconds; // secondes
         double completion = totalTimeDone / totalTimeToDo;
-
-        Debug.Log("TIME DONE :" + totalTimeDone);
-        Debug.Log("TIME TO DO :" + totalTimeToDo);
-        Debug.Log("COMPLETION :" + (completion * 100) + "%");
 
         if (completionState != null)
             completionState.value = (float)completion;
