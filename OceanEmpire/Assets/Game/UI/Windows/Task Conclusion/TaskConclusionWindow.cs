@@ -25,7 +25,7 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
     public GameObject oceanRefillReward;
 
     private ScheduledTask task;
-    private TimedTaskReport report;
+    //private TimedTaskReport report;
     private Action concludeCallback;
 
     private bool rewardGiven = false;
@@ -55,7 +55,7 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
 
     private void InitWindow(ScheduledTask task, TimedTaskReport incompleteReport, Action concludeCallback)
     {
-        this.report = incompleteReport;
+        //this.report = incompleteReport;
         this.task = task;
         this.concludeCallback = concludeCallback;
 
