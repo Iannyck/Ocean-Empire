@@ -61,8 +61,6 @@ public class InstantExerciseChoice : WindowAnimation
                 InstantTask instantTask = new InstantTask(item.assignedTask);
                 if (Calendar.instance.AddScheduledTask(instantTask))
                 {
-
-                    TrackingWindow.ShowWaitingWindow("", instantTask);
                     Close();
                 }
                 else

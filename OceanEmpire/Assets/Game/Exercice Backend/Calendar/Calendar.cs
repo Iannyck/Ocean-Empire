@@ -37,6 +37,8 @@ public class Calendar : BaseManager<Calendar>
             if (onTaskAdded != null)
                 onTaskAdded();
 
+            TrackOngoingTask();
+
             return true;
         }
         else
@@ -69,15 +71,16 @@ public class Calendar : BaseManager<Calendar>
     {
         ReadFromGameSaves();
         CompleteInit();
-        StartCoroutine(CheckPastTasksLoop());
+        StartCoroutine(CheckTasks());
     }
 
-    IEnumerator CheckPastTasksLoop()
+    IEnumerator CheckTasks()
     {
         while (true)
         {
             yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
             ConcludePastTasks();
+            TrackOngoingTask();
         }
     }
 
@@ -104,6 +107,33 @@ public class Calendar : BaseManager<Calendar>
             return true;
         }
         return false;
+    }
+
+    void TrackOngoingTask()
+    {
+        //On ne fait rien si on est deja entrain de tack quelque chose
+        if (TrackingWindow.IsTrackingSomething())
+            return;
+
+        //On cherche une tache qui serait en ce moment
+        ScheduledTask onGoingTask = null;
+        for (int i = 0; i < scheduledTasks.Count; i++)
+        {
+            TimeSlot timeslot = scheduledTasks[i].timeSlot;
+            if (timeslot.IsNow())
+            {
+                onGoingTask = scheduledTasks[i];
+                break;
+            }
+            else if (timeslot.IsInTheFuture())
+                break;
+        }
+
+        //Si aucune tache a ete trouver, on arrete ici
+        if (onGoingTask == null)
+            return;
+
+        TrackingWindow.ShowWaitingWindow("", onGoingTask);
     }
 
     List<ScheduledTask> ConcludePastTasks()
