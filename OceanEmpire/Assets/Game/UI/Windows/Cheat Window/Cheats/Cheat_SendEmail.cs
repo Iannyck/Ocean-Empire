@@ -14,7 +14,6 @@ public class Cheat_SendEmail : MonoBehaviour
 
     public void SendHistoryByEmail()
     {
-        ReadOnlyCollection<TimedTaskReport> tasks = History.instance.GetTaskReports();
         string completeText = "Device info:\n"
             + "ID: " + SystemInfo.deviceUniqueIdentifier
             + "\nName: " + SystemInfo.deviceName
@@ -23,10 +22,13 @@ public class Cheat_SendEmail : MonoBehaviour
             + "\nSupport Accelerometer: " + SystemInfo.supportsAccelerometer;
 
         completeText += "\n\nTask Reports:\n\n";
-        for (int i = tasks.Count - 1; i >= 0; i--)
-        {
-            completeText += tasks[i].ToString() + "\n\n\n";
-        }
+
+        ReadOnlyCollection<TimedTaskReport> reports = History.instance.GetTaskReports();
+        if (reports != null)
+            for (int i = reports.Count - 1; i >= 0; i--)
+            {
+                completeText += reports[i].ToString() + "\n\n\n";
+            }
 
         SendEmail(completeText);
     }
@@ -52,7 +54,7 @@ public class Cheat_SendEmail : MonoBehaviour
                 delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
                 { return true; };
             smtpServer.Send(mail);
-            
+
             MessagePopup.DisplayMessage("Courriel envoy\u00E9!");
         }
         catch (Exception e)
