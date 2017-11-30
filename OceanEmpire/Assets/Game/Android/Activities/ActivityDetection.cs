@@ -197,7 +197,11 @@ public class ActivityDetection : MonoBehaviour
 
     private static DateTime ConvertStringToDate(string value)
     {
-        string modifiedValue = value.Replace(" EST", "");
+        char[] charArray = value.ToCharArray();
+        string toDelete = " " + charArray[20] + charArray[21] + charArray[22];
+        Debug.Log("DELETING TIMEZONE : " + toDelete);
+        string modifiedValue = value.Replace(toDelete, "");
+        
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
     }
 }
