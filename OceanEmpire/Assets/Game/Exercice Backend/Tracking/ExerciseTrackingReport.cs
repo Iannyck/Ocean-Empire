@@ -63,4 +63,11 @@ public class ExerciseTrackingReport
             probabilities = activityReport.probabilities
         };
     }
+
+    public override string ToString()
+    {
+        return "Activity rate: " + activityRate.ToString()
+            + "\nState: " + state.ToString()
+            + "\nTimeslot:\n" + timeSlot.ToString();
+    }
 }

@@ -1,11 +1,20 @@
-﻿using System;
+﻿using CCC.Manager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivityAnalyser {
+public class ActivityAnalyser : BaseManager<ActivityAnalyser>
+{
+    public float achieveGap = 50;
 
-    public const float achieveGap = 50;
+    public float timeBetweenUpdate = 2f;
+
+    [HideInInspector]
+    public bool waitingForDataUpdate = false;
+
+    [HideInInspector]
+    public List<ActivityDetection.Activity> activities = new List<ActivityDetection.Activity>();
 
     public class Report
     {
@@ -19,7 +28,8 @@ public class ActivityAnalyser {
 
         public Report() { }
 
-        public Report(TimedTask task) {
+        public Report(TimedTask task)
+        {
             complete = false;
             this.task = task;
             activityRate = 0;
@@ -30,21 +40,49 @@ public class ActivityAnalyser {
         }
     }
 
-    public static Report VerifyCompletion(TimedTask task)
+    public override void Init()
+    {
+        CompleteInit();
+        UpdateActivities();
+    }
+
+    private void UpdateActivities()
+    {
+        if (waitingForDataUpdate)
+            return;
+
+        waitingForDataUpdate = true;
+        AskForActivities(delegate (List<ActivityDetection.Activity> activities)
+        {
+            if (activities != null)
+            {
+                Debug.Log("ANALYSER GOT SOME ACTIVITIES");
+                waitingForDataUpdate = false;
+                this.activities = activities;
+                DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
+            }
+            else
+            {
+                Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
+                waitingForDataUpdate = true;
+                UpdateActivities();
+            }
+        });
+    }
+
+    public Report VerifyCompletion(TimedTask task)
     {
         return VerifyCompletion(task, DateTime.Now);
     }
 
-    public static Report VerifyCompletion(TimedTask task, DateTime until)
+    public Report VerifyCompletion(TimedTask task, DateTime until)
     {
         switch (task.task.GetExerciseType())
         {
             case ExerciseType.Walk:
-                List<ActivityDetection.Activity> activites = GetAllActiviesInTimeStamp(task.timeSlot.start, until);
-                if (activites == null)
-                    break;
+                Debug.Log("BEGIN VERIFICATION FOR WALK");
                 Report result = new Report(task);
-                GetReport(activites,ref result);
+                GetReport(GetAllActiviesInTimeStamp(task.timeSlot.start,until), ref result);
                 return result;
             case ExerciseType.Run:
                 // TODO
@@ -55,10 +93,9 @@ public class ActivityAnalyser {
             default:
                 return new Report(task);
         }
-        return new Report(task);
     }
 
-    private static void GetReport(List<ActivityDetection.Activity> activites,ref Report result)
+    private void GetReport(List<ActivityDetection.Activity> activites, ref Report result)
     {
         result.probabilities = new List<float>();
 
@@ -79,6 +116,10 @@ public class ActivityAnalyser {
                 if (!doingExercice)
                 {
                     doingExercice = true;
+                    lastExercice = activites[i].time;
+                } else
+                { // On continue
+                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
                     lastExercice = activites[i].time;
                 }
             }
@@ -109,14 +150,14 @@ public class ActivityAnalyser {
         }
     }
 
-    public static List<ActivityDetection.Activity> GetAllActiviesInTimeStamp(DateTime start, DateTime end, ExerciseType type = ExerciseType.Walk)
+    public List<ActivityDetection.Activity> GetAllActiviesInTimeStamp(DateTime start, DateTime end, ExerciseType type = ExerciseType.Walk)
     {
-        if(start.CompareTo(end) >= 1)
+        if (start.CompareTo(end) >= 1)
             return null;
         if (end.CompareTo(DateTime.Now) >= 1)
             return null;
 
-        List<ActivityDetection.Activity> result = ActivityDetection.LoadActivities();
+        List<ActivityDetection.Activity> result = activities;
         for (int i = 0; i < result.Count; i++)
         {
             if (result[i].time.CompareTo(start) <= -1 || result[i].time.CompareTo(end) >= 1)
@@ -130,7 +171,7 @@ public class ActivityAnalyser {
             switch (result[i].type)
             {
                 case ActivityDetection.Activity.ActivityType.Walking:
-                    if(type != ExerciseType.Walk)
+                    if (type != ExerciseType.Walk)
                     {
                         result.Remove(result[i]);
                         i--;
@@ -142,7 +183,45 @@ public class ActivityAnalyser {
                     break;
             }
         }
-
         return result;
+    }
+
+    public void AskForActivities(Action<List<ActivityDetection.Activity>> onComplete = null, ExerciseType type = ExerciseType.Walk)
+    {
+        List<ActivityDetection.Activity> result = null;
+        ActivityDetection.LoadActivities(delegate (List<ActivityDetection.Activity> outputActivities)
+        {
+            result = outputActivities;
+            if (result == null)
+            {
+                onComplete.Invoke(null);
+                return;
+            }
+
+            //Clear la vidange (on garde slmt la marche)
+            for (int i = 0; i < result.Count; i++)
+            {
+                switch (result[i].type)
+                {
+                    case ActivityDetection.Activity.ActivityType.Walking:
+                        if (type != ExerciseType.Walk)
+                        {
+                            result.Remove(result[i]);
+                            i--;
+                            if (result.Count <= 0)
+                                onComplete.Invoke(result);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            onComplete.Invoke(result);
+        });
+    }
+
+    public void ResetActivities()
+    {
+        activities = new List<ActivityDetection.Activity>();
     }
 }

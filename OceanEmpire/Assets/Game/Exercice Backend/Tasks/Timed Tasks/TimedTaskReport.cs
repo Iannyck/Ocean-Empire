@@ -87,4 +87,16 @@ public class TimedTaskReport
         taskPlannedFor = plannedTimeSlot;
         this.taskCreatedOn = taskCreatedOn;
     }
+
+    public override string ToString()
+    {
+        return "State: " + state.ToString() +
+            "\nExercise type: " + exerciseType.ToString() +
+            "\nReport created on: " + reportCreatedOn.ToString() +
+            "\nTask created on: " + taskCreatedOn.ToString() +
+            "\n---Task planned for---\n" + taskPlannedFor.ToString() + "\n---"
+            + "\nWas instant task: " + wasInstantTask.ToString() +
+            "\nHappy rating: " + rating.ToString() +
+            "\n---Tracking report---\n" + trackingReport.ToString() + "\n---";
+    }
 }

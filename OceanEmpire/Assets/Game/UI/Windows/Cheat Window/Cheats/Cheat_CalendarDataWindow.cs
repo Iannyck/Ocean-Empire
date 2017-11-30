@@ -16,7 +16,7 @@ public class Cheat_CalendarDataWindow : MonoBehaviour
         ReadOnlyCollection<ScheduledTask> tasks = Calendar.instance.GetScheduledTasks();
 
         string completeText = "Tasks:\n\n";
-        for (int i = 0; i < tasks.Count; i++)
+        for (int i = tasks.Count - 1; i >= 0; i--)
         {
             completeText += tasks[i].ToString() + "\n\n\n";
         }

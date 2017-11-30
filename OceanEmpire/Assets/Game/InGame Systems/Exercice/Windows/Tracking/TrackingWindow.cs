@@ -14,17 +14,13 @@ public class TrackingWindow : MonoBehaviour
     // UI
     public Text currentTimeUI;
     public Slider completionState;
-    public Text lastProb;
-    public Text timeSinceStart;
+    public Text timeWaiting;
 
     // Animation
     public WindowAnimation windowAnim;
 
     // Tracking Initialisation
-    private DateTime startTime;
     private ExerciseTracker tracker;
-    private TimeSpan currentRemaining;
-    private bool startTrackingUpdate;
     private DateTime trackingStart;
     private ScheduledTask currentTask;
     private ActivityAnalyser.Report currentReport;
@@ -43,20 +39,11 @@ public class TrackingWindow : MonoBehaviour
         return Scenes.Exists(SCENE_NAME);
     }
 
-    private void Awake()
-    {
-        startTrackingUpdate = false;
-        currentRemaining = new TimeSpan(0, 0, 0);
-
-    }
-
     public void InitDisplay(string exerciceDescription, ScheduledTask task, string enAttente = "En Attente...", string title = "Faire l'exercice")
     {
         tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
         trackingStart = DateTime.Now;
         currentTask = task;
-        startTrackingUpdate = true;
-        startTime = DateTime.Now;
     }
 
     public void UpdateInfo(int index, string info)
@@ -66,21 +53,17 @@ public class TrackingWindow : MonoBehaviour
 
     private void Update()
     {
-        if (startTrackingUpdate)
+        currentReport = tracker.UpdateTracking(currentTask, trackingStart); // task=TimedTask, startedWhen=DateTime
+        UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
+        if (currentReport.complete)
         {
-            currentReport = tracker.UpdateTracking(currentTask, trackingStart); // task=TimedTask, startedWhen=DateTime
-            UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
-            if (currentReport.complete)
-            {
-                ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
-                Hide(); // exercise complete ! state=ExerciseTrackingReport.State 
-            }
+            ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
+            Hide(); // exercise complete ! state=ExerciseTrackingReport.State 
         }
     }
 
     public void Hide()
     {
-        startTrackingUpdate = false;
         windowAnim.Close(delegate ()
         {
             Scenes.UnloadAsync(SCENE_NAME);
@@ -109,20 +92,12 @@ public class TrackingWindow : MonoBehaviour
 
     private void UpdateExerciceCompletion(TimeSpan timeDone, TimeSpan timeToDo)
     {
-        if (currentReport.probabilities.Count > 0)
-            lastProb.text = currentReport.probabilities.Last().ToString() + "%";
-        else
-            lastProb.text = "NO PROB %";
-
-        timeSinceStart.text = DateTime.Now.Subtract(startTime).ToString();
+        TimeSpan time = DateTime.Now.Subtract(trackingStart);
+        timeWaiting.text = time.Hours + ":" + time.Minutes + ":" + time.Seconds;
 
         double totalTimeDone = timeDone.TotalSeconds; // secondes
         double totalTimeToDo = timeToDo.TotalSeconds; // secondes
         double completion = totalTimeDone / totalTimeToDo;
-
-        //Debug.Log("TIME DONE :" + totalTimeDone);
-        //Debug.Log("TIME TO DO :" + totalTimeToDo);
-        //Debug.Log("COMPLETION :" + (completion * 100) + "%");
 
         if (completionState != null)
             completionState.value = (float)completion;
