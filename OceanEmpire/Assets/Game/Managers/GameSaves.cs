@@ -24,6 +24,11 @@ public class GameSaves : BaseManager<GameSaves>
         public Dictionary<string, object> objects = new Dictionary<string, object>();
     }
 
+    /// <summary>
+    /// Read/Write operation queue. C'est une queue qui assure l'ordonnancement des operation read/write
+    /// </summary>
+    private Dictionary<Type, Queue<Action>> rwoQueue = new Dictionary<Type, Queue<Action>>();
+
     public override void Init()
     {
         //Debug.LogWarning("GameSaves: load started");
@@ -84,11 +89,14 @@ public class GameSaves : BaseManager<GameSaves>
             return defaultVal;
     }
 
-    public object GetObject(Type type, string key, object defaultVal = null)
+    public object GetObjectClone(Type type, string key, object defaultVal = null)
     {
         Data data = TypeToData(type);
         if (data.objects.ContainsKey(key))
-            return data.objects[key];
+        {
+            object result = data.objects[key];
+            return result != null ? ObjectCopier.Clone(result) : null;
+        }
         else
             return defaultVal;
     }
@@ -140,13 +148,15 @@ public class GameSaves : BaseManager<GameSaves>
             data.dateTimes.Add(key, value);
     }
 
-    public void SetObject(Type type, string key, object value)
+    public void SetObjectClone(Type type, string key, object value)
     {
+        object clone = value != null ? ObjectCopier.Clone(value) : null;
+
         Data data = TypeToData(type);
         if (data.objects.ContainsKey(key))
-            data.objects[key] = value;
+            data.objects[key] = clone;
         else
-            data.objects.Add(key, value);
+            data.objects.Add(key, clone);
     }
 
 
@@ -246,59 +256,126 @@ public class GameSaves : BaseManager<GameSaves>
 
     public void LoadDataAsync(Type type, Action onLoadComplete)
     {
-        string ext = TypeToFileName(type);
-        string path = GetPath() + ext;
-
-        //Exists ?
-        if (Saves.Exists(path))
-            Saves.ThreadLoad(GetPath() + ext,
-                delegate (object graph)
-                {
-                    ApplyDataByType(type, (Data)graph);
-                    if (onLoadComplete != null)
-                        onLoadComplete();
-                });
-        else
+        AddRWOperation(type, () =>
         {
-            //Nouveau fichier !
-            NewOfType(type);
-            SaveDataAsync(type, onLoadComplete);
-        }
+            string ext = TypeToFileName(type);
+            string path = GetPath() + ext;
 
+            //Exists ?
+            if (Saves.Exists(path))
+                Saves.ThreadLoad(GetPath() + ext,
+                    delegate (object graph)
+                    {
+                        ApplyDataByType(type, (Data)graph);
+                        if (onLoadComplete != null)
+                            onLoadComplete();
+
+                        CompleteRWOperation(type);
+                    });
+            else
+            {
+                //Nouveau fichier !
+                NewOfType(type);
+                SaveDataAsync(type, onLoadComplete);
+
+                CompleteRWOperation(type);
+            }
+        });
     }
 
-    public void LoadData(Type type)
+    public void LoadData(Type type, Action onLoadComplete = null)
     {
-        string ext = TypeToFileName(type);
-        string path = GetPath() + ext;
+        AddRWOperation(type, () =>
+        {
+            string ext = TypeToFileName(type);
+            string path = GetPath() + ext;
 
-        //Exists ?
-        if (Saves.Exists(path))
-        {
-            object graph = Saves.InstantLoad(GetPath() + ext);
-            ApplyDataByType(type, (Data)graph);
-        }
-        else
-        {
-            //Nouveau fichier !
-            NewOfType(type);
-            SaveData(type);
-        }
+            //Exists ?
+            if (Saves.Exists(path))
+            {
+                object graph = Saves.InstantLoad(GetPath() + ext);
+                ApplyDataByType(type, (Data)graph);
+            }
+            else
+            {
+                //Nouveau fichier !
+                NewOfType(type);
+                SaveData(type);
+            }
+
+            CompleteRWOperation(type);
+        });
     }
 
     public void SaveDataAsync(Type type, Action onSaveComplete)
     {
-        string ext = TypeToFileName(type);
-        Data data = TypeToData(type);
+        AddRWOperation(type, () =>
+        {
+            string ext = TypeToFileName(type);
+            Data data = TypeToData(type);
 
-        Saves.ThreadSave(GetPath() + ext, data, onSaveComplete);
+            Saves.ThreadSave(GetPath() + ext, data, () =>
+            {
+                if (onSaveComplete != null)
+                    onSaveComplete();
+
+                CompleteRWOperation(type);
+            });
+        });
     }
 
-    public void SaveData(Type type)
+    public void SaveData(Type type, Action onSaveComplete = null)
     {
-        string ext = TypeToFileName(type);
-        Data data = TypeToData(type);
-        Saves.InstantSave(GetPath() + ext, data);
+        AddRWOperation(type, () =>
+        {
+            string ext = TypeToFileName(type);
+            Data data = TypeToData(type);
+            Saves.InstantSave(GetPath() + ext, data);
+
+            if (onSaveComplete != null)
+                onSaveComplete();
+
+            CompleteRWOperation(type);
+        });
+    }
+
+    private void AddRWOperation(Type type, Action action)
+    {
+        //S'il y a deja une queue, on s'enfile et on attend
+        if (rwoQueue.ContainsKey(type))
+        {
+            //On s'enfile
+            rwoQueue[type].Enqueue(action);
+        }
+        else
+        {
+            //On cree la queue et execute l'operation
+            rwoQueue.Add(type, new Queue<Action>());
+            action();
+        }
+    }
+
+    private void CompleteRWOperation(Type type)
+    {
+        if (rwoQueue.ContainsKey(type))
+        {
+            Queue<Action> q = rwoQueue[type];
+            if (q.Count == 0)
+            {
+                //On est au bout de la file
+                rwoQueue.Remove(type);
+            }
+            else
+            {
+                //On execute la prochain action
+                Action nextOperation = q.Dequeue();
+                nextOperation();
+            }
+        }
+        else
+        {
+            Debug.LogError("Ne devrais pas arriver");
+        }
     }
 
     public void ClearAllSaves()

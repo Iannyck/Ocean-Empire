@@ -149,14 +149,14 @@ public class Calendar : BaseManager<Calendar>
 
     private void ApplyToGameSaves(bool andSave)
     {
-        GameSaves.instance.SetObject(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
+        GameSaves.instance.SetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
         if (andSave)
             GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, null);
     }
 
     private void ReadFromGameSaves()
     {
-        scheduledTasks = GameSaves.instance.GetObject(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<ScheduledTask>;
+        scheduledTasks = GameSaves.instance.GetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<ScheduledTask>;
         if (scheduledTasks == null)
             scheduledTasks = new List<ScheduledTask>();
     }

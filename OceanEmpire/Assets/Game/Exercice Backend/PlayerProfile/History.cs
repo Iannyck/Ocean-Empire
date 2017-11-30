@@ -27,6 +27,7 @@ public class History : CCC.Manager.BaseManager<History>
     public void AddReport(TimedTaskReport report)
     { 
         taskReports.Add(report);
+        ApplyToGameSaves(true);
     }
 
     public void Reload()
@@ -37,14 +38,14 @@ public class History : CCC.Manager.BaseManager<History>
     #region R/W Gamesaves
     private void ApplyToGameSaves(bool andSave)
     {
-        GameSaves.instance.SetObject(GameSaves.Type.History, SAVEKEY_reports, taskReports);
+        GameSaves.instance.SetObjectClone(GameSaves.Type.History, SAVEKEY_reports, taskReports);
         if (andSave)
             GameSaves.instance.SaveDataAsync(GameSaves.Type.History, null);
     }
 
     private void ReadFromGameSaves()
     {
-        taskReports = GameSaves.instance.GetObject(GameSaves.Type.History, SAVEKEY_reports) as List<TimedTaskReport>;
+        taskReports = GameSaves.instance.GetObjectClone(GameSaves.Type.History, SAVEKEY_reports) as List<TimedTaskReport>;
         if (taskReports == null)
             taskReports = new List<TimedTaskReport>();
     }

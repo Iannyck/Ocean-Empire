@@ -120,9 +120,9 @@ public class TrackingWindow : MonoBehaviour
         double totalTimeToDo = timeToDo.TotalSeconds; // secondes
         double completion = totalTimeDone / totalTimeToDo;
 
-        Debug.Log("TIME DONE :" + totalTimeDone);
-        Debug.Log("TIME TO DO :" + totalTimeToDo);
-        Debug.Log("COMPLETION :" + (completion * 100) + "%");
+        //Debug.Log("TIME DONE :" + totalTimeDone);
+        //Debug.Log("TIME TO DO :" + totalTimeToDo);
+        //Debug.Log("COMPLETION :" + (completion * 100) + "%");
 
         if (completionState != null)
             completionState.value = (float)completion;

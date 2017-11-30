@@ -73,8 +73,14 @@ public class PendingReports : BaseManager<PendingReports>
         if (pendingReports.Remove(report))
         {
             ApplyToGameSaves(true);
-            Debug.LogWarning("ON DOIT L'AJOUTER A L'HISTORIQUE");
-
+            try
+            {
+                History.instance.AddReport(report.incompleteReport);
+            }
+            catch (Exception e)
+            {
+                MessagePopup.DisplayMessage("Erreur lors de l'ajout du rapport dans l'history:\n " + e.Message);
+            }
             if (log)
                 Debug.Log("Retrait d'un 'pending report'.");
         }
@@ -90,14 +96,18 @@ public class PendingReports : BaseManager<PendingReports>
     #region R/W Gamesaves
     private void ApplyToGameSaves(bool andSave)
     {
-        GameSaves.instance.SetObject(GameSaves.Type.Calendar, SAVE_KEY_ST, pendingReports);
+        GameSaves.instance.SetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST, pendingReports);
         if (andSave)
-            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, null);
+        {
+            int c = pendingReports.Count;
+            print("Sauvgarde " + pendingReports.Count + " pending reports");
+            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, ()=>print("sauvegarde termine: " + c));
+        }
     }
 
     private void ReadFromGameSaves()
     {
-        pendingReports = GameSaves.instance.GetObject(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<PendingReport>;
+        pendingReports = GameSaves.instance.GetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<PendingReport>;
         if (pendingReports == null)
             pendingReports = new List<PendingReport>();
     }
