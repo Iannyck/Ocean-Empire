@@ -14,9 +14,9 @@ public class ConfirmBuy : WindowAnimation
 
     Action<bool> boughtConfirm;
 
-    public Text itemName;
+  //  public Text itemName;
 
-    public int price;
+    private int price;
 
     public Text cost;
     public Image CurrencyImage;
