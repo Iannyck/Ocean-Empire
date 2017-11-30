@@ -48,7 +48,9 @@ public class Cheat_SendEmail : MonoBehaviour
             {
                 Port = 587,
                 Credentials = new System.Net.NetworkCredential(email, password) as ICredentialsByHost,
-                EnableSsl = true
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false                
             };
             ServicePointManager.ServerCertificateValidationCallback =
                 delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)

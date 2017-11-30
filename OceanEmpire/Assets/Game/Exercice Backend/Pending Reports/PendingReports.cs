@@ -100,8 +100,8 @@ public class PendingReports : BaseManager<PendingReports>
         if (andSave)
         {
             int c = pendingReports.Count;
-            print("Sauvgarde " + pendingReports.Count + " pending reports");
-            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, ()=>print("sauvegarde termine: " + c));
+            //print("Sauvgarde " + pendingReports.Count + " pending reports");
+            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar,null);
         }
     }
 
