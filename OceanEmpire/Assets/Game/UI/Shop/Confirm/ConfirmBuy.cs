@@ -18,8 +18,8 @@ public class ConfirmBuy : WindowAnimation
 
     private int price;
 
-    public Text cost;
-    public Image CurrencyImage;
+  //  public Text cost;
+//public Image CurrencyImage;
 
     public static void OpenWindowAndConfirm(ItemDescription item, bool currency, Action<bool> resultCallback)
     {
@@ -42,20 +42,20 @@ public class ConfirmBuy : WindowAnimation
 
     public void Init(ItemDescription itemD, bool coinCurrency, Action<bool> resultCallback)
     {
-        itemName.text = itemD.GetName();
+        //itemName.text = itemD.GetName();
         boughtConfirm = resultCallback;
-        if (coinCurrency)
-        {
-            price = itemD.GetMoneyCost();
-            CurrencyImage.sprite = PlayerCurrency.GetMoneyIcon();
-        }
+       // if (coinCurrency)
+       // {
+       //     price = itemD.GetMoneyCost();
+       //     CurrencyImage.sprite = PlayerCurrency.GetMoneyIcon();
+       // }
             
-        else
-        {
-            price = itemD.GetTicketCost();
-            CurrencyImage.sprite = PlayerCurrency.GetTicketIcon();
-        }
-        cost.text = price.ToString();
+      //  else
+      //  {
+      //      price = itemD.GetTicketCost();
+      //      CurrencyImage.sprite = PlayerCurrency.GetTicketIcon();
+      //  }
+      //  cost.text = price.ToString();
     }
 
     public void OnConfirmClick()
