@@ -11,7 +11,13 @@ namespace CCC.Utility
     {
         static public void ThreadSave(string path, object graph, Action onComplete = null)
         {
-            Thread t = new Thread(new ThreadStart(() => ThreadSaveMethod(path, graph, onComplete)));
+            Thread t = new Thread(new ThreadStart(() =>
+            {
+                lock (graph)
+                {
+                    ThreadSaveMethod(path, graph, onComplete);
+                }
+            }));
             t.Start();
         }
 
