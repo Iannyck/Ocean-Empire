@@ -25,7 +25,7 @@ public class PlayerProfile : BaseManager<PlayerProfile>
 
     public static void IncrementLevel(int value)
     {
-        Level = (Level + value).Capped(TaskDifficulty.MaxLevel); 
+        Level = (Level + value).Capped(taskDifficulty.MaxLevel); 
     }
 
     public static void DecrementLevel(int value)
