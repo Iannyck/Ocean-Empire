@@ -7,10 +7,17 @@ public class DragThreashold : PublicSingleton<DragThreashold>
 {
     public EventSystem eventSystem;
 
+    [Header("Pourcentage d'ecran")]
     public float inMenuDragSize = 0.01f;
     public float inGameDragSize = 0.001f;
 
     public enum DragType { InGame = 0, InMenu = 1 }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        SetDragType(DragType.InMenu);
+    }
 
     public void SetDragType(DragType type)
     {

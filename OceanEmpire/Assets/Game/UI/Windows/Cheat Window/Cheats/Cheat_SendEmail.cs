@@ -44,8 +44,9 @@ public class Cheat_SendEmail : MonoBehaviour
             mail.Subject = "Jeu de poisson - Device: " + SystemInfo.deviceUniqueIdentifier;
             mail.Body = body;
 
-            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com")
+            SmtpClient smtpServer = new SmtpClient()
             {
+                Host = "smtp.gmail.com",
                 Port = 587,
                 Credentials = new System.Net.NetworkCredential(email, password) as ICredentialsByHost,
                 EnableSsl = true,
