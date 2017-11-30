@@ -50,7 +50,7 @@ public class ActivityDetection : MonoBehaviour
             if (reader.BaseStream.CanRead)
             {
                 result = reader.ReadToEnd();
-                Debug.Log("READING FILE");
+                //Debug.Log("READING FILE");
             }
             reader.Close();
         }
@@ -69,7 +69,7 @@ public class ActivityDetection : MonoBehaviour
     public static void ResetActivitiesSave()
     {
         Thread t = new Thread(new ThreadStart(() => {
-            Debug.Log("DELETING FILE");
+            //Debug.Log("DELETING FILE");
             using (File.Create(filePath)) ;
             FileInfo info = new FileInfo(filePath);
             if (info.Length > 0)

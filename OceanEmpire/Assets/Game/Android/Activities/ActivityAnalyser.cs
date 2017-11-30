@@ -56,17 +56,17 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         {
             if (activities != null)
             {
-                if (activities.Count <= 0)
-                    Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
-                else
-                    Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count-1].time);
+                //if (activities.Count <= 0)
+                    //Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
+                //else
+                    //Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count-1].time);
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
             }
             else
             {
-                Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
+                //Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
                 waitingForDataUpdate = true;
                 UpdateActivities();
             }
