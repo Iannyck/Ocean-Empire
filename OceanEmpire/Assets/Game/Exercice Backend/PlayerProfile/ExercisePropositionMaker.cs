@@ -12,7 +12,7 @@ public class ExercisePropositionMaker{
         List<Task> tasks = new List<Task>();
 
         for (int i = 0; i < amount; ++i)
-            tasks.Add(TaskBuilder.Build(types[i], taskDifficulty.GetExerciseDifficulty(types[i], levels[i])));
+            tasks.Add(TaskBuilder.Build(types[i], TaskDifficulty.GetExerciseDifficulty(types[i], levels[i])));
 
         return tasks;
     }
@@ -22,14 +22,14 @@ public class ExercisePropositionMaker{
     {
         Lottery<int> levelsLottery;
 
-        levelsLottery = new Lottery<int>(taskDifficulty.MaxLevel + 1);
-        for (int i = 0; i < taskDifficulty.MaxLevel; ++i)
+        levelsLottery = new Lottery<int>(TaskDifficulty.MaxLevel + 1);
+        for (int i = 0; i < TaskDifficulty.MaxLevel; ++i)
         {
             levelsLottery.Add(i, GetWeigth(i));
         }
 
-        if (amount > taskDifficulty.MaxLevel + 1)
-            amount = taskDifficulty.MaxLevel + 1;
+        if (amount > TaskDifficulty.MaxLevel + 1)
+            amount = TaskDifficulty.MaxLevel + 1;
 
         List<int> difficulties = new List<int>(); 
         while(difficulties.Count < amount )
