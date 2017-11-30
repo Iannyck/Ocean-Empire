@@ -8,6 +8,16 @@ public abstract class Task
 {
     Reward reward = Reward_Tickets.Build(5);
 
+    public void SetAutoReward(RewardType rewardType)
+    {
+        reward = RewardBuilder.AutoReward(this, rewardType);
+    }
+
+    public void SetReward(RewardType rewardType, int Amount = 0)
+    {
+        reward = RewardBuilder.ManualReward(rewardType, Amount);
+    }
+
     public Reward GetReward()
     {
         return reward;
