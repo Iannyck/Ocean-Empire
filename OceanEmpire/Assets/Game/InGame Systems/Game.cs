@@ -89,10 +89,16 @@ public class Game : PublicSingleton<Game>
         base.OnDestroy();
         onGameReady = null;
         onGameStart = null;
+
+        if (DragThreashold.instance != null)
+            DragThreashold.instance.SetDragType(DragThreashold.DragType.InMenu);
     }
 
     public void InitGame()
     {
+        if (DragThreashold.instance != null)
+            DragThreashold.instance.SetDragType(DragThreashold.DragType.InGame);
+
         cameraMouvement.followPlayer = false;
         Time.timeScale = 1;
 
@@ -114,7 +120,7 @@ public class Game : PublicSingleton<Game>
                 submarine.movementEnable = true;
                 playerSpawned = true;
                 ui.feedbacks.ShowGo(StartGame);
-                
+
             });
     }
 
