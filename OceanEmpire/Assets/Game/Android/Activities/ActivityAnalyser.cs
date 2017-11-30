@@ -56,7 +56,10 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         {
             if (activities != null)
             {
-                Debug.Log("ANALYSER GOT SOME ACTIVITIES");
+                if (activities.Count <= 0)
+                    Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
+                else
+                    Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count-1].time);
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
@@ -80,7 +83,6 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         switch (task.task.GetExerciseType())
         {
             case ExerciseType.Walk:
-                Debug.Log("BEGIN VERIFICATION FOR WALK");
                 Report result = new Report(task);
                 GetReport(GetAllActiviesInTimeStamp(task.timeSlot.start,until), ref result);
                 return result;
