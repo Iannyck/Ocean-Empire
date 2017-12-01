@@ -15,7 +15,7 @@ MonoBehaviour:
   itemDescription: Reservoir d'essence plus gros
   moneyCost: 40
   ticketCost: 10
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: 6f52f5fee94df764bb3b2f392f0abeb2, type: 3}
   itemFileName: item_gazTank2
   itemID: gaztank2
   upgradeLevel: 2
