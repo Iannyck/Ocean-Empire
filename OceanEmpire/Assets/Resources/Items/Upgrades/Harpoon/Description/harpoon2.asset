@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286f5076b2e78f84380f8fcb09f5a956, type: 3}
   m_Name: harpoon2
   m_EditorClassIdentifier: 
-  itemName: Trident de Poseidon
-  itemDescription: "Tir \xE0 la vitesse de l'\xE9clair"
+  itemName: "Trident de Pos\xE9idon"
+  itemDescription: Augmente la vitesse de ton harpon
   moneyCost: 80
   ticketCost: 20
   itemImage: {fileID: 21300000, guid: dd4884a83a0980e4389924e80d947052, type: 3}

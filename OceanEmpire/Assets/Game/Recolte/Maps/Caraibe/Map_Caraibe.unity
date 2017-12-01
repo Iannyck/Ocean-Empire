@@ -3456,7 +3456,7 @@ MonoBehaviour:
   WaterLocation: {fileID: 1082231827}
   regionName: Caraibe
   mapTop: 0
-  mapBottom: -64
+  mapBottom: -150
   depthAtYZero: 0
   mapFishDensity: 1
   mapFishReparition:

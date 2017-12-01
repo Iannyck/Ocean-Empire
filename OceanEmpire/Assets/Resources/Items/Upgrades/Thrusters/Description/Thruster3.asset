@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58137be365474a14ba9fb45a1e1b8d10, type: 3}
   m_Name: Thruster3
   m_EditorClassIdentifier: 
-  itemName: "Turbo R\xE9acteur"
-  itemDescription: Augmente beaucoup la vitesse du sous-marin
+  itemName: "R\xE9acteur Turbo"
+  itemDescription: "Atteins une vitesse incroyable avec ce nouveau r\xE9acteur"
   moneyCost: 150
   ticketCost: 35
   itemImage: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}

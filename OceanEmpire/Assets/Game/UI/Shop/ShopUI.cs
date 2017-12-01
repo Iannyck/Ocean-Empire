@@ -51,7 +51,7 @@ public class ShopUI : BaseBehavior {
         {
             Button newTab = Instantiate(tabButton.gameObject, tabButtonLayout.transform).GetComponent<Button>();
 
-            newTab.GetComponentInChildren<Text>().text = tabsList[i].tabName;
+            newTab.GetComponentInChildren<Text>().text = tabsList[i].tabName.Replace("\\n", "\n");
             int number = i;
             newTab.onClick.AddListener(() => { OpenTab(number); });
             tabs.Insert(i, newTab.GetComponent<Button>());

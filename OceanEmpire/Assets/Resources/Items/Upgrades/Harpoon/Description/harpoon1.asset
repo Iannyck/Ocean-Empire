@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286f5076b2e78f84380f8fcb09f5a956, type: 3}
   m_Name: harpoon1
   m_EditorClassIdentifier: 
-  itemName: Harpon de base
-  itemDescription: Ce harpon permet d'attraper de grosse prise
+  itemName: Harpon
+  itemDescription: Ce harpon te permet de capturer de grosses prises
   moneyCost: 20
   ticketCost: 5
   itemImage: {fileID: 21300000, guid: dd4884a83a0980e4389924e80d947052, type: 3}
