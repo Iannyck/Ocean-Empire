@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class WidgetFishPop : MonoBehaviour {
 
@@ -25,10 +26,13 @@ public class WidgetFishPop : MonoBehaviour {
 
     public void IncrementRate(float rateDifference)
     {
-        float currentRate = FishPopulation.FishDensity;
-        float target = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
+        float currentRate = FishPopulation.PopulationRate;
+        float targetRate = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
 
-        Tweener refillAnim = gageMeter.DOValue(target, fullRefillAnimLenght).SetUpdate(true);
+        float targetDensity = FishPopulation.GetFishDensityFromRate(targetRate);
+        Tweener refillAnim = gageMeter.DOValue(targetDensity, fullRefillAnimLenght).SetUpdate(true);
+
+        FishPopulation.instance.AddRate(rateDifference);
 
         refillAnim.OnComplete(() => {
             if (AnimComplete != null)
@@ -38,9 +42,16 @@ public class WidgetFishPop : MonoBehaviour {
             }
         });
 
-        FishPopulation.instance.AddRate(rateDifference);
+
     }
 
+
+    public void Fill(Action callBack)
+    {
+        Tweener refillAnim = gageMeter.DOValue(1, fullRefillAnimLenght).SetUpdate(true);
+        FishPopulation.instance.AddRate(1);
+        refillAnim.OnComplete(() =>  callBack());
+    }
 
     public void DecrementRate(float rateDifference)
     {
