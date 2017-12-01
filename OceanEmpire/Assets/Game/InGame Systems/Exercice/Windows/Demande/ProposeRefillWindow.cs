@@ -76,8 +76,8 @@ public class ProposeRefillWindow : MonoBehaviour
     {
         if (PlayerCurrency.RemoveTickets(refillCost.amount))
         {
-            FishPopulation.instance.AddRate(1);
-            Hide();
+            widgetFishPop.Fill(() =>
+            Hide());
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class WidgetFishPop : MonoBehaviour {
 
@@ -44,6 +45,13 @@ public class WidgetFishPop : MonoBehaviour {
 
     }
 
+
+    public void Fill(Action callBack)
+    {
+        Tweener refillAnim = gageMeter.DOValue(1, fullRefillAnimLenght).SetUpdate(true);
+        FishPopulation.instance.AddRate(1);
+        refillAnim.OnComplete(() =>  callBack());
+    }
 
     public void DecrementRate(float rateDifference)
     {
