@@ -77,14 +77,23 @@ public class InstantExerciseChoice : WindowAnimation
     {
         int taskCount = taskDisplays.Length;
 
+        List<Task> tasks;
 
         if (rewardType == RewardType.OceanRefill)
         {
-            Debug.LogWarning("Temporaire");
+            Montant refillCost = RefillCost.GetRefillCost();
+            print(refillCost.amount);
+            int level = RewardBuilder.RevertRewardByLevel(refillCost.amount);
+
+            Task task = TaskBuilder.Build(ExerciseType.Walk, taskDifficulty.GetExerciseDifficulty(ExerciseType.Walk, level));
+            task.SetReward(RewardType.OceanRefill, 0);
+            tasks = new List<Task>();
+            tasks.Add(task);
             taskCount = 1;
         }
+        else
+            tasks = ExercisePropositionMaker.GetExercisePropositions(taskCount, rewardType);
 
-        List<Task> tasks = ExercisePropositionMaker.GetExercisePropositions(taskCount, rewardType);
         int i = 0;
         for (i = 0; i < taskCount; i++)
         {

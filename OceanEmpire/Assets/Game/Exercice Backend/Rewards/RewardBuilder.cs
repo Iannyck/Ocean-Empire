@@ -29,8 +29,10 @@ public static class RewardBuilder
         return reward;
     }
 
-
-    //public stat
+    public static int RevertRewardByLevel(float reward)
+    {
+        return ((reward * RewardComponents.GetBaseValue(RewardType.Tickets) - nominalReward) / constantGrowthPerLevel).RoundedToInt().Clamped(0,taskDifficulty.MaxLevel);
+    }
 
     public static Reward AutoReward(Task task, RewardType rewardType)
     {
