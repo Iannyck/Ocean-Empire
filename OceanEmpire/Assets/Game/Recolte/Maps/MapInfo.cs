@@ -5,11 +5,6 @@ using FullInspector;
 
 public class MapInfo : BaseBehavior
 {
-
-    [InspectorCategory("General")]
-    public float PopulationRateVariation = 4;
-
-
     [InspectorCategory("General")]
     public Transform boatLocation;
     [InspectorCategory("General")]
@@ -123,8 +118,6 @@ public class MapInfo : BaseBehavior
                 float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
                 float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio) * fishTypeList[i].fishDensity;
 
-                print(fT.fish.description.name + ": " + fishProportion.ToString());
-
                 fishLottery.Add(fT.fish, fishProportion.Clamped(0f,1f));
             }
         }
@@ -144,10 +137,7 @@ public class MapInfo : BaseBehavior
     public float GetGeneralDensity(float position)
     {
         float deRatio = (mapTop - position) / (mapTop - mapBottom);
-
-        float fishRate = Mathf.Pow(FishPopulation.PopulationRate, PopulationRateVariation);
-
-        return mapFishReparition.Evaluate(deRatio) * mapFishDensity * fishRate;
+        return mapFishReparition.Evaluate(deRatio) * mapFishDensity * FishPopulation.FishDensity;
     }
 
 
