@@ -71,16 +71,17 @@ public class Calendar : BaseManager<Calendar>
     {
         ReadFromGameSaves();
         CompleteInit();
-        StartCoroutine(CheckTasks());
+
+        MasterManager.Sync(()=> StartCoroutine(CheckTasks()));
     }
 
     IEnumerator CheckTasks()
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
             ConcludePastTasks();
             TrackOngoingTask();
+            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
         }
     }
 

@@ -9,8 +9,10 @@ public class FishingReport
     public void AddToReport(BaseFish fish)
     {
         if (!CapturedFish.ContainsKey(fish.description))
+        { 
             CapturedFish.Add(fish.description, 1);
-
+            return;
+        }
         CapturedFish[fish.description] += 1;
     }
 

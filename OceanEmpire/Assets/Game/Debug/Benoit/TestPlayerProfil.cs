@@ -14,4 +14,10 @@ public class TestPlayerProfil : MonoBehaviour {
     {
         print(PlayerProfile.Level);
     }
+
+    public void ResetPlayerLevel()
+    {
+        GameSaves.instance.ClearPlayerProfile();
+        PlayerProfile.Reload();
+    }
 }

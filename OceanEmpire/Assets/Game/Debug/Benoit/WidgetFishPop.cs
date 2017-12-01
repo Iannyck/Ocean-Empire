@@ -19,13 +19,13 @@ public class WidgetFishPop : MonoBehaviour {
     public void UpdateMeter()
     {
         FishPopulation.instance.RefreshPopulation();
-        gageMeter.value = FishPopulation.PopulationRate;
+        gageMeter.value = FishPopulation.FishDensity;
     }
 
 
     public void IncrementRate(float rateDifference)
     {
-        float currentRate = FishPopulation.PopulationRate;
+        float currentRate = FishPopulation.FishDensity;
         float target = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
 
         Tweener refillAnim = gageMeter.DOValue(target, fullRefillAnimLenght).SetUpdate(true);
