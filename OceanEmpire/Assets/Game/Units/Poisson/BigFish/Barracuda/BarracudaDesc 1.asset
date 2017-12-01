@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Barracuda
   description: "Il est tellement m\xE9chant qu'il mange des chattons"
-  baseMonetaryValue: 6
+  baseMonetaryValue: 10
   populationValue: 1.5
   icon:
     spriteName: t_Barascuda

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Requin
   description: C'est un requin
-  baseMonetaryValue: 12
+  baseMonetaryValue: 15
   populationValue: 1.5
   icon:
     spriteName: t_Requin
