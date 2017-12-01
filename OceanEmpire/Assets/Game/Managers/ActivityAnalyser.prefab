@@ -62,4 +62,5 @@ MonoBehaviour:
   initComplete: 0
   achieveGap: 50
   timeBetweenUpdate: 2
+  generousMultiplier: 1.5
   waitingForDataUpdate: 0
