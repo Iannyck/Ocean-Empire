@@ -67,8 +67,8 @@ public class PlayerSpawn : MonoBehaviour
 
         TopScale = boatScale + (waterScale - boatScale) * (introToTopDuration / (introToTopDuration + introToWaterDuration / 2));
         Tweener intro2 =player.transform.DOScale(TopScale, introToTopDuration);
-        intro2.SetEase(Ease.InSine);
-        intro2.SetEase(Ease.OutSine);
+        intro2.SetEase(Ease.InOutSine);
+
 
 
 

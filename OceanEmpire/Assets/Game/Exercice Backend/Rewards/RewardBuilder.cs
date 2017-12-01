@@ -30,6 +30,8 @@ public static class RewardBuilder
     }
 
 
+    //public stat
+
     public static Reward AutoReward(Task task, RewardType rewardType)
     {
         int taskLevel = taskDifficulty.GetTaskLevel(task);
