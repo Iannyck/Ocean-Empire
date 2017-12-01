@@ -78,9 +78,9 @@ public class Calendar : BaseManager<Calendar>
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
             ConcludePastTasks();
             TrackOngoingTask();
+            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
         }
     }
 

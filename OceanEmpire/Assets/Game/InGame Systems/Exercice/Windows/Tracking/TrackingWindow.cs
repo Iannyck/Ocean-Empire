@@ -19,11 +19,13 @@ public class TrackingWindow : MonoBehaviour
     public Text timeWaiting;
     public float sliderAnimDuration = 1f;
     public float constantAugmentationRate = 10;
+    public Text pourcentDisplay;
 
     // Animation
     public WindowAnimation windowAnim;
 
     // Tracking Initialisation
+    private float currentPourcent;
     private float constantAugmentation;
     private float previousSliderValue;
     private ExerciseTracker tracker;
@@ -51,6 +53,7 @@ public class TrackingWindow : MonoBehaviour
         trackingStart = DateTime.Now;
         currentTask = task;
         previousSliderValue = 0;
+        currentPourcent = 0;
     }
 
     public void UpdateInfo(int index, string info)
@@ -115,6 +118,8 @@ public class TrackingWindow : MonoBehaviour
         double totalTimeToDo = timeToDo.TotalSeconds; // secondes
         double completion = totalTimeDone / totalTimeToDo;
 
+        pourcentDisplay.text = ((float)completion * 100) + "%";
+
         if (completionState != null)
         {
             if (previousSliderValue < (float)completion)
@@ -124,10 +129,11 @@ public class TrackingWindow : MonoBehaviour
             }
             else
             {
+                if ((completionState.value + constantAugmentation) >= 90)
+                    completionState.value = 90; 
                 completionState.value = completionState.value + constantAugmentation;
             }
         }
-            
 
         currentTimeUI.text = "" + timeDone.Minutes.ToString() + ":" + timeDone.Seconds.ToString();
     }
