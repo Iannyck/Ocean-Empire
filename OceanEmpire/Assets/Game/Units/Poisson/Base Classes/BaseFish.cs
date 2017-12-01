@@ -79,7 +79,7 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         return hasBeenCaptured;
     }
 
-    public void Start()
+    public virtual void Start()
     {
         Game.OnGameStart += Init;
     }
@@ -90,7 +90,7 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         //cam = Game.GameCamera;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         CheckPalier();
     }
