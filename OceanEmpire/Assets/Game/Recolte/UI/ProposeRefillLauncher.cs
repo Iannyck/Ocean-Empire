@@ -8,13 +8,13 @@ public class ProposeRefillLauncher : MonoBehaviour {
 
     // Utile pour scripter une demande d'exercice (donc a enlever lorsquon aura le vrai systeme)
 
-    public float proposeUnderRate = 0.75f;
+    public float proposeUnderDensity = 0.75f;
 
 	void Start ()
     {
         Game.OnGameReady += delegate ()
         {
-            if (FishPopulation.PopulationRate <= proposeUnderRate)
+            if (FishPopulation.FishDensity <= proposeUnderDensity)
             {
                 Scenes.LoadAsync(ProposeRefillWindow.SCENE_NAME, LoadSceneMode.Additive,null);
             }

@@ -28,6 +28,7 @@ public class ExercisePropositionMaker{
    
     private static List<int> getTaskLevels(int amount)
     {
+        /*
         Lottery<int> levelsLottery;
 
         levelsLottery = new Lottery<int>(taskDifficulty.MaxLevel + 1);
@@ -46,8 +47,16 @@ public class ExercisePropositionMaker{
             if (difficulties.Contains(difPicked) == false)
                 difficulties.Add(difPicked);
         }
-
+        
         difficulties.Sort();
+        */
+
+        List<int> difficulties = new List<int>();
+        int startValue = Mathf.Max(PlayerProfile.Level - ( (amount - 1) / 2.0f ).RoundedToInt(),  0);
+        int maxValue = startValue + amount;
+        for (int i = startValue; i <= maxValue; ++i)
+            difficulties.Add(i);
+
         return difficulties;
     }
 

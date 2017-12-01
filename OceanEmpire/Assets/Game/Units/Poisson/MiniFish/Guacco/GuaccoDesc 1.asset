@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Guacco
   description: C'est le cousin de Cayo
-  baseMonetaryValue: 1
+  baseMonetaryValue: 2
   populationValue: 1
   icon:
     spriteName: t_CayoaBleu
