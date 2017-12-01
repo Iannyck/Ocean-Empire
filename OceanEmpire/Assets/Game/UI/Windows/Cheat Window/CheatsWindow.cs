@@ -26,15 +26,6 @@ public class CheatsWindow : WindowAnimation
         if (GameSaves.instance != null)
             GameSaves.instance.ClearAllSaves();
 
-        if (ItemsList.instance != null)
-            ItemsList.Reload();
-
-        if (PlayerCurrency.instance != null)
-            PlayerCurrency.Reload();
-
-        if (FishPopulation.instance != null)
-            FishPopulation.Reload();
-
         ActivityDetection.ResetActivitiesSave();
         ActivityAnalyser.instance.ResetActivities();
     }

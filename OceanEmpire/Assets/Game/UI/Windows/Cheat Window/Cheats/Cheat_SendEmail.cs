@@ -21,14 +21,7 @@ public class Cheat_SendEmail : MonoBehaviour
             + "\nSupport Gyroscope: " + SystemInfo.supportsGyroscope
             + "\nSupport Accelerometer: " + SystemInfo.supportsAccelerometer;
 
-        completeText += "\n\nTask Reports:\n\n";
-
-        ReadOnlyCollection<TimedTaskReport> reports = History.instance.GetTaskReports();
-        if (reports != null)
-            for (int i = reports.Count - 1; i >= 0; i--)
-            {
-                completeText += reports[i].ToString() + "\n\n\n";
-            }
+        completeText += "\n\n" + History.instance.GetDataToString();
 
         SendEmail(completeText);
     }

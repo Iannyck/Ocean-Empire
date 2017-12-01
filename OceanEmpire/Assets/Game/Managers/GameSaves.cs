@@ -393,6 +393,10 @@ public class GameSaves : BaseManager<GameSaves>
     public void ClearCurrency()
     {
         ClearSave(Type.Currency);
+
+        if (PlayerCurrency.instance != null)
+            PlayerCurrency.Reload();
+
 #if UNITY_EDITOR
         Debug.Log("Shop Cleared");
 #endif
@@ -409,6 +413,9 @@ public class GameSaves : BaseManager<GameSaves>
     public void ClearFishPop()
     {
         ClearSave(Type.FishPop);
+
+        if (FishPopulation.instance != null)
+            FishPopulation.Reload();
 #if UNITY_EDITOR
         Debug.Log("FishPop Cleared");
 #endif
@@ -417,6 +424,9 @@ public class GameSaves : BaseManager<GameSaves>
     public void ClearItems()
     {
         ClearSave(Type.Items);
+
+        if (ItemsList.instance != null)
+            ItemsList.Reload();
 #if UNITY_EDITOR
         Debug.Log("Items Cleared");
 #endif

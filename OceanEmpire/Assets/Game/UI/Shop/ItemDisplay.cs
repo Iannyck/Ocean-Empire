@@ -109,19 +109,7 @@ public class ItemDisplay : MonoBehaviour {
     {
         if (PlayerCurrency.GetCoins() > item.GetMoneyCost())
         {
-            ConfirmBuy.OpenWindowAndConfirm(item, true, (hasConfirmed) =>
-            {
-                if (hasConfirmed)
-                {
-                    PlayerCurrency.RemoveCoins(item.GetMoneyCost());
-                    Buy();
-                    return;
-                }
-                else
-                {
-                    return;
-                }
-            });
+            Buy(CurrencyType.Coin);
         }
     }
 
@@ -129,34 +117,28 @@ public class ItemDisplay : MonoBehaviour {
     {
         if (PlayerCurrency.GetTickets() > item.GetTicketCost())
         {
-            ConfirmBuy.OpenWindowAndConfirm(item, false, (hasConfirmed) =>
-            {
-                if (hasConfirmed)
-                {
-                    PlayerCurrency.RemoveTickets(item.GetTicketCost());
-                    Buy();
-                    return;
-                }
-                else
-                {
-                    return;
-                }
-            });
+            Buy(CurrencyType.Ticket);
         }
     }
 
-    public void Buy()
+    public void Buy(CurrencyType currencyType)
     {
-        if (item is UpgradeDescription)
+        ConfirmBuy.OpenWindowAndConfirm(item, currencyType, (hasConfirmed) =>
         {
-            ItemsList.BuyUpgrade(item.GetItemID());
-            Equip();
-        }
-        if (item is ShopMapDescription)
-        {
-            ItemsList.BuyMap(item.GetItemID());
-        }
-        UpdateShop();
+            if (hasConfirmed)
+            {
+                if (item is UpgradeDescription)
+                {
+                    ItemsList.BuyUpgrade(item as UpgradeDescription, currencyType);
+                    Equip();
+                }
+                if (item is ShopMapDescription)
+                {
+                    ItemsList.BuyMap(item as ShopMapDescription, currencyType);
+                }
+                UpdateShop();
+            }
+        });
     }
 
 

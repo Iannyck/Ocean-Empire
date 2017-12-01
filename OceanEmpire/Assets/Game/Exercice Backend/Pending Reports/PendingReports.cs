@@ -75,7 +75,7 @@ public class PendingReports : BaseManager<PendingReports>
             ApplyToGameSaves(true);
             try
             {
-                History.instance.AddReport(report.incompleteReport);
+                History.instance.AddTaskReport(report.incompleteReport);
             }
             catch (Exception e)
             {
