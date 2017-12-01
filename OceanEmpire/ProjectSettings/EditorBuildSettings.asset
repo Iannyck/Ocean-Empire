@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: "Assets/Game/Debug/EXP\xC9RIMENTATION Scene choose/ExpeSceneChooser.unity"
+    guid: 00000000000000000000000000000000
+  - enabled: 1
     path: Assets/Game/Recolte/GameBuilder.unity
     guid: f0c884b8cca1c1f45bfe40eb64a0b6c8
   - enabled: 1
