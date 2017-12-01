@@ -15,7 +15,12 @@ public class ProposeRefillWindow : MonoBehaviour
     public WidgetFishPop widgetFishPop;
     public Button ticketButton;
 
+    public Text textTicket;
+    private const string baseTextTicket = "x ticket";
+    private Montant refillCost;
+
     public WindowAnimation windowAnim;
+
 
     public bool debug = false;
 
@@ -25,8 +30,7 @@ public class ProposeRefillWindow : MonoBehaviour
         if (debug)
             MasterManager.Sync();
 
-        if (PlayerCurrency.GetTickets() < 1)
-            ticketButton.interactable = false;
+        SetTicketCost();
 
         windowAnim.Open(delegate()
         {
@@ -36,7 +40,15 @@ public class ProposeRefillWindow : MonoBehaviour
 
     private void UpdateFishPopDisplay()
     {
-        widgetFishPop.DecrementRate(FishPopulation.PopulationRate);
+        widgetFishPop.UpdateMeter();//DecrementRate(FishPopulation.PopulationRate);
+    }
+
+    public void SetTicketCost()
+    {
+        refillCost = RefillCost.GetRefillCost();
+        textTicket.text = refillCost.amount.ToString() + baseTextTicket;
+        if (PlayerCurrency.GetTickets() < refillCost.amount)
+            ticketButton.interactable = false;
     }
 
     private void Hide()
@@ -62,7 +74,10 @@ public class ProposeRefillWindow : MonoBehaviour
 
     public void UseTicket()
     {
-        if (PlayerCurrency.RemoveTickets(1))
+        if (PlayerCurrency.RemoveTickets(refillCost.amount))
+        {
+            FishPopulation.instance.AddRate(1);
             Hide();
+        }
     }
 }

@@ -11,12 +11,14 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     private const string SAVE_KEY_POPULATION = "population";
 
+    [SerializeField, ReadOnly]
     private const float limitPopulation = 200;
     private TimeSpan refreshingTime = new TimeSpan(0, 0, 30, 0);
 
     [InspectorTooltip("Densité decroit exponentiellement en fonction du nombre")]
     public float PopulationDensityVariation = 4;
 
+    [SerializeField, ReadOnly]
     private float population;
     private DateTime lastUpdate;
 
@@ -60,7 +62,7 @@ public class FishPopulation : BaseManager<FishPopulation>
     /// </summary>
     public void AddRate(float value)
     {
-        PopulationRate += value;
+        PopulationRate = Mathf.Min(value + PopulationRate, 1);
     }
 
     public float FishNumberToRate(float fishes)
@@ -70,13 +72,18 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     public static float PopulationRate
     {
-        private set { Population = value * limitPopulation; }
+        private set { Population = value * limitPopulation ; }
         get { return Population / limitPopulation; }
     }
 
     public static float FishDensity
     {
         get { return Mathf.Pow(FishPopulation.PopulationRate, instance.PopulationDensityVariation); }
+    }
+
+    public static float GetFishDensityFromRate(float rate)
+    {
+       return Mathf.Pow(rate, instance.PopulationDensityVariation); 
     }
 
     public static float Population

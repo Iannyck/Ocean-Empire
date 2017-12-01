@@ -25,10 +25,13 @@ public class WidgetFishPop : MonoBehaviour {
 
     public void IncrementRate(float rateDifference)
     {
-        float currentRate = FishPopulation.FishDensity;
-        float target = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
+        float currentRate = FishPopulation.PopulationRate;
+        float targetRate = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
 
-        Tweener refillAnim = gageMeter.DOValue(target, fullRefillAnimLenght).SetUpdate(true);
+        float targetDensity = FishPopulation.GetFishDensityFromRate(targetRate);
+        Tweener refillAnim = gageMeter.DOValue(targetDensity, fullRefillAnimLenght).SetUpdate(true);
+
+        FishPopulation.instance.AddRate(rateDifference);
 
         refillAnim.OnComplete(() => {
             if (AnimComplete != null)
@@ -38,7 +41,7 @@ public class WidgetFishPop : MonoBehaviour {
             }
         });
 
-        FishPopulation.instance.AddRate(rateDifference);
+
     }
 
 
