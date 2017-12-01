@@ -7,7 +7,7 @@ public static class RewardBuilder
     private const float nominalReward = 30; // b dans r = ax +b
     const float constantGrowthPerLevel = 15; // a dans r = ax +b
 
-    const float levelDiffenceModifier = 0.10f; // pourcent gain or lost by level difference
+    const float levelDiffenceModifier = 0.20f; // pourcent gain or lost by level difference
 
     private static float RewardByLevel(int level)
     {
