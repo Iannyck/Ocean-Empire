@@ -32,6 +32,7 @@ public class History : CCC.Manager.BaseManager<History>
         Reload();
         CompleteInit();
     }
+
     public void AddTaskReport(TimedTaskReport report)
     {
         taskReports.Add(report);
