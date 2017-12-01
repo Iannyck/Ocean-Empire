@@ -14,6 +14,7 @@ public class ProposeRefillLauncher : MonoBehaviour {
     {
         Game.OnGameReady += delegate ()
         {
+            FishPopulation.instance.RefreshPopulation();
             if (FishPopulation.FishDensity <= proposeUnderDensity)
             {
                 Scenes.LoadAsync(ProposeRefillWindow.SCENE_NAME, LoadSceneMode.Additive,null);

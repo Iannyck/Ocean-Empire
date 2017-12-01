@@ -42,6 +42,7 @@ public class SlingshotControl : MonoBehaviour
         };
 
         ConvertToWorldPos(screenPosition);
+        
         if ((worldPosition - (Vector2)transform.position).sqrMagnitude <= toucheRadiusSQR)
         {
             isDragging = true;

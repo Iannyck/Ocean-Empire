@@ -31,16 +31,16 @@ public class Harpoon : Projectile, IKillable
 
     public void HitBigFish(ColliderInfo info, Collider2D collider)
     {
-        BigFish bigFish = info.Parent.GetComponent<BigFish>();
+        BaseFish fish = info.Parent.GetComponent<BaseFish>();
 
-        if (bigFish == null)
+        if (fish == null)
         {
             Debug.LogError("Le harpoon a frappé un objet qui n'est pas un big fish.");
             return;
         }
 
         //bigFish.Capture();
-        Game.PlayerStats.TryCapture(bigFish);
+        Game.PlayerStats.TryCapture(fish);
         Kill();
     }
 
