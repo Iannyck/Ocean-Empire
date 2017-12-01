@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Rojo
   description: C'est un poisson
-  baseMonetaryValue: 2
+  baseMonetaryValue: 4
   populationValue: 1
   icon:
     spriteName: t_RedBobo
