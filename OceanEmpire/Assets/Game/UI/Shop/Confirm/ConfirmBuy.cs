@@ -21,7 +21,7 @@ public class ConfirmBuy : WindowAnimation
   //  public Text cost;
 //public Image CurrencyImage;
 
-    public static void OpenWindowAndConfirm(ItemDescription item, bool currency, Action<bool> resultCallback)
+    public static void OpenWindowAndConfirm(ItemDescription item, CurrencyType currency, Action<bool> resultCallback)
     {
         print("ping!");
         MasterManager.Sync(() =>
@@ -40,7 +40,7 @@ public class ConfirmBuy : WindowAnimation
         });
     }
 
-    public void Init(ItemDescription itemD, bool coinCurrency, Action<bool> resultCallback)
+    public void Init(ItemDescription itemD, CurrencyType currency, Action<bool> resultCallback)
     {
         //itemName.text = itemD.GetName();
         boughtConfirm = resultCallback;

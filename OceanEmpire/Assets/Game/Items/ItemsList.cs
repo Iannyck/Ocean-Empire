@@ -47,7 +47,7 @@ public class ItemsList : BaseManager<ItemsList>
     private const string SAVE_KEY_FISHCONTAINER = "equipedfishcontainer";
     private const string SAVE_KEY_GAZTANK = "equipedgaztank";
 
-    static public T GetItem<T>(string itemID) where T : UnityEngine.Object
+    static public T GetItemDuplicate<T>(string itemID) where T : UnityEngine.Object
     {
         if (itemID == null) return null;
 
@@ -83,7 +83,7 @@ public class ItemsList : BaseManager<ItemsList>
         {
             if (containedIem.Value == true && instance.mapsPaths.ContainsKey(containedIem.Key))
             {
-                ShopMapDescription shopMap = GetItem<ShopMapDescription>(containedIem.Key);
+                ShopMapDescription shopMap = GetItemDuplicate<ShopMapDescription>(containedIem.Key);
                 ownedMaps.Add(shopMap.GetMapDescription());
             }
         }
@@ -94,7 +94,7 @@ public class ItemsList : BaseManager<ItemsList>
 
     public bool IsEquiped(string itemID)
     {
-        if (equipedThruster == itemID || equipedHarpoon == itemID || equipedGazTank == itemID || equipedFishContainer == itemID )
+        if (equipedThruster == itemID || equipedHarpoon == itemID || equipedGazTank == itemID || equipedFishContainer == itemID)
             return true;
         else
             return false;
@@ -102,38 +102,107 @@ public class ItemsList : BaseManager<ItemsList>
 
     public static FishContainerDescription GetEquipFishContainer()
     {
-        return GetItem<FishContainerDescription>(instance.equipedFishContainer);
+        return GetItemDuplicate<FishContainerDescription>(instance.equipedFishContainer);
     }
 
     public static ThrusterDescription GetEquipThruster()
     {
-        return GetItem<ThrusterDescription>(instance.equipedThruster);
+        return GetItemDuplicate<ThrusterDescription>(instance.equipedThruster);
     }
 
     public static HarpoonThrowerDescription GetEquipHarpoonThrower()
     {
-        return GetItem<HarpoonThrowerDescription>(instance.equipedHarpoon);
+        return GetItemDuplicate<HarpoonThrowerDescription>(instance.equipedHarpoon);
     }
 
     public static GazTankDescription GetEquipGazTank()
     {
-        return GetItem<GazTankDescription>(instance.equipedGazTank);
+        return GetItemDuplicate<GazTankDescription>(instance.equipedGazTank);
     }
 
-    public static void BuyUpgrade(string itemID)
+    private static bool BuyItem(ItemDescription item, CurrencyType currencyType, Dictionary<string, bool> bank)
     {
+        //--------------Check Null--------------//
 
-        if (instance.ownedUpgrades.ContainsKey(itemID))
-            instance.ownedUpgrades[itemID] = true;
-        Save();
+        if (item == null)
+        {
+            MessagePopup.DisplayMessage("L'item est null.");
+            return false;
+        }
+
+
+        //--------------In Bank--------------//
+
+        string itemID = item.GetItemID();
+        if (!bank.ContainsKey(itemID))
+        {
+            MessagePopup.DisplayMessage("L'item n'est pas dans la liste des upgrades.");
+            return false;
+        }
+
+
+        //--------------Already owned--------------//
+
+        if (bank[itemID])
+        {
+            MessagePopup.DisplayMessage("L'item a d\u00E9ja \u00E9t\u00E9 achet\u00E9.");
+            return false;
+        }
+
+
+        //--------------Montant--------------//
+
+        Montant montant = new Montant() { currencyType = currencyType };
+        switch (currencyType)
+        {
+            case CurrencyType.Coin:
+                montant.amount = item.GetMoneyCost();
+                break;
+            case CurrencyType.Ticket:
+                montant.amount = item.GetTicketCost();
+                break;
+        }
+        bool purchaseResult = PlayerCurrency.RemoveMontant(montant);
+
+
+        //--------------Finlité--------------//
+
+        if (!purchaseResult)
+        {
+            MessagePopup.DisplayMessage("Failed to purchase to upgrade");
+            return false;
+        }
+        else
+        {
+            PurchaseReport report = new PurchaseReport(montant, item.GetName(), item.GetItemID());
+            try { History.instance.AddPurchaseReport(report); }
+            catch (Exception e)
+            {
+                MessagePopup.DisplayMessage("Failed to add purchase report to history.\n\n" + e.Message);
+                return false;
+            }
+
+            bank[itemID] = true;
+            Save();
+            return true;
+        }
     }
 
-    public static void BuyMap(string itemID)
+    public static bool BuyUpgrade(string itemID, CurrencyType currencyType)
     {
-
-        if (instance.ownedMaps.ContainsKey(itemID))
-            instance.ownedMaps[itemID] = true;
-        Save();
+        return BuyUpgrade(GetItemDuplicate<UpgradeDescription>(itemID), currencyType);
+    }
+    public static bool BuyUpgrade(UpgradeDescription upgrade, CurrencyType currencyType)
+    {
+        return BuyItem(upgrade, currencyType, instance.ownedUpgrades);
+    }
+    public static bool BuyMap(string mapID, CurrencyType currencyType)
+    {
+        return BuyMap(GetItemDuplicate<ShopMapDescription>(mapID), currencyType);
+    }
+    public static bool BuyMap(ShopMapDescription map, CurrencyType currencyType)
+    {
+        return BuyItem(map, currencyType, instance.ownedMaps);
     }
 
 
@@ -305,13 +374,16 @@ public class ItemsList : BaseManager<ItemsList>
 
     public static void UnlockAll()
     {
-        foreach (KeyValuePair<string, bool> containedItem in instance.ownedUpgrades)
+        List<string> keys = new List<string>(instance.ownedUpgrades.Keys);
+        foreach (string key in keys)
         {
-            instance.ownedUpgrades[containedItem.Key] = true;
+            instance.ownedUpgrades[key] = true;
         }
-        foreach (KeyValuePair<string, bool> containedMap in instance.ownedMaps)
+
+        keys = new List<string>(instance.ownedMaps.Keys); ;
+        foreach (string key in keys)
         {
-            instance.ownedMaps[containedMap.Key] = true;
+            instance.ownedMaps[key] = true;
         }
     }
 }

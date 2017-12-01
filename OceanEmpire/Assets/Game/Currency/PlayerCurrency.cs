@@ -118,6 +118,29 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
         return AddTickets(-amount);
     }
 
+    public static bool AddMontant(Montant montant)
+    {
+        switch (montant.currencyType)
+        {
+            case CurrencyType.Coin:
+                return AddCoins(montant.amount);
+            case CurrencyType.Ticket:
+                return AddTickets(montant.amount);
+        }
+        return false;
+    }
+    public static bool RemoveMontant(Montant montant)
+    {
+        switch (montant.currencyType)
+        {
+            case CurrencyType.Coin:
+                return RemoveCoins(montant.amount);
+            case CurrencyType.Ticket:
+                return RemoveTickets(montant.amount);
+        }
+        return false;
+    }
+
     private static void Save()
     {
         GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_TICKETS, GetTickets());
@@ -128,6 +151,7 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private static void Load()
     {
         instance.coins = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_COINS);
+        instance.tickets = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_TICKETS);
         if (CurrencyUpdate != null)
         {
             CurrencyUpdate();
