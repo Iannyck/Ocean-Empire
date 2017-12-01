@@ -6,7 +6,6 @@ public class PlayerStats : MonoBehaviour {
 
     //private int score; // cash
     private float depthRecord;
-    private List<BaseFish> fishInStock = new List<BaseFish>();
 
     public bool infiniteTime = false;
     public float remainingTimeAtStart = 30;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class TrackingWindow : MonoBehaviour
 {
@@ -13,13 +14,18 @@ public class TrackingWindow : MonoBehaviour
 
     // UI
     public Text currentTimeUI;
+    public Text confidenceDisplay;
     public Slider completionState;
     public Text timeWaiting;
+    public float sliderAnimDuration = 1f;
+    public float constantAugmentationRate = 10;
 
     // Animation
     public WindowAnimation windowAnim;
 
     // Tracking Initialisation
+    private float constantAugmentation;
+    private float previousSliderValue;
     private ExerciseTracker tracker;
     private DateTime trackingStart;
     private ScheduledTask currentTask;
@@ -44,6 +50,7 @@ public class TrackingWindow : MonoBehaviour
         tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
         trackingStart = DateTime.Now;
         currentTask = task;
+        previousSliderValue = 0;
     }
 
     public void UpdateInfo(int index, string info)
@@ -54,6 +61,13 @@ public class TrackingWindow : MonoBehaviour
     private void Update()
     {
         currentReport = tracker.Track(currentTask);
+
+        constantAugmentation = ((int)((WalkTask)currentReport.task.task).minutesOfWalk) / (Mathf.Min(constantAugmentationRate,1) * 100000);
+
+        ConstantAugmentation();
+
+        DisplayCurrentConfidence();
+
         UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
         if (currentReport.complete)
         {
@@ -102,8 +116,30 @@ public class TrackingWindow : MonoBehaviour
         double completion = totalTimeDone / totalTimeToDo;
 
         if (completionState != null)
-            completionState.value = (float)completion;
+        {
+            if (previousSliderValue < (float)completion)
+            {
+                completionState.DOValue((float)completion, sliderAnimDuration);
+                previousSliderValue = (float)completion;
+            }
+            else
+            {
+                completionState.value = completionState.value + constantAugmentation;
+            }
+        }
+            
 
         currentTimeUI.text = "" + timeDone.Minutes.ToString() + ":" + timeDone.Seconds.ToString();
+    }
+
+    private void ConstantAugmentation()
+    {
+        constantAugmentation = ((int)((WalkTask)currentReport.task.task).minutesOfWalk) / (Mathf.Min(constantAugmentationRate, 1) * 100000);
+    }
+
+    private void DisplayCurrentConfidence()
+    {
+        if(ActivityAnalyser.instance.GetLast() != null)
+            confidenceDisplay.text = ActivityAnalyser.instance.GetLast().probability.ToString();
     }
 }
