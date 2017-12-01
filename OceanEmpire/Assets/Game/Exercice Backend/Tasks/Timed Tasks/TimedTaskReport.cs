@@ -30,6 +30,9 @@ public class TimedTaskReport
         reportCreatedOn = DateTime.Now;
     }
 
+    /// <summary>
+    /// Si le joueur cancel son plan AVANT de faire l'exercice.
+    /// </summary>
     public static TimedTaskReport BuildFromCancelled(TimedTask timedTask)
     {
         TimedTaskReport report = new TimedTaskReport
@@ -47,6 +50,9 @@ public class TimedTaskReport
         return report;
     }
 
+    /// <summary>
+    /// Si le joueur interrompt l'exercice en cours
+    /// </summary>
     public static TimedTaskReport BuildFromInterrupted(TimedTask timedTask, ExerciseTrackingReport trackingReport)
     {
         TimedTaskReport report = new TimedTaskReport
@@ -64,6 +70,9 @@ public class TimedTaskReport
         return report;
     }
 
+    /// <summary>
+    /// Si le joueur complete l'exercice (Il ne l'a pas nécessairement réussi)
+    /// </summary>
     public static TimedTaskReport BuildFromCompleted(TimedTask timedTask, ExerciseTrackingReport trackingReport, HappyRating happyRating)
     {
         TimedTaskReport report = new TimedTaskReport
