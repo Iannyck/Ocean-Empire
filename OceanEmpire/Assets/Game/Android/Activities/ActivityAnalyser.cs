@@ -10,6 +10,8 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
 
     public float timeBetweenUpdate = 2f;
 
+    public float addFactor = 0.3f;
+
     [HideInInspector]
     public bool waitingForDataUpdate = false;
 
@@ -56,17 +58,17 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         {
             if (activities != null)
             {
-                //if (activities.Count <= 0)
-                    //Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
-                //else
-                    //Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count-1].time);
+                if (activities.Count <= 0)
+                    Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
+                else
+                    Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count-1].time);
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
             }
             else
             {
-                //Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
+                Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
                 waitingForDataUpdate = true;
                 UpdateActivities();
             }
@@ -99,10 +101,12 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
 
     private void GetReport(List<ActivityDetection.Activity> activites, ref Report result)
     {
+        Debug.Log("ANALYSE...");
+
         result.probabilities = new List<float>();
 
-        float numberOfActivities = activites.Count;
-        float numberOfCompletion = 0;
+        int numberOfActivities = activites.Count;
+        int numberOfCompletion = 0;
 
         bool doingExercice = false;
         DateTime lastExercice = DateTime.Now;
@@ -121,7 +125,18 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
                     lastExercice = activites[i].time;
                 } else
                 { // On continue
-                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
+                    // Temsp à ajouter en considérant le addFactor
+                    TimeSpan timeToAdd = new TimeSpan((long)(activites[i].time.Subtract(lastExercice).TotalSeconds * addFactor));
+                    // On ajoute le temps de marche au temps total de marche
+                    result.timeSpendingExercice = result.timeSpendingExercice.Add((activites[i].time.Subtract(lastExercice)).Add(timeToAdd));
+                    // Si le nouveau temps est plus grand que le temps total entre le début de l'exercise jusqu'au dernier 
+                    TimeSpan totalExerciseTime = activites[numberOfActivities - 1].time.Subtract(result.task.timeSlot.start);
+                    if (result.timeSpendingExercice > totalExerciseTime)
+                    {
+                        Debug.Log("LE TEMPS DE MARCHE A DÉPASSÉ " + result.timeSpendingExercice + "VS" + totalExerciseTime);
+                        // Le temps total doit être égal au temps temps total entre le début de l'exercise jusqu'au dernier
+                        result.timeSpendingExercice = totalExerciseTime;
+                    } // Sinon le temps total est correct on a pas dépassé le temps max de l'exercise
                     lastExercice = activites[i].time;
                 }
             }
@@ -130,9 +145,22 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
                 // On vient d'arrêter de faire un exercice
                 if (doingExercice)
                 {
-                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
+                    // Temsp à ajouter en considérant le addFactor
+                    TimeSpan timeToAdd = new TimeSpan((long)(activites[i].time.Subtract(lastExercice).TotalSeconds * addFactor));
+                    // On ajoute le temps de marche au temps total de marche
+                    result.timeSpendingExercice = result.timeSpendingExercice.Add((activites[i].time.Subtract(lastExercice)).Add(timeToAdd));
+                    // Si le nouveau temps est plus grand que le temps total entre le début de l'exercise jusqu'au dernier 
+                    TimeSpan totalExerciseTime = activites[numberOfActivities - 1].time.Subtract(result.task.timeSlot.start);
+                    if (result.timeSpendingExercice > totalExerciseTime)
+                    {
+                        Debug.Log("LE TEMPS DE MARCHE A DÉPASSÉ " + result.timeSpendingExercice + "VS" + totalExerciseTime);
+                        // Le temps total doit être égal au temps temps total entre le début de l'exercise jusqu'au dernier
+                        result.timeSpendingExercice = totalExerciseTime;
+                    } // Sinon le temps total est correct on a pas dépassé le temps max de l'exercise
                     doingExercice = false;
-                    if (result.timeSpendingExercice.CompareTo(new TimeSpan(0, (int)((WalkTask)result.task.task).minutesOfWalk, 0)) == 1)
+
+                    // Si le temps a faire de l'Exercice a dépassé le temps qu'on devait faire de l'exercice, on a fini !
+                    if (result.timeSpendingExercice.CompareTo(((WalkTask)result.task.task).timeOfWalk) > 0)
                     {
                         result.exerciceEnd = activites[i].time;
                         result.complete = true;
@@ -191,6 +219,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
     public void AskForActivities(Action<List<ActivityDetection.Activity>> onComplete = null, ExerciseType type = ExerciseType.Walk)
     {
         List<ActivityDetection.Activity> result = null;
+        Debug.Log("ASKING FOR THE ACTIVITIES");
         ActivityDetection.LoadActivities(delegate (List<ActivityDetection.Activity> outputActivities)
         {
             result = outputActivities;
