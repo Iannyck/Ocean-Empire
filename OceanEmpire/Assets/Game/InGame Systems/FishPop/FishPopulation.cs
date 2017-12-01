@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
-
+using FullInspector;
 
 public class FishPopulation : BaseManager<FishPopulation>
 {
@@ -13,6 +13,9 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     private const float limitPopulation = 200;
     private TimeSpan refreshingTime = new TimeSpan(0, 0, 30, 0);
+
+    [InspectorTooltip("Densité decroit exponentiellement en fonction du nombre")]
+    public float PopulationDensityVariation = 4;
 
     private float population;
     private DateTime lastUpdate;
@@ -69,6 +72,11 @@ public class FishPopulation : BaseManager<FishPopulation>
     {
         private set { Population = value * limitPopulation; }
         get { return Population / limitPopulation; }
+    }
+
+    public static float FishDensity
+    {
+        get { return Mathf.Pow(FishPopulation.PopulationRate, instance.PopulationDensityVariation); }
     }
 
     public static float Population
