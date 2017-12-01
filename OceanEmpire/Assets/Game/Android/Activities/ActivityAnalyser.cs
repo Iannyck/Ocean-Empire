@@ -59,17 +59,17 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         {
             if (activities != null)
             {
-                if (activities.Count <= 0)
-                    Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
-                else
-                    Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count - 1].time);
+                //if (activities.Count <= 0)
+                    //Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
+                //else
+                    //Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count - 1].time);
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
             }
             else
             {
-                Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
+                //Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
                 waitingForDataUpdate = true;
                 UpdateActivities();
             }
@@ -217,7 +217,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
     public void AskForActivities(Action<List<ActivityDetection.Activity>> onComplete = null, ExerciseType type = ExerciseType.Walk)
     {
         List<ActivityDetection.Activity> result = null;
-        Debug.Log("ASKING FOR THE ACTIVITIES");
+        //Debug.Log("ASKING FOR THE ACTIVITIES");
         ActivityDetection.LoadActivities(delegate (List<ActivityDetection.Activity> outputActivities)
         {
             result = outputActivities;
