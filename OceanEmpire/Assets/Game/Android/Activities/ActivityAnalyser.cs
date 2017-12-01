@@ -10,6 +10,8 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
 
     public float timeBetweenUpdate = 2f;
 
+    public float generousMultiplier = 1.3f;
+
     [HideInInspector]
     public bool waitingForDataUpdate = false;
 
@@ -25,6 +27,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         public TimedTask task;
         public TimeSpan timeSpendingExercice;
         public bool complete;
+        public DateTime firstExerciseDetection;
 
         public Report() { }
 
@@ -33,7 +36,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
             complete = false;
             this.task = task;
             activityRate = 0;
-            probabilities = new List<float>();
+            probabilities = null;
             exerciceEnd = DateTime.Now;
             produceTime = DateTime.Now;
             timeSpendingExercice = new TimeSpan(0, 0, 0);
@@ -56,17 +59,17 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         {
             if (activities != null)
             {
-                //if (activities.Count <= 0)
-                    //Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
-                //else
-                    //Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count-1].time);
+                if (activities.Count <= 0)
+                    Debug.Log("AUCUNE ACTIVITÉ DÉTECTÉ");
+                else
+                    Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count - 1].time);
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
             }
             else
             {
-                //Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
+                Debug.Log("ANALYSER FAILED TO GET SOME ACTIVITIES");
                 waitingForDataUpdate = true;
                 UpdateActivities();
             }
@@ -84,7 +87,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         {
             case ExerciseType.Walk:
                 Report result = new Report(task);
-                GetReport(GetAllActiviesInTimeStamp(task.timeSlot.start,until), ref result);
+                FillReport(GetAllActiviesInTimeStamp(task.timeSlot.start, until), ref result);
                 return result;
             case ExerciseType.Run:
                 // TODO
@@ -97,59 +100,82 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         }
     }
 
-    private void GetReport(List<ActivityDetection.Activity> activites, ref Report result)
+    private void FillReport(List<ActivityDetection.Activity> activites, ref Report result)
     {
-        result.probabilities = new List<float>();
+        if (result.probabilities == null)
+            result.probabilities = new List<float>(activites.Count);
 
-        float numberOfActivities = activites.Count;
-        float numberOfCompletion = 0;
+        int numberOfCompletion = 0;
+        bool firstExerciseDetected = false;
+        bool previousWasExercise = false;
 
-        bool doingExercice = false;
-        DateTime lastExercice = DateTime.Now;
+        //Default Values
+        result.complete = false;
 
-        for (int i = 0; i < numberOfActivities; i++)
+
+        for (int i = 0; i < activites.Count; i++)
         {
             float prob = activites[i].probability;
-            // On est en train de faire un exercice
-            if (prob > achieveGap)
+
+            ActivityDetection.Activity nowActivity = activites[i];
+            bool nowIsExercise = prob > achieveGap;
+
+            if (nowIsExercise)
             {
+                //On compte la quantité d'entré d'exercice
                 numberOfCompletion++;
-                // On vient de commencer
-                if (!doingExercice)
+
+                //A-t-on detecté la première ?
+                if (!firstExerciseDetected)
                 {
-                    doingExercice = true;
-                    lastExercice = activites[i].time;
-                } else
-                { // On continue
-                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                    lastExercice = activites[i].time;
+                    result.firstExerciseDetection = nowActivity.time;
+                    firstExerciseDetected = true;
                 }
             }
-            else
+
+            if (previousWasExercise)
             {
-                // On vient d'arrêter de faire un exercice
-                if (doingExercice)
+                //----------------------Ajout de temps----------------------//
+
+                ActivityDetection.Activity firstActivity = activites[0];
+                ActivityDetection.Activity previousActivity = activites[i - 1];
+
+                // Temps à ajouter en considérant le addFactor
+                long ticksSinceLastMesure = (nowActivity.time - previousActivity.time).Ticks;
+                TimeSpan timeToAdd = new TimeSpan((long)(ticksSinceLastMesure * generousMultiplier));
+
+                // On ajoute le temps de marche au temps total de marche
+                result.timeSpendingExercice += timeToAdd;
+
+                TimeSpan timeSinceStart = nowActivity.time - firstActivity.time;
+
+                // Si le nouveau temps est plus grand que le temps total entre le début de l'exercise jusqu'au dernier
+                if (result.timeSpendingExercice > timeSinceStart)
                 {
-                    result.timeSpendingExercice = result.timeSpendingExercice.Add(activites[i].time.Subtract(lastExercice));
-                    doingExercice = false;
-                    if (result.timeSpendingExercice.CompareTo(new TimeSpan(0, (int)((WalkTask)result.task.task).minutesOfWalk, 0)) == 1)
-                    {
-                        result.exerciceEnd = activites[i].time;
-                        result.complete = true;
+                    // Le temps total doit être égal au temps temps total entre le début de l'exercise jusqu'au dernier
+                    result.timeSpendingExercice = timeSinceStart;
+                }// Sinon le temps total est correct on a pas dépassé le temps max de l'exercise
 
-                        if (numberOfActivities == 0)
-                            result.activityRate = 0;
-                        else
-                            result.activityRate = (numberOfCompletion / numberOfActivities);
 
-                        result.produceTime = DateTime.Now;
+                //----------------------A-t-on terminé ?----------------------//
+                TimeSpan objective = ((WalkTask)result.task.task).timeOfWalk;
 
-                        return;
-                    }
+                if (result.timeSpendingExercice >= objective)
+                {
+                    result.complete = true;
+                    break;
                 }
             }
+
+            previousWasExercise = nowIsExercise;
+            result.exerciceEnd = nowActivity.time;
+
             result.probabilities.Add(prob);
         }
+
+
+        result.activityRate = numberOfCompletion / (float)activities.Count;
+        result.produceTime = DateTime.Now;
     }
 
     public List<ActivityDetection.Activity> GetAllActiviesInTimeStamp(DateTime start, DateTime end, ExerciseType type = ExerciseType.Walk)
@@ -191,6 +217,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
     public void AskForActivities(Action<List<ActivityDetection.Activity>> onComplete = null, ExerciseType type = ExerciseType.Walk)
     {
         List<ActivityDetection.Activity> result = null;
+        Debug.Log("ASKING FOR THE ACTIVITIES");
         ActivityDetection.LoadActivities(delegate (List<ActivityDetection.Activity> outputActivities)
         {
             result = outputActivities;
