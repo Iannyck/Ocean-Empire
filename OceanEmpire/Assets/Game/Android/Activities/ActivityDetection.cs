@@ -102,7 +102,7 @@ public class ActivityDetection : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
         ReadDocument(delegate(string output){
             string document = output;
-
+            Debug.Log("CUTTING THE FILE STRING");
             if(document == null)
             {
                 onComplete.Invoke(null);
@@ -205,11 +205,9 @@ public class ActivityDetection : MonoBehaviour
 
     private static DateTime ConvertStringToDate(string value)
     {
-        Debug.Log("CONVERTING STRING BEFORE : " + value);
         char[] charArray = value.ToCharArray();
         string toDelete = " " + charArray[20] + charArray[21] + charArray[22];
         string modifiedValue = value.Replace(toDelete, "");
-        Debug.Log("CONVERTING STRING AFTER : " + modifiedValue);
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
     }
 }

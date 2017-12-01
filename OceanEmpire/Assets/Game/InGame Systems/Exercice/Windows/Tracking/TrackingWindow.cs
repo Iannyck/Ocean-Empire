@@ -13,7 +13,7 @@ public class TrackingWindow : MonoBehaviour
     public const string SCENE_NAME = "TrackingWindow";
 
     // UI
-    public Text currentTimeUI;
+    public Text currentExerciseDoneTime;
     public Text confidenceDisplay;
     public Slider completionState;
     public Text timeWaiting;
@@ -24,14 +24,15 @@ public class TrackingWindow : MonoBehaviour
     public WindowAnimation windowAnim;
 
     // Tracking Initialisation
-    private int stepsToCompletion;
-    private float currentPourcent;
+    private bool inSliderAnim;
     private float constantAugmentation;
+    private float currentPourcent;
     private float previousSliderValue;
     private ExerciseTracker tracker;
     private DateTime trackingStart;
     private ScheduledTask currentTask;
     private ActivityAnalyser.Report currentReport;
+    private bool trackingOver;
     private List<GameObject> infoObjects = new List<GameObject>();
 
     public static void ShowWaitingWindow(string exerciceDescription, ScheduledTask task, string enAttente = "En Attente...", string title = "Faire l'exercice")
@@ -54,7 +55,8 @@ public class TrackingWindow : MonoBehaviour
         currentTask = task;
         previousSliderValue = 0;
         currentPourcent = 0;
-        stepsToCompletion = 1;
+        inSliderAnim = false;
+        trackingOver = false;
         // Augmentation du slider
         constantAugmentation = (((int)((WalkTask)currentTask.task).minutesOfWalk) * 0.00005f) / 3;
     }
@@ -70,14 +72,20 @@ public class TrackingWindow : MonoBehaviour
 
         DisplayCurrentConfidence();
 
-        UpdateExerciceCompletion(currentReport.timeSpendingExercice, new TimeSpan(0, (int)((WalkTask)currentReport.task.task).minutesOfWalk, 0));
+        UpdateUI(currentReport.timeSpendingExercice, ((WalkTask)currentReport.task.task).timeOfWalk);
         if (currentReport.complete)
         {
-            ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
-            Hide();
+            if (!trackingOver)
+            {
+                Conclude_WithCompletion();
+            }
         }
-        if(DateTime.Now.CompareTo(currentTask.timeSlot.end) >= 1) // Si l'exercice est trop long
-            ForceStop();
+        else if (currentTask.timeSlot.IsInThePast())
+        {
+            // Si l'exercice est trop long
+            if (!trackingOver)
+                Conclude_WithCompletion();
+        }
     }
 
     public void Hide()
@@ -88,63 +96,105 @@ public class TrackingWindow : MonoBehaviour
         });
     }
 
-    private void ConcludeTask(ExerciseTrackingReport trackingReport)
+    public void Conclude_WithCompletion()
     {
-        TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(currentTask, trackingReport, HappyRating.None);
+        currentReport = tracker.Track(currentTask);
+        ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromNonInterrupted(currentReport);
+        TimedTaskReport timedTaskReport = TimedTaskReport.BuildFromCompleted(currentTask, trackingReport, HappyRating.None);
+        Conclude_AndCloseWindow(timedTaskReport);
+    }
+
+    public void Conclude_WithAbandon()
+    {
+        currentReport = tracker.Track(currentTask);
+        ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromAbandonned(currentReport);
+        TimedTaskReport timedTaskReport = TimedTaskReport.BuildFromInterrupted(currentTask, trackingReport);
+        Conclude_AndCloseWindow(timedTaskReport);
+    }
+
+    public void Conclude_WithUserSaidItsComplete()
+    {
+        currentReport = tracker.Track(currentTask);
+        ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFrom_UserSaidItWasCompleted(currentReport);
+        TimedTaskReport timedTaskReport = TimedTaskReport.BuildFromInterrupted(currentTask, trackingReport);
+        Conclude_AndCloseWindow(timedTaskReport);
+    }
+
+    private void Conclude_AndCloseWindow(TimedTaskReport taskReport)
+    {
+        if (trackingOver)
+            return;
+
+        trackingOver = true;
+        Hide();
         Calendar.instance.ConcludeScheduledTask(currentTask, taskReport);
     }
 
-    public void ForceComplete()
+    private void UpdateUI(TimeSpan timeDone, TimeSpan timeToDo)
     {
-        currentReport = tracker.Track(currentTask);
-        ConcludeTask(ExerciseTrackingReport.BuildFrom_UserSaidItWasCompleted(currentReport));
-        Hide();
-    }
+        TimeSpan timeSinceStart = DateTime.Now - currentReport.task.timeSlot.start;
+        timeWaiting.text = "Temps écoulé: " + timeSinceStart.Hours + ":" + timeSinceStart.Minutes + ":" + timeSinceStart.Seconds;
 
-    public void ForceStop()
-    {
-        currentReport = tracker.Track(currentTask);
-        ConcludeTask(ExerciseTrackingReport.BuildFromAbandonned(currentReport));
-        Hide();
-    }
-
-    private void UpdateExerciceCompletion(TimeSpan timeDone, TimeSpan timeToDo)
-    {
-        TimeSpan time = DateTime.Now.Subtract(trackingStart);
-        timeWaiting.text = time.Hours + ":" + time.Minutes + ":" + time.Seconds;
+        currentExerciseDoneTime.text = "Exer. done: " + timeDone.Minutes.ToString() + ":" + timeDone.Seconds.ToString();
 
         double totalTimeDone = timeDone.TotalSeconds; // secondes
         double totalTimeToDo = timeToDo.TotalSeconds; // secondes
         double completion = totalTimeDone / totalTimeToDo;
 
-        pourcentDisplay.text = ((float)completion * 100) + "%";
+        UpdateSlider((float)completion);
 
-        // Update du Slider
-        if (completionState != null)
-        {
-            if (previousSliderValue < (float)completion)
-            {
-                completionState.DOValue((float)completion, sliderAnimDuration);
-                previousSliderValue = (float)completion;
-                stepsToCompletion = (int)((float)completion * 10) + 1;
-            }
-            else
-            {
-                if((completionState.value + constantAugmentation) < (0.1 * stepsToCompletion))
-                {
-                    if ((completionState.value + constantAugmentation) >= (timeToDo.TotalSeconds / timeDone.TotalSeconds))
-                        completionState.value = (float)(timeToDo.TotalSeconds / timeDone.TotalSeconds);
-                    completionState.value = completionState.value + constantAugmentation;
-                }
-            }
-        }
-
-        currentTimeUI.text = "" + timeDone.Minutes.ToString() + ":" + timeDone.Seconds.ToString();
+        pourcentDisplay.text = ((float)completion * 100).Rounded(0) + "%";
     }
 
     private void DisplayCurrentConfidence()
     {
-        if(ActivityAnalyser.instance.GetLast() != null)
+        if (ActivityAnalyser.instance.GetLast() != null)
             confidenceDisplay.text = ActivityAnalyser.instance.GetLast().probability.ToString();
+    }
+
+    private void UpdateSlider(float completion)
+    {
+        if (inSliderAnim)
+            return;
+
+        // Update du Slider
+        if (completionState != null)
+        {
+
+            // Si on a terminé
+            if (completion >= 1)
+            {   // Slider doit être complet
+                completionState.value = 1;
+                return;
+            }
+
+            // Si on a complété plus que ce que le slider montre
+            if (completion > completionState.value)
+            {
+                // On fait une anim pour modifié le slider
+                inSliderAnim = true;
+                completionState.DOValue(completion, sliderAnimDuration).OnComplete(delegate () { inSliderAnim = false; });
+                // On enregistre la dernière fois qu'on a capté l'exercice et update le slider
+                previousSliderValue = completion;
+            }
+            else
+            {
+                // On augmente constamment la monté du slider jusqu'à 10% plus élevé que la derniere fois qu'un exercice a été capté
+                if ((completionState.value + constantAugmentation) > (previousSliderValue + 0.1f))
+                {
+                    if ((previousSliderValue + 0.1f) >= 1)
+                        completionState.value = 1;
+                    else
+                        completionState.value = (previousSliderValue + 0.1f);
+                }
+                else
+                {
+                    if (completionState.value + constantAugmentation >= 1)
+                        completionState.value = 1;
+                    else
+                        completionState.value = completionState.value + constantAugmentation;
+                }
+            }
+        }
     }
 }
