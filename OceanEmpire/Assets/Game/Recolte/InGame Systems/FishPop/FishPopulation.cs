@@ -13,7 +13,7 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     [SerializeField, ReadOnly]
     private const float limitPopulation = 200;
-    private TimeSpan refreshingTime = new TimeSpan(0, 0, 30, 0);
+    private TimeSpan refreshingTime = new TimeSpan(0, 0, 80, 0);
 
     [InspectorTooltip("Densité decroit exponentiellement en fonction du nombre")]
     public float PopulationDensityVariation = 4;
