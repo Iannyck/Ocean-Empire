@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286f5076b2e78f84380f8fcb09f5a956, type: 3}
   m_Name: harpoon3
   m_EditorClassIdentifier: 
-  itemName: Buckshot Harpoon
-  itemDescription: tir 5 harpons a la fois
+  itemName: Harpons multiples
+  itemDescription: "Te permet de propulser 5 harpons simultan\xE9ment"
   moneyCost: 160
   ticketCost: 40
   itemImage: {fileID: 21300000, guid: dd4884a83a0980e4389924e80d947052, type: 3}

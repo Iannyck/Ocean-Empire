@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32f6b5479ec67642b99821154697404, type: 3}
   m_Name: Caraibe
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
+  itemName: "Cara\xEFbes"
+  itemDescription: "Pirates et rhum \xE0 volont\xE9!"
   moneyCost: 0
   ticketCost: 0
-  itemImage: {fileID: 21300000, guid: a3b06cd6366e63d4c985579d1b12b8fa, type: 3}
+  itemImage: {fileID: 21300000, guid: 621db64e5a55b404390e0635b3f80659, type: 3}
   itemFileName: 
   itemID: caraibe
   mapDescription: {fileID: 11400000, guid: f061e21936211ac438203d8bf981ef32, type: 2}

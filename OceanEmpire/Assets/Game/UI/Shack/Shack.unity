@@ -2193,7 +2193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Population de poisson
+  m_Text: Population de poissons
 --- !u!222 &2037288192
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2315,7 +2315,7 @@ Prefab:
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 66.43599
+      value: 65.529015
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2335,7 +2335,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 183.53598
+      value: 182.62901
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2345,7 +2345,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 66.43599
+      value: 65.529015
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2355,7 +2355,7 @@ Prefab:
     - target: {fileID: 224074558001833780, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 249.97195
+      value: 248.15802
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 660fe2b1cf6ce8d428656980c7fe4314, type: 2}

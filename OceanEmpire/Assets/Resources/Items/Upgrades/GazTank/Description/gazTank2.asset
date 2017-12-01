@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad144232e99bed94898e34a166e493d6, type: 3}
   m_Name: gazTank2
   m_EditorClassIdentifier: 
-  itemName: reservoir medium
-  itemDescription: Reservoir d'essence plus gros
+  itemName: "R\xE9servoir de 60L"
+  itemDescription: Permet de rester plus longtemps sous l'eau
   moneyCost: 40
   ticketCost: 10
   itemImage: {fileID: 21300000, guid: 6f52f5fee94df764bb3b2f392f0abeb2, type: 3}

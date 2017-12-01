@@ -56,7 +56,7 @@ public class ActivityDetection : MonoBehaviour
             if (reader.BaseStream.CanRead)
             {
                 result = reader.ReadToEnd();
-                Debug.Log("UNITY FILE : " + result);
+                //Debug.Log("UNITY FILE : " + result);
             }
             reader.Close();
         }
@@ -102,7 +102,7 @@ public class ActivityDetection : MonoBehaviour
 #if UNITY_ANDROID && !UNITY_EDITOR
         ReadDocument(delegate(string output){
             string document = output;
-            Debug.Log("CUTTING THE FILE STRING");
+            //Debug.Log("CUTTING THE FILE STRING");
             if(document == null)
             {
                 onComplete.Invoke(null);
@@ -145,7 +145,7 @@ public class ActivityDetection : MonoBehaviour
                     continue;
                 }
             }
-            Debug.Log("ACTIVITIES LOADED");
+            //Debug.Log("ACTIVITIES LOADED");
             onComplete.Invoke(result);
         });
 #else
