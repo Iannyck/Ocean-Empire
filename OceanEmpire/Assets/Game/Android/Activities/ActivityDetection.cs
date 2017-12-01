@@ -35,8 +35,12 @@ public class ActivityDetection : MonoBehaviour
     // Debug
     const string exempleFile = "0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:40:00 EST 2017\n\r0|Fri Nov 17 14:45:14 EST 2017\n\r";
 
+    const bool LogLesInfoDesThread = false;
+
     public static void ReadDocument(Action<string> onComplete = null)
     {
+        if (LogLesInfoDesThread)
+            Debug.Log("UL Launching File Read - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
         Thread t = new Thread(new ThreadStart(() => ThreadReadDocument(onComplete)));
         t.Start();
     }
@@ -44,6 +48,8 @@ public class ActivityDetection : MonoBehaviour
     public static void ThreadReadDocument(Action<string> onComplete = null)
     {
         string result = null;
+        if (LogLesInfoDesThread)
+            Debug.Log("UL Reading File - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
         if (File.Exists(filePath))
         {
             StreamReader reader = new StreamReader(filePath);
@@ -68,7 +74,8 @@ public class ActivityDetection : MonoBehaviour
 
     public static void ResetActivitiesSave()
     {
-        Thread t = new Thread(new ThreadStart(() => {
+        Thread t = new Thread(new ThreadStart(() =>
+        {
             //Debug.Log("DELETING FILE");
             using (File.Create(filePath)) ;
             FileInfo info = new FileInfo(filePath);
@@ -81,7 +88,8 @@ public class ActivityDetection : MonoBehaviour
                 {
                     MainThread.AddAction(ResetActivitiesSave);
                 }
-            } else
+            }
+            else
             {
                 MessagePopup.DisplayMessageFromThread("File Deleted - Good job !");
             }
