@@ -9,4 +9,10 @@ public class Chest : BaseFish {
         Game.PlayerStats.TryCapture(this);
         //Capture();
     }
+
+    public void Update()
+    {
+        //print("Hello world!")
+    }
+
 }

@@ -47,8 +47,6 @@ public class FishSpawner : MonoBehaviour {
 
     void Init()
     {
-        Active = true;
-
         submarine = Game.instance.submarine;
         map = Game.instance.map;
         Game.OnGameStart -= Init;
@@ -74,6 +72,8 @@ public class FishSpawner : MonoBehaviour {
             float fishLimit = maxFishPerPalier * map.GetGeneralDensity(GetPalierPosition(i));
             newPalier.InitLimit(fishLimit);
         }
+
+        Active = true;
     }
 
 
