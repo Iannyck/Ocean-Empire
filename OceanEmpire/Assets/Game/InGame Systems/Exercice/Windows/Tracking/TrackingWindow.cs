@@ -77,7 +77,7 @@ public class TrackingWindow : MonoBehaviour
             ConcludeTask(ExerciseTrackingReport.BuildFromNonInterrupted(currentReport));
             Hide();
         }
-        if(DateTime.Now.CompareTo(currentTask.timeSlot.end) > 1)
+        if(DateTime.Now.CompareTo(currentTask.timeSlot.end) >= 1)
             ForceStop();
     }
 
