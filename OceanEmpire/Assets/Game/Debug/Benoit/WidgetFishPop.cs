@@ -4,24 +4,78 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using CCC.Utility;
 
-public class WidgetFishPop : MonoBehaviour {
+public class WidgetFishPop : MonoBehaviour
+{
 
     public Slider gageMeter;
     public float fullRefillAnimLenght = 2;
 
     public event SimpleEvent AnimComplete;
+    public Text ZoneTimeRemaining;
+
+    [SerializeField]
+    private bool autoUpdate = false;
+
+    public bool AutoUpdate
+    {
+        get { return autoUpdate; }
+        set
+        {
+            autoUpdate = value;
+
+            StopAllCoroutines();
+
+            if (autoUpdate)
+                StartCoroutine(UpdateLoop());
+            else
+                StopAllCoroutines();
+        }
+    }
 
     void Start()
     {
         UpdateMeter();
+
+        if (autoUpdate)
+            StartCoroutine(UpdateLoop());
+    }
+
+    IEnumerator UpdateLoop()
+    {
+        while (true)
+        {
+            UpdateMeter();
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void UpdateMeter()
     {
         FishPopulation.instance.RefreshPopulation();
         gageMeter.value = FishPopulation.FishDensity;
+
+        if (ZoneTimeRemaining != null)
+            DisplayTimeRemaing();
     }
+
+    public void DisplayTimeRemaing()
+    {
+        if (ZoneTimeRemaining == null)
+            return;
+
+        if (FishPopulation.PopulationRate == 1)
+        {
+            ZoneTimeRemaining.text = "La population est au maximum!";
+            return;
+        }
+
+        TimeSpan timeSpan = FishPopulation.GetTimeToRefill();
+        string timeString = PrintTime.ShortString(timeSpan);
+        ZoneTimeRemaining.text = "<size=34>Compl\u00E8tement rempli dans</size>\n" + timeString;
+    }
+
 
 
     public void IncrementRate(float rateDifference)
@@ -34,7 +88,8 @@ public class WidgetFishPop : MonoBehaviour {
 
         FishPopulation.instance.AddRate(rateDifference);
 
-        refillAnim.OnComplete(() => {
+        refillAnim.OnComplete(() =>
+        {
             if (AnimComplete != null)
             {
                 AnimComplete.Invoke();
@@ -50,27 +105,13 @@ public class WidgetFishPop : MonoBehaviour {
     {
         Tweener refillAnim = gageMeter.DOValue(1, fullRefillAnimLenght).SetUpdate(true);
         FishPopulation.instance.AddRate(1);
-        refillAnim.OnComplete(() =>  callBack());
+        refillAnim.OnComplete(() => callBack());
     }
 
     public void DecrementRate(float rateDifference)
     {
         IncrementRate(-rateDifference);
 
-    }
-
-        // Update is called once per frame
-    void Update () {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            print("inpoute");
-            IncrementRate(0.2f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            IncrementRate(-0.2f);
-        }
     }
 
 }
