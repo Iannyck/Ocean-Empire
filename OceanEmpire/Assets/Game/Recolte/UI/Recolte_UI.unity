@@ -876,6 +876,7 @@ GameObject:
   - component: {fileID: 1533438436}
   - component: {fileID: 1533438437}
   - component: {fileID: 1533438438}
+  - component: {fileID: 1533438439}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -977,6 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbacks: {fileID: 692108511}
+  textPopups: {fileID: 1533438439}
 --- !u!114 &1533438437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,6 +1004,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinsPopUpPrefab: {fileID: 114038013904753118, guid: 49b0ff1b139aeaf47b5ebf26782c23b5,
     type: 2}
+--- !u!114 &1533438439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1533438431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d128c834080e81449ba6148395f8657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 114295661116465250, guid: c81cbd5ebea24db4d868d8bdc5820acf,
+    type: 2}
+  parent: {fileID: 1533438435}
 --- !u!1 &1542161066
 GameObject:
   m_ObjectHideFlags: 0

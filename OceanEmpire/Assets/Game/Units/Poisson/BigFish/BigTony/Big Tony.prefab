@@ -58,6 +58,8 @@ GameObject:
   - component: {fileID: 4801256402393244}
   - component: {fileID: 58109501744363240}
   - component: {fileID: 114647200725526030}
+  - component: {fileID: 114069461908948814}
+  - component: {fileID: 114552173655373172}
   m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
@@ -195,6 +197,34 @@ MonoBehaviour:
   checkX: 0
   overrideDefaultMargin: 0
   margin: 3.33
+--- !u!114 &114069461908948814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1652968675826716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc332ad0ec059041bcce3fc19603e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filter: 1
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114552173655373172}
+        m_MethodName: SpawnText
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: OnCollision+OnCollisionEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114287080000692136
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +237,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: {fileID: 11400000, guid: 6e36e05622430b84eb0da0bbce65d19a, type: 2}
+--- !u!114 &114552173655373172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1652968675826716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c181f282ef07d914a912eb67cd939dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
