@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CCC.UI;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class InstantExerciseChoice : WindowAnimation
 {
@@ -15,7 +16,7 @@ public class InstantExerciseChoice : WindowAnimation
     /// Load la scene et propose 3 taches
     /// </summary>
     /// <param name="rewardType"></param>
-    public static void ProposeTasks(int rewardType = -1)
+    public static void ProposeTasks(RewardType rewardType)
     {
         MasterManager.Sync(() =>
         {
@@ -47,7 +48,7 @@ public class InstantExerciseChoice : WindowAnimation
     {
         base.Start();
         if (Scenes.SceneCount == 1)
-            ProposeTasks();
+            ProposeTasks(RewardType.Tickets);
     }
 
     private void OnItemClick(InstantExerciseChoice_Item item)
@@ -55,7 +56,6 @@ public class InstantExerciseChoice : WindowAnimation
         //item.assignedTask
         ConfirmInstantExercise.OpenWindowAndConfirm(item.assignedTask, (hasConfirmed) =>
         {
-            print("Has confirmed: " + hasConfirmed);
             if (hasConfirmed)
             {
                 InstantTask instantTask = new InstantTask(item.assignedTask);
@@ -73,15 +73,27 @@ public class InstantExerciseChoice : WindowAnimation
         });
     }
 
-    private void Init(int rewardType = -1)
+    private void Init(RewardType rewardType)
     {
         int taskCount = taskDisplays.Length;
 
-        List<Task> tasks = ExercisePropositionMaker.GetExercisePropositions(taskCount);
 
-        for (int i = 0; i < taskCount; i++)
+        if (rewardType == RewardType.OceanRefill)
         {
-           taskDisplays[i].DisplayTask(tasks[i]);
+            Debug.LogWarning("Temporaire");
+            taskCount = 1;
+        }
+
+        List<Task> tasks = ExercisePropositionMaker.GetExercisePropositions(taskCount, rewardType);
+        int i = 0;
+        for (i = 0; i < taskCount; i++)
+        {
+            taskDisplays[i].DisplayTask(tasks[i]);
+        }
+
+        for (; i < taskDisplays.Length; i++)
+        {
+            taskDisplays[i].DestroyGO();
         }
         /*
         int taskCount = taskDisplays.Length;

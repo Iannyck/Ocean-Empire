@@ -19,6 +19,7 @@ public class PendingReports : BaseManager<PendingReports>
     [SerializeField]
     private List<PendingReport> pendingReports = new List<PendingReport>();
     public bool log = true;
+    public event SimpleEvent onReportConcluded;
 
     public override void Init()
     {
@@ -73,6 +74,10 @@ public class PendingReports : BaseManager<PendingReports>
         if (pendingReports.Remove(report))
         {
             ApplyToGameSaves(true);
+
+            if (onReportConcluded != null)
+                onReportConcluded();
+
             try
             {
                 History.instance.AddTaskReport(report.incompleteReport);

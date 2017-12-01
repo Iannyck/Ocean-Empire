@@ -47,7 +47,7 @@ public class WidgetFishPop : MonoBehaviour
         while (true)
         {
             UpdateMeter();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSecondsRealtime(1);
         }
     }
 

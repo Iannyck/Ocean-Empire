@@ -13,7 +13,7 @@ public class OpenExercicePanel : MonoBehaviour
 
     public void Open()
     {
-        InstantExerciseChoice.ProposeTasks(-1);
+        InstantExerciseChoice.ProposeTasks(RewardType.Tickets);
     }
 
     void OnSceneLoaded(Scene scene)

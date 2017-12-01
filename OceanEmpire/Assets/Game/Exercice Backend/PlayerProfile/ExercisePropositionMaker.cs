@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExercisePropositionMaker{
+public class ExercisePropositionMaker
+{
 
     //Influence la la largeur des options offerte par rapport au niveau du joueur
     //pour ure rate de 2 et un exercice avec un écart de niveau n au par rapport au joueur, le poids est de 1/(2^n)
-    const float declineRate = 2f;   
+    const float declineRate = 2f;
 
-    public static List<Task> GetExercisePropositions(int amount)
+    public static List<Task> GetExercisePropositions(int amount, RewardType rewardType)
     {
-        List<int> levels = getTaskLevels(amount);
+        List<int> levels = GetTaskLevels(amount);
         List<ExerciseType> types = GetTypes(amount);
 
         List<Task> tasks = new List<Task>();
@@ -18,15 +19,13 @@ public class ExercisePropositionMaker{
         for (int i = 0; i < amount; ++i)
         {
             Task newTask = TaskBuilder.Build(types[i], taskDifficulty.GetExerciseDifficulty(types[i], levels[i]));
-            newTask.SetAutoReward(RewardType.Tickets);
+            newTask.SetAutoReward(rewardType);
             tasks.Add(newTask);
         }
-            
-
         return tasks;
     }
-   
-    private static List<int> getTaskLevels(int amount)
+
+    private static List<int> GetTaskLevels(int amount)
     {
         /*
         Lottery<int> levelsLottery;
@@ -52,7 +51,7 @@ public class ExercisePropositionMaker{
         */
 
         List<int> difficulties = new List<int>();
-        int startValue = Mathf.Max(PlayerProfile.Level - ( (amount - 1) / 2.0f ).RoundedToInt(),  0);
+        int startValue = Mathf.Max(PlayerProfile.Level - ((amount - 1) / 2.0f).RoundedToInt(), 0);
         int maxValue = startValue + amount;
         for (int i = startValue; i <= maxValue; ++i)
             difficulties.Add(i);
@@ -63,7 +62,7 @@ public class ExercisePropositionMaker{
     private static float GetWeigth(int checkedLevel)
     {
         int playerLevel = PlayerProfile.Level;
-        float weigth = 1 / Mathf.Pow(declineRate, Mathf.Abs(playerLevel - checkedLevel) );
+        float weigth = 1 / Mathf.Pow(declineRate, Mathf.Abs(playerLevel - checkedLevel));
         return weigth;
     }
 

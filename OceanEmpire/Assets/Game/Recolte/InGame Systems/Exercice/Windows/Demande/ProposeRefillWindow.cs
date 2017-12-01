@@ -24,6 +24,8 @@ public class ProposeRefillWindow : MonoBehaviour
 
     public bool debug = false;
 
+    private bool exerciseListeners = false;
+
     void Start()
     {
         Time.timeScale = 0;
@@ -32,7 +34,7 @@ public class ProposeRefillWindow : MonoBehaviour
 
         SetTicketCost();
 
-        windowAnim.Open(delegate()
+        windowAnim.Open(delegate ()
         {
             DelayManager.LocalCallTo(UpdateFishPopDisplay, delayToUpdatePop, this);
         });
@@ -62,9 +64,35 @@ public class ProposeRefillWindow : MonoBehaviour
 
     public void DoExercice()
     {
-        Debug.LogError("Mon ti chnappant, cossé tu fa icite ? FARME LA CRISS DE PORTE PI RVIENS PU !");
+        RemoveExerciseListeners();
 
         // Exercice Instantanné
+        InstantExerciseChoice.ProposeTasks(RewardType.OceanRefill);
+        AddExerciseListeners();
+    }
+
+    void OnDestroy()
+    {
+        RemoveExerciseListeners();
+    }
+
+    private void AddExerciseListeners()
+    {
+        if (exerciseListeners)
+            return;
+
+        exerciseListeners = true;
+        if (PendingReports.instance != null)
+            PendingReports.instance.onReportConcluded += Hide;
+    }
+    private void RemoveExerciseListeners()
+    {
+        if (!exerciseListeners)
+            return;
+
+        exerciseListeners = false;
+        if (PendingReports.instance != null)
+            PendingReports.instance.onReportConcluded -= Hide;
     }
 
     private void OnTrackerWindowLoad(Scene scene)
@@ -76,8 +104,8 @@ public class ProposeRefillWindow : MonoBehaviour
     {
         if (PlayerCurrency.RemoveTickets(refillCost.amount))
         {
-            widgetFishPop.Fill(() =>
-            Hide());
+            widgetFishPop.AutoUpdate = false;
+            widgetFishPop.Fill(() => Hide());
         }
     }
 }
