@@ -15,6 +15,7 @@ public class TimedTaskReport
 
     //Mendatoire
     public State state;
+    public string taskDescription;
     public ExerciseType exerciseType;
     public DateTime taskCreatedOn;
     public TimeSlot taskPlannedFor;
@@ -34,6 +35,7 @@ public class TimedTaskReport
         TimedTaskReport report = new TimedTaskReport
         {
             state = State.PreemptivelyCancelled,
+            taskDescription = timedTask.task.ToString(),
             trackingReport = null,
             rating = HappyRating.None,
             exerciseType = timedTask.task.GetExerciseType(),
@@ -50,6 +52,7 @@ public class TimedTaskReport
         TimedTaskReport report = new TimedTaskReport
         {
             state = State.InterruptedInProgress,
+            taskDescription = timedTask.task.ToString(),
             trackingReport = trackingReport,
             rating = HappyRating.None,
             exerciseType = timedTask.task.GetExerciseType(),
@@ -67,6 +70,7 @@ public class TimedTaskReport
         {
             state = State.Completed,
             trackingReport = trackingReport,
+            taskDescription = timedTask.task.ToString(),
             rating = happyRating,
             exerciseType = timedTask.task.GetExerciseType(),
             taskCreatedOn = timedTask.createdOn,
@@ -91,8 +95,9 @@ public class TimedTaskReport
     public override string ToString()
     {
         return "State: " + state.ToString() +
-            "\nExercise type: " + exerciseType.ToString() +
-            "\nReport created on: " + reportCreatedOn.ToString() +
+            "\nExercise type: " + exerciseType.ToString()
+            +"\nTask: " + taskDescription
+            +"\nReport created on: " + reportCreatedOn.ToString() +
             "\nTask created on: " + taskCreatedOn.ToString() +
             "\n---Task planned for---\n" + taskPlannedFor.ToString() + "\n---"
             + "\nWas instant task: " + wasInstantTask.ToString() +

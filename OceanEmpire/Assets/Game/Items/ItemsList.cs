@@ -374,13 +374,16 @@ public class ItemsList : BaseManager<ItemsList>
 
     public static void UnlockAll()
     {
-        foreach (KeyValuePair<string, bool> containedItem in instance.ownedUpgrades)
+        List<string> keys = new List<string>(instance.ownedUpgrades.Keys);
+        foreach (string key in keys)
         {
-            instance.ownedUpgrades[containedItem.Key] = true;
+            instance.ownedUpgrades[key] = true;
         }
-        foreach (KeyValuePair<string, bool> containedMap in instance.ownedMaps)
+
+        keys = new List<string>(instance.ownedMaps.Keys); ;
+        foreach (string key in keys)
         {
-            instance.ownedMaps[containedMap.Key] = true;
+            instance.ownedMaps[key] = true;
         }
     }
 }
