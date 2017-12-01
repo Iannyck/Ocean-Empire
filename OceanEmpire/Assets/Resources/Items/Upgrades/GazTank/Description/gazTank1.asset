@@ -15,7 +15,7 @@ MonoBehaviour:
   itemDescription: "R\xE9servoir d'essence par d\xE9faut"
   moneyCost: 0
   ticketCost: 0
-  itemImage: {fileID: 21300000, guid: 6f52f5fee94df764bb3b2f392f0abeb2, type: 3}
+  itemImage: {fileID: 21300000, guid: 553926718f6b4ed4f99b1cbf4e0100d8, type: 3}
   itemFileName: item_gazTank1
   itemID: gaztank1
   upgradeLevel: 1
