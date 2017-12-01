@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32f6b5479ec67642b99821154697404, type: 3}
   m_Name: Pacifique
   m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
+  itemName: "Oc\xE9an Pacifique"
+  itemDescription: "Pas si pacifique que \xE7a finalement..."
   moneyCost: 120
   ticketCost: 30
   itemImage: {fileID: 21300000, guid: 8108e3eae87d05d488e7309ceb31317e, type: 3}
