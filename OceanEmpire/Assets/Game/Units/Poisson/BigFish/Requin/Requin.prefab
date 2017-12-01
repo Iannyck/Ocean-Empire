@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114006607524244626}
   - component: {fileID: 114021408903366914}
   m_Layer: 10
-  m_Name: Grimdon
+  m_Name: Requin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4801256402393244}
-  - component: {fileID: 58109501744363240}
+  - component: {fileID: 70190793126108018}
   - component: {fileID: 114647200725526030}
   m_Layer: 10
   m_Name: Collider
@@ -71,13 +71,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306950366514508}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.01090805, w: 0.9999405}
   m_LocalPosition: {x: 0, y: 0.038, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4391991207605276}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.25}
 --- !u!4 &4391991207605276
 Transform:
   m_ObjectHideFlags: 1
@@ -85,8 +85,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365461041918330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8946829, y: -3.6385655, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.3012825, y: -2.3587978, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 4354569782890090}
   - {fileID: 4801256402393244}
@@ -99,13 +99,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652968675826716}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.02425772, w: 0.9997058}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4391991207605276}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.78}
 --- !u!50 &50708007439193562
 Rigidbody2D:
   serializedVersion: 4
@@ -126,8 +126,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58109501744363240
-CircleCollider2D:
+--- !u!70 &70190793126108018
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -139,8 +139,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.27
+  m_Size: {x: 1.7, y: 0.27}
+  m_Direction: 1
 --- !u!114 &114006607524244626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71ee4d65313697429d63a12f3827e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: {fileID: 11400000, guid: 7a8b6091653a7904c969943492b5a224, type: 2}
+  description: {fileID: 11400000, guid: 36d59587c4cd8e74e9c51587ab42a65d, type: 2}
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,7 +267,7 @@ SpriteRenderer:
   m_SortingLayerID: -1616546285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e1989783be31eed4396703f1c4c13e69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa6b6a5ddb99250459e393b2151b4e2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

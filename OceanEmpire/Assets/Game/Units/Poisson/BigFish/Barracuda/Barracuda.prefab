@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114006607524244626}
   - component: {fileID: 114021408903366914}
   m_Layer: 10
-  m_Name: Grimdon
+  m_Name: Barracuda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,8 +56,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4801256402393244}
-  - component: {fileID: 58109501744363240}
   - component: {fileID: 114647200725526030}
+  - component: {fileID: 70810199894465122}
   m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
@@ -73,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 1306950366514508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.038, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 4391991207605276}
   m_RootOrder: 0
@@ -85,8 +85,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365461041918330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8946829, y: -3.6385655, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.05794859, y: -2.7969139, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children:
   - {fileID: 4354569782890090}
   - {fileID: 4801256402393244}
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652968675826716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0, z: 0}
+  m_LocalPosition: {x: -0.023, y: 0.025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4391991207605276}
@@ -126,8 +126,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58109501744363240
-CircleCollider2D:
+--- !u!70 &70810199894465122
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -135,12 +135,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.27
+  m_Size: {x: 0.7, y: 0.15}
+  m_Direction: 1
 --- !u!114 &114006607524244626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71ee4d65313697429d63a12f3827e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: {fileID: 11400000, guid: 7a8b6091653a7904c969943492b5a224, type: 2}
+  description: {fileID: 11400000, guid: ca346f949a729584a9655d3806c4e045, type: 2}
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af967a12586e2ef4e9cd54e5438864fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facingRight: 1
+  facingRight: 0
   rb: {fileID: 50708007439193562}
   flipDuration: 0.4
   flipEase: 4
@@ -267,7 +267,7 @@ SpriteRenderer:
   m_SortingLayerID: -1616546285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e1989783be31eed4396703f1c4c13e69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ad14fda1ed9a6c4e968bcfdbd147759, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
