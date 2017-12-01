@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b943fb073374d2f4f8281144aa5409ba, type: 3}
+  m_Name: InputMapping_Helicopter
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys:
+  - locationButton
+  - keys
+  _serializedStateValues:
+  - '{}'
+  - '{"Fire":{"displayCategory":"","primary":{"first":"Mouse0","second":"None"},"secondary":{"first":"None","second":"None"}},"Run":{"displayCategory":"","primary":{"first":"Quote","second":"None"},"secondary":{"first":"None","second":"None"}},"Jump":{"displayCategory":"","primary":{"first":"Plus","second":"None"},"secondary":{"first":"None","second":"None"}}}'
+  displayName: Helicopter

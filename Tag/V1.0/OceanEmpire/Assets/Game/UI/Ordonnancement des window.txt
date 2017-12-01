@@ -1,0 +1,13 @@
+IN MENU
+
+Shack: -10
+Region Selection: 5
+Propose Instant Exercise: 10
+Confirm Instant Task: 15
+Tracking Panel: 20
+Task Conclusion (Reward): 30
+CheatsWindow: 50
+
+
+INGAME
+ProposeRefill: 5

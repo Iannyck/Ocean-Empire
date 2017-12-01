@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Game/UI/Shack/Shack.unity
+  isLoaded: 1
+  isActive: 1

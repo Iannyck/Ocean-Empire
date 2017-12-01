@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1056252920610246}
+  m_IsPrefabParent: 1
+--- !u!1 &1056252920610246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4708772372880884}
+  - component: {fileID: 114233758764746148}
+  - component: {fileID: 114331226706513050}
+  - component: {fileID: 114991176186273250}
+  - component: {fileID: 114191208945978696}
+  m_Layer: 0
+  m_Name: MasterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4708772372880884
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.014453957, y: 0.2181744, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114191208945978696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6dbd859558019439fe6652b237f27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 114331226706513050}
+  inMenuDragSize: 0.01
+  inGameDragSize: 0.001
+--- !u!114 &114233758764746148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515cb9c8aca8b844ab9f01cfb5d961f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  managersPrefab:
+  - {fileID: 114388996010884506, guid: 62f1bf5069e5808419e80102f0bee502, type: 2}
+  - {fileID: 114433543006935660, guid: 499c63aba491c7143b5b3b40c61a94ac, type: 2}
+  - {fileID: 114467485633564090, guid: 060e12aa357e85f4cb7ad09b4b602ccc, type: 2}
+  - {fileID: 114154190448646074, guid: dd6c9f514d26ff245936e3d037035d5c, type: 2}
+  - {fileID: 114601011516906360, guid: 7b4cb462677bf1544af62c558f68bd57, type: 2}
+  - {fileID: 114941931716701618, guid: d2b459f73651b294a839ff919f1bc158, type: 2}
+  - {fileID: 114891387732453912, guid: 323f31d39e30f534cb06606b2e09314e, type: 2}
+  - {fileID: 114169703373621136, guid: df86fa405b660c94f8611de34f83d419, type: 2}
+  - {fileID: 114342399426060556, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
+  - {fileID: 114632337948739566, guid: 55a96d455e32ec24099da346e46d2807, type: 2}
+  - {fileID: 114460630147748634, guid: 6961750fe7651984a9acb4cb1a32adf2, type: 2}
+  - {fileID: 114091529778875312, guid: 143ded45916896e45ad6147aaf0a475f, type: 2}
+  managers: []
+--- !u!114 &114331226706513050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!114 &114991176186273250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0

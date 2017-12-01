@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9480f22127541c74cb37ba6995c40ee4
+timeCreated: 1511831540
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Keys of Paradise
+  fontNames:
+  - Keys of Paradise
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
