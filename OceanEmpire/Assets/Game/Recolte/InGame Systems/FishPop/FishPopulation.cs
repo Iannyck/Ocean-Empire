@@ -39,7 +39,10 @@ public class FishPopulation : BaseManager<FishPopulation>
         time -= Time.deltaTime;
     }
 
-
+    public static TimeSpan GetTimeToRefill()
+    {
+        return new TimeSpan( (long)((float)instance.refreshingTime.Ticks * (1.0f - PopulationRate)) );
+    }
 
     public override void Init()
     {
@@ -102,11 +105,16 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     }
 
+    public static void LowerRate(float value)
+    {
+        PopulationRate = (PopulationRate - value).Raised(0);
+    }
+
     public void RefreshPopulation()
     {
         DateTime now = System.DateTime.Now;
 
-        TimeSpan deltaTime = now.Subtract(LastUpdate);
+        TimeSpan deltaTime = now - LastUpdate;
         float refreshRate = (float)( deltaTime.TotalSeconds / refreshingTime.TotalSeconds );
 
         population = (population += (refreshRate * limitPopulation)).Capped(limitPopulation);
@@ -127,8 +135,6 @@ public class FishPopulation : BaseManager<FishPopulation>
 
         Save();
     }
-
-
 
     public void UpdateOnExercise(float exerciseRateValue)
     {
