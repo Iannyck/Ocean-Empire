@@ -222,7 +222,6 @@ public class FishSpawner : MonoBehaviour {
             float lateralSpawnOffest = 1.2f * cam.HalfWidth;
 
             Vector3 spawnPos = Vector3.zero;
-            Random.InitState(fishCount);
 
             float leftRight = Random.Range(0.0f, 1.0f);
             if (leftRight > 0.5f)

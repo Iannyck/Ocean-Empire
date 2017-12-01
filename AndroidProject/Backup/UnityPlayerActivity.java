@@ -7,9 +7,11 @@ import com.unity3d.player.*;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -17,6 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import java.io.File;
 
 public class UnityPlayerActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 {
@@ -31,6 +35,18 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
         super.onCreate(savedInstanceState);
 
         getWindow().setFormat(PixelFormat.RGBX_8888); // <--- This makes xperia play happy
+
+        SharedPreferences wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
+        if (isFirstRun)
+        {
+            String dir = getFilesDir().getAbsolutePath();
+            File fileToDelete = new File(dir, "activities.txt");
+            boolean successful = fileToDelete.delete();
+            SharedPreferences.Editor editor = wmbPreference.edit();
+            editor.putBoolean("FIRSTRUN", false);
+            editor.commit();
+        }
 
         mUnityPlayer = new UnityPlayer(this);
         setContentView(mUnityPlayer);

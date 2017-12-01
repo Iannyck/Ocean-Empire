@@ -27,7 +27,6 @@ public class WidgetFishPop : MonoBehaviour {
     {
         float currentRate = FishPopulation.PopulationRate;
         float target = (currentRate + rateDifference).Clamped(0.0f, 1.0f);
-        float animDelay = (rateDifference * fullRefillAnimLenght).Abs();
 
         Tweener refillAnim = gageMeter.DOValue(target, fullRefillAnimLenght).SetUpdate(true);
 

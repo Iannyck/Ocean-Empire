@@ -226,4 +226,11 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
     {
         activities = new List<ActivityDetection.Activity>();
     }
+
+    public ActivityDetection.Activity GetLast()
+    {
+        if (activities.Count > 1)
+            return activities.Last();
+        return null;
+    }
 }

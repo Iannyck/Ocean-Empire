@@ -45,9 +45,15 @@ public class MapInfo : BaseBehavior
             repartition = new AnimationCurve(
             new Keyframe(0.0f, 1f), new Keyframe(1f, 0));
         }
+        [InspectorButton, InspectorCategory("Depth")]
+        public void DeepRepartition()
+        {
+            repartition = new AnimationCurve(
+            new Keyframe(1f, 0f), new Keyframe(1f, 1));
+        }
 
 
-            //Fish denstity
+        //Fish denstity
         [InspectorCategory("Density")]
         public float fishDensity;
 
@@ -116,6 +122,9 @@ public class MapInfo : BaseBehavior
                 nbStraws++;
                 float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
                 float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio) * fishTypeList[i].fishDensity;
+
+                print(fT.fish.description.name + ": " + fishProportion.ToString());
+
                 fishLottery.Add(fT.fish, fishProportion.Clamped(0f,1f));
             }
         }

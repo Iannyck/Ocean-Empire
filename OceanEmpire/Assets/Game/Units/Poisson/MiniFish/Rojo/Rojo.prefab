@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212771005577804690}
   - component: {fileID: 114930874317122786}
   - component: {fileID: 114008773675957000}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,11 +38,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4391991207605276}
   - component: {fileID: 50708007439193562}
-  - component: {fileID: 114287080000692136}
+  - component: {fileID: 114766056936082448}
   - component: {fileID: 114006607524244626}
   - component: {fileID: 114021408903366914}
-  m_Layer: 10
-  m_Name: Grimdon
+  m_Layer: 9
+  m_Name: Rojo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,8 @@ GameObject:
   - component: {fileID: 4801256402393244}
   - component: {fileID: 58109501744363240}
   - component: {fileID: 114647200725526030}
-  m_Layer: 10
+  - component: {fileID: 114780919155577168}
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +73,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306950366514508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.038, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4391991207605276}
   m_RootOrder: 0
@@ -85,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365461041918330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8946829, y: -3.6385655, z: 0}
+  m_LocalPosition: {x: -0.58, y: 2.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4354569782890090}
@@ -100,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652968675826716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.19, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4391991207605276}
@@ -140,7 +141,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.27
+  m_Radius: 0.2
 --- !u!114 &114006607524244626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,22 +192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e105b65f34042434fbb161a4fc65de5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkY: 1
+  checkY: 0
   checkX: 0
   overrideDefaultMargin: 0
-  margin: 3.33
---- !u!114 &114287080000692136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1365461041918330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71ee4d65313697429d63a12f3827e78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: {fileID: 11400000, guid: 7a8b6091653a7904c969943492b5a224, type: 2}
+  margin: 1000
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,8 +207,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190b5d0d759f6c04e95469ad912f3616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentType: 4
+  parentType: 2
   parent: {fileID: 1365461041918330}
+--- !u!114 &114766056936082448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2a6700374864741a9728d9f1dcc3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: {fileID: 11400000, guid: a912b21e55d4c0245befd7bdeef5a97a, type: 2}
+--- !u!114 &114780919155577168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1652968675826716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a2793b9149e794eb21a18d51db1855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filter: 1
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114766056936082448}
+        m_MethodName: OnPlayerTouch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: OnTrigger+OnTriggerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114930874317122786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,9 +296,9 @@ SpriteRenderer:
   m_SortingLayerID: -1616546285
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e1989783be31eed4396703f1c4c13e69, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2af488957f3ff1f41a3cc22210aa0e8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.64, y: 0.64}

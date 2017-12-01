@@ -50,7 +50,7 @@ public class ActivityDetection : MonoBehaviour
             if (reader.BaseStream.CanRead)
             {
                 result = reader.ReadToEnd();
-                //Debug.Log("READING FILE");
+                Debug.Log("UNITY FILE : " + result);
             }
             reader.Close();
         }
@@ -197,7 +197,11 @@ public class ActivityDetection : MonoBehaviour
 
     private static DateTime ConvertStringToDate(string value)
     {
-        string modifiedValue = value.Replace(" EST", "");
+        Debug.Log("CONVERTING STRING BEFORE : " + value);
+        char[] charArray = value.ToCharArray();
+        string toDelete = " " + charArray[20] + charArray[21] + charArray[22];
+        string modifiedValue = value.Replace(toDelete, "");
+        Debug.Log("CONVERTING STRING AFTER : " + modifiedValue);
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
     }
 }

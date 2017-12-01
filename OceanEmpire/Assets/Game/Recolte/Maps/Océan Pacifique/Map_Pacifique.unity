@@ -416,6 +416,48 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+--- !u!1001 &145912356
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.08050156
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -63.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6f27a41520412cd45a213d180713102e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &150361635
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +945,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327739966
 GameObject:
@@ -953,12 +995,12 @@ SpriteRenderer:
   m_SortingLayerID: -209382895
   m_SortingLayer: -1
   m_SortingOrder: -101
-  m_Sprite: {fileID: 21300000, guid: 71c7b7459266eea4cb6f8c425f6f2afd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 082853ae7f3627040913a78f5fc4c8d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 7.68}
+  m_Size: {x: 3.84, y: 2.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -977,7 +1019,7 @@ Transform:
   - {fileID: 1364451718}
   - {fileID: 1390526146}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330009202
 GameObject:
@@ -2059,14 +2101,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 114766056936082448, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
+  - {fileID: 114766056936082448, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
   - {fileID: 114287080000692136, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
-  - {fileID: 114766056936082448, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
+  - {fileID: 114287080000692136, guid: c877cd4996206a14db404966e57a29b2, type: 2}
   _serializedStateKeys:
   - mapFishReparition
   - fishTypeList
   _serializedStateValues:
-  - '{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
-  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":2.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.9975891,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.66,"value":0.0,"tangentMode":136,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0}]'
+  - '{"keys":[{"time":0.0,"value":0.66,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
+  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":2.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":2.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.66,"value":1.0,"tangentMode":0,"inTangent":0.0008724857,"outTangent":0.0008724857},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":2.0},{"fish":3,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":2.0,"outTangent":2.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0}]'
+  PopulationRateVariation: 4
   boatLocation: {fileID: 185285419}
   TopLocation: {fileID: 1719716374}
   WaterLocation: {fileID: 21776862}
@@ -2080,7 +2124,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 1
+      value: 0.66
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2105,8 +2149,42 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 1
+        time: 0.33
         value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0.5
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    highestSpawn: 0
+    lowestSpawn: -64
+    fishDensity: 2
+  - fish: {fileID: 114766056936082448, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
+    repartition:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.33
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2127,14 +2205,14 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.33
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        time: 0.66
+        value: 1
+        inSlope: 0.0008724857
+        outSlope: 0.0008724857
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 0.9975891
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -2143,28 +2221,22 @@ MonoBehaviour:
       m_RotationOrder: 4
     highestSpawn: 0
     lowestSpawn: -64
-    fishDensity: 1
-  - fish: {fileID: 114766056936082448, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
+    fishDensity: 2
+  - fish: {fileID: 114287080000692136, guid: c877cd4996206a14db404966e57a29b2, type: 2}
     repartition:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.66
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
         time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        value: 1
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -2539,7 +2611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1225785045
 GameObject:
@@ -3718,7 +3790,7 @@ Transform:
   - {fileID: 21776862}
   - {fileID: 185285419}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1976306890
 GameObject:
@@ -3932,7 +4004,7 @@ Transform:
   - {fileID: 2115812182}
   - {fileID: 260578993}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045130851
 GameObject:

@@ -36,6 +36,7 @@ namespace CCC.Manager
 
         void Awake()
         {
+            UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
             if (master == null) master = this;
             else
             {
