@@ -1909,6 +1909,7 @@ GameObject:
   - component: {fileID: 981076566}
   - component: {fileID: 981076565}
   - component: {fileID: 981076567}
+  - component: {fileID: 981076568}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1938,7 +1939,6 @@ MonoBehaviour:
   _serializedStateValues:
   - '{"keys":[{"time":0.0,"value":0.66,"tangentMode":0,"inTangent":0.3014002,"outTangent":0.3014002},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.3545214,"outTangent":0.3545214}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
   - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":1.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.66,"value":1.0,"tangentMode":0,"inTangent":0.0008724857,"outTangent":0.0008724857},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":0.0},{"fish":3,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.66,"value":1.0,"tangentMode":0,"inTangent":0.0008724857,"outTangent":0.0008724857},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-64.0,"fishDensity":0.0}]'
-  PopulationRateVariation: 4
   boatLocation: {fileID: 1408103016}
   TopLocation: {fileID: 1047353538}
   WaterLocation: {fileID: 1082231827}
@@ -2035,8 +2035,8 @@ MonoBehaviour:
       - serializedVersion: 2
         time: 0.66
         value: 1
-        inSlope: 0.00087248575
-        outSlope: 0.00087248575
+        inSlope: 0.0008724857
+        outSlope: 0.0008724857
         tangentMode: 0
       - serializedVersion: 2
         time: 1
@@ -2063,8 +2063,8 @@ MonoBehaviour:
       - serializedVersion: 2
         time: 0.66
         value: 1
-        inSlope: 0.00087248575
-        outSlope: 0.00087248575
+        inSlope: 0.0008724857
+        outSlope: 0.0008724857
         tangentMode: 0
       - serializedVersion: 2
         time: 1
@@ -2103,6 +2103,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: Map_Caraibe
+--- !u!114 &981076568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 981076564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b49fb242580c84993762745f5ae37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proposeUnderDensity: 0.75
 --- !u!1 &1015798229
 GameObject:
   m_ObjectHideFlags: 0
