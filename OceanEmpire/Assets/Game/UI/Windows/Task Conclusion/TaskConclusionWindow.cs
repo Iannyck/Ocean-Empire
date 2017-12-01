@@ -23,9 +23,9 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
 
     [Header("Ocean Refill Reward")]
     public GameObject oceanRefillReward;
+    public WidgetFishPop fishPop;
 
     private ScheduledTask task;
-    //private TimedTaskReport report;
     private Action concludeCallback;
 
     private bool rewardGiven = false;
@@ -84,6 +84,8 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
                 break;
             case RewardType.OceanRefill:
                 oceanRefillReward.SetActive(true);
+                fishPop.AutoUpdate = false;
+                fishPop.IncrementRate(1, false);
                 break;
             default:
                 Debug.LogError("Unsupported reward type (Task Conclusion Window)");

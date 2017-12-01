@@ -10,9 +10,8 @@ public class Chest : BaseFish {
         //Capture();
     }
 
-    public void Update()
+    public override void Update()
     {
-        //print("Hello world!")
-    }
 
+    }
 }
