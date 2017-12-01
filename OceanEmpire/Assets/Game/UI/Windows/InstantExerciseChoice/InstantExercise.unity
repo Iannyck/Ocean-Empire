@@ -662,7 +662,7 @@ Prefab:
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -296.5
       objectReference: {fileID: 0}
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
@@ -672,7 +672,7 @@ Prefab:
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
@@ -792,7 +792,7 @@ Prefab:
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -488.5
       objectReference: {fileID: 0}
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
@@ -802,7 +802,7 @@ Prefab:
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
@@ -1003,7 +1003,7 @@ Prefab:
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -104.5
       objectReference: {fileID: 0}
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
@@ -1013,7 +1013,7 @@ Prefab:
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 224106764041333892, guid: af9349bd8654dec438f948c3f491fb94,
         type: 2}
@@ -1150,7 +1150,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1563025687
 RectTransform:
