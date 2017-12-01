@@ -52,6 +52,7 @@ public class DragDetection : MonoBehaviour
 
         if(wasState == DragProfile.State.Pressed && newState == DragProfile.State.Dragged)
         {
+            //print("on start drag");
             onStartDrag.Invoke(drag.lastRecordedPosition);
         }
         else if (wasState == DragProfile.State.Dragged && newState != DragProfile.State.Dragged)

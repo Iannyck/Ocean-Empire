@@ -16,7 +16,9 @@ public class OnTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         ColliderInfo info = collider.GetComponent<ColliderInfo>();
-        
+        if (info == null)
+            return;
+
         if ((filter & info.parentType) != 0)
             onEnter.Invoke(info, collider);
     }
