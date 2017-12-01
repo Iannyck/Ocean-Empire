@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Grimdon
   description: Il n'aime pas les gens, c'est un poisson aigre
-  baseMonetaryValue: 7
+  baseMonetaryValue: 8
   populationValue: 1.5
   icon:
     spriteName: t_Grimdon

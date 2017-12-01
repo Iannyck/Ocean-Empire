@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Big Tony
   description: C'est UN GROS poisson. Rempli de chaine en or.
-  baseMonetaryValue: 8
+  baseMonetaryValue: 6
   populationValue: 1.5
   icon:
     spriteName: t_bigTony
