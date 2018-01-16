@@ -1,6 +1,6 @@
 # Ocean-Empire
 
-Exergame
+Exergame for people with schizophrenia. 
 
-Des poissons, des poissons TA DES POISSONS !!!
+The objective of this exercise is to help this part of the population maintain a minimum level of physical activity in order to prevent chronic diseases related to lack of physical activity.
 
