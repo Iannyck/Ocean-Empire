@@ -4,7 +4,9 @@ public static class VectorExtensions
 {
     public static float ToAngle(this Vector2 v)
     {
-        return CCC.Math.Vectors.VectorToAngle(v);
+        if (v.x < 0)
+            return Mathf.Atan(v.y / v.x) * Mathf.Rad2Deg + 180;
+        return Mathf.Atan(v.y / v.x) * Mathf.Rad2Deg;
     }
     public static Vector2 Clamped(this Vector2 v, Vector2 min, Vector2 max)
     {

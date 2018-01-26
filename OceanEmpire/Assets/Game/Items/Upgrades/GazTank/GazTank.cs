@@ -15,8 +15,8 @@ public class GazTank : Upgrade
     {
         GazTimeRemaining = (GazTimeRemaining - Time.deltaTime).Raised(0);
 
-        if (GazTimeRemaining <= 0 && !Game.instance.gameOver)
-            Game.instance.EndGame();
+        if (GazTimeRemaining <= 0 && !Game.Instance.gameOver)
+            Game.Instance.EndGame();
     }
 
     public void SetGaz()

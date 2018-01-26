@@ -23,8 +23,11 @@ public class CheatsWindow : WindowAnimation
 
     public void ResetDataToDefault()
     {
-        if (GameSaves.instance != null)
-            GameSaves.instance.ClearAllSaves();
+        var dataSavers = DataSaverBank.Instance.GetDataSavers();
+        foreach (DataSaver saver in dataSavers)
+        {
+            saver.ClearSave();
+        }
 
         ActivityDetection.ResetActivitiesSave();
         ActivityAnalyser.instance.ResetActivities();

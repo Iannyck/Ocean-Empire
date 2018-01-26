@@ -14,6 +14,7 @@ namespace CCC.Manager
         /// <summary>
         /// This only contains the prefab. It does not point towards any actual manager.
         /// </summary>
+        [Reorderable]
         public List<BaseManager> managersPrefab;
         [HideInInspector]
         public List<BaseManager> managers;

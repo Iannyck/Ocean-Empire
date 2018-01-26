@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CCC.Manager;
 using UnityEngine.SceneManagement;
+using CCC.DesignPattern;
 
 public delegate void SimpleEvent();
 

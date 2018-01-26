@@ -30,9 +30,9 @@ public class PlayerSpawn : MonoBehaviour
 
     public void Init()
     {
-        BoatLocation = Game.instance.map.boatLocation.transform.position;
-        TopLocation = Game.instance.map.TopLocation.transform.position;
-        WaterLocation = Game.instance.map.WaterLocation.transform.position;
+        BoatLocation = Game.Instance.map.boatLocation.transform.position;
+        TopLocation = Game.Instance.map.TopLocation.transform.position;
+        WaterLocation = Game.Instance.map.WaterLocation.transform.position;
     }
 
     public SubmarineMovement Spawn(Vector2 position)

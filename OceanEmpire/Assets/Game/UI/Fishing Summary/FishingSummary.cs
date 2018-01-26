@@ -38,7 +38,7 @@ public class FishingSummary : MonoBehaviour
             fishes += entry.Value;
         }
 
-        CCC.Manager.DelayManager.LocalCallTo(delegate () { UpdateFishPopulation();  }, delayToShowPopulationChanges, this);
+        this.DelayedCall(UpdateFishPopulation, delayToShowPopulationChanges);
         
     }
 

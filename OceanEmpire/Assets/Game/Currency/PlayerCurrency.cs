@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using CCC.Persistence;
 
-public class PlayerCurrency : BaseManager<PlayerCurrency>
+public class PlayerCurrency : MonoPersistent
 {
     private const string SAVE_KEY_COINS = "coins";
     private const string SAVE_KEY_TICKETS = "tickets";
@@ -12,19 +13,13 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
 
     public static event SimpleEvent CurrencyUpdate;
 
-    public override void Init()
-    {
-        Load();
-        CompleteInit();
-    }
-
     [SerializeField]
     private Sprite moneyIcon;
     [SerializeField]
     private Sprite ticketIcon;
 
-    public static Sprite GetMoneyIcon()    {   return instance.moneyIcon;  }
-    public static Sprite GetTicketIcon()   {   return instance.ticketIcon;  }
+    public static Sprite GetMoneyIcon() { return instance.moneyIcon; }
+    public static Sprite GetTicketIcon() { return instance.ticketIcon; }
 
 
 
@@ -32,6 +27,22 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private int coins;
     [SerializeField, ReadOnly]
     private int tickets;
+    [SerializeField]
+    private DataSaver dataSaver;
+
+    public static PlayerCurrency instance;
+
+    public override void Init(Action onComplete)
+    {
+        instance = this;
+        FetchData();
+        onComplete();
+    }
+
+    protected void Awake()
+    {
+        dataSaver.OnReassignData += FetchData;
+    }
 
     public static int GetCoins()
     {
@@ -41,13 +52,13 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
     private static void AddCoinsAndSave(int amount)
     {
         instance.coins += amount;
-    
+
         if (CurrencyUpdate != null)
         {
             CurrencyUpdate();
         }
 
-        Save();
+        instance.SaveData();
     }
 
     /// <summary>
@@ -90,7 +101,7 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
             CurrencyUpdate();
         }
 
-        Save();
+        instance.SaveData();
     }
 
     /// <summary>
@@ -141,25 +152,20 @@ public class PlayerCurrency : BaseManager<PlayerCurrency>
         return false;
     }
 
-    private static void Save()
+    private void SaveData()
     {
-        GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_TICKETS, GetTickets());
-        GameSaves.instance.SetInt(GameSaves.Type.Currency, SAVE_KEY_COINS, GetCoins());
-        GameSaves.instance.SaveData(GameSaves.Type.Currency);
+        dataSaver.SetInt(SAVE_KEY_TICKETS, GetTickets());
+        dataSaver.SetInt(SAVE_KEY_COINS, GetCoins());
+        dataSaver.Save();
     }
 
-    private static void Load()
+    private void FetchData()
     {
-        instance.coins = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_COINS);
-        instance.tickets = GameSaves.instance.GetInt(GameSaves.Type.Currency, SAVE_KEY_TICKETS);
+        coins = dataSaver.GetInt(SAVE_KEY_COINS);
+        tickets = dataSaver.GetInt(SAVE_KEY_TICKETS);
         if (CurrencyUpdate != null)
         {
             CurrencyUpdate();
         }
-    }
-
-    public static void Reload()
-    {
-        Load();
     }
 }

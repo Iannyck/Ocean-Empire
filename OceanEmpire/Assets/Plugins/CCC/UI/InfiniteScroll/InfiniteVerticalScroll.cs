@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 public class InfiniteVerticalScroll : InfiniteScroll
 {
     public VerticalLayoutGroup verticalLayoutGroup;
@@ -26,8 +22,3 @@ public class InfiniteVerticalScroll : InfiniteScroll
         return new Vector2(0, verticalLayoutGroup.spacing);
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(InfiniteVerticalScroll))]
-public class InfiniteVerticalScrollEditor : InfiniteScrollEditor { }
-#endif

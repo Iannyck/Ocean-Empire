@@ -45,12 +45,51 @@ public static class IntExtensions
     {
         if (modulo < 1)
             return 0;
-        
+
         if (value < 0)
         {
             value += Mathf.CeilToInt((float)value.Abs() / modulo) * modulo;
         }
 
         return value % modulo;
+    }
+
+    /// <summary>
+    /// Retourne le 'power of two' le plus pres, en descendant. Ex: 0010110 -> 0010000
+    /// </summary>
+    public static int GetLowerPowerOfTwo(this int value)
+    {
+        if (value < 0)
+            value = -value;
+        
+        int newVal = value;
+        while (newVal != 0)
+        {
+            value = newVal;
+            newVal &= (value - 1);
+        }
+        return value;
+    }
+
+    /// <summary>
+    /// Retourne le numero du bit a 1 le plus a gauche. Ex: 0010110 -> 4
+    /// </summary>
+    public static int GetLeftmostSetBit(this int value)
+    {
+        if (value < 0)
+            value = -value;
+
+        int i = 0;
+        while (value != 1)
+        {
+            value >>= 1;
+            i++;
+        }
+        return i;
+    }
+
+    public static bool IsEvenNumber(this int value)
+    {
+        return (value & 1) == 0;
     }
 }

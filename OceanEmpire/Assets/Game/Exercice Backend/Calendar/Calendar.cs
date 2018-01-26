@@ -4,8 +4,9 @@ using System;
 using System.Collections.ObjectModel;
 using CCC.Manager;
 using UnityEngine;
+using CCC.Persistence;
 
-public class Calendar : BaseManager<Calendar>
+public class Calendar : MonoPersistent
 {
     private const string SAVE_KEY_ST = "scheduledTasks";
 
@@ -15,13 +16,39 @@ public class Calendar : BaseManager<Calendar>
     /// <summary>
     /// Ordonner du plus vieux au plus recent
     /// </summary>
-    [SerializeField]
-    private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
+    [SerializeField] private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
+    [SerializeField] private DataSaver dataSaver;
+
     public bool log = true;
     public event SimpleEvent onTaskAdded;
     public event SimpleEvent onTaskConcluded;
+    public static Calendar instance;
 
     public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
+
+    protected void Awake()
+    {
+        dataSaver.OnReassignData += FetchDataFromSaver;
+    }
+
+    public override void Init(Action onComplete)
+    {
+        instance = this;
+        FetchDataFromSaver();
+        onComplete();
+
+        MasterManager.Sync(() => StartCoroutine(CheckTasks()));
+    }
+
+    IEnumerator CheckTasks()
+    {
+        while (true)
+        {
+            ConcludePastTasks();
+            TrackOngoingTask();
+            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
+        }
+    }
 
     public bool AddScheduledTask(ScheduledTask task)
     {
@@ -29,7 +56,7 @@ public class Calendar : BaseManager<Calendar>
         {
             scheduledTasks.SortedAdd(task, (a, b) => a.timeSlot.start.CompareTo(b.timeSlot.start));
 
-            ApplyToGameSaves(true);
+            ApplyDataToSaver(true);
 
             if (log)
                 Debug.Log("ScheduledTask ajouter au calendrier avec succes.");
@@ -67,24 +94,6 @@ public class Calendar : BaseManager<Calendar>
         return true;
     }
 
-    public override void Init()
-    {
-        ReadFromGameSaves();
-        CompleteInit();
-
-        MasterManager.Sync(()=> StartCoroutine(CheckTasks()));
-    }
-
-    IEnumerator CheckTasks()
-    {
-        while (true)
-        {
-            ConcludePastTasks();
-            TrackOngoingTask();
-            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
-        }
-    }
-
     /// <summary>
     /// Retire la tache du calendrier, l'ajoute a l'historique ET donne la reward si applicable
     /// </summary>
@@ -104,7 +113,7 @@ public class Calendar : BaseManager<Calendar>
                 Debug.LogWarning("L'instance de Pending reports est null. On vient de perdre le rapport");
             }
 
-            ApplyToGameSaves(true);
+            ApplyDataToSaver(true);
             return true;
         }
         return false;
@@ -173,21 +182,16 @@ public class Calendar : BaseManager<Calendar>
         return true;
     }
 
-    public void Reload()
+    private void ApplyDataToSaver(bool andSave)
     {
-        ReadFromGameSaves();
-    }
-
-    private void ApplyToGameSaves(bool andSave)
-    {
-        GameSaves.instance.SetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST, scheduledTasks);
+        dataSaver.SetObjectClone(SAVE_KEY_ST, scheduledTasks);
         if (andSave)
-            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar, null);
+            dataSaver.SaveAsync();
     }
 
-    private void ReadFromGameSaves()
+    private void FetchDataFromSaver()
     {
-        scheduledTasks = GameSaves.instance.GetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<ScheduledTask>;
+        scheduledTasks = dataSaver.GetObjectClone(SAVE_KEY_ST) as List<ScheduledTask>;
         if (scheduledTasks == null)
             scheduledTasks = new List<ScheduledTask>();
     }

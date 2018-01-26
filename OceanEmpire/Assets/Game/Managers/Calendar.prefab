@@ -60,5 +60,7 @@ MonoBehaviour:
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   initComplete: 0
+  checkForPastTasksEvery: 4
   scheduledTasks: []
+  dataSaver: {fileID: 11400000, guid: 9b4e1f2a3f1761e4bac08ee5dc7f5b19, type: 2}
   log: 1

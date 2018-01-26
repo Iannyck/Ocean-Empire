@@ -11,7 +11,7 @@ public class Recolte_UI : MonoBehaviour
     
     public void Quit()
     {
-        Game.instance.EndGame();
+        Game.Instance.EndGame();
     }
 
 

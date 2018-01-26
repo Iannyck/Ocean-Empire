@@ -5,14 +5,14 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 
-[System.Flags]
-public enum Hello
-{
-    A = 1 << 0,
-    B = 1 << 1,
-    C = 1 << 2,
-    All = A | B | C
-}
+//[System.Flags]
+//public enum Hello
+//{
+//    A = 1 << 0,
+//    B = 1 << 1,
+//    C = 1 << 2,
+//    All = A | B | C
+//}
 [CustomPropertyDrawer(typeof(BitMask))]
 public class EnumBitMaskPropertyDrawer : PropertyDrawer
 {

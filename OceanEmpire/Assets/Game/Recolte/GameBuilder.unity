@@ -347,12 +347,11 @@ MonoBehaviour:
   submarinePrefab: {fileID: 114071053288964254, guid: 29c29de0634f88647bc84bea37008cce,
     type: 2}
   spawnPoint: {fileID: 1660329141}
-  introAnimDuration: 1
   concluAnimDuration: 1.5
   introAnimFromTopOffset: 0
-  BoatLocation: {fileID: 1778498699}
-  TopLocation: {fileID: 880261003}
-  WaterLocation: {fileID: 853337483}
+  introToTopDuration: 0.5
+  introToWaterDuration: 1
+  introAnimDuration: 1
 --- !u!114 &1311441152
 MonoBehaviour:
   m_ObjectHideFlags: 0

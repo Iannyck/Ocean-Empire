@@ -2,54 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 public abstract class AudioPlayable : ScriptableObject
 {
-    public abstract void PlayOn(AudioSource audioSource);
-}
+    public float cooldown = -1;
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(AudioPlayable), true)]
-public class AudioPlayableEditor: Editor
-{
-    [SerializeField] private AudioSource _previewer;
+    [System.NonSerialized]
+    protected float lastPlayedTime = -1;
 
-    public override void OnInspectorGUI()
+    public virtual bool IsInCooldown
     {
-        base.OnInspectorGUI();
-
-        AudioPlayable playable = target as AudioPlayable;
-
-        EditorGUI.BeginDisabledGroup(serializedObject.isEditingMultipleObjects);
-        GUILayout.BeginHorizontal();
-
-        GUI.enabled = _previewer.isPlaying;
-        if (GUILayout.Button("Stop"))
+        get
         {
-            _previewer.Stop();
+            return cooldown > 0 && Time.time < lastPlayedTime + cooldown && Application.isPlaying;
         }
-        GUI.enabled = true;
-
-        if (GUILayout.Button("Preview"))
-        {
-            playable.PlayOn(_previewer);
-        }
-
-        GUILayout.EndHorizontal();
-        EditorGUI.EndDisabledGroup();
     }
 
-    public void OnEnable()
+    public void PlayOn(AudioSource audioSource, float volumeMultiplier = 1)
     {
-        _previewer = EditorUtility.CreateGameObjectWithHideFlags("Audio preview", HideFlags.HideAndDontSave, typeof(AudioSource)).GetComponent<AudioSource>();
+        if (IsInCooldown)
+            return;
+
+        Internal_PlayOn(audioSource, volumeMultiplier);
+        lastPlayedTime = Time.time;
+    }
+    public void PlayOnAndIgnoreCooldown(AudioSource audioSource, float volumeMultiplier = 1)
+    {
+        Internal_PlayOn(audioSource, volumeMultiplier);
     }
 
-    public void OnDisable()
+    public void PlayLoopedOn(AudioSource audioSource, float volumeMultiplier = 1)
     {
-        DestroyImmediate(_previewer.gameObject);
+        Interal_PlayLoopedOn(audioSource, volumeMultiplier);
     }
+
+    protected abstract void Internal_PlayOn(AudioSource audioSource, float volumeMultiplier = 1);
+    protected abstract void Interal_PlayLoopedOn(AudioSource audioSource, float volumeMultiplier = 1);
 }
-#endif

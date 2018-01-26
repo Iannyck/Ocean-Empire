@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using CCC.Manager;
-using System.Collections.ObjectModel;
 using System;
+using CCC.Persistence;
 
-public class PendingReports : BaseManager<PendingReports>
+public class PendingReports : MonoPersistent
 {
     private const string SAVE_KEY_ST = "pendingReports";
 
@@ -21,10 +20,13 @@ public class PendingReports : BaseManager<PendingReports>
     public bool log = true;
     public event SimpleEvent onReportConcluded;
 
-    public override void Init()
+    public static PendingReports instance;
+
+    public override void Init(Action onComplete)
     {
-        ReadFromGameSaves();
-        CompleteInit();
+        instance = this;
+        ReadFromSaver();
+        onComplete();
 
         MasterManager.Sync(CheckAndConcludeNextReport);
     }
@@ -61,7 +63,7 @@ public class PendingReports : BaseManager<PendingReports>
             pendingReports = new List<PendingReport>();
         pendingReports.Add(new PendingReport() { task = task, incompleteReport = incompleteReport });
 
-        ApplyToGameSaves(true);
+        ApplyToSaver(true);
 
         if (log)
             Debug.Log("Ajout d'un nouveau 'pending report'.");
@@ -73,7 +75,7 @@ public class PendingReports : BaseManager<PendingReports>
     {
         if (pendingReports.Remove(report))
         {
-            ApplyToGameSaves(true);
+            ApplyToSaver(true);
 
             if (onReportConcluded != null)
                 onReportConcluded();
@@ -99,20 +101,22 @@ public class PendingReports : BaseManager<PendingReports>
 
 
     #region R/W Gamesaves
-    private void ApplyToGameSaves(bool andSave)
+    private void ApplyToSaver(bool andSave)
     {
-        GameSaves.instance.SetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST, pendingReports);
+        var dataSaver = DataSaverBank.Instance.GetDataSaver(DataSaverBank.Type.Calendar);
+        dataSaver.SetObjectClone(SAVE_KEY_ST, pendingReports);
         if (andSave)
         {
-            int c = pendingReports.Count;
+            //int c = pendingReports.Count;
             //print("Sauvgarde " + pendingReports.Count + " pending reports");
-            GameSaves.instance.SaveDataAsync(GameSaves.Type.Calendar,null);
+            dataSaver.SaveAsync();
         }
     }
 
-    private void ReadFromGameSaves()
+    private void ReadFromSaver()
     {
-        pendingReports = GameSaves.instance.GetObjectClone(GameSaves.Type.Calendar, SAVE_KEY_ST) as List<PendingReport>;
+        var dataSaver = DataSaverBank.Instance.GetDataSaver(DataSaverBank.Type.Calendar);
+        pendingReports = dataSaver.GetObjectClone(SAVE_KEY_ST) as List<PendingReport>;
         if (pendingReports == null)
             pendingReports = new List<PendingReport>();
     }

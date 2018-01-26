@@ -26,7 +26,7 @@ public class ConfirmBuy : WindowAnimation
         print("ping!");
         MasterManager.Sync(() =>
         {
-            if (Scenes.Exists(SCENENAME))
+            if (Scenes.IsActive(SCENENAME))
             {
                 Scenes.GetActive(SCENENAME).FindRootObject<ConfirmBuy>().Init(item, currency, resultCallback);
             }

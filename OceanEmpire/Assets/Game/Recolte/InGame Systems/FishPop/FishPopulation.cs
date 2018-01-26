@@ -5,26 +5,40 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using FullInspector;
+using CCC.Persistence;
 
-public class FishPopulation : BaseManager<FishPopulation>
+public class FishPopulation : MonoPersistent
 {
-
     private const string SAVE_KEY_POPULATION = "population";
+    private const string SAVE_KEY_LASTUPDATE = "lastUpdate";
 
-    [SerializeField, ReadOnly]
-    private const float limitPopulation = 200;
+    [SerializeField, ReadOnly] private const float limitPopulation = 200;
     private TimeSpan refreshingTime = new TimeSpan(0, 0, 80, 0);
 
     [InspectorTooltip("Densité decroit exponentiellement en fonction du nombre")]
     public float PopulationDensityVariation = 4;
 
-    [SerializeField, ReadOnly]
-    private float population;
+    [SerializeField, ReadOnly] private float population;
     private DateTime lastUpdate;
 
+    [SerializeField] private DataSaver dataSaver;
     private float time = 0;
 
     public bool periodicLogs = false;
+
+    public static FishPopulation instance;
+
+    protected void Awake()
+    {
+        dataSaver.OnReassignData += FetchData;
+    }
+
+    public override void Init(Action onComplete)
+    {
+        instance = this;
+        FetchData();
+        onComplete();
+    }
 
     public void Update()
     {
@@ -41,23 +55,21 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     public static TimeSpan GetTimeToRefill()
     {
-        return new TimeSpan( (long)((float)instance.refreshingTime.Ticks * (1.0f - PopulationRate)) );
+        return new TimeSpan((long)((float)instance.refreshingTime.Ticks * (1.0f - PopulationRate)));
     }
 
-    public override void Init()
+    private void FetchData()
     {
-        population = GameSaves.instance.GetFloat(GameSaves.Type.FishPop, SAVE_KEY_POPULATION, limitPopulation);
-        lastUpdate = GameSaves.instance.GetDateTime(GameSaves.Type.FishPop, SAVE_KEY_POPULATION, System.DateTime.Now);
-
-        CompleteInit();
+        population = dataSaver.GetFloat(SAVE_KEY_POPULATION, limitPopulation);
+        lastUpdate = (DateTime)dataSaver.GetObjectClone(SAVE_KEY_LASTUPDATE, System.DateTime.Now);
     }
 
-    private static void Save()
+    private void SaveData()
     {
-        GameSaves.instance.SetFloat(GameSaves.Type.FishPop, SAVE_KEY_POPULATION, Population);
-        GameSaves.instance.SetDateTime(GameSaves.Type.FishPop, SAVE_KEY_POPULATION, LastUpdate);
+        dataSaver.SetFloat(SAVE_KEY_POPULATION, Population);
+        dataSaver.SetObjectClone(SAVE_KEY_LASTUPDATE, LastUpdate);
 
-        GameSaves.instance.SaveData(GameSaves.Type.FishPop);
+        dataSaver.Save();
     }
 
     /// <summary>
@@ -75,7 +87,7 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     public static float PopulationRate
     {
-        private set { Population = value * limitPopulation ; }
+        private set { Population = value * limitPopulation; }
         get { return Population / limitPopulation; }
     }
 
@@ -86,7 +98,7 @@ public class FishPopulation : BaseManager<FishPopulation>
 
     public static float GetFishDensityFromRate(float rate)
     {
-       return Mathf.Pow(rate, instance.PopulationDensityVariation); 
+        return Mathf.Pow(rate, instance.PopulationDensityVariation);
     }
 
     public static float Population
@@ -115,7 +127,7 @@ public class FishPopulation : BaseManager<FishPopulation>
         DateTime now = System.DateTime.Now;
 
         TimeSpan deltaTime = now - LastUpdate;
-        float refreshRate = (float)( deltaTime.TotalSeconds / refreshingTime.TotalSeconds );
+        float refreshRate = (float)(deltaTime.TotalSeconds / refreshingTime.TotalSeconds);
 
         population = (population += (refreshRate * limitPopulation)).Capped(limitPopulation);
         LastUpdate = now;
@@ -125,7 +137,7 @@ public class FishPopulation : BaseManager<FishPopulation>
     void OnApplicationQuit()
     {
         RefreshPopulation();
-        Save();
+        SaveData();
     }
 
     public void UpdateOnFishing(float capturedFishes)
@@ -133,7 +145,7 @@ public class FishPopulation : BaseManager<FishPopulation>
         LastUpdate = System.DateTime.Now;
         Population -= capturedFishes.Raised(0.0f);
 
-        Save();
+        SaveData();
     }
 
     public void UpdateOnExercise(float exerciseRateValue)
@@ -141,19 +153,14 @@ public class FishPopulation : BaseManager<FishPopulation>
         RefreshPopulation();
         PopulationRate += exerciseRateValue.Capped(limitPopulation);
 
-        Save();
+        SaveData();
     }
 
     public void DebugInGameExercice()
     {
         UpdateOnExercise(50);
-        if (Game.instance != null)
+        if (Game.Instance != null)
             if (Game.FishSpawner != null)
                 Game.FishSpawner.SetPalierFishLimit();
-    }
-
-    public static void Reload()
-    {
-        instance.Init();
     }
 }

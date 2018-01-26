@@ -62,3 +62,4 @@ MonoBehaviour:
   ticketIcon: {fileID: 21300000, guid: 5995a9c4ed1674148b5ff86db0549bce, type: 3}
   coins: 0
   tickets: 0
+  dataSaver: {fileID: 11400000, guid: 91b765acb2de1b840833439740cdbf3e, type: 2}

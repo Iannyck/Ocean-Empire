@@ -47,8 +47,8 @@ public class FishSpawner : MonoBehaviour {
 
     void Init()
     {
-        submarine = Game.instance.submarine;
-        map = Game.instance.map;
+        submarine = Game.Instance.submarine;
+        map = Game.Instance.map;
         Game.OnGameStart -= Init;
         cam = Game.GameCamera;
 

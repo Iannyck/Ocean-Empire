@@ -62,5 +62,6 @@ MonoBehaviour:
   - '[]'
   - '[]'
   initComplete: 0
+  dataSaver: {fileID: 11400000, guid: a797dbb87b151f3458b1ca199620fb10, type: 2}
   taskReports: []
   purchaseReport: []

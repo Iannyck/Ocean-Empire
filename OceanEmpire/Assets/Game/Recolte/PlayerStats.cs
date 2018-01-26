@@ -21,10 +21,10 @@ public class PlayerStats : MonoBehaviour {
 
     void Update()
     {
-        if (Game.instance == null)
+        if (Game.Instance == null)
             return;
 
-        if (!infiniteTime && Game.instance.gameStarted)
+        if (!infiniteTime && Game.Instance.gameStarted)
             UpdateTimer();
     }
 
@@ -32,8 +32,8 @@ public class PlayerStats : MonoBehaviour {
     {
         remainingTime = (remainingTime - Time.deltaTime).Raised(0);
 
-        if (remainingTime <= 0 && !Game.instance.gameOver)
-            Game.instance.EndGame();
+        if (remainingTime <= 0 && !Game.Instance.gameOver)
+            Game.Instance.EndGame();
     }
 
     public void TryCapture(BaseFish fish)

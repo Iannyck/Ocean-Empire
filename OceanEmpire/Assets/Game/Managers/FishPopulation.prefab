@@ -58,4 +58,7 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
     Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   initComplete: 0
+  PopulationDensityVariation: 4
+  population: 0
+  dataSaver: {fileID: 11400000, guid: 4570fe074b62a4a4685a6782160c6dd4, type: 2}
   periodicLogs: 0

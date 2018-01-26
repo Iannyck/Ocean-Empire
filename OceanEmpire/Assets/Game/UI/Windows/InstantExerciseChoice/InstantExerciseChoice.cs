@@ -20,7 +20,7 @@ public class InstantExerciseChoice : WindowAnimation
     {
         MasterManager.Sync(() =>
         {
-            if (Scenes.Exists(SCENENAME))
+            if (Scenes.IsActive(SCENENAME))
             {
                 Scenes.GetActive(SCENENAME).FindRootObject<InstantExerciseChoice>().Init(rewardType);
             }
@@ -47,7 +47,7 @@ public class InstantExerciseChoice : WindowAnimation
     protected override void Start()
     {
         base.Start();
-        if (Scenes.SceneCount == 1)
+        if (Scenes.ActiveSceneCount == 1)
             ProposeTasks(RewardType.Tickets);
     }
 

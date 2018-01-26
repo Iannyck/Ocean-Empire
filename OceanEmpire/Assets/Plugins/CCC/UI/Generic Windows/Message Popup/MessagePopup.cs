@@ -5,6 +5,7 @@ using CCC.Manager;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using CCC.Threading;
 
 public class MessagePopup : MonoBehaviour
 {
@@ -43,10 +44,7 @@ public class MessagePopup : MonoBehaviour
     }
     public static void DisplayMessageFromThread(string message, TweenCallback onComplete = null)
     {
-        lock (MainThread.instance)
-        {
-            MainThread.AddAction(() => DisplayMessage(message, onComplete));
-        }
+        MainThread.AddActionFromThread(() => DisplayMessage(message, onComplete));
     }
 
     private void Awake()

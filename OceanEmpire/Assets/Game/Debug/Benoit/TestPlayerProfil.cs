@@ -17,7 +17,6 @@ public class TestPlayerProfil : MonoBehaviour {
 
     public void ResetPlayerLevel()
     {
-        GameSaves.instance.ClearPlayerProfile();
-        PlayerProfile.Reload();
+        DataSaverBank.Instance.GetDataSaver(DataSaverBank.Type.PlayerProfile).ClearSave();
     }
 }

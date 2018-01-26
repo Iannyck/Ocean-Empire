@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 public class InfiniteHorizontalScroll : InfiniteScroll
 {
     public HorizontalLayoutGroup horizontalLayoutGroup;
@@ -26,8 +22,3 @@ public class InfiniteHorizontalScroll : InfiniteScroll
         return new Vector2(horizontalLayoutGroup.spacing, 0);
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(InfiniteHorizontalScroll))]
-public class InfiniteHorizontalScrollEditor : InfiniteScrollEditor { }
-#endif

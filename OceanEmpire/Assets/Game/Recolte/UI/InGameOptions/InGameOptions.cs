@@ -11,28 +11,23 @@ public class InGameOptions : WindowAnimation, SceneMessage
 {
     public const string SCENENAME = "InGameOptions";
 
-    [Header("Options Menu")]
-    public Button shackButton;
-
     private bool isQuitting = false;
 
     private GameBuilder gameBuilder;
 
     public void Confirm()
     {
-        SoundManager.Save();
         Exit();
     }
 
     public void Cancel()
     {
-        SoundManager.Load();
         Exit();
     }
 
     public void RestartGame()
     {
-        if (Game.instance != null)
+        if (Game.Instance != null)
             LoadingScreen.TransitionTo(GameBuilder.SCENENAME,this,false);
     }
 
@@ -68,7 +63,7 @@ public class InGameOptions : WindowAnimation, SceneMessage
 
     public static void OpenWindow()
     {
-        if (Game.instance == null)
+        if (Game.Instance == null)
         {
             Debug.LogWarning("Cannot open InGameOptions if the game is not running.");
             return;

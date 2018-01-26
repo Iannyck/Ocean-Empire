@@ -23,8 +23,8 @@ public class CameraMouvement : MonoBehaviour {
 
 
     void FixedUpdate () {
-        if (submarine == null && Game.instance != null) { 
-            submarine = Game.instance.submarine;
+        if (submarine == null && Game.Instance != null) { 
+            submarine = Game.Instance.submarine;
             return;
         }
         if (followPlayer && submarine != null && submarine.gameObject.activeSelf)

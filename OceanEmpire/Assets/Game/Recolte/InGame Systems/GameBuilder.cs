@@ -27,12 +27,12 @@ public class GameBuilder : MonoBehaviour {
     void Build()
     {
         // Load All Scenes
-        if (!Scenes.Exists(mapName))
+        if (!Scenes.IsActiveOrBeingLoaded(mapName))
             Scenes.LoadAsync(mapName, LoadSceneMode.Additive, OnMapLoaded);
         else
             OnMapLoaded();
 
-        if (!Scenes.Exists(Recolte_UI.SCENENAME))
+        if (!Scenes.IsActiveOrBeingLoaded(Recolte_UI.SCENENAME))
             Scenes.LoadAsync(Recolte_UI.SCENENAME, LoadSceneMode.Additive, OnUILoaded);
         else
             OnUILoaded();
@@ -40,7 +40,7 @@ public class GameBuilder : MonoBehaviour {
 
     void OnMapLoaded(Scene scene)
     {
-        Game.instance.map = scene.FindRootObject<MapInfo>();
+        Game.Instance.map = scene.FindRootObject<MapInfo>();
 
         mapLoaded = true;
         CheckInitGame();
@@ -53,7 +53,7 @@ public class GameBuilder : MonoBehaviour {
 
     void OnUILoaded(Scene scene)
     {
-        Game.instance.ui = scene.FindRootObject<Recolte_UI>();
+        Game.Instance.ui = scene.FindRootObject<Recolte_UI>();
 
         uiLoaded = true;
         CheckInitGame();
@@ -68,7 +68,7 @@ public class GameBuilder : MonoBehaviour {
     {
         if (uiLoaded && mapLoaded)
         {
-            Game.instance.InitGame();
+            Game.Instance.InitGame();
         }
     }
 }

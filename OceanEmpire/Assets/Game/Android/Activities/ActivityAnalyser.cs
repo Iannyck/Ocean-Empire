@@ -3,8 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CCC.Persistence;
 
-public class ActivityAnalyser : BaseManager<ActivityAnalyser>
+public class ActivityAnalyser : MonoPersistent
 {
     public float achieveGap = 50;
 
@@ -17,6 +18,8 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
 
     [HideInInspector]
     public List<ActivityDetection.Activity> activities = new List<ActivityDetection.Activity>();
+
+    static public ActivityAnalyser instance;
 
     public class Report
     {
@@ -43,10 +46,11 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
         }
     }
 
-    public override void Init()
+    public override void Init(Action onComplete)
     {
-        CompleteInit();
+        instance = this;
         UpdateActivities();
+        onComplete();
     }
 
     private void UpdateActivities()
@@ -65,7 +69,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
                     //Debug.Log("ANALYSER GOT SOME ACTIVITIES | " + activities[activities.Count - 1].time);
                 waitingForDataUpdate = false;
                 this.activities = activities;
-                DelayManager.LocalCallTo(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f), this);
+                this.DelayedCall(UpdateActivities, Mathf.Max(timeBetweenUpdate, 0.5f));
             }
             else
             {
@@ -75,6 +79,7 @@ public class ActivityAnalyser : BaseManager<ActivityAnalyser>
             }
         });
     }
+    
 
     public Report VerifyCompletion(TimedTask task)
     {

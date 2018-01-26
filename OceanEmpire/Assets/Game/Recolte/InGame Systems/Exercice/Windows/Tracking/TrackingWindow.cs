@@ -45,7 +45,7 @@ public class TrackingWindow : MonoBehaviour
 
     public static bool IsTrackingSomething()
     {
-        return Scenes.Exists(SCENE_NAME);
+        return Scenes.IsActive(SCENE_NAME);
     }
 
     public void InitDisplay(string exerciceDescription, ScheduledTask task, string enAttente = "En Attente...", string title = "Faire l'exercice")

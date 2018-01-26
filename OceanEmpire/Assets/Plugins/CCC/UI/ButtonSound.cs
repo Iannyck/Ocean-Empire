@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using CCC.Manager;
 
 namespace CCC.UI
 {
@@ -9,14 +8,29 @@ namespace CCC.UI
     public class ButtonSound : MonoBehaviour
     {
         public AudioClip clip;
-        void Start()
+        public AudioAsset audioAsset;
+
+        private void Awake()
         {
-            MasterManager.Sync();
+            PersistentLoader.LoadIfNotLoaded();
+        }
+
+        void OnEnable()
+        {
             GetComponent<Button>().onClick.AddListener(OnClick);
         }
+
+        void OnDisable()
+        {
+            GetComponent<Button>().onClick.RemoveListener(OnClick);
+        }
+
         void OnClick()
         {
-            SoundManager.PlaySFX(clip);
+            if (clip == null)
+                DefaultAudioSources.PlaySFX(audioAsset);
+            else
+                DefaultAudioSources.PlaySFX(clip);
         }
     }
 }

@@ -18,9 +18,9 @@ public class TimeMeter : MonoBehaviour {
 	
 	void Update ()
     {
-        if (Game.instance == null)
+        if (Game.Instance == null)
             return;
-        if (!Game.instance.gameStarted)
+        if (!Game.Instance.gameStarted)
             return;
         if (GetComponent<Text>() != null)
             text.text = "00:" + (int)Game.PlayerStats.remainingTime;

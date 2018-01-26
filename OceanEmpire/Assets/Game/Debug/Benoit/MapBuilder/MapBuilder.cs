@@ -16,7 +16,6 @@ public class MapBuilder : BaseBehavior {
     public int amountOfTints;
     [SerializeField, ReadOnly]
     private List<Color> tints;
-    private bool colorPrimed = false;
 
     public float StartPosition;
     public float FinishPostion;

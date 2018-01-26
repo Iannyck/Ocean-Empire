@@ -39,7 +39,7 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
 
         MasterManager.Sync(() =>
         {
-            if (Scenes.Exists(SCENENAME))
+            if (Scenes.IsActive(SCENENAME))
                 action(Scenes.GetActive(SCENENAME));
             else
                 Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive, action);

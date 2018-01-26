@@ -61,7 +61,7 @@ public class CalendarRootScene : MonoBehaviour
                 onComplete();
         };
 
-        if (!Scenes.Exists(DayInspector.SCENENAME))
+        if (!Scenes.IsActiveOrBeingLoaded(DayInspector.SCENENAME))
             Scenes.Load(DayInspector.SCENENAME, LoadSceneMode.Additive, fetcher);
         else
             fetcher(Scenes.GetActive(DayInspector.SCENENAME));
@@ -100,7 +100,7 @@ public class CalendarRootScene : MonoBehaviour
 
     public static bool IsCalendarTypeLoaded(CalendarType type)
     {
-        return Scenes.Exists(CalendarTypeToSceneName(type));
+        return Scenes.IsActiveOrBeingLoaded(CalendarTypeToSceneName(type));
     }
 
     public static string CalendarTypeToSceneName(CalendarType type)

@@ -21,7 +21,7 @@ public class KillOutOfCamera : MonoBehaviour
         enabled = false;
         killable = GetComponent<IKillable>();
 
-        if (Game.instance != null || Game.instance.gameStarted)
+        if (Game.Instance != null || Game.Instance.gameStarted)
             GetReference();
         else
             Game.OnGameStart += GetReference;

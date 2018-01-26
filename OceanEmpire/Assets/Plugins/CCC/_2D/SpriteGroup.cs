@@ -49,7 +49,7 @@ namespace CCC._2D
             if (childRenderers != null)
                 for (int i = 0; i < childRenderers.Length; i++)
                 {
-                    childRenderers[i].color = childRenderers[i].color.ChangedAlpha((defaultAlphas[i] * alpha).Clamped(0,1));
+                    childRenderers[i].SetAlpha((defaultAlphas[i] * alpha).Clamped(0, 1));
                 }
         }
     }

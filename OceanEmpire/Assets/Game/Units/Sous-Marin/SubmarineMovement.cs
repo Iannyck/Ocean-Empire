@@ -63,7 +63,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     void Init()
     {
-        MapInfo m = Game.instance.map;
+        MapInfo m = Game.Instance.map;
         upBound = m.mapTop;
         downBound = m.mapBottom;
         return;

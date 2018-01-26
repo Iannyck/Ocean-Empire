@@ -61,6 +61,7 @@ MonoBehaviour:
   - '{"myExercises":[{"type":"Walk","love":0.0}]}'
   initComplete: 0
   level: 0
+  playerProfileSaver: {fileID: 11400000, guid: 7e61d0176af1dc5429dab10f3e7705be, type: 2}
   preferences:
     myExercises:
     - type: 0

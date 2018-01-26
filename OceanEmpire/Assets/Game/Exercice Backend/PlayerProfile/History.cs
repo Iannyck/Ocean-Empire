@@ -3,20 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.ObjectModel;
 using System;
+using CCC.Persistence;
 
 /// <summary>
 /// On store tout !
 /// </summary>
 [System.Serializable]
-public class History : CCC.Manager.BaseManager<History>
+public class History : MonoPersistent
 {
     private const string SAVEKEY_TaskReports = "taskReports";
     private const string SAVEKEY_PurchaseReports = "purchaseReports";
 
     [SerializeField]
+    private DataSaver dataSaver;
+
+    [SerializeField]
     private List<TimedTaskReport> taskReports = new List<TimedTaskReport>();
     [SerializeField]
     private List<PurchaseReport> purchaseReport = new List<PurchaseReport>();
+
+    public static History instance;
+
+    public override void Init(Action onComplete)
+    {
+        instance = this;
+        FetchData();
+        onComplete();
+    }
+    protected void Awake()
+    {
+        dataSaver.OnReassignData += FetchData;
+    }
 
     public ReadOnlyCollection<TimedTaskReport> GetTaskReports()
     {
@@ -27,24 +44,18 @@ public class History : CCC.Manager.BaseManager<History>
         return purchaseReport.AsReadOnly();
     }
 
-    public override void Init()
-    {
-        Reload();
-        CompleteInit();
-    }
-
     public void AddTaskReport(TimedTaskReport report)
     {
         taskReports.Add(report);
 
-        GameSaves.instance.SetObjectClone(GameSaves.Type.History, SAVEKEY_TaskReports, taskReports);
+        dataSaver.SetObjectClone(SAVEKEY_TaskReports, taskReports);
         Save();
     }
     public void AddPurchaseReport(PurchaseReport report)
     {
         purchaseReport.Add(report);
 
-        GameSaves.instance.SetObjectClone(GameSaves.Type.History, SAVEKEY_PurchaseReports, purchaseReport);
+        dataSaver.SetObjectClone(SAVEKEY_PurchaseReports, purchaseReport);
         Save();
     }
 
@@ -69,16 +80,16 @@ public class History : CCC.Manager.BaseManager<History>
     #region R/W Gamesaves
     private void Save()
     {
-        GameSaves.instance.SaveDataAsync(GameSaves.Type.History, null);
+        dataSaver.SaveAsync();
     }
 
-    public void Reload()
+    private void FetchData()
     {
-        taskReports = GameSaves.instance.GetObjectClone(GameSaves.Type.History, SAVEKEY_TaskReports) as List<TimedTaskReport>;
+        taskReports = dataSaver.GetObjectClone(SAVEKEY_TaskReports) as List<TimedTaskReport>;
         if (taskReports == null)
             taskReports = new List<TimedTaskReport>();
 
-        purchaseReport = GameSaves.instance.GetObjectClone(GameSaves.Type.History, SAVEKEY_PurchaseReports) as List<PurchaseReport>;
+        purchaseReport = dataSaver.GetObjectClone(SAVEKEY_PurchaseReports) as List<PurchaseReport>;
         if (purchaseReport == null)
             purchaseReport = new List<PurchaseReport>();
     }

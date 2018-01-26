@@ -4,38 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using FullInspector;
+using CCC.Persistence;
 
-public class ItemsList : BaseManager<ItemsList>
+public class ItemsList : BaseBehavior, IPersistent
 {
-
-    public override void Init()
-    {
-        Load();
-        CompleteInit();
-    }
-
+    [SerializeField] private DataSaver dataSaver;
 
     public Dictionary<string, string> upgradePaths;
     public Dictionary<string, string> mapsPaths;
 
-    [HideInInspector]
-    public Dictionary<string, bool> ownedUpgrades;
-    [HideInInspector]
-    public Dictionary<string, bool> ownedMaps;
+    [HideInInspector] public Dictionary<string, bool> ownedUpgrades;
+    [HideInInspector] public Dictionary<string, bool> ownedMaps;
 
-
-
-    [SerializeField, ReadOnly]
-    private string equipedThruster;
-
-    [SerializeField, ReadOnly]
-    private string equipedHarpoon;
-
-    [SerializeField, ReadOnly]
-    private string equipedFishContainer;
-
-    [SerializeField, ReadOnly]
-    private string equipedGazTank;
+    [SerializeField, ReadOnly] private string equipedThruster;
+    [SerializeField, ReadOnly] private string equipedHarpoon;
+    [SerializeField, ReadOnly] private string equipedFishContainer;
+    [SerializeField, ReadOnly] private string equipedGazTank;
 
     public string defaultThruster;
     public string defaultMap;
@@ -46,6 +30,27 @@ public class ItemsList : BaseManager<ItemsList>
     private const string SAVE_KEY_HARPOON = "equipedharpoon";
     private const string SAVE_KEY_FISHCONTAINER = "equipedfishcontainer";
     private const string SAVE_KEY_GAZTANK = "equipedgaztank";
+
+    public static ItemsList instance;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        dataSaver.OnReassignData += Load;
+    }
+
+    public void Init(Action onComplete)
+    {
+        instance = this;
+        Load();
+        onComplete();
+    }
+
+    public UnityEngine.Object DuplicationBehavior()
+    {
+        return this.DuplicateGO();
+    }
 
     static public T GetItemDuplicate<T>(string itemID) where T : UnityEngine.Object
     {
@@ -183,7 +188,7 @@ public class ItemsList : BaseManager<ItemsList>
             }
 
             bank[itemID] = true;
-            Save();
+            instance.Save();
             return true;
         }
     }
@@ -224,70 +229,70 @@ public class ItemsList : BaseManager<ItemsList>
             if (upgrade is GazTankDescription)
                 instance.equipedGazTank = upgrade.GetItemID();
         }
-        Save();
+        instance.Save();
     }
 
 
-    private static void Save()
+    private void Save()
     {
         foreach (KeyValuePair<string, bool> containedItem in instance.ownedUpgrades)
         {
-            GameSaves.instance.SetBool(GameSaves.Type.Items, containedItem.Key, containedItem.Value);
+            dataSaver.SetBool(containedItem.Key, containedItem.Value);
         }
         foreach (KeyValuePair<string, bool> containedMap in instance.ownedMaps)
         {
-            GameSaves.instance.SetBool(GameSaves.Type.Items, containedMap.Key, containedMap.Value);
+            dataSaver.SetBool(containedMap.Key, containedMap.Value);
         }
 
-        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER, instance.equipedThruster);
-        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_HARPOON, instance.equipedHarpoon);
-        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_FISHCONTAINER, instance.equipedFishContainer);
-        GameSaves.instance.SetString(GameSaves.Type.Items, SAVE_KEY_GAZTANK, instance.equipedGazTank);
+        dataSaver.SetString(SAVE_KEY_THRUSTER, instance.equipedThruster);
+        dataSaver.SetString(SAVE_KEY_HARPOON, instance.equipedHarpoon);
+        dataSaver.SetString(SAVE_KEY_FISHCONTAINER, instance.equipedFishContainer);
+        dataSaver.SetString(SAVE_KEY_GAZTANK, instance.equipedGazTank);
 
-        GameSaves.instance.SaveData(GameSaves.Type.Items);
+        dataSaver.Save();
     }
 
 
-    private static void Load()
+    private void Load()
     {
 
         LoadUpgrades();
         LoadMaps();
     }
 
-    private static void LoadMaps()
+    private void LoadMaps()
     {
-        if (instance.ownedMaps != null)
-            instance.ownedMaps.Clear();
-        instance.ownedMaps = new Dictionary<string, bool>();
+        if (ownedMaps != null)
+            ownedMaps.Clear();
+        ownedMaps = new Dictionary<string, bool>();
 
-        foreach (KeyValuePair<string, string> containedIem in instance.mapsPaths)
+        foreach (KeyValuePair<string, string> containedIem in mapsPaths)
         {
             string itemID = containedIem.Key;
-            if (instance.ownedMaps.ContainsKey(itemID) == false)
+            if (ownedMaps.ContainsKey(itemID) == false)
             {
-                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID, false);
-                instance.ownedMaps.Add(itemID, owned);
+                bool owned = dataSaver.GetBool(itemID, false);
+                ownedMaps.Add(itemID, owned);
             }
         }
 
-        if (instance.ownedMaps.ContainsKey(instance.defaultMap))
-            instance.ownedMaps[instance.defaultMap] = true;
+        if (ownedMaps.ContainsKey(defaultMap))
+            ownedMaps[defaultMap] = true;
     }
 
-    private static void LoadUpgrades()
+    private void LoadUpgrades()
     {
-        if (instance.ownedUpgrades != null)
-            instance.ownedUpgrades.Clear();
-        instance.ownedUpgrades = new Dictionary<string, bool>();
+        if (ownedUpgrades != null)
+            ownedUpgrades.Clear();
+        ownedUpgrades = new Dictionary<string, bool>();
 
-        foreach (KeyValuePair<string, string> containedIem in instance.upgradePaths)
+        foreach (KeyValuePair<string, string> containedIem in upgradePaths)
         {
             string itemID = containedIem.Key;
-            if (instance.ownedUpgrades.ContainsKey(itemID) == false)
+            if (ownedUpgrades.ContainsKey(itemID) == false)
             {
-                bool owned = GameSaves.instance.GetBool(GameSaves.Type.Items, itemID, false);
-                instance.ownedUpgrades.Add(itemID, owned);
+                bool owned = dataSaver.GetBool( itemID, false);
+                ownedUpgrades.Add(itemID, owned);
             }
         }
 
@@ -298,78 +303,73 @@ public class ItemsList : BaseManager<ItemsList>
     }
 
 
-    private static void LoadGazTank()
+    private void LoadGazTank()
     {
-        string gazTankID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_GAZTANK);
+        string gazTankID = dataSaver.GetString(SAVE_KEY_GAZTANK);
 
-        if (gazTankID != null && instance.upgradePaths.ContainsKey(gazTankID) == true)
+        if (gazTankID != null && upgradePaths.ContainsKey(gazTankID) == true)
         {
-            instance.equipedGazTank = gazTankID;
+            equipedGazTank = gazTankID;
         }
         else
         {
-            instance.equipedGazTank = instance.defaultGazTank;
-            gazTankID = instance.defaultGazTank;
+            equipedGazTank = defaultGazTank;
+            gazTankID = defaultGazTank;
         }
-        if (instance.ownedUpgrades.ContainsKey(gazTankID))
-            instance.ownedUpgrades[gazTankID] = true;
+        if (ownedUpgrades.ContainsKey(gazTankID))
+            ownedUpgrades[gazTankID] = true;
 
     }
 
-    private static void LoadFishContainer()
+    private void LoadFishContainer()
     {
-        string fishContainerID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_FISHCONTAINER);
+        string fishContainerID = dataSaver.GetString(SAVE_KEY_FISHCONTAINER);
 
-        if (fishContainerID != null && instance.upgradePaths.ContainsKey(fishContainerID) == true)
+        if (fishContainerID != null && upgradePaths.ContainsKey(fishContainerID) == true)
         {
-            instance.equipedFishContainer = fishContainerID;
+            equipedFishContainer = fishContainerID;
         }
         else
         {
-            instance.equipedFishContainer = instance.defaultFishContainer;
-            fishContainerID = instance.defaultFishContainer;
+            equipedFishContainer = defaultFishContainer;
+            fishContainerID = defaultFishContainer;
         }
-        if (instance.ownedUpgrades.ContainsKey(fishContainerID))
-            instance.ownedUpgrades[fishContainerID] = true;
+        if (ownedUpgrades.ContainsKey(fishContainerID))
+            ownedUpgrades[fishContainerID] = true;
 
     }
 
 
-    private static void LoadThruster()
+    private void LoadThruster()
     {
-        string thrusterID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_THRUSTER);
+        string thrusterID = dataSaver.GetString(SAVE_KEY_THRUSTER);
 
-        if (thrusterID != null && instance.upgradePaths.ContainsKey(thrusterID) == true)
+        if (thrusterID != null && upgradePaths.ContainsKey(thrusterID) == true)
         {
-            instance.equipedThruster = thrusterID;
+            equipedThruster = thrusterID;
         }
         else
         {
-            instance.equipedThruster = instance.defaultThruster;
-            thrusterID = instance.defaultThruster;
+            equipedThruster = defaultThruster;
+            thrusterID = defaultThruster;
         }
-        if (instance.ownedUpgrades.ContainsKey(thrusterID))
-            instance.ownedUpgrades[thrusterID] = true;
+        if (ownedUpgrades.ContainsKey(thrusterID))
+            ownedUpgrades[thrusterID] = true;
     }
 
-    private static void LoadHarpoon()
+    private void LoadHarpoon()
     {
-        string harpoonID = GameSaves.instance.GetString(GameSaves.Type.Items, SAVE_KEY_HARPOON);
-        if (harpoonID != null && instance.upgradePaths.ContainsKey(harpoonID) == true)
+        string harpoonID = dataSaver.GetString(SAVE_KEY_HARPOON);
+
+        if (harpoonID != null && upgradePaths.ContainsKey(harpoonID) == true)
         {
-            instance.equipedHarpoon = harpoonID;
+            equipedHarpoon = harpoonID;
         }
         else
         {
-            instance.equipedHarpoon = null;
+            equipedHarpoon = null;
             harpoonID = "";
         }
-    }
-
-
-    public static void Reload()
-    {
-        Load();
     }
 
     public static void UnlockAll()

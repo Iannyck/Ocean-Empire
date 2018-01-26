@@ -36,7 +36,7 @@ public class ProposeRefillWindow : MonoBehaviour
 
         windowAnim.Open(delegate ()
         {
-            DelayManager.LocalCallTo(UpdateFishPopDisplay, delayToUpdatePop, this);
+            this.DelayedCall(UpdateFishPopDisplay, delayToUpdatePop);
         });
     }
 

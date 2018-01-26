@@ -35,7 +35,7 @@ public class ScheduledTask : TimedTask
         Reward reward = task.GetReward();
         bool applyResult = reward.Apply();
 
-        PlayerProfile.updatePlayerLevel(task);
+        PlayerProfile.UpdatePlayerLevel(task);
         return applyResult;
     }
 }

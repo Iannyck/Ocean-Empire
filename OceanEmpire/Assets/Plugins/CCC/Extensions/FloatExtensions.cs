@@ -4,9 +4,13 @@ using UnityEngine;
 
 public static class FloatExtensions
 {
+    /// <summary>
+    /// Retourne le vecteur unitaire avec l'angle spécifié
+    /// </summary>
     public static Vector2 ToVector(this float value)
     {
-        return CCC.Math.Vectors.AngleToVector(value);
+        float rad = value * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(rad), Mathf.Sin(rad));
     }
 
     public static float Abs(this float value)

@@ -1,4 +1,5 @@
 ﻿using CCC.Manager;
+using CCC.Threading;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ public class ActivityDetection : MonoBehaviour
     // Debug
     const string exempleFile = "0|Fri Nov 17 14:34:14 EST 2017\n\r0|Fri Nov 17 14:40:00 EST 2017\n\r0|Fri Nov 17 14:45:14 EST 2017\n\r";
 
-    const bool LogLesInfoDesThread = false;
+    public static bool LogLesInfoDesThread = false;
 
     public static void ReadDocument(Action<string> onComplete = null)
     {
@@ -60,16 +61,10 @@ public class ActivityDetection : MonoBehaviour
             }
             reader.Close();
         }
-        if (MainThread.instance == null)
-            Debug.Log("MainThread.cs not in the scene.");
-
-        lock (MainThread.instance)
+        MainThread.AddActionFromThread(delegate ()
         {
-            MainThread.AddAction(delegate ()
-            {
-                onComplete.Invoke(result);
-            });
-        }
+            onComplete.Invoke(result);
+        });
     }
 
     public static void ResetActivitiesSave()
@@ -81,13 +76,7 @@ public class ActivityDetection : MonoBehaviour
             FileInfo info = new FileInfo(filePath);
             if (info.Length > 0)
             {
-                if (MainThread.instance == null)
-                    Debug.Log("MainThread.cs not in the scene.");
-
-                lock (MainThread.instance)
-                {
-                    MainThread.AddAction(ResetActivitiesSave);
-                }
+                MainThread.AddActionFromThread(ResetActivitiesSave);
             }
             else
             {

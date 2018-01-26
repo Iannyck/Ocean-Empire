@@ -21,7 +21,7 @@ public class ConfirmInstantExercise : CCC.UI.WindowAnimation
     {
         MasterManager.Sync(() =>
         {
-            if (Scenes.Exists(SCENENAME))
+            if (Scenes.IsActiveOrBeingLoaded(SCENENAME))
             {
                 Scenes.GetActive(SCENENAME).FindRootObject<ConfirmInstantExercise>().Init(task, resultCallback);
             }

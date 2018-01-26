@@ -19,15 +19,15 @@ public class DepthMeter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Game.instance != null && (submarine == null))
+        if (Game.Instance != null && (submarine == null))
         {
-            if (Game.instance.map == null)
+            if (Game.Instance.map == null)
                 return;
 
             //MapInfo m = Game.instance.map;
             //depthStart = m.depthAtYZero;
             depthScaling = MapInfo.DEPTHSCALING;
-            submarine = Game.instance.submarine;
+            submarine = Game.Instance.submarine;
             return;
 
         }

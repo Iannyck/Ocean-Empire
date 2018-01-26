@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(menuName = "Audio/Audio Asset Group")]
+[CreateAssetMenu(menuName = "CCC/Audio/Audio Asset Group", fileName = "AAG_Something")]
 public class AudioAssetGroup : AudioPlayable
 {
-    public AudioAsset[] clips;
+    public AudioPlayable[] clips;
 
     [NonSerialized]
     private int lastPickedIndex = -1;
 
-    public override void PlayOn(AudioSource audioSource)
+    protected override void Internal_PlayOn(AudioSource audioSource, float volumeMultiplier = 1)
     {
-        if (clips == null || clips.Length == 0)
+        if (!CheckRessources())
             return;
 
-        int index = PickClip();
-        clips[index].PlayOn(audioSource);
-        lastPickedIndex = index;
+        PickAsset().PlayOn(audioSource, volumeMultiplier);
     }
 
-    private int PickClip()
+    protected override void Interal_PlayLoopedOn(AudioSource audioSource, float volumeMultiplier = 1)
+    {
+        if (!CheckRessources())
+            return;
+
+        PickAsset().PlayLoopedOn(audioSource, volumeMultiplier);
+    }
+
+    private bool CheckRessources()
+    {
+        return clips != null && clips.Length != 0;
+    }
+
+    private AudioPlayable PickAsset()
     {
         if (lastPickedIndex >= clips.Length)
             lastPickedIndex = 0;
 
         if (clips.Length == 1)
-            return 1;
+            return clips[0];
 
 
         int from;
@@ -45,6 +56,8 @@ public class AudioAssetGroup : AudioPlayable
             to = lastPickedIndex + clips.Length;
         }
 
-        return UnityEngine.Random.Range(from, to) % clips.Length;
+        int pickedIndex = UnityEngine.Random.Range(from, to) % clips.Length;
+        lastPickedIndex = pickedIndex;
+        return clips[pickedIndex];
     }
 }
