@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CCC.Math;
 
 public class CommonFishDriver : BaseFishDriver
 {
@@ -116,7 +117,7 @@ public class CommonFishDriver : BaseFishDriver
     Vector2 GetWanderPosition()
     {
         //Génère un vecteur random
-        Vector2 v = CCC.Math.Vectors.RandomVector2(angleRange.x, angleRange.y, distanceRange.x, distanceRange.y);
+        Vector2 v = Vectors.RandomVector2(distanceRange.x, distanceRange.y, angleRange.x, angleRange.y);
         if (Random.value > 0.5f)
             v = -v;
 
