@@ -42,7 +42,7 @@ public class DataSaverEditor : Editor
 
         base.OnInspectorGUI();
 
-        if (Event.current.type == EventType.layout)
+        if (Event.current.type == EventType.Layout)
             ExecuteAwaitingActions();
 
         EditorGUILayout.Space();
