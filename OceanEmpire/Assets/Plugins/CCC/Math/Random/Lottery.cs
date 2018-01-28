@@ -7,7 +7,7 @@ public interface IWeight
     float Weight { get; }
 }
 
-public struct Lottery<T>
+public class Lottery<T>
 {
     List<IWeight> list;
     float totalWeight;
