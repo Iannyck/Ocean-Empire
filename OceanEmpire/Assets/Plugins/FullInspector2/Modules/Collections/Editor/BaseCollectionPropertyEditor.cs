@@ -197,7 +197,7 @@ namespace FullInspector.Internal {
                 addItemButtonRect.y -= AddRegionBorder * 2;
                 addItemItemRect.y -= AddRegionBorder;
 
-                if (DisplayAddItemPreview && Event.current.type == EventType.repaint) {
+                if (DisplayAddItemPreview && Event.current.type == EventType.Repaint) {
                     Rect container = addItemItemRect;
                     container.x -= AddRegionBorder;
                     container.y -= AddRegionBorder;

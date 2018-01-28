@@ -34,7 +34,7 @@ public class SharedTablesEditor : Editor
 
         if (!EditorApplication.isPlaying)
         {
-            if (ss.GetTableCount() != ss.GetStartingTableCount() || (Event.current.type == EventType.layout && resetNextLayout))
+            if (ss.GetTableCount() != ss.GetStartingTableCount() || (Event.current.type == EventType.Layout && resetNextLayout))
             {
                 resetNextLayout = false;
                 ss.Reset();
