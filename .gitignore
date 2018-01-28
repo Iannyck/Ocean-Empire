@@ -4,12 +4,27 @@
 *.sln
 *.userprefs
 *.unityproj
+*/ExportedObj/
 *.suo
-OceanEmpire/Library/
-OceanEmpire/Temp/
+*.tmp
+*.user
+*.booproj
+*.svd
+*.suo
 OceanEmpire/.vs/
 .vs/
+*/[Ll]ibrary/
+*/[Tt]emp/
+*/[Oo]bj/
+*/[Bb]uild/
+*/[Bb]uilds/
 
 # SourceTree Patch against .gitignore_global on Windows
 !*.exe
 !*.dll
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
