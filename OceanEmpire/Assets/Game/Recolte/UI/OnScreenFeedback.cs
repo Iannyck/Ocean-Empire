@@ -33,7 +33,7 @@ public class OnScreenFeedback : MonoBehaviour
     {
         image.sprite = sprite;
 
-        Sequence sq = DOTween.Sequence();
+        var sq = DOTween.Sequence();
         sq.Join(
             image.DOFade(1, fadeDuration));
         sq.Append(
