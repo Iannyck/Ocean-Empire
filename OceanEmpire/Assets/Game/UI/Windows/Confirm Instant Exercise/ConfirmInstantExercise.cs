@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CCC.Manager;
+ 
 using UnityEngine.SceneManagement;
 using System;
 
@@ -19,7 +19,7 @@ public class ConfirmInstantExercise : CCC.UI.WindowAnimation
     /// </summary>
     public static void OpenWindowAndConfirm(Task task, Action<bool> resultCallback)
     {
-        MasterManager.Sync(() =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (Scenes.IsActiveOrBeingLoaded(SCENENAME))
             {

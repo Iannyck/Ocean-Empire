@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class PerformanceScene : MonoBehaviour
 
     void Awake()
     {
-        MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
 
     public void GoBackToShack()

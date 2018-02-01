@@ -28,7 +28,7 @@ public class RegionDisplay : MonoBehaviour
 
     private void Start()
     {
-        CCC.Manager.MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
 
     public void Go()

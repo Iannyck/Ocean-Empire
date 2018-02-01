@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +13,7 @@ public class GameDebug : MonoBehaviour {
         if(SceneManager.sceneCount != 1)
             return;
 
-        MasterManager.Sync(DebugStartGame);
+        PersistentLoader.LoadIfNotLoaded(DebugStartGame);
     }
 
     void DebugStartGame()

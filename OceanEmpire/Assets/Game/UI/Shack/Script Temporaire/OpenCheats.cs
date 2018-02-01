@@ -1,6 +1,6 @@
 ﻿
 using UnityEngine;
-using CCC.Manager;
+ 
 using UnityEngine.SceneManagement;
 
 
@@ -8,7 +8,7 @@ public class OpenCheats : MonoBehaviour
 {
     private void Start()
     {
-        MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
 
     public void Open()

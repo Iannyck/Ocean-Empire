@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ public class Shop : WindowAnimation
     protected override void Start()
     {
         base.Start();
-        CCC.Manager.MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
     public void Quit()
     {

@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ public class ProposeRefillWindow : MonoBehaviour
 
     public Text textTicket;
     private const string baseTextTicket = "x ticket";
-    private Montant refillCost;
+    private CurrencyAmount refillCost;
 
     public WindowAnimation windowAnim;
 
@@ -30,7 +30,7 @@ public class ProposeRefillWindow : MonoBehaviour
     {
         Time.timeScale = 0;
         if (debug)
-            MasterManager.Sync();
+            PersistentLoader.LoadIfNotLoaded();
 
         SetTicketCost();
 

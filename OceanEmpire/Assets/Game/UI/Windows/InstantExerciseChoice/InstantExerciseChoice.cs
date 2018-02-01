@@ -1,4 +1,4 @@
-using CCC.Manager;
+ 
 using System.Collections;
 using System.Collections.Generic;
 using CCC.UI;
@@ -18,7 +18,7 @@ public class InstantExerciseChoice : WindowAnimation
     /// <param name="rewardType"></param>
     public static void ProposeTasks(RewardType rewardType)
     {
-        MasterManager.Sync(() =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (Scenes.IsActive(SCENENAME))
             {
@@ -81,7 +81,7 @@ public class InstantExerciseChoice : WindowAnimation
 
         if (rewardType == RewardType.OceanRefill)
         {
-            Montant refillCost = RefillCost.GetRefillCost();
+            CurrencyAmount refillCost = RefillCost.GetRefillCost();
             print(refillCost.amount);
             int level = RewardBuilder.RevertRewardByLevel(refillCost.amount);
 

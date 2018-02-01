@@ -1,4 +1,4 @@
-using CCC.Manager;
+ 
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ public class CheatsWindow : WindowAnimation
     protected override void Awake()
     {
         base.Awake();
-        MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
 
 

@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ public class TaskConclusionWindow : CCC.UI.WindowAnimation
             scene.FindRootObject<TaskConclusionWindow>().InitWindow(task, incompleteReport, concludeCallback);
         };
 
-        MasterManager.Sync(() =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (Scenes.IsActive(SCENENAME))
                 action(Scenes.GetActive(SCENENAME));

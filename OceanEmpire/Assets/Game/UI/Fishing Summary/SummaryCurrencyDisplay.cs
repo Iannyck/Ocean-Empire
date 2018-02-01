@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using CCC.Manager;
+ 
 using DG.Tweening;
 
 public class SummaryCurrencyDisplay : MonoBehaviour
@@ -26,7 +26,7 @@ public class SummaryCurrencyDisplay : MonoBehaviour
     void OnEnable()
     {
         if (PlayerCurrency.instance == null)
-            MasterManager.Sync(Init);
+            PersistentLoader.LoadIfNotLoaded(Init);
         else
             Init();
     }

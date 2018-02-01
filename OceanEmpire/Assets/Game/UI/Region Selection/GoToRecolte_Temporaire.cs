@@ -8,7 +8,7 @@ public class GoToRecolte_Temporaire : MonoBehaviour
 
     private void Start()
     {
-        CCC.Manager.MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
 
     public void Go()

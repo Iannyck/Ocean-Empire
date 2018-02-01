@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CCC.Manager;
+ 
 using UnityEngine.SceneManagement;
 
 public class CalendarRoot_DebugLaunch : MonoBehaviour
 {
     private void Awake()
     {
-        MasterManager.Sync(() =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             if(Scenes.ActiveSceneCount == 2)
             {

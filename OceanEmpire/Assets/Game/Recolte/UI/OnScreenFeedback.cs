@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using DG.Tweening;
 using System;
 using System.Collections;

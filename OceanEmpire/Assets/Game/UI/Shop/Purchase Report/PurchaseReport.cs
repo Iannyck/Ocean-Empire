@@ -6,12 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class PurchaseReport
 {
-    public Montant cost;
+    public CurrencyAmount cost;
     public string itemName;
     public string itemID;
     public DateTime purchasedOn;
 
-    public PurchaseReport(Montant cost, string itemName, string itemID)
+    public PurchaseReport(CurrencyAmount cost, string itemName, string itemID)
     {
         this.cost = cost;
         this.itemID = itemID;

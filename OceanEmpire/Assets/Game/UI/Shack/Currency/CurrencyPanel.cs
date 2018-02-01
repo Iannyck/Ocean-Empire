@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using CCC.Manager;
+ 
 
 public class CurrencyPanel : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class CurrencyPanel : MonoBehaviour
     void OnEnable()
     {
         if (PlayerCurrency.instance == null)
-            MasterManager.Sync(Listen);
+            PersistentLoader.LoadIfNotLoaded(Listen);
         else
             Listen();
     }

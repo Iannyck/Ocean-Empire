@@ -18,7 +18,7 @@ public class FishingSummary : MonoBehaviour
 
     private void Start()
     {
-        CCC.Manager.MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
         Time.timeScale = 1;
     }
 

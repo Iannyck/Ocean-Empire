@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System;
-using CCC.Manager;
+ 
 using CCC.UI;
 
 public class ConfirmBuy : WindowAnimation
@@ -24,7 +24,7 @@ public class ConfirmBuy : WindowAnimation
     public static void OpenWindowAndConfirm(ItemDescription item, CurrencyType currency, Action<bool> resultCallback)
     {
         print("ping!");
-        MasterManager.Sync(() =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (Scenes.IsActive(SCENENAME))
             {

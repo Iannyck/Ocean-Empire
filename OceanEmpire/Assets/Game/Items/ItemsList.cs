@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -157,7 +157,7 @@ public class ItemsList : BaseBehavior, IPersistent
 
         //--------------Montant--------------//
 
-        Montant montant = new Montant() { currencyType = currencyType };
+        CurrencyAmount montant = new CurrencyAmount() { currencyType = currencyType };
         switch (currencyType)
         {
             case CurrencyType.Coin:
@@ -167,7 +167,7 @@ public class ItemsList : BaseBehavior, IPersistent
                 montant.amount = item.GetTicketCost();
                 break;
         }
-        bool purchaseResult = PlayerCurrency.RemoveMontant(montant);
+        bool purchaseResult = PlayerCurrency.RemoveCurrentAmount(montant);
 
 
         //--------------Finlité--------------//

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CCC.Manager;
+ 
 
 public class ExpeSceneChooser : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class ExpeSceneChooser : MonoBehaviour
 
     void Start()
     {
-        MasterManager.Sync(() =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (PlayerPrefs.HasKey(KEY))
             {

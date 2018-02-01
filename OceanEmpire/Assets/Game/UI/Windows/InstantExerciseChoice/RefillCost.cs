@@ -6,9 +6,9 @@ public static class RefillCost
 {
     private const int TicketCostForFullRefill = 20;
 
-    public static Montant GetRefillCost()
+    public static CurrencyAmount GetRefillCost()
     {
         int cost = ( (1 - FishPopulation.PopulationRate) * TicketCostForFullRefill).RoundedToInt();
-        return new Montant(cost, CurrencyType.Ticket);
+        return new CurrencyAmount(cost, CurrencyType.Ticket);
     }
 }

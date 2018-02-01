@@ -9,7 +9,7 @@ public class TestScript_Fred : MonoBehaviour
 
     void Start()
     {
-        CCC.Manager.MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
 
         Update();

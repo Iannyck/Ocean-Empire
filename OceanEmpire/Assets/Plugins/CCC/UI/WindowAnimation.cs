@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using DG.Tweening;
-using CCC.Manager;
 
 namespace CCC.UI
 {

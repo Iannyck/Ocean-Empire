@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,7 @@ public class OpenExercicePanel : MonoBehaviour
 {
     private void Start()
     {
-        MasterManager.Sync();
+        PersistentLoader.LoadIfNotLoaded();
     }
 
     public void Open()

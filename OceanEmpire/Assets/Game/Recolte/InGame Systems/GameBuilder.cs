@@ -1,4 +1,4 @@
-﻿using CCC.Manager;
+﻿ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +16,7 @@ public class GameBuilder : MonoBehaviour {
     public void Init(string mapName)
     {
         SetMapLoadedName(mapName);
-        MasterManager.Sync(Build);
+        PersistentLoader.LoadIfNotLoaded(Build);
     }
 
     public static void SetMapLoadedName(string name)
