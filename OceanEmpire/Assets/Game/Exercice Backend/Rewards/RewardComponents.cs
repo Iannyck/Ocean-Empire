@@ -9,11 +9,11 @@ public static class RewardComponents
         switch (type)
         {
             case RewardType.Coins:
-                return 1;
+                return CurrencyValues.GetAbsoluteValue(CurrencyType.Coin);
             case RewardType.Tickets:
-                return 5;
+                return CurrencyValues.GetAbsoluteValue(CurrencyType.Ticket);
             case RewardType.OceanRefill:
-                return 15;
+                return CurrencyValues.GetAbsoluteValue(CurrencyType.Ticket) * 1.5f;
         }
         return -1;
     }
