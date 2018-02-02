@@ -5,24 +5,25 @@ using System;
 
 public class TestScript_Fred : MonoBehaviour
 {
+    public event SimpleEvent a;
+    public event SimpleEvent remoteA;
     public DayInspector g;
 
     void Start()
     {
-        PersistentLoader.LoadIfNotLoaded();
+        remoteA = a;
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
-
-        Update();
-        //InstantExerciseChoice.ProposeTasks();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            char e = TextCharacters.E_Aigue;
-            char a = TextCharacters.A_Grave;
-            MessagePopup.DisplayMessage("La plage horaire est d" + e + "j" + a + " utilis" + e + ".");
+            a += () => Debug.Log("hello");
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            remoteA();
         }
     }
 }

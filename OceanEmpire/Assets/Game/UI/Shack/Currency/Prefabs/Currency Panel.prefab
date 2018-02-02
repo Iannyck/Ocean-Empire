@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 222957634930996788}
   - component: {fileID: 114606749691642852}
   - component: {fileID: 114744862629573372}
-  - component: {fileID: 114923833633486434}
   m_Layer: 5
   m_Name: Tickets
   m_TagString: Untagged
@@ -108,7 +107,6 @@ GameObject:
   - component: {fileID: 222865466697615762}
   - component: {fileID: 114030036713447850}
   - component: {fileID: 114467104472072242}
-  - component: {fileID: 114478184583978634}
   m_Layer: 5
   m_Name: Coins
   m_TagString: Untagged
@@ -147,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -181,9 +179,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5488bce967ec6e74d99130d531b91817, type: 3}
     m_FontSize: 60
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 60
@@ -228,7 +226,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyAmount: {fileID: 114030036713447850}
-  tickeyAmount: {fileID: 114606749691642852}
+  ticketAmount: {fileID: 114606749691642852}
+  coinChangePopup: {fileID: 114857690357815524, guid: 800bbfd71d59ece47afbe4d7a43b7a7e,
+    type: 2}
+  ticketChangePopup: {fileID: 114185066965367464, guid: 0217bf2c4af918745b304ad67c1ab3c5,
+    type: 2}
 --- !u!114 &114467104472072242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -243,19 +245,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
---- !u!114 &114478184583978634
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1784038821196148}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &114606749691642852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,9 +265,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5488bce967ec6e74d99130d531b91817, type: 3}
     m_FontSize: 60
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 79
@@ -388,19 +377,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114923833633486434
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1447594476314322}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!222 &222034126706609840
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -486,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -43.79999, y: 0}
+  m_AnchoredPosition: {x: -46, y: 0}
   m_SizeDelta: {x: 128.2, y: 255.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224742352635071524
@@ -504,8 +480,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -48.1, y: 0}
-  m_SizeDelta: {x: 154.1, y: 0}
+  m_AnchoredPosition: {x: -50.18498, y: 0}
+  m_SizeDelta: {x: 158.27005, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224829623670139516
 RectTransform:
@@ -522,7 +498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -55.20006, y: 0}
+  m_AnchoredPosition: {x: -61, y: 0}
   m_SizeDelta: {x: 103.2, y: 166.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224948260686012058

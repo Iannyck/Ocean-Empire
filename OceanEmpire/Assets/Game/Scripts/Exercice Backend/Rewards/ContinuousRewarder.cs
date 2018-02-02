@@ -40,19 +40,16 @@ public class ContinuousRewarder : MonoPersistent
         var timeslotToAnalyse = new TimeSlot(DateTime.Now.AddSeconds(-elapsedTime), DateTime.Now);
         AnalyserGroupReport groupReport = analyserGroup.GetExerciseVolume(timeslotToAnalyse);
 
+        // Calculate reward value
+        MarketValue rewardValue = 0;
         foreach (AnalyserReport individualReport in groupReport.individualReports)
         {
-            RewardForReport(individualReport);
+            rewardValue += Market.GetExerciseValue(individualReport.volume);
         }
-    }
 
-    private void RewardForReport(AnalyserReport analyserReport)
-    {
-        var marketValue = Market.GetExerciseValue(analyserReport.volume);
-        if (marketValue.floatValue <= 0)
-            return;
-
-        var reward = Market.GetCurrencyAmountFromValue(CurrencyType.Ticket, marketValue);
-        PlayerCurrency.AddCurrencyAmount(reward);
+        // Give reward
+        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(CurrencyType.Ticket, rewardValue);
+        if (reward.amount > 0)
+            PlayerCurrency.AddCurrencyAmount(reward);
     }
 }
