@@ -11,8 +11,8 @@ public class PendingReports : MonoPersistent
     [System.Serializable]
     public class PendingReport
     {
-        public ScheduledTask task;
-        public TimedTaskReport incompleteReport;
+        //public ScheduledTask task;
+        //public TimedTaskReport incompleteReport;
     }
 
     [SerializeField]
@@ -33,69 +33,69 @@ public class PendingReports : MonoPersistent
 
     void CheckAndConcludeNextReport()
     {
-        if (pendingReports != null && pendingReports.Count > 0)
-        {
-            PendingReport pending = pendingReports[0];
-            ExerciseTrackingReport trackingReport = pending.incompleteReport.trackingReport;
+        //if (pendingReports != null && pendingReports.Count > 0)
+        //{
+        //    PendingReport pending = pendingReports[0];
+        //    ExerciseTrackingReport trackingReport = pending.incompleteReport.trackingReport;
 
-            if (trackingReport != null && 
-                (trackingReport.state == ExerciseTrackingReport.State.Completed
-                || trackingReport.state == ExerciseTrackingReport.State.UserSaidItWasCompleted))
-            {
-                TaskConclusionWindow.ConcludeTask(pending.task, pending.incompleteReport,
-                    () =>
-                    {
-                        RemovePendingReport(pending);
-                    });
-            }
-            else
-            {
-                MessagePopup.DisplayMessage("Exercice non-compl\u00E9t\u00E9 planifi\u00E9 pour le "
-                    + pending.incompleteReport.taskPlannedFor.start.ToString() + ".");
-                RemovePendingReport(pending);
-            }
-        }
+        //    if (trackingReport != null && 
+        //        (trackingReport.state == ExerciseTrackingReport.State.Completed
+        //        || trackingReport.state == ExerciseTrackingReport.State.UserSaidItWasCompleted))
+        //    {
+        //        TaskConclusionWindow.ConcludeTask(pending.task, pending.incompleteReport,
+        //            () =>
+        //            {
+        //                RemovePendingReport(pending);
+        //            });
+        //    }
+        //    else
+        //    {
+        //        MessagePopup.DisplayMessage("Exercice non-compl\u00E9t\u00E9 planifi\u00E9 pour le "
+        //            + pending.incompleteReport.taskPlannedFor.start.ToString() + ".");
+        //        RemovePendingReport(pending);
+        //    }
+        //}
     }
 
-    public void AddPendingReport(ScheduledTask task, TimedTaskReport incompleteReport)
-    {
-        if (pendingReports == null)
-            pendingReports = new List<PendingReport>();
-        pendingReports.Add(new PendingReport() { task = task, incompleteReport = incompleteReport });
+    //public void AddPendingReport(ScheduledTask task, TimedTaskReport incompleteReport)
+    //{
+    //    if (pendingReports == null)
+    //        pendingReports = new List<PendingReport>();
+    //    pendingReports.Add(new PendingReport() { task = task, incompleteReport = incompleteReport });
 
-        ApplyToSaver(true);
+    //    ApplyToSaver(true);
 
-        if (log)
-            Debug.Log("Ajout d'un nouveau 'pending report'.");
+    //    if (log)
+    //        Debug.Log("Ajout d'un nouveau 'pending report'.");
 
-        CheckAndConcludeNextReport();
-    }
+    //    CheckAndConcludeNextReport();
+    //}
 
     private void RemovePendingReport(PendingReport report)
     {
-        if (pendingReports.Remove(report))
-        {
-            ApplyToSaver(true);
+        //if (pendingReports.Remove(report))
+        //{
+        //    ApplyToSaver(true);
 
-            if (onReportConcluded != null)
-                onReportConcluded();
+        //    if (onReportConcluded != null)
+        //        onReportConcluded();
 
-            try
-            {
-                History.instance.AddTaskReport(report.incompleteReport);
-            }
-            catch (Exception e)
-            {
-                MessagePopup.DisplayMessage("Erreur lors de l'ajout du rapport dans l'history:\n " + e.Message);
-            }
-            if (log)
-                Debug.Log("Retrait d'un 'pending report'.");
-        }
-        else
-        {
-            Debug.LogWarning("On a essayer de retirer un 'pending report' qui n'etait pas dans la liste.");
-        }
-        CheckAndConcludeNextReport();
+        //    try
+        //    {
+        //        History.instance.AddTaskReport(report.incompleteReport);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessagePopup.DisplayMessage("Erreur lors de l'ajout du rapport dans l'history:\n " + e.Message);
+        //    }
+        //    if (log)
+        //        Debug.Log("Retrait d'un 'pending report'.");
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("On a essayer de retirer un 'pending report' qui n'etait pas dans la liste.");
+        //}
+        //CheckAndConcludeNextReport();
     }
 
 

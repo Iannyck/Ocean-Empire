@@ -14,7 +14,7 @@ public class waterSway : MonoBehaviour {
     {
         Vector3 position = water.transform.position + new Vector3(moveOffset, 0f);
 
-        Tweener Buoyancy = water.transform.DOMove(position, cycleDelay)
+        /*Tweener Buoyancy =*/ water.transform.DOMove(position, cycleDelay)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo);
        

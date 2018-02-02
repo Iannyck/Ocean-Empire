@@ -17,8 +17,8 @@ public class History : MonoPersistent
     [SerializeField]
     private DataSaver dataSaver;
 
-    [SerializeField]
-    private List<TimedTaskReport> taskReports = new List<TimedTaskReport>();
+    //[SerializeField]
+    //private List<TimedTaskReport> taskReports = new List<TimedTaskReport>();
     [SerializeField]
     private List<PurchaseReport> purchaseReport = new List<PurchaseReport>();
 
@@ -35,22 +35,22 @@ public class History : MonoPersistent
         dataSaver.OnReassignData += FetchData;
     }
 
-    public ReadOnlyCollection<TimedTaskReport> GetTaskReports()
-    {
-        return taskReports.AsReadOnly();
-    }
+    //public ReadOnlyCollection<TimedTaskReport> GetTaskReports()
+    //{
+    //    return taskReports.AsReadOnly();
+    //}
     public ReadOnlyCollection<PurchaseReport> GetPurchaseReports()
     {
         return purchaseReport.AsReadOnly();
     }
 
-    public void AddTaskReport(TimedTaskReport report)
-    {
-        taskReports.Add(report);
+    //public void AddTaskReport(TimedTaskReport report)
+    //{
+    //    taskReports.Add(report);
 
-        dataSaver.SetObjectClone(SAVEKEY_TaskReports, taskReports);
-        Save();
-    }
+    //    dataSaver.SetObjectClone(SAVEKEY_TaskReports, taskReports);
+    //    Save();
+    //}
     public void AddPurchaseReport(PurchaseReport report)
     {
         purchaseReport.Add(report);
@@ -63,10 +63,10 @@ public class History : MonoPersistent
     {
 
         string completeText = "Task Reports:\n\n";
-        for (int i = taskReports.Count - 1; i >= 0; i--)
-        {
-            completeText += taskReports[i].ToString() + "\n\n";
-        }
+        //for (int i = taskReports.Count - 1; i >= 0; i--)
+        //{
+        //    completeText += taskReports[i].ToString() + "\n\n";
+        //}
 
         completeText += "\n\nPurchase Reports:\n\n";
         for (int i = purchaseReport.Count - 1; i >= 0; i--)
@@ -85,9 +85,9 @@ public class History : MonoPersistent
 
     private void FetchData()
     {
-        taskReports = dataSaver.GetObjectClone(SAVEKEY_TaskReports) as List<TimedTaskReport>;
-        if (taskReports == null)
-            taskReports = new List<TimedTaskReport>();
+        //taskReports = dataSaver.GetObjectClone(SAVEKEY_TaskReports) as List<TimedTaskReport>;
+        //if (taskReports == null)
+        //    taskReports = new List<TimedTaskReport>();
 
         purchaseReport = dataSaver.GetObjectClone(SAVEKEY_PurchaseReports) as List<PurchaseReport>;
         if (purchaseReport == null)

@@ -15,12 +15,14 @@ public class DisplayActivities : MonoBehaviour {
         {
             MessagePopup.DisplayMessage("Showing The Activity File");
             string allActivities = "";
-            List<ActivityDetection.Activity> activities = ActivityAnalyser.instance.activities;
-            for (int i = 0; i < activities.Count; i++)
+            List<GoogleActivities.ActivityReport> records = GoogleActivities.instance.records;
+            for (int i = 0; i < records.Count; i++)
             {
-                allActivities += activities[i].probability;
+                allActivities += records[i].best.rate;
+                allActivities += "|";
+                allActivities += GoogleActivities.instance.priority.ExerciseTypeToString(records[i].best.type);
                 allActivities += "->";
-                allActivities += activities[i].time;
+                allActivities += records[i].time;
                 allActivities += "\n";
             }
             display.text = allActivities;
