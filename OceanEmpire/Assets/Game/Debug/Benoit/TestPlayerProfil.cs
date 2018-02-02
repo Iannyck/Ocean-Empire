@@ -7,12 +7,12 @@ public class TestPlayerProfil : MonoBehaviour {
 	
     public void AddLevel()
     {
-        PlayerProfile.IncrementLevel(1);
+        //PlayerProfile.IncrementLevel(1);
     }
 
     public void PrintLevel()
     {
-        print(PlayerProfile.Level);
+        //print(PlayerProfile.Level);
     }
 
     public void ResetPlayerLevel()

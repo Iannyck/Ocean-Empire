@@ -29,8 +29,8 @@ public class CheatsWindow : WindowAnimation
             saver.ClearSave();
         }
 
-        ActivityDetection.ResetActivitiesSave();
-        ActivityAnalyser.instance.ResetActivities();
+        GoogleReader.ResetActivitiesSave();
+        GoogleActivities.instance.ResetActivities();
     }
 
 

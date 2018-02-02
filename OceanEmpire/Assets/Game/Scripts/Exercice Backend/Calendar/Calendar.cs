@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
- 
+
 using UnityEngine;
 using CCC.Persistence;
 
@@ -16,7 +16,7 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonner du plus vieux au plus recent
     /// </summary>
-    [SerializeField] private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
+    //[SerializeField] private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
     [SerializeField] private DataSaver dataSaver;
 
     public bool log = true;
@@ -24,7 +24,7 @@ public class Calendar : MonoPersistent
     public event SimpleEvent onTaskConcluded;
     public static Calendar instance;
 
-    public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
+    //public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
 
     protected void Awake()
     {
@@ -37,19 +37,19 @@ public class Calendar : MonoPersistent
         FetchDataFromSaver();
         onComplete();
 
-        PersistentLoader.LoadIfNotLoaded(() => StartCoroutine(CheckTasks()));
+        //PersistentLoader.LoadIfNotLoaded(() => StartCoroutine(CheckTasks()));
     }
 
-    IEnumerator CheckTasks()
-    {
-        while (true)
-        {
-            ConcludePastTasks();
-            TrackOngoingTask();
-            yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
-        }
-    }
-
+    //IEnumerator CheckTasks()
+    //{
+    //    while (true)
+    //    {
+    //        ConcludePastTasks();
+    //        TrackOngoingTask();
+    //        yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
+    //    }
+    //}
+    /*
     public bool AddScheduledTask(ScheduledTask task)
     {
         if (IsTimeSlutAvailable(task.timeSlot))
@@ -76,124 +76,124 @@ public class Calendar : MonoPersistent
             return false;
         }
     }
-
+    */
     /// <summary>
     /// ( ͡° ͜ʖ ͡°)
     /// </summary>
-    public bool IsTimeSlutAvailable(TimeSlot timeslot)
-    {
-        for (int i = 0; i < scheduledTasks.Count; i++)
-        {
-            int result = timeslot.IsOverlappingWith(scheduledTasks[i].timeSlot);
-            if (result == 0)
-                return false;
-            else if (result == -1)
-                return true;
-        }
+    //public bool IsTimeSlutAvailable(TimeSlot timeslot)
+    //{
+    //    for (int i = 0; i < scheduledTasks.Count; i++)
+    //    {
+    //        int result = timeslot.IsOverlappingWith(scheduledTasks[i].timeSlot);
+    //        if (result == 0)
+    //            return false;
+    //        else if (result == -1)
+    //            return true;
+    //    }
 
-        return true;
-    }
+    //    return true;
+    //}
 
     /// <summary>
     /// Retire la tache du calendrier, l'ajoute a l'historique ET donne la reward si applicable
     /// </summary>
-    public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
-    {
-        if (scheduledTasks.Remove(task))
-        {
-            if (onTaskConcluded != null)
-                onTaskConcluded();
+    //public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
+    //{
+    //    if (scheduledTasks.Remove(task))
+    //    {
+    //        if (onTaskConcluded != null)
+    //            onTaskConcluded();
 
-            if (PendingReports.instance != null)
-            {
-                PendingReports.instance.AddPendingReport(task, report);
-            }
-            else
-            {
-                Debug.LogWarning("L'instance de Pending reports est null. On vient de perdre le rapport");
-            }
+    //        if (PendingReports.instance != null)
+    //        {
+    //            PendingReports.instance.AddPendingReport(task, report);
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning("L'instance de Pending reports est null. On vient de perdre le rapport");
+    //        }
 
-            ApplyDataToSaver(true);
-            return true;
-        }
-        return false;
-    }
+    //        ApplyDataToSaver(true);
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
-    void TrackOngoingTask()
-    {
-        //On ne fait rien si on est deja entrain de tack quelque chose
-        if (TrackingWindow.IsTrackingSomething())
-            return;
+    //void TrackOngoingTask()
+    //{
+    //    //On ne fait rien si on est deja entrain de tack quelque chose
+    //    if (TrackingWindow.IsTrackingSomething())
+    //        return;
 
-        //On cherche une tache qui serait en ce moment
-        ScheduledTask onGoingTask = null;
-        for (int i = 0; i < scheduledTasks.Count; i++)
-        {
-            TimeSlot timeslot = scheduledTasks[i].timeSlot;
-            if (timeslot.IsNow())
-            {
-                onGoingTask = scheduledTasks[i];
-                break;
-            }
-            else if (timeslot.IsInTheFuture())
-                break;
-        }
+    //    //On cherche une tache qui serait en ce moment
+    //    ScheduledTask onGoingTask = null;
+    //    for (int i = 0; i < scheduledTasks.Count; i++)
+    //    {
+    //        TimeSlot timeslot = scheduledTasks[i].timeSlot;
+    //        if (timeslot.IsNow())
+    //        {
+    //            onGoingTask = scheduledTasks[i];
+    //            break;
+    //        }
+    //        else if (timeslot.IsInTheFuture())
+    //            break;
+    //    }
 
-        //Si aucune tache a ete trouver, on arrete ici
-        if (onGoingTask == null)
-            return;
+    //    //Si aucune tache a ete trouver, on arrete ici
+    //    if (onGoingTask == null)
+    //        return;
 
-        TrackingWindow.ShowWaitingWindow("", onGoingTask);
-    }
+    //    TrackingWindow.ShowWaitingWindow("", onGoingTask);
+    //}
 
-    List<ScheduledTask> ConcludePastTasks()
-    {
-        List<ScheduledTask> cancelledTasks = new List<ScheduledTask>();
+    //List<ScheduledTask> ConcludePastTasks()
+    //{
+    //    List<ScheduledTask> cancelledTasks = new List<ScheduledTask>();
 
-        DateTime now = DateTime.Now;
-        for (int i = 0; i < scheduledTasks.Count; i++)
-        {
-            ScheduledTask task = scheduledTasks[i];
-            if (ConcludePastTask(task))
-            {
-                cancelledTasks.Add(task);
-            }
-            else
-            {
-                break;
-            }
-        }
+    //    DateTime now = DateTime.Now;
+    //    for (int i = 0; i < scheduledTasks.Count; i++)
+    //    {
+    //        ScheduledTask task = scheduledTasks[i];
+    //        if (ConcludePastTask(task))
+    //        {
+    //            cancelledTasks.Add(task);
+    //        }
+    //        else
+    //        {
+    //            break;
+    //        }
+    //    }
 
-        return cancelledTasks;
-    }
+    //    return cancelledTasks;
+    //}
 
-    bool ConcludePastTask(ScheduledTask task)
-    {
-        if (!task.timeSlot.IsInThePast())
-            return false;
+    //bool ConcludePastTask(ScheduledTask task)
+    //{
+    //    if (!task.timeSlot.IsInThePast())
+    //        return false;
 
-        ExerciseTracker tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
-        ActivityAnalyser.Report analyserReport = tracker.Track(task,false);
-        ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromNonInterrupted(analyserReport);
-        TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(task, trackingReport, HappyRating.None);
+    //    ExerciseTracker tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
+    //    GoogleActivities.ActivityReport analyserReport = tracker.Track(task, false);
+    //    ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromNonInterrupted(analyserReport);
+    //    TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(task, trackingReport, HappyRating.None);
 
-        ConcludeScheduledTask(task, taskReport);
+    //    ConcludeScheduledTask(task, taskReport);
 
-        return true;
-    }
+    //    return true;
+    //}
 
     private void ApplyDataToSaver(bool andSave)
     {
-        dataSaver.SetObjectClone(SAVE_KEY_ST, scheduledTasks);
+        //dataSaver.SetObjectClone(SAVE_KEY_ST, scheduledTasks);
         if (andSave)
             dataSaver.SaveAsync();
     }
 
     private void FetchDataFromSaver()
     {
-        scheduledTasks = dataSaver.GetObjectClone(SAVE_KEY_ST) as List<ScheduledTask>;
-        if (scheduledTasks == null)
-            scheduledTasks = new List<ScheduledTask>();
+        //scheduledTasks = dataSaver.GetObjectClone(SAVE_KEY_ST) as List<ScheduledTask>;
+        //if (scheduledTasks == null)
+        //    scheduledTasks = new List<ScheduledTask>();
     }
 
 

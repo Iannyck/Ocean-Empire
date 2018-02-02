@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -47,7 +47,7 @@ public class ProposeRefillWindow : MonoBehaviour
 
     public void SetTicketCost()
     {
-        refillCost = RefillCost.GetRefillCost();
+        refillCost = Market.GetCurrencyAmountFromValue(CurrencyType.Ticket, Market.GetOceanRefillValue());
         textTicket.text = refillCost.amount.ToString() + baseTextTicket;
         if (PlayerCurrency.GetTickets() < refillCost.amount)
             ticketButton.interactable = false;
@@ -67,7 +67,7 @@ public class ProposeRefillWindow : MonoBehaviour
         RemoveExerciseListeners();
 
         // Exercice Instantanné
-        InstantExerciseChoice.ProposeTasks(RewardType.OceanRefill);
+        //InstantExerciseChoice.ProposeTasks(RewardType.OceanRefill);
         AddExerciseListeners();
     }
 
