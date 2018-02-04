@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b802cfbe3cac5498a6e65eef724cf2, type: 3}
   m_Name: Saver_PlayerProfile
   m_EditorClassIdentifier: 
-  fileName: PlayerProfile
+  fileName: PlayerProfile_V2
