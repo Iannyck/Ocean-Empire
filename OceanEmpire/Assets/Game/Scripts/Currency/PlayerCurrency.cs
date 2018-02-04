@@ -167,6 +167,18 @@ public class PlayerCurrency : MonoPersistent
 
 
     #region Get
+    public static int GetCurrency(CurrencyType type)
+    {
+        switch (type)
+        {
+            case CurrencyType.Coin:
+                return instance.coins.Amount;
+            case CurrencyType.Ticket:
+                return instance.tickets.Amount;
+            default:
+                return 2147483647;
+        }
+    }
     public static int GetCoins() { return instance.coins.Amount; }
     public static int GetTickets() { return instance.tickets.Amount; }
 

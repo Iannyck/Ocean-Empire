@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Ocean Empire/Item/Description/Thruster Description")]
-public class ThrusterDescription : UpgradeDescription
+public class ThrusterDescription : UpgradeDescriptionOLD
 {
     private const string thrusterFolderName = "Thrusters";
 

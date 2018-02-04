@@ -195,9 +195,9 @@ public class ItemsList : BaseBehavior, IPersistent
 
     public static bool BuyUpgrade(string itemID, CurrencyType currencyType)
     {
-        return BuyUpgrade(GetItemDuplicate<UpgradeDescription>(itemID), currencyType);
+        return BuyUpgrade(GetItemDuplicate<UpgradeDescriptionOLD>(itemID), currencyType);
     }
-    public static bool BuyUpgrade(UpgradeDescription upgrade, CurrencyType currencyType)
+    public static bool BuyUpgrade(UpgradeDescriptionOLD upgrade, CurrencyType currencyType)
     {
         return BuyItem(upgrade, currencyType, instance.ownedUpgrades);
     }
@@ -211,7 +211,7 @@ public class ItemsList : BaseBehavior, IPersistent
     }
 
 
-    public static void EquipUpgrade(UpgradeDescription upgrade)
+    public static void EquipUpgrade(UpgradeDescriptionOLD upgrade)
     {
         string id = upgrade.GetItemID();
 

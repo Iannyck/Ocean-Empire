@@ -127,9 +127,9 @@ public class ItemDisplay : MonoBehaviour {
         {
             if (hasConfirmed)
             {
-                if (item is UpgradeDescription)
+                if (item is UpgradeDescriptionOLD)
                 {
-                    ItemsList.BuyUpgrade(item as UpgradeDescription, currencyType);
+                    ItemsList.BuyUpgrade(item as UpgradeDescriptionOLD, currencyType);
                     Equip();
                 }
                 if (item is ShopMapDescription)
@@ -144,7 +144,7 @@ public class ItemDisplay : MonoBehaviour {
 
     public void Equip()
     {
-        ItemsList.EquipUpgrade(item as UpgradeDescription);
+        ItemsList.EquipUpgrade(item as UpgradeDescriptionOLD);
         UpdateShop();
     }
 

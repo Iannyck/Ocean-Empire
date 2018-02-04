@@ -91,7 +91,7 @@ public class ShopUI : BaseBehavior {
     {
         if (ItemIsRelevant(itemDescription))
         {
-            if (itemDescription is UpgradeDescription )
+            if (itemDescription is UpgradeDescriptionOLD )
             {        
                     ItemDisplay newItem = Instantiate(shopItem, shopItemLayout.transform);
                     newItem.item = itemDescription;
@@ -109,14 +109,14 @@ public class ShopUI : BaseBehavior {
 
     public bool ItemIsRelevant(ItemDescription item)
     {
-        if (item is UpgradeDescription)
-            return UpgradeIsRelevant(item as UpgradeDescription);
+        if (item is UpgradeDescriptionOLD)
+            return UpgradeIsRelevant(item as UpgradeDescriptionOLD);
         else if (item is ShopMapDescription)
             return !ItemsList.ItemOwned(item.GetItemID());
         return false;
     }
 
-    public bool UpgradeIsRelevant(UpgradeDescription item)
+    public bool UpgradeIsRelevant(UpgradeDescriptionOLD item)
     {
         int CurrentLevel = -1;
 
