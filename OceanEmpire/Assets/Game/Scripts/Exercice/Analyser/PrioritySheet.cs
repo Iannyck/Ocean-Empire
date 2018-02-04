@@ -11,41 +11,34 @@ public class PrioritySheet : ScriptableObject {
         bicycle = 2
     }
 
-    [Serializable]
-	public class ExerciseValue
-    {
-        public ExerciseTypes type;
-        public float priority;
-    }
-
-    [SerializeField,Reorderable] public List<ExerciseValue> Exercices = new List<ExerciseValue>();
+    [SerializeField,Reorderable,Header("Plus la priorité est haute plus c'est prioritaire")] public List<ExerciseTypes> Exercices = new List<ExerciseTypes>();
 
     /// <summary>
     /// Retourne le plus prioritaire des deux : -1 (error), 0 (first), 1(second), 2(egale)
     /// </summary>
     public int Compare(ExerciseTypes first, ExerciseTypes second)
     {
-        ExerciseValue firstValue = FindExerciceValueByType(first);
-        ExerciseValue secondValue = FindExerciceValueByType(second);
+        int firstValue = FindExerciceValueByType(first);
+        int secondValue = FindExerciceValueByType(second);
 
-        if (firstValue == null || secondValue == null)
+        if (firstValue < 0 || secondValue < 0)
             return -1;
-        else if (firstValue.priority > secondValue.priority)
+        else if (firstValue > secondValue)
             return 0;
-        else if (firstValue.priority < secondValue.priority)
+        else if (firstValue < secondValue)
             return 1;
         else
             return 2;
     }
 
-    private ExerciseValue FindExerciceValueByType(ExerciseTypes type)
+    private int FindExerciceValueByType(ExerciseTypes type)
     {
         for (int i = 0; i < Exercices.Count; i++)
         {
-            if (Exercices[i].type == type)
-                return Exercices[i];
+            if (Exercices[i] == type)
+                return i;
         }
-        return null;
+        return -1;
     }
 
     public string ExerciseTypeToString(ExerciseTypes type)
