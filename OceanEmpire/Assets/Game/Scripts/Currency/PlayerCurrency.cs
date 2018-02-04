@@ -42,13 +42,29 @@ public class PlayerCurrency : MonoPersistent
 
                 var delta = _amount - _lastSeenAmount;
 
-                _lastSeenAmount = _amount;
+                CurrencyEventArgs e = new CurrencyEventArgs() { Seen = false };
 
                 if (delta != 0 && ChangeEvent != null)
-                    ChangeEvent(delta);
+                {
+                    ChangeEvent(delta, e);
+                    if (e.Seen)
+                    {
+                        _lastSeenAmount = _amount;
+                    }
+                }
+
                 if (TriggerUpdateEvent && CurrencyUpdate != null)
                     CurrencyUpdate();
             }
+        }
+        public int UnseenDelta { get { return Amount - LastSeenAmount; } }
+
+        /// <summary>
+        /// Indique que le joueur a vue le changement de monnaie
+        /// </summary>
+        public void SeeDelta()
+        {
+            _lastSeenAmount = _amount;
         }
 
         public void ApplyDataTo(DataSaver saver)
@@ -62,16 +78,16 @@ public class PlayerCurrency : MonoPersistent
             LastSeenAmount = saver.GetInt(SAVE_KEY_LASTSEEN + SaveKey);
             Amount = saver.GetInt(SaveKey);
         }
+
     }
 
-    public delegate void CurrencyEvent(int delta);
+    public delegate void CurrencyEvent(int delta, CurrencyEventArgs eventArgs);
 
     /// <summary>
     /// Triggered lorsque les valeurs de currency sont mis a jour 
     /// (ex: apres lecture de sauvegarde, apres ajout de tickets/coins, etc.)
     /// </summary>
     public static event SimpleEvent CurrencyUpdate;
-
     /// <summary>
     /// Triggered lors que le joueur gagne/perd des coins
     /// </summary>
@@ -86,19 +102,19 @@ public class PlayerCurrency : MonoPersistent
     [SerializeField] private Sprite ticketIcon;
 
     [NonSerialized]
-    private Currency coins_ = new Currency("Coin",
-        (delta) =>
+    private Currency coins = new Currency("Coin",
+        (delta, e) =>
         {
             if (CoinChange != null)
-                CoinChange(delta);
+                CoinChange(delta, e);
         });
 
     [NonSerialized]
-    private Currency tickets_ = new Currency("Ticket",
-        (delta) =>
+    private Currency tickets = new Currency("Ticket",
+        (delta, e) =>
         {
             if (TicketChange != null)
-                TicketChange(delta);
+                TicketChange(delta, e);
         });
 
     [SerializeField]
@@ -119,10 +135,40 @@ public class PlayerCurrency : MonoPersistent
         dataSaver.OnReassignData += FetchData;
     }
 
+    #region Seen
+    /// <summary>
+    /// Le gain/perte de tickets que le joueur n'a pas encore vue
+    /// </summary>
+    public static int GetUnseenDeltaTickets() { return instance.tickets.UnseenDelta; }
+    /// <summary>
+    /// Le gain/perte de coins que le joueur n'a pas encore vue
+    /// </summary>
+    public static int GetUnseenDeltaCoins() { return instance.coins.UnseenDelta; }
+
+    /// <summary>
+    /// Indique que le joueur a vue les récents gains/pertes de ticket
+    /// </summary>
+    public static void SeeDeltaTickets()
+    {
+        instance.tickets.SeeDelta();
+        if (AutoSave)
+            instance.SaveDataAsync();
+    }
+    /// <summary>
+    /// Indique que le joueur a vue les récents gains/pertes de coins
+    /// </summary>
+    public static void SeeDeltaCoins()
+    {
+        instance.coins.SeeDelta();
+        if (AutoSave)
+            instance.SaveDataAsync();
+    }
+    #endregion
+
 
     #region Get
-    public static int GetCoins() { return instance.coins_.Amount; }
-    public static int GetTickets() { return instance.tickets_.Amount; }
+    public static int GetCoins() { return instance.coins.Amount; }
+    public static int GetTickets() { return instance.tickets.Amount; }
 
     public static Sprite GetMoneyIcon() { return instance.moneyIcon; }
     public static Sprite GetTicketIcon() { return instance.ticketIcon; }
@@ -163,10 +209,10 @@ public class PlayerCurrency : MonoPersistent
         if (amount == 0)
             return true;
 
-        instance.coins_.Amount += amount;
+        instance.coins.Amount += amount;
 
         if (AutoSave)
-            instance.SaveData();
+            instance.SaveDataAsync();
 
         return true;
     }
@@ -182,10 +228,10 @@ public class PlayerCurrency : MonoPersistent
         if (amount == 0)
             return true;
 
-        instance.tickets_.Amount += amount;
+        instance.tickets.Amount += amount;
 
         if (AutoSave)
-            instance.SaveData();
+            instance.SaveDataAsync();
 
         return true;
     }
@@ -195,26 +241,35 @@ public class PlayerCurrency : MonoPersistent
 
     #region Save/Load
     public void Save() { SaveData(); }
+    private void ApplyDataToSaver()
+    {
+        coins.ApplyDataTo(dataSaver);
+        tickets.ApplyDataTo(dataSaver);
+    }
     private void SaveData()
     {
-        coins_.ApplyDataTo(dataSaver);
-        tickets_.ApplyDataTo(dataSaver);
+        ApplyDataToSaver();
         dataSaver.Save();
+    }
+    private void SaveDataAsync()
+    {
+        ApplyDataToSaver();
+        dataSaver.SaveAsync();
     }
 
     private void FetchData()
     {
         //Disable event triggering
-        coins_.TriggerUpdateEvent = false;
-        tickets_.TriggerUpdateEvent = false;
+        coins.TriggerUpdateEvent = false;
+        tickets.TriggerUpdateEvent = false;
 
         //Fetch data
-        coins_.FetchDataFrom(dataSaver);
-        tickets_.FetchDataFrom(dataSaver);
+        coins.FetchDataFrom(dataSaver);
+        tickets.FetchDataFrom(dataSaver);
 
         //Enable event triggering
-        coins_.TriggerUpdateEvent = true;
-        tickets_.TriggerUpdateEvent = true;
+        coins.TriggerUpdateEvent = true;
+        tickets.TriggerUpdateEvent = true;
 
         if (CurrencyUpdate != null)
         {
@@ -222,4 +277,10 @@ public class PlayerCurrency : MonoPersistent
         }
     }
     #endregion
+}
+
+
+public class CurrencyEventArgs : EventArgs
+{
+    public bool Seen { get; set; }
 }

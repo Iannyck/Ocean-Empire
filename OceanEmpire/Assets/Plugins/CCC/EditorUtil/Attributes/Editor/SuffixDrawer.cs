@@ -8,7 +8,7 @@ public class SuffixDrawer : PropertyDrawer
     {
         Suffix suffix = attribute as Suffix;
 
-        var suffixWidth = GUILayoutUtility.GetRect(new GUIContent(suffix.text), EditorStyles.label, GUILayout.ExpandWidth(false)).width;
+        var suffixWidth = EditorStyles.label.CalcSize(new GUIContent(suffix.text)).x;
 
         position.xMax -= suffixWidth;
         EditorGUI.PropertyField(position, property, true);

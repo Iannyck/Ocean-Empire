@@ -53,4 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   analyserGroup: {fileID: 11400000, guid: fa0255cbbcaccda4d8f8e7923dabe376, type: 2}
   updateEvery: 5
+  rewardCurrency: 1
   lastUpdate: 0

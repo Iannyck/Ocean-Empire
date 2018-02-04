@@ -14,6 +14,7 @@ public class ContinuousRewarder : MonoPersistent
 
     [SerializeField, Suffix("seconds")] private float updateEvery = 5;
 
+    [SerializeField] private CurrencyType rewardCurrency = CurrencyType.Ticket;
     [SerializeField] private float lastUpdate;
 
     public override void Init(Action onComplete)
@@ -48,7 +49,7 @@ public class ContinuousRewarder : MonoPersistent
         }
 
         // Give reward
-        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(CurrencyType.Ticket, rewardValue);
+        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue);
         if (reward.amount > 0)
             PlayerCurrency.AddCurrencyAmount(reward);
     }

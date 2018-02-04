@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
- 
+
 
 public class CurrencyPanel : MonoBehaviour
 {
@@ -23,22 +23,48 @@ public class CurrencyPanel : MonoBehaviour
     void Listen()
     {
         UpdateCurrencyValues();
+        Canvas.ForceUpdateCanvases();
         PlayerCurrency.TicketChange += AnimateTicketGain;
         PlayerCurrency.CoinChange += AnimateCoinGain;
         PlayerCurrency.CurrencyUpdate += UpdateCurrencyValues;
+
+        if (PlayerCurrency.GetUnseenDeltaTickets() != 0)
+        {
+            AnimateTicketGain(PlayerCurrency.GetUnseenDeltaTickets());
+            PlayerCurrency.SeeDeltaTickets();
+        }
+        if (PlayerCurrency.GetUnseenDeltaCoins() != 0)
+        {
+            AnimateTicketGain(PlayerCurrency.GetUnseenDeltaCoins());
+            PlayerCurrency.SeeDeltaCoins();
+        }
     }
 
+    void AnimateTicketGain(int delta, CurrencyEventArgs e)
+    {
+        AnimateTicketGain(delta);
+        e.Seen = true;
+    }
     void AnimateTicketGain(int delta)
     {
-        print((delta > 0 ? "+" : "") + delta + " tickets");
-        TextPopup textPopup = ticketChangePopup.DuplicateGO(transform);
-        textPopup.transform.position = ticketAmount.transform.position;
-        textPopup.GetTextComponent().text = (delta > 0 ? "+" : "") + delta;
+        AnimateGain(delta, ticketChangePopup, ticketAmount);
     }
 
+    void AnimateCoinGain(int delta, CurrencyEventArgs e)
+    {
+        AnimateCoinGain(delta);
+        e.Seen = true;
+    }
     void AnimateCoinGain(int delta)
     {
-        print((delta > 0 ? "+" : "") + delta + " coins");
+        AnimateGain(delta, coinChangePopup, moneyAmount);
+    }
+
+    void AnimateGain(int delta, TextPopup prefab, Text anchorText)
+    {
+        TextPopup textPopup = prefab.DuplicateGO(transform);
+        textPopup.transform.position = anchorText.transform.position;
+        textPopup.GetTextComponent().text = (delta > 0 ? "+" : "") + delta;
     }
 
     void UpdateCurrencyValues()
