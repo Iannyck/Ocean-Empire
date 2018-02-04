@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -32,6 +32,7 @@ public interface IShopDisplayable : IBuyable
 {
     Sprite GetIcon();
     string GetTitle();
+    string GetDescription();
 }
 
 public interface IBuyable
@@ -44,4 +45,3 @@ public interface IDescription
 {
     string GetDescription();
 }
-*/

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Ocean Empire/Item/Description/Gaz Tank Description")]
-public class GazTankDescription : UpgradeDescription
+public class GazTankDescription : UpgradeDescriptionOLD
 {
     private const string gazTankFolderName = "GazTank";
 
