@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Ocean Empire/Item/Description/Fish Container Description")]
-public class FishContainerDescription : UpgradeDescription
+public class FishContainerDescription : UpgradeDescriptionOLD
 {
     private const string fishContainerFolderName = "FishContainer";
 

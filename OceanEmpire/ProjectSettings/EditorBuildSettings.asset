@@ -14,8 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Shack/Shack.unity
     guid: 3365bf45c1118084088b800e6da71856
-  - enabled: 1
-    path: Assets/Game/UI/Windows/InstantExerciseChoice/InstantExercise.unity
+  - enabled: 0
+    path: 
     guid: 34d9395ae2381f14eab93439ce5cce77
   - enabled: 1
     path: Assets/Game/Debug/Alex's Stuff/Alex_TestMap.unity
@@ -45,7 +45,7 @@ EditorBuildSettings:
     path: Assets/Game/Recolte/InGame Systems/Exercice/Windows/Demande/ProposeRefill.unity
     guid: 7190ad829dcddf24fae71ab9e4facae3
   - enabled: 1
-    path: Assets/Game/Recolte/InGame Systems/Exercice/Windows/Tracking/TrackingWindow.unity
+    path: 
     guid: 70aaec503ca4045479c021cf40983bdc
   - enabled: 1
     path: Assets/Game/Recolte/InGame Systems/Exercice/Windows/Rating/Rating.unity
@@ -66,7 +66,7 @@ EditorBuildSettings:
     path: Assets/Game/UI/CalendarDisplay/Day Inspector/DayInspector.unity
     guid: 24e7d953db1070d4b9e91ea551a30006
   - enabled: 1
-    path: Assets/Game/UI/Windows/Confirm Instant Exercise/ConfirmInstantExercise.unity
+    path: 
     guid: e68124fc8f92b7543b68432ae54e912d
   - enabled: 1
     path: "Assets/Game/Recolte/Maps/Oc\xE9an Pacifique/Map_Pacifique.unity"
@@ -78,7 +78,7 @@ EditorBuildSettings:
     path: Assets/Plugins/CCC/UI/Generic Windows/Message Popup/MessagePopup.unity
     guid: beb86ce867a9fa8468e6e7ce726c2539
   - enabled: 1
-    path: Assets/Game/UI/Windows/Task Conclusion/Task Conclusion Window.unity
+    path: 
     guid: 816990f090c25b2438617a65ed9c9cc9
   - enabled: 1
     path: Assets/Game/UI/Shop/Confirm/ShopConfirm.unity

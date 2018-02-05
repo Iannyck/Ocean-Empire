@@ -91,7 +91,7 @@ public class ShopUI : BaseBehavior {
     {
         if (ItemIsRelevant(itemDescription))
         {
-            if (itemDescription is UpgradeDescription )
+            if (itemDescription is UpgradeDescriptionOLD )
             {        
                     ItemDisplay newItem = Instantiate(shopItem, shopItemLayout.transform);
                     newItem.item = itemDescription;
@@ -109,24 +109,24 @@ public class ShopUI : BaseBehavior {
 
     public bool ItemIsRelevant(ItemDescription item)
     {
-        if (item is UpgradeDescription)
-            return UpgradeIsRelevant(item as UpgradeDescription);
+        if (item is UpgradeDescriptionOLD)
+            return UpgradeIsRelevant(item as UpgradeDescriptionOLD);
         else if (item is ShopMapDescription)
             return !ItemsList.ItemOwned(item.GetItemID());
         return false;
     }
 
-    public bool UpgradeIsRelevant(UpgradeDescription item)
+    public bool UpgradeIsRelevant(UpgradeDescriptionOLD item)
     {
         int CurrentLevel = -1;
 
-        if (item is ThrusterDescription && ItemsList.GetEquipThruster())
+        if (item is ThrusterDescriptionOLD && ItemsList.GetEquipThruster())
             CurrentLevel = ItemsList.GetEquipThruster().GetUpgradeLevel();
-        else if (item is HarpoonThrowerDescription && ItemsList.GetEquipHarpoonThrower())
+        else if (item is HarpoonThrowerDescriptionOLD && ItemsList.GetEquipHarpoonThrower())
             CurrentLevel = ItemsList.GetEquipHarpoonThrower().GetUpgradeLevel();
         else if (item is FishContainerDescription && ItemsList.GetEquipFishContainer())
             CurrentLevel = ItemsList.GetEquipFishContainer().GetUpgradeLevel();
-        else if (item is GazTankDescription && ItemsList.GetEquipGazTank())
+        else if (item is GazTankDescriptionOLD && ItemsList.GetEquipGazTank())
             CurrentLevel = ItemsList.GetEquipGazTank().GetUpgradeLevel();
 
         if (item.GetUpgradeLevel() >= CurrentLevel)
