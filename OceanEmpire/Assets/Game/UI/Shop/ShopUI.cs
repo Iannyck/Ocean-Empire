@@ -120,13 +120,13 @@ public class ShopUI : BaseBehavior {
     {
         int CurrentLevel = -1;
 
-        if (item is ThrusterDescription && ItemsList.GetEquipThruster())
+        if (item is ThrusterDescriptionOLD && ItemsList.GetEquipThruster())
             CurrentLevel = ItemsList.GetEquipThruster().GetUpgradeLevel();
-        else if (item is HarpoonThrowerDescription && ItemsList.GetEquipHarpoonThrower())
+        else if (item is HarpoonThrowerDescriptionOLD && ItemsList.GetEquipHarpoonThrower())
             CurrentLevel = ItemsList.GetEquipHarpoonThrower().GetUpgradeLevel();
         else if (item is FishContainerDescription && ItemsList.GetEquipFishContainer())
             CurrentLevel = ItemsList.GetEquipFishContainer().GetUpgradeLevel();
-        else if (item is GazTankDescription && ItemsList.GetEquipGazTank())
+        else if (item is GazTankDescriptionOLD && ItemsList.GetEquipGazTank())
             CurrentLevel = ItemsList.GetEquipGazTank().GetUpgradeLevel();
 
         if (item.GetUpgradeLevel() >= CurrentLevel)

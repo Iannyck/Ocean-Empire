@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Description")]
-public abstract class UpgradeDescription :ScriptableObject
-{
 
+public abstract class UpgradeDescription
+{
     [SerializeField]
     private string itemName;
     [SerializeField]
@@ -35,7 +34,7 @@ public abstract class UpgradeDescription :ScriptableObject
     private Sprite itemIcon;
 
 
-    public Sprite GetIcon()
+    public Sprite GetShopIcon()
     {
         return itemIcon;
     }

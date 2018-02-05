@@ -12,7 +12,7 @@ public abstract class TestScript : MonoBehaviour, IShopDisplayable, IDescription
         throw new NotImplementedException();
     }
 
-    public Sprite GetIcon()
+    public Sprite GetShopIcon()
     {
         throw new NotImplementedException();
     }
@@ -30,7 +30,7 @@ public abstract class TestScript : MonoBehaviour, IShopDisplayable, IDescription
 
 public interface IShopDisplayable : IBuyable
 {
-    Sprite GetIcon();
+    Sprite GetShopIcon();
     string GetTitle();
     string GetDescription();
 }

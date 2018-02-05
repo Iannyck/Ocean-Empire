@@ -8,7 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9b802cfbe3cac5498a6e65eef724cf2, type: 3}
-  m_Name: Saver_Upgrade
+  m_Script: {fileID: 11500000, guid: bb510bc33c87e2640a5752fbc46fd497, type: 3}
+  m_Name: GazTankCategory
   m_EditorClassIdentifier: 
-  fileName: someData
+  ownedUpgrade: -1
+  nextUpgGenCode: 
+  dataSaver: {fileID: 0}

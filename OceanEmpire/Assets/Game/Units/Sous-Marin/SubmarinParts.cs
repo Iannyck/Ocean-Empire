@@ -24,10 +24,10 @@ public class SubmarinParts : MonoBehaviour
 
     void Start()
     {     
-        ThrusterDescription TD = ItemsList.GetEquipThruster();
-        HarpoonThrowerDescription HPD = ItemsList.GetEquipHarpoonThrower();
+        ThrusterDescriptionOLD TD = ItemsList.GetEquipThruster();
+        HarpoonThrowerDescriptionOLD HPD = ItemsList.GetEquipHarpoonThrower();
         FishContainerDescription FC = ItemsList.GetEquipFishContainer();
-        GazTankDescription GT = ItemsList.GetEquipGazTank();
+        GazTankDescriptionOLD GT = ItemsList.GetEquipGazTank();
 
         thruster = TD.GetItem<Thruster>();
         if (HPD != null)

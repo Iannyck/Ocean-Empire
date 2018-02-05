@@ -4,8 +4,13 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Category")]
-public abstract class UpgradeCategory : ScriptableObject, IShopDisplayable
+public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
+    where B : UpgradeDescriptionBuilder<D>
+    where D : UpgradeDescription
 {
+
+    [SerializeField] private List<B> upgradeBuilders;
+
     [SerializeField, ReadOnly] private int ownedUpgrade = -1;
     [SerializeField, ReadOnly] private string nextUpgGenCode = "";
 
@@ -13,13 +18,22 @@ public abstract class UpgradeCategory : ScriptableObject, IShopDisplayable
     private string nextUpgGenCodeKey;
 
     public DataSaver dataSaver;
-    public Dictionary<int, UpgradeDescription> prebuiltUpgrades;
 
+    private UpgradeDescription GetPrebuilt(int level)
+    {
+        foreach (var item in upgradeBuilders)
+        {
+            if (level == item.upgradeLevel)
+                return item.BuildUpgradeDescription();
+        }
+        return null;
+    }
 
     public UpgradeDescription GetNextDescription()
     {
-        if (prebuiltUpgrades.ContainsKey(ownedUpgrade + 1))
-            return prebuiltUpgrades[ownedUpgrade + 1];
+        UpgradeDescription prebuilt = GetPrebuilt(ownedUpgrade + 1);
+        if (prebuilt != null)
+            return prebuilt;
         else return GenerateNextDescription(nextUpgGenCode);
     }
 
@@ -53,9 +67,9 @@ public abstract class UpgradeCategory : ScriptableObject, IShopDisplayable
         dataSaver.SetString(nextUpgGenCodeKey, nextUpgGenCode);
     }
 
-    public Sprite GetIcon()
+    public Sprite GetShopIcon()
     {
-        return GetNextDescription().GetIcon();
+        return GetNextDescription().GetShopIcon();
     }
     public string GetTitle()
     {

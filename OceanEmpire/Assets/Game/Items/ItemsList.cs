@@ -110,19 +110,19 @@ public class ItemsList : BaseBehavior, IPersistent
         return GetItemDuplicate<FishContainerDescription>(instance.equipedFishContainer);
     }
 
-    public static ThrusterDescription GetEquipThruster()
+    public static ThrusterDescriptionOLD GetEquipThruster()
     {
-        return GetItemDuplicate<ThrusterDescription>(instance.equipedThruster);
+        return GetItemDuplicate<ThrusterDescriptionOLD>(instance.equipedThruster);
     }
 
-    public static HarpoonThrowerDescription GetEquipHarpoonThrower()
+    public static HarpoonThrowerDescriptionOLD GetEquipHarpoonThrower()
     {
-        return GetItemDuplicate<HarpoonThrowerDescription>(instance.equipedHarpoon);
+        return GetItemDuplicate<HarpoonThrowerDescriptionOLD>(instance.equipedHarpoon);
     }
 
-    public static GazTankDescription GetEquipGazTank()
+    public static GazTankDescriptionOLD GetEquipGazTank()
     {
-        return GetItemDuplicate<GazTankDescription>(instance.equipedGazTank);
+        return GetItemDuplicate<GazTankDescriptionOLD>(instance.equipedGazTank);
     }
 
     private static bool BuyItem(ItemDescription item, CurrencyType currencyType, Dictionary<string, bool> bank)
@@ -217,16 +217,16 @@ public class ItemsList : BaseBehavior, IPersistent
 
         if (instance.ownedUpgrades.ContainsKey(id) && instance.ownedUpgrades[id] == true)
         {
-            if (upgrade is ThrusterDescription)
+            if (upgrade is ThrusterDescriptionOLD)
                 instance.equipedThruster = upgrade.GetItemID();
 
-            if (upgrade is HarpoonThrowerDescription)
+            if (upgrade is HarpoonThrowerDescriptionOLD)
                 instance.equipedHarpoon = upgrade.GetItemID();
 
             if (upgrade is FishContainerDescription)
                 instance.equipedFishContainer = upgrade.GetItemID();
 
-            if (upgrade is GazTankDescription)
+            if (upgrade is GazTankDescriptionOLD)
                 instance.equipedGazTank = upgrade.GetItemID();
         }
         instance.Save();
