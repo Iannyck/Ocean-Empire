@@ -36,6 +36,14 @@ public class CalendarScroll_Scroller : MonoBehaviour
         UpdateResetButtons();
     }
 
+    public void RefreshContent()
+    {
+        for (int i = 0; i < days.Count; i++)
+        {
+            days[i].RefreshContent();
+        }
+    }
+
     public void Rewind(int amount)
     {
         bool bottomToTop = amount > 0;
@@ -51,7 +59,6 @@ public class CalendarScroll_Scroller : MonoBehaviour
 
     void UpdateResetButtons()
     {
-
         bool toTopState = cumulativeRewinds < -7;
         bool toBottomState = cumulativeRewinds > 7;
 

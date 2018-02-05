@@ -8,23 +8,34 @@ using CCC.Persistence;
 
 public class Calendar : MonoPersistent
 {
-    private const string SAVE_KEY_ST = "scheduledTasks";
+    private const string SAVEKEY_FUTURE_BONIFIEDTIMES = "futureBT";
+    private const string SAVEKEY_PAST_BONIFIEDTIMES = "pasBT";
 
-    [SerializeField]
-    private float checkForPastTasksEvery = 4;
+    [SerializeField, Suffix("seconds")]
+    private float checkConcludeEvery = 4;
 
     /// <summary>
-    /// Ordonner du plus vieux au plus recent
+    /// Ordonné du plus vieux au plus récent
     /// </summary>
-    //[SerializeField] private List<ScheduledTask> scheduledTasks = new List<ScheduledTask>();
+    private List<BonifiedTime> presentAndFutureBonifiedTimes = new List<BonifiedTime>();
+    /// <summary>
+    /// Ordonné du plus vieux au plus récent
+    /// </summary>
+    private List<BonifiedTime> pastBonifiedTimes = new List<BonifiedTime>();
     [SerializeField] private DataSaver dataSaver;
 
     public bool log = true;
-    public event SimpleEvent onTaskAdded;
-    public event SimpleEvent onTaskConcluded;
+    public event SimpleEvent OnBonifiedTimeAdded;
     public static Calendar instance;
 
-    //public ReadOnlyCollection<ScheduledTask> GetScheduledTasks() { return scheduledTasks.AsReadOnly(); }
+    /// <summary>
+    /// Ordonné du plus vieux au plus récent
+    /// </summary>
+    public ReadOnlyCollection<BonifiedTime> GetPresentAndFutureBonifiedTimes() { return presentAndFutureBonifiedTimes.AsReadOnly(); }
+    /// <summary>
+    /// Ordonné du plus vieux au plus récent
+    /// </summary>
+    public ReadOnlyCollection<BonifiedTime> GetPastBonifiedTimes() { return pastBonifiedTimes.AsReadOnly(); }
 
     protected void Awake()
     {
@@ -37,166 +48,148 @@ public class Calendar : MonoPersistent
         FetchDataFromSaver();
         onComplete();
 
-        //PersistentLoader.LoadIfNotLoaded(() => StartCoroutine(CheckTasks()));
+        PersistentLoader.LoadIfNotLoaded(() => StartCoroutine(PeriodicCheck()));
     }
 
-    //IEnumerator CheckTasks()
-    //{
-    //    while (true)
-    //    {
-    //        ConcludePastTasks();
-    //        TrackOngoingTask();
-    //        yield return new WaitForSecondsRealtime(checkForPastTasksEvery);
-    //    }
-    //}
-    /*
-    public bool AddScheduledTask(ScheduledTask task)
+    IEnumerator PeriodicCheck()
     {
-        if (IsTimeSlutAvailable(task.timeSlot))
+        while (true)
         {
-            scheduledTasks.SortedAdd(task, (a, b) => a.timeSlot.start.CompareTo(b.timeSlot.start));
+            CheckBonifiedTimes();
+            yield return new WaitForSecondsRealtime(checkConcludeEvery);
+        }
+    }
+
+    private void CheckBonifiedTimes()
+    {
+        DateTime now = DateTime.Now;
+        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        {
+            int timeslotRelation = presentAndFutureBonifiedTimes[i].timeslot.IsOverlappingWith(now);
+
+            //The bonifiedTime is in the future
+            if (timeslotRelation == 1)
+                return;
+
+            //The bonifiedTime is in the past
+            if (timeslotRelation == -1)
+                ConcludeBonifiedTime(i);
+        }
+    }
+
+    private void ConcludeBonifiedTime(int index, bool andSave = true)
+    {
+        pastBonifiedTimes.Add(presentAndFutureBonifiedTimes[index]);
+        presentAndFutureBonifiedTimes.RemoveAt(index);
+        if (log)
+            Debug.Log("Bonified Time concluded: " + index);
+        if (andSave)
+            ApplyDataToSaver(andSave);
+    }
+
+    public bool AddBonifiedTime(BonifiedTime bonifiedTime)
+    {
+        if (!IsTimeSlotBonified(bonifiedTime.timeslot))
+        {
+            presentAndFutureBonifiedTimes.SortedAdd(bonifiedTime, (a, b) => a.timeslot.start.CompareTo(b.timeslot.start));
 
             ApplyDataToSaver(true);
 
             if (log)
-                Debug.Log("ScheduledTask ajouter au calendrier avec succes.");
+                Debug.Log("BonifiedTime ajouté au calendrier avec succès.");
 
-            if (onTaskAdded != null)
-                onTaskAdded();
-
-            TrackOngoingTask();
+            if (OnBonifiedTimeAdded != null)
+                OnBonifiedTimeAdded();
 
             return true;
         }
         else
         {
             if (log)
-                Debug.LogWarning("La ScheduledTask n'a pas pu être ajouter au calendrier. " +
-                    "La Timeslot est deja utilisé.");
+                Debug.LogWarning("Le BonifiedTime n'a pas pu être ajouté au calendrier. " +
+                    "La timeslot est déjà utilisé.");
             return false;
         }
     }
-    */
+
     /// <summary>
     /// ( ͡° ͜ʖ ͡°)
     /// </summary>
-    //public bool IsTimeSlutAvailable(TimeSlot timeslot)
-    //{
-    //    for (int i = 0; i < scheduledTasks.Count; i++)
-    //    {
-    //        int result = timeslot.IsOverlappingWith(scheduledTasks[i].timeSlot);
-    //        if (result == 0)
-    //            return false;
-    //        else if (result == -1)
-    //            return true;
-    //    }
-
-    //    return true;
-    //}
-
-    /// <summary>
-    /// Retire la tache du calendrier, l'ajoute a l'historique ET donne la reward si applicable
-    /// </summary>
-    //public bool ConcludeScheduledTask(ScheduledTask task, TimedTaskReport report)
-    //{
-    //    if (scheduledTasks.Remove(task))
-    //    {
-    //        if (onTaskConcluded != null)
-    //            onTaskConcluded();
-
-    //        if (PendingReports.instance != null)
-    //        {
-    //            PendingReports.instance.AddPendingReport(task, report);
-    //        }
-    //        else
-    //        {
-    //            Debug.LogWarning("L'instance de Pending reports est null. On vient de perdre le rapport");
-    //        }
-
-    //        ApplyDataToSaver(true);
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-    //void TrackOngoingTask()
-    //{
-    //    //On ne fait rien si on est deja entrain de tack quelque chose
-    //    if (TrackingWindow.IsTrackingSomething())
-    //        return;
-
-    //    //On cherche une tache qui serait en ce moment
-    //    ScheduledTask onGoingTask = null;
-    //    for (int i = 0; i < scheduledTasks.Count; i++)
-    //    {
-    //        TimeSlot timeslot = scheduledTasks[i].timeSlot;
-    //        if (timeslot.IsNow())
-    //        {
-    //            onGoingTask = scheduledTasks[i];
-    //            break;
-    //        }
-    //        else if (timeslot.IsInTheFuture())
-    //            break;
-    //    }
-
-    //    //Si aucune tache a ete trouver, on arrete ici
-    //    if (onGoingTask == null)
-    //        return;
-
-    //    TrackingWindow.ShowWaitingWindow("", onGoingTask);
-    //}
-
-    //List<ScheduledTask> ConcludePastTasks()
-    //{
-    //    List<ScheduledTask> cancelledTasks = new List<ScheduledTask>();
-
-    //    DateTime now = DateTime.Now;
-    //    for (int i = 0; i < scheduledTasks.Count; i++)
-    //    {
-    //        ScheduledTask task = scheduledTasks[i];
-    //        if (ConcludePastTask(task))
-    //        {
-    //            cancelledTasks.Add(task);
-    //        }
-    //        else
-    //        {
-    //            break;
-    //        }
-    //    }
-
-    //    return cancelledTasks;
-    //}
-
-    //bool ConcludePastTask(ScheduledTask task)
-    //{
-    //    if (!task.timeSlot.IsInThePast())
-    //        return false;
-
-    //    ExerciseTracker tracker = ExerciseComponents.GetTracker(task.task.GetExerciseType());
-    //    GoogleActivities.ActivityReport analyserReport = tracker.Track(task, false);
-    //    ExerciseTrackingReport trackingReport = ExerciseTrackingReport.BuildFromNonInterrupted(analyserReport);
-    //    TimedTaskReport taskReport = TimedTaskReport.BuildFromCompleted(task, trackingReport, HappyRating.None);
-
-    //    ConcludeScheduledTask(task, taskReport);
-
-    //    return true;
-    //}
+    public bool IsTimeSlotBonified(TimeSlot timeslot)
+    {
+        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        {
+            int result = timeslot.IsOverlappingWith(presentAndFutureBonifiedTimes[i].timeslot);
+            if (result == 0)
+                return true;
+            else if (result == -1)
+                return false;
+        }
+        return false;
+    }
 
     private void ApplyDataToSaver(bool andSave)
     {
-        //dataSaver.SetObjectClone(SAVE_KEY_ST, scheduledTasks);
+        dataSaver.SetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES, presentAndFutureBonifiedTimes);
+        dataSaver.SetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES, pastBonifiedTimes);
+
         if (andSave)
+        {
             dataSaver.SaveAsync();
+        }
     }
 
     private void FetchDataFromSaver()
     {
-        //scheduledTasks = dataSaver.GetObjectClone(SAVE_KEY_ST) as List<ScheduledTask>;
-        //if (scheduledTasks == null)
-        //    scheduledTasks = new List<ScheduledTask>();
+        presentAndFutureBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as List<BonifiedTime>;
+        if (presentAndFutureBonifiedTimes == null)
+            presentAndFutureBonifiedTimes = new List<BonifiedTime>();
+
+        pastBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as List<BonifiedTime>;
+        if (pastBonifiedTimes == null)
+            pastBonifiedTimes = new List<BonifiedTime>();
     }
 
+    public List<BonifiedTime> GetAllBonifiedTimesOn(Day day)
+    {
+        List<BonifiedTime> result = new List<BonifiedTime>();
 
+        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        {
+            DateTime entry = pastBonifiedTimes[i].timeslot.start;
+
+            int entryIsInThePast = day.IsInTheSameDay(entry);
+
+            // Stop !
+            if (entryIsInThePast == 1)
+            {
+                break;
+            }
+
+            // Same day
+            if (entryIsInThePast == 0)
+                result.Add(pastBonifiedTimes[i]);
+        }
+
+        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        {
+            DateTime entry = presentAndFutureBonifiedTimes[i].timeslot.start;
+
+            int entryIsInThePast = day.IsInTheSameDay(entry);
+
+            // Entry is in the future, Stop !
+            if (entryIsInThePast == -1)
+            {
+                break;
+            }
+
+            // Same day
+            if (entryIsInThePast == 0)
+                result.Add(presentAndFutureBonifiedTimes[i]);
+        }
+
+        return result;
+    }
 
 
 
@@ -217,6 +210,26 @@ public class Calendar : MonoPersistent
             year = around.Year;
         }
         public DateTime GetAnchorDateTime() { return new DateTime(year, monthOfYear, dayOfMonth); }
+
+        /// <summary>
+        /// 1 = time est dans le passé  0 = time est dans la même journée  -1 = time est dans le futur
+        /// </summary>
+        public int IsInTheSameDay(DateTime time)
+        {
+            if (time.Year < year)
+                return 1;
+            if (time.Year > year)
+                return -1;
+            if (time.Month < monthOfYear)
+                return 1;
+            if (time.Month > monthOfYear)
+                return -1;
+            if (time.Day < dayOfMonth)
+                return 1;
+            if (time.Day > dayOfMonth)
+                return -1;
+            return 0;
+        }
 
         public override bool Equals(object obj)
         {
@@ -355,6 +368,28 @@ public class Calendar : MonoPersistent
                 return "D\u00E9c";
             default:
                 return "NaM";
+        }
+    }
+    public static string GetDayOfTheWeekName(DayOfWeek dayOfTheWeek)
+    {
+        switch (dayOfTheWeek)
+        {
+            case DayOfWeek.Sunday:
+                return "Dimanche";
+            case DayOfWeek.Monday:
+                return "Lundi";
+            case DayOfWeek.Tuesday:
+                return "Mardi";
+            case DayOfWeek.Wednesday:
+                return "Mercredi";
+            case DayOfWeek.Thursday:
+                return "Jeudi";
+            case DayOfWeek.Friday:
+                return "Vendredi";
+            case DayOfWeek.Saturday:
+                return "Samedi";
+            default:
+                return "Error";
         }
     }
     #endregion

@@ -347,7 +347,6 @@ GameObject:
   - component: {fileID: 703156643}
   - component: {fileID: 703156642}
   - component: {fileID: 703156646}
-  - component: {fileID: 703156647}
   - component: {fileID: 703156648}
   m_Layer: 5
   m_Name: Canvas
@@ -452,18 +451,7 @@ MonoBehaviour:
   showEase: 9
   hiddenAnchoredPos: {x: 1059.95, y: 0}
   shownAnchoredPos: {x: 0, y: 0}
---- !u!114 &703156647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 703156641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a75af67d201f004c8673c5864cd7a85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  g: {fileID: 703156646}
+  root: {fileID: 0}
 --- !u!114 &703156648
 MonoBehaviour:
   m_ObjectHideFlags: 0

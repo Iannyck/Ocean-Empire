@@ -10,10 +10,9 @@ public class CalendarRoot_DebugLaunch : MonoBehaviour
     {
         PersistentLoader.LoadIfNotLoaded(() =>
         {
-            if(Scenes.ActiveSceneCount == 2)
+            if(Scenes.ActiveSceneCount == 1)
             {
-                Scenes.Load(CalendarRootScene.SCENENAME, LoadSceneMode.Additive
-                    ,(x)=>x.FindRootObject<CalendarRootScene>());
+                Scenes.Load(CalendarRootScene.SCENENAME, LoadSceneMode.Additive);
             }
         });
     }

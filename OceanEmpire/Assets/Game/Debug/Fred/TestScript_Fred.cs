@@ -5,13 +5,10 @@ using System;
 
 public class TestScript_Fred : MonoBehaviour
 {
-    public event SimpleEvent a;
-    public event SimpleEvent remoteA;
-    public DayInspector g;
+    public Calendar calendar;
 
     void Start()
     {
-        remoteA = a;
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
     }
 
@@ -19,11 +16,15 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            a += () => Debug.Log("hello");
+            calendar.AddBonifiedTime(new BonifiedTime(new TimeSlot(DateTime.Now, new TimeSpan(0, 0, 20)), 2));
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            remoteA();
+            calendar.AddBonifiedTime(new BonifiedTime(new TimeSlot(DateTime.Now.AddDays(2), new TimeSpan(0, 0, 20)), 2));
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            calendar.AddBonifiedTime(new BonifiedTime(new TimeSlot(DateTime.Now.AddDays(10), new TimeSpan(0, 0, 20)), 2));
         }
     }
 }

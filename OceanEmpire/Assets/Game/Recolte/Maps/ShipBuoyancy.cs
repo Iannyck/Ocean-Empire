@@ -19,7 +19,7 @@ public class ShipBuoyancy : MonoBehaviour
         first.SetEase(Ease.OutSine);
         first.OnComplete(delegate ()
         {
-            Tweener Buoyancy = ship.transform.DOMove(Bottom, cycleDelay)
+            ship.transform.DOMove(Bottom, cycleDelay)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(-1, LoopType.Yoyo);
         });

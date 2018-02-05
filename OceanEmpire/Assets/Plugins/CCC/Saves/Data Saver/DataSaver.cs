@@ -258,15 +258,15 @@ public class DataSaver : ScriptablePersistent
     public void SaveAsync(Action onSaveComplete)
     {
         AddRWOperation(() =>
-       {
-           Saves.ThreadSave(GetPath(), data, () =>
-           {
-               if (onSaveComplete != null)
-                   onSaveComplete();
+        {
+            Saves.ThreadSave(GetPath(), data, () =>
+            {
+                if (onSaveComplete != null)
+                    onSaveComplete();
 
-               CompleteRWOperation();
-           });
-       });
+                CompleteRWOperation();
+            });
+        });
     }
 
     public void Save() { Save(null); }

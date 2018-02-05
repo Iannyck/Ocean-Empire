@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4636657759288920}
   - component: {fileID: 114169703373621136}
+  - component: {fileID: 114900642581256620}
   m_Layer: 0
   m_Name: Calendar
   m_TagString: Untagged
@@ -51,16 +52,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75bd628cdb479a4b97999f222ac8c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - onCompleteInit
-  - scheduledTasks
-  _serializedStateValues:
-  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"CCC.Manager.BaseManager+BaseManagerEvent,
-    Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
-  - '[]'
-  initComplete: 0
-  checkForPastTasksEvery: 4
-  scheduledTasks: []
+  checkConcludeEvery: 4
   dataSaver: {fileID: 11400000, guid: 9b4e1f2a3f1761e4bac08ee5dc7f5b19, type: 2}
   log: 1
+--- !u!114 &114900642581256620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570810329200740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a75af67d201f004c8673c5864cd7a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calendar: {fileID: 114169703373621136}

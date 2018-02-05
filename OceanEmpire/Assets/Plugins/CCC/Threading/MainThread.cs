@@ -24,7 +24,7 @@ namespace CCC.Threading
         {
             if (actionList.Count > 0)
             {
-                while (actionList.Count > 1)
+                while (actionList.Count > 0)
                 {
                     actionList.Dequeue()();
                 }
