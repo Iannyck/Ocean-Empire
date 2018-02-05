@@ -112,4 +112,9 @@ public struct TimeSlot
         return "Start: " + start.ToString()
             + "\nEnd: " + end.ToString();
     }
+
+    public string ToCondensedDayOfTimeString()
+    {
+        return start.ToCondensedDayOfTimeString() + " - " + end.ToCondensedDayOfTimeString();
+    }
 }

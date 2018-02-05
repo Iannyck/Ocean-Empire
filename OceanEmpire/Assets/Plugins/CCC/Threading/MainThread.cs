@@ -22,12 +22,9 @@ namespace CCC.Threading
 
         void Update()
         {
-            if (actionList.Count > 0)
+            while (actionList.Count > 0)
             {
-                while (actionList.Count > 0)
-                {
-                    actionList.Dequeue()();
-                }
+                actionList.Dequeue()();
             }
         }
 

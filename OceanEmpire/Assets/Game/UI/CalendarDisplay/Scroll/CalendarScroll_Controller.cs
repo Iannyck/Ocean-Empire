@@ -51,7 +51,7 @@ public class CalendarScroll_Controller : CanvasGroupBehaviour
 
     public void OnDayClick(CalendarScroll_Day day)
     {
-        root.dayInspector.Show(day.GetDay());
+        root.dayInspector.ShowAndFill(day.GetDay());
     }
 
     public void BackToTop()

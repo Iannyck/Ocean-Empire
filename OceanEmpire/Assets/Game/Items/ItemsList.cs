@@ -49,7 +49,9 @@ public class ItemsList : BaseBehavior, IPersistent
 
     public UnityEngine.Object DuplicationBehavior()
     {
-        return this.DuplicateGO();
+        var copy = this.DuplicateGO();
+        DontDestroyOnLoad(copy);
+        return copy;
     }
 
     static public T GetItemDuplicate<T>(string itemID) where T : UnityEngine.Object

@@ -3,25 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 public class DayInspector : MonoBehaviour
 {
     public const string SCENENAME = "DayInspector";
 
-    [Header("Links")]
-    public Button exitButton;
-    public RectTransform container;
-    public CanvasGroupBehaviour blackBG;
+    [Header("Prefabs"), SerializeField] DayInspector_Schedule schedulePrefab;
 
-    [Header("Animation")]
-    public float moveDuration;
-    public Ease hideEase;
-    public Ease showEase;
-    public Vector2 hiddenAnchoredPos;
-    public Vector2 shownAnchoredPos;
+    [Header("Components"), SerializeField] Button exitButton;
+    [SerializeField] RectTransform container;
+    [SerializeField] CanvasGroupBehaviour blackBG;
+    [SerializeField] RectTransform schedulesContainer;
+    [SerializeField] Text nothingPlannedText;
 
-    [ReadOnly]
-    public CalendarRootScene root;
+    [Header("Header"), SerializeField] Text dateText;
+    [SerializeField] Text dayOfWeekText;
+
+
+    [Header("Window Animation"), SerializeField] float moveDuration;
+    [SerializeField] Ease hideEase;
+    [SerializeField] Ease showEase;
+    [SerializeField] Vector2 hiddenAnchoredPos;
+    [SerializeField] Vector2 shownAnchoredPos;
+
+    [ReadOnly] public CalendarRootScene root;
+
+    List<GameObject> trash = new List<GameObject>();
+
+    Calendar.Day day;
 
     private void Awake()
     {
@@ -29,13 +39,22 @@ public class DayInspector : MonoBehaviour
         exitButton.onClick.AddListener(Hide);
     }
 
-    public void Show(Calendar.Day day) { Show(day, null); }
-    public void Show(Calendar.Day day, TweenCallback onComplete)
+    public void ShowAndFill(Calendar.Day day) { ShowAndFill(day, null); }
+    public void ShowAndFill(Calendar.Day day, TweenCallback onComplete)
     {
+        Fill(day);
         blackBG.Show();
 
         container.DOKill();
         container.DOAnchorPos(shownAnchoredPos, moveDuration).SetEase(showEase).OnComplete(onComplete);
+    }
+
+    public void Fill(Calendar.Day day)
+    {
+        this.day = day;
+
+        RefreshHeader();
+        BuildSchedules();
     }
 
     public void Hide() { Hide(null); }
@@ -61,5 +80,47 @@ public class DayInspector : MonoBehaviour
 
         container.DOKill();
         container.anchoredPosition = hiddenAnchoredPos;
+    }
+
+    public void RefreshHeader()
+    {
+        char[] month = Calendar.GetMonthName(day.monthOfYear).ToCharArray();
+        month[0] = Char.ToLower(month[0]);
+
+        dateText.text = day.dayOfMonth + " " + new string(month) + " " + day.year;
+        dayOfWeekText.text = Calendar.GetDayOfTheWeekName(day.dayOfWeek);
+    }
+
+    public void BuildSchedules()
+    {
+        EmptyTrash();
+
+        bool enableNothingPlannedText = true;
+        var bonifiedTimes = Calendar.instance.GetAllBonifiedTimesOn(day);
+
+        if (bonifiedTimes.Count > 0)
+        {
+            enableNothingPlannedText = false;
+            for (int i = 0; i < bonifiedTimes.Count; i++)
+            {
+                var scheduleDisplay = schedulePrefab.DuplicateGO(schedulesContainer);
+                var roundedStrength = bonifiedTimes[i].bonusStrength.Rounded(1);
+                scheduleDisplay.FillContent(bonifiedTimes[i].timeslot,
+                    "BONUS X" + roundedStrength
+                    , "Faire de l'exercice vous rapportera " + roundedStrength + "x plus de tickets!");
+                trash.Add(scheduleDisplay.gameObject);
+            }
+        }
+
+        nothingPlannedText.enabled = enableNothingPlannedText;
+    }
+
+    public void EmptyTrash()
+    {
+        for (int i = 0; i < trash.Count; i++)
+        {
+            Destroy(trash[i]);
+        }
+        trash.Clear();
     }
 }
