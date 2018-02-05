@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class AnalyserReport
     public TimeSlot activeTimeslot;
 
     /// <summary>
-    /// Le pourcentage de temps active par rapport au activeTimeslot (ex: le joueur a marché 12 des 30min)
+    /// Le pourcentage de temps active par rapport au activeTimeslot (ex: le joueur etait actif a faire des push pendant 10 des 20 minutes)
     /// </summary>
     public float activeRate;
 
@@ -35,6 +36,14 @@ public class AnalyserReport
         this.analysedTimeslot = analysedTimeslot;
         this.activeRate = activeRate;
         this.activeTimeslot = activeTimeslot;
+    }
+
+    public AnalyserReport(ExerciseVolume volume, TimeSlot analysedTimeslot, DateTime firstExerciceTime, DateTime lastExerciceTime)
+    {
+        this.volume = volume;
+        this.analysedTimeslot = analysedTimeslot;
+        activeTimeslot = new TimeSlot(firstExerciceTime, lastExerciceTime);
+        this.activeRate = activeTimeslot.duration.Seconds / analysedTimeslot.duration.Seconds;
     }
 
     public override string ToString()

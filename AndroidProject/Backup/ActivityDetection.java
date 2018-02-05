@@ -73,7 +73,7 @@ public class ActivityDetection extends IntentService {
     private void writeToFile(String data) {
         try {
             outputStreamWriter.append(data);
-            outputStreamWriter.append("|" + Calendar.getInstance().getTime());
+            outputStreamWriter.append("" + Calendar.getInstance().getTime());
             outputStreamWriter.append("\n\r");
             outputStreamWriter.close();
         }
@@ -84,7 +84,15 @@ public class ActivityDetection extends IntentService {
 
     private void handleDetectedActivities(List<DetectedActivity> probableActivities) {
         Log.e("ActivityRecogition","-----------------------------");
-        boolean saved = false;
+
+        boolean walkSaved = false;
+        boolean runSaved = false;
+        boolean bikeSaved = false;
+
+	string walkConfidence;
+	string runConfidence;
+	string bikeConfidence;
+
         for( DetectedActivity activity : probableActivities ) {
             switch( activity.getType() ) {
                 case DetectedActivity.IN_VEHICLE: {
@@ -92,7 +100,9 @@ public class ActivityDetection extends IntentService {
                     break;
                 }
                 case DetectedActivity.ON_BICYCLE: {
+                    bikeSaved = true;
                     Log.e( "ActivityRecogition", "On Bicycle: " + activity.getConfidence() );
+		    bikeConfidence = "" + activity.getConfidence();
                     break;
                 }
                 case DetectedActivity.ON_FOOT: {
@@ -100,7 +110,9 @@ public class ActivityDetection extends IntentService {
                     break;
                 }
                 case DetectedActivity.RUNNING: {
+                    runSaved = true;
                     Log.e( "ActivityRecogition", "Running: " + activity.getConfidence() );
+		    runConfidence = "" + activity.getConfidence();
                     break;
                 }
                 case DetectedActivity.STILL: {
@@ -112,9 +124,9 @@ public class ActivityDetection extends IntentService {
                     break;
                 }
                 case DetectedActivity.WALKING: {
-                    saved = true;
+                    walkSaved = true;
                     Log.e( "ActivityRecogition", "Walking: " + activity.getConfidence() );
-                    writeToFile("" + activity.getConfidence());
+		    walkConfidence = "" + activity.getConfidence();
                     break;
                 }
                 case DetectedActivity.UNKNOWN: {
@@ -123,10 +135,18 @@ public class ActivityDetection extends IntentService {
                 }
             }
         }
-        if(!saved){
-            saved = true;
+        if(!walkSaved){
             Log.e( "ActivityRecogition", "Walking: 0");
-            writeToFile("0");
+	    walkConfidence = "0";
         }
+        if(!runSaved){
+            Log.e( "ActivityRecogition", Running : 0");
+	    runConfidence = "0";
+        }
+        if(!bikeSaved){
+            Log.e( "ActivityRecogition", Biking : 0");
+	    bikeConfidence = "0";
+        }
+	writeToFile(walkConfidence+"|"+runConfidence+"|"+bikeConfidence+"|");
     }
 }

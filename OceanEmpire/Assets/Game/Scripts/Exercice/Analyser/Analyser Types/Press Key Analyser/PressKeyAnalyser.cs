@@ -6,6 +6,11 @@ public class PressKeyAnalyser : BaseAnalyser
 {
     [SerializeField] private float volumePerPress = 1;
 
+    public override float CalculateExerciceVolume(GoogleActivities.ActivityReport previous, GoogleActivities.ActivityReport now)
+    {
+        return 0;
+    }
+
     public override AnalyserReport GetExerciseVolume(TimeSlot analysedTimeslot)
     {
         if (KeyPressRecorder.instance == null)
