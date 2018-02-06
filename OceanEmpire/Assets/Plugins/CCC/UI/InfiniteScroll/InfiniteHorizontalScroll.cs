@@ -21,4 +21,33 @@ public class InfiniteHorizontalScroll : InfiniteScroll
     {
         return new Vector2(horizontalLayoutGroup.spacing, 0);
     }
+
+    public override void FetchData()
+    {
+        if (scrollRect.vertical)
+        {
+            Debug.LogError("Le ScrollRect ne doit pas avoir Vertical d'activé.");
+            return;
+        }
+
+        if (horizontalLayoutGroup == null)
+        {
+            Debug.LogError("Il doit y avoir un HorizontalLayoutGroup");
+            return;
+        }
+
+        RectTransform content = horizontalLayoutGroup.GetComponent<RectTransform>();
+        if (content.childCount < 2)
+        {
+            Debug.LogError("Il doit y avoir au moins deux éléments enfants du HorizontalLayoutGroup.");
+            return;
+        }
+
+        base.FetchData();
+    }
+
+    public override bool IsDataOk()
+    {
+        return base.IsDataOk() && !scrollRect.vertical;
+    }
 }

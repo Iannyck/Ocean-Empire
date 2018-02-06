@@ -55,7 +55,7 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
             Vector2 velocity = scrollRect.velocity;
 
             //On kill le drag s'il y a lieu
-            if (lastDragEvent.dragging)
+            if (lastDragEvent != null && lastDragEvent.dragging)
             {
                 scrollRect.OnEndDrag(lastDragEvent);
             }
@@ -67,7 +67,7 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
                 RewindHorizontal(normalizedPosition.x);
 
             //On reanime le drag d'entre les morts s'il y a lieu
-            if (lastDragEvent.dragging)
+            if (lastDragEvent != null && lastDragEvent.dragging)
             {
                 scrollRect.OnBeginDrag(lastDragEvent);
             }
@@ -133,7 +133,7 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
         return deplacement;
     }
 
-    public bool IsDataOk()
+    public virtual bool IsDataOk()
     {
         if (scrollRect == null)
         {

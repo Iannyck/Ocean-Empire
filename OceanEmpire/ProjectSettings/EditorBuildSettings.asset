@@ -86,3 +86,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Debug/PerfomanceScene/PerformanceScene.unity
     guid: 81d6b9243ee93b54db8eaa84dfda5521
+  - enabled: 1
+    path: Assets/Game/UI/CalendarDisplay/New Schedule/New Schedule.unity
+    guid: 18157be7d1118fb45a87d59cad4847ee

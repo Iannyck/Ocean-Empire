@@ -21,7 +21,8 @@ public class InfiniteScrollEditor : Editor
         if (GUILayout.Button("Fetch layout data"))
         {
             scroller.FetchData();
-            EditorSceneManager.MarkSceneDirty(scroller.gameObject.scene);
+            if (!Application.isPlaying)
+                EditorSceneManager.MarkSceneDirty(scroller.gameObject.scene);
         }
 
 
