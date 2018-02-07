@@ -43,7 +43,7 @@ public class ScrollRectSnap : MonoBehaviour
             }
             else
             {
-                targetPos = currentPos.RoundedTo(snapInterval) + baseSnapDelta;
+                targetPos = (currentPos- baseSnapDelta).RoundedTo(snapInterval) + baseSnapDelta;
             }
 
             var deltaTime = Time.deltaTime;
