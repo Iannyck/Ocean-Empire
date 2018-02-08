@@ -185,7 +185,7 @@ public class Calendar : MonoPersistent
             pastBonifiedTimes = new AutoSortedList<BonifiedTime>();
     }
 
-    public List<BonifiedTime> GetAllBonifiedTimesOn(Day day)
+    public List<BonifiedTime> GetAllBonifiedTimesStartingOn(Day day)
     {
         List<BonifiedTime> result = new List<BonifiedTime>();
 

@@ -125,7 +125,7 @@ public class DayInspector : MonoBehaviour
         EmptyTrash();
 
         bool enableNothingPlannedText = true;
-        var bonifiedTimes = Calendar.instance.GetAllBonifiedTimesOn(day);
+        var bonifiedTimes = Calendar.instance.GetAllBonifiedTimesStartingOn(day);
 
         if (bonifiedTimes.Count > 0)
         {

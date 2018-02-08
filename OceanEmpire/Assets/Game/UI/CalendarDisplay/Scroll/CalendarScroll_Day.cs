@@ -55,7 +55,7 @@ public class CalendarScroll_Day : MonoBehaviour
     {
         EmptyTrash();
 
-        var bonifiedTimesToday = Calendar.instance.GetAllBonifiedTimesOn(day);
+        var bonifiedTimesToday = Calendar.instance.GetAllBonifiedTimesStartingOn(day);
 
         bool enableThreeDots = false;
         for (int i = 0; i < bonifiedTimesToday.Count; i++)
