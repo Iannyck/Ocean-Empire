@@ -1,23 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shack : MonoBehaviour
 {
     public const string SCENENAME = "Shack";
 
+    [SerializeField] SceneInfo calendarScene;
+
     public void OpenCalendar()
     {
-
-        CalendarRootScene.OpenCalendar(
-            () =>
-            {
-                //On load complete
-            },
-            () =>
-            {
-                //On entrance complete
-                Scenes.UnloadAsync(gameObject.scene);
-            });
+        Scenes.Load(calendarScene, (scene) =>
+        {
+            scene.FindRootObject<CalendarScroll_Controller>().OnEntranceComplete(() => Scenes.UnloadAsync(gameObject.scene));
+        });
     }
 }

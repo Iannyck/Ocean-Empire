@@ -29,8 +29,6 @@ public class DayInspector : MonoBehaviour
     [SerializeField] Vector2 hiddenAnchoredPos;
     [SerializeField] Vector2 shownAnchoredPos;
 
-    [ReadOnly] public CalendarRootScene root;
-
     List<GameObject> trash = new List<GameObject>();
 
     Calendar.Day day;

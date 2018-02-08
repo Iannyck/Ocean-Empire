@@ -28,7 +28,7 @@ public class SceneInfo : ScriptableObject
     [SerializeField, ReadOnly]
     private string sceneName;
 
-    [SerializeField, Header("Defaults")] private LoadSceneMode loadMode = LoadSceneMode.Single;
+    [SerializeField, Header("Defaults")] private LoadSceneMode loadMode = LoadSceneMode.Additive;
     [SerializeField] private bool allowMultiple = false;
 
     public string SceneName { get { return sceneName; } }

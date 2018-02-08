@@ -11,9 +11,6 @@ public class CalendarGrid_Controller : CanvasGroupBehaviour
     public int currentWeekIndex = 0;
     public CalendarGrid_Scroller scroller;
 
-    [ReadOnly]
-    public CalendarRootScene root;
-
     //private Calendar calendar;
 
     private void Awake()
