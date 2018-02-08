@@ -50,7 +50,7 @@ public class Scenes : MonoPersistent
 
     static public void Load(string name, LoadSceneMode mode = LoadSceneMode.Single, Action<Scene> callback = null, bool allowMultiple = true)
     {
-        if (allowMultiple && _HandleUniqueLoad(name, callback))
+        if (!allowMultiple && _HandleUniqueLoad(name, callback))
             return;
 
         ScenePromise scenePromise = new ScenePromise(name, callback);
@@ -64,7 +64,7 @@ public class Scenes : MonoPersistent
 
     static public void LoadAsync(string name, LoadSceneMode mode = LoadSceneMode.Single, Action<Scene> callback = null, bool allowMultiple = true)
     {
-        if (allowMultiple && _HandleUniqueLoad(name, callback))
+        if (!allowMultiple && _HandleUniqueLoad(name, callback))
             return;
 
         ScenePromise scenePromise = new ScenePromise(name, callback);
