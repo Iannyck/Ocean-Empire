@@ -36,6 +36,8 @@ public class AskForTimeWindow : MonoBehaviour
         headerText.text = text;
     }
 
+    public bool CanCancel { set { cancelButton.gameObject.SetActive(value); } }
+
     public void SetButtonText(string text)
     {
         confirmButtonText.text = text;
