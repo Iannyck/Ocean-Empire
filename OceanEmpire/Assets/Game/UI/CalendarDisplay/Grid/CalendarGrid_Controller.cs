@@ -73,7 +73,7 @@ public class CalendarGrid_Controller : CanvasGroupBehaviour
             //Construit celui en bas
             newWeek.Fill(
                 Calendar.GetDaysOfWeek(
-                    weeks[weeks.Count - 2].GetCalendarDay().GetAnchorDateTime().AddWeeks(1)));
+                    weeks[weeks.Count - 2].GetCalendarDay().ToDateTime().AddWeeks(1)));
         }
         else
         {
@@ -83,7 +83,7 @@ public class CalendarGrid_Controller : CanvasGroupBehaviour
             //Construit celui en haut
             newWeek.Fill(
                 Calendar.GetDaysOfWeek(
-                    weeks[1].GetCalendarDay().GetAnchorDateTime().AddWeeks(-1)));
+                    weeks[1].GetCalendarDay().ToDateTime().AddWeeks(-1)));
         }
         scroller.CenterScroller();
     }

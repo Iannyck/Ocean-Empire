@@ -214,7 +214,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: C:/Users/etudiant/Documents/Ocean-Empire/Key/oceanEmpireKey.keystore
-  AndroidKeyaliasName: ocean empire
+  AndroidKeyaliasName: 
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1

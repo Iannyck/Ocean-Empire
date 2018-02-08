@@ -9,13 +9,15 @@ public class DayInspector : MonoBehaviour
 {
     public const string SCENENAME = "DayInspector";
 
-    [Header("Prefabs"), SerializeField] DayInspector_Schedule schedulePrefab;
+    [Header("Assets"), SerializeField] DayInspector_Schedule schedulePrefab;
+    [SerializeField] SceneInfo askForTimeWindow;
 
     [Header("Components"), SerializeField] Button exitButton;
     [SerializeField] RectTransform container;
     [SerializeField] CanvasGroupBehaviour blackBG;
     [SerializeField] RectTransform schedulesContainer;
     [SerializeField] Text nothingPlannedText;
+    [SerializeField] Button scheduleButton;
 
     [Header("Header"), SerializeField] Text dateText;
     [SerializeField] Text dayOfWeekText;
@@ -37,6 +39,35 @@ public class DayInspector : MonoBehaviour
     {
         HideInstant();
         exitButton.onClick.AddListener(Hide);
+        scheduleButton.onClick.AddListener(Plan);
+    }
+
+    void Plan()
+    {
+        Scenes.LoadAsync(askForTimeWindow, (scene) =>
+        {
+            var window = scene.FindRootObject<AskForTimeWindow>();
+            window.AnswerEvent += ScheduleNewBonifiedTime;
+        });
+    }
+
+    private void ScheduleNewBonifiedTime(bool confirmed, int hours, int minutes)
+    {
+        if (!confirmed)
+            return;
+
+        DateTime date = new DateTime(day.year, day.monthOfYear, day.dayOfMonth, hours, minutes, 0);
+        TimeSlot timeSlot = new TimeSlot(date, BonifiedTime.DefaultDuration);
+        BonifiedTime bonifiedTime = new BonifiedTime(timeSlot, BonifiedTime.DefaultStrength);
+
+        if (!Calendar.instance.AddBonifiedTime(bonifiedTime))
+        {
+            MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
+        }
+        else
+        {
+            RefreshSchedules();
+        }
     }
 
     public void ShowAndFill(Calendar.Day day) { ShowAndFill(day, null); }
@@ -54,7 +85,7 @@ public class DayInspector : MonoBehaviour
         this.day = day;
 
         RefreshHeader();
-        BuildSchedules();
+        RefreshSchedules();
     }
 
     public void Hide() { Hide(null); }
@@ -91,7 +122,7 @@ public class DayInspector : MonoBehaviour
         dayOfWeekText.text = Calendar.GetDayOfTheWeekName(day.dayOfWeek);
     }
 
-    public void BuildSchedules()
+    public void RefreshSchedules()
     {
         EmptyTrash();
 

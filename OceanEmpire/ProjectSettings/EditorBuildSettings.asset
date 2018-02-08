@@ -5,18 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: "Assets/Game/Debug/EXP\xC9RIMENTATION Scene choose/ExpeSceneChooser.unity"
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Game/UI/Generic Windows/Ask For Time Window/Ask For Time Window.unity
+    guid: 18157be7d1118fb45a87d59cad4847ee
   - enabled: 1
     path: Assets/Game/Recolte/GameBuilder.unity
     guid: f0c884b8cca1c1f45bfe40eb64a0b6c8
   - enabled: 1
     path: Assets/Game/UI/Shack/Shack.unity
     guid: 3365bf45c1118084088b800e6da71856
-  - enabled: 0
-    path: 
-    guid: 34d9395ae2381f14eab93439ce5cce77
   - enabled: 1
     path: Assets/Game/Debug/Alex's Stuff/Alex_TestMap.unity
     guid: 2722d89de8236494297e067f3d8d72cb
@@ -45,9 +42,6 @@ EditorBuildSettings:
     path: Assets/Game/Recolte/InGame Systems/Exercice/Windows/Demande/ProposeRefill.unity
     guid: 7190ad829dcddf24fae71ab9e4facae3
   - enabled: 1
-    path: 
-    guid: 70aaec503ca4045479c021cf40983bdc
-  - enabled: 1
     path: Assets/Game/Recolte/InGame Systems/Exercice/Windows/Rating/Rating.unity
     guid: 5bc2be3cb9da2294ab6ae09d31e86ab4
   - enabled: 1
@@ -66,9 +60,6 @@ EditorBuildSettings:
     path: Assets/Game/UI/CalendarDisplay/Day Inspector/DayInspector.unity
     guid: 24e7d953db1070d4b9e91ea551a30006
   - enabled: 1
-    path: 
-    guid: e68124fc8f92b7543b68432ae54e912d
-  - enabled: 1
     path: "Assets/Game/Recolte/Maps/Oc\xE9an Pacifique/Map_Pacifique.unity"
     guid: 447972ceb2ca45d4a9299125d2870195
   - enabled: 1
@@ -78,14 +69,8 @@ EditorBuildSettings:
     path: Assets/Plugins/CCC/UI/Generic Windows/Message Popup/MessagePopup.unity
     guid: beb86ce867a9fa8468e6e7ce726c2539
   - enabled: 1
-    path: 
-    guid: 816990f090c25b2438617a65ed9c9cc9
-  - enabled: 1
     path: Assets/Game/UI/Shop/Confirm/ShopConfirm.unity
     guid: 456281001804c8143939b454fa7eaaed
   - enabled: 1
     path: Assets/Game/Debug/PerfomanceScene/PerformanceScene.unity
     guid: 81d6b9243ee93b54db8eaa84dfda5521
-  - enabled: 1
-    path: Assets/Game/UI/CalendarDisplay/New Schedule/New Schedule.unity
-    guid: 18157be7d1118fb45a87d59cad4847ee

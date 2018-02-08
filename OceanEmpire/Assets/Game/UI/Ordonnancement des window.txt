@@ -1,13 +1,25 @@
-IN MENU
+******** IN MENU ********
 
+// Shack
 Shack: -10
+
+// Calendar
+Calendar Scroll: 0
+Calendar Day Inspector: 1
+
+// Map select
 Region Selection: 5
-Propose Instant Exercise: 10
-Confirm Instant Task: 15
+
+// Exercise
 Tracking Panel: 20
 Task Conclusion (Reward): 30
+
+//Generic Windows
+Ask For Time Window: 35
+
+// Cheats
 CheatsWindow: 50
 
 
-INGAME
+******** INGAME ********
 ProposeRefill: 5

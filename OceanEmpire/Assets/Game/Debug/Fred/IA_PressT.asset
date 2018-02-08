@@ -8,10 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584b9682b36211045bd18c8a7567399e, type: 3}
-  m_Name: SI_NewSchedule
+  m_Script: {fileID: 11500000, guid: 1f31911a71a7d434689b99fa8928825e, type: 3}
+  m_Name: IA_PressT
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 18157be7d1118fb45a87d59cad4847ee, type: 3}
-  sceneName: New Schedule
-  loadMode: 1
-  allowMultiple: 1
+  screenTouch: 0
+  mouseButtons: 
+  keyCombinations:
+  - first: 116
+    second: 0

@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(ScrollRect))]
-public class ScrollRectSnap : MonoBehaviour
+public class ScrollRectSnap : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public enum Direction { Vertical, Horizontal }
     public Direction SnapDirection = Direction.Vertical;
@@ -25,6 +26,8 @@ public class ScrollRectSnap : MonoBehaviour
     /// </summary>
     public Func<float> customSnapFunction;
 
+    private bool pointerDown = false;
+
     private ScrollRect ScrollRect
     {
         get { return _scrollRect ?? (_scrollRect = GetComponent<ScrollRect>()); }
@@ -43,12 +46,13 @@ public class ScrollRectSnap : MonoBehaviour
             }
             else
             {
-                targetPos = (currentPos- baseSnapDelta).RoundedTo(snapInterval) + baseSnapDelta;
+                targetPos = (currentPos - baseSnapDelta).RoundedTo(snapInterval) + baseSnapDelta;
             }
 
             var deltaTime = Time.deltaTime;
             accelerationHandler.UpdateAcceleration(targetPos, currentPos, GetVelocity(), deltaTime);
-            ScrollRect.velocity += GetPositiveVelocity() * accelerationHandler.CurrentAcceleration * deltaTime;
+            if (!pointerDown)
+                ScrollRect.velocity += GetPositiveVelocity() * accelerationHandler.CurrentAcceleration * deltaTime;
         }
     }
 
@@ -74,5 +78,15 @@ public class ScrollRectSnap : MonoBehaviour
             return Vector2.up;
         else
             return Vector2.right;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        pointerDown = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        pointerDown = false;
     }
 }

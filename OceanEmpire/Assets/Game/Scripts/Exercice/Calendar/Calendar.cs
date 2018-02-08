@@ -17,11 +17,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    private List<BonifiedTime> presentAndFutureBonifiedTimes = new List<BonifiedTime>();
+    private AutoSortedList<BonifiedTime> presentAndFutureBonifiedTimes = new AutoSortedList<BonifiedTime>();
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    private List<BonifiedTime> pastBonifiedTimes = new List<BonifiedTime>();
+    private AutoSortedList<BonifiedTime> pastBonifiedTimes = new AutoSortedList<BonifiedTime>();
     [SerializeField] private DataSaver dataSaver;
 
     public bool log = true;
@@ -31,11 +31,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    public ReadOnlyCollection<BonifiedTime> GetPresentAndFutureBonifiedTimes() { return presentAndFutureBonifiedTimes.AsReadOnly(); }
+    public ReadOnlyCollection<BonifiedTime> GetPresentAndFutureBonifiedTimes() { return presentAndFutureBonifiedTimes.GetInternalList(); }
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    public ReadOnlyCollection<BonifiedTime> GetPastBonifiedTimes() { return pastBonifiedTimes.AsReadOnly(); }
+    public ReadOnlyCollection<BonifiedTime> GetPastBonifiedTimes() { return pastBonifiedTimes.GetInternalList(); }
 
     protected void Awake()
     {
@@ -89,9 +89,12 @@ public class Calendar : MonoPersistent
 
     public bool AddBonifiedTime(BonifiedTime bonifiedTime)
     {
-        if (!IsTimeSlotBonified(bonifiedTime.timeslot))
+        if (!IsTimeBonified(bonifiedTime.timeslot))
         {
-            presentAndFutureBonifiedTimes.SortedAdd(bonifiedTime, (a, b) => a.timeslot.start.CompareTo(b.timeslot.start));
+            if (bonifiedTime.timeslot.IsInThePast())
+                pastBonifiedTimes.Add(bonifiedTime);
+            else
+                presentAndFutureBonifiedTimes.Add(bonifiedTime);
 
             ApplyDataToSaver(true);
 
@@ -113,16 +116,48 @@ public class Calendar : MonoPersistent
     }
 
     /// <summary>
-    /// ( ͡° ͜ʖ ͡°)
+    /// Retourne vrai si la timeslot overlap totalement ou partiellement avec un temps bonifié.
     /// </summary>
-    public bool IsTimeSlotBonified(TimeSlot timeslot)
+    public bool IsTimeBonified(TimeSlot timeslot)
     {
-        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
         {
-            int result = timeslot.IsOverlappingWith(presentAndFutureBonifiedTimes[i].timeslot);
+            int result = pastBonifiedTimes[i].timeslot.IsOverlappingWith(timeslot);
             if (result == 0)
                 return true;
             else if (result == -1)
+                return false;
+        }
+        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        {
+            int result = presentAndFutureBonifiedTimes[i].timeslot.IsOverlappingWith(timeslot);
+            if (result == 0)
+                return true;
+            else if (result == 1)
+                return false;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Retourne vrai si la dateTime overlap avec un temps bonifié.
+    /// </summary>
+    public bool IsTimeBonified(DateTime dateTime)
+    {
+        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        {
+            int result = pastBonifiedTimes[i].timeslot.IsOverlappingWith(dateTime);
+            if (result == 0)
+                return true;
+            else if (result == -1)
+                return false;
+        }
+        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        {
+            int result = presentAndFutureBonifiedTimes[i].timeslot.IsOverlappingWith(dateTime);
+            if (result == 0)
+                return true;
+            else if (result == 1)
                 return false;
         }
         return false;
@@ -141,13 +176,13 @@ public class Calendar : MonoPersistent
 
     private void FetchDataFromSaver()
     {
-        presentAndFutureBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as List<BonifiedTime>;
+        presentAndFutureBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as AutoSortedList<BonifiedTime>;
         if (presentAndFutureBonifiedTimes == null)
-            presentAndFutureBonifiedTimes = new List<BonifiedTime>();
+            presentAndFutureBonifiedTimes = new AutoSortedList<BonifiedTime>();
 
-        pastBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as List<BonifiedTime>;
+        pastBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as AutoSortedList<BonifiedTime>;
         if (pastBonifiedTimes == null)
-            pastBonifiedTimes = new List<BonifiedTime>();
+            pastBonifiedTimes = new AutoSortedList<BonifiedTime>();
     }
 
     public List<BonifiedTime> GetAllBonifiedTimesOn(Day day)
@@ -170,6 +205,7 @@ public class Calendar : MonoPersistent
             if (entryIsInThePast == 0)
                 result.Add(pastBonifiedTimes[i]);
         }
+        result.Reverse();
 
         for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
         {
@@ -209,10 +245,12 @@ public class Calendar : MonoPersistent
             monthOfYear = around.Month;
             year = around.Year;
         }
-        public DateTime GetAnchorDateTime() { return new DateTime(year, monthOfYear, dayOfMonth); }
+        public DateTime ToDateTime() { return new DateTime(year, monthOfYear, dayOfMonth); }
 
         /// <summary>
-        /// 1 = time est dans le passé  0 = time est dans la même journée  -1 = time est dans le futur
+        /// -1 = day  ->  time
+        /// <para/>0 = same day
+        /// <para/>1 = time  ->  day
         /// </summary>
         public int IsInTheSameDay(DateTime time)
         {
@@ -257,7 +295,7 @@ public class Calendar : MonoPersistent
 
     public static List<Day> GetDaysFrom(Day startingDay, int numberOfDays)
     {
-        return GetDaysFrom(startingDay.GetAnchorDateTime(), numberOfDays);
+        return GetDaysFrom(startingDay.ToDateTime(), numberOfDays);
     }
     public static List<Day> GetDaysFrom(DateTime startingDay, int numberOfDays)
     {
@@ -306,7 +344,7 @@ public class Calendar : MonoPersistent
     }
     public static DateTime GetDayOfMonth_Convert(Day someDayOfTheMonth, int requestedDay)
     {
-        return GetDayOfMonth(someDayOfTheMonth.GetAnchorDateTime(), requestedDay);
+        return GetDayOfMonth(someDayOfTheMonth.ToDateTime(), requestedDay);
     }
     public static DateTime GetDayOfMonth(DateTime someDayOfTheMonth, int requestedDay)
     {
@@ -314,14 +352,14 @@ public class Calendar : MonoPersistent
     }
     public static Day GetDayOfMonth(Day someDayOfTheMonth, int requestedDay)
     {
-        return GetDayOfMonth_Convert(someDayOfTheMonth.GetAnchorDateTime(), requestedDay);
+        return GetDayOfMonth_Convert(someDayOfTheMonth.ToDateTime(), requestedDay);
     }
     #endregion
 
     #region Get Day Of Week
     public static DateTime GetDayOfWeek_Convert(Day someDayOfTheWeek, DayOfWeek requestedDay)
     {
-        return GetDayOfWeek(someDayOfTheWeek.GetAnchorDateTime(), requestedDay);
+        return GetDayOfWeek(someDayOfTheWeek.ToDateTime(), requestedDay);
     }
     public static Day GetDayOfWeek_Convert(DateTime someDayOfTheWeek, DayOfWeek requestedDay)
     {
@@ -329,7 +367,7 @@ public class Calendar : MonoPersistent
     }
     public static Day GetDayOfWeek(Day someDayOfTheWeek, DayOfWeek requestedDay)
     {
-        return GetDayOfWeek_Convert(someDayOfTheWeek.GetAnchorDateTime(), requestedDay);
+        return GetDayOfWeek_Convert(someDayOfTheWeek.ToDateTime(), requestedDay);
     }
     public static DateTime GetDayOfWeek(DateTime someDayOfTheWeek, DayOfWeek requestedDay)
     {

@@ -13,9 +13,6 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
     [System.Serializable]
     public class RewindEvent : UnityEvent<int> { }
 
-    public RewindEvent onHorizontalRewind = new RewindEvent();
-    public RewindEvent onVerticalRewind = new RewindEvent();
-
     [SerializeField, ReadOnly]
     protected Vector2 itemSize = Vector2.zero;
     [SerializeField, ReadOnly]
@@ -105,8 +102,10 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
         int mult = normalizedPosition > 1 ? -1 : 1;
 
         scrollRect.verticalNormalizedPosition += deplacement * mult;
-        onVerticalRewind.Invoke((itemDelta * mult).RoundedToInt());
+        OnVerticalRewind((itemDelta * mult).RoundedToInt());
     }
+
+    protected virtual void OnVerticalRewind(int value) { }
 
     private void RewindHorizontal(float normalizedPosition)
     {
@@ -116,8 +115,9 @@ public abstract class InfiniteScroll : MonoBehaviour, IDragHandler
         int mult = normalizedPosition > 1 ? -1 : 1;
 
         scrollRect.horizontalNormalizedPosition += deplacement * mult;
-        onHorizontalRewind.Invoke((itemDelta * mult).RoundedToInt());
+        OnHorizontalRewind((itemDelta * mult).RoundedToInt());
     }
+    protected virtual void OnHorizontalRewind(int value) { }
 
     private float CalculateRewindDelta(float _itemSpacing, float _itemSize, float _viewportSize, float _deplacementMaxDuScroll, int shownItemsAtATime, out float itemDelta)
     {

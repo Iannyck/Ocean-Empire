@@ -521,11 +521,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollRect: {fileID: 393997713}
-  onHorizontalRewind:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: InfiniteScroll+RewindEvent, Assembly-CSharp-firstpass, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  itemSize: {x: 0, y: 228.69998}
+  viewportSize: {x: 1039.4366, y: 1585.5}
+  shownItemsAtATimeX: -2147483648
+  shownItemsAtATimeY: 7
+  deplacementMaxDuScroll: {x: 0, y: 310.39014}
+  itemSpacing: {x: 0, y: 9.47}
   onVerticalRewind:
     m_PersistentCalls:
       m_Calls:
@@ -542,12 +543,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: InfiniteScroll+RewindEvent, Assembly-CSharp-firstpass, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  itemSize: {x: 0, y: 228.69998}
-  viewportSize: {x: 1039.4366, y: 1585.5}
-  shownItemsAtATimeX: -2147483648
-  shownItemsAtATimeY: 7
-  deplacementMaxDuScroll: {x: 0, y: 310.39014}
-  itemSpacing: {x: 0, y: 9.47}
   verticalLayoutGroup: {fileID: 46227989}
 --- !u!1 &504889242
 GameObject:

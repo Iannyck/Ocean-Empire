@@ -87,14 +87,14 @@ public class CalendarScroll_Scroller : MonoBehaviour
 
         if (putLast)
         {
-            day = new Calendar.Day(days.Last().GetDay().GetAnchorDateTime().AddDays(1));
+            day = new Calendar.Day(days.Last().GetDay().ToDateTime().AddDays(1));
             dayItem.transform.SetAsLastSibling();
             days.RemoveAt(childIndex);
             days.Add(dayItem);
         }
         else
         {
-            day = new Calendar.Day(days[0].GetDay().GetAnchorDateTime().AddDays(-1));
+            day = new Calendar.Day(days[0].GetDay().ToDateTime().AddDays(-1));
             dayItem.transform.SetAsFirstSibling();
             days.RemoveAt(childIndex);
             days.Insert(0, dayItem);

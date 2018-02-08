@@ -64,7 +64,10 @@ public struct TimeSlot
     }
 
     /// <summary>
-    /// La valeur d'overlap. 1 = la timeslot en paramètre dans le passé, 0 = overlap, -1 = la timeslot en paramètre dans le future
+    /// La valeur d'overlap. 
+    /// <para/>-1 = instance -> timeslot en paramètre
+    /// <para/>0 = overlap
+    /// <para/>1 = timeslot en paramètre -> instance
     /// </summary>
     public int IsOverlappingWith(TimeSlot timeslot)
     {
@@ -74,29 +77,32 @@ public struct TimeSlot
 
         if (start < otherStart)
         {
-            if (end < otherStart)
-                return -1;
-            else
+            if (end > otherStart)
                 return 0;
+            else
+                return -1;
         }
         else
         {
-            if (start >= otherEnd)
-                return 1;
-            else
+            if (start < otherEnd)
                 return 0;
+            else
+                return 1;
         }
 
     }
 
     /// <summary>
-    /// La valeur d'overlap. 1 = la date est dans le passé, 0 = overlap, -1 = la date dans le future
+    /// La valeur d'overlap.
+    /// <para/>-1 = instance -> date en paramètre
+    /// <para/>0 = overlap
+    /// <para/>1 = date en paramètre -> instance
     /// </summary>
     public int IsOverlappingWith(DateTime dateTime)
     {
-        if (start <= dateTime)
+        if (start < dateTime)
         {
-            if (end >= dateTime)
+            if (end > dateTime)
                 return 0;
             else
                 return -1;

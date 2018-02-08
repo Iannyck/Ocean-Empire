@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 582389507}
   - component: {fileID: 582389506}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Schedule Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,11 +489,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   schedulePrefab: {fileID: 114708869612451668, guid: 836437ac39205e74c9b6e6471632b384,
     type: 2}
+  askForTimeWindow: {fileID: 11400000, guid: c209fa41f40244749a1d79ac77fe4fa0, type: 2}
   exitButton: {fileID: 789019411}
   container: {fileID: 44125699}
   blackBG: {fileID: 2049662506}
   schedulesContainer: {fileID: 891744392}
   nothingPlannedText: {fileID: 1159363554}
+  scheduleButton: {fileID: 582389506}
   dateText: {fileID: 872744148}
   dayOfWeekText: {fileID: 1269984299}
   moveDuration: 0.35

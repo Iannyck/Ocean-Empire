@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InfiniteVerticalScroll : InfiniteScroll
 {
+    public RewindEvent onVerticalRewind = new RewindEvent();
+
     public VerticalLayoutGroup verticalLayoutGroup;
 
     protected override Vector2 GetItemSize()
@@ -49,5 +51,11 @@ public class InfiniteVerticalScroll : InfiniteScroll
     public override bool IsDataOk()
     {
         return base.IsDataOk() && !scrollRect.horizontal;
+    }
+
+    protected override void OnVerticalRewind(int value)
+    {
+        if (onVerticalRewind != null)
+            onVerticalRewind.Invoke(value);
     }
 }

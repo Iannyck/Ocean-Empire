@@ -22,7 +22,10 @@ namespace CCC.Input.Axis
             Joystick_Right_Vertical = 6
         }
 
+#if UNITY_EDITOR
         [SerializeField] private NativeType type;
+#endif
+
         [SerializeField] private string axisName;
         [SerializeField] private bool useCustomAxis;
 
@@ -56,7 +59,9 @@ namespace CCC.Input.Axis
 
         public void SetNativeAxis(NativeType type)
         {
+#if UNITY_EDITOR
             this.type = type;
+#endif
             axisName = NativeTypeToAxisName(type);
             useCustomAxis = false;
         }

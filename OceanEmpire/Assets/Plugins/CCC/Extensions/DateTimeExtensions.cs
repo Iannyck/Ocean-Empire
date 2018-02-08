@@ -10,7 +10,7 @@ public static class DateTimeExtensions
     {
         string minutes = date.Minute.ToString();
         if (minutes.Length < 2)
-            minutes.Insert(0, "0");
+            minutes = minutes.PadLeft(2, '0');
         return date.Hour + "h" + minutes;
     }
 }

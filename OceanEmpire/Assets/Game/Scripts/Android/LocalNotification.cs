@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.iOS;
 using System.Collections.Generic;
 
 public class LocalNotification

@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkConcludeEvery: 4
   dataSaver: {fileID: 11400000, guid: 9b4e1f2a3f1761e4bac08ee5dc7f5b19, type: 2}
-  log: 1
+  log: 0
 --- !u!114 &114900642581256620
 MonoBehaviour:
   m_ObjectHideFlags: 1
