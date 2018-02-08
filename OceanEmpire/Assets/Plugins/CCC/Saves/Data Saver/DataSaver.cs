@@ -207,6 +207,8 @@ public class DataSaver : ScriptablePersistent
                 Saves.ThreadLoad(path,
                     delegate (object graph)
                     {
+                        if (graph == null)
+                            graph = new Data();
                         data = (Data)graph;
 
                         if (onLoadComplete != null)
@@ -237,6 +239,8 @@ public class DataSaver : ScriptablePersistent
             {
                 //Load and apply
                 object graph = Saves.InstantLoad(path);
+                if (graph == null)
+                    graph = new Data();
                 data = (Data)graph;
 
                 if (onLoadComplete != null)

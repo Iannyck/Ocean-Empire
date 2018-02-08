@@ -22,7 +22,7 @@ public class CalendarEditor : Editor
         DrawBonifiedTimes("Present and Future Bonified Times", calendar.GetPresentAndFutureBonifiedTimes());
     }
 
-    private void DrawBonifiedTimes(string label, ReadOnlyCollection<BonifiedTime> bonifiedTimes)
+    private void DrawBonifiedTimes(string label, ReadOnlyCollection<ScheduledBonus> bonifiedTimes)
     {
         EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
 
@@ -42,16 +42,16 @@ public class CalendarEditor : Editor
         EditorGUI.indentLevel--;
     }
 
-    private void DrawBonifiedTime(BonifiedTime bonifiedTime)
+    private void DrawBonifiedTime(ScheduledBonus bonifiedTime)
     {
         EditorGUILayout.LabelField("Time Slot", EditorStyles.boldLabel);
         EditorGUI.indentLevel++;
-        EditorGUILayout.LabelField(bonifiedTime.timeslot.ToString());
+        EditorGUILayout.LabelField(bonifiedTime.timeSlot.ToString());
         EditorGUI.indentLevel--;
 
         EditorGUILayout.LabelField("Bonus Strength", EditorStyles.label);
         EditorGUI.indentLevel++;
-        EditorGUILayout.LabelField(bonifiedTime.bonusStrength.ToString());
+        EditorGUILayout.LabelField(bonifiedTime.bonus.ToString());
         EditorGUI.indentLevel--;
     }
 }

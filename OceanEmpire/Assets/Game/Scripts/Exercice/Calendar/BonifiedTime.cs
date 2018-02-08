@@ -1,39 +1,63 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-[System.Serializable]
-public class BonifiedTime : IComparable
+/// <summary>
+/// Structure de donnée représentant un temps bonifié
+/// </summary>
+[Serializable]
+public class BonifiedTime
 {
-    public TimeSlot timeslot;
-    public float bonusStrength;
+    public TimeSlot timeSlot;
+    public Bonus bonus;
 
-    public BonifiedTime(TimeSlot timeslot, float bonusStrength)
+    public BonifiedTime(TimeSlot timeSlot, Bonus bonus)
     {
-        this.timeslot = timeslot;
-        this.bonusStrength = bonusStrength;
+        this.timeSlot = timeSlot;
+        this.bonus = bonus;
     }
 
-    public static TimeSpan DefaultDuration
+    /// <summary>
+    /// Croise le temps bonifié avec la timeslot pour construire un nouveau BonifiedTime
+    /// <para/>Retourne null si le bonifiedTime et la timeSlot ne s'overlap pas
+    /// </summary>
+    public static BonifiedTime Cross(BonifiedTime bonifiedTime, TimeSlot timeSlot) { int bidon; return Cross(bonifiedTime, timeSlot, out bidon); }
+    /// <summary>
+    /// Croise le temps bonifié avec la timeslot pour construire un nouveau BonifiedTime
+    /// <para/>Retourne null si le bonifiedTime et la timeSlot ne s'overlap pas
+    /// <para/>-1 = bonifiedTime -> timeSlot
+    /// <para/>0 = overlap
+    /// <para/>1 = timeSlot -> bonifiedTime
+    /// </summary>
+    public static BonifiedTime Cross(BonifiedTime bonifiedTime, TimeSlot timeSlot, out int compareResult)
     {
-        get { return new TimeSpan(1,0,0); }
-    }
-    public static float DefaultStrength
-    {
-        get { return 2; }
+        TimeSlot overlap;
+        compareResult = bonifiedTime.timeSlot.IsOverlappingWith(timeSlot, out overlap);
+
+        // OVERLAP !
+        if (compareResult == 0)
+            return new BonifiedTime(overlap, bonifiedTime.bonus);
+        return null;
     }
 
-    public int CompareTo(object obj)
+    /// <summary>
+    /// Met en commun deux bonifiedTime pour en construire un nouveau
+    /// <para/>Retourne null si les deux temps ne s'overlap pas
+    /// </summary>
+    public static BonifiedTime Cross(BonifiedTime a, BonifiedTime b) { int bidon; return Cross(a, b, out bidon); }
+    /// <summary>
+    /// Met en commun deux bonifiedTime pour en construire un nouveau
+    /// <para/>Retourne null si les deux temps ne s'overlap pas
+    /// <para/>-1 = a -> b
+    /// <para/>0 = overlap
+    /// <para/>1 = b -> a
+    /// </summary>
+    public static BonifiedTime Cross(BonifiedTime a, BonifiedTime b, out int compareResult)
     {
-        BonifiedTime castedObj = obj as BonifiedTime;
-        if(castedObj != null)
-        {
-            return timeslot.start.CompareTo(castedObj.timeslot.start);
-        }
-        else
-        {
-            return -1;
-        }
+        TimeSlot overlap;
+        compareResult = a.timeSlot.IsOverlappingWith(b.timeSlot, out overlap);
+
+        // OVERLAP !
+        if (compareResult == 0)
+            return new BonifiedTime(overlap, Bonus.Join(a.bonus, b.bonus));
+        return null;
     }
 }

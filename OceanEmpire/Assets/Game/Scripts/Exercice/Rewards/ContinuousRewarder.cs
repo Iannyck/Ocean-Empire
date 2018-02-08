@@ -34,10 +34,10 @@ public class ContinuousRewarder : MonoPersistent
         {
             var start = new DateTime(2018, 2, 10, 1, 30, 0);
             var end = new DateTime(2018, 2, 10, 5, 30, 0);
-            List<BT> result = GetAllBTInTimeSlot(new TimeSlot(start, end));
+            List<BonifiedTime> result = GetAllBTInTimeSlot(new TimeSlot(start, end));
             for (int i = 0; i < result.Count; i++)
             {
-                print(result[i].bonus + " : " + result[i].ts);
+                print(result[i].bonus + " : " + result[i].timeSlot);
             }
             if (result.Count == 0)
                 print("nothin'");
@@ -48,48 +48,48 @@ public class ContinuousRewarder : MonoPersistent
 
     private struct BT
     {
-        public BonifiedTime bonus;
+        public ScheduledBonus bonus;
         public TimeSlot ts;
     }
 
-    private static List<BT> GetAllBTInTimeSlot(TimeSlot analysedTime)
+    private static List<BonifiedTime> GetAllBTInTimeSlot(TimeSlot analysedTime)
     {
-        List<BT> list = new List<BT>();
+        List<BonifiedTime> list = new List<BonifiedTime>();
 
         var past = Calendar.instance.GetPastBonifiedTimes();
         var future = Calendar.instance.GetPresentAndFutureBonifiedTimes();
 
         for (int i = past.Count - 1; i >= 0; i--)
         {
-            TimeSlot overlap;
-            int entryIsInThePast = analysedTime.IsOverlappingWith(past[i].timeslot, out overlap);
+            var bonifiedTime = past[i].GetBonifiedTime();
+            int compareResult;
+            var result = BonifiedTime.Cross(bonifiedTime, analysedTime, out compareResult);
 
-            // Stop ! On est allé trop loin
-            if (entryIsInThePast == 1)
+            if (result != null)
+                list.Add(result);
+
+            // bonifiedTime -> analysedTime    Stop ! On est allé trop loin dans le passé
+            if (compareResult == -1)
             {
                 break;
             }
-
-            // OVERLAP !
-            if (entryIsInThePast == 0)
-                list.Add(new BT() { bonus = past[i], ts = overlap });
         }
         list.Reverse();
 
         for (int i = 0; i < future.Count; i++)
         {
-            TimeSlot overlap;
-            int entryIsInThePast = analysedTime.IsOverlappingWith(future[i].timeslot, out overlap);
+            var bonifiedTime = future[i].GetBonifiedTime();
+            int compareResult;
+            var result = BonifiedTime.Cross(bonifiedTime, analysedTime, out compareResult);
 
-            // Stop ! On est allé trop loin
-            if (entryIsInThePast == -1)
+            if (result != null)
+                list.Add(result);
+
+            // analysedTime -> bonifiedTime    Stop ! On est allé trop loin dans le passé
+            if (compareResult == 1)
             {
                 break;
             }
-
-            // OVERLAP !
-            if (entryIsInThePast == 0)
-                list.Add(new BT() { bonus = future[i], ts = overlap });
         }
 
         return list;

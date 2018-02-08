@@ -40,11 +40,17 @@ namespace CCC.Utility
                 return;
             }
 
+            object obj = null;
             BinaryFormatter bf = new BinaryFormatter();
-            //UnityEngine.Debug.Log("load started: " + path);
             FileStream file = File.Open(path, FileMode.Open);
-            //UnityEngine.Debug.Log("load completed" + path);
-            object obj = bf.Deserialize(file);
+            try
+            {
+                obj = bf.Deserialize(file);
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError("Failed to deserialize the following file:\n" + path + "\n\nError:\n" + e.Message);
+            }
             file.Close();
 
 
@@ -67,10 +73,22 @@ namespace CCC.Utility
         {
             if (!Exists(path))
                 return null;
+
+            object obj = null;
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(path, FileMode.Open);
-            object obj = bf.Deserialize(file);
+
+            try
+            {
+                obj = bf.Deserialize(file);
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError("Failed to deserialize the following file:\n" + path + "\n\nError:\n" + e.Message);
+            }
+
             file.Close();
+
             return obj;
         }
 

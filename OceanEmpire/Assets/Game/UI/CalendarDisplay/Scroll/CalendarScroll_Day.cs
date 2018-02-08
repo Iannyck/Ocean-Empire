@@ -67,8 +67,8 @@ public class CalendarScroll_Day : MonoBehaviour
             }
             var bonifiedTimeUI = bonifiedTimePrefab.DuplicateGO(potentialSchedules[i]);
             bonifiedTimeUI.FillContent(
-                bonifiedTimesToday[i].timeslot,
-                "BONUS X" + bonifiedTimesToday[i].bonusStrength.Rounded(1));
+                bonifiedTimesToday[i].timeSlot,
+                "BONUS X" + bonifiedTimesToday[i].bonus.ticketMultiplier.Rounded(1));
             trash.Add(bonifiedTimeUI.gameObject);
         }
 

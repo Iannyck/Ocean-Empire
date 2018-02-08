@@ -55,8 +55,8 @@ public class DayInspector : MonoBehaviour
             return;
 
         DateTime date = new DateTime(day.year, day.monthOfYear, day.dayOfMonth, hours, minutes, 0);
-        TimeSlot timeSlot = new TimeSlot(date, BonifiedTime.DefaultDuration);
-        BonifiedTime bonifiedTime = new BonifiedTime(timeSlot, BonifiedTime.DefaultStrength);
+        TimeSlot timeSlot = new TimeSlot(date, ScheduledBonus.DefaultDuration());
+        ScheduledBonus bonifiedTime = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
 
         if (!Calendar.instance.AddBonifiedTime(bonifiedTime))
         {
@@ -133,8 +133,8 @@ public class DayInspector : MonoBehaviour
             for (int i = 0; i < bonifiedTimes.Count; i++)
             {
                 var scheduleDisplay = schedulePrefab.DuplicateGO(schedulesContainer);
-                var roundedStrength = bonifiedTimes[i].bonusStrength.Rounded(1);
-                scheduleDisplay.FillContent(bonifiedTimes[i].timeslot,
+                var roundedStrength = bonifiedTimes[i].bonus.ticketMultiplier.Rounded(1);
+                scheduleDisplay.FillContent(bonifiedTimes[i].timeSlot,
                     "BONUS X" + roundedStrength
                     , "Faire de l'exercice vous rapportera " + roundedStrength + "x plus de tickets!");
                 trash.Add(scheduleDisplay.gameObject);
