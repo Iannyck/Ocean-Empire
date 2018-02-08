@@ -206,6 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridCalendar: {fileID: 0}
   scrollCalendar: {fileID: 0}
+  dayInspector: {fileID: 0}
+  calendarCamera: {fileID: 1220477430}
   defaultType: 0
 --- !u!4 &1035951891
 Transform:

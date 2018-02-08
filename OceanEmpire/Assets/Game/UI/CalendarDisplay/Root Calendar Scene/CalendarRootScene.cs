@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 using System;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class CalendarRootScene : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class CalendarRootScene : MonoBehaviour
     public CalendarScroll_Controller scrollCalendar;
     [ReadOnly]
     public DayInspector dayInspector;
+
+    [SerializeField] public Camera calendarCamera;
+
+    private bool entranceComplete = false;
+    private Action onEntranceComplete;
 
     public enum CalendarType { Scroll = 0, Grid = 1 }
     public CalendarType defaultType = CalendarType.Scroll;
@@ -33,23 +39,60 @@ public class CalendarRootScene : MonoBehaviour
         });
     }
 
+    public static void OpenCalendar(Action onLoadComplete, Action onEntranceComplete)
+    {
+        Scenes.Load(SCENENAME, LoadSceneMode.Additive, (scene) =>
+        {
+            if (onLoadComplete != null)
+                onLoadComplete();
+
+            var calendarRoot = scene.FindRootObject<CalendarRootScene>();
+            if (calendarRoot.entranceComplete)
+            {
+                if (onEntranceComplete != null)
+                    onEntranceComplete();
+            }
+            else
+                calendarRoot.onEntranceComplete = onEntranceComplete;
+        });
+    }
+
     private void AllScenesLoaded()
     {
+        TweenCallback onComplete = () =>
+        {
+            entranceComplete = true;
+            if (onEntranceComplete != null)
+                onEntranceComplete();
+        };
+
         switch (defaultType)
         {
             case CalendarType.Scroll:
                 if (!scrollCalendar.IsShown)
-                    scrollCalendar.Show();
+                    scrollCalendar.Show(onComplete);
                 break;
             case CalendarType.Grid:
                 if (!gridCalendar.IsShown)
-                    gridCalendar.Show();
+                    gridCalendar.Show(onComplete);
                 break;
         }
 
         gridCalendar.root = this;
         scrollCalendar.root = this;
         dayInspector.root = this;
+    }
+
+    public void UnloadAll()
+    {
+        if (gridCalendar != null)
+            Scenes.UnloadAsync(gridCalendar.gameObject.scene);
+        if (scrollCalendar != null)
+            Scenes.UnloadAsync(scrollCalendar.gameObject.scene);
+        if (dayInspector != null)
+            Scenes.UnloadAsync(dayInspector.gameObject.scene);
+
+        Scenes.UnloadAsync(gameObject.scene);
     }
 
     private void FetchDayInspector(Action onComplete)

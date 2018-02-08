@@ -6,20 +6,19 @@ using UnityEngine.UI;
 
 public class CalendarScroll_Day : MonoBehaviour
 {
-    [Header("Components")]
-    public Text monthText;
-    public Text dayOfTheWeekText;
-    public Image bg;
-    public Text dayOfTheMonthText;
-    public Button button;
-    public RectTransform[] potentialSchedules;
-    public Image threeDots;
+    [Header("Components"), SerializeField] Text monthText;
+    [SerializeField] Text dayOfTheWeekText;
+    [SerializeField] Image bg;
+    [SerializeField] Text dayOfTheMonthText;
+    [SerializeField] Button button;
+    [SerializeField] RectTransform[] potentialSchedules;
+    [SerializeField] Image threeDots;
 
-    [Header("Prefabs")]
-    public CalendarScroll_Schedule bonifiedTimePrefab;
+    [Header("Prefabs"), SerializeField]
+    CalendarScroll_Schedule bonifiedTimePrefab;
 
-    [Header("Settings")]
-    public Color todayColor = Color.white;
+    [Header("Settings"), SerializeField] Color todayColor = Color.white;
+    [SerializeField] Text todayText;
 
     public delegate void ElementEvent(CalendarScroll_Day day);
     public ElementEvent onClick;
@@ -89,14 +88,8 @@ public class CalendarScroll_Day : MonoBehaviour
 
     private void SetTodayVisuals(bool state)
     {
-        if (state)
-        {
-            bg.color = todayColor;
-        }
-        else
-        {
-            bg.color = notTodayColor;
-        }
+        todayText.enabled = state;
+        bg.color = state ? todayColor : notTodayColor;
     }
 
     public Calendar.Day GetDay() { return day; }
