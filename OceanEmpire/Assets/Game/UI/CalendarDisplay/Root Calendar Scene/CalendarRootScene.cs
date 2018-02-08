@@ -17,8 +17,6 @@ public class CalendarRootScene : MonoBehaviour
     [ReadOnly]
     public DayInspector dayInspector;
 
-    [SerializeField] public Camera calendarCamera;
-
     private bool entranceComplete = false;
     private Action onEntranceComplete;
 

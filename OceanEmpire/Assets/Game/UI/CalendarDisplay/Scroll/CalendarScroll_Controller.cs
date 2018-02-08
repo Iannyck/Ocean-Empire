@@ -55,7 +55,6 @@ public class CalendarScroll_Controller : MonoBehaviour
         {
             Scenes.Load(exitScene.SceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive, (scene) =>
             {
-                root.calendarCamera.gameObject.SetActive(false);
                 windowAnimation.Hide(root.UnloadAll);
             });
         }

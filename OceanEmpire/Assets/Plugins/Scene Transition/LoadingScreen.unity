@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bg: {fileID: 1012802938}
+  handleCameras: 0
   cam: {fileID: 850305614}
 --- !u!114 &2050655177
 MonoBehaviour:

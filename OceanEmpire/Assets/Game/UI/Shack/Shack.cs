@@ -6,8 +6,6 @@ public class Shack : MonoBehaviour
 {
     public const string SCENENAME = "Shack";
 
-    [SerializeField] Camera shackCamera;
-
     public void OpenCalendar()
     {
 
@@ -15,7 +13,6 @@ public class Shack : MonoBehaviour
             () =>
             {
                 //On load complete
-                shackCamera.gameObject.SetActive(false);
             },
             () =>
             {
