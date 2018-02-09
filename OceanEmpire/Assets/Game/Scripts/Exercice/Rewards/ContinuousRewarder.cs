@@ -32,68 +32,19 @@ public class ContinuousRewarder : MonoPersistent
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            var start = new DateTime(2018, 2, 10, 1, 30, 0);
-            var end = new DateTime(2018, 2, 10, 5, 30, 0);
-            List<BonifiedTime> result = GetAllBTInTimeSlot(new TimeSlot(start, end));
-            for (int i = 0; i < result.Count; i++)
-            {
-                print(result[i].bonus + " : " + result[i].timeSlot);
-            }
-            if (result.Count == 0)
-                print("nothin'");
+            var start = new DateTime(2018, 2, 6, 1, 30, 0);
+            var end = new DateTime(2018, 2, 6, 5, 30, 0);
+            //List<BonifiedTime> result = Calendar.get GetAllBTInTimeSlot(new TimeSlot(start, end));
+            //for (int i = 0; i < result.Count; i++)
+            //{
+            //    print(result[i].bonus + " : " + result[i].timeSlot);
+            //}
+            //if (result.Count == 0)
+            //    print("nothin'");
         }
     }
 
     public void ForceUpdate() { UpdateReward(); }
-
-    private struct BT
-    {
-        public ScheduledBonus bonus;
-        public TimeSlot ts;
-    }
-
-    private static List<BonifiedTime> GetAllBTInTimeSlot(TimeSlot analysedTime)
-    {
-        List<BonifiedTime> list = new List<BonifiedTime>();
-
-        var past = Calendar.instance.GetPastBonifiedTimes();
-        var future = Calendar.instance.GetPresentAndFutureBonifiedTimes();
-
-        for (int i = past.Count - 1; i >= 0; i--)
-        {
-            var bonifiedTime = past[i].GetBonifiedTime();
-            int compareResult;
-            var result = BonifiedTime.Cross(bonifiedTime, analysedTime, out compareResult);
-
-            if (result != null)
-                list.Add(result);
-
-            // bonifiedTime -> analysedTime    Stop ! On est allé trop loin dans le passé
-            if (compareResult == -1)
-            {
-                break;
-            }
-        }
-        list.Reverse();
-
-        for (int i = 0; i < future.Count; i++)
-        {
-            var bonifiedTime = future[i].GetBonifiedTime();
-            int compareResult;
-            var result = BonifiedTime.Cross(bonifiedTime, analysedTime, out compareResult);
-
-            if (result != null)
-                list.Add(result);
-
-            // analysedTime -> bonifiedTime    Stop ! On est allé trop loin dans le passé
-            if (compareResult == 1)
-            {
-                break;
-            }
-        }
-
-        return list;
-    }
 
     private void UpdateReward()
     {
@@ -103,26 +54,48 @@ public class ContinuousRewarder : MonoPersistent
 
         var timeslotToAnalyse = new TimeSlot(DateTime.Now.AddSeconds(-elapsedTime), DateTime.Now);
 
+        AnalyseAndRewardTimeSlot(timeslotToAnalyse);
+    }
+
+    void AnalyseAndRewardTimeSlot(TimeSlot timeslotToAnalyse)
+    {
+        var bts = Calendar.instance.GetAllBonifiedTimesInTimeSlot(timeslotToAnalyse);
+
+        DateTime previous = timeslotToAnalyse.start;
+
+        MarketValue rewardValue = MarketValue.Zero;
+
+        for (int i = 0; i < bts.Count; i++)
+        {
+            var ts = new TimeSlot(previous, bts[i].timeSlot.start);
+
+            //On prend la reward entre le bonified time et le precendant
+            rewardValue += GetMarketValueOfTimeSlot(ts, null);
+
+            //On prend la reward du bonified time
+            rewardValue += GetMarketValueOfTimeSlot(bts[i].timeSlot, bts[i].bonus);
+
+            previous = bts[i].timeSlot.end;
+        }
+
+        //On prend la reward entre le bonified time et le precendant
+        var finalTs = new TimeSlot(previous, timeslotToAnalyse.end);
+        rewardValue += GetMarketValueOfTimeSlot(finalTs, null);
 
 
+        // Give reward
+        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue);
+        print("reward: " + reward);
+        if (reward.amount > 0)
+            PlayerCurrency.AddCurrencyAmount(reward);
+    }
 
+    MarketValue GetMarketValueOfTimeSlot(TimeSlot timeSlot, Bonus bonus)
+    {
+        if (timeSlot.duration.TotalSeconds == 0)
+            return MarketValue.Zero;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        AnalyserGroupReport groupReport = analyserGroup.GetExerciseVolume(timeslotToAnalyse);
+        AnalyserGroupReport groupReport = analyserGroup.GetExerciseVolume(timeSlot);
 
         // Calculate reward value
         MarketValue rewardValue = 0;
@@ -131,9 +104,9 @@ public class ContinuousRewarder : MonoPersistent
             rewardValue += Market.GetExerciseValue(individualReport.volume);
         }
 
-        // Give reward
-        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue);
-        if (reward.amount > 0)
-            PlayerCurrency.AddCurrencyAmount(reward);
+        if (bonus != null)
+            rewardValue *= bonus.ticketMultiplier;
+
+        return rewardValue;
     }
 }

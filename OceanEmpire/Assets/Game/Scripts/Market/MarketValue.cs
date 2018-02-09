@@ -10,6 +10,7 @@ public struct MarketValue
     {
         this.floatValue = floatValue;
     }
+    public static MarketValue Zero { get { return new MarketValue(0); } }
 
     #region Standard struc overrides
     public override string ToString()

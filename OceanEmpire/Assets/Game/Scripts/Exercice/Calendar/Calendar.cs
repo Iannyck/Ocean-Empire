@@ -227,7 +227,45 @@ public class Calendar : MonoPersistent
         return result;
     }
 
+    public List<BonifiedTime> GetAllBonifiedTimesInTimeSlot(TimeSlot timeSlot)
+    {
+        List<BonifiedTime> list = new List<BonifiedTime>();
 
+        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        {
+            var bonifiedTime = pastBonifiedTimes[i].GetBonifiedTime();
+            int compareResult;
+            var result = BonifiedTime.Cross(bonifiedTime, timeSlot, out compareResult);
+
+            if (result != null)
+                list.Add(result);
+
+            // bonifiedTime -> analysedTime    Stop ! On est allé trop loin dans le passé
+            if (compareResult == -1)
+            {
+                break;
+            }
+        }
+        list.Reverse();
+
+        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        {
+            var bonifiedTime = presentAndFutureBonifiedTimes[i].GetBonifiedTime();
+            int compareResult;
+            var result = BonifiedTime.Cross(bonifiedTime, timeSlot, out compareResult);
+
+            if (result != null)
+                list.Add(result);
+
+            // analysedTime -> bonifiedTime    Stop ! On est allé trop loin dans le passé
+            if (compareResult == 1)
+            {
+                break;
+            }
+        }
+
+        return list;
+    }
 
 
 
