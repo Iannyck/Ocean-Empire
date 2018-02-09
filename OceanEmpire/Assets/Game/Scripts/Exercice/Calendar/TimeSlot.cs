@@ -7,25 +7,25 @@ using UnityEngine;
 public struct TimeSlot
 {
     public DateTime start;
-    public TimeSpan duration;
-    public DateTime end { get { return start + duration; } }
+    public TimeSpan duration { get { return end - start; } }
+    public DateTime end;
 
     public TimeSlot(DateTime dateTime, TimeSpan duration)
     {
-        this.start = dateTime;
-        this.duration = duration;
+        start = dateTime;
+        end = start + duration;
     }
 
     public TimeSlot(TimeSlot copy)
     {
         start = copy.start;
-        duration = copy.duration;
+        end = copy.end;
     }
 
     public TimeSlot(DateTime start, DateTime end)
     {
         this.start = start;
-        duration = end - start;
+        this.end = end;
     }
 
     public override bool Equals(object obj)
@@ -71,26 +71,22 @@ public struct TimeSlot
 
     /// <summary>
     /// La valeur d'overlap. 
-    /// <para/>-1 = instance -> timeslot en paramètre
+    /// <para/>-1 = instance -> other
     /// <para/>0 = overlap
-    /// <para/>1 = timeslot en paramètre -> instance
+    /// <para/>1 = other -> instance
     /// </summary>
-    public int IsOverlappingWith(TimeSlot timeslot)
+    public int IsOverlappingWith(TimeSlot other)
     {
-        DateTime end = this.end;
-        DateTime otherEnd = timeslot.end;
-        DateTime otherStart = timeslot.start;
-
-        if (start < otherStart)
+        if (start < other.start)
         {
-            if (end > otherStart)
+            if (end > other.start)
                 return 0;
             else
                 return -1;
         }
         else
         {
-            if (start < otherEnd)
+            if (start < other.end)
                 return 0;
             else
                 return 1;
@@ -100,40 +96,36 @@ public struct TimeSlot
 
     /// <summary>
     /// La valeur d'overlap. 
-    /// <para/>-1 = instance -> timeslot en paramètre
+    /// <para/>-1 = instance -> other
     /// <para/>0 = overlap
-    /// <para/>1 = timeslot en paramètre -> instance
+    /// <para/>1 = other -> instance
     /// <para/>overlappingDuration = la durée total de l'overlap
     /// </summary>
-    public int IsOverlappingWith(TimeSlot timeslot, out TimeSpan overlappingDuration)
+    public int IsOverlappingWith(TimeSlot other, out TimeSpan overlappingDuration)
     {
         TimeSlot t;
-        var result = IsOverlappingWith(timeslot, out t);
+        var result = IsOverlappingWith(other, out t);
         overlappingDuration = t.duration;
         return result;
     }
 
     /// <summary>
     /// La valeur d'overlap. 
-    /// <para/>-1 = instance -> timeslot en paramètre
+    /// <para/>-1 = instance -> other
     /// <para/>0 = overlap
-    /// <para/>1 = timeslot en paramètre -> instance
-    /// <para/>overlappingTimeslot = la timeslot formé par l'overlap
+    /// <para/>1 = other -> instance
+    /// <para/>overlappingTimeslot = la time slot formé par l'overlap
     /// </summary>
-    public int IsOverlappingWith(TimeSlot timeslot, out TimeSlot overlappingTimeslot)
+    public int IsOverlappingWith(TimeSlot other, out TimeSlot overlappingTimeslot)
     {
-        DateTime end = this.end;
-        DateTime otherEnd = timeslot.end;
-        DateTime otherStart = timeslot.start;
-
-        if (start < otherStart)
+        if (start < other.start)
         {
-            if (end > otherStart)
+            if (end > other.start)
             {
-                if (end > otherEnd)
-                    overlappingTimeslot = timeslot;
+                if (end > other.end)
+                    overlappingTimeslot = other;
                 else
-                    overlappingTimeslot = new TimeSlot(otherStart, end);
+                    overlappingTimeslot = new TimeSlot(other.start, end);
                 return 0;
             }
             else
@@ -144,17 +136,17 @@ public struct TimeSlot
         }
         else
         {
-            if (start < otherEnd)
+            if (start < other.end)
             {
-                if (otherEnd < end)
-                    overlappingTimeslot = new TimeSlot(start, otherEnd);
+                if (other.end < end)
+                    overlappingTimeslot = new TimeSlot(start, other.end);
                 else
                     overlappingTimeslot = this;
                 return 0;
             }
             else
             {
-                overlappingTimeslot = new TimeSlot(new DateTime(), new TimeSpan(0));
+                overlappingTimeslot = new TimeSlot(new DateTime(), new DateTime());
                 return 1;
             }
         }
@@ -163,9 +155,9 @@ public struct TimeSlot
 
     /// <summary>
     /// La valeur d'overlap.
-    /// <para/>-1 = instance -> date en paramètre
+    /// <para/>-1 = instance -> date
     /// <para/>0 = overlap
-    /// <para/>1 = date en paramètre -> instance
+    /// <para/>1 = date -> instance
     /// </summary>
     public int IsOverlappingWith(DateTime dateTime)
     {

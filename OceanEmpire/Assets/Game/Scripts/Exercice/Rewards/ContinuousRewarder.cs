@@ -29,19 +29,6 @@ public class ContinuousRewarder : MonoPersistent
         {
             UpdateReward();
         }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            var start = new DateTime(2018, 2, 6, 1, 30, 0);
-            var end = new DateTime(2018, 2, 6, 5, 30, 0);
-            //List<BonifiedTime> result = Calendar.get GetAllBTInTimeSlot(new TimeSlot(start, end));
-            //for (int i = 0; i < result.Count; i++)
-            //{
-            //    print(result[i].bonus + " : " + result[i].timeSlot);
-            //}
-            //if (result.Count == 0)
-            //    print("nothin'");
-        }
     }
 
     public void ForceUpdate() { UpdateReward(); }
