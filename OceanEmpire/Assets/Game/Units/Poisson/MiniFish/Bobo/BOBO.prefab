@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114766056936082448}
   - component: {fileID: 114006607524244626}
   - component: {fileID: 114021408903366914}
+  - component: {fileID: 114045833318967798}
   m_Layer: 9
   m_Name: BOBO
   m_TagString: Untagged
@@ -196,6 +197,23 @@ MonoBehaviour:
   checkX: 0
   overrideDefaultMargin: 0
   margin: 1000
+--- !u!114 &114045833318967798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81be136143904e14b8c0eeec0ea4c7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moment: 0
+  startDelay: 0
+  electricInterval: 2.5
+  electricDuration: 2.5
+  fishSprite: {fileID: 212771005577804690}
+  electricCollider: {fileID: 58109501744363240}
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
