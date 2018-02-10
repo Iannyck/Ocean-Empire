@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Upgrade : Item {
+public class Upgrade : Item{
 
 	// Use this for initialization
 	void Start () {

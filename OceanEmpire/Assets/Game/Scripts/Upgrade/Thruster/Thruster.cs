@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Ocean Empire/Item/Thruster")]
+
 public class Thruster : Upgrade {
 
     public float subMarineSpeed = 1;
@@ -15,5 +15,12 @@ public class Thruster : Upgrade {
     public float GetAcceleration()
     {
         return subMarineAcceleration;
+    }
+
+
+    public Thruster(float speed = 1, float acceleration = 1)
+    {
+        subMarineSpeed = speed;
+        subMarineAcceleration = acceleration;
     }
 }

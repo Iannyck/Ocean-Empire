@@ -11,8 +11,8 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
 
     [SerializeField] private List<B> upgradeBuilders;
 
-    [SerializeField, ReadOnly] private int ownedUpgrade = -1;
-    [SerializeField, ReadOnly] private string nextUpgGenCode = "";
+    [SerializeField, ReadOnly] protected int ownedUpgrade = -1;
+    [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
 
     private string ownedUpgradeKey;
     private string nextUpgGenCodeKey;
@@ -34,10 +34,17 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
         UpgradeDescription prebuilt = GetPrebuilt(ownedUpgrade + 1);
         if (prebuilt != null)
             return prebuilt;
-        else return GenerateNextDescription(nextUpgGenCode);
+        else
+        {
+            if (nextUpgGenCode == "")
+                MakeNextGenCode(ownedUpgrade + 1);
+
+            return GenerateNextDescription(nextUpgGenCode);
+        }
     }
 
     public abstract UpgradeDescription GenerateNextDescription(string nextUpgGenCode);
+    public abstract void MakeNextGenCode(int level);
 
     public bool Buy(CurrencyType type)
     {
@@ -53,7 +60,7 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
         return GetNextDescription().GetCost(type);
     }
 
-    private void Load()
+    protected void Load()
     {
         if (ownedUpgrade == -1)
             ownedUpgrade = dataSaver.GetInt(ownedUpgradeKey, -1);
@@ -61,7 +68,7 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
             nextUpgGenCode = dataSaver.GetString(nextUpgGenCode, "");
     }
 
-    private void Save()
+    protected void Save()
     {
         dataSaver.SetInt(ownedUpgradeKey, ownedUpgrade);
         dataSaver.SetString(nextUpgGenCodeKey, nextUpgGenCode);

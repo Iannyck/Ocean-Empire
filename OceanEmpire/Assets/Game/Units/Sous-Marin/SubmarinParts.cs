@@ -28,13 +28,13 @@ public class SubmarinParts : MonoBehaviour
         HarpoonThrowerDescriptionOLD HPD = ItemsList.GetEquipHarpoonThrower();
         FishContainerDescription FC = ItemsList.GetEquipFishContainer();
         GazTankDescriptionOLD GT = ItemsList.GetEquipGazTank();
-
+        
         thruster = TD.GetItem<Thruster>();
         if (HPD != null)
             harpoonThrower = HPD.GetItem<HarpoonThrower>();
         fishContainer = FC.GetItem<FishContainer>();
         gazTank = GT.GetItem<GazTank>();
-
+        
         fishContainer.ResetContainedFish();
         gazTank.SetGaz();
     }

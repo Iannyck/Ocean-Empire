@@ -2,13 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public abstract class UpgradeDescription
 {
+    public UpgradeDescription() { }
+    public UpgradeDescription(string nm, int lv, string desc, int coin, int tick, Sprite Icon)
+    {
+        itemName = nm;
+        upgradeLevel = lv;
+        itemDescription = desc;
+        moneyCost = coin;
+        ticketCost = tick;
+        itemIcon = Icon;
+    }
+
     [SerializeField]
     private string itemName;
     [SerializeField]
+    private int upgradeLevel;
+    [SerializeField]
     private string itemDescription;
+    [SerializeField]
+    private int moneyCost;
+    [SerializeField]
+    private int ticketCost;
+    [SerializeField]
+    private Sprite itemIcon;
 
     public int GetCost(CurrencyType type)
     {
@@ -25,18 +44,13 @@ public abstract class UpgradeDescription
         }
     }
 
-    [SerializeField]
-    private int moneyCost;
-    [SerializeField]
-    private int ticketCost;
-
-    [SerializeField]
-    private Sprite itemIcon;
-
-
     public Sprite GetShopIcon()
     {
         return itemIcon;
+    }
+    private int GetUpgradeLevel()
+    {
+        return upgradeLevel;
     }
     public string GetTitle()
     {

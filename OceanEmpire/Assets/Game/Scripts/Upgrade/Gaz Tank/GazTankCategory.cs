@@ -10,4 +10,6 @@ public class GazTankCategory : UpgradeCategory<GazTankDescBuilder, GazTankDescri
     {
         return null;
     }
+
+    public override void MakeNextGenCode(int level) { }
 }
