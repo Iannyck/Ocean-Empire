@@ -32,6 +32,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     private SlingshotControl slingshotControl;
 
+    public bool inputEnable = true;
 
     public bool movementEnable = false;
 
@@ -104,20 +105,23 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     public void GetDraggingPosition()
     {
-        Vector2 position;
-        if (DragDetection.GetTouchPosition(out position) && slingshotControl.isDragging == false)
+        if (inputEnable)
         {
-            position = Game.GameCamera.cam.ScreenToWorldPoint(position);
-
-            float sqrMag = (position - rb.position).sqrMagnitude;
-            if (sqrMag > deadZoneRadiusSQR)
+            Vector2 position;
+            if (DragDetection.GetTouchPosition(out position) && slingshotControl.isDragging == false)
             {
-                float d = distanceFromBound;
+                position = Game.GameCamera.cam.ScreenToWorldPoint(position);
 
-                currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
-                currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
+                float sqrMag = (position - rb.position).sqrMagnitude;
+                if (sqrMag > deadZoneRadiusSQR)
+                {
+                    float d = distanceFromBound;
 
-                realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
+                    currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
+                    currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
+
+                    realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
+                }
             }
         }
     }
@@ -145,5 +149,35 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
     FishContainer GetFishContainer()
     {
         return fishContainer;
+    }
+
+    public void PushAwayFromTarget(float duration, float speedBoost, float force)
+    {
+        inputEnable = false;
+        Vector2 displacement = currentTarget - (Vector2)transform.position;
+
+        float minDistance = 1;
+        if (displacement.sqrMagnitude < (minDistance * minDistance))
+            displacement = (displacement.normalized) * minDistance;
+
+        currentTarget = (Vector2)transform.position + (displacement * -1 * force);
+
+        maximumSpeed += speedBoost;
+
+        TransformFlipper flipper = GetComponentInChildren<TransformFlipper>();
+        if (flipper != null)
+            flipper.enabled = false;
+
+        TransformTilter tilter = GetComponentInChildren<TransformTilter>();
+        if (tilter != null)
+            tilter.enabled = false;
+
+        this.DelayedCall(delegate ()
+        {
+            maximumSpeed -= speedBoost;
+            inputEnable = true;
+            flipper.enabled = true;
+            tilter.enabled = true;
+        },duration);
     }
 }

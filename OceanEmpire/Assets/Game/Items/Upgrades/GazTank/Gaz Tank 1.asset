@@ -11,4 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ed5e5b1be679da4c8db648bbdce27ed, type: 3}
   m_Name: Gaz Tank 1
   m_EditorClassIdentifier: 
-  upgradeLevel: 0
+  upgradeLevel: 1
+  data:
+    itemName: 
+    itemDescription: 
+    moneyCost: 0
+    ticketCost: 0
+    itemIcon: {fileID: 0}
+    gazTank: {fileID: 0}
