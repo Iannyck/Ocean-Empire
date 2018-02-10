@@ -8,6 +8,13 @@ public static class VectorExtensions
             return Mathf.Atan(v.y / v.x) * Mathf.Rad2Deg + 180;
         return Mathf.Atan(v.y / v.x) * Mathf.Rad2Deg;
     }
+    public static Vector2 SwapXAndY(this Vector2 v)
+    {
+        float wasX = v.x;
+        v.x = v.y;
+        v.y = wasX;
+        return v;
+    }
     public static Vector2 Clamped(this Vector2 v, Vector2 min, Vector2 max)
     {
         return new Vector2(Mathf.Clamp(v.x, min.x, max.x),
