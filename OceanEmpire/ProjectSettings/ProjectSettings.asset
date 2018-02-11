@@ -119,7 +119,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2
+  bundleVersion: 4
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -139,7 +139,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.UQAC.OceanEmpire
   buildNumber: {}
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 4
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -213,8 +213,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/etudiant/Documents/Ocean-Empire/Key/oceanEmpireKey.keystore
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: D:/Game Projects/Ocean Empire/Key/oceanEmpireKey.keystore
+  AndroidKeyaliasName: ocean empire
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1

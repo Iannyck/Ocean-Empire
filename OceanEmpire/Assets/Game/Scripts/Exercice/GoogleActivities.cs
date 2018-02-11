@@ -30,7 +30,7 @@ public class GoogleActivities : MonoPersistent
     private bool waitingForDataUpdate = false;
 
     // Data
-    private List<GoogleReader.Activity> activities = new List<GoogleReader.Activity>();
+    public List<GoogleReader.Activity> activities = new List<GoogleReader.Activity>();
     public List<ActivityReport> records = new List<ActivityReport>();
 
     // Instance

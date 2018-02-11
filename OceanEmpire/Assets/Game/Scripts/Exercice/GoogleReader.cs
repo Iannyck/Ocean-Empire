@@ -50,7 +50,7 @@ public class GoogleReader : MonoBehaviour
     const string filePath = "/data/user/0/com.UQAC.OceanEmpire/files/activities.txt";
 
     // Exemple d'une ligne dans le fichier
-    const string exempleFile = "0|0|0|Fri Nov 17 14:34:14 EST 2017\n\r";
+    const string exempleFile = "10|10|10|Fri Nov 17 14:34:14 EST 2017\n\r10|10|10|Fri Nov 17 14:34:14 EST 2017\n\r10|10|10|Fri Nov 17 14:34:14 EST 2017\n\r";
 
     public static bool LogLesInfoDesThread = false;
 
@@ -109,75 +109,83 @@ public class GoogleReader : MonoBehaviour
         // Lecture du document sur un Thread
         ReadDocument(delegate(string output){
             string document = output; // output enregistre dans un seul string
-            //Debug.Log("CUTTING THE FILE STRING");
+
             if(document == null)
             {
                 onComplete.Invoke(null);
                 return;
             }
 
-        // Meme code que pour PC
-        List<Activity> result = new List<Activity>();
+            // Meme code que pour PC
+            List<Activity> result = new List<Activity>();
 
-        bool readingDate = false;
-        string probWalk = "";
-        string probRun = "";
-        string probBicycle = "";
-        string currentDateTime = "";
+            bool readingDate = false;
+            string probWalk = "";
+            string probRun = "";
+            string probBicycle = "";
+            string currentDateTime = "";
 
-        int exerciceRead = 0;
+            int exerciceRead = 0;
 
-        for (int i = 0; i < document.Length; i++)
-        {
-            char currentChar = document[i];
-            if (currentChar == '|')
+            // Rappel structure d'un enregistrement : 0|0|0|Fri Nov 17 14:34:14 EST 2017\n\r
+            //                                        marche|course|bicicle|date\FIN
+            Debug.Log(document);
+            for (int i = 0; i < document.Length; i++)
             {
-                if(exerciceRead == 3)
+                char currentChar = document[i];
+                if (currentChar == '|')
                 {
-                    readingDate = true;
-                    currentDateTime = "";
+                    exerciceRead++;
+                    if (exerciceRead == 3)
+                    {
+                        readingDate = true;
+                        currentDateTime = "";
+                    }
+                    continue;
                 }
-                continue;
-            }
-            else if (currentChar == '\r')
-            {
-                readingDate = false;
-                result.Add(new Activity(IntParseFast(probWalk), IntParseFast(probRun), IntParseFast(probBicycle), ConvertStringToDate(currentDateTime)));
-                probWalk = "";
-                continue;
-            }
-            else if (currentChar == '\n')
-                continue;
-
-            if (readingDate)
-            {
-                currentDateTime += currentChar;
-                continue;
-            }
-            else
-            {
-                switch (exerciceRead)
+                else if (currentChar == '\r')
                 {
-                    case 0:
-                        probWalk += currentChar;
-                        break;
-                    case 1:
-                        probRun += currentChar;
-                        break;
-                    case 2:
-                        probBicycle += currentChar;
-                        break;
-                    default:
-                        break;
+                    readingDate = false;
+                    Debug.Log(probWalk + "~" + probRun + "~" + probBicycle + "~" + currentDateTime);
+                    result.Add(new Activity(IntParseFast(probWalk), IntParseFast(probRun), IntParseFast(probBicycle), ConvertStringToDate(currentDateTime)));
+                    probWalk = "";
+                    probRun = "";
+                    probBicycle = "";
+                    exerciceRead = 0;
+                    continue;
                 }
-                exerciceRead++;
-                continue;
+                else if (currentChar == '\n')
+                    continue;
+
+                if (readingDate)
+                {
+                    currentDateTime += currentChar;
+                    continue;
+                }
+                else
+                {
+                    switch (exerciceRead)
+                    {
+                        case 0:
+                            probWalk += currentChar;
+                            break;
+                        case 1:
+                            probRun += currentChar;
+                            break;
+                        case 2:
+                            probBicycle += currentChar;
+                            break;
+                        default:
+                            break;
+                    }
+                    continue;
+                }
             }
-        }
             //Debug.Log("ACTIVITIES LOADED");
             onComplete.Invoke(result);
         });
 #else
+
         // CODE EXECUTER QUAND ON EST SUR PC
         string document = exempleFile;
 
@@ -200,7 +208,8 @@ public class GoogleReader : MonoBehaviour
             char currentChar = document[i];
             if (currentChar == '|')
             {
-                if(exerciceRead == 3)
+                exerciceRead++;
+                if (exerciceRead == 3)
                 {
                     readingDate = true;
                     currentDateTime = "";
@@ -214,6 +223,7 @@ public class GoogleReader : MonoBehaviour
                 probWalk = "";
                 probRun = "";
                 probBicycle = "";
+                exerciceRead = 0;
                 continue;
             }
             else if (currentChar == '\n')
@@ -240,7 +250,6 @@ public class GoogleReader : MonoBehaviour
                     default:
                         break;
                 }
-                exerciceRead++;
                 continue;
             }
         }

@@ -89,64 +89,59 @@ public class ActivityDetection extends IntentService {
         boolean runSaved = false;
         boolean bikeSaved = false;
 
-	string walkConfidence;
-	string runConfidence;
-	string bikeConfidence;
+	    String walkConfidence = "";
+        String runConfidence = "";
+        String bikeConfidence = "";
 
         for( DetectedActivity activity : probableActivities ) {
             switch( activity.getType() ) {
                 case DetectedActivity.IN_VEHICLE: {
-                    Log.e( "ActivityRecogition", "In Vehicle: " + activity.getConfidence() );
                     break;
                 }
                 case DetectedActivity.ON_BICYCLE: {
                     bikeSaved = true;
-                    Log.e( "ActivityRecogition", "On Bicycle: " + activity.getConfidence() );
-		    bikeConfidence = "" + activity.getConfidence();
+		            bikeConfidence = "" + activity.getConfidence();
                     break;
                 }
                 case DetectedActivity.ON_FOOT: {
-                    Log.e( "ActivityRecogition", "On Foot: " + activity.getConfidence() );
                     break;
                 }
                 case DetectedActivity.RUNNING: {
                     runSaved = true;
-                    Log.e( "ActivityRecogition", "Running: " + activity.getConfidence() );
-		    runConfidence = "" + activity.getConfidence();
+		            runConfidence = "" + activity.getConfidence();
                     break;
                 }
                 case DetectedActivity.STILL: {
-                    Log.e( "ActivityRecogition", "Still: " + activity.getConfidence() );
                     break;
                 }
                 case DetectedActivity.TILTING: {
-                    Log.e( "ActivityRecogition", "Tilting: " + activity.getConfidence() );
                     break;
                 }
                 case DetectedActivity.WALKING: {
                     walkSaved = true;
-                    Log.e( "ActivityRecogition", "Walking: " + activity.getConfidence() );
-		    walkConfidence = "" + activity.getConfidence();
+                    walkConfidence = "" + activity.getConfidence();
                     break;
                 }
                 case DetectedActivity.UNKNOWN: {
-                    Log.e( "ActivityRecogition", "Unknown: " + activity.getConfidence() );
                     break;
                 }
             }
         }
+
         if(!walkSaved){
-            Log.e( "ActivityRecogition", "Walking: 0");
-	    walkConfidence = "0";
+	        walkConfidence = "0";
         }
         if(!runSaved){
-            Log.e( "ActivityRecogition", Running : 0");
-	    runConfidence = "0";
+	        runConfidence = "0";
         }
         if(!bikeSaved){
-            Log.e( "ActivityRecogition", Biking : 0");
-	    bikeConfidence = "0";
+	        bikeConfidence = "0";
         }
-	writeToFile(walkConfidence+"|"+runConfidence+"|"+bikeConfidence+"|");
+
+        Log.e( "ActivityRecogition", "Walking: " + walkConfidence);
+        Log.e( "ActivityRecogition", "Running : " + runConfidence);
+        Log.e( "ActivityRecogition", "Biking : " + bikeConfidence);
+
+	    writeToFile(walkConfidence+"|"+runConfidence+"|"+bikeConfidence+"|");
     }
 }
