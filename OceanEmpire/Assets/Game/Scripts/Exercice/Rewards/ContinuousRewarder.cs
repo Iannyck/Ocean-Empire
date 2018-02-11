@@ -10,36 +10,65 @@ using System;
 /// </summary>
 public class ContinuousRewarder : MonoPersistent
 {
+    private const string SAVEKEY_LASTUPDATE = "CR_lastUpdate";
     [SerializeField] private AnalyserGroup analyserGroup;
+    [SerializeField] private DataSaver dataSaver;
 
-    [SerializeField, Suffix("seconds")] private float updateEvery = 5;
+    [SerializeField, Suffix("seconds")] private int updateEvery = 5;
 
     [SerializeField] private CurrencyType rewardCurrency = CurrencyType.Ticket;
-    [SerializeField] private float lastUpdate;
+
+    private DateTime lastUpdate;
+    private DateTime nextUpdate;
+
+    private float nextCheckTimer = 0;
 
     public override void Init(Action onComplete)
     {
         onComplete();
+
+        nextUpdate = DateTimeNow;
+
+        object lastUpdateOBJ = dataSaver.GetObjectClone(SAVEKEY_LASTUPDATE);
+        if (lastUpdateOBJ == null)
+            lastUpdate = DateTimeNow;
+        else
+            lastUpdate = (DateTime)lastUpdateOBJ;
+    }
+
+    DateTime DateTimeNow
+    {
+        get { return DateTime.Now; }
     }
 
     private void Update()
     {
-        var currentTime = Time.realtimeSinceStartup;
-        if (currentTime > lastUpdate + updateEvery)
+        nextCheckTimer -= Time.unscaledDeltaTime;
+
+        if(nextCheckTimer < 0)
         {
-            UpdateReward();
+            CheckIfNeedToUpdate();
+            nextCheckTimer = updateEvery / 10;
         }
+    }
+
+    public void CheckIfNeedToUpdate()
+    {
+        if (DateTimeNow > nextUpdate)
+            UpdateReward();
     }
 
     public void ForceUpdate() { UpdateReward(); }
 
     private void UpdateReward()
     {
-        var currentTime = Time.realtimeSinceStartup;
-        var elapsedTime = currentTime - lastUpdate;
-        lastUpdate = Time.realtimeSinceStartup;
+        var now = DateTimeNow;
+        var timeslotToAnalyse = new TimeSlot(lastUpdate, now);
 
-        var timeslotToAnalyse = new TimeSlot(DateTime.Now.AddSeconds(-elapsedTime), DateTime.Now);
+        lastUpdate = now;
+        nextUpdate = lastUpdate + new TimeSpan(0, 0, updateEvery);
+
+        dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
 
         AnalyseAndRewardTimeSlot(timeslotToAnalyse);
     }

@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   analyserGroup: {fileID: 11400000, guid: fa0255cbbcaccda4d8f8e7923dabe376, type: 2}
+  dataSaver: {fileID: 11400000, guid: 91b765acb2de1b840833439740cdbf3e, type: 2}
   updateEvery: 5
   rewardCurrency: 1
-  lastUpdate: 0
