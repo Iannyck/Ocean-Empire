@@ -6,6 +6,7 @@ using UnityEngine;
 public class RunAnalyser : BaseAnalyser
 {
     public float multiplier = 1.0f;
+    public float minimumValidation = 50;
 
     public override float CalculateExerciceVolume(GoogleActivities.ActivityReport previous, GoogleActivities.ActivityReport now)
     {
@@ -49,7 +50,7 @@ public class RunAnalyser : BaseAnalyser
                 if (previousRecord != null)
                 {
                     // L'exercice precedent etait de la course ?
-                    if (previousRecord.best.type == PrioritySheet.ExerciseTypes.run)
+                    if (previousRecord.best.type == PrioritySheet.ExerciseTypes.run && previousRecord.best.rate >= minimumValidation)
                     {
                         // Oui, on considere donc la difference de temps comme etant le volume
                         volume.volume += CalculateExerciceVolume(previousRecord, currentRecord);
@@ -65,7 +66,7 @@ public class RunAnalyser : BaseAnalyser
             else if (nextExitIsOutOfTimeslot) // On a fini, dernier calcul et on retourne le resultat
             {
                 // L'exercice precedent etait de la course ?
-                if (previousRecord.best.type == PrioritySheet.ExerciseTypes.run)
+                if (previousRecord.best.type == PrioritySheet.ExerciseTypes.run && previousRecord.best.rate >= minimumValidation)
                 {
                     // Oui, on considere donc la difference de temps comme etant le volume
                     volume.volume += CalculateExerciceVolume(previousRecord, currentRecord);
