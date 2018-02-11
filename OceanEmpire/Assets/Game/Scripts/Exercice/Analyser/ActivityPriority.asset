@@ -11,10 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32fff162530975a438c8dcf3734c7023, type: 3}
   m_Name: ActivityPriority
   m_EditorClassIdentifier: 
-  Exercices:
-  - type: 0
-    priority: 1
-  - type: 1
-    priority: 2
-  - type: 2
-    priority: 3
+  Exercices: 000000000100000002000000

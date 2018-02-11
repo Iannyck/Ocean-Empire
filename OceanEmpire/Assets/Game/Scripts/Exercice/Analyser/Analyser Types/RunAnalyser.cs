@@ -10,7 +10,7 @@ public class RunAnalyser : BaseAnalyser
     public override float CalculateExerciceVolume(GoogleActivities.ActivityReport previous, GoogleActivities.ActivityReport now)
     {
         // Nombre de minute course
-        return now.time.Subtract(previous.time).Minutes * multiplier;
+        return now.time.Subtract(previous.time).Seconds * multiplier;
     }
 
     public override AnalyserReport GetExerciseVolume(TimeSlot analysedTimeslot)
@@ -20,66 +20,63 @@ public class RunAnalyser : BaseAnalyser
 
         // Parametres a calculer
         ExerciseVolume volume;
-        // Le volume est de la course
-        volume.type = ExerciseType.Run;
+        // Le volume est de la marche
+        volume.type = ExerciseType.Walk;
         // Volume start a 0
         volume.volume = 0;
 
         // Temps premier et dernier exercice pour rapport
-        bool firstExericeEncounter = false;
+        bool firstExericeEncounter = true;
         DateTime firstExerciceTime = new DateTime();
         DateTime lastExerciceTime = new DateTime();
 
-        // Gestion d'une zone d'exercice
-        bool previousExerciceWasWalk = false;
-        GoogleActivities.ActivityReport zoneFirstExercice = null;
-        GoogleActivities.ActivityReport zoneLastExercice = null;
+        bool nextExitIsOutOfTimeslot = false;
 
         for (int i = 0; i < activities.Count; i++)
         {
+            GoogleActivities.ActivityReport currentRecord = activities[i];
+            GoogleActivities.ActivityReport previousRecord = null;
+            if (i != 0)
+                previousRecord = activities[i - 1];
+
             // Si l'exercice est dans la timeslot
-            if (activities[i].time >= analysedTimeslot.start && activities[i].time <= analysedTimeslot.end)
+            if (currentRecord.time >= analysedTimeslot.start && currentRecord.time <= analysedTimeslot.end)
             {
-                // Si l'exercice precedent etait course
-                if (previousExerciceWasWalk)
-                {
-                    // On compte les donnees de l'exercice dans le volume total
-                    volume.volume += CalculateExerciceVolume(zoneLastExercice, activities[i]);
+                // Prochaine fois qu'on rentre pas c'est qu'on a fini notre job
+                nextExitIsOutOfTimeslot = true;
 
-                    // Si on a deja rencontrer le premier exercice, on enregistre le courrant comme etant le dernier rencontrer
-                    if (firstExericeEncounter)
-                        zoneLastExercice = activities[i - 1];
-                }
-
-                // Si l'exercice est de la course
-                if (activities[i].best.type == PrioritySheet.ExerciseTypes.run)
+                // as-t-on vraiment un enregistrement precedent ?
+                if (previousRecord != null)
                 {
-                    // Si on a pas encore rencontrer le premier exercice
-                    if (!firstExericeEncounter)
+                    // L'exercice precedent etait de la course ?
+                    if (previousRecord.best.type == PrioritySheet.ExerciseTypes.run)
                     {
-                        // On enregistre son temps
-                        firstExerciceTime = activities[i].time;
-                        firstExericeEncounter = true;
-                    }
+                        // Oui, on considere donc la difference de temps comme etant le volume
+                        volume.volume += CalculateExerciceVolume(previousRecord, currentRecord);
 
-                    // Si l'exercice precedent n'etait pas de la course, maintenant s'en ai !
-                    if (!previousExerciceWasWalk)
-                    {
-                        previousExerciceWasWalk = true;
-                        zoneFirstExercice = activities[i];
+                        if (firstExericeEncounter)
+                        {
+                            firstExericeEncounter = false;
+                            firstExerciceTime = previousRecord.time;
+                        }
                     }
-                }
-                else
-                {
-                    // On est toujours pas en train de course
-                    previousExerciceWasWalk = false;
                 }
             }
-            // On prend le temps du dernier exercice
-            lastExerciceTime = zoneLastExercice.time;
+            else if (nextExitIsOutOfTimeslot) // On a fini, dernier calcul et on retourne le resultat
+            {
+                // L'exercice precedent etait de la course ?
+                if (previousRecord.best.type == PrioritySheet.ExerciseTypes.run)
+                {
+                    // Oui, on considere donc la difference de temps comme etant le volume
+                    volume.volume += CalculateExerciceVolume(previousRecord, currentRecord);
+                    lastExerciceTime = currentRecord.time;
+                }
+                break;
+            }
         }
 
         // construction du rapport
+        //Debug.Log("Volume | " + volume + "(" + analysedTimeslot.start + "-" + analysedTimeslot.end + ")");
         AnalyserReport report = new AnalyserReport(volume, analysedTimeslot, firstExerciceTime, lastExerciceTime);
 
         // envoie du rapport

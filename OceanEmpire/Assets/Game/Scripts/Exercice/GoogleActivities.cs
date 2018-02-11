@@ -130,6 +130,13 @@ public class GoogleActivities : MonoPersistent
         records = new List<ActivityReport>();
     }
 
+    public void ClearAllActivitiesSave()
+    {
+        activities.Clear();
+        records.Clear();
+        GoogleReader.ResetActivitiesSave();
+    }
+
     /*
 
     private void FillReport(List<GoogleReader.Activity> activites, ref Report result)

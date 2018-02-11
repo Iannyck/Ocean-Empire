@@ -49,8 +49,15 @@ public class GoogleReader : MonoBehaviour
     // File Path
     const string filePath = "/data/user/0/com.UQAC.OceanEmpire/files/activities.txt";
 
-    // Exemple d'une ligne dans le fichier
-    const string exempleFile = "10|10|10|Fri Nov 17 14:34:14 EST 2017\n\r10|10|10|Fri Nov 17 14:34:14 EST 2017\n\r10|10|10|Fri Nov 17 14:34:14 EST 2017\n\r";
+    // Exemple d'un fichier
+    const string exempleFile = "60|0|0|Sun Feb 11 17:52:28 EST 2018\n\r" +
+                               "0|0|0|Sun Feb 11 17:52:32 EST 2018\n\r" +
+                               "70|0|0|Sun Feb 11 17:52:34 EST 2018\n\r" +
+                               "75|0|0|Sun Feb 11 17:52:36 EST 2018\n\r" +
+                               "80|0|0|Sun Feb 11 17:52:38 EST 2018\n\r" +
+                               "0|0|0|Sun Feb 11 17:52:40 EST 2018\n\r" +
+                               "90|0|0|Sun Feb 11 17:52:42 EST 2018\n\r" +
+                               "90|0|0|Sun Feb 11 17:52:50 EST 2018\n\r";
 
     public static bool LogLesInfoDesThread = false;
 
@@ -88,7 +95,7 @@ public class GoogleReader : MonoBehaviour
         Thread t = new Thread(new ThreadStart(() =>
         {
             //Debug.Log("DELETING FILE");
-            using (File.Create(filePath)) ;
+            using (File.Create(filePath));
             FileInfo info = new FileInfo(filePath);
             if (info.Length > 0)
             {
@@ -98,6 +105,11 @@ public class GoogleReader : MonoBehaviour
             {
                 MessagePopup.DisplayMessageFromThread("File Deleted - Good job !");
             }
+            LoadLastActivityString(delegate(string lastLine) {
+                StreamWriter writer = new StreamWriter(filePath, true);
+                writer.WriteLine(lastLine);
+                writer.Close();
+            });
         }));
         t.Start();
     }
@@ -129,7 +141,7 @@ public class GoogleReader : MonoBehaviour
 
             // Rappel structure d'un enregistrement : 0|0|0|Fri Nov 17 14:34:14 EST 2017\n\r
             //                                        marche|course|bicicle|date\FIN
-            Debug.Log(document);
+            //Debug.Log(document);
             for (int i = 0; i < document.Length; i++)
             {
                 char currentChar = document[i];
@@ -146,7 +158,7 @@ public class GoogleReader : MonoBehaviour
                 else if (currentChar == '\r')
                 {
                     readingDate = false;
-                    Debug.Log(probWalk + "~" + probRun + "~" + probBicycle + "~" + currentDateTime);
+                    //Debug.Log(probWalk + "~" + probRun + "~" + probBicycle + "~" + currentDateTime);
                     result.Add(new Activity(IntParseFast(probWalk), IntParseFast(probRun), IntParseFast(probBicycle), ConvertStringToDate(currentDateTime)));
                     probWalk = "";
                     probRun = "";
@@ -255,6 +267,66 @@ public class GoogleReader : MonoBehaviour
         }
 
         onComplete.Invoke(result);
+#endif
+    }
+
+    public static void LoadLastActivityString(Action<string> onComplete = null)
+    {
+        // CODE EXECUTER QUAND ON EST SUR ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // Lecture du document sur un Thread
+        ReadDocument(delegate(string output){
+            string document = output; // output enregistre dans un seul string
+
+            if(document == null)
+            {
+                onComplete.Invoke(null);
+                return;
+            }
+
+            // Rappel structure d'un enregistrement : 0|0|0|Fri Nov 17 14:34:14 EST 2017\n\r
+            //                                        marche|course|bicicle|date\FIN
+            
+            string previousLine = "";
+            string currentLine = "";
+            for (int i = 0; i < document.Length; i++)
+            {
+                char currentChar = document[i];
+                if (currentChar == '\r')
+                {
+                    currentLine += currentChar;
+                    previousLine = currentLine;
+                    currentLine = "";
+                } else {
+                    currentLine += currentChar;
+                }
+            }
+
+            onComplete.Invoke(previousLine);
+        });
+#else
+
+        // CODE EXECUTER QUAND ON EST SUR PC
+        string document = exempleFile;
+
+        string previousLine = "";
+        string currentLine = "";
+        for (int i = 0; i < document.Length; i++)
+        {
+            char currentChar = document[i];
+            if (currentChar == '\r')
+            {
+                currentLine += currentChar;
+                previousLine = currentLine;
+                currentLine = "";
+            }
+            else
+            {
+                currentLine += currentChar;
+            }
+        }
+
+        onComplete.Invoke(previousLine);
 #endif
     }
 
