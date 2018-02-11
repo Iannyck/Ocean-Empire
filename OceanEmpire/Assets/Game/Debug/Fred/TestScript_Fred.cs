@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TestScript_Fred : MonoBehaviour
 {
-    public RandomHSVColor randomColor;
-    public Color color;
+    public string manualGenCode;
+    public GeneratedSpriteKit readKit;
+    public GeneratedSpriteKit kit;
+    public SpriteKitGenerator boboKitGenerator;
 
     void Start()
     {
@@ -16,7 +18,11 @@ public class TestScript_Fred : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            color = randomColor.GetRandomColor();
+            kit = boboKitGenerator.GenerateNewSpriteKit();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            readKit = boboKitGenerator.GenerateSpriteKit(manualGenCode);
         }
     }
 }
