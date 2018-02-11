@@ -125,16 +125,20 @@ public class Calendar : MonoPersistent
             int result = pastBonifiedTimes[i].timeSlot.IsOverlappingWith(timeslot);
             if (result == 0)
                 return true;
-            else if (result == -1)
-                return false;
+
+            //Too far
+            if (result == -1)
+                break;
         }
         for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
         {
             int result = presentAndFutureBonifiedTimes[i].timeSlot.IsOverlappingWith(timeslot);
             if (result == 0)
                 return true;
-            else if (result == 1)
-                return false;
+
+            //Too far
+            if (result == 1)
+                break;
         }
         return false;
     }
