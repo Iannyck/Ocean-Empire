@@ -13,8 +13,7 @@ public class WanderBrain : Brain
     [MinMaxSlider(1, 15), SerializeField] Vector2 brainFreezeFrequence = new Vector2(4, 8);
     [MinMaxSlider(1, 6), SerializeField] Vector2 brainFreezeDuration = new Vector2(1.5f, 3);
 
-    [Header("Wander"), SerializeField] bool clampWander = true;
-    [SerializeField] float changeDestIfCloserThan = 0.25f;
+    [Header("Wander"), SerializeField] float changeDestIfCloserThan = 0.25f;
     [MinMaxSlider(-90, 90), SerializeField] Vector2 angleRange = new Vector2(-45, 45);
     [MinMaxSlider(0.25f, 5), SerializeField] Vector2 distanceRange = new Vector2(1f, 2.5f);
 
