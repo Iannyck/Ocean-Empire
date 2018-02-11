@@ -72,6 +72,10 @@ public abstract class BaseFish : MonoBehaviour, IKillable
         BaseFishDriver driver = GetComponent<BaseFishDriver>();
         if (driver != null)
             driver.ClearMind();
+
+        BrainBehaviour brainBehaviour = GetComponent<BrainBehaviour>();
+        if (brainBehaviour != null)
+            brainBehaviour.ResetBrain();
     }
 
     public bool IsDead()

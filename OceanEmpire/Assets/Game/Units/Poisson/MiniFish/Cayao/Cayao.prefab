@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4391991207605276}
   - component: {fileID: 50708007439193562}
   - component: {fileID: 114766056936082448}
-  - component: {fileID: 114006607524244626}
+  - component: {fileID: 114964399605969236}
   - component: {fileID: 114021408903366914}
   - component: {fileID: 114962999608621408}
   m_Layer: 9
@@ -143,30 +143,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.2
---- !u!114 &114006607524244626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1365461041918330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30bf0b66c9342d844844e9a6fc5a33d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 0.75
-  acceleration: 1.5
-  defaultBehaviour: 0
-  fleePlayer: 0
-  fleeDistance: 1
-  canBrainFreeze: 1
-  brainFreezeFrequence: {x: 4, y: 8}
-  brainFreezeDuration: {x: 1.5, y: 3}
-  clampWander: 1
-  changeDestIfCloserThan: 0.25
-  angleRange: {x: -45, y: 45}
-  distanceRange: {x: 2.5, y: 5}
-  currentBehaviour: 0
 --- !u!114 &114008773675957000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -277,10 +253,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moment: 0
-  startDelay: 0
+  delay: 0
+  alwaysApplyDelay: 0
   collision: {fileID: 0}
   triggerCollision: {fileID: 114780919155577168}
   canCapture: 1
+--- !u!114 &114964399605969236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a61266c318cd1043bb6a8366dbd4f12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
 --- !u!212 &212771005577804690
 SpriteRenderer:
   m_ObjectHideFlags: 1
