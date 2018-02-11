@@ -72,7 +72,7 @@ public class ContinuousRewarder : MonoPersistent
 
         // Give reward
         CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue);
-        print("reward: " + reward);
+
         if (reward.amount > 0)
             PlayerCurrency.AddCurrencyAmount(reward);
     }

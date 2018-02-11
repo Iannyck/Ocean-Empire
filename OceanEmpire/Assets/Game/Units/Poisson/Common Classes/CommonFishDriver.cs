@@ -5,16 +5,9 @@ using CCC.Math;
 
 public class CommonFishDriver : BaseFishDriver
 {
-    public enum Behaviour { Wander = 0, Flee = 1 }
     [Header("General")]
     public float maxSpeed = 1;
     public float acceleration = 3;
-    public Behaviour defaultBehaviour = Behaviour.Wander;
-
-    [Header("Flee")]
-    public bool fleePlayer;
-    public float fleeDistance;
-    //private float fleeDistanceSQR;
 
     [Header("Brain Freeze")]
     public bool canBrainFreeze;
@@ -60,21 +53,14 @@ public class CommonFishDriver : BaseFishDriver
 
         //Petit switch de comportement dépendemment de l'état.
         //Pas la peine de faire une machine a etat fini développé. (ça risquerait d'être plus lourd pour rien)
-        switch (currentBehaviour)
+        if (distSQR < changeDestIfCloserThanSQR)
         {
-            case Behaviour.Wander:
-                if (distSQR < changeDestIfCloserThanSQR)
-                {
-                    targetPosition = GetWanderPosition();
-                }
-                break;
-            case Behaviour.Flee:
-                break;
+            targetPosition = GetWanderPosition();
         }
 
         //Vitesse cible
         Vector2 targetSpeed = Vector2.zero;
-        if (distSQR > 0.02 && (currentBehaviour == Behaviour.Flee || !brainFreeze))
+        if (distSQR > 0.02 && !brainFreeze)
         {
             targetSpeed = meToTargetPos.normalized * maxSpeed;
         }
@@ -140,8 +126,6 @@ public class CommonFishDriver : BaseFishDriver
         brainFreeze = false;
         brainFreezeTimer = Random.Range(brainFreezeFrequence.x, brainFreezeFrequence.y);
         brainFreezeRemainingDuration = 0;
-        currentBehaviour = Behaviour.Wander;
         targetPosition = Position;
-        
     }
 }
