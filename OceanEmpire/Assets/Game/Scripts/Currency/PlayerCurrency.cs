@@ -176,7 +176,7 @@ public class PlayerCurrency : MonoPersistent
             case CurrencyType.Ticket:
                 return instance.tickets.Amount;
             default:
-                return 2147483647;
+                return int.MaxValue;
         }
     }
     public static int GetCoins() { return instance.coins.Amount; }
@@ -184,6 +184,18 @@ public class PlayerCurrency : MonoPersistent
 
     public static Sprite GetMoneyIcon() { return instance.moneyIcon; }
     public static Sprite GetTicketIcon() { return instance.ticketIcon; }
+    public static Sprite GetIcon( CurrencyType type)
+    {
+        switch (type)
+        {
+            case CurrencyType.Coin:
+                return instance.moneyIcon;
+            case CurrencyType.Ticket:
+                return instance.ticketIcon;
+            default:
+                return null;
+        }
+    }
     #endregion
 
 
