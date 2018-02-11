@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class ShopButton : MonoBehaviour {
 
-    
+
     public Button button;
     public Text buttonText;
     public Image currencyIcon;

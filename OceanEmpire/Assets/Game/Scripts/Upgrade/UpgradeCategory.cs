@@ -11,7 +11,7 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
 
     [SerializeField] private List<B> upgradeBuilders;
 
-    [SerializeField, ReadOnly] protected int ownedUpgrade = -1;
+    [SerializeField, ReadOnly] protected int ownedUpgrade = 0;
     [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
 
     private string ownedUpgradeKey;
@@ -31,13 +31,21 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
 
     public UpgradeDescription GetNextDescription()
     {
+
+        //   Override load
+        //
+        ownedUpgrade = 0;
+        nextUpgGenCode = "";
+
+        FetchDataFrom();
         UpgradeDescription prebuilt = GetPrebuilt(ownedUpgrade + 1);
         if (prebuilt != null)
             return prebuilt;
         else
         {
-            if (nextUpgGenCode == "")
+            if (nextUpgGenCode == "") 
                 MakeNextGenCode(ownedUpgrade + 1);
+
 
             return GenerateNextDescription(nextUpgGenCode);
         }
@@ -52,6 +60,8 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
             return false;
 
         ownedUpgrade++;
+
+        ApplyDataTo();
         return true;
     }
 
@@ -60,15 +70,15 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
         return GetNextDescription().GetCost(type);
     }
 
-    protected void Load()
+    protected void FetchDataFrom()
     {
-        if (ownedUpgrade == -1)
-            ownedUpgrade = dataSaver.GetInt(ownedUpgradeKey, -1);
+        if (ownedUpgrade == 0)
+            ownedUpgrade = dataSaver.GetInt(ownedUpgradeKey, 0);
         if (nextUpgGenCode == "")
             nextUpgGenCode = dataSaver.GetString(nextUpgGenCode, "");
     }
 
-    protected void Save()
+    protected void ApplyDataTo()
     {
         dataSaver.SetInt(ownedUpgradeKey, ownedUpgrade);
         dataSaver.SetString(nextUpgGenCodeKey, nextUpgGenCode);

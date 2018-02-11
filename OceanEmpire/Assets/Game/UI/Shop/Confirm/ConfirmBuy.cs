@@ -40,6 +40,7 @@ public class ConfirmBuy : WindowAnimation
         });
     }
 
+    
     public void Init(ItemDescription itemD, CurrencyType currency, Action<bool> resultCallback)
     {
         //itemName.text = itemD.GetName();
