@@ -6,4 +6,5 @@ using UnityEngine;
 public class GazTankDescription : UpgradeDescription {
     [SerializeField, ReadOnly] private GazTank gazTank;
     public GazTank GetGazTank() { return gazTank; }
+
 }

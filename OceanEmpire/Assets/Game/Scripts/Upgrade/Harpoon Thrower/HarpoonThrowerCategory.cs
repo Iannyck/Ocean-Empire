@@ -10,4 +10,5 @@ public class HarpoonThrowerCategory : UpgradeCategory<HarpoonThrowerDescBuilder,
     {
         return null;
     }
+    public override void MakeNextGenCode(int level) { }
 }
