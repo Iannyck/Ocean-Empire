@@ -43,8 +43,7 @@ public class WanderBrain : Brain
     public override void Tick(Rigidbody2D rb, float deltaTime, object perInstanceData)
     {
         base.Tick(rb, deltaTime, perInstanceData);
-        Data data = perInstanceData as Data;
-
+        Data data = (Data)perInstanceData;
 
         //Update l'etat du brain freeze
         UpdateBrainFreeze(data, Time.deltaTime);
@@ -118,5 +117,16 @@ public class WanderBrain : Brain
         }
 
         return pos;
+    }
+
+    public override void DrawGizmosSelected(Rigidbody2D rb, object perInstanceData)
+    {
+        base.DrawGizmosSelected(rb, perInstanceData);
+
+        Data data = (Data)perInstanceData;
+
+        if (!data.brainFreeze)
+            DrawPathGizmos(rb.position, data.targetPosition);
+
     }
 }

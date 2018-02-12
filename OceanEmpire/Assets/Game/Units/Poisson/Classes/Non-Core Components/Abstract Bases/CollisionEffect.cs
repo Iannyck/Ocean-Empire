@@ -1,19 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CollisionEffect : EffectComponent {
+public abstract class CollisionEffect : MonoBehaviour
+{
+    [SerializeField] OnCollision collision;
+    [SerializeField] OnTrigger triggerCollision;
 
-    public OnCollision collision;
-    public OnTrigger triggerCollision;
-
-    protected override void StartEffect()
+    protected virtual void Awake()
     {
-        SearchForCollisionScript();
-    }
-
-    void SearchForCollisionScript()
-    {
+        // Add listeners
         if (collision != null)
             collision.onEnter.AddListener(OnCollisionEnterEvent);
 

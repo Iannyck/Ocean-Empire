@@ -163,7 +163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114421981925445368}
-        m_MethodName: HitBigFish
+        m_MethodName: OnUnitHit
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

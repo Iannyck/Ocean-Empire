@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114637774938423458}
   - component: {fileID: 114521991460025274}
   - component: {fileID: 114569494801252236}
+  - component: {fileID: 114036274611998082}
   m_Layer: 10
   m_Name: Big Tony
   m_TagString: Untagged
@@ -176,6 +177,17 @@ MonoBehaviour:
   checkX: 0
   overrideDefaultMargin: 0
   margin: 3.33
+--- !u!114 &114036274611998082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdef2c9515ba45c4997ec74d938b2a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114069461908948814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a61266c318cd1043bb6a8366dbd4f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
+  exposedBrain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
   resetBrainOnEnable: 1
 --- !u!212 &212771005577804690
 SpriteRenderer:

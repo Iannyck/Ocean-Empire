@@ -5,26 +5,37 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BrainBehaviour : MonoBehaviour
 {
-    [SerializeField] private Brain brain;
+    [SerializeField] private Brain exposedBrain;
     [SerializeField] private bool resetBrainOnEnable = true;
 
     private object brainData;
     private Rigidbody2D rb;
-    private Brain currentBrain;
+    private Brain brain;
 
     private bool hasAwaken = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        SetNewBrain(brain);
+        SetNewBrain(exposedBrain);
         hasAwaken = true;
     }
 
     private void OnValidate()
     {
-        if (hasAwaken && brain != currentBrain)
-            SetNewBrain(brain);
+        if (hasAwaken && exposedBrain != brain)
+            SetNewBrain(exposedBrain);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (brain != null && hasAwaken)
+            brain.DrawGizmosSelected(rb, brainData);
+    }
+    private void OnDrawGizmos()
+    {
+        if (brain != null && hasAwaken)
+            brain.DrawGizmos(rb, brainData);
     }
 
     void OnEnable()
@@ -35,22 +46,22 @@ public class BrainBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (currentBrain != null)
-            currentBrain.Tick(rb, Time.deltaTime, brainData);
+        if (brain != null)
+            brain.Tick(rb, Time.deltaTime, brainData);
     }
 
     public void SetNewBrain(Brain brain)
     {
-        currentBrain = brain;
+        this.brain = brain;
         Restart();
     }
 
 
     public void Restart()
     {
-        if (brain != null)
+        if (exposedBrain != null)
         {
-            brainData = brain.NewInstanceData(rb, this);
+            brainData = exposedBrain.NewInstanceData(rb, this);
         }
     }
 }

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114151049699176434}
   - component: {fileID: 114768552844836286}
   - component: {fileID: 114457681998235702}
+  - component: {fileID: 114775152165244624}
   m_Layer: 10
   m_Name: Requin
   m_TagString: Untagged
@@ -250,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a61266c318cd1043bb6a8366dbd4f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
+  exposedBrain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
   resetBrainOnEnable: 1
 --- !u!114 &114445835287860690
 MonoBehaviour:
@@ -328,6 +329,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f1a6246da1ceef45a2e0cee088d0790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114775152165244624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdef2c9515ba45c4997ec74d938b2a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212771005577804690

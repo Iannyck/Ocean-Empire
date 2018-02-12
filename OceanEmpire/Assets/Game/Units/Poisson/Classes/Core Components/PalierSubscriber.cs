@@ -90,6 +90,8 @@ public class PalierSubscriber : MonoBehaviour
     {
         FishPalier fiP = Game.FishSpawner.GetPalier(currentPalier);
         fiP.SubscribeFish(this);
+        if (!fiP.isActive)
+            TryToKill();
         fiP.palierDespawnEvent += TryToKill;
     }
 

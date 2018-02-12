@@ -3,25 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Capturable))]
-public class MeleeCapture : CollisionEffect
+public class MeleeCapturable : CollisionEffect
 {
-    Capturable capturable;
-
     [HideInInspector]
-    public bool canCapture = true;
-
-    protected override void Awake()
-    {
-        capturable = GetComponent<Capturable>();
-        base.Awake();
-    }
-
-    protected override void StartEffect()
-    {
-        base.StartEffect();
-
-        canCapture = true;
-    }
+    public Locker canCapture = new Locker();
 
     protected override void OnCollisionEnterEvent(ColliderInfo info, Collision2D col)
     {
@@ -38,7 +23,8 @@ public class MeleeCapture : CollisionEffect
     void Capture()
     {
         // NB: LA LIGNE SUIVANT EST TEMPORAIRE. Ça fait beaucoup trop weird de passé par PlayerStats pour capturer quelque-chose
-        if (canCapture)
+        var capturable = GetComponent<Capturable>();
+        if(capturable != null && canCapture)
             Game.PlayerStats.TryCapture(capturable);
     }
 }

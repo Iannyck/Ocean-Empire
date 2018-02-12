@@ -11,19 +11,18 @@ public class Electrify : CollisionEffect
     public float repulsionStrength = 2.5f;
 
     // Animation temporaire
-    public SpriteRenderer fishSprite; 
+    public SpriteRenderer fishSprite;
     private Color originColor;
 
     private bool isElectrified = false;
+    private const string LOCKCAPTURE_KEY = "elec";
 
 
-    private MeleeCapture captureEffect;
+    private MeleeCapturable captureEffect;
 
-    protected override void StartEffect()
+    protected void Start()
     {
-        base.StartEffect();
-
-        captureEffect = GetComponent<MeleeCapture>();
+        captureEffect = GetComponent<MeleeCapturable>();
 
         originColor = fishSprite.color;
 
@@ -33,13 +32,14 @@ public class Electrify : CollisionEffect
     void ElectricEffect()
     {
         isElectrified = true;
-        
+
         if (captureEffect != null)
-            captureEffect.canCapture = false;
+            captureEffect.canCapture.Lock(LOCKCAPTURE_KEY);
 
         ElectricAnimation();
 
-        this.DelayedCall(delegate () {
+        this.DelayedCall(delegate ()
+        {
             StopElectricEffect();
             this.DelayedCall(ElectricEffect, electricInterval);
         }, electricDuration);
@@ -50,14 +50,14 @@ public class Electrify : CollisionEffect
         isElectrified = false;
 
         if (captureEffect != null)
-            captureEffect.canCapture = true;
+            captureEffect.canCapture.Unlock(LOCKCAPTURE_KEY);
 
         StopElectricAnimation();
     }
 
     void ElectricAnimation()
     {
-        fishSprite.color = Color.yellow;
+        fishSprite.color = Color.blue;
     }
 
     void StopElectricAnimation()

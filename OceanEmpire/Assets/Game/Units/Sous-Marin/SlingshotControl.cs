@@ -7,18 +7,20 @@ public class SlingshotControl : MonoBehaviour
     public float playerTouchRadius = 0.75f;
     public Slingshot slingshotInstance;
 
-    public Harpoon harpoonPrefab;   // On va changer ça lors qu'on aura plusieurs weapons
-
     [ReadOnly]
     public bool isDragging;
     [ReadOnly]
     public Vector2 worldPosition;
 
+    [Header("Debug"), SerializeField] bool overrideItems = false;
+    [SerializeField] Harpoon overridePrefab;
+    [SerializeField] int overrideCount = 1;
+
+
     private Camera cam;
     private float toucheRadiusSQR;
     private Transform tr;
-
-    private int harpoonThrownAtOnce = 1;
+    private HarpoonThrower harpoonThrower;
 
     private void Start()
     {
@@ -27,22 +29,63 @@ public class SlingshotControl : MonoBehaviour
         tr = transform;
     }
 
+    private void Update()
+    {
+        if (isDragging && cam != null)
+        {
+            Vector2 screenPosition;
+            DragDetection.GetTouchPosition(out screenPosition);
+            ConvertToWorldPos(screenPosition);
+            slingshotInstance.UpdatePosition(worldPosition);
+        }
+    }
+
+    #region Harpoon Resources
+    private Harpoon GetHarpoonPrefab()
+    {
+        if (overrideItems)
+        {
+            return overridePrefab;
+        }
+        else
+        {
+            if (!FetchHarpoonThrower())
+                return null;
+            return harpoonThrower.harpoonPrefab;
+        }
+    }
+
+    private int GetHarpoonCount()
+    {
+        if (overrideItems)
+        {
+            return overrideCount;
+        }
+        else
+        {
+            if (!FetchHarpoonThrower())
+                return -1;
+
+            return harpoonThrower.amountThrown;
+        }
+    }
+
+    private bool FetchHarpoonThrower()
+    {
+        if (harpoonThrower == null)
+            harpoonThrower = GetComponent<SubmarinParts>().GetHarpoonThrower();
+        return harpoonThrower != null;
+    }
+    #endregion
+
+    #region Dragging
     public void StartDrag(Vector2 screenPosition)
     {
-        if (harpoonPrefab == null)
-        {
-            HarpoonThrower ht = GetComponent<SubmarinParts>().GetHarpoonThrower();
-            if (ht != null)
-            {
-                harpoonThrownAtOnce = ht.amountThrown;
-                harpoonPrefab = ht.harpoonPrefab;
-            }             
-            else
-                return;
-        };
+        if (GetHarpoonPrefab() == null)
+            return;
 
         ConvertToWorldPos(screenPosition);
-        
+
         if ((worldPosition - (Vector2)transform.position).sqrMagnitude <= toucheRadiusSQR)
         {
             isDragging = true;
@@ -65,12 +108,23 @@ public class SlingshotControl : MonoBehaviour
         }
     }
 
+    void ConvertToWorldPos(Vector2 screenPos)
+    {
+        if (cam != null)
+        {
+            worldPosition = cam.ScreenToWorldPoint(screenPos);
+        }
+    }
+    #endregion
+
+    #region Shooting
     void ShootMultipleHarrpons(Vector2 direction)
     {
         const float angleoffset = 5;
+        var harpoonCount = GetHarpoonCount();
         float middleAngle = direction.ToAngle();
 
-        bool nombrePair = (harpoonThrownAtOnce % 2 == 0);
+        bool nombrePair = (harpoonCount % 2 == 0);
 
         float currentOffset = 0;
         int impair = 0;
@@ -86,7 +140,7 @@ public class SlingshotControl : MonoBehaviour
             impair = 1;
         }
 
-        for (int i = 0 + impair; i < harpoonThrownAtOnce + impair; ++i)
+        for (int i = 0 + impair; i < harpoonCount + impair; ++i)
         {
             ShootHarpoon((middleAngle + currentOffset).ToVector());
 
@@ -97,26 +151,8 @@ public class SlingshotControl : MonoBehaviour
 
     void ShootHarpoon(Vector2 direction)
     {
-        Harpoon harpoon = Game.Spawner.Spawn(harpoonPrefab, tr.position);
+        Harpoon harpoon = Game.Spawner.Spawn(GetHarpoonPrefab(), tr.position);
         harpoon.Shoot_Direction(direction);
     }
-
-    private void Update()
-    {
-        if (isDragging && cam != null)
-        {
-            Vector2 screenPosition;
-            DragDetection.GetTouchPosition(out screenPosition);
-            ConvertToWorldPos(screenPosition);
-            slingshotInstance.UpdatePosition(worldPosition);
-        }
-    }
-
-    void ConvertToWorldPos(Vector2 screenPos)
-    {
-        if (cam != null)
-        {
-            worldPosition = cam.ScreenToWorldPoint(screenPos);
-        }
-    }
+    #endregion
 }

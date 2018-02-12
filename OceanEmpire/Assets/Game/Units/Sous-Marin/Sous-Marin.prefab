@@ -296,6 +296,7 @@ MonoBehaviour:
   rightBound: 2.81
   brakeDistance: 1.5
   currentTarget: {x: 0, y: 0}
+  inputEnable: 1
   movementEnable: 0
 --- !u!114 &114379696085279956
 MonoBehaviour:
@@ -423,9 +424,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTouchRadius: 0.75
   slingshotInstance: {fileID: 114379696085279956}
-  harpoonPrefab: {fileID: 0}
   isDragging: 0
   worldPosition: {x: 0, y: 0}
+  overrideItems: 1
+  overridePrefab: {fileID: 114421981925445368, guid: afeb9d6af433f4c42ab677c5566152fa,
+    type: 2}
+  overrideCount: 1
 --- !u!114 &114904046857194384
 MonoBehaviour:
   m_ObjectHideFlags: 1

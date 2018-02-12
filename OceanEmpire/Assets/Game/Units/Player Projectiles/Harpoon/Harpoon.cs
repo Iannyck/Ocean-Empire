@@ -22,19 +22,15 @@ public class Harpoon : Projectile
         }
     }
 
-    public void HitBigFish(ColliderInfo info, Collider2D collider)
+    public void OnUnitHit(ColliderInfo info, Collider2D collider)
     {
-        Capturable capturable = info.Parent.GetComponent<Capturable>();
+        var harpoonBlocker = info.Parent.GetComponent<HarpoonBlocker>();
 
-        if (capturable == null)
+        if (harpoonBlocker != null)
         {
-            Debug.LogError("Le harpoon a frappé un objet qui n'est pas un big fish.");
-            return;
+            harpoonBlocker.HarpoonHit();
+            Kill();
         }
-
-        //bigFish.Capture();
-        Game.PlayerStats.TryCapture(capturable);
-        Kill();
     }
 
     void Kill()

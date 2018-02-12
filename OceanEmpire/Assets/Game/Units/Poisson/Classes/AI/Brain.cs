@@ -12,4 +12,18 @@ public class Brain : ScriptableObject
     {
 
     }
+    public virtual void DrawGizmos(Rigidbody2D rb, object perInstanceData)
+    {
+
+    }
+    public virtual void DrawGizmosSelected(Rigidbody2D rb, object perInstanceData)
+    {
+
+    }
+
+    protected static void DrawPathGizmos(Vector2 from, Vector2 destination)
+    {
+        Gizmos.color = new Color(1, 1, 1);
+        Gizmos.DrawLine(from, destination);
+    }
 }
