@@ -4869,16 +4869,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences:
-  - {fileID: 114766056936082448, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
-  - {fileID: 114766056936082448, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
-  - {fileID: 114287080000692136, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
-  - {fileID: 114287080000692136, guid: c877cd4996206a14db404966e57a29b2, type: 2}
+  - {fileID: 1365461041918330, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
+  - {fileID: 1365461041918330, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
+  - {fileID: 1365461041918330, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
+  - {fileID: 1365461041918330, guid: c877cd4996206a14db404966e57a29b2, type: 2}
   _serializedStateKeys:
   - mapFishReparition
   - fishTypeList
   _serializedStateValues:
   - '{"keys":[{"time":0.0,"value":0.66,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.6820898,"value":0.9494149,"tangentMode":0,"inTangent":0.3191829,"outTangent":0.3191829},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
-  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":3.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.33,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.5,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":2.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":-0.001678467,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.1511274,"value":0.1114695,"tangentMode":0,"inTangent":1.965314,"outTangent":1.965314},{"time":0.3026856,"value":0.4688588,"tangentMode":0,"inTangent":1.847744,"outTangent":1.847744},{"time":0.6281102,"value":0.9041959,"tangentMode":0,"inTangent":0.4438594,"outTangent":0.4438594},{"time":1.0,"value":0.9983215,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":3.0},{"fish":3,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":2.0,"outTangent":2.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":1.0}]'
+  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":3.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":2.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":3.0},{"fish":3,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-250.0,"fishDensity":1.0}]'
   boatLocation: {fileID: 185285419}
   TopLocation: {fileID: 1719716374}
   WaterLocation: {fileID: 21776862}
@@ -4912,103 +4912,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fishTypeList:
-  - fish: {fileID: 114766056936082448, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.33
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 3
-  - fish: {fileID: 114766056936082448, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.33
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0.5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 2
-  - fish: {fileID: 114287080000692136, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: -0.001678467
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.1511274
-        value: 0.1114695
-        inSlope: 1.965314
-        outSlope: 1.965314
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.3026856
-        value: 0.4688588
-        inSlope: 1.847744
-        outSlope: 1.847744
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.6281102
-        value: 0.9041959
-        inSlope: 0.4438594
-        outSlope: 0.4438594
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0.9983215
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 3
-  - fish: {fileID: 114287080000692136, guid: c877cd4996206a14db404966e57a29b2, type: 2}
+  - fish: {fileID: 1365461041918330, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
     repartition:
       serializedVersion: 2
       m_Curve:
@@ -5019,10 +4923,100 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
       - serializedVersion: 2
-        time: 1
+        time: 0.5
         value: 1
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    highestSpawn: 0
+    lowestSpawn: -250
+    fishDensity: 3
+  - fish: {fileID: 1365461041918330, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
+    repartition:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    highestSpawn: 0
+    lowestSpawn: -250
+    fishDensity: 2
+  - fish: {fileID: 1365461041918330, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
+    repartition:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    highestSpawn: 0
+    lowestSpawn: -250
+    fishDensity: 3
+  - fish: {fileID: 1365461041918330, guid: c877cd4996206a14db404966e57a29b2, type: 2}
+    repartition:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 0.5
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

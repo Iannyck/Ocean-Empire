@@ -38,10 +38,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4391991207605276}
   - component: {fileID: 50708007439193562}
-  - component: {fileID: 114766056936082448}
   - component: {fileID: 114583386763139864}
   - component: {fileID: 114021408903366914}
   - component: {fileID: 114369728418578240}
+  - component: {fileID: 114518445896378502}
+  - component: {fileID: 114854407842506146}
+  - component: {fileID: 114650917481136330}
+  - component: {fileID: 114351547439865576}
   m_Layer: 9
   m_Name: Guacco
   m_TagString: Untagged
@@ -173,6 +176,17 @@ MonoBehaviour:
   checkX: 0
   overrideDefaultMargin: 0
   margin: 1000
+--- !u!114 &114351547439865576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6502b1990d76404791e883183f111cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114369728418578240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,6 +204,17 @@ MonoBehaviour:
   collision: {fileID: 0}
   triggerCollision: {fileID: 114780919155577168}
   canCapture: 1
+--- !u!114 &114518445896378502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a55c0108fd1a844c8d3ab06d4b872a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114583386763139864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
+  resetBrainOnEnable: 1
 --- !u!114 &114647200725526030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,7 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentType: 2
   parent: {fileID: 1365461041918330}
---- !u!114 &114766056936082448
+--- !u!114 &114650917481136330
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -223,10 +249,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365461041918330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2a6700374864741a9728d9f1dcc3b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f1a6246da1ceef45a2e0cee088d0790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: {fileID: 11400000, guid: 923ca771aba49d840afd5234651cf0e0, type: 2}
 --- !u!114 &114780919155577168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,6 +269,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: OnTrigger+OnTriggerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114854407842506146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a29d0b05f345b24591c3bf8aa73cce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: {fileID: 11400000, guid: 923ca771aba49d840afd5234651cf0e0, type: 2}
 --- !u!114 &114930874317122786
 MonoBehaviour:
   m_ObjectHideFlags: 1

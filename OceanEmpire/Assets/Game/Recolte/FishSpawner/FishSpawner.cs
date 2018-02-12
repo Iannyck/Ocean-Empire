@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishSpawner : MonoBehaviour {
+public class FishSpawner : MonoBehaviour
+{
 
     bool Active = false;
 
@@ -28,7 +29,7 @@ public class FishSpawner : MonoBehaviour {
     }
 
     private palierRange lastActivePaliers;
-   
+
     // Use this for initialization
     private SubmarineMovement submarine;
     private MapInfo map;
@@ -40,7 +41,8 @@ public class FishSpawner : MonoBehaviour {
         return listPaliers[n];
     }
 
-    void Start () {
+    void Start()
+    {
         lastSpawn = 0;
         Game.OnGameStart += Init;
     }
@@ -55,7 +57,7 @@ public class FishSpawner : MonoBehaviour {
         FishPalier.repopulationCycle = 120;
 
         StartPalierSystem();
-        return;    
+        return;
     }
 
 
@@ -98,7 +100,7 @@ public class FishSpawner : MonoBehaviour {
     {
         ypos = ypos.Raised(map.mapBottom);
         ypos = ypos.Capped(map.mapTop);
-        int palier = (int)Mathf.Round(( (map.mapTop - ypos) + (palierHeigth/2) ) / palierHeigth);
+        int palier = (int)Mathf.Round(((map.mapTop - ypos) + (palierHeigth / 2)) / palierHeigth);
         return palier;
     }
 
@@ -106,14 +108,15 @@ public class FishSpawner : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (!Active)
             return;
 
         SpawnSideFish();
         UpdatePalier();
 
-        timeCounter += Time.deltaTime;     
+        timeCounter += Time.deltaTime;
     }
 
 
@@ -127,9 +130,9 @@ public class FishSpawner : MonoBehaviour {
         //Spawn
         while (newPalier.start < lastActivePaliers.start)
         {
-           //start up
+            //start up
             lastActivePaliers.start -= 1;
-            SpawnPalier(lastActivePaliers.start);         
+            SpawnPalier(lastActivePaliers.start);
         }
         while (newPalier.finish > lastActivePaliers.finish)
         {
@@ -171,12 +174,14 @@ public class FishSpawner : MonoBehaviour {
 
         while (fishesToSpawn > 0)
         {
-            if (fishesToSpawn < 1) {
+            if (fishesToSpawn < 1)
+            {
                 float spawnChances = Random.Range(0.0f, 1.0f);
                 if (spawnChances < fishesToSpawn)
                     SpawnPalierFish(i);
             }
-            else {
+            else
+            {
                 SpawnPalierFish(i);
             }
             fishesToSpawn -= 1;
@@ -203,12 +208,7 @@ public class FishSpawner : MonoBehaviour {
         spawnPos.y = spawnPos.y.Clamped(map.mapBottom, map.mapTop);
         spawnPos.x = nb3;
 
-        BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
-        if (fishPool != null && newFish != null)
-        {
-            /*BaseFish someFish = */fishPool.SetFishAt(newFish, spawnPos);
-            //GetPalier(palierIte).SuscribeFish(someFish);
-        }
+        DrawAtLotteryAndSpawn(spawnPos);
     }
 
 
@@ -236,11 +236,7 @@ public class FishSpawner : MonoBehaviour {
 
             if (closestPalier.GetFishDensity(timeCounter) > 1 || Random.Range(0.0f, 1.0f) > 0)
             {
-                BaseFish newFish = map.DrawAtFishLottery(spawnPos.y);
-                if (fishPool != null && newFish != null)
-                {
-                    fishPool.SetFishAt(newFish, spawnPos);
-                }          
+                DrawAtLotteryAndSpawn(spawnPos);
             }
             lastSpawn = timeBetweenSideSpawn;
         }
@@ -248,5 +244,22 @@ public class FishSpawner : MonoBehaviour {
         else lastSpawn -= Time.deltaTime;
     }
 
+    private void DrawAtLotteryAndSpawn(Vector2 spawnPos)
+    {
+        GameObject fishPrefab = map.DrawAtFishLottery(spawnPos.y);
+        if (fishPrefab == null)
+            return;
 
+        var poolableUnit = fishPrefab.GetComponent<PoolableUnit>();
+        if (fishPool != null && poolableUnit != null)
+        {
+            //Poolable Unit
+            fishPool.PlaceUnit(poolableUnit, spawnPos);
+        }
+        else
+        {
+            //Non-Poolable Unit
+            Game.Spawner.Spawn(fishPrefab, spawnPos);
+        }
+    }
 }

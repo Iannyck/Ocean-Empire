@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : MonoBehaviour
+{
 
     //private int score; // cash
     private float depthRecord;
@@ -12,7 +13,7 @@ public class PlayerStats : MonoBehaviour {
     [ReadOnly]
     public float remainingTime;
 
-    void Start ()
+    void Start()
     {
         //score = 0;
         remainingTime = remainingTimeAtStart;
@@ -36,22 +37,22 @@ public class PlayerStats : MonoBehaviour {
             Game.Instance.EndGame();
     }
 
-    public void TryCapture(BaseFish fish)
+    public void TryCapture(Capturable fish)
     {
         FishContainer container = Game.SubmarinParts.GetFishContainer();
-        if ( container.HasRoom())
+        if (container.HasRoom())
         {
             fish.Capture();
-            container.AddFish(fish);
+            container.AddFish(fish.info);
 
-            CallCoinsPopUp(fish);
+            CallCoinsPopUp(fish.info);
         }
     }
 
-    private void CallCoinsPopUp(BaseFish fish)
+    private void CallCoinsPopUp(FishInfo info)
     {
-        int fishWorth = fish.description.baseMonetaryValue.RoundedToInt();
-        Vector3 fishPostion = fish.transform.position;
+        int fishWorth = info.description.baseMonetaryValue.RoundedToInt();
+        Vector3 fishPostion = info.transform.position;
 
         Game.Recolte_UI.GetComponent<SpawnCoinsPopUp>().SpawnPopUp(fishPostion, fishWorth);
     }

@@ -36,9 +36,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4391991207605276}
   - component: {fileID: 50708007439193562}
-  - component: {fileID: 114287080000692136}
   - component: {fileID: 114097656064112580}
   - component: {fileID: 114021408903366914}
+  - component: {fileID: 114614717770269226}
+  - component: {fileID: 114189534833459078}
+  - component: {fileID: 114729617283386180}
+  - component: {fileID: 114775861769525318}
   m_Layer: 10
   m_Name: Grimdon
   m_TagString: Untagged
@@ -199,6 +202,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
+  resetBrainOnEnable: 1
+--- !u!114 &114189534833459078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a29d0b05f345b24591c3bf8aa73cce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: {fileID: 11400000, guid: 7a8b6091653a7904c969943492b5a224, type: 2}
 --- !u!114 &114215357455308370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c181f282ef07d914a912eb67cd939dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114287080000692136
+--- !u!114 &114614717770269226
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -246,10 +262,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365461041918330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71ee4d65313697429d63a12f3827e78, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a55c0108fd1a844c8d3ab06d4b872a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: {fileID: 11400000, guid: 7a8b6091653a7904c969943492b5a224, type: 2}
 --- !u!114 &114643635133572694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,6 +293,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentType: 4
   parent: {fileID: 1365461041918330}
+--- !u!114 &114729617283386180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1a6246da1ceef45a2e0cee088d0790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114735119776899194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +319,17 @@ MonoBehaviour:
   maxSpeed: 0.75
   tiltSpeed: 60
   angleRange: {x: -90, y: 90}
+--- !u!114 &114775861769525318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6502b1990d76404791e883183f111cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212771005577804690
 SpriteRenderer:
   m_ObjectHideFlags: 1

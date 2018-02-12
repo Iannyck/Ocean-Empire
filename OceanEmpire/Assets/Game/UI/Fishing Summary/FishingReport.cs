@@ -6,19 +6,20 @@ public class FishingReport
 {
     public Dictionary<FishDescription, int> CapturedFish = new Dictionary<FishDescription, int>();
 
-    public void AddToReport(BaseFish fish)
+    public void AddToReport(Capturable capturable)
     {
-        if (!CapturedFish.ContainsKey(fish.description))
-        { 
-            CapturedFish.Add(fish.description, 1);
+        var info = capturable.info;
+        if (!CapturedFish.ContainsKey(info.description))
+        {
+            CapturedFish.Add(info.description, 1);
             return;
         }
-        CapturedFish[fish.description] += 1;
+        CapturedFish[info.description] += 1;
     }
 
-    public void KeepTrack(BaseFish fish)
+    public void KeepTrack(Capturable capturable)
     {
-        fish.captureEvent += AddToReport;
+        capturable.OnNextCapture += AddToReport;
     }
 
     public List<FishDescription> GetSortedFishes()

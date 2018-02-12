@@ -12,8 +12,14 @@ public class Spawner : MonoBehaviour
         tr = transform;
     }
 
+    public Transform GetSpawnContainer() { return tr; }
+
     public T Spawn<T>(T obj, Vector2 position) where T : MonoBehaviour
     {
         return Instantiate(obj, position, Quaternion.identity, tr).GetComponent<T>();
+    }
+    public GameObject Spawn(GameObject obj, Vector2 position)
+    {
+        return Instantiate(obj, position, Quaternion.identity, tr);
     }
 }

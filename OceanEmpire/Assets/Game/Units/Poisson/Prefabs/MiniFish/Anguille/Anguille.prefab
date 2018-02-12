@@ -54,11 +54,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4391991207605276}
   - component: {fileID: 50708007439193562}
-  - component: {fileID: 114344551330916604}
   - component: {fileID: 114759646282957270}
   - component: {fileID: 114021408903366914}
   - component: {fileID: 114711318566592404}
   - component: {fileID: 114998183075533196}
+  - component: {fileID: 114304175309523648}
+  - component: {fileID: 114607619358298838}
+  - component: {fileID: 114666966049966068}
+  - component: {fileID: 114457547989728266}
   m_Layer: 10
   m_Name: Anguille
   m_TagString: Untagged
@@ -220,7 +223,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: OnCollision+OnCollisionEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114344551330916604
+--- !u!114 &114304175309523648
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -228,10 +231,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365461041918330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2a6700374864741a9728d9f1dcc3b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a55c0108fd1a844c8d3ab06d4b872a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114457547989728266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6502b1990d76404791e883183f111cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114607619358298838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a29d0b05f345b24591c3bf8aa73cce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   description: {fileID: 11400000, guid: 3473791ea65093e4ea838ff596b1e0ee, type: 2}
+--- !u!114 &114666966049966068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1a6246da1ceef45a2e0cee088d0790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114667671419622946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brain: {fileID: 11400000, guid: 7d296df1a0872c946a6fa0b8a6bc4a02, type: 2}
+  resetBrainOnEnable: 1
 --- !u!114 &114998183075533196
 MonoBehaviour:
   m_ObjectHideFlags: 1

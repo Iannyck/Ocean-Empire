@@ -23,7 +23,7 @@ public class EffectComponent : MonoBehaviour {
     // start up with event
     public event SimpleEvent startEffect;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if(moment == BehaviorStartUpMoment.onAwake)
             StartEffect();

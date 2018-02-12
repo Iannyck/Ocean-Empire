@@ -11,7 +11,7 @@ public class KillOutOfCamera : MonoBehaviour
     public float margin = 3.33f;
     private const float DEFAULT_MARGIN = 3.33f;
 
-    private IKillable killable;
+    private BaseKillableUnit killable;
     private GameCamera cam;
     private Transform tr;
 
@@ -19,7 +19,7 @@ public class KillOutOfCamera : MonoBehaviour
     {
         tr = transform;
         enabled = false;
-        killable = GetComponent<IKillable>();
+        killable = GetComponent<BaseKillableUnit>();
 
         if (Game.Instance != null || Game.Instance.gameStarted)
             GetReference();
@@ -35,7 +35,7 @@ public class KillOutOfCamera : MonoBehaviour
 
     private void Update()
     {
-        if (killable.IsDead())
+        if (killable.IsDead)
             return;
 
         bool shallWeKill = false;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishPalier{
-
+public class FishPalier
+{
     public event SimpleEvent palierDespawnEvent;
     public bool isActive = false;
 
@@ -34,15 +34,18 @@ public class FishPalier{
 
         lastActivationTime = time;
     }
-     
-    public void SuscribeFish(BaseFish fish)
+    public void SubscribeFish(PalierSubscriber subscriber)
     {
-        fish.captureEvent += CaptureFish;
+        var capturable = subscriber.GetComponent<Capturable>();
+        if (capturable != null)
+            capturable.OnNextCapture += OnFishCaptured;
     }
 
-    public void UnsuscribeFish(BaseFish fish)
+    public void UnsubscribeFish(PalierSubscriber subscriber)
     {
-        fish.captureEvent -= CaptureFish;
+        var capturable = subscriber.GetComponent<Capturable>();
+        if (capturable != null)
+            capturable.OnNextCapture -= OnFishCaptured;
     }
 
 
@@ -60,7 +63,7 @@ public class FishPalier{
 
 
 
-    public void CaptureFish(BaseFish fish)
+    public void OnFishCaptured(Capturable capturable)
     {
         currentFishLimit -= (currentFishLimit > 0 ? 1 : 0);
     }

@@ -20,7 +20,7 @@ public class FishContainer : Upgrade {
         return (fishContained < fishCapacity);
     }
 
-    public void AddFish(BaseFish fish)
+    public void AddFish(FishInfo fish)
     { 
         fishContained += fish.description.populationValue;   
     }

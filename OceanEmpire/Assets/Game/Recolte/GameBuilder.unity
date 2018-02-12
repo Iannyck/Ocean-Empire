@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07852fdd61cd5a34a9be83b7a1c4c737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnContainer: {fileID: 601328786}
 --- !u!1 &1570689303
 GameObject:
   m_ObjectHideFlags: 1
@@ -495,10 +496,10 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0

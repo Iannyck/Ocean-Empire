@@ -19,8 +19,6 @@ public class Electrify : CollisionEffect
 
     private MeleeCapture captureEffect;
 
-    private bool playerPushed = false;
-
     protected override void StartEffect()
     {
         base.StartEffect();

@@ -16,7 +16,6 @@ MonoBehaviour:
   canBrainFreeze: 1
   brainFreezeFrequence: {x: 4, y: 8}
   brainFreezeDuration: {x: 1.5, y: 3}
-  clampWander: 1
   changeDestIfCloserThan: 0.25
   angleRange: {x: -45, y: 45}
   distanceRange: {x: 2.5, y: 5}

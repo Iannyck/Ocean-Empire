@@ -16,11 +16,11 @@ public class MapInfo : BaseBehavior
     [System.Serializable]
     public struct FishType
     {
-            //Fish type
+        //Fish type
         [InspectorCategory("Type")]
-        public BaseFish fish;
+        public GameObject fish;
 
-            //Distribution by Depth
+        //Distribution by Depth
         [InspectorCategory("Depth")]
         public AnimationCurve repartition;
         [InspectorCategory("Depth")]
@@ -86,8 +86,8 @@ public class MapInfo : BaseBehavior
     [InspectorCategory("fish")]
     public List<FishType> fishTypeList;
 
-        //Fish Lottery
-    private Lottery<BaseFish> fishLottery;
+    //Fish Lottery
+    private Lottery<GameObject> fishLottery;
 
     void Start()
     {
@@ -97,13 +97,12 @@ public class MapInfo : BaseBehavior
     //Set lottery
     public void Init()
     {
-        fishLottery = new Lottery<BaseFish>(fishTypeList.Count);
+        fishLottery = new Lottery<GameObject>(fishTypeList.Count);
     }
 
     //Each fish draw a straw, the fish with the shortest straw spawns
-    public BaseFish DrawAtFishLottery(float yPos)
+    public GameObject DrawAtFishLottery(float yPos)
     {
-   
         int lSize = fishTypeList.Count;
 
         int nbStraws = 0;
@@ -113,33 +112,29 @@ public class MapInfo : BaseBehavior
             FishType fT = fishTypeList[i];
             if (fT.highestSpawn > yPos && fT.lowestSpawn < yPos)
             {
-               
+
                 nbStraws++;
                 float depthRatio = (fT.highestSpawn - yPos) / (fT.highestSpawn - fT.lowestSpawn);
                 float fishProportion = fishTypeList[i].repartition.Evaluate(depthRatio) * fishTypeList[i].fishDensity;
 
-                fishLottery.Add(fT.fish, fishProportion.Clamped(0f,1f));
+                fishLottery.Add(fT.fish, fishProportion.Clamped(0f, 1f));
             }
         }
 
         if (nbStraws != 0)
-        { 
-            BaseFish bigBigWinner = fishLottery.Pick();
+        {
+            var bigBigWinner = fishLottery.Pick();
             fishLottery.Clear();
-            
             return bigBigWinner;
         }
-        else          
-        return null;
+        else
+            return null;
     }
 
-        //Get the spawn rate for this specific depth
+    //Get the spawn rate for this specific depth
     public float GetGeneralDensity(float position)
     {
         float deRatio = (mapTop - position) / (mapTop - mapBottom);
         return mapFishReparition.Evaluate(deRatio) * mapFishDensity * FishPopulation.FishDensity;
     }
-
-
-
 }
