@@ -10,7 +10,7 @@ public class TriColored : MonoBehaviour
     const string MATERIALNAME = "MAT_TriColorSprite";
     const string SHADERNAME = "Ocean Empire/TriColor Sprite";
 
-    public Color colorR = new Color(1,0,0,1);
+    public Color colorR = new Color(1, 0, 0, 1);
     public Color colorG = new Color(0, 1, 0, 1);
     public Color colorB = new Color(0, 0, 1, 1);
 
@@ -21,37 +21,37 @@ public class TriColored : MonoBehaviour
     {
         Verify();
 
-        if (Application.isPlaying)
-            return;
-
-        Material material = Resources.Load(FOLDERNAME + "/" + MATERIALNAME) as Material;
+        if (!Application.isPlaying)
+        {
+            Material material = Resources.Load(FOLDERNAME + "/" + MATERIALNAME) as Material;
 
 #if UNITY_EDITOR
-        if (material == null)
-        {
-            print("null mat");
-            Shader shader = Shader.Find(SHADERNAME);
-            if (shader == null)
+            if (material == null)
             {
-                Debug.LogError("Besoin du shader " + SHADERNAME);
-                return;
+                print("null mat");
+                Shader shader = Shader.Find(SHADERNAME);
+                if (shader == null)
+                {
+                    Debug.LogError("Besoin du shader " + SHADERNAME);
+                    return;
+                }
+                if (!AssetDatabase.IsValidFolder("Assets/Resources"))
+                {
+                    AssetDatabase.CreateFolder("Assets", "Resources");
+                }
+                if (!AssetDatabase.IsValidFolder("Assets/Resources/" + FOLDERNAME))
+                {
+                    AssetDatabase.CreateFolder("Assets/Resources", FOLDERNAME);
+                }
+                Material newMat = new Material(shader);
+                AssetDatabase.CreateAsset(newMat, "Assets/Resources/" + FOLDERNAME + "/" + MATERIALNAME + ".mat");
+                material = Resources.Load(FOLDERNAME + "/" + MATERIALNAME) as Material;
             }
-            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-            {
-                AssetDatabase.CreateFolder("Assets", "Resources");
-            }
-            if (!AssetDatabase.IsValidFolder("Assets/Resources/" + FOLDERNAME))
-            {
-                AssetDatabase.CreateFolder("Assets/Resources", FOLDERNAME);
-            }
-            Material newMat = new Material(shader);
-            AssetDatabase.CreateAsset(newMat, "Assets/Resources/" + FOLDERNAME + "/" + MATERIALNAME + ".mat");
-            material = Resources.Load(FOLDERNAME + "/" + MATERIALNAME) as Material;
-        }
 #endif
 
-        if (sprRenderer != null)
-            sprRenderer.sharedMaterial = material;
+            if (sprRenderer != null)
+                sprRenderer.sharedMaterial = material;
+        }
 
         Apply();
     }

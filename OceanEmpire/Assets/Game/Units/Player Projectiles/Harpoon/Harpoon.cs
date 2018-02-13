@@ -10,11 +10,17 @@ public class Harpoon : Projectile
     private float deathTimer;
     private bool isDead = false;
 
+    protected override void Start()
+    {
+        base.Start();
+        deathTimer = killAfter;
+    }
+
     private void Update()
     {
         if(deathTimer > 0)
         {
-            deathTimer -= killAfter;
+            deathTimer -= Time.deltaTime;
             if(deathTimer <= 0)
             {
                 Kill();

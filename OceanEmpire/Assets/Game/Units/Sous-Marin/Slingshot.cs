@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
-    [ReadOnly]
-    public Transform followAnchor;
+    [ReadOnly] public Transform followAnchor;
+    [ReadOnly] public float maxLength = 4;
 
     public Transform arrowHolder;
-    public float maxLength = 4;
 
     private Transform tr;
 

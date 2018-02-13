@@ -6,12 +6,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float defaultSpeed;
+    public bool shootOnStart = true;
 
     protected Rigidbody2D rb;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Start()
+    {
+        if (shootOnStart)
+            Shoot_Direction(transform.right);
     }
 
     public void Shoot_Velocity(Vector2 velocity)

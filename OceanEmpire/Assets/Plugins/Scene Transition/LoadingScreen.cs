@@ -66,6 +66,8 @@ public class LoadingScreen
 
     private static void OnDestinationLoaded(Scene scene)
     {
+        SceneManager.SetActiveScene(scene);
+
         if (!waitForNextSceneSetup)
             OnNewSetupComplete();
         animator.OnNewSceneLoaded();

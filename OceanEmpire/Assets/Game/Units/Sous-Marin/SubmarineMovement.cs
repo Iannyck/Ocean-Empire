@@ -5,36 +5,35 @@ using UnityEngine;
 
 public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfaces.ITouchInputs
 {
+
+    [Header("Enables")]
+    public bool inputEnable = true;
+    public bool movementEnable = true;
+
+    [Header("Move Settings")]
     public float deadZoneRadius = 0.75f;
-
-    //Proportionnal to the acceleration rate
     public float accelerationRate;
-    //Maximium attainable speed
     public float maximumSpeed;
+    public float brakeDistance = 1.5f;
+    [ReadOnly] public Vector2 currentTarget;
 
+    [Header("Bounds")]
     public float distanceFromBound;
     public float leftBound;
     public float rightBound;
 
-    private float upBound;
-    private float downBound;
+
+    private float upBound = float.MaxValue;
+    private float downBound = float.MinValue;
     private float deadZoneRadiusSQR;
-
-    public float brakeDistance = 1.5f;
-
-    public Vector2 currentTarget;
 
     private Rigidbody2D rb;
     private float realBrakeDistance = -1;
 
     private Thruster thruster;
     private FishContainer fishContainer;
-
     private SlingshotControl slingshotControl;
 
-    public bool inputEnable = true;
-
-    public bool movementEnable = false;
 
     private void Awake()
     {
@@ -53,7 +52,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
         SubmarinParts parts = gameObject.GetComponent<SubmarinParts>();
         thruster = parts.GetThruster();
-        if(thruster != null)
+        if (thruster != null)
         {
             maximumSpeed = thruster.GetSpeed();
             accelerationRate = thruster.GetAcceleration();
@@ -67,7 +66,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
         MapInfo m = Game.Instance.map;
         upBound = m.mapTop;
         downBound = m.mapBottom;
-        return;
     }
 
 
@@ -76,7 +74,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
         GetDraggingPosition();
 
         if (movementEnable == false)
-        { 
+        {
             rb.velocity = Vector2.zero;
             return;
         }
@@ -110,7 +108,7 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
             Vector2 position;
             if (DragDetection.GetTouchPosition(out position) && slingshotControl.isDragging == false)
             {
-                position = Game.GameCamera.cam.ScreenToWorldPoint(position);
+                position = GetCamera().ScreenToWorldPoint(position);
 
                 float sqrMag = (position - rb.position).sqrMagnitude;
                 if (sqrMag > deadZoneRadiusSQR)
@@ -124,6 +122,14 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
                 }
             }
         }
+    }
+
+    Camera GetCamera()
+    {
+        if (Game.Instance != null)
+            return Game.GameCamera.cam;
+        else
+            return GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
 
@@ -178,6 +184,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
             inputEnable = true;
             flipper.enabled = true;
             tilter.enabled = true;
-        },duration);
+        }, duration);
     }
 }
