@@ -8,7 +8,6 @@ public class Harpoon : Projectile
     public float killAfter = 5;
 
     private float deathTimer;
-    private bool isDead = false;
 
     protected override void Start()
     {

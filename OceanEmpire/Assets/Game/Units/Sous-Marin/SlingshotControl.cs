@@ -30,7 +30,6 @@ public class SlingshotControl : MonoBehaviour
 
     private float cooldownTimer = 0;
     private float toucheRadiusSQR;
-    private bool wasDragging = false;
     private Transform tr;
     private HarpoonThrower harpoonThrower;
     private Vector3 handleRestScale;
@@ -50,7 +49,6 @@ public class SlingshotControl : MonoBehaviour
     {
         UpdateCooldown(Time.deltaTime);
         UpdateVisuals();
-        wasDragging = isDragging;
     }
 
     private void UpdateVisuals()
