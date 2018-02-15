@@ -64,10 +64,10 @@ public class SpriteKitCategoryEditor : Editor
             _previewRenderUtility = new PreviewRenderUtility();
 
             _distance = DEFAULT_DISTANCE;
-            _previewRenderUtility.m_Camera.transform.position = new Vector3(0, 0, -_distance);
-            _previewRenderUtility.m_Camera.transform.rotation = Quaternion.identity;
-            _previewRenderUtility.m_Camera.nearClipPlane = NEAR_CLIP_PLANE;
-            _previewRenderUtility.m_Camera.farClipPlane = FAR_CLIP_PLANE;
+            _previewRenderUtility.camera.transform.position = new Vector3(0, 0, -_distance);
+            _previewRenderUtility.camera.transform.rotation = Quaternion.identity;
+            _previewRenderUtility.camera.nearClipPlane = NEAR_CLIP_PLANE;
+            _previewRenderUtility.camera.farClipPlane = FAR_CLIP_PLANE;
         }
 
         if (mesh == null)
@@ -241,16 +241,16 @@ public class SpriteKitCategoryEditor : Editor
 
                 _previewRenderUtility.DrawMesh(mesh, _matrix, material, 0, propertyBlock);
 
-                _previewRenderUtility.m_Camera.transform.position = Vector2.zero;
-                _previewRenderUtility.m_Camera.transform.rotation = Quaternion.Euler(new Vector3(-_drag.y, -_drag.x, 0));
-                _previewRenderUtility.m_Camera.transform.position = _previewRenderUtility.m_Camera.transform.forward * -_distance;
-                _previewRenderUtility.m_Camera.Render();
+                _previewRenderUtility.camera.transform.position = Vector2.zero;
+                _previewRenderUtility.camera.transform.rotation = Quaternion.Euler(new Vector3(-_drag.y, -_drag.x, 0));
+                _previewRenderUtility.camera.transform.position = _previewRenderUtility.camera.transform.forward * -_distance;
+                _previewRenderUtility.camera.Render();
 
                 Texture resultRender = _previewRenderUtility.EndPreview();
                 GUI.DrawTexture(r, resultRender, ScaleMode.StretchToFill, false);
             }
         }
-        if (Event.current.type == EventType.scrollWheel)
+        if (Event.current.type == EventType.ScrollWheel)
         {
             _distance *= 1 + (Event.current.delta.y * MOUSE_SENSITIVITY);
             _distance = _distance.Clamped(MIN_DISTANCE, MAX_DISTANCE);
