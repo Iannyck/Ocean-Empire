@@ -184,7 +184,6 @@ GameObject:
   - component: {fileID: 4389043993171966}
   - component: {fileID: 114071053288964254}
   - component: {fileID: 50751458136881890}
-  - component: {fileID: 114467016133407704}
   - component: {fileID: 114517759041208734}
   - component: {fileID: 114894073798485186}
   - component: {fileID: 114904046857194384}
@@ -439,9 +438,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527a1732d99a1174681851d8e90b1dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragDetection: {fileID: 114517759041208734}
   inputEnable: 1
   movementEnable: 1
-  deadZoneRadius: 0.75
+  deadZoneRadius:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 0}
   accelerationRate: 0.6
   maximumSpeed: 2.5
   brakeDistance: 1.5
@@ -492,41 +495,6 @@ MonoBehaviour:
   colorR: {r: 0.6838235, g: 0.6838235, b: 0.6838235, a: 1}
   colorG: {r: 0.6764706, g: 0.6578093, b: 0, a: 1}
   colorB: {r: 0, g: 0, b: 1, a: 1}
---- !u!114 &114467016133407704
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853673111068200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d617d989a1fe8254388c87b1b5651de8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useTouch: 1
-  useClick: 1
-  screenTouched:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: PlayerInputs+InputEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  inputTouched:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  externalScriptTouch: {fileID: 114071053288964254}
-  screenClicked:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: PlayerInputs+InputEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  inputClicked:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  externalScriptMouse: {fileID: 114071053288964254}
 --- !u!114 &114517759041208734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -539,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragMinScreenPercentage: 0.01
+  deadZoneRadius: 0.75
   onStartDrag:
     m_PersistentCalls:
       m_Calls:
@@ -601,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03311fa5d50030749b665d57ee50c839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTouchRadius: 0.75
+  dragDetection: {fileID: 114517759041208734}
   slingshotInstance: {fileID: 114379696085279956}
   maxDragLength: 2.5
   canonRotator: {fileID: 4397481441661994}
@@ -611,7 +580,6 @@ MonoBehaviour:
   handleMinDraggingScale: {x: 0.8, y: 0.8, z: 0.8}
   handleMaxDraggingScale: {x: 1.4, y: 1.4, z: 1.4}
   isDragging: 0
-  worldPosition: {x: 0, y: 0}
   overrideItems: 1
   overridePrefab: {fileID: 114421981925445368, guid: e093fda6acdf161458bc4bb61872f542,
     type: 2}
@@ -644,8 +612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorR: {r: 0.618, g: 0.618, b: 0.618, a: 1}
-  colorG: {r: 0.916, g: 0.05954, b: 0.05954, a: 1}
-  colorB: {r: 0, g: 0.35086888, b: 0.644, a: 1}
+  colorG: {r: 0.817, g: 0.14542598, b: 0.18236242, a: 1}
+  colorB: {r: 0.11446427, g: 0.49346817, b: 0.641, a: 1}
 --- !u!114 &114922179210201468
 MonoBehaviour:
   m_ObjectHideFlags: 1

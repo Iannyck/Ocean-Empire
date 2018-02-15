@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfaces.ITouchInputs
+public class SubmarineMovement : MonoBehaviour
 {
+    [Header("Components"), SerializeField] private DragDetection dragDetection;
 
     [Header("Enables")]
     public bool inputEnable = true;
     public bool movementEnable = true;
 
     [Header("Move Settings")]
-    public float deadZoneRadius = 0.75f;
+    public FloatReference deadZoneRadius;
     public float accelerationRate;
     public float maximumSpeed;
     public float brakeDistance = 1.5f;
@@ -25,14 +26,13 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     private float upBound = float.MaxValue;
     private float downBound = float.MinValue;
-    private float deadZoneRadiusSQR;
 
     private Rigidbody2D rb;
     private float realBrakeDistance = -1;
 
     private Thruster thruster;
-    private FishContainer fishContainer;
     private SlingshotControl slingshotControl;
+    //private bool touchHasStartedInDeadZone = false;
 
 
     private void Awake()
@@ -43,7 +43,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     void Start()
     {
-        deadZoneRadiusSQR = deadZoneRadius * deadZoneRadius;
         currentTarget = new Vector2(transform.position.x, transform.position.y);
 
         Game.OnGameStart += Init;
@@ -57,8 +56,6 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
             maximumSpeed = thruster.GetSpeed();
             accelerationRate = thruster.GetAcceleration();
         }
-
-        fishContainer = parts.GetFishContainer();
     }
 
     void Init()
@@ -68,11 +65,12 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
         downBound = m.mapBottom;
     }
 
-
+    void Update()
+    {
+        UpdateTargetPosition();
+    }
     void FixedUpdate()
     {
-        GetDraggingPosition();
-
         if (movementEnable == false)
         {
             rb.velocity = Vector2.zero;
@@ -101,60 +99,22 @@ public class SubmarineMovement : MonoBehaviour, Interfaces.IClickInputs, Interfa
 
     }
 
-    public void GetDraggingPosition()
+    public void UpdateTargetPosition()
     {
-        if (inputEnable)
+        if (dragDetection.IsTouching && inputEnable && !dragDetection.OriginatedInDeadZone && !slingshotControl.isDragging)
         {
-            Vector2 position;
-            if (DragDetection.GetTouchPosition(out position) && slingshotControl.isDragging == false)
+            var worldPos = dragDetection.LastWorldTouchedPosition;
+            float sqrDist;
+            if (!dragDetection.IsWithinDeadZone(worldPos, out sqrDist))
             {
-                position = GetCamera().ScreenToWorldPoint(position);
+                float d = distanceFromBound;
 
-                float sqrMag = (position - rb.position).sqrMagnitude;
-                if (sqrMag > deadZoneRadiusSQR)
-                {
-                    float d = distanceFromBound;
+                currentTarget.x = worldPos.x.Clamped(leftBound + d, rightBound - d);
+                currentTarget.y = worldPos.y.Clamped(downBound + d, upBound - d);
 
-                    currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
-                    currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
-
-                    realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
-                }
+                realBrakeDistance = (0.2f + sqrDist * 0.5f).Capped(brakeDistance);
             }
         }
-    }
-
-    Camera GetCamera()
-    {
-        if (Game.Instance != null)
-            return Game.GameCamera.cam;
-        else
-            return GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-    }
-
-
-    public void OnClick(Vector2 position)
-    {/*
-        float sqrMag = (position - rb.position).sqrMagnitude;
-        if (sqrMag > deadZoneRadiusSQR)
-        {
-            float d = distanceFromBound;
-
-            currentTarget.x = position.x.Clamped(leftBound + d, rightBound - d);
-            currentTarget.y = position.y.Clamped(downBound + d, upBound - d);
-
-            realBrakeDistance = (0.2f + sqrMag * 0.5f).Capped(brakeDistance);
-        }*/
-    }
-
-    public void OnTouch(Vector2 position)
-    {
-        OnClick(position);
-    }
-
-    FishContainer GetFishContainer()
-    {
-        return fishContainer;
     }
 
     public void PushAwayFromTarget(float duration, float speedBoost, float force)

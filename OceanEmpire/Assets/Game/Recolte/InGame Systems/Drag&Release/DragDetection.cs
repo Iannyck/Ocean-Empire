@@ -7,9 +7,10 @@ using UnityEngine.Events;
 public class DragDetection : MonoBehaviour
 {
     [System.Serializable]
-    public class DragEvent: UnityEvent<Vector2> { }
+    public class DragEvent : UnityEvent<Vector2> { }
 
     public float dragMinScreenPercentage = 0.01f;
+    public float deadZoneRadius = 0.75f;
     public DragEvent onStartDrag = new DragEvent();
     public DragEvent onReleaseDrag = new DragEvent();
 
@@ -19,16 +20,28 @@ public class DragDetection : MonoBehaviour
     [ReadOnly]
     public DragProfile drag = DragProfile.Null;
 
+    public Vector2 LastWorldTouchedPosition { get { return lastWorldTouchedPosition; } }
+    public bool IsTouching { get { return drag.state != DragProfile.State.Released; } }
+    public bool LastTouchIsWithinDeadZone { get { return IsWithinDeadZone(lastWorldTouchedPosition); } }
+    public bool OriginatedInDeadZone { get { return originatedInDeadZone; } }
+
+    private Transform tr;
+    private bool originatedInDeadZone = false;
+    private Vector2 lastWorldTouchedPosition;
+
     private void Awake()
     {
         dragMinSQRDist = Screen.height * dragMinScreenPercentage;
         dragMinSQRDist *= dragMinSQRDist;
+        tr = GetComponent<Transform>();
     }
 
     void Update()
     {
         Vector2 touchPos;
         bool isTouching = GetTouchPosition(out touchPos);
+        if (isTouching)
+            lastWorldTouchedPosition = GetCamera().ScreenToWorldPoint(touchPos);
 
         DragProfile.State wasState = drag.state;
 
@@ -50,34 +63,67 @@ public class DragDetection : MonoBehaviour
 
         DragProfile.State newState = drag.state;
 
-        if(wasState == DragProfile.State.Pressed && newState == DragProfile.State.Dragged)
+        if (wasState == DragProfile.State.Released && newState == DragProfile.State.Pressed)
         {
+            // Just started to press
+            originatedInDeadZone = IsWithinDeadZone(lastWorldTouchedPosition);
+        }
+        else if (wasState == DragProfile.State.Pressed && newState == DragProfile.State.Dragged)
+        {
+            // Just started drag
             onStartDrag.Invoke(drag.startPosition);
         }
         else if (wasState == DragProfile.State.Dragged && newState != DragProfile.State.Dragged)
         {
+            // Just released drag
             onReleaseDrag.Invoke(drag.lastRecordedPosition);
         }
     }
 
-    public static bool GetTouchPosition(out Vector2 position)
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(1, 1, 1, 0.5f);
+        Gizmos.DrawSphere(transform.position, deadZoneRadius);
+    }
+
+    public bool IsWithinDeadZone(Vector2 worldPoint)
+    {
+        float sqrDist;
+        return IsWithinDeadZone(worldPoint, out sqrDist);
+    }
+    public bool IsWithinDeadZone(Vector2 worldPoint, out float sqrDistance)
+    {
+        sqrDistance = (worldPoint - (Vector2)tr.position).sqrMagnitude;
+        return sqrDistance <= deadZoneRadius * deadZoneRadius;
+    }
+
+    Camera GetCamera()
+    {
+        if (Game.Instance != null)
+            return Game.GameCamera.cam;
+        else
+            return GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
+
+
+    public static bool GetTouchPosition(out Vector2 screenPosition)
     {
         bool touching = false;
         if (Input.touchSupported)
         {
             touching = Input.touchCount > 0;
             if (touching)
-                position = Input.GetTouch(0).position;
+                screenPosition = Input.GetTouch(0).position;
             else
-                position = Vector2.zero;
+                screenPosition = Vector2.zero;
         }
         else
         {
             touching = Input.GetMouseButton(0);
             if (touching)
-                position = Input.mousePosition;
+                screenPosition = Input.mousePosition;
             else
-                position = Vector2.zero;
+                screenPosition = Vector2.zero;
         }
         return touching;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlingshotControl : MonoBehaviour
 {
-    public float playerTouchRadius = 0.75f;
+    public DragDetection dragDetection;
     public Slingshot slingshotInstance;
     public float maxDragLength = 2.5f;
 
@@ -19,8 +19,6 @@ public class SlingshotControl : MonoBehaviour
 
     [ReadOnly]
     public bool isDragging;
-    [ReadOnly]
-    public Vector2 worldPosition;
 
     [Header("Debug"), SerializeField] bool overrideItems = false;
     [SerializeField] Harpoon overridePrefab;
@@ -29,7 +27,6 @@ public class SlingshotControl : MonoBehaviour
 
 
     private float cooldownTimer = 0;
-    private float toucheRadiusSQR;
     private Transform tr;
     private HarpoonThrower harpoonThrower;
     private Vector3 handleRestScale;
@@ -37,7 +34,6 @@ public class SlingshotControl : MonoBehaviour
 
     private void Start()
     {
-        toucheRadiusSQR = playerTouchRadius * playerTouchRadius;
         tr = transform;
         if (handleTransform != null)
             handleRestScale = handleTransform.localScale;
@@ -55,9 +51,7 @@ public class SlingshotControl : MonoBehaviour
     {
         if (isDragging)
         {
-            Vector2 screenPosition;
-            DragDetection.GetTouchPosition(out screenPosition);
-            ConvertToWorldPos(screenPosition);
+            var worldPosition = dragDetection.LastWorldTouchedPosition;
 
             var dir = (Vector2)tr.position - worldPosition;
             var maxLength = GetDragMaxLength();
@@ -168,9 +162,7 @@ public class SlingshotControl : MonoBehaviour
         if (GetHarpoonPrefab() == null || IsInCooldown())
             return;
 
-        ConvertToWorldPos(screenPosition);
-
-        if ((worldPosition - (Vector2)transform.position).sqrMagnitude <= toucheRadiusSQR)
+        if (dragDetection.OriginatedInDeadZone)
         {
             isDragging = true;
 
@@ -182,7 +174,7 @@ public class SlingshotControl : MonoBehaviour
             slingshotInstance.Show();
             slingshotInstance.maxLength = maxDragLength;
             slingshotInstance.followAnchor = tr;
-            slingshotInstance.UpdatePosition(worldPosition);
+            slingshotInstance.UpdatePosition(dragDetection.LastWorldTouchedPosition);
         }
     }
 
@@ -190,8 +182,6 @@ public class SlingshotControl : MonoBehaviour
     {
         if (isDragging)
         {
-            ConvertToWorldPos(screenPosition);
-
             isDragging = false;
             slingshotInstance.Hide();
 
@@ -201,13 +191,8 @@ public class SlingshotControl : MonoBehaviour
                 handleTransform.localScale = handleRestScale;
 
             //Shoot !
-            ShootMultipleHarpoons((Vector2)tr.position - worldPosition);
+            ShootMultipleHarpoons((Vector2)tr.position - dragDetection.LastWorldTouchedPosition);
         }
-    }
-
-    void ConvertToWorldPos(Vector2 screenPos)
-    {
-        worldPosition = GetCamera().ScreenToWorldPoint(screenPos);
     }
 
     Camera GetCamera()
