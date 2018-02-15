@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorR: {r: 0.31617647, g: 0.31617647, b: 0.31617647, a: 1}
-  colorG: {r: 0.334, g: 0, b: 0, a: 1}
+  colorG: {r: 0.5955882, g: 0, b: 0, a: 1}
   colorB: {r: 0.52205884, g: 0.52205884, b: 0.52205884, a: 1}
 --- !u!114 &114894073798485186
 MonoBehaviour:
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorR: {r: 0.618, g: 0.618, b: 0.618, a: 1}
   colorG: {r: 0.916, g: 0.05954, b: 0.05954, a: 1}
-  colorB: {r: 0, g: 0.54482746, b: 1, a: 1}
+  colorB: {r: 0, g: 0.35086888, b: 0.644, a: 1}
 --- !u!114 &114922179210201468
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,9 +6,10 @@ using UnityEditor;
 [ExecuteInEditMode, RequireComponent(typeof(SpriteRenderer))]
 public class TriColored : MonoBehaviour
 {
-    const string FOLDERNAME = "Materials";
-    const string MATERIALNAME = "MAT_TriColorSprite";
-    const string SHADERNAME = "Ocean Empire/TriColor Sprite";
+    public const string FOLDERNAME = "Materials";
+    public const string MATERIALNAME = "MAT_TriColorSprite";
+    public const string SHADERNAME = "Ocean Empire/TriColor Sprite";
+    public static string COMPLETE_MATERIAL_PATH { get { return FOLDERNAME + "/" + MATERIALNAME; } }
 
     public Color colorR = new Color(1, 0, 0, 1);
     public Color colorG = new Color(0, 1, 0, 1);
@@ -23,7 +24,7 @@ public class TriColored : MonoBehaviour
 
         if (!Application.isPlaying)
         {
-            Material material = Resources.Load(FOLDERNAME + "/" + MATERIALNAME) as Material;
+            Material material = Resources.Load(COMPLETE_MATERIAL_PATH) as Material;
 
 #if UNITY_EDITOR
             if (material == null)
@@ -80,10 +81,17 @@ public class TriColored : MonoBehaviour
         Material mat = sprRenderer.sharedMaterial;
         Texture texture = sprRenderer.sprite.texture;
 
-        propertyBlock.SetTexture("_MainTex", texture);
-        propertyBlock.SetColor("_ColorR", colorR);
-        propertyBlock.SetColor("_ColorG", colorG);
-        propertyBlock.SetColor("_ColorB", colorB);
+        ApplyToPropertyBlock(propertyBlock, texture, colorR, colorG, colorB);
+
         sprRenderer.SetPropertyBlock(propertyBlock);
+    }
+
+    public static void ApplyToPropertyBlock(MaterialPropertyBlock block,
+        Texture texture, Color colorR, Color colorG, Color colorB)
+    {
+        block.SetTexture("_MainTex", texture);
+        block.SetColor("_ColorR", colorR);
+        block.SetColor("_ColorG", colorG);
+        block.SetColor("_ColorB", colorB);
     }
 }
