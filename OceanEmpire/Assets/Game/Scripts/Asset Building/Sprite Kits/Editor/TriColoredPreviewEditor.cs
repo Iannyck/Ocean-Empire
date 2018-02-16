@@ -1,26 +1,96 @@
 ﻿using UnityEngine;
 using UnityEditor;
-
+using System.Collections.Generic;
 
 public abstract class TriColoredPreviewEditor : Editor
 {
     private PreviewRenderUtility _previewRenderUtility;
 
-    private Mesh mesh;
-    private Material material;
-    private MaterialPropertyBlock propertyBlock;
+    protected List<RenderedSprite> renderedObjects = new List<RenderedSprite>();
 
     private Vector2 _drag;
     private float _distance = DEFAULT_DISTANCE;
-    private TriColoredSprite _triColoredSprite;
-    private Matrix4x4 _matrix = Matrix4x4.identity;
 
     private const float DEFAULT_DISTANCE = 5;
     private const float MOUSE_SENSITIVITY = 0.01f;
     private const float NEAR_CLIP_PLANE = 1;
-    private const float FAR_CLIP_PLANE = 10;
+    private const float FAR_CLIP_PLANE = 100;
     private const float MAX_DISTANCE = FAR_CLIP_PLANE - 0.5f;
     private const float MIN_DISTANCE = NEAR_CLIP_PLANE + 0.5f;
+
+    protected class RenderedSprite
+    {
+        public TriColoredSprite triColoredSprite;
+        public Mesh mesh;
+        public Material material;
+        public MaterialPropertyBlock propertyBlock;
+        public Matrix4x4 matrix;
+        public Vector3 position = Vector3.zero;
+        public Vector3 baseScale = Vector3.one;
+        public Quaternion rotation = Quaternion.identity;
+
+        public void ValidateData()
+        {
+            if (mesh == null)
+            {
+                GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                gameObject.hideFlags = HideFlags.HideAndDontSave;
+                mesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
+                DestroyImmediate(gameObject);
+            }
+
+            if (material == null)
+            {
+                material = Resources.Load<Material>(TriColored.COMPLETE_MATERIAL_PATH);
+                if (material == null)
+                    Debug.LogError("Need Tricolored Material in Resources folder: " + TriColored.COMPLETE_MATERIAL_PATH);
+            }
+
+            if (propertyBlock == null)
+            {
+                propertyBlock = new MaterialPropertyBlock();
+                UpdatePropertyBlock();
+            }
+        }
+        public void UpdatePropertyBlock()
+        {
+            if (triColoredSprite == null || triColoredSprite.sprite == null)
+                return;
+
+            TriColored.ApplyToPropertyBlock(propertyBlock,
+                triColoredSprite.sprite.texture,
+                triColoredSprite.colorR,
+                triColoredSprite.colorG,
+                triColoredSprite.colorB);
+        }
+        public void UpdateMatrix()
+        {
+            if (triColoredSprite != null && triColoredSprite.sprite != null)
+            {
+                var rect = triColoredSprite.sprite.rect;
+                var ratio = rect.width / rect.height;
+
+                var scaleFactor = Vector3.one;
+                if (ratio > 1)
+                    scaleFactor = new Vector3(1, 1 / ratio, 1);
+                else
+                    scaleFactor = new Vector3(ratio, 1, 1);
+
+                scaleFactor.Scale(baseScale);
+                matrix = Matrix4x4.TRS(position, rotation, scaleFactor);
+            }
+        }
+    }
+    protected virtual void Awake()
+    {
+        NewTriColoredSprites();
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (_previewRenderUtility != null)
+            _previewRenderUtility.Cleanup();
+    }
 
     protected virtual void ValidateData()
     {
@@ -35,25 +105,9 @@ public abstract class TriColoredPreviewEditor : Editor
             _previewRenderUtility.m_Camera.farClipPlane = FAR_CLIP_PLANE;
         }
 
-        if (mesh == null)
+        for (int i = 0; i < renderedObjects.Count; i++)
         {
-            GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            gameObject.hideFlags = HideFlags.HideAndDontSave;
-            mesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
-            DestroyImmediate(gameObject);
-        }
-
-        if (material == null)
-        {
-            material = Resources.Load<Material>(TriColored.COMPLETE_MATERIAL_PATH);
-            if (material == null)
-                Debug.LogError("Need Tricolored Material in Resources folder: " + TriColored.COMPLETE_MATERIAL_PATH);
-        }
-
-        if (propertyBlock == null)
-        {
-            propertyBlock = new MaterialPropertyBlock();
-            UpdatePropertyBlock();
+            renderedObjects[i].ValidateData();
         }
     }
 
@@ -64,6 +118,7 @@ public abstract class TriColoredPreviewEditor : Editor
         return true;
     }
 
+
     protected void DrawPreviewButton()
     {
         EditorGUILayout.Space();
@@ -71,69 +126,52 @@ public abstract class TriColoredPreviewEditor : Editor
 
         if (GUILayout.Button("Preview"))
         {
-            PickNewTriColoredSprite();
+            NewTriColoredSprites();
         }
     }
 
-    private void PickNewTriColoredSprite()
+    protected void NewTriColoredSprites()
     {
         ValidateData();
 
-        _triColoredSprite = GetPreviewSprite();
+        OnNewColoredSprites();
 
-        if (_triColoredSprite != null && _triColoredSprite.sprite != null)
+        for (int i = 0; i < renderedObjects.Count; i++)
         {
-            var rect = _triColoredSprite.sprite.rect;
-            var ratio = rect.width / rect.height;
-
-            if (ratio > 1)
-                _matrix = Matrix4x4.Scale(new Vector3(1, 1 / ratio, 1));
-            else
-                _matrix = Matrix4x4.Scale(new Vector3(ratio, 1, 1));
+            renderedObjects[i].UpdateMatrix();
         }
     }
 
-    protected abstract TriColoredSprite GetPreviewSprite();
-
-
-    private void UpdatePropertyBlock()
-    {
-        if (_triColoredSprite == null || _triColoredSprite.sprite == null)
-            return;
-
-        TriColored.ApplyToPropertyBlock(propertyBlock,
-            _triColoredSprite.sprite.texture,
-            _triColoredSprite.colorR,
-            _triColoredSprite.colorG,
-            _triColoredSprite.colorB);
-    }
+    protected abstract void OnNewColoredSprites();
 
     public override void OnPreviewGUI(Rect r, GUIStyle background)
     {
-        UpdatePropertyBlock();
+        for (int i = 0; i < renderedObjects.Count; i++)
+        {
+            renderedObjects[i].UpdatePropertyBlock();
+        }
 
         _drag = Drag2D(_drag, r);
 
         if (Event.current.type == EventType.Repaint)
         {
-            if (material == null)
+            _previewRenderUtility.BeginPreview(r, background);
+
+            for (int i = 0; i < renderedObjects.Count; i++)
             {
-                EditorGUI.DropShadowLabel(r, "Material not found.");
+                var obj = renderedObjects[i];
+                if (obj.mesh == null || obj.material == null || obj.propertyBlock == null)
+                    continue;
+                _previewRenderUtility.DrawMesh(obj.mesh, obj.matrix, obj.material, 0, obj.propertyBlock);
             }
-            else
-            {
-                _previewRenderUtility.BeginPreview(r, background);
 
-                _previewRenderUtility.DrawMesh(mesh, _matrix, material, 0, propertyBlock);
+            _previewRenderUtility.m_Camera.transform.position = Vector2.zero;
+            _previewRenderUtility.m_Camera.transform.rotation = Quaternion.Euler(new Vector3(-_drag.y, -_drag.x, 0));
+            _previewRenderUtility.m_Camera.transform.position = _previewRenderUtility.m_Camera.transform.forward * -_distance;
+            _previewRenderUtility.m_Camera.Render();
 
-                _previewRenderUtility.m_Camera.transform.position = Vector2.zero;
-                _previewRenderUtility.m_Camera.transform.rotation = Quaternion.Euler(new Vector3(-_drag.y, -_drag.x, 0));
-                _previewRenderUtility.m_Camera.transform.position = _previewRenderUtility.m_Camera.transform.forward * -_distance;
-                _previewRenderUtility.m_Camera.Render();
-
-                Texture resultRender = _previewRenderUtility.EndPreview();
-                GUI.DrawTexture(r, resultRender, ScaleMode.StretchToFill, false);
-            }
+            Texture resultRender = _previewRenderUtility.EndPreview();
+            GUI.DrawTexture(r, resultRender, ScaleMode.StretchToFill, false);
         }
         if (Event.current.type == EventType.ScrollWheel)
         {
@@ -150,11 +188,6 @@ public abstract class TriColoredPreviewEditor : Editor
             _drag = Vector2.zero;
             _distance = DEFAULT_DISTANCE;
         }
-    }
-
-    protected virtual void OnDestroy()
-    {
-        _previewRenderUtility.Cleanup();
     }
 
     public static Vector2 Drag2D(Vector2 scrollPosition, Rect position)
