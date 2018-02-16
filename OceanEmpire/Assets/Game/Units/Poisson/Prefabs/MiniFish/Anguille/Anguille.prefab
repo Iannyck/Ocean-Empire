@@ -56,13 +56,13 @@ GameObject:
   - component: {fileID: 50708007439193562}
   - component: {fileID: 114759646282957270}
   - component: {fileID: 114021408903366914}
-  - component: {fileID: 114711318566592404}
   - component: {fileID: 114998183075533196}
   - component: {fileID: 114304175309523648}
   - component: {fileID: 114607619358298838}
   - component: {fileID: 114666966049966068}
   - component: {fileID: 114457547989728266}
   - component: {fileID: 114072663983940806}
+  - component: {fileID: 114041858298378942}
   m_Layer: 10
   m_Name: Anguille
   m_TagString: Untagged
@@ -192,6 +192,23 @@ MonoBehaviour:
   checkX: 0
   overrideDefaultMargin: 0
   margin: 3.33
+--- !u!114 &114041858298378942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365461041918330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f79c2a55584d042975b19318e826a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collision: {fileID: 114240615215909148}
+  triggerCollision: {fileID: 0}
+  repulsionStrength: 7.5
+  fishSprite: {fileID: 212771005577804690}
+  electricInterval: 2.5
+  electricDuration: 2.5
 --- !u!114 &114072663983940806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,23 +325,6 @@ MonoBehaviour:
   maxSpeed: 0.75
   tiltSpeed: 60
   angleRange: {x: -90, y: 90}
---- !u!114 &114711318566592404
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1365461041918330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81be136143904e14b8c0eeec0ea4c7c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collision: {fileID: 114240615215909148}
-  triggerCollision: {fileID: 0}
-  electricInterval: 2.5
-  electricDuration: 2.5
-  repulsionStrength: 7.5
-  fishSprite: {fileID: 212771005577804690}
 --- !u!114 &114759646282957270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,6 +360,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -375,6 +376,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -392,3 +394,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

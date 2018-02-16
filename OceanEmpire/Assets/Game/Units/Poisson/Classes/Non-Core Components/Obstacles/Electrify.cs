@@ -5,9 +5,6 @@ using CCC;
 
 public class Electrify : CollisionEffect
 {
-    public float electricInterval = 2.5f;
-    public float electricDuration = 2.5f;
-
     public float repulsionStrength = 2.5f;
 
     // Animation temporaire
@@ -20,7 +17,7 @@ public class Electrify : CollisionEffect
 
     private MeleeCapturable captureEffect;
 
-    protected void Start()
+    protected virtual void Start()
     {
         captureEffect = GetComponent<MeleeCapturable>();
 
@@ -29,7 +26,7 @@ public class Electrify : CollisionEffect
         ElectricEffect();
     }
 
-    void ElectricEffect()
+    protected void ElectricEffect()
     {
         isElectrified = true;
 
@@ -37,15 +34,9 @@ public class Electrify : CollisionEffect
             captureEffect.canCapture.Lock(LOCKCAPTURE_KEY);
 
         ElectricAnimation();
-
-        this.DelayedCall(delegate ()
-        {
-            StopElectricEffect();
-            this.DelayedCall(ElectricEffect, electricInterval);
-        }, electricDuration);
     }
 
-    void StopElectricEffect()
+    protected void StopElectricEffect()
     {
         isElectrified = false;
 
@@ -55,12 +46,12 @@ public class Electrify : CollisionEffect
         StopElectricAnimation();
     }
 
-    void ElectricAnimation()
+    protected void ElectricAnimation()
     {
         fishSprite.color = Color.blue;
     }
 
-    void StopElectricAnimation()
+    protected void StopElectricAnimation()
     {
         fishSprite.color = originColor;
     }
@@ -77,7 +68,7 @@ public class Electrify : CollisionEffect
         Repulse(col.attachedRigidbody, transform.position);
     }
 
-    void Repulse(Rigidbody2D target, Vector2 myPosition)
+    protected void Repulse(Rigidbody2D target, Vector2 myPosition)
     {
         if (isElectrified)
         {
