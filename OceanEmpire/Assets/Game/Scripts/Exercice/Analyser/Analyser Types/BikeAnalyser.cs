@@ -22,7 +22,7 @@ public class BikeAnalyser : BaseAnalyser
         // Parametres a calculer
         ExerciseVolume volume;
         // Le volume est de la marche
-        volume.type = ExerciseType.Walk;
+        volume.type = ExerciseType.Bike;
         // Volume start a 0
         volume.volume = 0;
 
