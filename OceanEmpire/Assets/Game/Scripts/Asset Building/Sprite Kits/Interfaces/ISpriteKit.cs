@@ -2,7 +2,7 @@
 
 public interface ISpriteKit
 {
-    void Get(int index, out TriColoredSprite triColoredSprite);
+    TriColoredSprite Get(int index);
 
     int Length
     {

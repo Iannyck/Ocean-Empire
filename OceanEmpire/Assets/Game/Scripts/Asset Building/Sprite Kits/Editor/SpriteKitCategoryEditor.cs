@@ -15,7 +15,9 @@ public class SpriteKitCategoryEditor : TriColoredPreviewEditor
 
     protected override void ValidateData()
     {
-        if(spriteKit == null)
+        AddObjects();
+
+        if (spriteKit == null)
             spriteKit = (SpriteKitCategory)target;
 
         if (!spriteKit.VerifyIntegrity())
@@ -125,16 +127,24 @@ public class SpriteKitCategoryEditor : TriColoredPreviewEditor
         DrawPreviewButton();
     }
 
-    protected override TriColoredSprite GetPreviewSprite()
+    void AddObjects()
+    {
+        renderedObjects.Add(new RenderedSprite());
+    }
+
+    protected override void OnNewColoredSprites()
     {
         if (elements == null)
         {
             ValidateData();
-            return null;
+            return;
         }
         if (elements.Count <= 0)
-            return null;
+            return;
 
-        return spriteKit.Pick();
+        for (int i = 0; i < renderedObjects.Count; i++)
+        {
+            renderedObjects[i].triColoredSprite = spriteKit.Pick();
+        }
     }
 }

@@ -37,9 +37,9 @@ public class GeneratedSpriteKit : ISpriteKit, IGenerated
         get { return triColoredSprites.Count; }
     }
 
-    public void Get(int index, out TriColoredSprite triColoredSprite)
+    public TriColoredSprite Get(int index)
     {
-        triColoredSprite = triColoredSprites[index];
+        return triColoredSprites[index];
     }
 
     public string GetGenerationCode()
