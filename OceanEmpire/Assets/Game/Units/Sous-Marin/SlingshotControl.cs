@@ -159,23 +159,33 @@ public class SlingshotControl : MonoBehaviour
     #region Dragging
     public void StartDrag(Vector2 screenPosition)
     {
-        if (GetHarpoonPrefab() == null || IsInCooldown())
+        if (GetHarpoonPrefab() == null)
             return;
 
-        if (dragDetection.OriginatedInDeadZone)
+        if (!dragDetection.OriginatedInDeadZone)
+            return;
+
+        if (IsInCooldown())
         {
-            isDragging = true;
-
-            if (handleTransform != null)
+            if (Game.Instance != null)
             {
-                handleTransform.localScale = handleMinDraggingScale;
+                Game.Instance.ui.textPopups.SpawnText("En recharge", Color.white, (Vector2)tr.position + Vector2.up);
             }
-
-            slingshotInstance.Show();
-            slingshotInstance.maxLength = maxDragLength;
-            slingshotInstance.followAnchor = tr;
-            slingshotInstance.UpdatePosition(dragDetection.LastWorldTouchedPosition);
+            return;
         }
+
+
+        isDragging = true;
+
+        if (handleTransform != null)
+        {
+            handleTransform.localScale = handleMinDraggingScale;
+        }
+
+        slingshotInstance.Show();
+        slingshotInstance.maxLength = maxDragLength;
+        slingshotInstance.followAnchor = tr;
+        slingshotInstance.UpdatePosition(dragDetection.LastWorldTouchedPosition);
     }
 
     public void ReleaseDrag(Vector2 screenPosition)

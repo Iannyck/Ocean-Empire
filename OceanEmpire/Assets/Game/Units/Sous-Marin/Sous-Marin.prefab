@@ -441,14 +441,11 @@ MonoBehaviour:
   dragDetection: {fileID: 114517759041208734}
   inputEnable: 1
   movementEnable: 1
-  deadZoneRadius:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
   accelerationRate: 0.6
   maximumSpeed: 2.5
   brakeDistance: 1.5
   currentTarget: {x: 0, y: 0}
+  clampPosition: 1
   distanceFromBound: 0.35
   leftBound: -2.81
   rightBound: 2.81
@@ -584,7 +581,7 @@ MonoBehaviour:
   overridePrefab: {fileID: 114421981925445368, guid: e093fda6acdf161458bc4bb61872f542,
     type: 2}
   overrideCount: 1
-  overrideCooldown: -1
+  overrideCooldown: 2
 --- !u!114 &114904046857194384
 MonoBehaviour:
   m_ObjectHideFlags: 1

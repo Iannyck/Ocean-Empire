@@ -63,14 +63,17 @@ public class ContinuousRewarder : MonoPersistent
     private void UpdateReward()
     {
         var now = DateTimeNow;
+        nextUpdate = now + new TimeSpan(0, 0, updateEvery);
+
         var timeslotToAnalyse = new TimeSlot(lastUpdate, now);
+        if (timeslotToAnalyse.duration.Seconds > 1)
+        {
+            lastUpdate = now;
 
-        lastUpdate = now;
-        nextUpdate = lastUpdate + new TimeSpan(0, 0, updateEvery);
+            dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
 
-        dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
-
-        AnalyseAndRewardTimeSlot(timeslotToAnalyse);
+            AnalyseAndRewardTimeSlot(timeslotToAnalyse);
+        }
     }
 
     void AnalyseAndRewardTimeSlot(TimeSlot timeslotToAnalyse)
