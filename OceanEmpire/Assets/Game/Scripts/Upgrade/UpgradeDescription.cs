@@ -20,7 +20,7 @@ public abstract class UpgradeDescription
     private string itemName;
     [SerializeField]
     private int upgradeLevel;
-    [SerializeField]
+    [SerializeField, TextArea]
     private string itemDescription;
     [SerializeField]
     private int moneyCost;
@@ -28,6 +28,8 @@ public abstract class UpgradeDescription
     private int ticketCost;
     [SerializeField]
     private Sprite itemIcon;
+
+    public ISpriteKit spriteKit;
 
     public int GetCost(CurrencyType type)
     {
@@ -60,4 +62,6 @@ public abstract class UpgradeDescription
     {
         return itemDescription;
     }
+
+    abstract public List<Statistic> GetStatistics();
 }

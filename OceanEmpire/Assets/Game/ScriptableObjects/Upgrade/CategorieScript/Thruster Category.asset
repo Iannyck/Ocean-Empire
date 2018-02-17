@@ -11,9 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f76c93bee4b6f46b0e13ea4b9a3728, type: 3}
   m_Name: Thruster Category
   m_EditorClassIdentifier: 
-  upgradeBuilders: []
-  ownedUpgrade: -1
+  SavingMode: 0
+  upgradeBuilders:
+  - {fileID: 11400000, guid: 5322bc13e4b40f54ca7158df0c850cd6, type: 2}
+  - {fileID: 11400000, guid: 54cd2a1c3a5677248a37c43dc6fc9eb3, type: 2}
+  - {fileID: 11400000, guid: ce17c5fc36d9a8c4baa8766dea260274, type: 2}
+  - {fileID: 11400000, guid: be2a3e1384f927e418235400669c75a4, type: 2}
+  ownedUpgrade: 0
   nextUpgGenCode: 
+  ownedUpgGenUpgrade: 
   dataSaver: {fileID: 11400000, guid: 81d221094b9bdbf41805451be7f2b23f, type: 2}
   Icons:
   - {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}

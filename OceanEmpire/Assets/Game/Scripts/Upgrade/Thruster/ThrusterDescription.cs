@@ -9,23 +9,42 @@ public class ThrusterDescription : UpgradeDescription {
     public Thruster GetThruster() { return thruster;}
     */
 
-    public float subMarineSpeed = 1;
-    public float subMarineAcceleration = 1;
+    [SerializeField]
+    private float speed = 1; // "speed"
+    [SerializeField]
+    private float acceleration = 1; // "Accélération"
+    [SerializeField]
+    private float deceleration = 1; //"décélération"
 
     public float GetSpeed()
     {
-        return subMarineSpeed;
+        return speed;
     }
     public float GetAcceleration()
     {
-        return subMarineAcceleration;
+        return acceleration;
+    }
+    public float GetDeceleration()
+    {
+        return deceleration;
+    }
+    public override List<Statistic> GetStatistics()
+    {
+        List<Statistic> stats = new List<Statistic>();
+
+        stats.Add( new Statistic("speed", speed) );
+        stats.Add(new Statistic("Accélération", acceleration));
+        stats.Add(new Statistic("décélération", deceleration));
+
+        return stats;
     }
 
 
-    public ThrusterDescription(string nm, int lv, string desc, int coin, int tick, Sprite Icon, float Speed, float Acce)
+    public ThrusterDescription(string nm, int lv, string desc, int coin, int tick, Sprite Icon, float Speed, float Acce, float Dece)
         : base(nm, lv, desc, coin, tick, Icon)
     {
-        subMarineSpeed = Speed;
-        subMarineAcceleration = Acce;
+        speed = Speed;
+        acceleration = Acce;
+        deceleration = Dece;
     }
 }

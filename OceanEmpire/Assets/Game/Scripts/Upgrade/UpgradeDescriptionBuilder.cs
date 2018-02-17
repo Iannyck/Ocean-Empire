@@ -10,8 +10,14 @@ public abstract class UpgradeDescriptionBuilder<T> : ScriptableObject where T : 
     [SerializeField]
     protected T data;
 
+    [SerializeField]
+    protected PrebuiltSpriteKit prebuiltSpriteKit;
+
     public T BuildUpgradeDescription()
     {
+        data.spriteKit = prebuiltSpriteKit;
         return data;
     }
+
+
 }
