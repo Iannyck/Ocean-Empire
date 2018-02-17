@@ -13,8 +13,8 @@ public class PrebuiltSpriteKit : ScriptableObject, ISpriteKit
         get { return triColoredSprites.Length; }
     }
 
-    public void Get(int index, out TriColoredSprite triColoredSprite)
+    public TriColoredSprite Get(int index)
     {
-        triColoredSprite = triColoredSprites[index];
+        return triColoredSprites[index];
     }
 }

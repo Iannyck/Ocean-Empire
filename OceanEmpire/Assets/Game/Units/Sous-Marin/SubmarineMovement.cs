@@ -12,13 +12,13 @@ public class SubmarineMovement : MonoBehaviour
     public bool movementEnable = true;
 
     [Header("Move Settings")]
-    public FloatReference deadZoneRadius;
     public float accelerationRate;
     public float maximumSpeed;
     public float brakeDistance = 1.5f;
     [ReadOnly] public Vector2 currentTarget;
 
     [Header("Bounds")]
+    public bool clampPosition = true;
     public float distanceFromBound;
     public float leftBound;
     public float rightBound;
@@ -32,7 +32,6 @@ public class SubmarineMovement : MonoBehaviour
 
     private Thruster thruster;
     private SlingshotControl slingshotControl;
-    //private bool touchHasStartedInDeadZone = false;
 
 
     private void Awake()
@@ -71,6 +70,9 @@ public class SubmarineMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (clampPosition)
+            rb.position = ClampPosition(rb.position);
+
         if (movementEnable == false)
         {
             rb.velocity = Vector2.zero;
@@ -99,6 +101,13 @@ public class SubmarineMovement : MonoBehaviour
 
     }
 
+    protected Vector2 ClampPosition(Vector2 pos)
+    {
+        pos.x = pos.x.Clamped(leftBound + distanceFromBound, rightBound - distanceFromBound);
+        pos.y = pos.y.Clamped(downBound + distanceFromBound, upBound - distanceFromBound);
+        return pos;
+    }
+
     public void UpdateTargetPosition()
     {
         if (dragDetection.IsTouching && inputEnable && !dragDetection.OriginatedInDeadZone && !slingshotControl.isDragging)
@@ -109,8 +118,7 @@ public class SubmarineMovement : MonoBehaviour
             {
                 float d = distanceFromBound;
 
-                currentTarget.x = worldPos.x.Clamped(leftBound + d, rightBound - d);
-                currentTarget.y = worldPos.y.Clamped(downBound + d, upBound - d);
+                currentTarget = ClampPosition(worldPos);
 
                 realBrakeDistance = (0.2f + sqrDist * 0.5f).Capped(brakeDistance);
             }
