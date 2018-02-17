@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25f76c93bee4b6f46b0e13ea4b9a3728, type: 3}
-  m_Name: Thruster Category
+  m_Name: ThrusterCategory
   m_EditorClassIdentifier: 
   SavingMode: 0
   upgradeBuilders:
@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54cd2a1c3a5677248a37c43dc6fc9eb3, type: 2}
   - {fileID: 11400000, guid: ce17c5fc36d9a8c4baa8766dea260274, type: 2}
   - {fileID: 11400000, guid: be2a3e1384f927e418235400669c75a4, type: 2}
+  - {fileID: 11400000, guid: 9893c397e9d4e1a4c84a489b9de5b28d, type: 2}
   ownedUpgrade: 0
   nextUpgGenCode: 
   ownedUpgGenUpgrade: 

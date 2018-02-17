@@ -13,14 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeLevel: 3
   data:
-    itemName: Moteur 3
-    upgradeLevel: 3
-    itemDescription: 'Vitesse: 2
-
-      Acceleration: 1.5'
-    moneyCost: 3
-    ticketCost: 3
+    itemName: Moteur 4
+    upgradeLevel: 4
+    itemDescription: 
+    moneyCost: 4
+    ticketCost: 4
     itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
-    subMarineSpeed: 0
-    subMarineAcceleration: 0
-    decceleration: 0
+    speed: 1.5
+    acceleration: 2
+    deceleration: 1.5
+  prebuiltSpriteKit: {fileID: 0}

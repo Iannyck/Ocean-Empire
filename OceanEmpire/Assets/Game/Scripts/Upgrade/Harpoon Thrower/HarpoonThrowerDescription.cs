@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class HarpoonThrowerDescription : UpgradeDescription {
     [SerializeField, ReadOnly] private HarpoonThrower harpoonThrower;
     public HarpoonThrower GetHarpoonThrower() { return harpoonThrower; }
