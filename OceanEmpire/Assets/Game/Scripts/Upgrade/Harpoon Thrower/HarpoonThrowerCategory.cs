@@ -5,6 +5,28 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Category/Harpoon Thrower Category")]
 public class HarpoonThrowerCategory : UpgradeCategory<HarpoonThrowerDescBuilder, HarpoonThrowerDescription>
 {
+    protected override string OwnedUpgradeKey
+    {
+        get
+        {
+            return "ht1";
+        }
+    }
+    protected override string NextUpgGenCodeKey
+    {
+        get
+        {
+            return "ht2";
+        }
+    }
+    protected override string OwnedUpgGenKey
+    {
+        get
+        {
+            return "ht3";
+        }
+    }
+
 
     public override UpgradeDescription GenerateNextDescription(string nextUpgGenCode)
     {

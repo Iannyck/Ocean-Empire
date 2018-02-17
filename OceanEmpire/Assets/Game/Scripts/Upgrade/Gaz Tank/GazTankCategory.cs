@@ -5,7 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Category/Gaz Tank Category")]
 public class GazTankCategory : UpgradeCategory<GazTankDescBuilder, GazTankDescription>
 {
-
+    protected override string OwnedUpgradeKey
+    {
+        get
+        {
+            return "gt1";
+        }
+    }
+    protected override string NextUpgGenCodeKey
+    {
+        get
+        {
+            return "gt2";
+        }
+    }
+    protected override string OwnedUpgGenKey
+    {
+        get
+        {
+            return "gt3";
+        }
+    }
     public override UpgradeDescription GenerateNextDescription(string nextUpgGenCode)
     {
         return null;

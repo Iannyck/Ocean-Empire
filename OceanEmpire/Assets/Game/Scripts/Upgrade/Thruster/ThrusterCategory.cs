@@ -14,7 +14,30 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
     public CCC.Math.NeverReachingCurve nvcAcceleration;
     [SerializeField]
     private List<Sprite> Icons;
-    
+
+
+    protected override string OwnedUpgradeKey
+    {
+        get
+        {
+            return "tt1";
+        }
+    }
+    protected override string NextUpgGenCodeKey
+    {
+        get
+        {
+            return "tt2";
+        }
+    }
+    protected override string OwnedUpgGenKey
+    {
+        get
+        {
+            return "tt3";
+        }
+    }
+
     public ThrusterCategory()
     {
         nvcSpeed = new CCC.Math.NeverReachingCurve();
@@ -46,6 +69,7 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
     {
         float speed = nvcSpeed.Evalutate((float)level);
         float acceleration = nvcAcceleration.Evalutate((float)level);
+
         int coin = GenCoinCost(level);
         int ticket = GenTicketCost(level);
 
@@ -54,15 +78,14 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
 
         StringBuilder genCodeBuilder = new StringBuilder();
 
+        String description = "Vitesse: " + speed.ToString("F") + "\nAcceleration :" + acceleration.ToString("F") + "\nDeceleration :" + acceleration.ToString("F"); ;
+
         genCodeBuilder.Append("Moteur niveau ");
         genCodeBuilder.Append(level.ToString());
         genCodeBuilder.Append('@');
         genCodeBuilder.Append(level.ToString());
         genCodeBuilder.Append('@');
-        genCodeBuilder.Append("Vitesse de ");
-        genCodeBuilder.Append(speed.ToString("F"));
-        genCodeBuilder.Append(" et acceleration de ");
-        genCodeBuilder.Append(acceleration.ToString("F"));
+        genCodeBuilder.Append(description);
         genCodeBuilder.Append('@');
         genCodeBuilder.Append(coin);
         genCodeBuilder.Append('@');
@@ -71,6 +94,8 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
         genCodeBuilder.Append(picture);
         genCodeBuilder.Append('@');
         genCodeBuilder.Append(speed.ToString("F"));
+        genCodeBuilder.Append('@');
+        genCodeBuilder.Append(acceleration.ToString("F"));
         genCodeBuilder.Append('@');
         genCodeBuilder.Append(acceleration.ToString("F"));
 
@@ -83,7 +108,7 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
         string[] result = nextUpgGenCode.Split(stringSeparators, StringSplitOptions.None);
 
         ThrusterDescription description = new ThrusterDescription(result[0], int.Parse(result[1]), result[2], int.Parse(result[3]), 
-            Convert.ToInt32(result[4]), Icons[ int.Parse(result[5]) ], float.Parse(result[6]), float.Parse(result[7]));
+            Convert.ToInt32(result[4]), Icons[ int.Parse(result[5]) ], float.Parse(result[6]), float.Parse(result[7]), float.Parse(result[8]));
 
         return description;
     }

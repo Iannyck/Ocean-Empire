@@ -11,8 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb510bc33c87e2640a5752fbc46fd497, type: 3}
   m_Name: GazTankCategory
   m_EditorClassIdentifier: 
+  SavingMode: 1
   upgradeBuilders:
-  - {fileID: 11400000, guid: 810c1882fc6619f4d90d738712ff3c93, type: 2}
-  ownedUpgrade: -1
+  - {fileID: 11400000, guid: 113be89a372d5f14da647d92d8c81c59, type: 2}
+  - {fileID: 11400000, guid: c85bb2ea902045f4488976946ebb55a2, type: 2}
+  - {fileID: 11400000, guid: d67460a7bd3e18541bdce459ae191efc, type: 2}
+  - {fileID: 11400000, guid: 45c743315747ddf4b89a4e3c85ad88b4, type: 2}
+  - {fileID: 11400000, guid: a5c57326214aef34bad2a3347caa7335, type: 2}
+  ownedUpgrade: 0
   nextUpgGenCode: 
+  ownedUpgGenUpgrade: 
   dataSaver: {fileID: 11400000, guid: 81d221094b9bdbf41805451be7f2b23f, type: 2}

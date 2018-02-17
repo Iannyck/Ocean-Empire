@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3daf87bb26eddeb40b669d6067a654c8, type: 3}
+  m_Name: HarpoonThrower4
+  m_EditorClassIdentifier: 
+  upgradeLevel: 4
+  data:
+    itemName: Lanceur de harpon 4
+    upgradeLevel: 4
+    itemDescription: 
+    moneyCost: 2
+    ticketCost: 2
+    itemIcon: {fileID: 0}
+    harpoonThrower: {fileID: 0}
+    harpoonSpeed: 3
+    cooldown: 2
+    harpoonNumber: 2
+  prebuiltSpriteKit: {fileID: 11400000, guid: 52c1a91832fef084d89ebedef983f278, type: 2}
