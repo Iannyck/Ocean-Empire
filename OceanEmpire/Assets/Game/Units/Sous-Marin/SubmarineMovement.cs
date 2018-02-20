@@ -116,8 +116,6 @@ public class SubmarineMovement : MonoBehaviour
             float sqrDist;
             if (!dragDetection.IsWithinDeadZone(worldPos, out sqrDist))
             {
-                float d = distanceFromBound;
-
                 currentTarget = ClampPosition(worldPos);
 
                 realBrakeDistance = (0.2f + sqrDist * 0.5f).Capped(brakeDistance);

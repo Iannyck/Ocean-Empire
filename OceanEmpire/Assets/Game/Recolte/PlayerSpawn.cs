@@ -11,7 +11,6 @@ public class PlayerSpawn : MonoBehaviour
     [Header("Intro"), SerializeField] float topHeightIncrease = 2;
     [SerializeField] float introToTopDuration = 0.5f;
     [SerializeField] float introToWaterDuration = 1.0f;
-    [SerializeField] float introAnimDuration = 1f;
 
     [Header("Outro"), SerializeField] float exitDuration = 1.5f;
 
