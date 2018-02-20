@@ -101,7 +101,7 @@ public partial class AudioMixerSaver : ScriptablePersistent
     private void ApplyChannelSettings(Channel channel)
     {
         var volume = channel.data.muted ? MIN_VOLUME : channel.data.dbBoost;
-
+        Debug.Log("apply: " + volume);
         foreach (var parameterName in channel.volumeParameters)
         {
             mixer.SetFloat(parameterName, volume);

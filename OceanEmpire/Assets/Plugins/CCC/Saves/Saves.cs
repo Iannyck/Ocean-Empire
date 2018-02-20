@@ -4,7 +4,7 @@ using System.Threading;
 using System;
 using CCC.Threading;
 
-namespace CCC.Utility
+namespace CCC.Serialization
 {
     public class Saves
     {

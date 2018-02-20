@@ -3,24 +3,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using CCC.Persistence;
+using CCC.Serialization;
 
 [CreateAssetMenu(menuName = "CCC/Other/Data Saver")]
-public class DataSaver : ScriptablePersistent
+public class DataSaver : FileScriptableInterface, IPersistent// ScriptablePersistent
 {
-    [Suffix(".dat")] public string fileName = "someData";
-    public const string FILE_EXTENSION = ".dat";
-
-    [NonSerialized] private Data _data = new Data();
-    private Data data
-    {
-        get { return _data; }
-        set
-        {
-            _data = value;
-            if (OnReassignData != null)
-                OnReassignData();
-        }
-    }
+    [NonSerialized] private Data data = new Data();
 
     [Serializable]
     private class Data
@@ -33,28 +21,33 @@ public class DataSaver : ScriptablePersistent
         public Dictionary<string, DateTime> dateTimes = new Dictionary<string, DateTime>();
     }
 
-    public delegate void SaverEvent();
-
-    /// <summary>
-    /// Évenement appelé lorsqu'on réassigne les données (load/clear)
-    /// </summary>
-    public event SaverEvent OnReassignData;
-
-    /// <summary>
-    /// Read/Write operation queue. C'est une queue qui assure l'ordonnancement des opérations read/write
-    /// </summary>
-    private Queue<Action> rwoQueue = new Queue<Action>();
-
-    public override void Init(Action onComplete)
+    #region IPersistent
+    public void Init(Action onComplete)
     {
         Load();
         onComplete();
     }
 
-    private string GetPath()
+    public UnityEngine.Object DuplicationBehavior()
     {
-        return Application.persistentDataPath + "/" + fileName + FILE_EXTENSION;
+        return this;
     }
+    #endregion
+
+    #region File Scriptable Interface
+    protected override object GetLocalData()
+    {
+        return data;
+    }
+    protected override void OverwriteLocalData(object graph)
+    {
+        data = (Data)graph;
+    }
+    protected override void SetDefaultLocalData()
+    {
+        data = new Data();
+    }
+    #endregion
 
     #region Get Value
     public int GetInt(string key, int defaultVal = 0)
@@ -171,158 +164,21 @@ public class DataSaver : ScriptablePersistent
     {
         return data.ints.ContainsKey(key);
     }
-
     public bool ContainsFloat(string key)
     {
         return data.floats.ContainsKey(key);
     }
-
     public bool ContainsString(string key)
     {
         return data.strings.ContainsKey(key);
     }
-
     public bool ContainsBool(string key)
     {
         return data.bools.ContainsKey(key);
     }
-
     public bool ContainsObject(string key)
     {
         return data.objects.ContainsKey(key);
     }
-    #endregion
-
-    #region Save/Load
-
-    public void LoadAsync() { LoadAsync(null); }
-    public void LoadAsync(Action onLoadComplete)
-    {
-        AddRWOperation(() =>
-        {
-            string path = GetPath();
-
-            //Exists ?
-            if (Saves.Exists(path))
-                Saves.ThreadLoad(path,
-                    delegate (object graph)
-                    {
-                        if (graph == null)
-                            graph = new Data();
-                        data = (Data)graph;
-
-                        if (onLoadComplete != null)
-                            onLoadComplete();
-
-                        CompleteRWOperation();
-                    });
-            else
-            {
-                //Nouveau fichier !
-                data = new Data();
-                SaveAsync(onLoadComplete);
-
-                CompleteRWOperation();
-            }
-        });
-    }
-
-    public void Load() { Load(null); }
-    public void Load(Action onLoadComplete)
-    {
-        AddRWOperation(() =>
-        {
-            string path = GetPath();
-
-            //Exists ?
-            if (Saves.Exists(path))
-            {
-                //Load and apply
-                object graph = Saves.InstantLoad(path);
-                if (graph == null)
-                    graph = new Data();
-                data = (Data)graph;
-
-                if (onLoadComplete != null)
-                    onLoadComplete();
-            }
-            else
-            {
-                //Nouveau fichier !
-                data = new Data();
-
-                Save(onLoadComplete);
-            }
-
-            CompleteRWOperation();
-        });
-    }
-
-    public void SaveAsync() { SaveAsync(null); }
-    public void SaveAsync(Action onSaveComplete)
-    {
-        AddRWOperation(() =>
-        {
-            Saves.ThreadSave(GetPath(), data, () =>
-            {
-                if (onSaveComplete != null)
-                    onSaveComplete();
-
-                CompleteRWOperation();
-            });
-        });
-    }
-
-    public void Save() { Save(null); }
-    public void Save(Action onSaveComplete)
-    {
-        AddRWOperation(() =>
-        {
-            Saves.InstantSave(GetPath(), data);
-
-            if (onSaveComplete != null)
-                onSaveComplete();
-
-            CompleteRWOperation();
-        });
-    }
-
-    public void ClearSave() { ClearSave(null); }
-    public void ClearSave(Action onComplete)
-    {
-        AddRWOperation(() =>
-        {
-            Saves.Delete(GetPath());
-            data = new Data();
-
-            if (onComplete != null)
-                onComplete();
-
-            CompleteRWOperation();
-        });
-    }
-
-    #region RW Operations
-    private void AddRWOperation(Action action)
-    {
-        //On s'enfile
-        rwoQueue.Enqueue(action);
-
-        //Sommes nous les premier a etre dans la queue ?
-        if (rwoQueue.Count == 1)
-            action();
-    }
-
-    private void CompleteRWOperation()
-    {
-        //On enleve la derniere action
-        rwoQueue.Dequeue();
-
-        //On execute la prochaine s'il y en a une
-        if (rwoQueue.Count > 0)
-            rwoQueue.Peek()();
-    }
-    #endregion
-
     #endregion
 }
