@@ -6,17 +6,14 @@ using System;
 
 public class PlayerSpawn : MonoBehaviour
 {
-
     public SubmarineMovement submarinePrefab;
-    public GameObject spawnPoint;
 
-    public float concluAnimDuration = 1.5f;
-    public float introAnimFromTopOffset = 1;
+    [Header("Intro"), SerializeField] float topHeightIncrease = 2;
+    [SerializeField] float introToTopDuration = 0.5f;
+    [SerializeField] float introToWaterDuration = 1.0f;
+    [SerializeField] float introAnimDuration = 1f;
 
-    public float introToTopDuration = 0.5f;
-    public float introToWaterDuration = 1.0f;
-
-    public float introAnimDuration = 1f;
+    [Header("Outro"), SerializeField] float exitDuration = 1.5f;
 
 
     private Vector2 BoatLocation;
@@ -24,15 +21,15 @@ public class PlayerSpawn : MonoBehaviour
     private Vector2 WaterLocation;
 
     private Vector3 boatScale = new Vector3(0.2f, 0.2f, 0.2f);
-    private Vector3 TopScale =  new Vector3(0.5f, 0.5f, 0.5f);
+    private Vector3 TopScale = new Vector3(0.5f, 0.5f, 0.5f);
     private Vector3 waterScale = new Vector3(1f, 1f, 1f);
 
 
     public void Init()
     {
-        BoatLocation = Game.Instance.map.boatLocation.transform.position;
-        TopLocation = Game.Instance.map.TopLocation.transform.position;
-        WaterLocation = Game.Instance.map.WaterLocation.transform.position;
+        BoatLocation = Game.Instance.map.PlayerSpawn.position;
+        WaterLocation = Game.Instance.map.PlayerStart_.position;
+        TopLocation = BoatLocation + Vector2.up * topHeightIncrease;
     }
 
     public SubmarineMovement Spawn(Vector2 position)
@@ -45,13 +42,16 @@ public class PlayerSpawn : MonoBehaviour
 
     public SubmarineMovement SpawnPlayer()
     {
-        SubmarineMovement newPlayer = Spawn(spawnPoint.transform.position);
+        Vector3 defaultPosition = Game.GameCamera.transform.position;
+        defaultPosition.z = 0;
+
+        SubmarineMovement newPlayer = Spawn(defaultPosition);
         if (newPlayer == null)
             Debug.Log("Erreur Spawn Player");
         return newPlayer;
     }
 
-    public SubmarineMovement AnimatePlayerFromTop(SubmarineMovement player, Action onIntroAnimComplete)
+    public SubmarineMovement AnimatePlayerIntro(SubmarineMovement player, Action onIntroAnimComplete)
     {
         Init();
 
@@ -66,27 +66,27 @@ public class PlayerSpawn : MonoBehaviour
         intro1.SetEase(Ease.OutSine);
 
         TopScale = boatScale + (waterScale - boatScale) * (introToTopDuration / (introToTopDuration + introToWaterDuration / 2));
-        Tweener intro2 =player.transform.DOScale(TopScale, introToTopDuration);
+        Tweener intro2 = player.transform.DOScale(TopScale, introToTopDuration);
         intro2.SetEase(Ease.InOutSine);
 
 
 
 
-        intro1.OnComplete(delegate () { tweene2(player, onIntroAnimComplete); });
+        intro1.OnComplete(delegate () { Tweene2(player, onIntroAnimComplete); });
 
         return player;
     }
 
 
-    public SubmarineMovement tweene2(SubmarineMovement player, Action onIntroAnimComplete)
+    private SubmarineMovement Tweene2(SubmarineMovement player, Action onIntroAnimComplete)
     {
         // Anim
-        Tweener intro2 = player.transform.DOScale((TopScale + waterScale) /2, introToWaterDuration / 2);
+        Tweener intro2 = player.transform.DOScale((TopScale + waterScale) / 2, introToWaterDuration / 2);
         intro2.SetEase(Ease.InSine);
 
 
 
-        Tweener intro1 = player.transform.DOMove((TopLocation + WaterLocation)/2, introToWaterDuration / 2);
+        Tweener intro1 = player.transform.DOMove((TopLocation + WaterLocation) / 2, introToWaterDuration / 2);
         intro1.SetEase(Ease.InSine);
 
         intro1.OnComplete(delegate () { Tween3(player, onIntroAnimComplete); });
@@ -94,7 +94,7 @@ public class PlayerSpawn : MonoBehaviour
         return player;
     }
 
-    public SubmarineMovement Tween3(SubmarineMovement player, Action onIntroAnimComplete)
+    private SubmarineMovement Tween3(SubmarineMovement player, Action onIntroAnimComplete)
     {
         // Anim
         Tweener intro2 = player.transform.DOScale(waterScale, introToWaterDuration / 2);
@@ -116,16 +116,17 @@ public class PlayerSpawn : MonoBehaviour
     }
 
 
-    public SubmarineMovement AnimatePlayerGoToTop(SubmarineMovement player)
+    public SubmarineMovement AnimatePlayerExit(SubmarineMovement player)
     {
         // Physics
         player.enabled = false;
-        
+
         Vector3 position = player.transform.position;
         position.y += 10;
+
         // Anim
         player.transform.DOMove(position,
-            concluAnimDuration);
+            exitDuration);
 
         return player;
     }

@@ -114,7 +114,7 @@ public class Game : PublicSingleton<Game>
         ReadyGame();
 
         //Intro
-        playerSpawn.AnimatePlayerFromTop(submarine,
+        playerSpawn.AnimatePlayerIntro(submarine,
             delegate ()
             {
                 cameraMouvement.followPlayer = true;
@@ -168,7 +168,7 @@ public class Game : PublicSingleton<Game>
 
         cameraMouvement.followPlayer = false;
         submarine.movementEnable = false;
-        playerSpawn.AnimatePlayerGoToTop(submarine);
+        playerSpawn.AnimatePlayerExit(submarine);
 
         ui.feedbacks.ShowTimeUp(delegate ()
         {

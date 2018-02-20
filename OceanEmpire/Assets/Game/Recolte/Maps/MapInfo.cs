@@ -6,11 +6,9 @@ using FullInspector;
 public class MapInfo : BaseBehavior
 {
     [InspectorCategory("General")]
-    public Transform boatLocation;
+    public Transform PlayerSpawn;
     [InspectorCategory("General")]
-    public Transform TopLocation;
-    [InspectorCategory("General")]
-    public Transform WaterLocation;
+    public Transform PlayerStart_;
 
     //contain distribution of a fish species
     [System.Serializable]

@@ -79,6 +79,7 @@ public partial class AudioMixerSaver : ScriptablePersistent
     private void SetMuted(Channel channel, bool muted)
     {
         channel.data.muted = muted;
+        ApplyChannelSettings(channel);
     }
 
     public void SetVolume(ChannelType channelType, float value)
