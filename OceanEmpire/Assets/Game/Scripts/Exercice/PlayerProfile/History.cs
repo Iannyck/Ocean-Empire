@@ -56,7 +56,7 @@ public class History : MonoPersistent
         purchaseReport.Add(report);
 
         dataSaver.SetObjectClone(SAVEKEY_PurchaseReports, purchaseReport);
-        Save();
+        SetDirty();
     }
 
     public string GetDataToString()
@@ -78,9 +78,9 @@ public class History : MonoPersistent
     }
 
     #region R/W Gamesaves
-    private void Save()
+    private void SetDirty()
     {
-        dataSaver.SaveAsync();
+        dataSaver.SetDataDirty();
     }
 
     private void FetchData()

@@ -152,7 +152,7 @@ public class PlayerCurrency : MonoPersistent
     {
         instance.tickets.SeeDelta();
         if (AutoSave)
-            instance.SaveDataAsync();
+            instance.SetDirty();
     }
     /// <summary>
     /// Indique que le joueur a vue les récents gains/pertes de coins
@@ -161,7 +161,7 @@ public class PlayerCurrency : MonoPersistent
     {
         instance.coins.SeeDelta();
         if (AutoSave)
-            instance.SaveDataAsync();
+            instance.SetDirty();
     }
     #endregion
 
@@ -236,7 +236,7 @@ public class PlayerCurrency : MonoPersistent
         instance.coins.Amount += amount;
 
         if (AutoSave)
-            instance.SaveDataAsync();
+            instance.SetDirty();
 
         return true;
     }
@@ -255,7 +255,7 @@ public class PlayerCurrency : MonoPersistent
         instance.tickets.Amount += amount;
 
         if (AutoSave)
-            instance.SaveDataAsync();
+            instance.SetDirty();
 
         return true;
     }
@@ -264,21 +264,16 @@ public class PlayerCurrency : MonoPersistent
 
 
     #region Save/Load
-    public void Save() { SaveData(); }
+
     private void ApplyDataToSaver()
     {
         coins.ApplyDataTo(dataSaver);
         tickets.ApplyDataTo(dataSaver);
     }
-    private void SaveData()
+    private void SetDirty()
     {
         ApplyDataToSaver();
-        dataSaver.Save();
-    }
-    private void SaveDataAsync()
-    {
-        ApplyDataToSaver();
-        dataSaver.SaveAsync();
+        dataSaver.SetDataDirty();
     }
 
     private void FetchData()
