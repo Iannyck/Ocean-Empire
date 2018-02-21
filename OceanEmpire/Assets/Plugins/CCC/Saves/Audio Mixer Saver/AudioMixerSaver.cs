@@ -140,7 +140,9 @@ public partial class AudioMixerSaver : ScriptablePersistent
 
             file.Close();
 
-            ApplyAllChannelSettings();
+            // NB: C'est important de call lors de la prochaine frame sinon,
+            // il arrive d'apply AVANT que le mixer soit initialisé
+            CoroutineLauncher.Instance.CallNextFrame(ApplyAllChannelSettings);
         }
         else
         {

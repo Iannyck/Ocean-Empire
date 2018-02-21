@@ -13,6 +13,8 @@ public class TestScript_Fred : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
+
+        print(CoroutineLauncher.Instance);
     }
 
     private void Update()
