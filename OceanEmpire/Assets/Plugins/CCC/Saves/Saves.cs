@@ -10,6 +10,7 @@ namespace CCC.Serialization
     {
         static public void ThreadSave(string path, object graph, Action onComplete = null)
         {
+            MainThread.SpawnIfNotSpawned();
             Thread t = new Thread(new ThreadStart(() => ThreadSaveMethod(path, graph, onComplete)));
             t.Start();
         }
@@ -27,6 +28,7 @@ namespace CCC.Serialization
 
         static public void ThreadLoad(string path, Action<object> onComplete)
         {
+            MainThread.SpawnIfNotSpawned();
             Thread t = new Thread(new ThreadStart(delegate () { ThreadLoadMethod(path, onComplete); }));
             t.Start();
         }

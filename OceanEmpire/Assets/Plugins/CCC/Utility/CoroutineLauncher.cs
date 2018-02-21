@@ -1,32 +1,15 @@
-﻿using UnityEngine;
-
-public class CoroutineLauncher : MonoBehaviour
+﻿public class CoroutineLauncher : SelfSpawningSingleton<CoroutineLauncher>
 {
-    private static  CoroutineLauncher instance;
-
-    private void Awake()
+    protected override string GameObjectName()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        return "Couroutine Launcher";
     }
 
     public static CoroutineLauncher Instance
     {
         get
         {
-            if(instance == null)
-            {
-                var obj = new GameObject("Couroutine Launcher");
-                DontDestroyOnLoad(obj);
-                obj.AddComponent<CoroutineLauncher>();
-            }
-            return instance;
+            return _Instance;
         }
     }
 }
