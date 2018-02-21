@@ -55,6 +55,9 @@ public class Game : PublicSingleton<Game>
     static private event SimpleEvent onGameReady;
     static private event SimpleEvent onGameStart;
 
+    [HideInInspector]
+    public Locker gameRunning = new Locker();
+
     static public event SimpleEvent OnGameReady
     {
         add
@@ -102,6 +105,7 @@ public class Game : PublicSingleton<Game>
 
         cameraMouvement.followPlayer = false;
         Time.timeScale = 1;
+        gameRunning.onLockStateChange += GameRunning_onLockStateChange;
 
         //Create a fishingReport
         fishingReport = new FishingReport();
@@ -123,6 +127,14 @@ public class Game : PublicSingleton<Game>
                 ui.feedbacks.ShowGo(StartGame);
 
             });
+    }
+
+    private void GameRunning_onLockStateChange(bool state)
+    {
+        if (state)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
     }
 
     void ReadyGame()

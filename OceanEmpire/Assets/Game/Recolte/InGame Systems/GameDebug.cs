@@ -8,7 +8,7 @@ public class GameDebug : MonoBehaviour {
 
     public string mapName;
 
-	void Start ()
+    void Start ()
     {
         if(SceneManager.sceneCount != 1)
             return;

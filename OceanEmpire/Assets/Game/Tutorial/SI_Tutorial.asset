@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584b9682b36211045bd18c8a7567399e, type: 3}
+  m_Name: SI_Tutorial
+  m_EditorClassIdentifier: 
+  scene: {fileID: 102900000, guid: 5d21ac831219f354c9609d669481b11c, type: 3}
+  sceneName: Tutorial
+  loadMode: 1
+  allowMultiple: 1

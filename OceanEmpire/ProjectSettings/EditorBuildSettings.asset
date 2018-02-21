@@ -71,3 +71,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Shop2/Description window/ItemDescription.unity
     guid: 345bbbf9db5806b4db17c236083591c1
+  - enabled: 1
+    path: Assets/Game/Tutorial/Tutorial.unity
+    guid: 5d21ac831219f354c9609d669481b11c
