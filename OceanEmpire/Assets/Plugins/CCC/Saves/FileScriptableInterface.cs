@@ -21,6 +21,8 @@ namespace CCC.Serialization
         /// Read/Write operation queue. C'est une queue qui assure l'ordonnancement des opérations read/write
         /// </summary>
         private Queue<Action> rwoQueue = new Queue<Action>();
+        [NonSerialized] private bool isDirty = false;
+        private Queue<Action> pendingDirtyCallbacks = new Queue<Action>();
 
         public string CompletePath
         {
@@ -43,6 +45,50 @@ namespace CCC.Serialization
         protected abstract void OverwriteLocalData(object graph);
         protected abstract void SetDefaultLocalData();
         protected abstract object GetLocalData();
+
+        private void OnEnable()
+        {
+            isDirty = false;
+        }
+
+        /// <summary>
+        /// Semblable au SaveAsync, mais on va laisser 1 frame s'écouler avant.
+        /// <para/>
+        /// Si SetDirty est appelé plusieur fois, l'objet ne sera que sauvegarder 1 fois.
+        /// Ça nous permet d'appeler plusieur fois SetDirty par frame sans avoir à se soucier
+        /// du coût de performance de plusieurs sauvegardes.
+        /// </summary>
+        public void SetDataDirty() { SetDataDirty(null); }
+        /// <summary>
+        /// Semblable au SaveAsync, mais on va laisser 1 frame s'écouler avant.
+        /// <para/>
+        /// Si SetDirty est appelé plusieur fois, l'objet ne sera que sauvegarder 1 fois.
+        /// Ça nous permet d'appeler plusieur fois SetDirty par frame sans avoir à se soucier
+        /// du coût de performance de plusieurs sauvegardes.
+        /// </summary>
+        public void SetDataDirty(Action callback)
+        {
+            //Add callback to queue
+            if (callback != null)
+                pendingDirtyCallbacks.Enqueue(callback);
+
+            if (isDirty)
+                return;
+            isDirty = true;
+
+            CoroutineLauncher.Instance.CallNextFrame(() =>
+            {
+                SaveAsync(() =>
+                {
+                    //Clear all pending callbacks
+                    while(pendingDirtyCallbacks.Count > 0)
+                    {
+                        pendingDirtyCallbacks.Dequeue()();
+                    }
+                    isDirty = false;
+                });
+            });
+        }
 
         #region Save/Load
         public void LoadAsync() { LoadAsync(null); }

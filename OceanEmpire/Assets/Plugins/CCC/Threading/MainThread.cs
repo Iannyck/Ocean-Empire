@@ -1,24 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using CCC.Persistence;
 
 namespace CCC.Threading
 {
-    public class MainThread : MonoPersistent
+    public class MainThread : SelfSpawningSingleton<MainThread>
     {
-        private static MainThread instance;
         private static Queue<Action> actionList = new Queue<Action>();
-
-        void Awake()
-        {
-            instance = this;
-        }
-
-        public override void Init(Action onComplete)
-        {
-            onComplete();
-        }
 
         void Update()
         {
@@ -28,18 +16,29 @@ namespace CCC.Threading
             }
         }
 
+        static public void SpawnIfNotSpawned()
+        {
+            CheckInstance();
+        }
         static public void AddActionFromThread(Action action)
         {
-            if (instance == null)
+            if (action == null)
+                return;
+            
+            if (GetRawInstance() == null)
             {
                 Debug.LogError("Aucune instance de MainThread");
                 return;
             }
-            lock (instance)
+            lock (_Instance)
             {
-                if (action == null) return;
                 actionList.Enqueue(action);
             }
+        }
+
+        protected override string GameObjectName()
+        {
+            return "Main Thread";
         }
     }
 }

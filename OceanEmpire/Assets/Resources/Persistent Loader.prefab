@@ -83,7 +83,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistentObjects:
-  - {fileID: 114259935524226702, guid: 62f1bf5069e5808419e80102f0bee502, type: 2}
   - {fileID: 11400000, guid: 1c6328201a8e2e842b9fc53029948653, type: 2}
   - {fileID: 114759252974965620, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
   - {fileID: 114325834626299392, guid: 1252680dbe26af74cbc4ab7e66894cad, type: 2}
