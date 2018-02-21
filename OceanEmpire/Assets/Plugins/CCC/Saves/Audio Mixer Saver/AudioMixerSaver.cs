@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.Audio;
+using CCC.Serialization;
 using CCC.Persistence;
 
 [CreateAssetMenu(menuName = "CCC/Audio/Audio Mixer Saver")]
-public partial class AudioMixerSaver : ScriptablePersistent
+public partial class AudioMixerSaver : FileScriptableInterface, IPersistent
 {
     [Serializable]
     public class ChannelData
@@ -35,23 +34,28 @@ public partial class AudioMixerSaver : ScriptablePersistent
     public const int MAX_VOLUME = 20;
     public const int MIN_VOLUME = -80;
 
-    [SerializeField] private string fileName = "Audio Settings";
     [SerializeField] private bool loadOnInit = true;
     [SerializeField] private AudioMixer mixer;
 
-    public override void Init(Action onComplete)
+    #region IPersistent
+    public void Init(Action onComplete)
     {
         if (loadOnInit)
             Load();
         onComplete();
     }
+    public UnityEngine.Object DuplicationBehavior()
+    {
+        return this;
+    }
+    #endregion
 
+    #region Get
     private Channel GetChannelFromType(ChannelType type)
     {
         return channels[type];
     }
 
-    #region Get
     public bool GetMuted(ChannelType channelType)
     {
         return GetMuted(GetChannelFromType(channelType));
@@ -91,6 +95,12 @@ public partial class AudioMixerSaver : ScriptablePersistent
         channel.data.dbBoost = value;
         ApplyChannelSettings(channel);
     }
+
+    public void SetDefaults()
+    {
+        DefaultSettings();
+        CoroutineLauncher.Instance.CallNextFrame(ApplyAllChannelSettings);
+    }
     #endregion
 
     #region Apply
@@ -115,58 +125,19 @@ public partial class AudioMixerSaver : ScriptablePersistent
     }
     #endregion
 
-    #region Save / Load
-    private string FileName
+    #region File Scriptable Interface
+    protected override object GetLocalData()
     {
-        get { return "/" + fileName + ".dat"; }
+        return SavedData;
     }
-
-    public void Load()
+    protected override void OverwriteLocalData(object graph)
     {
-        string savePath = Application.persistentDataPath + FileName;
-        if (File.Exists(savePath))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(savePath, FileMode.Open);
-            try
-            {
-                SavedData = (ChannelData[])bf.Deserialize(file);
-            }
-            catch (Exception e)
-            {
-                file.Close();
-                throw e;
-            }
-
-            file.Close();
-
-            // NB: C'est important de call lors de la prochaine frame sinon,
-            // il arrive d'apply AVANT que le mixer soit initialisé
-            CoroutineLauncher.Instance.CallNextFrame(ApplyAllChannelSettings);
-        }
-        else
-        {
-            SetDefaults();
-            Save();
-        }
+        SavedData = (ChannelData[])graph;
+        CoroutineLauncher.Instance.CallNextFrame(ApplyAllChannelSettings);
     }
-
-    public bool Save()
+    protected override void SetDefaultLocalData()
     {
-        try
-        {
-            string savePath = Application.persistentDataPath + FileName;
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(savePath, FileMode.OpenOrCreate);
-            bf.Serialize(file, SavedData);
-            file.Close();
-
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
+        SetDefaults();
     }
 
     private ChannelData[] SavedData
@@ -192,11 +163,6 @@ public partial class AudioMixerSaver : ScriptablePersistent
                 i++;
             }
         }
-    }
-
-    public void SetDefaults()
-    {
-        DefaultSettings();
     }
     #endregion
 }

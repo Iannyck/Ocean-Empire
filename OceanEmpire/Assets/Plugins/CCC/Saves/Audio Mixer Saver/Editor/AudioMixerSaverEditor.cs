@@ -8,7 +8,7 @@ using System.Reflection;
 using System;
 
 [CustomEditor(typeof(AudioMixerSaver))]
-public class AudioMixerSavesEditor : Editor
+public class AudioMixerSaverEditor : Editor
 {
     SerializedProperty _fileName;
     SerializedProperty _mixer;
@@ -54,12 +54,8 @@ public class AudioMixerSavesEditor : Editor
                 Process.Start("explorer.exe", path);
             }
         }
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.PropertyField(_fileName, true);
-        EditorGUILayout.LabelField(".dat", GUILayout.Width(45));
-        EditorGUILayout.EndHorizontal();
 
-        EditorGUILayout.PropertyField(_loadOnEnable, true);
+        EditorGUILayout.PropertyField(_fileName, true);
         EditorGUILayout.PropertyField(_mixer, true);
 
 
