@@ -8,33 +8,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c215b7e2e3512641b52ce06bf1ff080, type: 3}
-  m_Name: TUT_FirstMap
+  m_Script: {fileID: 11500000, guid: 5fbd8048303b0ac4783b70c4b18b7693, type: 3}
+  m_Name: TUT_Advance
   m_EditorClassIdentifier: 
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
   tutorialEvents:
-  - eventID: FocusOnSubmarine
-    functionName: FocusOnSubmarine
-    useSpecificTime: 1
-    when: 3
-    invokeOnGameStarted: 1
+  - eventID: FocusOnFishInvincible
+    functionName: FocusOnFishInvincible
+    useSpecificTime: 0
+    when: 0
+    invokeOnGameStarted: 0
     startAfterAnotherStep: 0
     startAfterTutorialStepIndex: 0
-  - eventID: FocusOnGaz
-    functionName: FocusOnGaz
+  - eventID: FocusOnHarpoon
+    functionName: FocusOnHarpoon
     useSpecificTime: 0
     when: 0
     invokeOnGameStarted: 0
-    startAfterAnotherStep: 1
+    startAfterAnotherStep: 0
     startAfterTutorialStepIndex: 0
-  - eventID: FocusOnOption
-    functionName: FocusOnOption
-    useSpecificTime: 0
-    when: 0
-    invokeOnGameStarted: 0
-    startAfterAnotherStep: 1
-    startAfterTutorialStepIndex: 1
   sliderAnim_Prefab: {fileID: 1298547634821562, guid: c02b368fe6cc8c940864f62db81adf15,
     type: 2}
-  focusDuration: 5
