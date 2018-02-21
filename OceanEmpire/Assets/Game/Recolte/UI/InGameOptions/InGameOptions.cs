@@ -75,12 +75,12 @@ public class InGameOptions : WindowAnimation, SceneMessage
 
     static void OnStartOpen()
     {
-        Time.timeScale = 0;
+        Game.Instance.gameRunning.Lock("option");
     }
 
     static void OnQuit()
     {
-        Time.timeScale = 1;
+        Game.Instance.gameRunning.Unlock("option");
     }
 
     public void OnLoaded(Scene scene)

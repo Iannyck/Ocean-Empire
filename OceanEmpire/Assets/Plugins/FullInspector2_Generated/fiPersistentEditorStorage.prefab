@@ -62,6 +62,7 @@ MonoBehaviour:
   - {fileID: 114091529778875312, guid: 143ded45916896e45ad6147aaf0a475f, type: 2}
   - {fileID: 114632337948739566, guid: 55a96d455e32ec24099da346e46d2807, type: 2}
   - {fileID: 114759252974965620, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
+  - {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
   _values:
   - _keys: []
     _values: []
@@ -99,6 +100,18 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 114759252974965620, guid: 1b90c83d2504c234186d441a41e57607,
       type: 2}
+  - _keys:
+    - DefaultBehaviorEditor.tutorialEvents.EditProperty.0.useSpecificTime.EditProperty
+    - DefaultBehaviorEditor.tutorialEvents.EditProperty.1.useSpecificTime.EditProperty
+    - DefaultBehaviorEditor.tutorialEvents.EditProperty.2.useSpecificTime.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    _target: {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
 --- !u!114 &114711524658704266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +133,7 @@ MonoBehaviour:
   - {fileID: 114091529778875312, guid: 143ded45916896e45ad6147aaf0a475f, type: 2}
   - {fileID: 114632337948739566, guid: 55a96d455e32ec24099da346e46d2807, type: 2}
   - {fileID: 114759252974965620, guid: 1b90c83d2504c234186d441a41e57607, type: 2}
+  - {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
   _values:
   - _keys: []
     _values: []
@@ -157,3 +171,6 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 114759252974965620, guid: 1b90c83d2504c234186d441a41e57607,
       type: 2}
+  - _keys: []
+    _values: []
+    _target: {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
