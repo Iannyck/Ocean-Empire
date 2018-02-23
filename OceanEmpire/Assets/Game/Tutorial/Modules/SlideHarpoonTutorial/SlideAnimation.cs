@@ -17,6 +17,11 @@ public class SlideAnimation : MonoBehaviour {
 
     private void StartAnimation()
     {
-        hand.transform.DOMoveX(transform.position.x - displacement, duration).SetLoops(-1, LoopType.Yoyo);
+        hand.transform.DOMoveX(transform.position.x - displacement, duration).SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
+    }
+
+    private void Update()
+    {
+        transform.position = Game.GameCamera.cam.WorldToScreenPoint(Game.Instance.submarine.transform.position);
     }
 }

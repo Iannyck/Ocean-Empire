@@ -10,6 +10,7 @@ public class Recolte_UI : MonoBehaviour
     public InGameTextPopup textPopups;
     public GazSlider gazSlider;
     public OptionsButton optionButton;
+    public GameObject hider;
     
     public void Quit()
     {

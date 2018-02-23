@@ -3685,14 +3685,12 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 1365461041918330, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
   - {fileID: 1365461041918330, guid: 82c76eecc091e61488986e0c197295af, type: 2}
-  - {fileID: 1365461041918330, guid: 8f56018fff48dd14baafe50d9c45b4c9, type: 2}
-  - {fileID: 1365461041918330, guid: a40c24d43d6a9e045bd22d9da4db8419, type: 2}
   _serializedStateKeys:
   - mapFishReparition
   - fishTypeList
   _serializedStateValues:
   - '{"keys":[{"time":0.0,"value":0.66,"tangentMode":0,"inTangent":0.3014002,"outTangent":0.3014002},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.3545214,"outTangent":0.3545214}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
-  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":2.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":3.0},{"fish":2,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":3.0},{"fish":3,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":1.5}]'
+  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":2.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":3.0}]'
   PlayerSpawn: {fileID: 1408103016}
   PlayerStart_: {fileID: 1047353538}
   regionName: Caraibe
@@ -3775,62 +3773,6 @@ MonoBehaviour:
     highestSpawn: 0
     lowestSpawn: -150
     fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: 8f56018fff48dd14baafe50d9c45b4c9, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: a40c24d43d6a9e045bd22d9da4db8419, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 1.5
 --- !u!4 &981076566
 Transform:
   m_ObjectHideFlags: 0
@@ -3855,7 +3797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9491cdc3eb5c443bee03442a3dcf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Map_Caraibe
+  mapName: Map_Tutoriel
 --- !u!114 &981076568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3880,7 +3822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onStart: 1
-  tutorial: {fileID: 11400000, guid: c6f6060824b97e940b8bcee18cbd0842, type: 2}
+  tutorial: {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
 --- !u!1 &1016361202
 GameObject:
   m_ObjectHideFlags: 0

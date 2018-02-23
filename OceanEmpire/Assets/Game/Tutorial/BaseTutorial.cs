@@ -37,6 +37,7 @@ namespace Tutorial
         }
         public DataSaver dataSaver;
         public bool startTutorialOnInit = true;
+        public bool forceStart = false;
         [SerializeField]
         public List<TutorialEvent> tutorialEvents = new List<TutorialEvent>();
 
@@ -58,26 +59,29 @@ namespace Tutorial
         /// </summary>
         public void Start()
         {
-            // Avant meme de commencer a faire les events, on doit s'assurer que l'enchainement se fera comme il faut
-            for (int i = 0; i < tutorialEvents.Count; i++)
-            {
-                TutorialEvent currentTutorialEvent = tutorialEvents[i];
-                if (currentTutorialEvent.startAfterAnotherStep)
-                    tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () { Execute(currentTutorialEvent, true); };
-
-            }
-
-            // On peut ensuite commencer les events qui sont start au debut
-            for (int i = 0; i < tutorialEvents.Count; i++)
-            {
-                TutorialEvent currentEvent = tutorialEvents[i];
-                if (currentEvent.alreadyExecute)
-                    continue;
-                if (currentEvent.invokeOnGameStarted)
-                    Execute(currentEvent, true);
-            }
-
             OnStart();
+
+            if (forceStart && !HasBeenCompleted(name, dataSaver))
+            {
+                // Avant meme de commencer a faire les events, on doit s'assurer que l'enchainement se fera comme il faut
+                for (int i = 0; i < tutorialEvents.Count; i++)
+                {
+                    TutorialEvent currentTutorialEvent = tutorialEvents[i];
+                    if (currentTutorialEvent.startAfterAnotherStep)
+                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () { Execute(currentTutorialEvent, true); };
+
+                }
+
+                // On peut ensuite commencer les events qui sont start au debut
+                for (int i = 0; i < tutorialEvents.Count; i++)
+                {
+                    TutorialEvent currentEvent = tutorialEvents[i];
+                    if (currentEvent.alreadyExecute)
+                        continue;
+                    if (currentEvent.invokeOnGameStarted)
+                        Execute(currentEvent, true);
+                }
+            }
         }
 
         protected abstract void OnStart();

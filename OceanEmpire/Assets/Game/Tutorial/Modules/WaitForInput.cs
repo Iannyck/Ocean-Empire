@@ -7,7 +7,9 @@ public class WaitForInput : MonoBehaviour
 {
     private struct Order
     {
+        public bool useTouch;
         public KeyCode[] keyCodes;
+        public TouchPhase touchType;
         public Action callback;
     }
 
@@ -15,11 +17,15 @@ public class WaitForInput : MonoBehaviour
 
     public void OnKeyDown(Action callback, params KeyCode[] keyCodes)
     {
-        orders.Add(new Order() { keyCodes = keyCodes, callback = callback });
+        orders.Add(new Order() { keyCodes = keyCodes, callback = callback, useTouch = false });
     }
     public void OnAnyKeyDown(Action callback)
     {
-        orders.Add(new Order() { keyCodes = null, callback = callback });
+        orders.Add(new Order() { keyCodes = null, callback = callback, useTouch = false });
+    }
+    public void OnTouch(Action callback, TouchPhase phase)
+    {
+        orders.Add(new Order() { keyCodes = null, callback = callback, useTouch = true, touchType = phase });
     }
 
     void Update()
@@ -27,7 +33,26 @@ public class WaitForInput : MonoBehaviour
         int count = orders.Count;
         for (int i = 0; i < count; i++)
         {
-            if(orders[i].keyCodes == null)
+            if (orders[i].useTouch)
+            {
+                print(Input.GetMouseButtonDown(0));
+                if(Input.touchCount > 0) // ANDROID
+                {
+                    if (Input.GetTouch(1).phase == orders[i].touchType)
+                    {
+                        orders[i].callback();
+                        orders.RemoveAt(i);
+                        i--;
+                        count--;
+                    }
+                } else if(Input.GetMouseButtonDown(0)) // PC
+                {
+                    orders[i].callback();
+                    orders.RemoveAt(i);
+                    i--;
+                    count--;
+                }
+            } else if(orders[i].keyCodes == null)
             {
                 if (Input.anyKeyDown)
                 {

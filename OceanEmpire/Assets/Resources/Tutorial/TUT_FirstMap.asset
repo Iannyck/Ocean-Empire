@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
+  forceStart: 0
   tutorialEvents:
   - eventID: FocusOnSubmarine
     functionName: FocusOnSubmarine
@@ -35,6 +36,5 @@ MonoBehaviour:
     invokeOnGameStarted: 0
     startAfterAnotherStep: 1
     startAfterTutorialStepIndex: 1
-  sliderAnim_Prefab: {fileID: 1298547634821562, guid: c02b368fe6cc8c940864f62db81adf15,
-    type: 2}
   focusDuration: 5
+  shackScene: {fileID: 11400000, guid: 65fc4546fb6b8444f8633c86e90cf493, type: 2}
