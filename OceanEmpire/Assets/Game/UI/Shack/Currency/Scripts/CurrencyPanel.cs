@@ -14,10 +14,7 @@ public class CurrencyPanel : MonoBehaviour
 
     void OnEnable()
     {
-        if (PlayerCurrency.instance == null)
-            PersistentLoader.LoadIfNotLoaded(Listen);
-        else
-            Listen();
+        PersistentLoader.LoadIfNotLoaded(Listen);
     }
 
     void Listen()
