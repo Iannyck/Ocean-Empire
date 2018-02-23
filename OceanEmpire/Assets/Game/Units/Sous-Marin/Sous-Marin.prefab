@@ -596,7 +596,7 @@ MonoBehaviour:
   thruster: {fileID: 11400000, guid: a2b77ef46b753674ca5315e8025e080f, type: 2}
   harpoonThrower: {fileID: 0}
   fishContainer: {fileID: 11400000, guid: 17392dd121433264bb6dd8a202d90506, type: 2}
-  gazTank: {fileID: 11400000, guid: bc99e3cc64622f64282c4807d05c047d, type: 2}
+  gazTank: {fileID: 11400000, guid: d1a9a4b39881fcd40a39b021629adcca, type: 2}
 --- !u!114 &114916000236723280
 MonoBehaviour:
   m_ObjectHideFlags: 1

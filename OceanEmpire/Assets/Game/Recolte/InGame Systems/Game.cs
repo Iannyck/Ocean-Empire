@@ -20,6 +20,7 @@ public class Game : PublicSingleton<Game>
     public static Recolte_UI Recolte_UI { get { return instance.ui; } }
 
     public static SubmarineMovement SubmarineMouvement { get { return instance.submarine; } }
+    public static GameObject Submarine { get { return instance.submarine.gameObject; } }
     public static SubmarinParts SubmarinParts { get { return (instance.submarine == null ? null : instance.submarine.gameObject.GetComponent<SubmarinParts>()); } }
 
     [SerializeField]
@@ -173,7 +174,6 @@ public class Game : PublicSingleton<Game>
     public void EndGame()
     {
         // End Game Screen
-        // Save All
         if (gameOver)
             return;
         gameOver = true;

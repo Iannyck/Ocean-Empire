@@ -334,6 +334,8 @@ GameObject:
   - component: {fileID: 1311441152}
   - component: {fileID: 1311441153}
   - component: {fileID: 1311441154}
+  - component: {fileID: 1311441156}
+  - component: {fileID: 1311441155}
   m_Layer: 0
   m_Name: GAME
   m_TagString: Untagged
@@ -459,6 +461,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnContainer: {fileID: 601328786}
+--- !u!114 &1311441155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311441146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719146f9827b68c4ab6327b7e1958d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSystem: {fileID: 1311441149}
+  sceneManager: {fileID: 1311441156}
+--- !u!114 &1311441156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1311441146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5ff264843057f49b4c8bd4e5a7cd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0

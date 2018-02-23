@@ -9,8 +9,15 @@ namespace GPComponents
 	/// These components must represent the player's atomic objectives (for more details read the articles on gameplay components).
 	/// </summary>
 	public abstract class AbstractGPCBehaviour : IGPComponent
-	{
-		public abstract GPCState Eval ();
+    {
+        protected SceneManager sceneManager;
+
+        public AbstractGPCBehaviour(SceneManager sceneManager)
+        {
+            this.sceneManager = sceneManager;
+        }
+
+        public abstract GPCState Eval ();
 
 		public abstract void Launch ();
 

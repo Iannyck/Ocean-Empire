@@ -13,10 +13,7 @@ public class GazTank : Upgrade
 
     public void UpdateTimer()
     {
-        GazTimeRemaining = (GazTimeRemaining - Time.deltaTime).Raised(0);
-
-        if (GazTimeRemaining <= 0 && !Game.Instance.gameOver)
-            Game.Instance.EndGame();
+        GazTimeRemaining = Mathf.Max(GazTimeRemaining - Time.deltaTime, 0);
     }
 
     public void SetGaz()
@@ -26,6 +23,6 @@ public class GazTank : Upgrade
 
     public float GetGazRatio()
     {
-        return 1 - ( (GazDuration - GazTimeRemaining) / GazDuration );
+        return GazTimeRemaining / GazDuration;
     }
 }

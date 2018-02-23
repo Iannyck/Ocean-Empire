@@ -4,51 +4,56 @@ using UnityEngine;
 
 namespace GPComponents
 {
-	public class ParallelAND : Nary
-	{
+    public class ParallelAND : Nary
+    {
+        public override GPCState Eval()
+        {
+            GPCState state;
+            for (int i = 0; i < children.Count; i++)
+            {
+                state = children[i].Eval();
+                if (state == GPCState.SUCCESS)
+                {
+                    //It is important to decrement i if we don't want to skip the next element.
+                    children.RemoveAt(i);
+                    i--;
+                }
+                else if (state == GPCState.FAILURE)
+                {
+                    return GPCState.FAILURE;
+                }
+            }
 
-		private List<IGPComponent> childrenCopy;
+            if (children.Count == 0)
+            {
+                return GPCState.SUCCESS;
+            }
+            return GPCState.RUNNING;
+        }
 
-		public override GPCState Eval ()
-		{
-			
-			GPCState state;
-			foreach (IGPComponent gComponent in children) {
-				state = gComponent.Eval ();
-				if (state == GPCState.SUCCESS) {
-					childrenCopy.Remove (gComponent);
-				} else if (state == GPCState.FAILURE) {
-					return GPCState.FAILURE;
-				}
-			}
-			if (childrenCopy.Count == 0) {
-				return GPCState.SUCCESS;
-			}
-			return GPCState.RUNNING;
-		}
+        public override void Launch()
+        {
+            foreach (IGPComponent gComponent in children)
+            {
+                gComponent.Launch();
+            }
+        }
 
-		public override void Launch ()
-		{
-			foreach (IGPComponent gComponent in children) {
-				gComponent.Launch ();
-			}
-			childrenCopy = children;
-		}
+        public override void Reset()
+        {
+            foreach (IGPComponent gComponent in children)
+            {
+                gComponent.Reset();
+            }
+        }
 
-		public override void Reset ()
-		{
-			foreach (IGPComponent gComponent in children) {
-				gComponent.Reset ();
-			}
-			childrenCopy = children;
-		}
+        public override void Abort()
+        {
+            foreach (IGPComponent gComponent in children)
+            {
+                gComponent.Abort();
+            }
+        }
 
-		public override void Abort ()
-		{
-			foreach (IGPComponent gComponent in children) {
-				gComponent.Abort ();
-			}
-		}
-	
-	}
+    }
 }

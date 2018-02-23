@@ -6,9 +6,19 @@ namespace GPComponents
 {
 	public abstract class Nary : IGPComponent
 	{
-		protected List<IGPComponent> children;
+		protected List<IGPComponent> children = new List<IGPComponent>();
 
-		public abstract GPCState Eval ();
+        public void AddChild(IGPComponent child)
+        {
+            children.Add(child);
+        }
+        public void AddChildren(IEnumerable<IGPComponent> children)
+        {
+            this.children.AddRange(children);
+        }
+
+
+        public abstract GPCState Eval ();
 
 		public abstract void Launch ();
 
