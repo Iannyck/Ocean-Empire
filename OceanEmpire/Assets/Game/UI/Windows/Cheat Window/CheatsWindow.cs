@@ -57,7 +57,8 @@ public class CheatsWindow : WindowAnimation
 
     public void UnlockAll()    //Cheat code StarCraft xD
     {
-        if (ItemsList.instance != null)
-            ItemsList.UnlockAll();
+        MessagePopup.DisplayMessage("Not implemented");
+        //if (ItemsList.instance != null)
+        //    ItemsList.UnlockAll();
     }
 }

@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using FullInspector;
 
-public class MapInfo : BaseBehavior
+public class MapInfo : MonoBehaviour
 {
-    [InspectorCategory("General")]
+    //[InspectorCategory("General")]
     public Transform PlayerSpawn;
-    [InspectorCategory("General")]
+    //[InspectorCategory("General")]
     public Transform PlayerStart_;
 
     //contain distribution of a fish species
@@ -15,41 +13,35 @@ public class MapInfo : BaseBehavior
     public struct FishType
     {
         //Fish type
-        [InspectorCategory("Type")]
+        [Header("Type")]
         public GameObject fish;
 
-        //Distribution by Depth
-        [InspectorCategory("Depth")]
+        [Header("Depth")]
         public AnimationCurve repartition;
-        [InspectorCategory("Depth")]
+        [Header("Depth")]
         public float highestSpawn;
-        [InspectorCategory("Depth")]
+        [Header("Depth")]
         public float lowestSpawn;
 
-        [InspectorButton, InspectorCategory("Depth")]
-        public void DefaultRepartition()
-        {
-            repartition = new AnimationCurve(
-            new Keyframe(0, 0), new Keyframe(0.5f, 1f), new Keyframe(1f, 0));
-        }
-        [InspectorButton, InspectorCategory("Depth")]
-        public void SurfaceRepartition()
-        {
-            repartition = new AnimationCurve(
-            new Keyframe(0.0f, 1f), new Keyframe(1f, 0));
-        }
-        [InspectorButton, InspectorCategory("Depth")]
-        public void DeepRepartition()
-        {
-            repartition = new AnimationCurve(
-            new Keyframe(1f, 0f), new Keyframe(1f, 1));
-        }
-
-
-        //Fish denstity
-        [InspectorCategory("Density")]
+        [Header("Density")]
         public float fishDensity;
 
+        // BOUTONS
+        //public void DefaultRepartition()
+        //{
+        //    repartition = new AnimationCurve(
+        //    new Keyframe(0, 0), new Keyframe(0.5f, 1f), new Keyframe(1f, 0));
+        //}
+        //public void SurfaceRepartition()
+        //{
+        //    repartition = new AnimationCurve(
+        //    new Keyframe(0.0f, 1f), new Keyframe(1f, 0));
+        //}
+        //public void DeepRepartition()
+        //{
+        //    repartition = new AnimationCurve(
+        //    new Keyframe(1f, 0f), new Keyframe(1f, 1));
+        //}
     }
 
     public const float MAP_WIDTH = 5;
@@ -60,28 +52,28 @@ public class MapInfo : BaseBehavior
     /// À L'horizontal seulement
     /// </summary>
     public static bool IsOutOfBounds(Vector2 v) { return v.x > MAP_RIGHT || v.x < MAP_LEFT; }
-    [InspectorCategory("General")]
+    [Header("General")]
     public string regionName = "YourRegionName";
-    [InspectorCategory("General")]
+    [Header("General")]
     public float mapTop = 0;
-    [InspectorCategory("General")]
+    [Header("General")]
     public float mapBottom = -100;
 
-    [InspectorCategory("General")]
+    [Header("General")]
     public float depthAtYZero = 0;
 
     public const float DEPTHSCALING = 100;
 
     //Overall map Fish density
-    [InspectorCategory("fish")]
+    [Header("fish")]
     public float mapFishDensity;
     //Overall Distribution by depth 
-    [InspectorCategory("fish")]
+    [Header("fish")]
     public AnimationCurve mapFishReparition = new AnimationCurve(
         new Keyframe(0.0f, 1f), new Keyframe(1f, 1f));
 
     //Array of fish distributions
-    [InspectorCategory("fish")]
+    [Header("fish")]
     public List<FishType> fishTypeList;
 
     //Fish Lottery

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using FullInspector;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Ocean Empire/Item/Item")]
 public class Item : ScriptableObject

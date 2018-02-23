@@ -1,10 +1,5 @@
- 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using System;
-using FullInspector;
 using CCC.Persistence;
 
 public class FishPopulation : MonoPersistent
@@ -15,7 +10,6 @@ public class FishPopulation : MonoPersistent
     [SerializeField, ReadOnly] private const float limitPopulation = 200;
     private TimeSpan refreshingTime = new TimeSpan(0, 0, 80, 0);
 
-    [InspectorTooltip("Densité decroit exponentiellement en fonction du nombre")]
     public float PopulationDensityVariation = 4;
 
     [SerializeField, ReadOnly] private float population;

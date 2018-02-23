@@ -9,12 +9,12 @@ public class RegionSelectionDisplayMaps : MonoBehaviour
 
     void Start()
     {
+        Debug.LogError("A fix");
+        //List<MapDescription> maps = ItemsList.GetAllOwnedMaps();
 
-        List<MapDescription> maps = ItemsList.GetAllOwnedMaps();
-
-        for (int i = 0; i < regionDisplays.Length; ++i)
-        {
-            regionDisplays[i].Init(maps.Contains(regionDisplays[i].selectedMap));
-        }
+        //for (int i = 0; i < regionDisplays.Length; ++i)
+        //{
+        //    regionDisplays[i].Init(maps.Contains(regionDisplays[i].selectedMap));
+        //}
     }
 }
