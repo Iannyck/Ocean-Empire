@@ -30,10 +30,4 @@ namespace GPComponents
 		void Abort();
 
 	}
-
-	public enum GPCState {
-		RUNNING,
-		SUCCESS,
-		FAILURE
-	};
 }

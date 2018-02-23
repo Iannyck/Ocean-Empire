@@ -1,10 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 using DG.Tweening;
-using UnityEngine.Audio;
-using FullInspector;
 using System;
 using System.Collections.Generic;
 using CCC.Persistence;

@@ -43,7 +43,7 @@ public class AnalyserReport
         this.volume = volume;
         this.analysedTimeslot = analysedTimeslot;
         activeTimeslot = new TimeSlot(firstExerciceTime, lastExerciceTime);
-        this.activeRate = activeTimeslot.duration.Seconds / analysedTimeslot.duration.Seconds;
+        activeRate = (float)(activeTimeslot.duration.TotalSeconds / analysedTimeslot.duration.TotalSeconds);
     }
 
     public override string ToString()

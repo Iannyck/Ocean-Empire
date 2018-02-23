@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using FullInspector;
 
-public class MapBuilder : BaseBehavior {
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public class MapBuilder : MonoBehaviour {
 
     public SpriteRenderer WaterTop;
     public SpriteRenderer waterLayer;
@@ -27,11 +29,10 @@ public class MapBuilder : BaseBehavior {
     public Transform parent;
 
 #if UNITY_EDITOR
-    [InspectorButton()]
-    public void BuildWater()
+    public void _BuildWater()
     {
         if (BackgroundWater != null && BackgroundWater.Count != 0)
-            ClearWater();
+            _ClearWater();
         BackgroundWater = new List<SpriteRenderer>();
         PrimeColors();
 
@@ -74,11 +75,7 @@ public class MapBuilder : BaseBehavior {
         SpawnBot();
 
     }
-
-
-
-    [InspectorButton()]
-    public void ClearWater()
+    public void _ClearWater()
     {
         if (BackgroundWater == null)
             return;
@@ -90,7 +87,6 @@ public class MapBuilder : BaseBehavior {
 
         BackgroundWater.Clear();
     }
-
 #endif
 
     private float GetLateralOffset()
@@ -130,7 +126,24 @@ public class MapBuilder : BaseBehavior {
         newLayer.sortingOrder = Mathf.CeilToInt((StartPosition - FinishPostion) / VerticalOffset) + 10;
         BackgroundWater.Add(newLayer);
     }
-
-
-
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(MapBuilder))]
+public class MapBuilderEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        if(GUILayout.Button("Build Water"))
+        {
+            ((MapBuilder)target)._BuildWater();
+        }
+        if (GUILayout.Button("Clear Water"))
+        {
+            ((MapBuilder)target)._ClearWater();
+        }
+    }
+}
+#endif
