@@ -14,7 +14,8 @@ namespace GPComponents
 			GPCState state = children [childrenIndex].Eval ();
 			if (state == GPCState.FAILURE) {
 				childrenIndex++;
-			} else if (state == GPCState.SUCCESS) {
+                children[childrenIndex].Launch();
+            } else if (state == GPCState.SUCCESS) {
 				return GPCState.SUCCESS;
 			}
 			if (childrenIndex >= children.Count) {
