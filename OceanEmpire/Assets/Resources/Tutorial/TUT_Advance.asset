@@ -17,7 +17,8 @@ MonoBehaviour:
   tutorialEvents:
   - eventID: FocusOnFishInvincible
     functionName: FocusOnFishInvincible
-    useSpecificTime: 0
+    useSpecificTime: 1
+    useRealTime: 0
     when: 0
     invokeOnGameStarted: 0
     startAfterAnotherStep: 0
@@ -25,10 +26,10 @@ MonoBehaviour:
   - eventID: FocusOnHarpoon
     functionName: FocusOnHarpoon
     useSpecificTime: 1
+    useRealTime: 0
     when: 3
     invokeOnGameStarted: 1
     startAfterAnotherStep: 0
     startAfterTutorialStepIndex: 0
   sliderAnim_Prefab: {fileID: 1298547634821562, guid: c02b368fe6cc8c940864f62db81adf15,
     type: 2}
-  focusDuration: 5
