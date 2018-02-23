@@ -15,7 +15,10 @@ public class TUT_FirstMap : BaseTutorial {
     protected override void OnStart()
     {
         if (forceStart && !HasBeenCompleted(name, dataSaver))
+        {
             Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = false;
+
+        }
         else
             Scenes.Load(shackScene);
     }

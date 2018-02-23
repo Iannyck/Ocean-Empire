@@ -35,7 +35,6 @@ public class WaitForInput : MonoBehaviour
         {
             if (orders[i].useTouch)
             {
-                print(Input.GetMouseButtonDown(0));
                 if(Input.touchCount > 0) // ANDROID
                 {
                     if (Input.GetTouch(1).phase == orders[i].touchType)

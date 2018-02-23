@@ -17,6 +17,7 @@ namespace Tutorial
             public string eventID;
             public string functionName;
             public bool useSpecificTime = false;
+            public bool useRealTime = true;
             public float when = 0;
             public bool invokeOnGameStarted = true;
             public bool startAfterAnotherStep = false;
@@ -68,7 +69,7 @@ namespace Tutorial
                 {
                     TutorialEvent currentTutorialEvent = tutorialEvents[i];
                     if (currentTutorialEvent.startAfterAnotherStep)
-                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () { Execute(currentTutorialEvent, true); };
+                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () { Execute(currentTutorialEvent, tutorialEvents[i].useRealTime); };
 
                 }
 
@@ -79,7 +80,7 @@ namespace Tutorial
                     if (currentEvent.alreadyExecute)
                         continue;
                     if (currentEvent.invokeOnGameStarted)
-                        Execute(currentEvent, true);
+                        Execute(currentEvent, tutorialEvents[i].useRealTime);
                 }
             }
         }
@@ -91,7 +92,7 @@ namespace Tutorial
             for (int i = 0; i < tutorialEvents.Count; i++)
             {
                 if (tutorialEvents[i].eventID == eventId)
-                    Execute(tutorialEvents[i], true);
+                    Execute(tutorialEvents[i], tutorialEvents[i].useRealTime);
             }
         }
 
@@ -156,11 +157,11 @@ namespace Tutorial
                 tutorialEvent.OnComplete();
             };
 
-            if (useTime && tutorialEvent.useSpecificTime)
+            if (tutorialEvent.useSpecificTime)
                 sequence.InsertCallback(tutorialEvent.when, delegate ()
                 {
                     theMethod.Invoke(this, parameters);
-                });
+                }).SetUpdate(useTime);
             else
             {
                 theMethod.Invoke(this, parameters);
