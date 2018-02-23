@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Game/Recolte/Maps/Tutorial/Map_Tutoriel.unity
+    guid: 0db00dd7820f2f348a4e2491189c2f4f
+  - enabled: 1
     path: Assets/Game/UI/Shack/Shack.unity
     guid: 3365bf45c1118084088b800e6da71856
   - enabled: 1

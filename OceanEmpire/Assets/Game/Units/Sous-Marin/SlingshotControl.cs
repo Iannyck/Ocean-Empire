@@ -41,6 +41,13 @@ public class SlingshotControl : MonoBehaviour
             handleRestSize = handleRenderer.size;
     }
 
+    private void OnDisable()
+    {
+        canonRotator.gameObject.SetActive(false);
+        stillHarpoon.enabled = false;
+        handleRenderer.enabled = false;
+    }
+
     private void Update()
     {
         UpdateCooldown(Time.deltaTime);
@@ -159,10 +166,7 @@ public class SlingshotControl : MonoBehaviour
     #region Dragging
     public void StartDrag(Vector2 screenPosition)
     {
-        if (GetHarpoonPrefab() == null)
-            return;
-
-        if (!dragDetection.OriginatedInDeadZone)
+        if (GetHarpoonPrefab() == null || !enabled || !dragDetection.OriginatedInDeadZone)
             return;
 
         if (IsInCooldown())

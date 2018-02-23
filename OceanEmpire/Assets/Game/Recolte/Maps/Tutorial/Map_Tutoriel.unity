@@ -648,6 +648,47 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &286954697
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 286954699}
+  - component: {fileID: 286954698}
+  m_Layer: 0
+  m_Name: fiBackupSceneStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &286954698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 286954697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2402078a2026eb74499c6534c267da6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects: []
+--- !u!4 &286954699
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 286954697}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &291989693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1310,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f27a41520412cd45a213d180713102e, type: 2}
@@ -3641,6 +3682,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53b2bb602fe5dc4bbe82cabad92b3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 1365461041918330, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
+  - {fileID: 1365461041918330, guid: 82c76eecc091e61488986e0c197295af, type: 2}
+  _serializedStateKeys:
+  - mapFishReparition
+  - fishTypeList
+  _serializedStateValues:
+  - '{"keys":[{"time":0.0,"value":0.66,"tangentMode":0,"inTangent":0.3014002,"outTangent":0.3014002},{"time":1.0,"value":1.0,"tangentMode":0,"inTangent":0.3545214,"outTangent":0.3545214}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"}'
+  - '[{"fish":0,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":2.0},{"fish":1,"repartition":{"keys":[{"time":0.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":0.5,"value":1.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0},{"time":1.0,"value":0.0,"tangentMode":0,"inTangent":0.0,"outTangent":0.0}],"preWrapMode":"ClampForever","postWrapMode":"ClampForever"},"highestSpawn":0.0,"lowestSpawn":-150.0,"fishDensity":3.0}]'
   PlayerSpawn: {fileID: 1408103016}
   PlayerStart_: {fileID: 1047353538}
   regionName: Caraibe
@@ -3723,62 +3773,6 @@ MonoBehaviour:
     highestSpawn: 0
     lowestSpawn: -150
     fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: 8f56018fff48dd14baafe50d9c45b4c9, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: a40c24d43d6a9e045bd22d9da4db8419, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 1.5
 --- !u!4 &981076566
 Transform:
   m_ObjectHideFlags: 0
@@ -3803,7 +3797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9491cdc3eb5c443bee03442a3dcf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Map_Caraibe
+  mapName: Map_Tutoriel
 --- !u!114 &981076568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3828,7 +3822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onStart: 1
-  tutorial: {fileID: 11400000, guid: c6f6060824b97e940b8bcee18cbd0842, type: 2}
+  tutorial: {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
 --- !u!1 &1016361202
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,7 +4141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047716055
 GameObject:
@@ -4394,7 +4388,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1110420612
 GameObject:
@@ -4542,6 +4536,78 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1208142955
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1208142958}
+  - component: {fileID: 1208142957}
+  - component: {fileID: 1208142956}
+  m_Layer: 0
+  m_Name: fiPersistentEditorStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1208142956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1208142955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be205b8c5a2f88c408c5e5343719637c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keys:
+  - {fileID: 981076565}
+  - {fileID: 2021202806}
+  _values:
+  - _keys: []
+    _values: []
+    _target: {fileID: 981076565}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2021202806}
+--- !u!114 &1208142957
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1208142955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b5fe0e79f64584a83676f21be2d2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keys:
+  - {fileID: 981076565}
+  - {fileID: 2021202806}
+  _values:
+  - _keys: []
+    _values: []
+    _target: {fileID: 981076565}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2021202806}
+--- !u!4 &1208142958
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1208142955}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1212861238
 GameObject:
   m_ObjectHideFlags: 0
@@ -5298,7 +5364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1410865734
 GameObject:
@@ -5811,7 +5877,7 @@ Transform:
   m_Children:
   - {fileID: 554110251}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1495850317
 MonoBehaviour:
@@ -7707,7 +7773,7 @@ Transform:
   - {fileID: 1045454841}
   - {fileID: 498633261}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2021202806
 MonoBehaviour:
@@ -7720,6 +7786,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e95964cd6103794f8e20ef963e95e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys:
+  - PalestColor
+  - DarkestColor
+  - tints
+  _serializedStateValues:
+  - '{"r":0.0,"g":0.6235294,"b":0.882353,"a":1.0}'
+  - '{"r":0.0,"g":0.2,"b":0.282353,"a":1.0}'
+  - '[{"r":0.0,"g":0.6235294,"b":0.882353,"a":1.0},{"r":0.0,"g":0.5932773,"b":0.8394958,"a":1.0},{"r":0.0,"g":0.5630252,"b":0.7966387,"a":1.0},{"r":0.0,"g":0.5327731,"b":0.7537816,"a":1.0},{"r":0.0,"g":0.502521,"b":0.7109244,"a":1.0},{"r":0.0,"g":0.4722689,"b":0.6680673,"a":1.0},{"r":0.0,"g":0.4420168,"b":0.6252101,"a":1.0},{"r":0.0,"g":0.4117647,"b":0.582353,"a":1.0},{"r":0.0,"g":0.3815126,"b":0.5394958,"a":1.0},{"r":0.0,"g":0.3512605,"b":0.4966387,"a":1.0},{"r":0.0,"g":0.3210084,"b":0.4537815,"a":1.0},{"r":0.0,"g":0.2907563,"b":0.4109244,"a":1.0},{"r":0.0,"g":0.2605042,"b":0.3680672,"a":1.0},{"r":0.0,"g":0.2302521,"b":0.3252101,"a":1.0},{"r":0.0,"g":0.2,"b":0.282353,"a":1.0}]'
   WaterTop: {fileID: 212088766395150204, guid: 039a5e9775547b545a63c1132d5a3456, type: 2}
   waterLayer: {fileID: 212388780666056082, guid: b7466fe23c01bcc45a9ee8a62d8aebb8,
     type: 2}
