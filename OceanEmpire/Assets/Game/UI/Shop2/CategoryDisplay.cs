@@ -23,6 +23,7 @@ public class CategoryDisplay : MonoBehaviour {
         titre.text = displayableCategory.GetTitle();
         icon.sprite = displayableCategory.GetShopIcon();
 
+        GetComponent<Button>().onClick.RemoveAllListeners();
         GetComponent<Button>().onClick.AddListener(() => OpenItem());
     }
 
