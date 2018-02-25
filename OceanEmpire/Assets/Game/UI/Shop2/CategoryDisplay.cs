@@ -29,5 +29,6 @@ public class CategoryDisplay : MonoBehaviour {
     public void OpenItem()
     {
         ItemDescScene.OpenItemDescription(displayableCategory, () => UpdateView() );
+
     }
 }

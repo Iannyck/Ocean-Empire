@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -44,4 +46,9 @@ public interface IBuyable
 public interface IDescription
 {
     string GetDescription();
+}
+
+public interface IUpgradeDisplayable : IShopDisplayable
+{
+    List<Statistic> GetStatistics();
 }

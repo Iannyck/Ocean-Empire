@@ -23,7 +23,11 @@ public class ItemDescScene : WindowAnimation
         {
             if (Scenes.IsActive(SCENENAME))
             {
-                Scenes.GetActive(SCENENAME).FindRootObject<ItemDisplay2>().SetValues(item);
+                ItemDisplay2 id2 = Scenes.GetActive(SCENENAME).FindRootObject<ItemDisplay2>();
+                if(id2)
+                 id2.SetValues(item);
+                else 
+                    Debug.Log("ASASGASG");
             }
             else
             {

@@ -100,7 +100,7 @@ public class FishSpawner : MonoBehaviour
     {
         ypos = ypos.Raised(map.mapBottom);
         ypos = ypos.Capped(map.mapTop);
-        int palier = (int)Mathf.Round(((map.mapTop - ypos) + (palierHeigth / 2)) / palierHeigth);
+        int palier = (int)Mathf.Round(((map.mapTop - ypos) + (palierHeigth / 2)) / palierHeigth) -1 ;
         return palier;
     }
 

@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Category")]
-public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
+public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplayable
     where B : UpgradeDescriptionBuilder<D>
     where D : UpgradeDescription
 {
@@ -133,5 +134,10 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IShopDisplayable
     public string GetDescription()
     {
         return GetNextDescription().GetDescription();
+    }
+
+    public List<Statistic> GetStatistics()
+    {
+        return GetNextDescription().GetStatistics();
     }
 }
