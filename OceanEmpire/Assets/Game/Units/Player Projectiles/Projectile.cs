@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Projectile : MonoBehaviour
+public class Projectile : BaseKillableUnit
 {
     public float defaultSpeed;
     public bool shootOnStart = true;
@@ -29,5 +30,10 @@ public class Projectile : MonoBehaviour
     public void Shoot_Direction(Vector2 direction)
     {
         Shoot_Velocity(direction.normalized * defaultSpeed);
+    }
+
+    protected override void OnDeath()
+    {
+       //You're dead motherfucker
     }
 }

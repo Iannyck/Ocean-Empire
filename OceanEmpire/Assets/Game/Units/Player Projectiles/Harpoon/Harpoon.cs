@@ -6,8 +6,8 @@ using UnityEngine;
 public class Harpoon : Projectile
 {
     public float killAfter = 5;
-
     private float deathTimer;
+    public SpriteRenderer harpoonSpriteRenderer;
 
     protected override void Start()
     {
@@ -41,5 +41,10 @@ public class Harpoon : Projectile
     void Kill()
     {
         Destroy(gameObject);
+    }
+
+    void SetHarpoonSprite(Sprite hSprite)
+    {
+        harpoonSpriteRenderer.sprite = hSprite;
     }
 }

@@ -4,51 +4,31 @@ using UnityEngine;
 
 public class SubmarinParts : MonoBehaviour
 {
-    [SerializeField]
-    private Thruster thruster;
-
-    [SerializeField]
-    private HarpoonThrower harpoonThrower;
-
-    [SerializeField]
-    private FishContainer fishContainer;
-
-    [SerializeField]
+    private ThrusterDescription thruster;
+    private HarpoonThrowerDescription harpoonThrower;
     private GazTank gazTank;
 
-    public Thruster GetThruster() { return thruster; }
-    public HarpoonThrower GetHarpoonThrower() { return harpoonThrower; }
-    public FishContainer GetFishContainer() { return fishContainer; }
+    public ThrusterCategory thrusterCategory;
+    public HarpoonThrowerCategory harpoonThrowerCategory;
+    public GazTankCategory gazTankCategory;
+
+    public ThrusterDescription GetThruster() { return thruster; }
+    public HarpoonThrowerDescription GetHarpoonThrower() { return harpoonThrower; }
     public GazTank GetGazTank() { return gazTank; }
 
     void Start()
     {
-        //ThrusterDescriptionOLD TD = null;
-        //HarpoonThrowerDescriptionOLD HPD = null;
-        //FishContainerDescription FC = null;
-        //GazTankDescriptionOLD GT = null;
+        thruster = thrusterCategory.GetCurrentDescription() as ThrusterDescription;
 
-        //if (ItemsList.instance != null)
-        //{
-        //    TD = ItemsList.GetEquipThruster();
-        //    HPD = ItemsList.GetEquipHarpoonThrower();
-        //    FC = ItemsList.GetEquipFishContainer();
-        //    GT = ItemsList.GetEquipGazTank();
-        //}
+        harpoonThrower = harpoonThrowerCategory.GetCurrentDescription() as HarpoonThrowerDescription;
+        GetComponent<SlingshotControl>().Initiate(
+            harpoonThrower.GetCanonSprite(),
+            harpoonThrower.GetPullSprite(),
+            harpoonThrower.GetHarpoonSprite(),
+            harpoonThrower.GetHarpoonSpeed());
 
-        //if (TD != null)
-        //    thruster = TD.GetItem<Thruster>();
-        //if (HPD != null)
-        //    harpoonThrower = HPD.GetItem<HarpoonThrower>();
-        //if (FC != null)
-        //    fishContainer = FC.GetItem<FishContainer>();
-        //if (GT != null)
-        //    gazTank = GT.GetItem<GazTank>();
-
-        if (gazTank != null)
-            gazTank.SetGaz();
-        if (fishContainer != null)
-            fishContainer.ResetContainedFish();
+        GazTankDescription GTD = gazTankCategory.GetCurrentDescription() as GazTankDescription;
+        gazTank = new GazTank(GTD.GetDiveDuration());
     }
 
     private void Update()

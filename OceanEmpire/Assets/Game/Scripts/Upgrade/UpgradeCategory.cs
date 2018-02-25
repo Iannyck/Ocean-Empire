@@ -140,4 +140,13 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
     {
         return GetNextDescription().GetStatistics();
     }
+
+
+    public void ResetData()
+    {
+        ownedUpgrade = 0;
+        ownedUpgGenUpgrade = "";
+        nextUpgGenCode = "";
+        ApplyDataTo();
+    }
 }

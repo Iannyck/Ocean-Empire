@@ -12,20 +12,28 @@ public class HarpoonThrowerDescription : UpgradeDescription {
     [SerializeField]
     private float cooldown = 5;
     [SerializeField]
-    private float harpoonNumber = 0;
+    private int harpoonNumber = 0;
 
-    public float GetHarpoonSpeed()
-    {
+    public float GetHarpoonSpeed()  {
         return harpoonSpeed;
     }
-    public float GetCooldown()
-    {
+    public float GetCooldown()   {
         return cooldown;
     }
-    public float GetHarpoonNumber()
-    {
+    public int GetHarpoonNumber()   {
         return harpoonNumber;
     }
+    public Sprite GetPullSprite(){
+        return spriteKit.Get(0).sprite;
+    }
+    public Sprite GetCanonSprite()    {
+        return spriteKit.Get(1).sprite;
+    }
+    public Sprite GetHarpoonSprite()    {
+        return spriteKit.Get(2).sprite;
+    }
+
+
 
 
     public override List<Statistic> GetStatistics()
@@ -33,9 +41,11 @@ public class HarpoonThrowerDescription : UpgradeDescription {
         List<Statistic> stats = new List<Statistic>();
 
         stats.Add(new Statistic("Vitesse des harpons", harpoonSpeed));
-        stats.Add(new Statistic("temps de recharge", cooldown));
+        stats.Add(new Statistic("Temps de recharge", cooldown));
         stats.Add(new Statistic("Nombre de harpons", harpoonNumber));
 
         return stats;
     }
 }
+
+

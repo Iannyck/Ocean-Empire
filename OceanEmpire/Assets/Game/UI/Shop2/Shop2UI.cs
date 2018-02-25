@@ -33,15 +33,18 @@ public class Shop2UI : MonoBehaviour {
         categoryList = new List<CategoryDisplay>();
         UpdateDisplay();
 
-        PlayerCurrency.CurrencyUpdate += UpdateDisplay;
+        //PlayerCurrency.CurrencyUpdate += UpdateDisplay;
     }
 
 
     void UpdateDisplay()
     {
-
         for (int i = 0; i < categoryList.Count; ++i)
-            Destroy(categoryList[i].gameObject);
+        {
+            if (categoryList[i] != null)
+                Destroy(categoryList[i].gameObject);
+        }
+
 
         categoryList.Clear();
         int categoryCount = categories.Count;
@@ -56,5 +59,4 @@ public class Shop2UI : MonoBehaviour {
         newCategory.SetValues(itemDescription);
             categoryList.Add(newCategory);        
     }
-
 }

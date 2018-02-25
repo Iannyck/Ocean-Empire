@@ -243,7 +243,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853673111068200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05804181, y: 0.8273895, z: -0.5}
+  m_LocalPosition: {x: -152.97263, y: 659.12177, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4729834400856544}
@@ -572,12 +572,13 @@ MonoBehaviour:
   maxDragLength: 2.5
   canonRotator: {fileID: 4397481441661994}
   stillHarpoon: {fileID: 212583042900928852}
+  Canon: {fileID: 212799858674460600}
   handleRenderer: {fileID: 212026670732969576}
   handleTransform: {fileID: 4004174878592824}
   handleMinDraggingScale: {x: 0.8, y: 0.8, z: 0.8}
   handleMaxDraggingScale: {x: 1.4, y: 1.4, z: 1.4}
   isDragging: 0
-  overrideItems: 1
+  overrideItems: 0
   overridePrefab: {fileID: 114421981925445368, guid: e093fda6acdf161458bc4bb61872f542,
     type: 2}
   overrideCount: 1
@@ -593,10 +594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ebdf9642f58aa741b16ac29d232bb4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thruster: {fileID: 11400000, guid: a2b77ef46b753674ca5315e8025e080f, type: 2}
-  harpoonThrower: {fileID: 0}
-  fishContainer: {fileID: 11400000, guid: 17392dd121433264bb6dd8a202d90506, type: 2}
-  gazTank: {fileID: 11400000, guid: d1a9a4b39881fcd40a39b021629adcca, type: 2}
+  thrusterCategory: {fileID: 11400000, guid: 407c5076b304cd24ebc2c1eed6009095, type: 2}
+  harpoonThrowerCategory: {fileID: 11400000, guid: aacd2a64bb8412c4eb115bc1e208bddb,
+    type: 2}
+  gazTankCategory: {fileID: 11400000, guid: 77693d811e0af7f40a9e995791827ddc, type: 2}
 --- !u!114 &114916000236723280
 MonoBehaviour:
   m_ObjectHideFlags: 1

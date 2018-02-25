@@ -23,7 +23,6 @@ public class ConfirmBuy : WindowAnimation
 
     public static void OpenWindowAndConfirm(ItemDescription item, CurrencyType currency, Action<bool> resultCallback)
     {
-        print("ping!");
         PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (Scenes.IsActive(SCENENAME))

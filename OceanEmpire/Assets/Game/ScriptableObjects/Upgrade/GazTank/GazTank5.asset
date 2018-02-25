@@ -8,18 +8,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b846d6a4193c934ea8c4bfe3f0f6937, type: 3}
-  m_Name: Thruster4
+  m_Script: {fileID: 11500000, guid: 6ed5e5b1be679da4c8db648bbdce27ed, type: 3}
+  m_Name: GazTank4
   m_EditorClassIdentifier: 
   upgradeLevel: 4
   data:
-    itemName: Moteur 4
+    itemName: Resrvoir 4
     upgradeLevel: 4
-    itemDescription: 
+    itemDescription: "Augmente la capacit\xE9 d'essence, permettant de rester plus
+      longtemps sous l'eau"
     moneyCost: 4
     ticketCost: 4
-    itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
-    speed: 3.5
-    acceleration: 3
-    deceleration: 1.5
+    itemIcon: {fileID: 21300000, guid: 6f52f5fee94df764bb3b2f392f0abeb2, type: 3}
+    gazTank: {fileID: 0}
+    diveDuration: 70
   prebuiltSpriteKit: {fileID: 0}

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b846d6a4193c934ea8c4bfe3f0f6937, type: 3}
   m_Name: Thruster7
   m_EditorClassIdentifier: 
-  upgradeLevel: 3
+  upgradeLevel: 7
   data:
     itemName: Moteur 7
     upgradeLevel: 7

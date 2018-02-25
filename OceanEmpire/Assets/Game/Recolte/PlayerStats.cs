@@ -8,14 +8,8 @@ public class PlayerStats : MonoBehaviour
 
     public void TryCapture(Capturable fish)
     {
-        FishContainer container = Game.SubmarinParts.GetFishContainer();
-        if (container.HasRoom())
-        {
-            fish.Capture();
-            container.AddFish(fish.info);
-
-            CallCoinsPopUp(fish.info);
-        }
+        fish.Capture();
+        CallCoinsPopUp(fish.info);
     }
 
     private void CallCoinsPopUp(FishInfo info)

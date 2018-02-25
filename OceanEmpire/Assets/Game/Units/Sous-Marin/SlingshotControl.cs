@@ -11,6 +11,8 @@ public class SlingshotControl : MonoBehaviour
     [Header("Visuals")]
     public Transform canonRotator;
     public SpriteRenderer stillHarpoon;
+    public SpriteRenderer Canon;
+
     [Header("Handle")]
     public SpriteRenderer handleRenderer;
     public Transform handleTransform;
@@ -28,7 +30,7 @@ public class SlingshotControl : MonoBehaviour
 
     private float cooldownTimer = 0;
     private Transform tr;
-    private HarpoonThrower harpoonThrower;
+    private HarpoonThrowerDescription harpoonThrower;
     private Vector3 handleRestScale;
     private Vector2 handleRestSize;
 
@@ -52,6 +54,19 @@ public class SlingshotControl : MonoBehaviour
     {
         UpdateCooldown(Time.deltaTime);
         UpdateVisuals();
+    }
+
+
+    public void Initiate(Sprite canon, Sprite handle, Sprite harpoon, float harpoonSpeed)
+    {
+        if(Canon)
+            Canon.sprite = canon;
+        if (handleRenderer)
+            handleRenderer.sprite = handle;
+        if(overridePrefab)  { 
+            overridePrefab.harpoonSpriteRenderer.sprite = harpoon;
+            overridePrefab.defaultSpeed = harpoonSpeed;
+        }
     }
 
     private void UpdateVisuals()
@@ -123,7 +138,7 @@ public class SlingshotControl : MonoBehaviour
         {
             if (!FetchHarpoonThrower())
                 return null;
-            return harpoonThrower.harpoonPrefab;
+            return overridePrefab;
         }
     }
     private int GetHarpoonCount()
@@ -137,7 +152,7 @@ public class SlingshotControl : MonoBehaviour
             if (!FetchHarpoonThrower())
                 return -1;
 
-            return harpoonThrower.amountThrown;
+            return harpoonThrower.GetHarpoonNumber();
         }
     }
     private float GetShootCooldown()
@@ -150,16 +165,17 @@ public class SlingshotControl : MonoBehaviour
         {
             if (!FetchHarpoonThrower())
                 return -1;
-            return -1;
-            //return harpoonThrower.coo;
+            return harpoonThrower.GetCooldown();
         }
     }
+
     private bool FetchHarpoonThrower()
     {
         if (harpoonThrower == null)
             harpoonThrower = GetComponent<SubmarinParts>().GetHarpoonThrower();
         return harpoonThrower != null;
     }
+
     private float GetDragMaxLength() { return maxDragLength; }
     #endregion
 

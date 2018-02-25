@@ -10,13 +10,18 @@ public class GazTank : Upgrade
     [SerializeField, ReadOnly]
     private float GazTimeRemaining = 0;
 
+    public GazTank(float _GazDuration)
+    {
+        this.GazDuration = _GazDuration;
+        FillGaz();
+    }
 
     public void UpdateTimer()
     {
         GazTimeRemaining = Mathf.Max(GazTimeRemaining - Time.deltaTime, 0);
     }
 
-    public void SetGaz()
+    public void FillGaz()
     {
         GazTimeRemaining = GazDuration;
     }
