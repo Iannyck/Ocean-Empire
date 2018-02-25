@@ -17,7 +17,10 @@ public class LoadingScreenAnimation : MonoBehaviour
 
     public void Intro(UnityAction onComplete)
     {
-        bg.DOFade(1, transitionDuration/2).OnComplete(delegate ()
+        //bg.DOFade(1, transitionDuration/2)
+        particleTexture.gameObject.SetActive(true);
+        particleSystem.gameObject.SetActive(true);
+        particleTexture.DOFade(1, transitionDuration / 2).OnComplete(delegate ()
         {
             if (handleCameras)
             {
@@ -26,22 +29,19 @@ public class LoadingScreenAnimation : MonoBehaviour
                     currentCam.gameObject.SetActive(false);
                 cam.gameObject.SetActive(true);
             }
-            this.DelayedCall(()=> { onComplete(); }, waitTime);
+            this.DelayedCall(() => { onComplete(); }, waitTime);
         }).SetUpdate(true);
-        particleTexture.gameObject.SetActive(true);
-        particleSystem.gameObject.SetActive(true);
-        particleTexture.DOFade(1, transitionDuration / 2);
     }
 
     public void Outro(UnityAction onComplete)
     {
         if (handleCameras)
             cam.gameObject.SetActive(false);
-        bg.DOFade(0, transitionDuration/2).OnComplete(delegate ()
+        //bg.DOFade(0, transitionDuration/2)
+        particleTexture.DOFade(0, transitionDuration / 2).OnComplete(delegate ()
         {
             onComplete();
         }).SetUpdate(true);
-        particleTexture.DOFade(0, transitionDuration / 2);
     }
 
     public void OnNewSceneLoaded()
