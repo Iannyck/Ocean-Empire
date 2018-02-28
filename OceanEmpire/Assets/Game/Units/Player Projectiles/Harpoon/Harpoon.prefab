@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 4196113968527848}
   - component: {fileID: 50828878938548116}
   - component: {fileID: 114421981925445368}
-  - component: {fileID: 114325721456530666}
   m_Layer: 14
   m_Name: Harpoon
   m_TagString: Untagged
@@ -177,21 +176,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: OnTrigger+OnTriggerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &114325721456530666
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1979245170684404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e105b65f34042434fbb161a4fc65de5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkY: 1
-  checkX: 1
-  overrideDefaultMargin: 1
-  margin: 1
 --- !u!114 &114418199504386794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d978da077167fc84d8f70a960f0bcc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 9
+  defaultSpeed: 5
   shootOnStart: 1
   killAfter: 5
   harpoonSpriteRenderer: {fileID: 212000747143019798}
