@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class HarpoonThrowerDescription : UpgradeDescription {
-    [SerializeField, ReadOnly] private HarpoonThrower harpoonThrower;
-    public HarpoonThrower GetHarpoonThrower() { return harpoonThrower; }
-
+public class HarpoonThrowerDescription : UpgradeDescription
+{
     [SerializeField]
     private float harpoonSpeed = 2;
     [SerializeField]
@@ -14,23 +12,29 @@ public class HarpoonThrowerDescription : UpgradeDescription {
     [SerializeField]
     private int harpoonNumber = 0;
 
-    public float GetHarpoonSpeed()  {
+    public float GetHarpoonSpeed()
+    {
         return harpoonSpeed;
     }
-    public float GetCooldown()   {
+    public float GetCooldown()
+    {
         return cooldown;
     }
-    public int GetHarpoonNumber()   {
+    public int GetHarpoonNumber()
+    {
         return harpoonNumber;
     }
-    public Sprite GetPullSprite(){
-        return spriteKit.Get(0).sprite;
+    public TriColoredSprite GetPullSprite()
+    {
+        return spriteKit.Get(0);
     }
-    public Sprite GetCanonSprite()    {
-        return spriteKit.Get(1).sprite;
+    public TriColoredSprite GetCanonSprite()
+    {
+        return spriteKit.Get(1);
     }
-    public Sprite GetHarpoonSprite()    {
-        return spriteKit.Get(2).sprite;
+    public TriColoredSprite GetHarpoonSprite()
+    {
+        return spriteKit.Get(2);
     }
 
 
@@ -38,11 +42,12 @@ public class HarpoonThrowerDescription : UpgradeDescription {
 
     public override List<Statistic> GetStatistics()
     {
-        List<Statistic> stats = new List<Statistic>();
-
-        stats.Add(new Statistic("Vitesse des harpons", harpoonSpeed));
-        stats.Add(new Statistic("Temps de recharge", cooldown));
-        stats.Add(new Statistic("Nombre de harpons", harpoonNumber));
+        List<Statistic> stats = new List<Statistic>
+        {
+            new Statistic("Vitesse des harpons", harpoonSpeed),
+            new Statistic("Temps de recharge", cooldown),
+            new Statistic("Nombre de harpons", harpoonNumber)
+        };
 
         return stats;
     }

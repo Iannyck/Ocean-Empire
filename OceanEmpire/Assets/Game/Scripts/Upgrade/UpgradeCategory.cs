@@ -23,7 +23,7 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
 
     public DataSaver dataSaver;
 
-    private UpgradeDescription GetPrebuilt(int level)
+    private D GetPrebuilt(int level)
     {
         string t = OwnedUpgradeKey;
         foreach (var item in upgradeBuilders)
@@ -37,11 +37,11 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
         return null;
     }
 
-    public UpgradeDescription GetCurrentDescription()
+    public D GetCurrentDescription()
     {
 
         FetchDataFrom();
-        UpgradeDescription prebuilt = GetPrebuilt(ownedUpgrade);
+        D prebuilt = GetPrebuilt(ownedUpgrade);
         if (prebuilt != null)
             return prebuilt;
         else
@@ -54,11 +54,11 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
         }
     }
 
-    public UpgradeDescription GetNextDescription()
+    public D GetNextDescription()
     {
 
         FetchDataFrom();
-        UpgradeDescription prebuilt = GetPrebuilt(ownedUpgrade + 1);
+        D prebuilt = GetPrebuilt(ownedUpgrade + 1);
         if (prebuilt != null)
             return prebuilt;
         else
@@ -71,7 +71,7 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
         }
     }
 
-    public abstract UpgradeDescription GenerateNextDescription(string nextUpgGenCode);
+    public abstract D GenerateNextDescription(string nextUpgGenCode);
     public abstract void MakeNextGenCode(int level);
 
     public bool Buy(CurrencyType type)

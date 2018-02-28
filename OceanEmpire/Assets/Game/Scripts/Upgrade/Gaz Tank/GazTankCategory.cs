@@ -26,7 +26,7 @@ public class GazTankCategory : UpgradeCategory<GazTankDescBuilder, GazTankDescri
             return "gt3";
         }
     }
-    public override UpgradeDescription GenerateNextDescription(string nextUpgGenCode)
+    public override GazTankDescription GenerateNextDescription(string nextUpgGenCode)
     {
         return null;
     }

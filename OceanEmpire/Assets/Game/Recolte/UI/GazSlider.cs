@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class GazSlider : MonoBehaviour {
-
+public class GazSlider : MonoBehaviour
+{
     public Slider gageMeter;
     public Image bg;
 
@@ -19,7 +19,7 @@ public class GazSlider : MonoBehaviour {
     void Update()
     {
         UpdateMeter();
-        if(gageMeter.value < 0.2f)
+        if (gageMeter.value < 0.2f)
         {
             Alerte();
         }
@@ -28,13 +28,12 @@ public class GazSlider : MonoBehaviour {
     public void UpdateMeter()
     {
         SubmarinParts parts;
-        GazTank gazTank;
-        if (Game.Instance != null && (parts = Game.SubmarinParts) != null && (gazTank = parts.GetGazTank()) != null)
+        if (Game.Instance != null && (parts = Game.SubmarinParts) != null && parts.GazTank != null)
         {
-            gageMeter.value = gazTank.GetGazRatio();
+            gageMeter.value = parts.GazTank.GetGazRatio();
         }
         else
-        { 
+        {
             gageMeter.value = 1;
         }
     }

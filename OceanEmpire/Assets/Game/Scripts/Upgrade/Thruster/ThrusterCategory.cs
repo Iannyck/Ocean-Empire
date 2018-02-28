@@ -40,17 +40,21 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
 
     public ThrusterCategory()
     {
-        nvcSpeed = new CCC.Math.NeverReachingCurve();
-        nvcSpeed.a = 1;
-        nvcSpeed.b = 5;
-        nvcSpeed.speed = 0.03f;
-        nvcSpeed.minX = 0;
+        nvcSpeed = new CCC.Math.NeverReachingCurve
+        {
+            a = 1,
+            b = 5,
+            speed = 0.03f,
+            minX = 0
+        };
 
-        nvcAcceleration = new CCC.Math.NeverReachingCurve();
-        nvcAcceleration.a = 1;
-        nvcAcceleration.b = 5;
-        nvcAcceleration.speed = 0.05f;
-        nvcAcceleration.minX = 0;
+        nvcAcceleration = new CCC.Math.NeverReachingCurve
+        {
+            a = 1,
+            b = 5,
+            speed = 0.05f,
+            minX = 0
+        };
     }
 
     private int GenCoinCost(int level)
@@ -102,7 +106,7 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
         nextUpgGenCode = genCodeBuilder.ToString();
     }
 
-    public override UpgradeDescription GenerateNextDescription(string nextUpgGenCode)
+    public override ThrusterDescription GenerateNextDescription(string nextUpgGenCode)
     {
         string[] stringSeparators = new string[] { "@" };
         string[] result = nextUpgGenCode.Split(stringSeparators, StringSplitOptions.None);

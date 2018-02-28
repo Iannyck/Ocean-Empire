@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ThrusterDescription : UpgradeDescription {
-    /*
-    [SerializeField, ReadOnly] private Thruster thruster;
-    public Thruster GetThruster() { return thruster;}
-    */
-
+public class ThrusterDescription : UpgradeDescription
+{
     [SerializeField]
     private float speed = 1; // "speed"
     [SerializeField]
@@ -30,11 +26,12 @@ public class ThrusterDescription : UpgradeDescription {
     }
     public override List<Statistic> GetStatistics()
     {
-        List<Statistic> stats = new List<Statistic>();
-
-        stats.Add( new Statistic("speed", speed) );
-        stats.Add(new Statistic("Accélération", acceleration));
-        stats.Add(new Statistic("décélération", deceleration));
+        List<Statistic> stats = new List<Statistic>
+        {
+            new Statistic("speed", speed),
+            new Statistic("Accélération", acceleration),
+            new Statistic("décélération", deceleration)
+        };
 
         return stats;
     }

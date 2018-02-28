@@ -36,7 +36,7 @@ namespace GPComponents
             var player = sceneManager.Read<GameObject>("player");
             if(player != null)
             {
-                gazTank = player.GetComponent<SubmarinParts>().GetGazTank();
+                gazTank = player.GetComponent<SubmarinParts>().GazTank;
             }
         }
     }

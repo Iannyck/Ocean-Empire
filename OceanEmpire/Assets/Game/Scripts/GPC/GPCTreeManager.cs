@@ -34,8 +34,7 @@ public class GPCTreeManager : MonoBehaviour
 
     void CreateTree()
     {
-        tree = new ParallelAND();
-        tree.AddChild(new FuelCheck(sceneManager));
+        tree = new ParallelAND(new FuelCheck(sceneManager));
         tree.Launch();
     }
 }

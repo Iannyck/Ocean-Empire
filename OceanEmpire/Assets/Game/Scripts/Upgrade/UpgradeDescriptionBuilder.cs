@@ -18,6 +18,4 @@ public abstract class UpgradeDescriptionBuilder<T> : ScriptableObject where T : 
         data.spriteKit = prebuiltSpriteKit;
         return data;
     }
-
-
 }

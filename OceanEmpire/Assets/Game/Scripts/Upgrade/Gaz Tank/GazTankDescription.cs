@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GazTankDescription : UpgradeDescription {
-    [SerializeField, ReadOnly] private GazTank gazTank;
-    public GazTank GetGazTank() { return gazTank; }
-
+public class GazTankDescription : UpgradeDescription
+{
     [SerializeField]
     private float diveDuration = 2;
 
@@ -17,9 +15,10 @@ public class GazTankDescription : UpgradeDescription {
 
     public override List<Statistic> GetStatistics()
     {
-        List<Statistic> stats = new List<Statistic>();
-
-        stats.Add(new Statistic("Durée de plongée", diveDuration));
+        List<Statistic> stats = new List<Statistic>
+        {
+            new Statistic("Durée de plongée", diveDuration)
+        };
 
         return stats;
     }

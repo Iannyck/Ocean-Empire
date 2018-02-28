@@ -1,18 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Ocean Empire/Item/Gaz Tank")]
-public class GazTank : Upgrade
+public class GazTank
 {
-    public float GazDuration = 20;
-    [SerializeField, ReadOnly]
-    private float GazTimeRemaining = 0;
+    public float GazTimeRemaining { private set; get; }
+    public GazTankDescription Description { private set; get; }
 
-    public GazTank(float _GazDuration)
+    public GazTank(GazTankDescription description)
     {
-        this.GazDuration = _GazDuration;
+        Description = description;
         FillGaz();
     }
 
@@ -23,11 +18,11 @@ public class GazTank : Upgrade
 
     public void FillGaz()
     {
-        GazTimeRemaining = GazDuration;
+        GazTimeRemaining = Description.GetDiveDuration();
     }
 
     public float GetGazRatio()
     {
-        return GazTimeRemaining / GazDuration;
+        return GazTimeRemaining / Description.GetDiveDuration();
     }
 }

@@ -28,7 +28,7 @@ public class HarpoonThrowerCategory : UpgradeCategory<HarpoonThrowerDescBuilder,
     }
 
 
-    public override UpgradeDescription GenerateNextDescription(string nextUpgGenCode)
+    public override HarpoonThrowerDescription GenerateNextDescription(string nextUpgGenCode)
     {
         return null;
     }

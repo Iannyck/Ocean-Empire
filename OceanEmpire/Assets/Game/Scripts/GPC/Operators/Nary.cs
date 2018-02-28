@@ -6,15 +6,19 @@ namespace GPComponents
 {
 	public abstract class Nary : IGPComponent
 	{
-		protected List<IGPComponent> children = new List<IGPComponent>();
+		protected List<IGPComponent> children;
 
-        public void AddChild(IGPComponent child)
+        public Nary(IGPComponent child)
         {
-            children.Add(child);
+            children = new List<IGPComponent>() { child };
         }
-        public void AddChildren(IEnumerable<IGPComponent> children)
+        public Nary(params IGPComponent[] children)
         {
-            this.children.AddRange(children);
+            this.children = new List<IGPComponent>(children);
+        }
+        public Nary(IEnumerable<IGPComponent> children)
+        {
+            this.children = new List<IGPComponent>(children);
         }
 
 

@@ -30,7 +30,6 @@ public class SubmarineMovement : MonoBehaviour
     private Rigidbody2D rb;
     private float realBrakeDistance = -1;
 
-    private ThrusterDescription thruster;
     private SlingshotControl slingshotControl;
 
 
@@ -50,7 +49,7 @@ public class SubmarineMovement : MonoBehaviour
 
         SubmarinParts parts = gameObject.GetComponent<SubmarinParts>();
 
-        thruster = parts.GetThruster();
+        var thruster = parts.Thruster.Description;
         if (thruster != null)
         {
             maximumSpeed = thruster.GetSpeed();

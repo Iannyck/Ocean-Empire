@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ed5e5b1be679da4c8db648bbdce27ed, type: 3}
-  m_Name: GazTank4
+  m_Name: GazTank5
   m_EditorClassIdentifier: 
   upgradeLevel: 4
   data:

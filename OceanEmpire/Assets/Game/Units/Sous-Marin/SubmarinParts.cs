@@ -4,36 +4,58 @@ using UnityEngine;
 
 public class SubmarinParts : MonoBehaviour
 {
-    private ThrusterDescription thruster;
-    private HarpoonThrowerDescription harpoonThrower;
-    private GazTank gazTank;
+    public Thruster Thruster { private set; get; }
+    public HarpoonThrower HarpoonThrower { private set; get; }
+    public GazTank GazTank { private set; get; }
 
-    public ThrusterCategory thrusterCategory;
-    public HarpoonThrowerCategory harpoonThrowerCategory;
-    public GazTankCategory gazTankCategory;
+    [Header("Default upgrades"), SerializeField] private bool useDefaults = false;
+    [SerializeField] private ThrusterDescBuilder prebuiltThruster;
+    [SerializeField] private HarpoonThrowerDescBuilder prebuiltHarpoon;
+    [SerializeField] private GazTankDescBuilder prebuiltGazTank;
 
-    public ThrusterDescription GetThruster() { return thruster; }
-    public HarpoonThrowerDescription GetHarpoonThrower() { return harpoonThrower; }
-    public GazTank GetGazTank() { return gazTank; }
+    [SerializeField] private ThrusterCategory thrusterCategory;
+    [SerializeField] private HarpoonThrowerCategory harpoonThrowerCategory;
+    [SerializeField] private GazTankCategory gazTankCategory;
 
     void Start()
     {
-        thruster = thrusterCategory.GetCurrentDescription() as ThrusterDescription;
+        GazTankDescription GTD = null;
+        ThrusterDescription TD = null;
+        HarpoonThrowerDescription HTD = null;
+        if (useDefaults)
+        {
+            TD = prebuiltThruster.BuildUpgradeDescription();
+            HTD = prebuiltHarpoon.BuildUpgradeDescription();
+            GTD = prebuiltGazTank.BuildUpgradeDescription();
+        }
+        else
+        {
+            TD = thrusterCategory.GetCurrentDescription();
+            HTD = harpoonThrowerCategory.GetCurrentDescription();
+            GTD = gazTankCategory.GetCurrentDescription();
+        }
 
-        harpoonThrower = harpoonThrowerCategory.GetCurrentDescription() as HarpoonThrowerDescription;
-        GetComponent<SlingshotControl>().Initiate(
-            harpoonThrower.GetCanonSprite(),
-            harpoonThrower.GetPullSprite(),
-            harpoonThrower.GetHarpoonSprite(),
-            harpoonThrower.GetHarpoonSpeed());
+        GazTank = new GazTank(GTD);
+        Thruster = new Thruster(TD);
+        HarpoonThrower = new HarpoonThrower(HTD);
 
-        GazTankDescription GTD = gazTankCategory.GetCurrentDescription() as GazTankDescription;
-        gazTank = new GazTank(GTD.GetDiveDuration());
+        SlingshotControl slingshotControl = GetComponent<SlingshotControl>();
+
+        if (slingshotControl != null)
+        {
+            HarpoonThrowerDescription desc = HarpoonThrower.Description;
+            slingshotControl.Initiate(
+                desc.GetCanonSprite(),
+                desc.GetPullSprite(),
+                desc.GetHarpoonSprite(),
+                desc.GetHarpoonSpeed());
+        }
+
     }
 
     private void Update()
     {
-        if (gazTank != null)
-            gazTank.UpdateTimer();
+        if (GazTank != null)
+            GazTank.UpdateTimer();
     }
 }

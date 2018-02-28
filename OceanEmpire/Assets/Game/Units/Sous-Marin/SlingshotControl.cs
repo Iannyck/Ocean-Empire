@@ -57,14 +57,14 @@ public class SlingshotControl : MonoBehaviour
     }
 
 
-    public void Initiate(Sprite canon, Sprite handle, Sprite harpoon, float harpoonSpeed)
+    public void Initiate(TriColoredSprite canon, TriColoredSprite handle, TriColoredSprite harpoon, float harpoonSpeed)
     {
         if(Canon)
-            Canon.sprite = canon;
+            Canon.sprite = canon.sprite;
         if (handleRenderer)
-            handleRenderer.sprite = handle;
+            handleRenderer.sprite = handle.sprite;
         if(overridePrefab)  { 
-            overridePrefab.harpoonSpriteRenderer.sprite = harpoon;
+            overridePrefab.harpoonSpriteRenderer.sprite = harpoon.sprite;
             overridePrefab.defaultSpeed = harpoonSpeed;
         }
     }
@@ -172,7 +172,9 @@ public class SlingshotControl : MonoBehaviour
     private bool FetchHarpoonThrower()
     {
         if (harpoonThrower == null)
-            harpoonThrower = GetComponent<SubmarinParts>().GetHarpoonThrower();
+        {
+            harpoonThrower = GetComponent<SubmarinParts>().HarpoonThrower.Description;
+        }
         return harpoonThrower != null;
     }
 

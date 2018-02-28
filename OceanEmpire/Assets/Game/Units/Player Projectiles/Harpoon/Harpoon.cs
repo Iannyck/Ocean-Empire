@@ -17,10 +17,10 @@ public class Harpoon : Projectile
 
     private void Update()
     {
-        if(deathTimer > 0)
+        if (deathTimer > 0)
         {
             deathTimer -= Time.deltaTime;
-            if(deathTimer <= 0)
+            if (deathTimer <= 0)
             {
                 Kill();
             }
@@ -37,9 +37,9 @@ public class Harpoon : Projectile
             Kill();
         }
     }
-
-    void Kill()
+    protected override void OnDeath()
     {
+        base.OnDeath();
         Destroy(gameObject);
     }
 
