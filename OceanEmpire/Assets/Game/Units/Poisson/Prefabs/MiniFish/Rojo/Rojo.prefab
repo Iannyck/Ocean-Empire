@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 4391991207605276}
   - component: {fileID: 50708007439193562}
   - component: {fileID: 114114819016960596}
-  - component: {fileID: 114021408903366914}
   - component: {fileID: 114400721705563310}
   - component: {fileID: 114312419390531772}
   - component: {fileID: 114773341971279570}
@@ -162,21 +161,6 @@ MonoBehaviour:
   maxSpeed: 0.75
   tiltSpeed: 60
   angleRange: {x: -90, y: 90}
---- !u!114 &114021408903366914
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1365461041918330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e105b65f34042434fbb161a4fc65de5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkY: 0
-  checkX: 0
-  overrideDefaultMargin: 0
-  margin: 1000
 --- !u!114 &114114819016960596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,6 +308,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -339,6 +324,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -356,3 +342,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

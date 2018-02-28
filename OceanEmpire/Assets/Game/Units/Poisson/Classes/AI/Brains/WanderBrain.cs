@@ -111,9 +111,18 @@ public class WanderBrain : Brain
         Vector2 pos = v + rb.position;
         if (MapInfo.IsOutOfBounds(pos))
         {
+            // Flip direction
             v = -v;
             pos = v + rb.position;
-            pos = new Vector2(pos.x.Clamped(MapInfo.MAP_LEFT, MapInfo.MAP_RIGHT), pos.y);
+
+            pos.x = Mathf.Clamp(pos.x, MapInfo.MAP_LEFT, MapInfo.MAP_RIGHT);
+        }
+
+        // Clamp vertical
+        MapInfo map;
+        if (Game.Instance != null && (map = Game.Instance.map) != null)
+        {
+            pos.y = Mathf.Clamp(pos.y, map.mapBottom + 0.5f, map.mapTop - 0.5f);
         }
 
         return pos;
