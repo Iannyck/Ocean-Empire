@@ -8,14 +8,14 @@ public class SubmarinParts : MonoBehaviour
     public HarpoonThrower HarpoonThrower { private set; get; }
     public GazTank GazTank { private set; get; }
 
+    [Header("Categories"), SerializeField] private ThrusterCategory thrusterCategory;
+    [SerializeField] private HarpoonThrowerCategory harpoonThrowerCategory;
+    [SerializeField] private GazTankCategory gazTankCategory;
+
     [Header("Default upgrades"), SerializeField] private bool useDefaults = false;
     [SerializeField] private ThrusterDescBuilder prebuiltThruster;
     [SerializeField] private HarpoonThrowerDescBuilder prebuiltHarpoon;
     [SerializeField] private GazTankDescBuilder prebuiltGazTank;
-
-    [SerializeField] private ThrusterCategory thrusterCategory;
-    [SerializeField] private HarpoonThrowerCategory harpoonThrowerCategory;
-    [SerializeField] private GazTankCategory gazTankCategory;
 
     void Start()
     {
@@ -39,18 +39,37 @@ public class SubmarinParts : MonoBehaviour
         Thruster = new Thruster(TD);
         HarpoonThrower = new HarpoonThrower(HTD);
 
-        SlingshotControl slingshotControl = GetComponent<SlingshotControl>();
+        ApplyFuelTank();
+        ApplyHarpoonThrower();
+        ApplyThruster();
+    }
+
+    void ApplyThruster()
+    {
+        var movement = GetComponent<SubmarineMovement>();
+        if (movement != null)
+        {
+            movement.maximumSpeed = Thruster.Description.GetSpeed();
+            movement.accelerationRate = Thruster.Description.GetAcceleration();
+        }
+    }
+
+    void ApplyFuelTank()
+    {
+    }
+
+    void ApplyHarpoonThrower()
+    {
+        var slingshotControl = GetComponent<SlingshotControl>();
 
         if (slingshotControl != null)
         {
             HarpoonThrowerDescription desc = HarpoonThrower.Description;
-            slingshotControl.Initiate(
-                desc.GetCanonSprite(),
-                desc.GetPullSprite(),
-                desc.GetHarpoonSprite(),
-                desc.GetHarpoonSpeed());
+            slingshotControl.SetHarpoonVisuals(desc.GetCanonSprite(), desc.GetPullSprite(), desc.GetHarpoonSprite());
+            slingshotControl.SetHarpoonSpeed(desc.GetHarpoonSpeed());
+            slingshotControl.HarpoonCooldown = desc.GetCooldown();
+            slingshotControl.HarpoonCount = 1;
         }
-
     }
 
     private void Update()

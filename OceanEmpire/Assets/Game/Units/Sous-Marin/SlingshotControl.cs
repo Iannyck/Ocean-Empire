@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SlingshotControl : MonoBehaviour
 {
+    //-------------------Serialized-------------------//
+
+    public Harpoon HarpoonPrefab;
     public DragDetection dragDetection;
     public Slingshot slingshotInstance;
     public float maxDragLength = 2.5f;
@@ -22,15 +25,14 @@ public class SlingshotControl : MonoBehaviour
     [ReadOnly]
     public bool isDragging;
 
-    [Header("Debug"), SerializeField] bool overrideItems = false;
-    [SerializeField] Harpoon overridePrefab;
-    [SerializeField] int overrideCount = 1;
-    [SerializeField] float overrideCooldown = 2;
 
+    //-------------------NonSerialized-------------------//
+
+    public int HarpoonCount { get; set; }
+    public float HarpoonCooldown { get; set; }
 
     private float cooldownTimer = 0;
     private Transform tr;
-    private HarpoonThrowerDescription harpoonThrower;
     private Vector3 handleRestScale;
     private Vector2 handleRestSize;
 
@@ -56,17 +58,19 @@ public class SlingshotControl : MonoBehaviour
         UpdateVisuals();
     }
 
-
-    public void Initiate(TriColoredSprite canon, TriColoredSprite handle, TriColoredSprite harpoon, float harpoonSpeed)
+    public void SetHarpoonVisuals(TriColoredSprite canon, TriColoredSprite handle, TriColoredSprite harpoon)
     {
-        if(Canon)
-            Canon.sprite = canon.sprite;
-        if (handleRenderer)
+        if (HarpoonPrefab != null)
+            HarpoonPrefab.harpoonSpriteRenderer.sprite = harpoon.sprite;
+        if (handleRenderer != null)
             handleRenderer.sprite = handle.sprite;
-        if(overridePrefab)  { 
-            overridePrefab.harpoonSpriteRenderer.sprite = harpoon.sprite;
-            overridePrefab.defaultSpeed = harpoonSpeed;
-        }
+        if (Canon != null)
+            Canon.sprite = canon.sprite;
+    }
+    public void SetHarpoonSpeed(float speed)
+    {
+        if (HarpoonPrefab != null)
+            HarpoonPrefab.defaultSpeed = speed;
     }
 
     private void UpdateVisuals()
@@ -76,7 +80,7 @@ public class SlingshotControl : MonoBehaviour
             var worldPosition = dragDetection.LastWorldTouchedPosition;
 
             var dir = (Vector2)tr.position - worldPosition;
-            var maxLength = GetDragMaxLength();
+            var maxLength = maxDragLength;
             var length = Mathf.Min(dir.magnitude, maxLength);
             var normalizedLength = length / maxLength;
             var rotation = Quaternion.AngleAxis(dir.ToAngle(), Vector3.forward);
@@ -113,7 +117,7 @@ public class SlingshotControl : MonoBehaviour
     }
     private void PutInCooldown()
     {
-        cooldownTimer = GetShootCooldown();
+        cooldownTimer = HarpoonCooldown;
         if (IsInCooldown())
         {
             if (stillHarpoon != null)
@@ -126,65 +130,10 @@ public class SlingshotControl : MonoBehaviour
     }
     #endregion
 
-
-    #region Harpoon Resources
-    private Harpoon GetHarpoonPrefab()
-    {
-        if (overrideItems)
-        {
-            return overridePrefab;
-        }
-        else
-        {
-            if (!FetchHarpoonThrower())
-                return null;
-            return overridePrefab;
-        }
-    }
-    private int GetHarpoonCount()
-    {
-        if (overrideItems)
-        {
-            return overrideCount;
-        }
-        else
-        {
-            if (!FetchHarpoonThrower())
-                return -1;
-
-            return harpoonThrower.GetHarpoonNumber();
-        }
-    }
-    private float GetShootCooldown()
-    {
-        if (overrideItems)
-        {
-            return overrideCooldown;
-        }
-        else
-        {
-            if (!FetchHarpoonThrower())
-                return -1;
-            return harpoonThrower.GetCooldown();
-        }
-    }
-
-    private bool FetchHarpoonThrower()
-    {
-        if (harpoonThrower == null)
-        {
-            harpoonThrower = GetComponent<SubmarinParts>().HarpoonThrower.Description;
-        }
-        return harpoonThrower != null;
-    }
-
-    private float GetDragMaxLength() { return maxDragLength; }
-    #endregion
-
     #region Dragging
     public void StartDrag(Vector2 screenPosition)
     {
-        if (GetHarpoonPrefab() == null || !enabled || !dragDetection.OriginatedInDeadZone)
+        if (HarpoonPrefab == null || !enabled || !dragDetection.OriginatedInDeadZone)
             return;
 
         if (IsInCooldown())
@@ -247,10 +196,9 @@ public class SlingshotControl : MonoBehaviour
     void ShootMultipleHarpoons(Vector2 direction)
     {
         const float angleoffset = 5;
-        var harpoonCount = GetHarpoonCount();
         float middleAngle = direction.ToAngle();
 
-        bool nombrePair = (harpoonCount % 2 == 0);
+        bool nombrePair = (HarpoonCount % 2 == 0);
 
         float currentOffset = 0;
         int impair = 0;
@@ -266,7 +214,7 @@ public class SlingshotControl : MonoBehaviour
             impair = 1;
         }
 
-        for (int i = 0 + impair; i < harpoonCount + impair; ++i)
+        for (int i = 0 + impair; i < HarpoonCount + impair; ++i)
         {
             ShootHarpoon(Quaternion.AngleAxis(middleAngle + currentOffset, Vector3.forward));
 
@@ -276,7 +224,7 @@ public class SlingshotControl : MonoBehaviour
     }
     void ShootHarpoon(Quaternion direction)
     {
-        Harpoon harpoon = GetHarpoonPrefab().DuplicateGO(tr.position, direction);
+        Harpoon harpoon = HarpoonPrefab.DuplicateGO(tr.position, direction);
         harpoon.shootOnStart = true;
 
         PutInCooldown();

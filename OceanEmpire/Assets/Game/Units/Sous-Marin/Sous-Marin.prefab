@@ -567,6 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03311fa5d50030749b665d57ee50c839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HarpoonPrefab: {fileID: 114421981925445368, guid: e093fda6acdf161458bc4bb61872f542,
+    type: 2}
   dragDetection: {fileID: 114517759041208734}
   slingshotInstance: {fileID: 114379696085279956}
   maxDragLength: 2.5
@@ -578,11 +580,6 @@ MonoBehaviour:
   handleMinDraggingScale: {x: 0.8, y: 0.8, z: 0.8}
   handleMaxDraggingScale: {x: 1.4, y: 1.4, z: 1.4}
   isDragging: 0
-  overrideItems: 0
-  overridePrefab: {fileID: 114421981925445368, guid: e093fda6acdf161458bc4bb61872f542,
-    type: 2}
-  overrideCount: 1
-  overrideCooldown: 2
 --- !u!114 &114904046857194384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,6 +595,10 @@ MonoBehaviour:
   harpoonThrowerCategory: {fileID: 11400000, guid: aacd2a64bb8412c4eb115bc1e208bddb,
     type: 2}
   gazTankCategory: {fileID: 11400000, guid: 77693d811e0af7f40a9e995791827ddc, type: 2}
+  useDefaults: 1
+  prebuiltThruster: {fileID: 11400000, guid: 659c8e28473ef244cb011e8de3599362, type: 2}
+  prebuiltHarpoon: {fileID: 11400000, guid: 5c6cd1236f8b0814e8c34cd0489a71a3, type: 2}
+  prebuiltGazTank: {fileID: 11400000, guid: 5cdff2bb70ef7f24e95eddc35d64dcdb, type: 2}
 --- !u!114 &114916000236723280
 MonoBehaviour:
   m_ObjectHideFlags: 1

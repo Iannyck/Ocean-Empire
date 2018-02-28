@@ -46,17 +46,6 @@ public class SubmarineMovement : MonoBehaviour
         Game.OnGameStart += Init;
 
         slingshotControl = GetComponent<SlingshotControl>();
-
-        SubmarinParts parts = gameObject.GetComponent<SubmarinParts>();
-
-        var thruster = parts.Thruster.Description;
-        if (thruster != null)
-        {
-            maximumSpeed = thruster.GetSpeed();
-            accelerationRate = thruster.GetAcceleration();
-            //decelerationRate thruster.GetDeceleration();
-        }
-
     }
 
     void Init()
@@ -70,6 +59,7 @@ public class SubmarineMovement : MonoBehaviour
     {
         UpdateTargetPosition();
     }
+
     void FixedUpdate()
     {
         if (clampPosition)

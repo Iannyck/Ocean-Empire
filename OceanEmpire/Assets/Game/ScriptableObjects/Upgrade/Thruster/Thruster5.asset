@@ -19,7 +19,7 @@ MonoBehaviour:
     moneyCost: 5
     ticketCost: 5
     itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
-    speed: 5
-    acceleration: 5
-    deceleration: 5
+    speed: 2.5
+    acceleration: 1.5
+    deceleration: 1.5
   prebuiltSpriteKit: {fileID: 0}
