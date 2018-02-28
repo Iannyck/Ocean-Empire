@@ -108,6 +108,7 @@ public class PlayerSpawn : MonoBehaviour
         {
             player.enabled = true;
             onIntroAnimComplete();
+            print("on complete");
         });
 
 

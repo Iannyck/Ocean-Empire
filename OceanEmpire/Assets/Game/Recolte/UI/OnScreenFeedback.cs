@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -13,7 +13,7 @@ public class OnScreenFeedback : MonoBehaviour
     public Sprite timeUp;
     public Image image;
     public float fadeDuration = 0.25f;
-    public int bounceCount =3;
+    public int bounceCount = 3;
     [ReadOnly]
     public float totalDuration;
 
@@ -37,13 +37,14 @@ public class OnScreenFeedback : MonoBehaviour
         sq.Join(
             image.DOFade(1, fadeDuration));
         sq.Append(
-            image.gameObject.transform.DOScale(1.25f, 0.25f).SetLoops(bounceCount*2, LoopType.Yoyo));
+            image.gameObject.transform.DOScale(1.25f, 0.25f).SetLoops(bounceCount * 2, LoopType.Yoyo));
         sq.Append(image.DOFade(0, fadeDuration));
         sq.OnComplete(delegate ()
         {
             image.SetAlpha(0);
             image.gameObject.transform.localScale = new Vector3(1, 1, 1);
-            onComplete();
+            if (onComplete != null)
+                onComplete();
         });
     }
 

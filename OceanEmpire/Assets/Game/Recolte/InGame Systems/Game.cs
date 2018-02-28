@@ -125,8 +125,8 @@ public class Game : PublicSingleton<Game>
                 cameraMouvement.followPlayer = true;
                 submarine.movementEnable = true;
                 playerSpawned = true;
-                ui.feedbacks.ShowGo(StartGame);
-
+                ui.feedbacks.ShowGo(null);
+                StartGame();
             });
     }
 
