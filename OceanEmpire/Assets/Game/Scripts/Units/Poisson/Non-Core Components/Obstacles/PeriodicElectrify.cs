@@ -4,22 +4,54 @@ using UnityEngine;
 
 public class PeriodicElectrify : Electrify
 {
+    [Header("On/Off Toggle")]
     public float electricInterval = 2.5f;
     public float electricDuration = 2.5f;
 
+    private Coroutine toggleRoutine;
 
-    protected override void Start () {
-        base.Start();
+    protected override void OnEnable()
+    {
+        base.OnEnable();
 
-        this.DelayedCall(ElectricRestart, electricDuration);
+        if (electrifiedOnStart)
+            toggleRoutine = StartCoroutine(InvertedToggleRoutine());
+        else
+            toggleRoutine = StartCoroutine(ToggleRoutine());
     }
 
-    void ElectricRestart()
+    /// <summary>
+    /// Débute non électrifié, puis le deviens
+    /// </summary>
+    IEnumerator ToggleRoutine()
     {
-        StopElectricEffect();
-        this.DelayedCall(delegate() {
-            ElectricEffect();
-            this.DelayedCall(ElectricRestart, electricDuration);
-        }, electricInterval);
+        while (this != null)
+        {
+            Electrified = false;
+            yield return new WaitForSeconds(electricInterval);
+            Electrified = true;
+            yield return new WaitForSeconds(electricDuration);
+        }
+    }
+
+    /// <summary>
+    /// Débute électrifié, puis ne le deviens plus
+    /// </summary>
+    IEnumerator InvertedToggleRoutine()
+    {
+        while (this != null)
+        {
+            Electrified = true;
+            yield return new WaitForSeconds(electricDuration);
+            Electrified = false;
+            yield return new WaitForSeconds(electricInterval);
+        }
+    }
+
+
+    void OnDisable()
+    {
+        if (toggleRoutine != null)
+            StopCoroutine(toggleRoutine);
     }
 }

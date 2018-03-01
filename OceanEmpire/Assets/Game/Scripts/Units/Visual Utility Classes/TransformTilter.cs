@@ -40,7 +40,7 @@ public class TransformTilter : MonoBehaviour
             if (sqrMag > 0.05f)
             {
                 if (vel.x < 0)
-                    vel = vel.FlippedX();
+                    vel.x = -vel.x;
                 float map = (vel.ToAngle() + 90) / 180;
                 float influenceAngle = Mathf.Lerp(angleRange.x, angleRange.y, map);
                 targetAngle = targetAngle.Lerpped(influenceAngle, sqrMag / maxSpeedSQR);

@@ -7,33 +7,43 @@ public class TransformFlipper : MonoBehaviour
 {
     private const float REPOS = 0.1f;
 
-    public bool facingRight;
-    public Rigidbody2D rb;
-    public float flipDuration = 0.4f;
-    public Ease flipEase = Ease.InOutSine;
+    [Header("Components"), SerializeField] Rigidbody2D rb;
+
+    [Header("Settings"), SerializeField] bool startingRight = true;
+    [SerializeField] float flipDuration = 0.4f;
+    [SerializeField] Ease flipEase = Ease.InOutSine;
+    public bool FlipManually = false;
 
     private Tween flipTween;
+    private bool facingRight = false;
+
+    void Start()
+    {
+        facingRight = startingRight;
+    }
 
     private void Update()
     {
-        if (rb != null)
+        if (!FlipManually && rb != null)
         {
-            if (facingRight)
+            var vel = rb.velocity;
+            if(vel.x.Abs() > REPOS)
             {
-                if (rb.velocity.x < -REPOS)
-                {
-                    facingRight = false;
-                    Flip();
-                }
+                FacingRight = vel.x > 0;
             }
-            else
-            {
-                if (rb.velocity.x > REPOS)
-                {
-                    facingRight = true;
-                    Flip();
-                }
-            }
+        }
+    }
+
+    public bool FacingRight
+    {
+        get
+        {
+            return facingRight;
+        }
+        set
+        {
+            if (facingRight != value)
+                Flip();
         }
     }
 
@@ -43,7 +53,9 @@ public class TransformFlipper : MonoBehaviour
     {
         if (flipTween == null)
         {
-            flipTween = transform.DOBlendableRotateBy(Vector3.up * 180, flipDuration, RotateMode.LocalAxisAdd).SetAutoKill(false);
+            flipTween = transform.DOBlendableRotateBy(Vector3.up * 180, flipDuration, RotateMode.LocalAxisAdd)
+                .SetEase(flipEase)
+                .SetAutoKill(false);
         }
         else
         {
@@ -54,5 +66,6 @@ public class TransformFlipper : MonoBehaviour
 
             flipToggle = !flipToggle;
         }
+        facingRight = !facingRight;
     }
 }

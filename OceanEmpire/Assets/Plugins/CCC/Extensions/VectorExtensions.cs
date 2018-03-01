@@ -54,16 +54,6 @@ public static class VectorExtensions
         return v;
     }
 
-    public static Vector2 FlippedX(this Vector2 v)
-    {
-        return new Vector2(-v.x,v.y);
-    }
-
-    public static Vector2 FlippedY(this Vector2 v)
-    {
-        return new Vector2(v.x, -v.y);
-    }
-
     public static Vector2 MovedTowards(this Vector2 v, Vector2 target, float maxDistanceDelta)
     {
         return Vector2.MoveTowards(v, target, maxDistanceDelta);

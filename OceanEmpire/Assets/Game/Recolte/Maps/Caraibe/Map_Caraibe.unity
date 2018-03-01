@@ -3723,7 +3723,7 @@ MonoBehaviour:
     highestSpawn: 0
     lowestSpawn: -150
     fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: 8f56018fff48dd14baafe50d9c45b4c9, type: 2}
+  - fish: {fileID: 1365461041918330, guid: 1b2f9b83001ff014ab1603f7a682bb5c, type: 2}
     repartition:
       serializedVersion: 2
       m_Curve:

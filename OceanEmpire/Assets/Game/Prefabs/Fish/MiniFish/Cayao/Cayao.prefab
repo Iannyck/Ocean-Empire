@@ -258,10 +258,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af967a12586e2ef4e9cd54e5438864fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facingRight: 1
   rb: {fileID: 50708007439193562}
+  startingRight: 1
   flipDuration: 0.4
   flipEase: 4
+  AutoFlip: 1
 --- !u!114 &114962999608621408
 MonoBehaviour:
   m_ObjectHideFlags: 1

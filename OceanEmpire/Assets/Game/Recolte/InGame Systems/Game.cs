@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 using UnityEngine.SceneManagement;
 using CCC.DesignPattern;
 
@@ -68,10 +68,7 @@ public class Game : PublicSingleton<Game>
             else
                 onGameReady += value;
         }
-        remove
-        {
-            onGameReady -= value;
-        }
+        remove { onGameReady -= value; }
     }
 
     static public event SimpleEvent OnGameStart
@@ -83,10 +80,7 @@ public class Game : PublicSingleton<Game>
             else
                 onGameStart += value;
         }
-        remove
-        {
-            onGameStart -= value;
-        }
+        remove { onGameStart -= value; }
     }
 
     protected override void OnDestroy()
@@ -113,7 +107,7 @@ public class Game : PublicSingleton<Game>
 
         //Spawn player
         submarine = playerSpawn.SpawnPlayer();
-        submarine.movementEnable = false;
+        submarine.canAccelerate.Lock("game");
 
         //Ready up !
         ReadyGame();
@@ -123,7 +117,7 @@ public class Game : PublicSingleton<Game>
             delegate ()
             {
                 cameraMouvement.followPlayer = true;
-                submarine.movementEnable = true;
+                submarine.canAccelerate.Unlock("game");
                 playerSpawned = true;
                 ui.feedbacks.ShowGo(null);
                 StartGame();
@@ -161,8 +155,6 @@ public class Game : PublicSingleton<Game>
 
         gameStarted = true;
 
-        Debug.Log("Game started");
-
         // Init Game Start Events
         if (onGameStart != null)
         {
@@ -179,7 +171,7 @@ public class Game : PublicSingleton<Game>
         gameOver = true;
 
         cameraMouvement.followPlayer = false;
-        submarine.movementEnable = false;
+        submarine.canAccelerate.Lock("end");
         playerSpawn.AnimatePlayerExit(submarine);
 
         ui.feedbacks.ShowTimeUp(delegate ()

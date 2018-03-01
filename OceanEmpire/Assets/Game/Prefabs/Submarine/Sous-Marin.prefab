@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 114517759041208734}
   - component: {fileID: 114894073798485186}
   - component: {fileID: 114904046857194384}
+  - component: {fileID: 114541176641096520}
   m_Layer: 8
   m_Name: Sous-Marin
   m_TagString: Untagged
@@ -423,10 +424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af967a12586e2ef4e9cd54e5438864fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facingRight: 1
   rb: {fileID: 50751458136881890}
+  startingRight: 1
   flipDuration: 0.15
   flipEase: 4
+  FlipManually: 1
 --- !u!114 &114071053288964254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,8 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragDetection: {fileID: 114517759041208734}
-  inputEnable: 1
-  movementEnable: 1
+  transformFlipper: {fileID: 114050367843227536}
   accelerationRate: 0.6
   maximumSpeed: 2.5
   brakeDistance: 1.5
@@ -542,6 +543,24 @@ MonoBehaviour:
     startPosition: {x: 0, y: 0}
     lastRecordedPosition: {x: 0, y: 0}
     state: 2
+--- !u!114 &114541176641096520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1853673111068200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f12d2843e96792d4084cfd1ab67608b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformFlipper: {fileID: 114050367843227536}
+  transformTilter: {fileID: 114424785887848696}
+  rigidbody: {fileID: 50751458136881890}
+  submarineMovement: {fileID: 114071053288964254}
+  bumpedLinearDrag: 5
+  reactivVelocity: 1
+  reactivMaxDelay: 2
 --- !u!114 &114770118300138616
 MonoBehaviour:
   m_ObjectHideFlags: 1

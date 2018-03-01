@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class SubmarineMovement : MonoBehaviour
 {
-    [Header("Components"), SerializeField] private DragDetection dragDetection;
+    [Header("Components"), SerializeField] DragDetection dragDetection;
+    [SerializeField] TransformFlipper transformFlipper;
 
     [Header("Enables")]
-    public bool inputEnable = true;
-    public bool movementEnable = true;
+    public Locker canReadInput = new Locker();
+    public Locker canAccelerate = new Locker();
 
     [Header("Move Settings")]
     public float accelerationRate;
@@ -31,24 +32,25 @@ public class SubmarineMovement : MonoBehaviour
     private float realBrakeDistance = -1;
 
     private SlingshotControl slingshotControl;
+    private bool hasATarget = false;
+    private Transform tr;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        tr = transform;
         realBrakeDistance = brakeDistance;
     }
 
     void Start()
     {
-        currentTarget = new Vector2(transform.position.x, transform.position.y);
-
-        Game.OnGameStart += Init;
+        Game.OnGameStart += OnGameStart;
 
         slingshotControl = GetComponent<SlingshotControl>();
     }
 
-    void Init()
+    void OnGameStart()
     {
         MapInfo m = Game.Instance.map;
         upBound = m.mapTop;
@@ -57,7 +59,8 @@ public class SubmarineMovement : MonoBehaviour
 
     void Update()
     {
-        UpdateTargetPosition();
+        if (canReadInput)
+            ReadInput();
     }
 
     void FixedUpdate()
@@ -65,24 +68,29 @@ public class SubmarineMovement : MonoBehaviour
         if (clampPosition)
             rb.position = ClampPosition(rb.position);
 
-        if (movementEnable == false)
-        {
-            rb.velocity = Vector2.zero;
+        if (!canAccelerate)
             return;
-        }
 
-        Vector2 distance = currentTarget - (Vector2)transform.position;
-        Vector2 direction = distance.normalized;
+        var myPos = (Vector2)tr.position;
+        var targetPos = hasATarget ? currentTarget : myPos;
+
+        var v = targetPos - myPos;
+
+        // Visually flip the submarine
+        if(transformFlipper != null && v.x.Abs() > 0.1f)
+        {
+            transformFlipper.FacingRight = v.x > 0;
+        }
 
         Vector2 targetSpeed;
 
-        if (distance.magnitude < realBrakeDistance)
+        if (v.magnitude < realBrakeDistance)
         {
-            targetSpeed = distance.Capped(Vector2.one * maximumSpeed);
+            targetSpeed = v.Capped(Vector2.one * maximumSpeed);
         }
         else
         {
-            targetSpeed = direction * maximumSpeed;
+            targetSpeed = v.normalized * maximumSpeed;
         }
 
         Vector2 Speed = Vector2.Lerp(
@@ -90,7 +98,6 @@ public class SubmarineMovement : MonoBehaviour
             targetSpeed,
             FixedLerp.Fix(0.1f * accelerationRate));
         rb.velocity = Speed;
-
     }
 
     protected Vector2 ClampPosition(Vector2 pos)
@@ -100,14 +107,15 @@ public class SubmarineMovement : MonoBehaviour
         return pos;
     }
 
-    public void UpdateTargetPosition()
+    private void ReadInput()
     {
-        if (dragDetection.IsTouching && inputEnable && !dragDetection.OriginatedInDeadZone && !slingshotControl.isDragging)
+        if (dragDetection.IsTouching && !dragDetection.OriginatedInDeadZone && !slingshotControl.isDragging)
         {
             var worldPos = dragDetection.LastWorldTouchedPosition;
             float sqrDist;
             if (!dragDetection.IsWithinDeadZone(worldPos, out sqrDist))
             {
+                hasATarget = true;
                 currentTarget = ClampPosition(worldPos);
 
                 realBrakeDistance = (0.2f + sqrDist * 0.5f).Capped(brakeDistance);
@@ -115,33 +123,8 @@ public class SubmarineMovement : MonoBehaviour
         }
     }
 
-    public void PushAwayFromTarget(float duration, float speedBoost, float force)
+    public void ClearTarget()
     {
-        inputEnable = false;
-        Vector2 displacement = currentTarget - (Vector2)transform.position;
-
-        float minDistance = 1;
-        if (displacement.sqrMagnitude < (minDistance * minDistance))
-            displacement = (displacement.normalized) * minDistance;
-
-        currentTarget = (Vector2)transform.position + (displacement * -1 * force);
-
-        maximumSpeed += speedBoost;
-
-        TransformFlipper flipper = GetComponentInChildren<TransformFlipper>();
-        if (flipper != null)
-            flipper.enabled = false;
-
-        TransformTilter tilter = GetComponentInChildren<TransformTilter>();
-        if (tilter != null)
-            tilter.enabled = false;
-
-        this.DelayedCall(delegate ()
-        {
-            maximumSpeed -= speedBoost;
-            inputEnable = true;
-            flipper.enabled = true;
-            tilter.enabled = true;
-        }, duration);
+        hasATarget = false;
     }
 }
