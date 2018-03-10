@@ -4,29 +4,34 @@ using UnityEngine;
 
 namespace GPComponents
 {
-	public class Continuation : IGPComponent
-	{
-		private ContinuationFunction continuationFunction;
+    public class Continuation : IGPComponent
+    {
+        private ContinuationFunction continuationFunction;
 
-		public GPCState Eval ()
-		{
-			GPCState state = continuationFunction.Eval ();
-			return state;
-		}
+        public Continuation(ContinuationFunction function)
+        {
+            continuationFunction = function;
+        }
 
-		public void Launch ()
-		{
-			continuationFunction.Launch ();
-		}
+        public GPCState Eval()
+        {
+            GPCState state = continuationFunction.Eval();
+            return state;
+        }
 
-		public void Reset ()
-		{
-			continuationFunction.Reset ();
-		}
+        public void Launch()
+        {
+            continuationFunction.Launch();
+        }
 
-		public void Abort ()
-		{
-			continuationFunction.Abort ();
-		}
-	}
+        public void Reset()
+        {
+            continuationFunction.Reset();
+        }
+
+        public void Abort()
+        {
+            continuationFunction.Abort();
+        }
+    }
 }

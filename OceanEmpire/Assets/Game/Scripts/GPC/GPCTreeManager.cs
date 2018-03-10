@@ -34,7 +34,17 @@ public class GPCTreeManager : MonoBehaviour
 
     void CreateTree()
     {
-        tree = new ParallelAND(new FuelCheck(sceneManager));
+        // 1 - Fuel check. Fin de la partie lorsque le joueur n'a plus de fuel
+        GPC_FuelCheck fuelCheck = new GPC_FuelCheck(sceneManager);
+
+        // 2 - Periodic spawn de poisson
+        GPC_FishSpawnFunction spawnFunc = new GPC_FishSpawnFunction(sceneManager);
+        Continuation fishSpawning = new Continuation(spawnFunc);
+        
+
+        
+        // Tree build
+        tree = new ParallelAND(fuelCheck, fishSpawning);
         tree.Launch();
     }
 }

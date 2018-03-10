@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace GPComponents
 {
-    public class ParallelOR : Nary
+    public class ParallelOR : ParallelBASE
     {
         public ParallelOR(IGPComponent child) : base(child) { }
         public ParallelOR(params IGPComponent[] children) : base(children) { }
         public ParallelOR(IEnumerable<IGPComponent> children) : base(children) { }
-
-        private List<IGPComponent> ongoingChildren = new List<IGPComponent>();
 
         public override GPCState Eval()
         {
@@ -35,43 +33,6 @@ namespace GPComponents
                 return GPCState.FAILURE;
             }
             return GPCState.RUNNING;
-        }
-
-        public override void Launch()
-        {
-            foreach (IGPComponent gComponent in children)
-            {
-                gComponent.Launch();
-            }
-            RebuildOngoingChildrenList();
-        }
-
-        public override void Reset()
-        {
-            foreach (IGPComponent gComponent in children)
-            {
-                gComponent.Reset();
-            }
-            RebuildOngoingChildrenList();
-        }
-
-        public override void Abort()
-        {
-            foreach (IGPComponent gComponent in children)
-            {
-                gComponent.Abort();
-            }
-        }
-
-        private void RebuildOngoingChildrenList()
-        {
-            ongoingChildren.Clear();
-            if (ongoingChildren.Capacity != children.Count)
-                ongoingChildren.Capacity = children.Count;
-            for (int i = 0; i < children.Count; i++)
-            {
-                ongoingChildren.Add(children[i]);
-            }
         }
     }
 }

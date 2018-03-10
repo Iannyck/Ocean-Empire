@@ -21,6 +21,11 @@ namespace GPComponents
             this.children = new List<IGPComponent>(children);
         }
 
+        public List<IGPComponent> GetChildren()
+        {
+            return children;
+        }
+
 
         public abstract GPCState Eval ();
 

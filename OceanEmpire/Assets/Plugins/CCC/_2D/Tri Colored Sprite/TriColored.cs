@@ -11,9 +11,13 @@ public class TriColored : MonoBehaviour
     public const string SHADERNAME = "Ocean Empire/TriColor Sprite";
     public static string COMPLETE_MATERIAL_PATH { get { return FOLDERNAME + "/" + MATERIALNAME; } }
 
-    public Color colorR = new Color(1, 0, 0, 1);
-    public Color colorG = new Color(0, 1, 0, 1);
-    public Color colorB = new Color(0, 0, 1, 1);
+    [SerializeField] Color colorR = new Color(1, 0, 0, 1);
+    [SerializeField] Color colorG = new Color(0, 1, 0, 1);
+    [SerializeField] Color colorB = new Color(0, 0, 1, 1);
+
+    public Color ColorR { get { return colorR; } set { colorR = value; Apply(); } }
+    public Color ColorG { get { return colorG; } set { colorG = value; Apply(); } }
+    public Color ColorB { get { return colorB; } set { colorB = value; Apply(); } }
 
     private MaterialPropertyBlock propertyBlock;
     private SpriteRenderer sprRenderer;
@@ -70,7 +74,7 @@ public class TriColored : MonoBehaviour
             sprRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Apply()
+    private void Apply()
     {
         Verify();
         sprRenderer.GetPropertyBlock(propertyBlock);
@@ -84,6 +88,14 @@ public class TriColored : MonoBehaviour
         ApplyToPropertyBlock(propertyBlock, texture, colorR, colorG, colorB);
 
         sprRenderer.SetPropertyBlock(propertyBlock);
+    }
+
+    public void SetColors(Color colorR, Color colorG, Color colorB)
+    {
+        this.colorR = colorR;
+        this.colorG = colorG;
+        this.colorB = colorB;
+        Apply();
     }
 
     public static void ApplyToPropertyBlock(MaterialPropertyBlock block,

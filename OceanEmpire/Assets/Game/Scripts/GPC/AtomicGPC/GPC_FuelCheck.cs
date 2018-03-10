@@ -2,11 +2,15 @@
 
 namespace GPComponents
 {
-    public class FuelCheck : AbstractGPCBehaviour
+    public class GPC_FuelCheck : AbstractGPCBehaviour
     {
         GazTank gazTank;
+        SceneManager sceneManager;
 
-        public FuelCheck(SceneManager sceneManager) : base(sceneManager) { }
+        public GPC_FuelCheck(SceneManager sceneManager)
+        {
+            this.sceneManager = sceneManager;
+        }
 
         public override void Abort()
         {

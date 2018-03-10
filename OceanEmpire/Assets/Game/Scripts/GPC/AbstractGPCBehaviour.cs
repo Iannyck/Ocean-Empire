@@ -10,13 +10,6 @@ namespace GPComponents
 	/// </summary>
 	public abstract class AbstractGPCBehaviour : IGPComponent
     {
-        protected SceneManager sceneManager;
-
-        public AbstractGPCBehaviour(SceneManager sceneManager)
-        {
-            this.sceneManager = sceneManager;
-        }
-
         public abstract GPCState Eval ();
 
 		public abstract void Launch ();
