@@ -8,6 +8,8 @@ public class MeleeCapturable : CollisionEffect
     [HideInInspector]
     public Locker canCapture = new Locker();
 
+    public Capturable Capturable { get { return GetComponent<Capturable>(); } }
+
     protected override void OnCollisionEnterEvent(ColliderInfo info, Collision2D col)
     {
         base.OnCollisionEnterEvent(info, col);

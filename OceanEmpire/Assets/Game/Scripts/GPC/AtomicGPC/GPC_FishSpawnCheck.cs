@@ -8,29 +8,37 @@ namespace GPComponents
     {
         SceneManager sceneManager;
 
+        PendingFishGPC pendingFishGPC;
+
         public GPC_FishSpawnCheck(SceneManager sceneManager)
         {
             this.sceneManager = sceneManager;
+            pendingFishGPC = sceneManager.Read<PendingFishGPC>("pending fish gpc");
         }
 
         public override void Abort()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override GPCState Eval()
         {
-            throw new System.NotImplementedException();
+            if(pendingFishGPC != null)
+            {
+                if (pendingFishGPC.List.Count > 0)
+                    return GPCState.FAILURE;
+            }
+            return GPCState.RUNNING;
         }
 
         public override void Launch()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public override void Reset()
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }

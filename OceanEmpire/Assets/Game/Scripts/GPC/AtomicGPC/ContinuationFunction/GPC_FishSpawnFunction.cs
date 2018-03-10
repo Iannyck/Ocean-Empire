@@ -16,17 +16,45 @@ namespace GPComponents
             Rebuild();
         }
 
-        public override void Abort()
-        {
-
-        }
-
         public override GPCState Eval()
         {
             var parallState = parall.Eval();
             if (parallState == GPCState.FAILURE)
             {
-                //New spawn
+                // NEW FISH SPAWN !!
+
+                List<IGPComponent> fishGPCs = null;
+
+                // Get ongoing fish GPCs
+                if(parall.GetChildren().Count >= 2)
+                {
+                    var list = parall.GetChildren()[1] as ParallelAND;
+                    if(list != null)
+                    {
+                        fishGPCs = list.GetOngoingChildren();
+                    }
+                }
+
+                if (fishGPCs == null)
+                    fishGPCs = new List<IGPComponent>();
+
+                // Get new fish GPCs
+                var pendingGPCs = sceneManager.Read<PendingFishGPC>("pending fish gpc");
+                if(pendingGPCs != null)
+                {
+                    int newBeginIndex = fishGPCs.Count;
+                    fishGPCs.AddRange(pendingGPCs.List);
+                    pendingGPCs.List.Clear();
+
+                    for (int i = newBeginIndex; i < fishGPCs.Count; i++)
+                    {
+                        fishGPCs[i].Launch();
+                    }
+                }
+
+                // Rebuild tree
+                Rebuild(fishGPCs);
+                parall.Launch();
             }
             else if (parallState == GPCState.SUCCESS)
             {
@@ -36,21 +64,26 @@ namespace GPComponents
             return GPCState.RUNNING;
         }
 
+        public override void Abort()
+        {
+            parall.Abort();
+        }
+
         public override void Launch()
         {
-
+            parall.Launch();
         }
 
         public override void Reset()
         {
-
+            parall.Reset();
         }
 
         void Rebuild(List<IGPComponent> fishList)
         {
             var spawnChecker = new GPC_FishSpawnCheck(sceneManager);
             var paralleleFish = new ParallelAND(fishList);
-            parall = new ParallelAND(spawnChecker);
+            parall = new ParallelAND(spawnChecker, paralleleFish);
         }
         void Rebuild()
         {

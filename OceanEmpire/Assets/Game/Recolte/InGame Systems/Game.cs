@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using UnityEngine.SceneManagement;
 using CCC.DesignPattern;
 
 public delegate void SimpleEvent();
@@ -15,13 +13,13 @@ public class Game : PublicSingleton<Game>
     public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
     public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
     public static FishingReport FishingReport { get { return instance.fishingReport; } }
-    public static UnitSpawner Spawner { get { return instance.spawner; } }
+    public static UnitSpawner UnitSpawner { get { return instance.spawner; } }
     public static GameCamera GameCamera { get { return instance.gameCamera; } }
     public static Recolte_UI Recolte_UI { get { return instance.ui; } }
-
     public static SubmarineMovement SubmarineMouvement { get { return instance.submarine; } }
     public static GameObject Submarine { get { return instance.submarine.gameObject; } }
     public static SubmarinParts SubmarinParts { get { return (instance.submarine == null ? null : instance.submarine.gameObject.GetComponent<SubmarinParts>()); } }
+    public static GPComponents.SceneManager SceneManager { get { return instance.sceneManager; } }
 
     [SerializeField]
     private UnitSpawner spawner;
@@ -35,6 +33,8 @@ public class Game : PublicSingleton<Game>
     private FishSpawner fishSpawner;
     [SerializeField]
     private GameCamera gameCamera;
+    [SerializeField]
+    private GPComponents.SceneManager sceneManager;
 
     [HideInInspector]
     public SubmarineMovement submarine;
@@ -44,6 +44,8 @@ public class Game : PublicSingleton<Game>
     public MapInfo map;
     [HideInInspector]
     public Recolte_UI ui;
+    [HideInInspector]
+    public PendingFishGPC PendingFishGPC { get; private set; }
 
     // GAME STATE
     [HideInInspector]
@@ -58,6 +60,15 @@ public class Game : PublicSingleton<Game>
 
     [HideInInspector]
     public Locker gameRunning = new Locker();
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        PendingFishGPC = new PendingFishGPC();
+    }
+
 
     static public event SimpleEvent OnGameReady
     {

@@ -25,6 +25,10 @@ namespace GPComponents
                     return null;
                 case "player":
                     return Game.Submarine;
+                case "unit spawner":
+                    return Game.UnitSpawner;
+                case "pending fish gpc":
+                    return Game.Instance.PendingFishGPC;
             }
         }
         public override T Read<T>(string tag)

@@ -36,7 +36,7 @@ public class PlayerSpawn : MonoBehaviour
         if (submarinePrefab == null)
             return null;
 
-        return Game.Spawner.Spawn(submarinePrefab, position);
+        return Game.UnitSpawner.Spawn(submarinePrefab, position);
     }
 
     public SubmarineMovement SpawnPlayer()

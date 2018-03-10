@@ -56,7 +56,7 @@ public class FishSpawner : MonoBehaviour
 
         StartPalierSystem();
     }
-    
+
     void StartPalierSystem()
     {
         listPaliers = new List<FishPalier>();
@@ -236,6 +236,23 @@ public class FishSpawner : MonoBehaviour
 
     private void DrawAtLotteryAndSpawn(Vector2 spawnPos)
     {
-        unitSpawner.Spawn(map.DrawAtFishLottery(spawnPos.y), spawnPos);
+        var fish = map.DrawAtFishLottery(spawnPos.y);
+        if (fish == null)
+            return;
+
+        PendingFishGPC pending = Game.Instance.PendingFishGPC;
+
+
+
+        // Melee capture
+        var meleeCapturable = fish.GetComponent<MeleeCapturable>();
+        if (meleeCapturable != null)
+        {
+            pending.AddPendingFishGPC(new GPComponents.GPC_MeleeCapture(Game.SceneManager, meleeCapturable, spawnPos));
+            return;
+        }
+
+        // Non eligible for a GPC
+        unitSpawner.Spawn(fish, spawnPos);
     }
 }

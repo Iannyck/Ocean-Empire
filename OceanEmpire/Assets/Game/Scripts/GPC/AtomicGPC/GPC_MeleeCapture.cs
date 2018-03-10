@@ -4,33 +4,37 @@ using UnityEngine;
 
 namespace GPComponents
 {
-    public class GPC_MeleeCapture : AbstractGPCBehaviour
+    public class GPC_MeleeCapture : GPC_CapturableBased
     {
-        private readonly SceneManager sceneManager;
+        MeleeCapturable meleeCapturable;
 
-        public GPC_MeleeCapture(SceneManager sceneManager)
+        public GPC_MeleeCapture(SceneManager sceneManager, MeleeCapturable unitPrefab, Vector2 referencePosition) :
+            base(sceneManager, unitPrefab.Capturable, referencePosition)
+        { }
+        public GPC_MeleeCapture(SceneManager sceneManager, MeleeCapturable unit) :
+            base(sceneManager, unit.Capturable)
+        { }
+
+
+        protected override void OnFailure()
         {
-            this.sceneManager = sceneManager;
+            base.OnFailure();
+
+            Debug.Log("on fail");
         }
 
-        public override void Abort()
+        protected override void OnSuccess()
         {
-            throw new System.NotImplementedException();
+            base.OnSuccess();
+
+            Debug.Log("on succeed");
         }
 
-        public override GPCState Eval()
+        protected override void OnUnitSpawned()
         {
-            throw new System.NotImplementedException();
-        }
+            base.OnUnitSpawned();
 
-        public override void Launch()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Reset()
-        {
-            throw new System.NotImplementedException();
+            meleeCapturable = unit.GetComponent<MeleeCapturable>();
         }
     }
 }
