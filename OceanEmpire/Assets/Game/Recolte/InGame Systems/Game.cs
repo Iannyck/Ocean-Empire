@@ -15,7 +15,7 @@ public class Game : PublicSingleton<Game>
     public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
     public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
     public static FishingReport FishingReport { get { return instance.fishingReport; } }
-    public static Spawner Spawner { get { return instance.spawner; } }
+    public static UnitSpawner Spawner { get { return instance.spawner; } }
     public static GameCamera GameCamera { get { return instance.gameCamera; } }
     public static Recolte_UI Recolte_UI { get { return instance.ui; } }
 
@@ -24,7 +24,7 @@ public class Game : PublicSingleton<Game>
     public static SubmarinParts SubmarinParts { get { return (instance.submarine == null ? null : instance.submarine.gameObject.GetComponent<SubmarinParts>()); } }
 
     [SerializeField]
-    private Spawner spawner;
+    private UnitSpawner spawner;
     [SerializeField]
     private CameraMouvement cameraMouvement;
     [SerializeField]

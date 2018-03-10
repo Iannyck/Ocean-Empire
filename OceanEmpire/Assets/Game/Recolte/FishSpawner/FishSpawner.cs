@@ -7,7 +7,7 @@ public class FishSpawner : MonoBehaviour
 
     bool Active = false;
 
-    public FishPool fishPool;
+    [SerializeField] UnitSpawner unitSpawner;
 
     public float maxFishPerUnit = 1.5f;
     public float palierHeigth = 1;
@@ -21,14 +21,13 @@ public class FishSpawner : MonoBehaviour
     private List<FishPalier> listPaliers;
 
     private float timeCounter;
-    private int fishCount = 0;
-    struct palierRange
+    struct PalierRange
     {
         public int start;
         public int finish;
     }
 
-    private palierRange lastActivePaliers;
+    private PalierRange lastActivePaliers;
 
     // Use this for initialization
     private SubmarineMovement submarine;
@@ -51,15 +50,24 @@ public class FishSpawner : MonoBehaviour
     {
         submarine = Game.Instance.submarine;
         map = Game.Instance.map;
-        Game.OnGameStart -= Init;
         cam = Game.GameCamera;
 
         FishPalier.repopulationCycle = 120;
 
         StartPalierSystem();
-        return;
     }
+    
+    void StartPalierSystem()
+    {
+        listPaliers = new List<FishPalier>();
+        SetPalierFishLimit();
 
+        PalierRange lastActivePaliers = new PalierRange
+        {
+            start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera),
+            finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera)
+        };
+    }
 
     public void SetPalierFishLimit()
     {
@@ -79,15 +87,6 @@ public class FishSpawner : MonoBehaviour
     }
 
 
-    void StartPalierSystem()
-    {
-        listPaliers = new List<FishPalier>();
-        SetPalierFishLimit();
-
-        palierRange lastActivePaliers = new palierRange();
-        lastActivePaliers.start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera);
-        lastActivePaliers.finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera);
-    }
 
 
 
@@ -100,7 +99,7 @@ public class FishSpawner : MonoBehaviour
     {
         ypos = ypos.Raised(map.mapBottom);
         ypos = ypos.Capped(map.mapTop);
-        int palier = (int)Mathf.Round(((map.mapTop - ypos) + (palierHeigth / 2)) / palierHeigth) -1 ;
+        int palier = (int)Mathf.Round(((map.mapTop - ypos) + (palierHeigth / 2)) / palierHeigth) - 1;
         return palier;
     }
 
@@ -122,10 +121,11 @@ public class FishSpawner : MonoBehaviour
 
     public void UpdatePalier()
     {
-        palierRange newPalier = new palierRange();
-
-        newPalier.start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera);
-        newPalier.finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera);
+        PalierRange newPalier = new PalierRange
+        {
+            start = GetClosestPalier(cam.Top + palierHeigth * palierSpawnedOutsideCamera),
+            finish = GetClosestPalier(cam.Bottom - palierHeigth * palierSpawnedOutsideCamera)
+        };
 
         //Spawn
         while (newPalier.start < lastActivePaliers.start)
@@ -188,17 +188,8 @@ public class FishSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnFish(int palier)
-    {
-
-    }
-
-
-
     public void SpawnPalierFish(int palierIte)
     {
-        fishCount += 1;
-
         Vector3 spawnPos = Vector3.zero;
         float nb1 = Random.Range(-0.5f, 0.5f);
         float nb2 = Random.Range(-0.5f, 0.5f);
@@ -215,7 +206,6 @@ public class FishSpawner : MonoBehaviour
 
     void SpawnSideFish()
     {
-        fishCount += 1;
         if (lastSpawn <= 0)
         {
             float spawnAreaHeight = cam.Height;
@@ -246,20 +236,6 @@ public class FishSpawner : MonoBehaviour
 
     private void DrawAtLotteryAndSpawn(Vector2 spawnPos)
     {
-        GameObject fishPrefab = map.DrawAtFishLottery(spawnPos.y);
-        if (fishPrefab == null)
-            return;
-
-        var poolableUnit = fishPrefab.GetComponent<PoolableUnit>();
-        if (fishPool != null && poolableUnit != null)
-        {
-            //Poolable Unit
-            fishPool.PlaceUnit(poolableUnit, spawnPos);
-        }
-        else
-        {
-            //Non-Poolable Unit
-            Game.Spawner.Spawn(fishPrefab, spawnPos);
-        }
+        unitSpawner.Spawn(map.DrawAtFishLottery(spawnPos.y), spawnPos);
     }
 }

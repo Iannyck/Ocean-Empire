@@ -7,15 +7,13 @@ namespace GPComponents
     public class GPC_FishSpawnFunction : ContinuationFunction
     {
         private readonly SceneManager sceneManager;
-        private ParallelAND parallelFish;
-        private GPC_FishSpawnCheck spawnCheck;
+        private ParallelAND parall;
 
-        public GPC_FishSpawnFunction( SceneManager sceneManager)
+        public GPC_FishSpawnFunction(SceneManager sceneManager)
         {
             this.sceneManager = sceneManager;
-
-            parallelFish = new ParallelAND();
-            spawnCheck = new GPC_FishSpawnCheck(sceneManager);
+            
+            Rebuild();
         }
 
         public override void Abort()
@@ -25,6 +23,16 @@ namespace GPComponents
 
         public override GPCState Eval()
         {
+            var parallState = parall.Eval();
+            if (parallState == GPCState.FAILURE)
+            {
+                //New spawn
+            }
+            else if (parallState == GPCState.SUCCESS)
+            {
+                return GPCState.SUCCESS;
+            }
+
             return GPCState.RUNNING;
         }
 
@@ -36,6 +44,18 @@ namespace GPComponents
         public override void Reset()
         {
 
+        }
+
+        void Rebuild(List<IGPComponent> fishList)
+        {
+            var spawnChecker = new GPC_FishSpawnCheck(sceneManager);
+            var paralleleFish = new ParallelAND(fishList);
+            parall = new ParallelAND(spawnChecker);
+        }
+        void Rebuild()
+        {
+            var spawnChecker = new GPC_FishSpawnCheck(sceneManager);
+            parall = new ParallelAND(spawnChecker);
         }
     }
 }

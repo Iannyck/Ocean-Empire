@@ -232,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 601328786}
   - component: {fileID: 601328787}
+  - component: {fileID: 601328788}
   m_Layer: 0
   m_Name: Units Container
   m_TagString: Untagged
@@ -263,6 +264,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e71627dac134a40bd8ecd518fc0d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitPool: {fileID: 601328788}
+--- !u!114 &601328788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 601328785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07852fdd61cd5a34a9be83b7a1c4c737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnContainer: {fileID: 0}
 --- !u!1 &853337482
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +347,6 @@ GameObject:
   - component: {fileID: 1311441147}
   - component: {fileID: 1311441152}
   - component: {fileID: 1311441153}
-  - component: {fileID: 1311441154}
   - component: {fileID: 1311441156}
   - component: {fileID: 1311441155}
   m_Layer: 0
@@ -354,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08cb89af05689f41a9e39ba8ddbc699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishPool: {fileID: 1311441154}
+  unitSpawner: {fileID: 601328787}
   maxFishPerUnit: 0.66
   palierHeigth: 5
   FishReplenishTime: 100
@@ -446,18 +459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: Map_Caraibe
---- !u!114 &1311441154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1311441146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07852fdd61cd5a34a9be83b7a1c4c737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnContainer: {fileID: 601328786}
 --- !u!114 &1311441155
 MonoBehaviour:
   m_ObjectHideFlags: 0
