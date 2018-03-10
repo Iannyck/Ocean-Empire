@@ -20,14 +20,14 @@ namespace GPComponents
         {
             base.OnFailure();
 
-            Debug.Log("on fail");
+            Debug.Log("Failed melee capture");
         }
 
         protected override void OnSuccess()
         {
             base.OnSuccess();
 
-            Debug.Log("on succeed");
+            Debug.Log("Succeeded melee capture");
         }
 
         protected override void OnUnitSpawned()

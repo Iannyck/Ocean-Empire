@@ -13,13 +13,13 @@ namespace GPComponents
 		private int iterations;
 		private int count;
 
-		public Repeat (int iterations)
+		public Repeat (IGPComponent child, int iterations) : base(child)
 		{
 			this.iterations = iterations;
 			count = 0;
 		}
 
-		public override GPCState Eval ()
+        public override GPCState Eval ()
 		{
 			
 			GPCState state = child.Eval ();

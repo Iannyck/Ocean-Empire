@@ -57,11 +57,13 @@ namespace GPComponents
 
         protected virtual void OnDeath(BaseKillableUnit killableUnit)
         {
-            State = CapturableState.KILLED;
+            if (State == CapturableState.ONGOING)
+                State = CapturableState.KILLED;
         }
         protected virtual void OnCapture(Capturable capturable)
         {
-            State = CapturableState.CAPTURED;
+            if (State == CapturableState.ONGOING)
+                State = CapturableState.CAPTURED;
         }
 
         protected virtual void OnFailure() { }

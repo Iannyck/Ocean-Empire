@@ -42,15 +42,31 @@ namespace GPComponents
                 var pendingGPCs = sceneManager.Read<PendingFishGPC>("pending fish gpc");
                 if(pendingGPCs != null)
                 {
+                    var pendingList = pendingGPCs.List;
                     int newBeginIndex = fishGPCs.Count;
-                    fishGPCs.AddRange(pendingGPCs.List);
-                    pendingGPCs.List.Clear();
 
+                    // Update capacity
+                    if(fishGPCs.Capacity < fishGPCs.Count + pendingList.Count)
+                    {
+                        fishGPCs.Capacity = fishGPCs.Count + pendingList.Count;
+                    }
+                    
+                    // Add new GPCs
+                    for (int i = 0; i < pendingList.Count; i++)
+                    {
+                        fishGPCs.Add(new Ignore(pendingList[i]));
+                    }
+
+                    // Clear pending list
+                    pendingList.Clear();
+                    
+                    // Launch new GPCs
                     for (int i = newBeginIndex; i < fishGPCs.Count; i++)
                     {
                         fishGPCs[i].Launch();
                     }
                 }
+                Debug.Log("rebuild");
 
                 // Rebuild tree
                 Rebuild(fishGPCs);

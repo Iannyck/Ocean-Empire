@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Capturable)), DisallowMultipleComponent]
 public class HarpoonCapturable : HarpoonBlocker
 {
+    public Capturable Capturable { get { return GetComponent<Capturable>(); } }
+
     public Locker canBeHarpooned = new Locker();
 
     public override void HarpoonHit()

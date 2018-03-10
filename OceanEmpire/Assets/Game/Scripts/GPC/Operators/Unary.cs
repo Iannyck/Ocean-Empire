@@ -8,7 +8,12 @@ namespace GPComponents
 	{
 		protected IGPComponent child;
 
-		public abstract GPCState Eval ();
+        protected Unary(IGPComponent child)
+        {
+            this.child = child;
+        }
+
+        public abstract GPCState Eval ();
 
 		public abstract void Launch ();
 
