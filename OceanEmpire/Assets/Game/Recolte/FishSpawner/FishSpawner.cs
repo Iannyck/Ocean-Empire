@@ -90,9 +90,9 @@ public class FishSpawner : MonoBehaviour
 
 
 
-    public float GetPalierPosition(int iterator)
+    public float GetPalierPosition(int index)
     {
-        return map.mapTop - (iterator + 0.5f) * palierHeigth;
+        return map.mapTop - (index + 0.5f) * palierHeigth;
     }
 
     public int GetClosestPalier(float ypos)
