@@ -34,7 +34,7 @@ public class WanderBrain : Brain
             brainFreeze = false,
             brainFreezeTimer = Random.Range(brainFreezeFrequence.x, brainFreezeFrequence.y),
             brainFreezeRemainingDuration = 0,
-            targetPosition = rb.position
+            targetPosition = component.transform.position
         };
 
         return data;
@@ -46,14 +46,13 @@ public class WanderBrain : Brain
         Data data = (Data)perInstanceData;
 
         //Update l'etat du brain freeze
-        UpdateBrainFreeze(data, Time.deltaTime);
+        UpdateBrainFreeze(rb, data, Time.deltaTime);
 
         //Variables
         Vector2 meToTargetPos = data.targetPosition - rb.position;
         float distSQR = meToTargetPos.sqrMagnitude;
 
-        //Petit switch de comportement dépendemment de l'état.
-        //Pas la peine de faire une machine a etat fini développé. (ça risquerait d'être plus lourd pour rien)
+        // Get new wander position if we're close
         if (distSQR < data.changeDestIfCloserThanSQR)
         {
             data.targetPosition = GetWanderPosition(rb, data);
@@ -70,7 +69,7 @@ public class WanderBrain : Brain
         rb.velocity = rb.velocity.MovedTowards(targetSpeed, Time.deltaTime * acceleration);
     }
 
-    void UpdateBrainFreeze(Data data, float deltaTime)
+    void UpdateBrainFreeze(Rigidbody2D rb, Data data, float deltaTime)
     {
         if (canBrainFreeze)
         {
@@ -82,6 +81,8 @@ public class WanderBrain : Brain
                     data.brainFreezeRemainingDuration -= deltaTime;
                 }
                 data.brainFreeze = data.brainFreezeRemainingDuration > 0;
+                if (!data.brainFreeze)
+                    data.targetPosition = rb.position;
             }
             else
             {
@@ -109,6 +110,7 @@ public class WanderBrain : Brain
             v = -v;
 
         Vector2 pos = v + rb.position;
+        //Debug.Log("ID: " + rb.GetInstanceID() + "    rb: " + rb.position + "  v: " + v + "  =  " + pos);
         if (MapInfo.IsOutOfBounds(pos))
         {
             // Flip direction

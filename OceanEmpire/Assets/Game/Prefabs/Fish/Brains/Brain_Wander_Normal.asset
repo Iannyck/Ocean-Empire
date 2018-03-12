@@ -14,8 +14,8 @@ MonoBehaviour:
   maxSpeed: 0.75
   acceleration: 1.5
   canBrainFreeze: 1
-  brainFreezeFrequence: {x: 4, y: 8}
+  brainFreezeFrequence: {x: 3, y: 9}
   brainFreezeDuration: {x: 1.5, y: 3}
   changeDestIfCloserThan: 0.25
   angleRange: {x: -45, y: 45}
-  distanceRange: {x: 2.5, y: 5}
+  distanceRange: {x: 1, y: 3}
