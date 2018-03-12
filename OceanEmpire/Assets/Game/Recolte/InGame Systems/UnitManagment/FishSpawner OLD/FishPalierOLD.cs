@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishPalier
+public class FishPalierOLD
 {
     public event SimpleEvent palierDespawnEvent;
     public bool isActive = false;

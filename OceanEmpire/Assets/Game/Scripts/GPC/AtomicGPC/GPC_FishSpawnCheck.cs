@@ -6,13 +6,10 @@ namespace GPComponents
 {
     public class GPC_FishSpawnCheck : AbstractGPCBehaviour
     {
-        SceneManager sceneManager;
-
         PendingFishGPC pendingFishGPC;
 
         public GPC_FishSpawnCheck(SceneManager sceneManager)
         {
-            this.sceneManager = sceneManager;
             pendingFishGPC = sceneManager.Read<PendingFishGPC>("pending fish gpc");
         }
 

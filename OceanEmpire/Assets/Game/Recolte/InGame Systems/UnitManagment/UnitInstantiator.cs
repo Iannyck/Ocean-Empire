@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSpawner : MonoBehaviour
+public class UnitInstantiator : MonoBehaviour
 {
     [SerializeField] UnitPool unitPool;
 

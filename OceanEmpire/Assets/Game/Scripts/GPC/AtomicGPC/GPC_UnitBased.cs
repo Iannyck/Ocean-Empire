@@ -48,7 +48,7 @@ namespace GPComponents
                 }
                 else
                 {
-                    var spawner = sceneManager.Read<UnitSpawner>("unit spawner");
+                    var spawner = sceneManager.Read<UnitInstantiator>("unit spawner");
                     unit = spawner.Spawn(unitReference, referencePosition);
                     OnUnitSpawned();
                 }

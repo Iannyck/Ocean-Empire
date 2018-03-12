@@ -153,8 +153,8 @@ public class FishPopulation : MonoPersistent
     public void DebugInGameExercice()
     {
         UpdateOnExercise(50);
-        if (Game.Instance != null)
-            if (Game.FishSpawner != null)
-                Game.FishSpawner.SetPalierFishLimit();
+        //if (Game.Instance != null)
+        //    if (Game.FishSpawner != null)
+        //        Game.FishSpawner.SetPalierFishLimit();
     }
 }

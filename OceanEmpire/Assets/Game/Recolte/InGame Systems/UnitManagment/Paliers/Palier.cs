@@ -2,18 +2,22 @@
 using UnityEngine;
 
 [System.Serializable]
-public class PalierContent
+public class Palier
 {
-    public int test = -1;
     public int Index { get; private set; }
-    public List<PalierSubscriber> Subscribers { get; private set; }
+    [SerializeField] private List<PalierSubscriber> subscribers;
+    public List<PalierSubscriber> Subscribers { get { return subscribers; } private set { subscribers = value; } }
     public bool IsActive { get; private set; }
+    public OneWayBool HasBeenSeen;
+    public int FishToRespawn { get; set; }
 
-    public PalierContent(int index)
+    public Palier(int index)
     {
-        test = index;
+        IsActive = false;
+        HasBeenSeen = new OneWayBool(false);
         Index = index;
         Subscribers = new List<PalierSubscriber>();
+        FishToRespawn = 0;
     }
 
     public void Subscribe(PalierSubscriber subscriber)
@@ -29,7 +33,6 @@ public class PalierContent
             return;
         }
 
-
         Subscribers.Add(subscriber);
     }
 
@@ -40,11 +43,19 @@ public class PalierContent
 
     public void Activate()
     {
-
+        IsActive = true;
+        for (int i = Subscribers.Count - 1; i >= 0; i--)
+        {
+            Subscribers[i].OnPalierActivate();
+        }
     }
 
     public void Deactivate()
     {
-
+        IsActive = false;
+        for (int i = Subscribers.Count - 1; i >= 0; i--)
+        {
+            Subscribers[i].OnPalierDeactivate();
+        }
     }
 }

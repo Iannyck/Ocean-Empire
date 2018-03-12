@@ -11,40 +11,30 @@ public class Game : PublicSingleton<Game>
     public static CameraMouvement CameraMouvement { get { return instance.cameraMouvement; } }
     public static PlayerStats PlayerStats { get { return instance.playerStats; } }
     public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
-    public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
     public static FishingReport FishingReport { get { return instance.fishingReport; } }
-    public static UnitSpawner UnitSpawner { get { return instance.spawner; } }
+    public static UnitInstantiator UnitInstantiator { get { return instance.instantiator; } }
     public static GameCamera GameCamera { get { return instance.gameCamera; } }
     public static Recolte_UI Recolte_UI { get { return instance.ui; } }
     public static SubmarineMovement SubmarineMouvement { get { return instance.submarine; } }
     public static GameObject Submarine { get { return instance.submarine.gameObject; } }
     public static SubmarinParts SubmarinParts { get { return (instance.submarine == null ? null : instance.submarine.gameObject.GetComponent<SubmarinParts>()); } }
     public static GPComponents.SceneManager SceneManager { get { return instance.sceneManager; } }
+    public static PalierManager PalierManager { get { return instance.palierManager; } }
+    public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
 
-    [SerializeField]
-    private UnitSpawner spawner;
-    [SerializeField]
-    private CameraMouvement cameraMouvement;
-    [SerializeField]
-    private PlayerStats playerStats;
-    [SerializeField]
-    private PlayerSpawn playerSpawn;
-    [SerializeField]
-    private FishSpawner fishSpawner;
-    [SerializeField]
-    private GameCamera gameCamera;
-    [SerializeField]
-    private GPComponents.SceneManager sceneManager;
+    [SerializeField] private UnitInstantiator instantiator;
+    [SerializeField] private CameraMouvement cameraMouvement;
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private PlayerSpawn playerSpawn;
+    [SerializeField] private GameCamera gameCamera;
+    [SerializeField] private GPComponents.SceneManager sceneManager;
+    [SerializeField] private PalierManager palierManager;
+    [SerializeField] private FishSpawner fishSpawner;
 
-    [HideInInspector]
-    public SubmarineMovement submarine;
-    [HideInInspector]
-    public FishingReport fishingReport;
-    [HideInInspector]
-    public MapInfo map;
-    [HideInInspector]
-    public Recolte_UI ui;
-    [HideInInspector]
+    [HideInInspector] public SubmarineMovement submarine;
+    [HideInInspector] public FishingReport fishingReport;
+    [HideInInspector] public MapInfo map;
+    [HideInInspector] public Recolte_UI ui;
     public PendingFishGPC PendingFishGPC { get; private set; }
 
     // GAME STATE

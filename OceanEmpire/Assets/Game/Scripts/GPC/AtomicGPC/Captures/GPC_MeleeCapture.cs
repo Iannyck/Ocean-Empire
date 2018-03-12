@@ -6,7 +6,7 @@ namespace GPComponents
 {
     public class GPC_MeleeCapture : GPC_CapturableBased
     {
-        MeleeCapturable meleeCapturable;
+        //MeleeCapturable meleeCapturable;
 
         public GPC_MeleeCapture(SceneManager sceneManager, MeleeCapturable unitPrefab, Vector2 referencePosition) :
             base(sceneManager, unitPrefab.Capturable, referencePosition)
@@ -20,21 +20,21 @@ namespace GPComponents
         {
             base.OnFailure();
 
-            Debug.Log("Failed melee capture");
+            //Debug.Log("Failed melee capture");
         }
 
         protected override void OnSuccess()
         {
             base.OnSuccess();
 
-            Debug.Log("Succeeded melee capture");
+            //Debug.Log("Succeeded melee capture");
         }
 
         protected override void OnUnitSpawned()
         {
             base.OnUnitSpawned();
 
-            meleeCapturable = unit.GetComponent<MeleeCapturable>();
+            //meleeCapturable = unit.GetComponent<MeleeCapturable>();
         }
     }
 }

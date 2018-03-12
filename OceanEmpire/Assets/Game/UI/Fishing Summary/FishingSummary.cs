@@ -47,7 +47,7 @@ public class FishingSummary : MonoBehaviour
         float CapturedValue = 0;
         foreach (KeyValuePair<FishDescription, int> entry in fishingReport.CapturedFish)
         {
-            CapturedValue += entry.Value * entry.Key.populationValue;
+            CapturedValue += entry.Value;// * entry.Key.populationValue;
         }
         
         if (widgetFishPop != null)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestScript_Fred : MonoBehaviour
 {
     public PalierPlans palierManager;
-    public PalierContentManager contentManager;
+    public PalierManager contentManager;
     public Camera cam;
 
 
@@ -16,6 +16,7 @@ public class TestScript_Fred : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
+        contentManager.OnPalierActivated += (x) => print(x.Index + " : " + x.IsActive);
     }
 
     private void Update()
@@ -23,7 +24,7 @@ public class TestScript_Fred : MonoBehaviour
         Vector3 point = cam.ScreenToWorldPoint(Input.mousePosition);
         int palierIndex = palierManager.GetClosestPalier(point.y);
         Debug.DrawLine(point, Vector3.up * palierManager.GetPalierCenter(palierIndex));
-
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
             contentManager.CenterPalier--;
@@ -40,5 +41,7 @@ public class TestScript_Fred : MonoBehaviour
         {
             contentManager.CenterPalier += 5;
         }
+
+        contentManager.CenterPalier = contentManager.CenterPalier;
     }
 }

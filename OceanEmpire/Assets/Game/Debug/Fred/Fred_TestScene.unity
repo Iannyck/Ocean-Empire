@@ -162,7 +162,7 @@ MonoBehaviour:
   _palierThickness: 1.5
   _top: 0
   drawPaliers: 1
-  drawCount: 7
+  drawCount: 30
 --- !u!20 &313016523
 Camera:
   m_ObjectHideFlags: 0
@@ -237,9 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d512a49eda568b4f8398fb121cc4284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activePalierRange: 5
   _plans: {fileID: 313016522}
+  _activePalierRange: 5
   Contents: []
+  _centerPalier: 0
 --- !u!1001 &2054325732
 Prefab:
   m_ObjectHideFlags: 0

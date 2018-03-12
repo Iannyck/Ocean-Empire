@@ -66,7 +66,6 @@ namespace GPComponents
                         fishGPCs[i].Launch();
                     }
                 }
-                Debug.Log("rebuild");
 
                 // Rebuild tree
                 Rebuild(fishGPCs);

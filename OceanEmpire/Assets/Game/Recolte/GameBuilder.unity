@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 601328787}
   - component: {fileID: 601328788}
   m_Layer: 0
-  m_Name: Units Container
+  m_Name: Units Instantiator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,7 +343,6 @@ GameObject:
   - component: {fileID: 1311441149}
   - component: {fileID: 1311441151}
   - component: {fileID: 1311441150}
-  - component: {fileID: 1311441147}
   - component: {fileID: 1311441152}
   - component: {fileID: 1311441153}
   - component: {fileID: 1311441156}
@@ -355,22 +354,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1311441147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1311441146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f08cb89af05689f41a9e39ba8ddbc699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitSpawner: {fileID: 601328787}
-  maxFishPerUnit: 0.66
-  palierHeigth: 5
-  FishReplenishTime: 100
-  timeBetweenSideSpawn: 4
 --- !u!4 &1311441148
 Transform:
   m_ObjectHideFlags: 0
@@ -395,13 +378,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0770be719ccd4914989f6f69f8403843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 601328787}
+  instantiator: {fileID: 601328787}
   cameraMouvement: {fileID: 1699934080}
   playerStats: {fileID: 1311441150}
   playerSpawn: {fileID: 1311441151}
-  fishSpawner: {fileID: 1311441147}
   gameCamera: {fileID: 1699934081}
   sceneManager: {fileID: 1311441156}
+  palierManager: {fileID: 1532139182}
+  fishSpawner: {fileID: 1532139186}
   submarine: {fileID: 0}
   map: {fileID: 0}
   ui: {fileID: 0}
@@ -483,6 +467,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5ff264843057f49b4c8bd4e5a7cd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1532139181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1532139184}
+  - component: {fileID: 1532139183}
+  - component: {fileID: 1532139182}
+  - component: {fileID: 1532139185}
+  - component: {fileID: 1532139186}
+  m_Layer: 0
+  m_Name: Fish Spawning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532139182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532139181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d512a49eda568b4f8398fb121cc4284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plans: {fileID: 1532139183}
+  activePalierRange: 3
+  inactivePalierExtraRange: 1
+  Paliers: []
+  centerPalier: 0
+--- !u!114 &1532139183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532139181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9b46b8e452fa14e8f95c067b0de3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _palierThickness: 4
+  _top: 0
+  drawPaliers: 1
+  drawCount: 20
+--- !u!4 &1532139184
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532139181}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1532139185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532139181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bf5c895caf1834fb82dec7f08bc05f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  palierManager: {fileID: 1532139182}
+  FollowTarget: {fileID: 1699934079}
+  VerticalOffset: 0
+--- !u!114 &1532139186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532139181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306c375dd6deae64d8cb540de3a04a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiator: {fileID: 601328787}
+  palierManager: {fileID: 1532139182}
+  fishPerPalier: 2
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0

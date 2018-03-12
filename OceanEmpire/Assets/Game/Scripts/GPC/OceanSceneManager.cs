@@ -26,7 +26,7 @@ namespace GPComponents
                 case "player":
                     return Game.Submarine;
                 case "unit spawner":
-                    return Game.UnitSpawner;
+                    return Game.UnitInstantiator;
                 case "pending fish gpc":
                     return Game.Instance.PendingFishGPC;
             }
