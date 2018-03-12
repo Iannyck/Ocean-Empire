@@ -125,8 +125,6 @@ GameObject:
   - component: {fileID: 313016521}
   - component: {fileID: 313016520}
   - component: {fileID: 313016525}
-  - component: {fileID: 313016522}
-  - component: {fileID: 313016526}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -148,21 +146,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 313016519}
   m_Enabled: 1
---- !u!114 &313016522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 313016519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a9b46b8e452fa14e8f95c067b0de3d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _palierThickness: 1.5
-  _top: 0
-  drawPaliers: 1
-  drawCount: 30
 --- !u!20 &313016523
 Camera:
   m_ObjectHideFlags: 0
@@ -223,24 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a75af67d201f004c8673c5864cd7a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  palierManager: {fileID: 313016522}
-  contentManager: {fileID: 313016526}
-  cam: {fileID: 313016523}
---- !u!114 &313016526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 313016519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d512a49eda568b4f8398fb121cc4284, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _plans: {fileID: 313016522}
-  _activePalierRange: 5
-  Contents: []
-  _centerPalier: 0
 --- !u!1001 &2054325732
 Prefab:
   m_ObjectHideFlags: 0
