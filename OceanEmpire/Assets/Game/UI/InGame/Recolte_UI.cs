@@ -11,11 +11,4 @@ public class Recolte_UI : MonoBehaviour
     public GazSlider gazSlider;
     public OptionsButton optionButton;
     public GameObject hider;
-    
-    public void Quit()
-    {
-        Game.Instance.EndGame();
-    }
-
-
 }

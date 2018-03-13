@@ -617,7 +617,7 @@ MonoBehaviour:
   useDefaults: 1
   prebuiltThruster: {fileID: 11400000, guid: 659c8e28473ef244cb011e8de3599362, type: 2}
   prebuiltHarpoon: {fileID: 11400000, guid: 5c6cd1236f8b0814e8c34cd0489a71a3, type: 2}
-  prebuiltGazTank: {fileID: 11400000, guid: 5cdff2bb70ef7f24e95eddc35d64dcdb, type: 2}
+  prebuiltGazTank: {fileID: 11400000, guid: 113be89a372d5f14da647d92d8c81c59, type: 2}
 --- !u!114 &114916000236723280
 MonoBehaviour:
   m_ObjectHideFlags: 1

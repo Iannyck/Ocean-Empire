@@ -1,4 +1,4 @@
- 
+
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +7,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 
-public class InGameOptions : WindowAnimation, SceneMessage
+public class InGameOptions : WindowAnimation
 {
     public const string SCENENAME = "InGameOptions";
 
     private bool isQuitting = false;
-
-    private GameBuilder gameBuilder;
 
     public void Confirm()
     {
@@ -28,15 +26,20 @@ public class InGameOptions : WindowAnimation, SceneMessage
     public void RestartGame()
     {
         if (Game.Instance != null)
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME,this,false);
+        {
+            // NB: On fait ça pour prévenir la game de finir d'une toute autre façon
+            Game.Instance.gameOver = true;
+            UnlockTime();
+            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(Game.Instance.map.gameObject.scene.name), true);
+        }
     }
 
     public void BackToShack()
     {
-        LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(Game.FishingReport));
+        Exit(() => Game.Instance.EndGame());
     }
 
-    public void Exit()
+    public void Exit(Action onComplete = null)
     {
         if (isQuitting) return;
 
@@ -49,7 +52,9 @@ public class InGameOptions : WindowAnimation, SceneMessage
                 {
                     Scenes.UnloadAsync(SCENENAME);
                     isQuitting = false;
-                    OnQuit();
+                    UnlockTime();
+                    if (onComplete != null)
+                        onComplete();
                 }
             );
         }
@@ -57,7 +62,9 @@ public class InGameOptions : WindowAnimation, SceneMessage
         {
             Scenes.UnloadAsync(SCENENAME);
             isQuitting = false;
-            OnQuit();
+            UnlockTime();
+            if (onComplete != null)
+                onComplete();
         }
     }
 
@@ -70,26 +77,16 @@ public class InGameOptions : WindowAnimation, SceneMessage
         }
 
         Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive);
-        OnStartOpen();
+        Locktime();
     }
 
-    static void OnStartOpen()
+    static void Locktime()
     {
         Game.Instance.gameRunning.Lock("option");
     }
 
-    static void OnQuit()
+    static void UnlockTime()
     {
         Game.Instance.gameRunning.Unlock("option");
-    }
-
-    public void OnLoaded(Scene scene)
-    {
-        gameBuilder = Scenes.FindRootObject<GameBuilder>(scene);
-    }
-
-    public void OnOutroComplete()
-    {
-        gameBuilder.Init(GameBuilder.mapName);
     }
 }

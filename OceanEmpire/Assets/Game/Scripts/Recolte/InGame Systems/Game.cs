@@ -34,6 +34,7 @@ public class Game : PublicSingleton<Game>
     [HideInInspector] public SubmarineMovement submarine;
     [HideInInspector] public FishingReport fishingReport;
     [HideInInspector] public MapInfo map;
+    [HideInInspector] public FishLottery fishLottery;
     [HideInInspector] public Recolte_UI ui;
     public PendingFishGPC PendingFishGPC { get; private set; }
 
@@ -173,9 +174,7 @@ public class Game : PublicSingleton<Game>
 
         cameraMouvement.followPlayer = false;
         submarine.canAccelerate.Lock("end");
-        playerSpawn.AnimatePlayerExit(submarine);
-
-        ui.feedbacks.ShowTimeUp(delegate ()
+        playerSpawn.AnimatePlayerExit(submarine, ()=>
         {
             LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(fishingReport));
         });

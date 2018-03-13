@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameDebug : MonoBehaviour {
 
-    public string mapName;
+    public SceneInfo mapScene;
 
     void Start ()
     {
@@ -20,7 +20,7 @@ public class GameDebug : MonoBehaviour {
     {
         if (gameObject.scene.name == GameBuilder.SCENENAME)
         {
-            OnGameLoaded();
+            OnGameLoaded(gameObject.scene);
             return;
         }
 
@@ -29,13 +29,6 @@ public class GameDebug : MonoBehaviour {
 
     public void OnGameLoaded(Scene scene)
     {
-        scene.FindRootObject<GameBuilder>().Init(mapName);
-    }
-
-    public void OnGameLoaded()
-    {
-        GameBuilder builder = GetComponent<GameBuilder>();
-        if (builder != null)
-            builder.Init(mapName);
+        scene.FindRootObject<GameBuilder>().Init(mapScene.SceneName);
     }
 }

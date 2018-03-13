@@ -7,28 +7,22 @@ using UnityEngine.SceneManagement;
 public class GameBuilder : MonoBehaviour {
 
     public const string SCENENAME = "GameBuilder";
-
-    [HideInInspector]
-    public static string mapName = "Map_Caraibe";
+    
+    string mapSceneName;
     bool mapLoaded = false;
     bool uiLoaded = false;
 
-    public void Init(string mapName)
+    public void Init(string mapScene)
     {
-        SetMapLoadedName(mapName);
+        mapSceneName = mapScene;
         PersistentLoader.LoadIfNotLoaded(Build);
-    }
-
-    public static void SetMapLoadedName(string name)
-    {
-        mapName = name;
     }
 
     void Build()
     {
         // Load All Scenes
-        if (!Scenes.IsActiveOrBeingLoaded(mapName))
-            Scenes.LoadAsync(mapName, LoadSceneMode.Additive, OnMapLoaded);
+        if (!Scenes.IsActiveOrBeingLoaded(mapSceneName))
+            Scenes.LoadAsync(mapSceneName, LoadSceneMode.Additive, OnMapLoaded);
         else
             OnMapLoaded();
 
@@ -41,6 +35,7 @@ public class GameBuilder : MonoBehaviour {
     void OnMapLoaded(Scene scene)
     {
         Game.Instance.map = scene.FindRootObject<MapInfo>();
+        Game.Instance.fishLottery = scene.FindRootObject<FishLottery>();
 
         mapLoaded = true;
         CheckInitGame();
@@ -48,7 +43,7 @@ public class GameBuilder : MonoBehaviour {
 
     void OnMapLoaded()
     {
-        OnMapLoaded(SceneManager.GetSceneByName(mapName));
+        OnMapLoaded(SceneManager.GetSceneByName(mapSceneName));
     }
 
     void OnUILoaded(Scene scene)

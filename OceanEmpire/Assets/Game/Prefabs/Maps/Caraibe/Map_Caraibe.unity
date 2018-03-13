@@ -259,30 +259,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &122746333 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1014045438012982, guid: 039a5e9775547b545a63c1132d5a3456,
-    type: 2}
-  m_PrefabInternal: {fileID: 763660581}
---- !u!114 &122746334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 122746333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8b9edf7e11ba33459e25647c0c769f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  water: {fileID: 122746335}
-  moveOffset: 0.5
-  cycleDelay: 1
---- !u!212 &122746335 stripped
-SpriteRenderer:
-  m_PrefabParentObject: {fileID: 212088766395150204, guid: 039a5e9775547b545a63c1132d5a3456,
-    type: 2}
-  m_PrefabInternal: {fileID: 763660581}
 --- !u!1 &146369770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,34 +2680,6 @@ Prefab:
       propertyPath: m_Name
       value: top (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4994439144155968, guid: 039a5e9775547b545a63c1132d5a3456, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 212088766395150204, guid: 039a5e9775547b545a63c1132d5a3456,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212088766395150204, guid: 039a5e9775547b545a63c1132d5a3456,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.62352943
-      objectReference: {fileID: 0}
-    - target: {fileID: 212088766395150204, guid: 039a5e9775547b545a63c1132d5a3456,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 4994439144155968, guid: 039a5e9775547b545a63c1132d5a3456, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 212088766395150204, guid: 039a5e9775547b545a63c1132d5a3456,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 2.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 039a5e9775547b545a63c1132d5a3456, type: 2}
   m_IsPrefabParent: 0
@@ -3621,10 +3569,10 @@ GameObject:
   - component: {fileID: 981076566}
   - component: {fileID: 981076565}
   - component: {fileID: 981076567}
-  - component: {fileID: 981076568}
   - component: {fileID: 981076569}
+  - component: {fileID: 981076570}
   m_Layer: 0
-  m_Name: Map
+  m_Name: Main Manangers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3643,142 +3591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSpawn: {fileID: 1408103016}
   PlayerStart_: {fileID: 1047353538}
-  regionName: Caraibe
   mapTop: 0
   mapBottom: -150
-  depthAtYZero: 0
-  mapFishDensity: 1
-  mapFishReparition:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0.66
-      inSlope: 0.3014002
-      outSlope: 0.3014002
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0.3545214
-      outSlope: 0.3545214
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fishTypeList:
-  - fish: {fileID: 1365461041918330, guid: c186050c02c004541ae5ec695d2b4873, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 2
-  - fish: {fileID: 1365461041918330, guid: 82c76eecc091e61488986e0c197295af, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: 1b2f9b83001ff014ab1603f7a682bb5c, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: a40c24d43d6a9e045bd22d9da4db8419, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.5
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -150
-    fishDensity: 1.5
 --- !u!4 &981076566
 Transform:
   m_ObjectHideFlags: 0
@@ -3803,19 +3617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9491cdc3eb5c443bee03442a3dcf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Map_Caraibe
---- !u!114 &981076568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 981076564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b49fb242580c84993762745f5ae37a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  proposeUnderDensity: 0.75
+  mapScene: {fileID: 11400000, guid: bf41f1cdd7792fe4e8b5f26a85b0a029, type: 2}
 --- !u!114 &981076569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3829,6 +3631,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onStart: 1
   tutorial: {fileID: 11400000, guid: c6f6060824b97e940b8bcee18cbd0842, type: 2}
+--- !u!114 &981076570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 981076564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cefd19b3001bb4596a4dcd25c2038d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapInfo: {fileID: 981076565}
+  generalDensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  densityMultiplier: 1
+  fishRepartitions:
+  - {fileID: 11400000, guid: c695c578ee05d2a4b8ed05bda1f03cf7, type: 2}
+  - {fileID: 11400000, guid: 310affc0f218ec9469b6d484827ceb46, type: 2}
 --- !u!1 &1016361202
 GameObject:
   m_ObjectHideFlags: 0

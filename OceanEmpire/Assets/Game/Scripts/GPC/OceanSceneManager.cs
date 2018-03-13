@@ -29,6 +29,8 @@ namespace GPComponents
                     return Game.UnitInstantiator;
                 case "pending fish gpc":
                     return Game.Instance.PendingFishGPC;
+                case "ui":
+                    return Game.Recolte_UI;
             }
         }
         public override T Read<T>(string tag)

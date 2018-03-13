@@ -5008,7 +5008,7 @@ GameObject:
   - component: {fileID: 981076566}
   - component: {fileID: 981076565}
   - component: {fileID: 981076567}
-  - component: {fileID: 981076568}
+  - component: {fileID: 981076569}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -5029,124 +5029,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSpawn: {fileID: 185285419}
   PlayerStart_: {fileID: 21776862}
-  regionName: Caraibe
   mapTop: 0
   mapBottom: -250
-  depthAtYZero: 0
-  mapFishDensity: 1
-  mapFishReparition:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0.66
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.6820898
-      value: 0.9494149
-      inSlope: 0.3191829
-      outSlope: 0.3191829
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fishTypeList:
-  - fish: {fileID: 1365461041918330, guid: bd8ba3449f353494fb540c81176a92dd, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: 91b743804fbbb1244a355efe00ca2241, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 2
-  - fish: {fileID: 1365461041918330, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 3
-  - fish: {fileID: 1365461041918330, guid: c877cd4996206a14db404966e57a29b2, type: 2}
-    repartition:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    highestSpawn: 0
-    lowestSpawn: -250
-    fishDensity: 1
 --- !u!4 &981076566
 Transform:
   m_ObjectHideFlags: 0
@@ -5171,8 +5055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9491cdc3eb5c443bee03442a3dcf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Map_Pacifique
---- !u!114 &981076568
+  mapScene: {fileID: 11400000, guid: abdc00627385c9447b5975344efb61a5, type: 2}
+--- !u!114 &981076569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -5180,10 +5064,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 981076564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21b49fb242580c84993762745f5ae37a, type: 3}
+  m_Script: {fileID: 11500000, guid: 44cefd19b3001bb4596a4dcd25c2038d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proposeUnderDensity: 0.75
+  mapInfo: {fileID: 981076565}
+  generalDensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  densityMultiplier: 1
+  fishRepartitions:
+  - {fileID: 11400000, guid: 310affc0f218ec9469b6d484827ceb46, type: 2}
+  - {fileID: 11400000, guid: c695c578ee05d2a4b8ed05bda1f03cf7, type: 2}
 --- !u!1 &991065276
 GameObject:
   m_ObjectHideFlags: 0

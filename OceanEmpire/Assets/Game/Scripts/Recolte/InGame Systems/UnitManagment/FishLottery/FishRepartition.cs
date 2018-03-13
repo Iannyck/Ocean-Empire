@@ -2,19 +2,21 @@
 using UnityEngine;
 
 [System.Serializable]
-//[CreateAssetMenu(menuName = "Ocean Empire/Fish Repartition")]
-public class FishRepartition
+[CreateAssetMenu(menuName = "Ocean Empire/Fish Repartition")]
+public class FishRepartition : ScriptableObject
 {
     public GameObject prefab;
-    public float weight;
-    public AnimationCurve populationCurve;
-    public float shallowestSpawn = 0;
-    public float deepestSpawn = 1;
+    public float weight = 1;
+    public AnimationCurve populationCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1));
 
-#if UNITY_EDITOR
-#pragma warning disable 0414  // variable declared but not used.
-    [SerializeField] private bool hasBeenInitialized = false;//
-#endif
+    /// <summary>
+    /// Entre 0 et 1
+    /// </summary>
+    public float shallowestSpawn = 0;
+    /// <summary>
+    /// Entre 0 et 1
+    /// </summary>
+    public float deepestSpawn = 1;
 
     #region Premade Curves
     public static AnimationCurve CURVE_CONSTANT

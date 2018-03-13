@@ -7,6 +7,8 @@ namespace GPComponents
         GazTank gazTank;
         SceneManager sceneManager;
 
+        private GPCState wasState;
+
         public GPC_FuelCheck(SceneManager sceneManager)
         {
             this.sceneManager = sceneManager;
@@ -19,10 +21,18 @@ namespace GPComponents
 
         public override GPCState Eval()
         {
-            if (gazTank != null)
-                return gazTank.GetGazRatio() > 0 ? GPCState.RUNNING : GPCState.SUCCESS;
-            else
-                return GPCState.FAILURE;
+            GPCState newState = GPCState.RUNNING;
+
+            if (gazTank != null && gazTank.GetGazRatio() <= 0)
+                newState = GPCState.SUCCESS;
+            
+            if(newState == GPCState.SUCCESS && wasState != GPCState.SUCCESS)
+            {
+                sceneManager.Read<Recolte_UI>("ui").feedbacks.ShowTimeUp(null);
+            }
+
+            wasState = newState;
+            return newState;
         }
 
         public override void Launch()
@@ -38,7 +48,7 @@ namespace GPComponents
         void FetchPlayer()
         {
             var player = sceneManager.Read<GameObject>("player");
-            if(player != null)
+            if (player != null)
             {
                 gazTank = player.GetComponent<SubmarinParts>().GazTank;
             }

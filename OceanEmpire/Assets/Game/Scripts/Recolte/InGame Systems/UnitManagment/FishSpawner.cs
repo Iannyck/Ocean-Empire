@@ -14,7 +14,7 @@ public class FishSpawner : MonoBehaviour
     private int fishPerPalier = 2;
 
     private GameCamera Camera { get { return Game.GameCamera; } }
-    private MapInfo Map { get { return Game.Instance.map; } }
+    private FishLottery FishLottery { get { return Game.Instance.fishLottery; } }
     private PendingFishGPC PendingGPC { get { return Game.Instance.PendingFishGPC; } }
 
     void Start()
@@ -95,7 +95,7 @@ public class FishSpawner : MonoBehaviour
 
     void SpawnAt(Vector2 position)
     {
-        var fish = Map.DrawAtFishLottery(position.y);
+        var fish = FishLottery.DrawAtHeight(position.y);
         if (fish == null)
             return;
 

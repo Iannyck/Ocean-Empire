@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 
 public struct ToRecolteMessage : SceneMessage
 {
-    private MapDescription mapDescription;
+    private string mapScene;
 
-    public ToRecolteMessage(MapDescription mapDescription)
+    public ToRecolteMessage(string mapScene)
     {
-        this.mapDescription = mapDescription;
+        this.mapScene = mapScene;
     }
 
     public void OnLoaded(Scene scene)
     {
-        scene.FindRootObject<GameBuilder>().Init(mapDescription.sceneToLoad);
+        scene.FindRootObject<GameBuilder>().Init(mapScene);
     }
 
     public void OnOutroComplete()

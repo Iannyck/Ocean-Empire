@@ -111,7 +111,7 @@ public class WanderBrain : Brain
 
         Vector2 pos = v + rb.position;
         //Debug.Log("ID: " + rb.GetInstanceID() + "    rb: " + rb.position + "  v: " + v + "  =  " + pos);
-        if (MapInfo.IsOutOfBounds(pos))
+        if (MapInfo.IsOutOfHorizontalBounds(pos))
         {
             // Flip direction
             v = -v;

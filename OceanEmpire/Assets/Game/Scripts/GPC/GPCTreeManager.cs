@@ -8,7 +8,7 @@ public class GPCTreeManager : MonoBehaviour
     [SerializeField] private Game gameSystem;
     [SerializeField] private SceneManager sceneManager;
 
-    private ParallelAND tree;
+    private ParallelOR tree;
 
     private void Update()
     {
@@ -44,7 +44,7 @@ public class GPCTreeManager : MonoBehaviour
 
         
         // Tree build
-        tree = new ParallelAND(fuelCheck, fishSpawning);
+        tree = new ParallelOR(fuelCheck, fishSpawning);
         tree.Launch();
     }
 }

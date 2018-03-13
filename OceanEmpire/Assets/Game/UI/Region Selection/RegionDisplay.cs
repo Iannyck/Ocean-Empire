@@ -34,6 +34,6 @@ public class RegionDisplay : MonoBehaviour
     public void Go()
     {
         if (selectedMap != null)
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap), true);
+            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap.sceneToLoad), true);
     }
 }

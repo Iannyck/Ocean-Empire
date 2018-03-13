@@ -115,7 +115,7 @@ public class PlayerSpawn : MonoBehaviour
     }
 
 
-    public SubmarineMovement AnimatePlayerExit(SubmarineMovement player)
+    public SubmarineMovement AnimatePlayerExit(SubmarineMovement player, TweenCallback onComplete)
     {
         // Physics
         player.enabled = false;
@@ -125,7 +125,7 @@ public class PlayerSpawn : MonoBehaviour
 
         // Anim
         player.transform.DOMove(position,
-            exitDuration);
+            exitDuration).onComplete = onComplete;
 
         return player;
     }

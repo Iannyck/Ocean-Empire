@@ -14,6 +14,6 @@ public class GoToRecolte_Temporaire : MonoBehaviour
     public void Go()
     {
         if (selectedMap != null)
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap), true);
+            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap.sceneToLoad), true);
     }
 }
