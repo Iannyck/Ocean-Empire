@@ -273,7 +273,7 @@ public class PlayerCurrency : MonoPersistent
     private void SetDirty()
     {
         ApplyDataToSaver();
-        dataSaver.SetDataDirty();
+        dataSaver.LateSave();
     }
 
     private void FetchData()

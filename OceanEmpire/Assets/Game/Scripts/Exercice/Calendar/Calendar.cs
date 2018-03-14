@@ -174,7 +174,7 @@ public class Calendar : MonoPersistent
 
         if (andSave)
         {
-            dataSaver.SetDataDirty();
+            dataSaver.LateSave();
         }
     }
 

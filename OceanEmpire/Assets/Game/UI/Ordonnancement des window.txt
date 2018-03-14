@@ -2,13 +2,13 @@
 
 // Shack
 Shack: -10
+Region Selection: -7
+Shop: -4
+Shack HUD (Currency + Fish Frenzy): -2
 
 // Calendar
 Calendar Scroll: 0
 Calendar Day Inspector: 1
-
-// Map select
-Region Selection: 5
 
 // Exercise
 Tracking Panel: 20
@@ -23,3 +23,8 @@ CheatsWindow: 50
 
 ******** INGAME ********
 ProposeRefill: 5
+
+
+
+******** BOTH ********
+Loading Screen: 10000

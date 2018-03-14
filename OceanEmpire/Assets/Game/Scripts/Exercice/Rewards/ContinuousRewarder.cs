@@ -71,7 +71,7 @@ public class ContinuousRewarder : MonoPersistent
             lastUpdate = now;
 
             dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
-            dataSaver.SetDataDirty();
+            dataSaver.LateSave();
 
             AnalyseAndRewardTimeSlot(timeslotToAnalyse);
         }

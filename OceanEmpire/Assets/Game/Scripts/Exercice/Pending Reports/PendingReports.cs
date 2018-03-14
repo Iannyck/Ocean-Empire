@@ -109,7 +109,7 @@ public class PendingReports : MonoPersistent
         {
             //int c = pendingReports.Count;
             //print("Sauvgarde " + pendingReports.Count + " pending reports");
-            dataSaver.SetDataDirty();
+            dataSaver.LateSave();
         }
     }
 

@@ -80,7 +80,7 @@ public class History : MonoPersistent
     #region R/W Gamesaves
     private void SetDirty()
     {
-        dataSaver.SetDataDirty();
+        dataSaver.LateSave();
     }
 
     private void FetchData()

@@ -21,20 +21,29 @@ namespace CCC.Serialization
         /// Read/Write operation queue. C'est une queue qui assure l'ordonnancement des opérations read/write
         /// </summary>
         private Queue<Action> rwoQueue = new Queue<Action>();
-        [NonSerialized] private bool isDirty = false;
-        private Queue<Action> pendingDirtyCallbacks = new Queue<Action>();
+
+        private bool lateSave = false;
+        private Queue<Action> pendingLateSaveCallbacks = new Queue<Action>();
+
+        private bool lateLoad = false;
+        private Queue<Action> pendingLateLoadCallbacks = new Queue<Action>();
 
         public string CompletePath
         {
             get { return Application.persistentDataPath + "/" + fileName + FILE_EXTENSION; }
         }
 
+        /// <summary>
+        /// Retourne vrai si l'objet a Load au moins une fois à date
+        /// </summary>
+        public bool HasEverLoaded { get; private set; }
+
 
         private void _OverwriteLocalData(object graph)
         {
+            OverwriteLocalData(graph);
             if (OnReassignData != null)
                 OnReassignData();
-            OverwriteLocalData(graph);
         }
         protected void _SetDefaultLocalData()
         {
@@ -48,44 +57,83 @@ namespace CCC.Serialization
 
         private void OnEnable()
         {
-            isDirty = false;
+            lateSave = false;
         }
 
         /// <summary>
         /// Semblable au SaveAsync, mais on va laisser 1 frame s'écouler avant.
         /// <para/>
-        /// Si SetDirty est appelé plusieur fois, l'objet ne sera que sauvegarder 1 fois.
-        /// Ça nous permet d'appeler plusieur fois SetDirty par frame sans avoir à se soucier
+        /// Si LateSave est appelé plusieur fois, l'objet ne sera que sauvegarder 1 fois.
+        /// Ça nous permet d'appeler plusieur fois LateSave par frame sans avoir à se soucier
         /// du coût de performance de plusieurs sauvegardes.
         /// </summary>
-        public void SetDataDirty() { SetDataDirty(null); }
+        public void LateSave() { LateSave(null); }
         /// <summary>
         /// Semblable au SaveAsync, mais on va laisser 1 frame s'écouler avant.
         /// <para/>
-        /// Si SetDirty est appelé plusieur fois, l'objet ne sera que sauvegarder 1 fois.
-        /// Ça nous permet d'appeler plusieur fois SetDirty par frame sans avoir à se soucier
+        /// Si LateSave est appelé plusieur fois, l'objet ne sera que sauvegarder 1 fois.
+        /// Ça nous permet d'appeler plusieur fois LateSave par frame sans avoir à se soucier
         /// du coût de performance de plusieurs sauvegardes.
         /// </summary>
-        public void SetDataDirty(Action callback)
+        public void LateSave(Action callback)
         {
             //Add callback to queue
             if (callback != null)
-                pendingDirtyCallbacks.Enqueue(callback);
+                pendingLateSaveCallbacks.Enqueue(callback);
 
-            if (isDirty)
+            if (lateSave)
                 return;
-            isDirty = true;
+            lateSave = true;
 
             CoroutineLauncher.Instance.CallNextFrame(() =>
             {
                 SaveAsync(() =>
                 {
                     //Clear all pending callbacks
-                    while(pendingDirtyCallbacks.Count > 0)
+                    while(pendingLateSaveCallbacks.Count > 0)
                     {
-                        pendingDirtyCallbacks.Dequeue()();
+                        pendingLateSaveCallbacks.Dequeue().Invoke();
                     }
-                    isDirty = false;
+                    lateSave = false;
+                });
+            });
+        }
+
+        /// <summary>
+        /// Semblable au LoadAsync, mais on va laisser 1 frame s'écouler avant.
+        /// <para/>
+        /// Si LateLoad est appelé plusieur fois, l'objet ne sera que loadé 1 fois.
+        /// Ça nous permet d'appeler plusieur fois LateLoad par frame sans avoir à se soucier
+        /// du coût de performance de plusieurs loading.
+        /// </summary>
+        public void LateLoad() { LateLoad(null); }
+        /// <summary>
+        /// Semblable au LoadAsync, mais on va laisser 1 frame s'écouler avant.
+        /// <para/>
+        /// Si LateLoad est appelé plusieur fois, l'objet ne sera que loadé 1 fois.
+        /// Ça nous permet d'appeler plusieur fois LateLoad par frame sans avoir à se soucier
+        /// du coût de performance de plusieurs loading.
+        /// </summary>
+        public void LateLoad(Action callback)
+        {
+            //Add callback to queue
+            if (callback != null)
+                pendingLateLoadCallbacks.Enqueue(callback);
+
+            if (lateLoad)
+                return;
+            lateLoad = true;
+
+            CoroutineLauncher.Instance.CallNextFrame(() =>
+            {
+                LoadAsync(() =>
+                {
+                    //Clear all pending callbacks
+                    while (pendingLateLoadCallbacks.Count > 0)
+                    {
+                        pendingLateLoadCallbacks.Dequeue().Invoke();
+                    }
+                    lateLoad = false;
                 });
             });
         }
@@ -104,6 +152,7 @@ namespace CCC.Serialization
                         delegate (object graph)
                         {
                             _OverwriteLocalData(graph);
+                            HasEverLoaded = true;
 
                             if (onLoadComplete != null)
                                 onLoadComplete();
@@ -134,6 +183,7 @@ namespace CCC.Serialization
                     //Load and apply
                     object graph = Saves.InstantLoad(path);
                     _OverwriteLocalData(graph);
+                    HasEverLoaded = true;
 
                     if (onLoadComplete != null)
                         onLoadComplete();
