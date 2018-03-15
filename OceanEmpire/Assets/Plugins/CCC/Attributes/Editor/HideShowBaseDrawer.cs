@@ -52,7 +52,7 @@ public abstract class HideShowBaseDrawer : PropertyDrawer
             switch (memberType)
             {
                 case HideShowBaseAttribute.Type.Property:
-                    PropertyInfo propInfo = type.GetProperty(name);
+                    PropertyInfo propInfo = type.GetProperty(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                     if (propInfo == null)
                         break;
                     else if (propInfo.PropertyType != typeof(bool))
@@ -65,7 +65,7 @@ public abstract class HideShowBaseDrawer : PropertyDrawer
                         return (bool)propInfo.GetValue(instance, null);
                     }
                 case HideShowBaseAttribute.Type.Method:
-                    MethodInfo methodInfo = type.GetMethod(name);
+                    MethodInfo methodInfo = type.GetMethod(name, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
                     if (methodInfo == null)
                         break;
                     else if (methodInfo.ReturnType != typeof(bool))

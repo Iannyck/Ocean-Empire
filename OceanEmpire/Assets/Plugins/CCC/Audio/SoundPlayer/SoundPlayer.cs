@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSoundPlayer : MonoBehaviour
+public class SoundPlayer : MonoBehaviour
 {
     private enum DefaultSourceType { SFX, SFX_Static, Music, Voice }
 
@@ -16,13 +16,26 @@ public class BaseSoundPlayer : MonoBehaviour
     [SerializeField] AudioSource _localSource;
 
     [ShowIf("_useDefaultSources", HideShowBaseAttribute.Type.Field)]
-    [SerializeField] DefaultSourceType defaultSourceType = DefaultSourceType.SFX_Static;
+    [SerializeField] DefaultSourceType _defaultSourceType = DefaultSourceType.SFX_Static;
 
-    public void Play()
+
+    [ShowIf("GonnaPlayMusic", HideShowBaseAttribute.Type.Property)]
+    [SerializeField] bool _transitionSmoothly = false;
+
+    private bool GonnaPlayMusic
+    {
+        get
+        {
+            return _useDefaultSources && _defaultSourceType == DefaultSourceType.Music;
+        }
+    }
+
+
+    public virtual void Play()
     {
         if (_useDefaultSources)
         {
-            switch (defaultSourceType)
+            switch (_defaultSourceType)
             {
                 case DefaultSourceType.SFX:
                     DefaultAudioSources.PlaySFX(_audioPlayable);
@@ -31,7 +44,10 @@ public class BaseSoundPlayer : MonoBehaviour
                     DefaultAudioSources.PlayStaticSFX(_audioPlayable);
                     break;
                 case DefaultSourceType.Music:
-                    DefaultAudioSources.PlayMusic(_audioPlayable);
+                    if (_transitionSmoothly)
+                        DefaultAudioSources.TransitionToMusic(_audioPlayable);
+                    else
+                        DefaultAudioSources.PlayMusic(_audioPlayable);
                     break;
                 case DefaultSourceType.Voice:
                     DefaultAudioSources.PlayVoice(_audioPlayable);

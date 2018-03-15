@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundPlayer_Button : BaseSoundPlayer
+public class SoundPlayer_Button : SoundPlayer
 {
     [Header("Button")]
     [SerializeField] Button _button;

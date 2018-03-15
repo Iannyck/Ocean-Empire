@@ -51,4 +51,9 @@ public class AudioPlayableEditor : Editor
     {
         DestroyImmediate(_previewer.gameObject);
     }
+
+    public override bool RequiresConstantRepaint()
+    {
+        return true;
+    }
 }

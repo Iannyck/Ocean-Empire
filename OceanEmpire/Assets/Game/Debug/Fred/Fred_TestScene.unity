@@ -240,14 +240,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 404100401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d253ae474c646ab45887bd2d2ad434dd, type: 3}
+  m_Script: {fileID: 11500000, guid: f5deaf55c45a2bd40833e42a50ad4a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audioPlayable: {fileID: 11400000, guid: b18fe870f3f76f245ac0f32b4c6388f6, type: 2}
   _useDefaultSources: 1
   _localSource: {fileID: 0}
-  defaultSourceType: 1
-  _button: {fileID: 404100404}
+  _defaultSourceType: 1
+  _transitionSmoothly: 0
+  pointerClick: 0
+  pointerEnter: 0
+  pointerExit: 0
+  pointerDown: 0
+  pointerUp: 0
 --- !u!114 &404100404
 MonoBehaviour:
   m_ObjectHideFlags: 0
