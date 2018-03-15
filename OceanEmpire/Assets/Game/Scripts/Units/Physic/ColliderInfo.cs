@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColliderInfo : MonoBehaviour
 {
+    [System.Flags]
     public enum ParentType
     {
         Player = 1 << 0,

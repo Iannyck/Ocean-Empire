@@ -8,7 +8,7 @@ public class OnTrigger : MonoBehaviour
     [System.Serializable]
     public class OnTriggerEvent : UnityEvent<ColliderInfo, Collider2D> { }
 
-    [BitMask(typeof(ColliderInfo.ParentType))]
+    [BitMask]
     public ColliderInfo.ParentType filter;
 
     public OnTriggerEvent onEnter;

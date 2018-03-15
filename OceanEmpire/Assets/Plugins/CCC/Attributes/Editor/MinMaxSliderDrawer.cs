@@ -6,6 +6,7 @@ class MinMaxSliderDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
+        EditorGUI.BeginProperty(position, label, property);
 
         if (property.propertyType == SerializedPropertyType.Vector2)
         {
@@ -53,5 +54,6 @@ class MinMaxSliderDrawer : PropertyDrawer
         {
             EditorGUI.LabelField(position, label, "Use only with Vector2");
         }
+        EditorGUI.EndProperty();
     }
 }
