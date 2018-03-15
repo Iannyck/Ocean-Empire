@@ -11,7 +11,6 @@ public class BitMaskPropertyDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, prop);
 
-        var typeAttr = attribute as BitMaskAttribute;
         // Add the actual int value behind the field name
         label.text = label.text + "(" + prop.intValue + ")";
         prop.intValue = DrawBitMaskField(position, prop.intValue, GetTypeOfProp(prop), label);

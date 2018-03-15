@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CCC.Persistence;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Scenes : MonoPersistent
+public static class Scenes
 {
     class ScenePromise
     {
@@ -24,17 +24,20 @@ public class Scenes : MonoPersistent
     }
 
     static List<ScenePromise> loadingScenes = new List<ScenePromise>();
-    private static Scenes instance;
+    private static bool IsListening { get; set; }
 
-    public override void Init(Action onComplete)
+    private static void ListenIfNotListening()
     {
+        if (IsListening)
+            return;
+        if (!Application.isPlaying)
+        {
+            Debug.LogError("Cannot use CCC's Scenes when the application is not playing");
+            return;
+        }
+
+        IsListening = true;
         SceneManager.sceneLoaded += OnSceneLoading;
-        onComplete();
-    }
-
-    void Awake()
-    {
-        instance = this;
     }
 
     #region QualityOfLife
@@ -53,6 +56,8 @@ public class Scenes : MonoPersistent
         if (!allowMultiple && _HandleUniqueLoad(name, callback))
             return;
 
+        ListenIfNotListening();
+
         ScenePromise scenePromise = new ScenePromise(name, callback);
         loadingScenes.Add(scenePromise);
         SceneManager.LoadScene(name, mode);
@@ -66,6 +71,8 @@ public class Scenes : MonoPersistent
     {
         if (!allowMultiple && _HandleUniqueLoad(name, callback))
             return;
+
+        ListenIfNotListening();
 
         ScenePromise scenePromise = new ScenePromise(name, callback);
         loadingScenes.Add(scenePromise);
@@ -94,10 +101,12 @@ public class Scenes : MonoPersistent
 
     static public void UnloadAsync(Scene scene)
     {
+        ListenIfNotListening();
         SceneManager.UnloadSceneAsync(scene);
     }
     static public void UnloadAsync(string name)
     {
+        ListenIfNotListening();
         SceneManager.UnloadSceneAsync(name);
     }
     static public void UnloadAsync(SceneInfo sceneInfo)
@@ -176,7 +185,7 @@ public class Scenes : MonoPersistent
 
         promise.scene = scene;
 
-        if (!scene.isLoaded) instance.StartCoroutine(WaitForSceneLoad(scene, promise));
+        if (!scene.isLoaded) CoroutineLauncher.Instance.StartCoroutine(WaitForSceneLoad(scene, promise));
         else Execute(promise);
     }
 
