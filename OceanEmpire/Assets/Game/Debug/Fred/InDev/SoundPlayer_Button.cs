@@ -5,6 +5,18 @@ using UnityEngine.UI;
 
 public class SoundPlayer_Button : BaseSoundPlayer
 {
+    [Header("Button")]
     [SerializeField] Button _button;
-    [Colored(1, 1, 0)] public int test;
+
+    void OnEnable()
+    {
+        if (_button != null)
+            _button.onClick.AddListener(Play);
+    }
+
+    void OnDisable()
+    {
+        if (_button != null)
+            _button.onClick.RemoveListener(Play);
+    }
 }

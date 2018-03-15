@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using CCC.Persistence;
 
-public class DefaultAudioSources : MonoPersistent
+public class DefaultAudioSources : MonoBehaviour
 {
     public AudioSource SFXSource;
     public AudioSource staticSFXSource;
@@ -18,13 +18,40 @@ public class DefaultAudioSources : MonoPersistent
 
     private const Ease AUDIOFADE_EASE = Ease.OutSine;
 
-    private static DefaultAudioSources instance;
+    private static DefaultAudioSources _instance;
 
-    public override void Init(Action onComplete)
+    #region Singleton Managment
+    private const string ASSETNAME = "CCC/Default Audio Sources";
+    void Awake()
     {
-        instance = this;
-        onComplete();
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(this);
     }
+    static DefaultAudioSources Instance
+    {
+        get
+        {
+            CheckInstance();
+            return _instance;
+        }
+    }
+    static void CheckInstance()
+    {
+        if (_instance == null)
+        {
+            var prefab = Resources.Load<GameObject>(ASSETNAME);
+            if (prefab == null)
+                Debug.LogError("Could not find the prefab: Resources/" + ASSETNAME);
+            else
+                Instantiate(prefab);
+        }
+    }
+    #endregion
 
     /// <summary>
     /// Plays the audioplayable. Leave source to 'null' to play on the standard 2D SFX audiosource.
@@ -32,7 +59,7 @@ public class DefaultAudioSources : MonoPersistent
     static public void PlayStaticSFX(AudioPlayable playable, float delay = 0, float volumeMultiplier = 1, AudioSource source = null)
     {
         if (CheckResources_Instance())
-            PlayNonMusic(playable, delay, volumeMultiplier, source, instance.staticSFXSource);
+            PlayNonMusic(playable, delay, volumeMultiplier, source, Instance.staticSFXSource);
     }
     /// <summary>
     /// Plays the audioclip. Leave source to 'null' to play on the standard 2D SFX audiosource.
@@ -40,7 +67,7 @@ public class DefaultAudioSources : MonoPersistent
     static public void PlayStaticSFX(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
     {
         if (CheckResources_Instance())
-            PlayNonMusic(clip, delay, volume, source, instance.staticSFXSource);
+            PlayNonMusic(clip, delay, volume, source, Instance.staticSFXSource);
     }
 
     /// <summary>
@@ -49,7 +76,7 @@ public class DefaultAudioSources : MonoPersistent
     static public void PlayVoice(AudioPlayable playable, float delay = 0, float volumeMultiplier = 1, AudioSource source = null)
     {
         if (CheckResources_Instance())
-            PlayNonMusic(playable, delay, volumeMultiplier, source, instance.voiceSource);
+            PlayNonMusic(playable, delay, volumeMultiplier, source, Instance.voiceSource);
     }
     /// <summary>
     /// Plays the audioclip. Leave source to 'null' to play on the standard 2D Voice audiosource.
@@ -57,7 +84,7 @@ public class DefaultAudioSources : MonoPersistent
     static public void PlayVoice(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
     {
         if (CheckResources_Instance())
-            PlayNonMusic(clip, delay, volume, source, instance.voiceSource);
+            PlayNonMusic(clip, delay, volume, source, Instance.voiceSource);
     }
 
     /// <summary>
@@ -66,7 +93,7 @@ public class DefaultAudioSources : MonoPersistent
     static public void PlaySFX(AudioPlayable playable, float delay = 0, float volumeMultiplier = 1, AudioSource source = null)
     {
         if (CheckResources_Instance())
-            PlayNonMusic(playable, delay, volumeMultiplier, source, instance.SFXSource);
+            PlayNonMusic(playable, delay, volumeMultiplier, source, Instance.SFXSource);
     }
     /// <summary>
     /// Plays the audioclip. Leave source to 'null' to play on the standard 2D SFX audiosource.
@@ -74,7 +101,7 @@ public class DefaultAudioSources : MonoPersistent
     static public void PlaySFX(AudioClip clip, float delay = 0, float volume = 1, AudioSource source = null)
     {
         if (CheckResources_Instance())
-            PlayNonMusic(clip, delay, volume, source, instance.SFXSource);
+            PlayNonMusic(clip, delay, volume, source, Instance.SFXSource);
     }
 
     private static void PlayNonMusic(AudioPlayable playable, float delay, float volumeMultiplier, AudioSource source, AudioSource defaultSource)
@@ -87,7 +114,7 @@ public class DefaultAudioSources : MonoPersistent
 
         if (delay > 0)
         {
-            instance.StartCoroutine(PlayNonMusicIn(playable, delay, volumeMultiplier, theSource));
+            Instance.StartCoroutine(PlayNonMusicIn(playable, delay, volumeMultiplier, theSource));
             return;
         }
         else
@@ -105,7 +132,7 @@ public class DefaultAudioSources : MonoPersistent
 
         if (delay > 0)
         {
-            instance.StartCoroutine(PlayNonMusicIn(clip, delay, volume, theSource));
+            Instance.StartCoroutine(PlayNonMusicIn(clip, delay, volume, theSource));
             return;
         }
         else
@@ -163,7 +190,7 @@ public class DefaultAudioSources : MonoPersistent
             return;
 
         float stdVolume = Internal_PlayMusic(playable, looping, startingVolume);
-        instance.musicTransitionTweens.Add(
+        Instance.musicTransitionTweens.Add(
             GetMusicSource().DOFade(stdVolume, fadeInDuration).SetEase(AUDIOFADE_EASE));
     }
     static private void Internal_PlayMusicFaded(AudioClip clip, float fadeInDuration, bool looping = true, float volume = 1, float startingVolume = 0)
@@ -172,43 +199,43 @@ public class DefaultAudioSources : MonoPersistent
             return;
 
         Internal_PlayMusic(clip, looping, startingVolume);
-        instance.musicTransitionTweens.Add(
+        Instance.musicTransitionTweens.Add(
             GetMusicSource().DOFade(volume, fadeInDuration).SetEase(AUDIOFADE_EASE));
     }
 
     static private AudioSource GetAndIncrementMusicSource()
     {
-        instance.currentMusicSource++;
-        instance.currentMusicSource %= 2;
+        Instance.currentMusicSource++;
+        Instance.currentMusicSource %= 2;
         return GetMusicSource();
     }
     static private AudioSource GetMusicSource()
     {
-        return instance.currentMusicSource == 0 ? instance.musicSource_0 : instance.musicSource_1;
+        return Instance.currentMusicSource == 0 ? Instance.musicSource_0 : Instance.musicSource_1;
     }
     static private AudioSource GetOtherMusicSource()
     {
-        return instance.currentMusicSource == 0 ? instance.musicSource_1 : instance.musicSource_0;
+        return Instance.currentMusicSource == 0 ? Instance.musicSource_1 : Instance.musicSource_0;
     }
 
     static private Coroutine DelayedCall(float delay, Action to)
     {
-        return instance.DelayedCall(to, delay, true);
+        return Instance.DelayedCall(to, delay, true);
     }
     static private void CancelRoutine(Coroutine routine)
     {
-        instance.StopCoroutine(routine);
+        Instance.StopCoroutine(routine);
     }
     static private void CancelMusicTransitionCalls()
     {
-        List<Coroutine> routine = instance.musicTransitionCalls;
+        List<Coroutine> routine = Instance.musicTransitionCalls;
         for (int i = 0; i < routine.Count; i++)
         {
             CancelRoutine(routine[i]);
         }
         routine.Clear();
 
-        List<Tween> tweens = instance.musicTransitionTweens;
+        List<Tween> tweens = Instance.musicTransitionTweens;
         for (int i = 0; i < tweens.Count; i++)
         {
             tweens[i].Kill();
@@ -223,7 +250,7 @@ public class DefaultAudioSources : MonoPersistent
     {
         if (fadeDuration > 0 && IsPlayingMusic())
         {
-            instance.musicTransitionTweens.Add(
+            Instance.musicTransitionTweens.Add(
                 source.DOFade(0, fadeDuration).OnComplete(delegate ()
                 {
                     StopSource(source);
@@ -264,10 +291,10 @@ public class DefaultAudioSources : MonoPersistent
             float end1stMusicDelay = overlap < 0.5f ? 0 : (overlap - 0.5f) * 2 * fadingDuration;
             float start2ndMusicDelay = overlap > 0.5f ? 0 : (0.5f - overlap) * 2 * fadingDuration;
 
-            instance.musicTransitionCalls.Add(
+            Instance.musicTransitionCalls.Add(
                 DelayedCall(end1stMusicDelay,
                     () => StopSourceFaded(firstSource, fadingDuration, null)));
-            instance.musicTransitionCalls.Add(
+            Instance.musicTransitionCalls.Add(
                 DelayedCall(start2ndMusicDelay, playMusicFaded));
         }
         else
@@ -343,7 +370,7 @@ public class DefaultAudioSources : MonoPersistent
     #region Check Resources
     private static bool CheckResources_MusicSource()
     {
-        if (instance.musicSource_0 == null || instance.musicSource_1 == null)
+        if (Instance.musicSource_0 == null || Instance.musicSource_1 == null)
         {
             Debug.LogError("Il manque 1 ou 2 AudioSource de musique sur l'instance de SoundManager");
             return false;
@@ -353,7 +380,7 @@ public class DefaultAudioSources : MonoPersistent
     }
     private static bool CheckResources_VoiceSource()
     {
-        if (instance.voiceSource == null)
+        if (Instance.voiceSource == null)
         {
             Debug.LogError("Aucune 'Voice' AudioSource sur l'instance de SoundManager");
             return false;
@@ -363,7 +390,7 @@ public class DefaultAudioSources : MonoPersistent
     }
     private static bool CheckResources_SFXSource()
     {
-        if (instance.SFXSource == null)
+        if (Instance.SFXSource == null)
         {
             Debug.LogError("Aucune 'SFX' AudioSource sur l'instance de SoundManager");
             return false;
@@ -373,7 +400,7 @@ public class DefaultAudioSources : MonoPersistent
     }
     private static bool CheckResources_Instance()
     {
-        if (instance == null)
+        if (Instance == null)
         {
             Debug.LogError("Aucune instance de Sound manager.");
             return false;

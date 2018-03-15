@@ -10,6 +10,7 @@ public abstract class SelfSpawningSingleton<T> : MonoBehaviour where T : SelfSpa
         if (_instance == null)
         {
             _instance = (T)this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -36,7 +37,6 @@ public abstract class SelfSpawningSingleton<T> : MonoBehaviour where T : SelfSpa
         if (_instance == null)
         {
             var obj = new GameObject("t");
-            DontDestroyOnLoad(obj);
             obj.AddComponent<T>();
             obj.name = _instance.GameObjectName();
         }

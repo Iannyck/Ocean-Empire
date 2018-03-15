@@ -9,7 +9,7 @@ public class PersistentLoader : MonoBehaviour
     public List<Object> persistentObjects;
 
     public static PersistentLoader instance;
-    private const string AssetName = "Persistent Loader";
+    private const string ASSETNAME = "CCC/Persistent Loader";
     static List<System.Action> callbacks = new List<System.Action>();
 
     private InitQueue queue;
@@ -91,10 +91,10 @@ public class PersistentLoader : MonoBehaviour
     {
         if (instance != null) return;
 
-        var obj = Resources.Load<GameObject>(AssetName);
+        var obj = Resources.Load<GameObject>(ASSETNAME);
         if (obj == null)
         {
-            Debug.LogError("Il doit y avoir un prefab nommé: " + AssetName + " avec le script PersistentLoader dans le dossier /Resources");
+            Debug.LogError("Il doit y avoir un prefab nommé: " + ASSETNAME + " avec le script PersistentLoader dans le dossier /Resources");
         }
         else
             GameObject.Instantiate(obj);
