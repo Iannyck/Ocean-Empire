@@ -386,6 +386,7 @@ MonoBehaviour:
   sceneManager: {fileID: 1311441156}
   palierManager: {fileID: 1532139182}
   fishSpawner: {fileID: 1532139186}
+  gameBuilder: {fileID: 0}
   submarine: {fileID: 0}
   map: {fileID: 0}
   fishLottery: {fileID: 0}
@@ -480,6 +481,7 @@ GameObject:
   - component: {fileID: 1532139182}
   - component: {fileID: 1532139185}
   - component: {fileID: 1532139186}
+  - component: {fileID: 1532139187}
   m_Layer: 0
   m_Name: Fish Spawning
   m_TagString: Untagged
@@ -559,6 +561,18 @@ MonoBehaviour:
   instantiator: {fileID: 601328787}
   palierManager: {fileID: 1532139182}
   fishPerPalier: 2
+--- !u!114 &1532139187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532139181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947e69bd8121d2547b0133fe1a708519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  densityMultiplier: 2.5
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0

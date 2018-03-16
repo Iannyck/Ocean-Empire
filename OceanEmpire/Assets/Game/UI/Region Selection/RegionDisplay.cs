@@ -33,7 +33,19 @@ public class RegionDisplay : MonoBehaviour
 
     public void Go()
     {
+        if(FishingFrenzy.Instance != null)
+        {
+            if (FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
+                FishingFrenzy.Instance.Activate();
+        }
+
         if (selectedMap != null)
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap.sceneToLoad), true);
+        {
+            GameSettings gameSettings = new GameSettings()
+            {
+                CanUseFishingFrenzy = true
+            };
+            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap.sceneToLoad, gameSettings), true);
+        }
     }
 }

@@ -21,6 +21,8 @@ public class Game : PublicSingleton<Game>
     public static GPComponents.SceneManager SceneManager { get { return instance.sceneManager; } }
     public static PalierManager PalierManager { get { return instance.palierManager; } }
     public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
+    public static GameBuilder GameBuilder { get { return instance.gameBuilder; } }
+    public static GameSettings GameSettings { get { return instance.gameSettings; } }
 
     [SerializeField] private UnitInstantiator instantiator;
     [SerializeField] private CameraMouvement cameraMouvement;
@@ -30,12 +32,16 @@ public class Game : PublicSingleton<Game>
     [SerializeField] private GPComponents.SceneManager sceneManager;
     [SerializeField] private PalierManager palierManager;
     [SerializeField] private FishSpawner fishSpawner;
+    [SerializeField] private GameBuilder gameBuilder;
+
+    private GameSettings gameSettings;
 
     [HideInInspector] public SubmarineMovement submarine;
     [HideInInspector] public FishingReport fishingReport;
     [HideInInspector] public MapInfo map;
     [HideInInspector] public FishLottery fishLottery;
     [HideInInspector] public Recolte_UI ui;
+
     public PendingFishGPC PendingFishGPC { get; private set; }
 
     // GAME STATE
@@ -45,6 +51,7 @@ public class Game : PublicSingleton<Game>
     public bool gameReady = false;
     [HideInInspector]
     public bool gameOver = false;
+    [HideInInspector]
     bool playerSpawned = false;
     static private event SimpleEvent onGameReady;
     static private event SimpleEvent onGameStart;
@@ -95,8 +102,10 @@ public class Game : PublicSingleton<Game>
             DragThreashold.instance.SetDragType(DragThreashold.DragType.InMenu);
     }
 
-    public void InitGame()
+    public void InitGame(GameSettings gameSettings)
     {
+        this.gameSettings = gameSettings;
+
         if (DragThreashold.instance != null)
             DragThreashold.instance.SetDragType(DragThreashold.DragType.InGame);
 

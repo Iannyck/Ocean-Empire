@@ -30,7 +30,9 @@ public class InGameOptions : WindowAnimation
             // NB: On fait ça pour prévenir la game de finir d'une toute autre façon
             Game.Instance.gameOver = true;
             UnlockTime();
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(Game.Instance.map.gameObject.scene.name), true);
+
+            var sceneMessage = new ToRecolteMessage(Game.Instance.map.gameObject.scene.name, Game.GameSettings);
+            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, sceneMessage, true);
         }
     }
 

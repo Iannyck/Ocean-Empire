@@ -29,6 +29,10 @@ public class GameDebug : MonoBehaviour {
 
     public void OnGameLoaded(Scene scene)
     {
-        scene.FindRootObject<GameBuilder>().Init(mapScene.SceneName);
+        GameSettings gameSettings = new GameSettings()
+        {
+            CanUseFishingFrenzy = false
+        };
+        scene.FindRootObject<GameBuilder>().Init(mapScene.SceneName, gameSettings);
     }
 }

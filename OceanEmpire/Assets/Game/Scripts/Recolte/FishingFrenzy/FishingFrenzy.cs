@@ -12,6 +12,7 @@ public class FishingFrenzy : MonoPersistent
     [SerializeField, Suffix("minutes")] float cooldown;
     [SerializeField, Suffix("minutes")] float duration;
     [SerializeField] DataSaver dataSaver;
+    [SerializeField] bool log = true;
 
     private const string SAVEKEY_NEXTAVAILABLETIME = "nxtAvblTime_UTC";
     private const string SAVEKEY_LASTACTIVATION = "lstActiv_UTC";
@@ -65,18 +66,25 @@ public class FishingFrenzy : MonoPersistent
 
     public void UpdateState()
     {
+        var wasState = State;
         var now_UTC = DateTime.UtcNow;
         if (lastActivation_UTC + Duration > now_UTC)
         {
             State = EffectState.CurrentlyActive;
+            if(log && wasState != EffectState.CurrentlyActive)
+                Debug.Log("Fishing Frenzy Activated");
         }
         else if (nextAvailableTime_UTC < now_UTC)
         {
             State = EffectState.Available;
+            if(log && wasState != EffectState.Available)
+                Debug.Log("Fishing Frenzy Available");
         }
         else
         {
             State = EffectState.InCooldown;
+            if(log && wasState == EffectState.CurrentlyActive)
+                Debug.Log("Fishing Frenzy Is Over");
         }
     }
 

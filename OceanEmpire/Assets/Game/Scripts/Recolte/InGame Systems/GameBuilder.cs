@@ -1,19 +1,21 @@
-﻿ 
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameBuilder : MonoBehaviour {
-
+public class GameBuilder : MonoBehaviour
+{
     public const string SCENENAME = "GameBuilder";
-    
+
     string mapSceneName;
     bool mapLoaded = false;
     bool uiLoaded = false;
+    GameSettings gameSettings;
 
-    public void Init(string mapScene)
+    public void Init(string mapScene, GameSettings gameSettings)
     {
+        this.gameSettings = gameSettings;
         mapSceneName = mapScene;
         PersistentLoader.LoadIfNotLoaded(Build);
     }
@@ -63,7 +65,7 @@ public class GameBuilder : MonoBehaviour {
     {
         if (uiLoaded && mapLoaded)
         {
-            Game.Instance.InitGame();
+            Game.Instance.InitGame(gameSettings);
         }
     }
 }

@@ -7,15 +7,17 @@ using UnityEngine.SceneManagement;
 public struct ToRecolteMessage : SceneMessage
 {
     private string mapScene;
+    private GameSettings gameSettings;
 
-    public ToRecolteMessage(string mapScene)
+    public ToRecolteMessage(string mapScene, GameSettings gameSettings)
     {
         this.mapScene = mapScene;
+        this.gameSettings = gameSettings;
     }
 
     public void OnLoaded(Scene scene)
     {
-        scene.FindRootObject<GameBuilder>().Init(mapScene);
+        scene.FindRootObject<GameBuilder>().Init(mapScene, gameSettings);
     }
 
     public void OnOutroComplete()

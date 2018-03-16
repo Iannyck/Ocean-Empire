@@ -41,11 +41,26 @@ public class FishSpawner : MonoBehaviour
         {
             if (!paliers[i].IsActive)
                 continue;
-            SpawnOnEdgesOfPalier(paliers[i].Index, fishPerPalier);
+            SpawnOnEdgesOfPalier(paliers[i].Index, GetNewFishToSpawnAt(paliers[i].Index));
             paliers[i].HasBeenSeen.FlipValue();
         }
 
         PalierManager.OnPalierActivated += OnPalierActivated;
+    }
+
+    private int GetNewFishToSpawnAt(int palierIndex)
+    {
+        float height = PalierManager.PalierPlans.GetPalierCenter(palierIndex);
+        float density = FishLottery.GetDensityAt(height);
+        float theoreticalFishCount = density * fishPerPalier;
+        int realCount = Mathf.FloorToInt(theoreticalFishCount);
+
+        // Ex: 5.35 fish - 5      ->   35% chance of +1 fish
+        if (Random.value < theoreticalFishCount - realCount)
+        {
+            realCount++;
+        }
+        return realCount; 
     }
 
     void OnPalierActivated(Palier palier)
@@ -53,7 +68,7 @@ public class FishSpawner : MonoBehaviour
         // New Fish
         if (!palier.HasBeenSeen)
         {
-            SpawnWithinPalier(palier.Index, fishPerPalier);
+            SpawnWithinPalier(palier.Index, GetNewFishToSpawnAt(palier.Index));
             palier.HasBeenSeen.FlipValue();
         }
 
