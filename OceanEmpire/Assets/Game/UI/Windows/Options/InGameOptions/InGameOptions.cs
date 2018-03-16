@@ -31,7 +31,7 @@ public class InGameOptions : WindowAnimation
             Game.Instance.gameOver = true;
             UnlockTime();
 
-            var sceneMessage = new ToRecolteMessage(Game.Instance.map.gameObject.scene.name, Game.GameSettings);
+            var sceneMessage = new ToRecolteMessage(Game.GameSettings);
             LoadingScreen.TransitionTo(GameBuilder.SCENENAME, sceneMessage, true);
         }
     }

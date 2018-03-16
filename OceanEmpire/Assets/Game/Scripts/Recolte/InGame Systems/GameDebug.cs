@@ -1,16 +1,17 @@
-﻿ 
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameDebug : MonoBehaviour {
+public class GameDebug : MonoBehaviour
+{
 
     public SceneInfo mapScene;
 
-    void Start ()
+    void Start()
     {
-        if(SceneManager.sceneCount != 1)
+        if (SceneManager.sceneCount != 1)
             return;
 
         PersistentLoader.LoadIfNotLoaded(DebugStartGame);
@@ -29,10 +30,11 @@ public class GameDebug : MonoBehaviour {
 
     public void OnGameLoaded(Scene scene)
     {
-        GameSettings gameSettings = new GameSettings()
-        {
-            CanUseFishingFrenzy = false
-        };
-        scene.FindRootObject<GameBuilder>().Init(mapScene.SceneName, gameSettings);
+        GameSettings gameSettings = new GameSettings
+            (
+            mapScene: mapScene.SceneName,
+            canUseFishingFrenzy: false
+            );
+        scene.FindRootObject<GameBuilder>().Init(gameSettings);
     }
 }

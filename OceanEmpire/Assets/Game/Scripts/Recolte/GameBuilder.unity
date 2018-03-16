@@ -386,7 +386,7 @@ MonoBehaviour:
   sceneManager: {fileID: 1311441156}
   palierManager: {fileID: 1532139182}
   fishSpawner: {fileID: 1532139186}
-  gameBuilder: {fileID: 0}
+  gameBuilder: {fileID: 1311441152}
   submarine: {fileID: 0}
   map: {fileID: 0}
   fishLottery: {fileID: 0}
