@@ -33,7 +33,7 @@ public class RegionDisplay : MonoBehaviour
 
     public void Go()
     {
-        if(FishingFrenzy.Instance != null)
+        if (FishingFrenzy.Instance != null)
         {
             if (FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
                 FishingFrenzy.Instance.Activate();
@@ -41,11 +41,12 @@ public class RegionDisplay : MonoBehaviour
 
         if (selectedMap != null)
         {
-            GameSettings gameSettings = new GameSettings()
-            {
-                CanUseFishingFrenzy = true
-            };
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(selectedMap.sceneToLoad, gameSettings), true);
+            GameSettings gameSettings = new GameSettings
+                (
+                mapScene: selectedMap.sceneToLoad,
+                canUseFishingFrenzy: true
+                );
+            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
         }
     }
 }

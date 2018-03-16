@@ -7,24 +7,22 @@ using UnityEngine.SceneManagement;
 public class GameBuilder : MonoBehaviour
 {
     public const string SCENENAME = "GameBuilder";
-
-    string mapSceneName;
+    
     bool mapLoaded = false;
     bool uiLoaded = false;
     GameSettings gameSettings;
 
-    public void Init(string mapScene, GameSettings gameSettings)
+    public void Init(GameSettings gameSettings)
     {
         this.gameSettings = gameSettings;
-        mapSceneName = mapScene;
         PersistentLoader.LoadIfNotLoaded(Build);
     }
 
     void Build()
     {
         // Load All Scenes
-        if (!Scenes.IsActiveOrBeingLoaded(mapSceneName))
-            Scenes.LoadAsync(mapSceneName, LoadSceneMode.Additive, OnMapLoaded);
+        if (!Scenes.IsActiveOrBeingLoaded(gameSettings.MapScene))
+            Scenes.LoadAsync(gameSettings.MapScene, LoadSceneMode.Additive, OnMapLoaded);
         else
             OnMapLoaded();
 
@@ -45,7 +43,7 @@ public class GameBuilder : MonoBehaviour
 
     void OnMapLoaded()
     {
-        OnMapLoaded(SceneManager.GetSceneByName(mapSceneName));
+        OnMapLoaded(SceneManager.GetSceneByName(gameSettings.MapScene));
     }
 
     void OnUILoaded(Scene scene)
