@@ -24,6 +24,8 @@ CheatsWindow: 50
 ******** INGAME ********
 ProposeRefill: 5
 
+Fishing Frenzy is ACTIVATED !!: 7
+
 
 
 ******** BOTH ********

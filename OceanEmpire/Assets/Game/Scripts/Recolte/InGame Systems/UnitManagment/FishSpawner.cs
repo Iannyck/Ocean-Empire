@@ -114,8 +114,13 @@ public class FishSpawner : MonoBehaviour
         if (fish == null)
             return;
 
+        SpawnAt(fish, position);
+    }
+
+    void SpawnAt(GameObject fishPrefab, Vector2 position)
+    {
         // Melee capture GPC
-        var meleeCapturable = fish.GetComponent<MeleeCapturable>();
+        var meleeCapturable = fishPrefab.GetComponent<MeleeCapturable>();
         if (meleeCapturable != null)
         {
             PendingGPC.AddPendingFishGPC(new GPComponents.GPC_MeleeCapture(Game.SceneManager, meleeCapturable, position));
@@ -123,7 +128,7 @@ public class FishSpawner : MonoBehaviour
         }
 
         // Harpoon capture GPC
-        var harpoonCapturable = fish.GetComponent<HarpoonCapturable>();
+        var harpoonCapturable = fishPrefab.GetComponent<HarpoonCapturable>();
         if (harpoonCapturable != null)
         {
             PendingGPC.AddPendingFishGPC(new GPComponents.GPC_HarpoonCapture(Game.SceneManager, harpoonCapturable, position));
@@ -132,6 +137,6 @@ public class FishSpawner : MonoBehaviour
 
         // Not eligible for a GPC
         Debug.LogWarning("Spawned a fish that was not elligible for any type of GPC");
-        Instantiator.Spawn(fish, position);
+        Instantiator.Spawn(fishPrefab, position);
     }
 }

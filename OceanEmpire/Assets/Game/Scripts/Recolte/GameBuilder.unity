@@ -573,6 +573,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   densityMultiplier: 2.5
+  popupPrefab: {fileID: 114380347530104044, guid: 52c9d93438428c64a8434976d6018570,
+    type: 2}
+  popupSpawnDelay: 1
 --- !u!1 &1586854656
 GameObject:
   m_ObjectHideFlags: 0

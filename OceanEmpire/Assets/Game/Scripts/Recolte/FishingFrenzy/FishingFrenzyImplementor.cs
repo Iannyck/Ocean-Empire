@@ -6,6 +6,9 @@ public class FishingFrenzyImplementor : MonoBehaviour
 {
     public float densityMultiplier = 1.5f;
 
+    [SerializeField] FishingFrenzyActivatedPopup popupPrefab;
+    [SerializeField] float popupSpawnDelay = 1f;
+
     void OnEnable()
     {
         Game.OnGameReady += OnGameReady;
@@ -24,6 +27,8 @@ public class FishingFrenzyImplementor : MonoBehaviour
         {
             Debug.Log("Fish density x" + densityMultiplier);
             Game.Instance.fishLottery.densityMultiplier *= densityMultiplier;
+
+            this.DelayedCall(() => popupPrefab.DuplicateGO().Animate(), popupSpawnDelay);
         }
     }
 }
