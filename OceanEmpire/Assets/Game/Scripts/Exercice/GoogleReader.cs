@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,6 +59,9 @@ public class GoogleReader : MonoBehaviour
                                "0|0|0|Sun Feb 11 17:52:40 EST 2018\n\r" +
                                "90|0|0|Sun Feb 11 17:52:42 EST 2018\n\r" +
                                "90|0|0|Sun Feb 11 17:52:50 EST 2018\n\r";
+
+    // Exemple Key
+    const string key = "abcdefg";
 
     public static bool LogLesInfoDesThread = false;
 
@@ -201,8 +205,13 @@ public class GoogleReader : MonoBehaviour
         // CODE EXECUTER QUAND ON EST SUR PC
         string document = exempleFile;
 
+        // EXEMPLE DE FICHIER ENCRYPTER
+        //string cryptDocument = TestEncrypt(document);
+        //string decryptDocument = TestDecrypt(cryptDocument);
+        //Debug.Log("DecryptDocument" + decryptDocument);
+
         // On desire decoupe le string pour trouver tous les activites
-        List<Activity> result = new List<Activity>();
+        List <Activity> result = new List<Activity>();
 
         bool readingDate = false;
         string probWalk = "";
@@ -350,4 +359,39 @@ public class GoogleReader : MonoBehaviour
         string modifiedValue = value.Replace(toDelete, "");
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
     }
+    /*
+    private static string TestEncrypt(string input)
+    {
+        char[] output = input.ToCharArray();
+        char[] charKey = key.ToCharArray();
+        for (int i = 0; i < charKey.Length; i++)
+        {
+            int result = (output[i] & charKey[i]) / 2;
+            output[i] = (char)result;
+        }
+        for (int i = charKey.Length - 1; i < output.Length; i++)
+        {
+            int result = output[i] & charKey[charKey.Length - 1];
+            output[i] = (char)result;
+        }
+        return new string(output);
+    }
+
+    private static string TestDecrypt(string input)
+    {
+        char[] output = input.ToCharArray();
+        char[] charKey = key.ToCharArray();
+        for (int i = 0; i < charKey.Length; i++)
+        {
+            int result = (output[i] & charKey[i]) * 2;
+            output[i] = (char)result;
+        }
+        for (int i = charKey.Length - 1; i < output.Length; i++)
+        {
+            int result = output[i] & charKey[charKey.Length - 1];
+            output[i] = (char)result;
+        }
+        return output.ToString();
+    }
+    */
 }
