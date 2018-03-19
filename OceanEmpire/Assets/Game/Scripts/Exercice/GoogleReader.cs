@@ -1,10 +1,11 @@
-﻿ 
+﻿
 using CCC.Threading;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using UnityEngine;
@@ -12,6 +13,8 @@ using UnityEngine.UI;
 
 public class GoogleReader : MonoBehaviour
 {
+    public static string keyStr;
+
     public class Activity
     {
         public List<int> probabilities;
@@ -61,7 +64,8 @@ public class GoogleReader : MonoBehaviour
                                "90|0|0|Sun Feb 11 17:52:50 EST 2018\n\r";
 
     // Exemple Key
-    const string key = "abcdefg";
+    private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+    private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
     public static bool LogLesInfoDesThread = false;
 
@@ -134,6 +138,11 @@ public class GoogleReader : MonoBehaviour
 
             // Meme code que pour PC
             List<Activity> result = new List<Activity>();
+            if (string.IsNullOrEmpty(keyStr))
+                return;
+
+            document = Decrypt(document);
+            Debug.Log("Document Decrypted : " + document);
 
             bool readingDate = false;
             string probWalk = "";
@@ -204,11 +213,6 @@ public class GoogleReader : MonoBehaviour
 
         // CODE EXECUTER QUAND ON EST SUR PC
         string document = exempleFile;
-
-        // EXEMPLE DE FICHIER ENCRYPTER
-        //string cryptDocument = TestEncrypt(document);
-        //string decryptDocument = TestDecrypt(cryptDocument);
-        //Debug.Log("DecryptDocument" + decryptDocument);
 
         // On desire decoupe le string pour trouver tous les activites
         List <Activity> result = new List<Activity>();
@@ -359,39 +363,33 @@ public class GoogleReader : MonoBehaviour
         string modifiedValue = value.Replace(toDelete, "");
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
     }
-    /*
-    private static string TestEncrypt(string input)
-    {
-        char[] output = input.ToCharArray();
-        char[] charKey = key.ToCharArray();
-        for (int i = 0; i < charKey.Length; i++)
-        {
-            int result = (output[i] & charKey[i]) / 2;
-            output[i] = (char)result;
-        }
-        for (int i = charKey.Length - 1; i < output.Length; i++)
-        {
-            int result = output[i] & charKey[charKey.Length - 1];
-            output[i] = (char)result;
-        }
-        return new string(output);
-    }
 
-    private static string TestDecrypt(string input)
+    private static string Decrypt(string CipherText)
     {
-        char[] output = input.ToCharArray();
-        char[] charKey = key.ToCharArray();
-        for (int i = 0; i < charKey.Length; i++)
-        {
-            int result = (output[i] & charKey[i]) * 2;
-            output[i] = (char)result;
-        }
-        for (int i = charKey.Length - 1; i < output.Length; i++)
-        {
-            int result = output[i] & charKey[charKey.Length - 1];
-            output[i] = (char)result;
-        }
-        return output.ToString();
+        RijndaelManaged aes = new RijndaelManaged();
+        aes.BlockSize = 128;
+        aes.KeySize = 256;
+
+        aes.Mode = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+
+        byte[] keyArr = Convert.FromBase64String(keyStr);
+        byte[] KeyArrBytes32Value = new byte[32];
+        Array.Copy(keyArr, KeyArrBytes32Value, 32);
+
+        // Initialization vector.   
+        // It could be any value or generated using a random number generator.
+        byte[] ivArr = { 1, 2, 3, 4, 5, 6, 6, 5, 4, 3, 2, 1, 7, 7, 7, 7 };
+        byte[] IVBytes16Value = new byte[16];
+        Array.Copy(ivArr, IVBytes16Value, 16);
+
+        aes.Key = KeyArrBytes32Value;
+        aes.IV = IVBytes16Value;
+
+        ICryptoTransform decrypto = aes.CreateDecryptor();
+
+        byte[] encryptedBytes = Convert.FromBase64CharArray(CipherText.ToCharArray(), 0, CipherText.Length);
+        byte[] decryptedData = decrypto.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+        return ASCIIEncoding.UTF8.GetString(decryptedData);
     }
-    */
 }

@@ -3,26 +3,27 @@ package com.UQAC.OceanEmpire;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
-import com.unity3d.player.UnityPlayer;
-
+import android.util.Base64;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Date;
-import java.util.List;
+import java.security.Key;
 import java.util.Calendar;
+import java.util.List;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class ActivityDetection extends IntentService {
 
@@ -36,6 +37,45 @@ public class ActivityDetection extends IntentService {
         super(name);
     }
 
+	public static String key;
+
+
+    public static String Crypt(String text)
+    {       
+	    if (TextUtils.isEmpty(text)) {
+			return ""; // or break, continue, throw
+		}
+        try
+        {   
+            if (TextUtils.isEmpty(key)) {
+				// Get the Key
+				if(com.UQAC.OceanEmpire.UnityPlayerActivity.myInstance != null){
+                // can add delay to not spam this
+					key = Base64.encodeToString(com.UQAC.OceanEmpire.UnityPlayerActivity.myInstance.key.getEncoded(),0);
+					com.UQAC.OceanEmpire.UnityPlayerActivity.myInstance.SendMessageToUnity(key);
+					return Crypt(text);
+				}
+			}
+            byte[] key_Array = Base64.decode(key,0);
+            Cipher _Cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+  
+            // It could be any value or generated using a random number generator.
+            byte[] iv = { 1, 2, 3, 4, 5, 6, 6, 5, 4, 3, 2, 1, 7, 7, 7, 7 };
+            IvParameterSpec ivspec = new IvParameterSpec(iv);
+
+            Key secretKey = new SecretKeySpec(key_Array, "AES");
+            _Cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);       
+
+            return Base64.encodeToString(_Cipher.doFinal(text.getBytes()),0);
+        }
+        catch (Exception e)
+        {
+            System.out.println("[Exception]:"+e.getMessage());
+        }
+        return null;
+    }
+	
+	
     @Override
     public void onCreate() {
         super.onCreate();
@@ -72,9 +112,8 @@ public class ActivityDetection extends IntentService {
 
     private void writeToFile(String data) {
         try {
-            outputStreamWriter.append(data);
-            outputStreamWriter.append("" + Calendar.getInstance().getTime());
-            outputStreamWriter.append("\n\r");
+			String outputToWrite = data + Calendar.getInstance().getTime() + "\n\r";
+            outputStreamWriter.append(Crypt(outputToWrite));
             outputStreamWriter.close();
         }
         catch (IOException e) {

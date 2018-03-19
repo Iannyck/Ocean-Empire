@@ -12,6 +12,8 @@ import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyProperties;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -21,12 +23,33 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.util.Calendar;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 public class UnityPlayerActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 {
-    protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
+    protected UnityPlayer mUnityPlayer = null; // don't change the name of this variable; referenced from native code
+
+    static public UnityPlayerActivity myInstance = null;
 
     public GoogleApiClient mApiClient;
+
+    public SecretKey key;
+
+    public void SendMessageToUnity(String msg){
+        mUnityPlayer.UnitySendMessage("GoogleActivities(Clone)", "ReceiveAndroidMessage", msg);
+    }
+
+    void GenerateKey(){
+        try {
+            key = KeyGenerator.getInstance("AES").generateKey();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
     // Setup activity layout
     @Override protected void onCreate (Bundle savedInstanceState)
@@ -59,6 +82,10 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
                 .build();
 
         mApiClient.connect();
+
+        GenerateKey();
+
+        myInstance = this;
     }
 
     @Override protected void onNewIntent(Intent intent)
@@ -74,6 +101,7 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
     @Override protected void onDestroy ()
     {
         mUnityPlayer.quit();
+        myInstance = null;
         super.onDestroy();
     }
 
