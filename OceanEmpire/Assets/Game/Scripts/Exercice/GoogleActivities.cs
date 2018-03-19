@@ -137,6 +137,13 @@ public class GoogleActivities : MonoPersistent
         GoogleReader.ResetActivitiesSave();
     }
 
+    // TODO : Pourrait etre deplacer dans un autre singleton
+    public void ReceiveAndroidMessage(string message)
+    {
+        GoogleReader.keyStr = message;
+        Debug.Log(message);
+    }
+
     /*
 
     private void FillReport(List<GoogleReader.Activity> activites, ref Report result)

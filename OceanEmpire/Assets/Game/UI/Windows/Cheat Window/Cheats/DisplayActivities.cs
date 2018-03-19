@@ -13,7 +13,7 @@ public class DisplayActivities : MonoBehaviour {
     {
         anim.Open(delegate ()
         {
-            MessagePopup.DisplayMessage("Showing The Activity File");
+            MessagePopup.DisplayMessage("Showing The Activities");
             string allActivities = "";
             List<GoogleReader.Activity> activities = GoogleActivities.instance.activities;
             for (int i = 0; i < activities.Count; i++)
