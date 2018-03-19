@@ -27,6 +27,7 @@ public class GPCTreeManager : MonoBehaviour
             }
             else if (result == GPCState.SUCCESS)
             {
+                print("endgame");
                 gameSystem.EndGame();
             }
         }

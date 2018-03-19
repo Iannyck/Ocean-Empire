@@ -21,11 +21,12 @@ public abstract class HideShowBaseDrawer : PropertyDrawer
     {
         if (IsTrue(property) == IsShownIfMemberTrue)
             EditorGUI.PropertyField(position, property, true);
+
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        return IsTrue(property) == IsShownIfMemberTrue ? base.GetPropertyHeight(property, label) : -2;
+        return IsTrue(property) == IsShownIfMemberTrue ? EditorGUI.GetPropertyHeight(property, label) : -2;
     }
 
     protected bool IsTrue(SerializedProperty property)

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
-  forceStart: 0
+  forceStart: 1
   tutorialEvents:
   - eventID: FocusOnSubmarine
     functionName: FocusOnSubmarine

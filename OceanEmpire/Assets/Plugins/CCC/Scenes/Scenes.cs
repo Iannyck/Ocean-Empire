@@ -58,6 +58,7 @@ public static class Scenes
 
         ListenIfNotListening();
 
+        Debug.Log("Loading: " + name);
         ScenePromise scenePromise = new ScenePromise(name, callback);
         loadingScenes.Add(scenePromise);
         SceneManager.LoadScene(name, mode);
@@ -74,6 +75,7 @@ public static class Scenes
 
         ListenIfNotListening();
 
+        Debug.Log("Loading async: " + name);
         ScenePromise scenePromise = new ScenePromise(name, callback);
         loadingScenes.Add(scenePromise);
         SceneManager.LoadSceneAsync(name, mode);
