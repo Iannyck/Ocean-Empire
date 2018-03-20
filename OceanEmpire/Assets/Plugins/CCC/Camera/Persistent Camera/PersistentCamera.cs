@@ -13,8 +13,15 @@ public class PersistentCamera : MonoPersistent
 
     private void Awake()
     {
-        instance = this;
-        ApplyEnable();
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            ApplyEnable();
+        }
     }
 
     public override void Init(Action onComplete)

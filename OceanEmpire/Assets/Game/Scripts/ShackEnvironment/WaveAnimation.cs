@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveShaker : MonoBehaviour
+public class WaveAnimation : MonoBehaviour
 {
     [System.Serializable]
     public struct MovementData
@@ -12,10 +12,12 @@ public class WaveShaker : MonoBehaviour
         public float CycleOffset;
     }
     [SerializeField] bool _horizontalMovement;
-
-    //[Forward]
     [ShowIf("_horizontalMovement", HideShowBaseAttribute.Type.Field)]
     [SerializeField] MovementData _horizontalData;
+
+    [SerializeField] bool _verticalMovement;
+    [ShowIf("_verticalMovement", HideShowBaseAttribute.Type.Field)]
+    [SerializeField] MovementData _verticalData;
 
     Vector3 anchorPos;
     Transform tr;
@@ -34,7 +36,11 @@ public class WaveShaker : MonoBehaviour
         {
             pos.x += GetDelta(ref _horizontalData);
         }
-        tr.position = pos;
+        if (_verticalMovement)
+        {
+            pos.y += GetDelta(ref _verticalData);
+        }
+        tr.localPosition = pos;
 
         UpdateTimer();
     }
@@ -43,6 +49,7 @@ public class WaveShaker : MonoBehaviour
     {
         timer += Time.deltaTime;
     }
+
     float GetDelta(ref MovementData movementData)
     {
         var radOffset = movementData.CycleOffset * (Mathf.PI * 2);
