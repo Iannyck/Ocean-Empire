@@ -69,8 +69,9 @@ namespace Tutorial
                 {
                     TutorialEvent currentTutorialEvent = tutorialEvents[i];
                     if (currentTutorialEvent.startAfterAnotherStep)
-                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () { Execute(currentTutorialEvent, tutorialEvents[i].useRealTime); };
-
+                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () {
+                            Execute(currentTutorialEvent, currentTutorialEvent.useRealTime);
+                        };
                 }
 
                 // On peut ensuite commencer les events qui sont start au debut
@@ -80,7 +81,7 @@ namespace Tutorial
                     if (currentEvent.alreadyExecute)
                         continue;
                     if (currentEvent.invokeOnGameStarted)
-                        Execute(currentEvent, tutorialEvents[i].useRealTime);
+                        Execute(currentEvent, currentEvent.useRealTime);
                 }
             }
         }
