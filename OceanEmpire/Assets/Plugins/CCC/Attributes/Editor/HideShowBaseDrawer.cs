@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -36,13 +38,26 @@ public abstract class HideShowBaseDrawer : PropertyDrawer
         if (so.isEditingMultipleObjects)
             return DefaultMemberValue;
 
-        UnityEngine.Object instance = so.targetObject;
-        //Type t = instance.GetType();
-        //while (t != null)
-        //{
-        //    Debug.Log(t.Name);
-        //    t = t.BaseType;
-        //}
+        object instance = so.targetObject;
+
+        string parentPath = property.propertyPath;
+        if (parentPath.Contains("."))
+            parentPath = parentPath.Remove(parentPath.LastIndexOf('.'));
+        else
+            parentPath = "";
+
+        if (parentPath == "")
+        {
+            // Nous somme déjà au top
+            instance = so.targetObject;
+        }
+        else
+        {
+            // Nous devons allez creux
+            instance = GetSubObjectFromPath(so.targetObject, parentPath);
+            if (instance == null)
+                return DefaultMemberValue;
+        }
 
         Type type = instance.GetType();
         HideShowBaseAttribute.Type memberType = GetMemberType();
@@ -111,5 +126,46 @@ public abstract class HideShowBaseDrawer : PropertyDrawer
                 break;
         }
         return DefaultMemberValue;
+    }
+
+    object GetSubObjectFromPath(object parentObject, string objectPath)
+    {
+        string[] fieldNames = objectPath.Split('.');
+        Type type = parentObject.GetType();
+        FieldInfo fieldInfo = null;
+
+        try
+        {
+            for (int i = 0; i < fieldNames.Length; i++)
+            {
+                if (fieldNames[i] == "Array")
+                {
+                    i++;
+                    string dataIndex = fieldNames[i].Substring(5, fieldNames[i].Length - 6);
+                    int index = int.Parse(dataIndex);
+                    if (parentObject is IList)
+                    {
+                        var list= (IList)parentObject;
+                        if (list.Count <= index)
+                            return null;
+                        parentObject = list[index];
+                    }
+                    i++;
+                }
+                else
+                {
+                    fieldInfo = type.GetField(fieldNames[i], BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    parentObject = fieldInfo.GetValue(parentObject);
+                    type = parentObject.GetType();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("Error in Hide/Show: " + e.Message);
+            return null;
+        }
+
+        return parentObject;
     }
 }
