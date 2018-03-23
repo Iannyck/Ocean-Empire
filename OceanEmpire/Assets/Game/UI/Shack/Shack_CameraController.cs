@@ -12,8 +12,8 @@ public class Shack_CameraController : MonoBehaviour
     [SerializeField] private Transform _recolteDestination;
     [SerializeField] private Transform _shopDestination;
 
-    private const int SECTION_MAX = 1;
-    private const int SECTION_MIN = -1;
+    public const int SECTION_MAX = 1;
+    public const int SECTION_MIN = -1;
     private Section _currentSection;
     private Vector3 _currentDestination;
     private Transform _cameraT;
@@ -35,29 +35,58 @@ public class Shack_CameraController : MonoBehaviour
 
     public void MoveLeft()
     {
-        _currentSection = (Section)Mathf.Min(SECTION_MAX, (int)_currentSection - 1);
+        _currentSection = (Section)Mathf.Max(SECTION_MIN, (int)_currentSection - 1);
         UpdateCameraDestination();
     }
 
     public void GoTo(Section section)
     {
-        _currentSection = section;
+        _currentSection = (Section)Mathf.Clamp((int)section, SECTION_MIN, SECTION_MAX);
         UpdateCameraDestination();
     }
 
     void UpdateCameraDestination()
     {
-        switch (_currentSection)
+        _currentDestination = GetSectionPosition(_currentSection);
+    }
+
+    public float CameraSectionPosition
+    {
+        get
+        {
+            float camX = _cameraT.position.x;
+            float previousSectionX = float.PositiveInfinity;
+
+            for (int i = SECTION_MIN; i <= SECTION_MAX; i++)
+            {
+                float sectionX = GetSectionPosition((Section)i).x;
+                if(camX < sectionX)
+                {
+                    if (previousSectionX == float.PositiveInfinity)
+                        return SECTION_MIN;
+                    return (camX - previousSectionX) / (sectionX - previousSectionX) + i - 1;
+                }
+                else
+                {
+                    previousSectionX = sectionX;
+                }
+            }
+            return SECTION_MAX;
+        }
+    }
+
+    public Vector3 GetSectionPosition(Section section)
+    {
+        switch (section)
         {
             case Section.Calendar:
-                _currentDestination = _calendarDestination.position;
-                break;
+                return _calendarDestination.position;
             case Section.Recolte:
-                _currentDestination = _recolteDestination.position;
-                break;
+                return _recolteDestination.position;
             case Section.Shop:
-                _currentDestination = _shopDestination.position;
-                break;
+                return _shopDestination.position;
+            default:
+                return Vector3.zero;
         }
     }
 

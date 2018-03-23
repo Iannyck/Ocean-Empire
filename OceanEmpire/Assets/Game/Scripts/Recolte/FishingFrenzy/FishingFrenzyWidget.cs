@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class FishingFrenzyWidget : MonoBehaviour
@@ -22,6 +23,8 @@ public class FishingFrenzyWidget : MonoBehaviour
     [SerializeField] Color col_availableShine;
     [SerializeField] Color col_inCooldownText;
     [SerializeField] Color col_inCooldownBG;
+
+    public UnityEvent OnStateUpdated = new UnityEvent();
 
     Color col_notInCooldownText;
     Color col_notInCooldownBG;
@@ -117,6 +120,9 @@ public class FishingFrenzyWidget : MonoBehaviour
 
         txt_active.enabled = true;
         txt_active.text = str.ToString();
+
+        // Event
+        OnStateUpdated.Invoke();
     }
     public void Set_Available()
     {
@@ -126,6 +132,9 @@ public class FishingFrenzyWidget : MonoBehaviour
         img_shine.color = col_availableShine;
 
         txt_available.enabled = true;
+
+        // Event
+        OnStateUpdated.Invoke();
     }
     public void Set_InCooldown(int remainingHours, int remainingMinutes, int remainingSeconds)
     {
@@ -157,10 +166,16 @@ public class FishingFrenzyWidget : MonoBehaviour
 
         txt_title.color = col_inCooldownText;
         img_bg.color = col_inCooldownBG;
+
+        // Event
+        OnStateUpdated.Invoke();
     }
     public void Set_Error()
     {
         Common();
         txt_error.enabled = true;
+
+        // Event
+        OnStateUpdated.Invoke();
     }
 }
