@@ -51,6 +51,7 @@ namespace CCC.UI.Animation
                 .SetEase(ease)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetUpdate(independantUpdate);
+            tween.Goto(duration / 2, true);
         }
 
         public void Stop()

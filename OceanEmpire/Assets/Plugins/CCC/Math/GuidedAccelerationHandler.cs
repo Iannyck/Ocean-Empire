@@ -7,6 +7,7 @@ public class GuidedAccelerationHandler
 {
     public float CurrentAcceleration { get; private set; }
     public float MaxTargetAcceleration;
+    private const float CatchUpMultiplier = 1.1f;
 
     public GuidedAccelerationHandler(float maxTargetAcceleration)
     {
@@ -15,32 +16,26 @@ public class GuidedAccelerationHandler
     }
     public void UpdateAcceleration(float targetPosition, float currentPosition, float currentSpeed, float deltaTime)
     {
-        var dD = targetPosition - currentPosition;
-        var maxAcc = (((dD / deltaTime) - currentSpeed) / deltaTime).Abs();
-        var standardAcc = dD.Sign() * MaxTargetAcceleration.Abs();
+        if (MaxTargetAcceleration <= 0)
+            return;
 
-        //Si on ne va pas dans la bonne direction, on accelere dans la bonne
-        if (currentSpeed.Sign() != dD.Sign())
+        var d = targetPosition - currentPosition;
+        var a = MaxTargetAcceleration * d.Sign();
+        var idealETA = Mathf.Sqrt(2 * d / a);
+
+        float idealVelocity = 0;
+        if (idealETA.Abs() < deltaTime)
         {
-            CurrentAcceleration = standardAcc;
+            // Nous ne devons pas dépacer la cible en 1 frame
+            idealVelocity = d / deltaTime;
         }
         else
         {
-            var a = -(currentSpeed * currentSpeed) / (2 * dD);
-            float borne = standardAcc.Abs();
-            if (a.Abs() >= borne)
-            {
-                //On ralentie
-                CurrentAcceleration = a.Clamped(-borne, borne);
-            }
-            else
-            {
-                //On accelère
-                CurrentAcceleration = standardAcc;
-            }
+            // Nous visons la vitesse moyenne entre la frame courrante et la frame suivante
+            idealVelocity = (2 * idealETA - deltaTime) * a / 2;
         }
 
-        //On clamp l'acceleration pour etre certain de ne pas dépasser la cible en 1 frame
-        CurrentAcceleration = CurrentAcceleration.Clamped(-maxAcc, maxAcc);
+        var wantedAcceleration = (idealVelocity - currentSpeed) / deltaTime;
+        CurrentAcceleration = Mathf.Clamp(wantedAcceleration, -MaxTargetAcceleration * CatchUpMultiplier, MaxTargetAcceleration * CatchUpMultiplier);
     }
 }

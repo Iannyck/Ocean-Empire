@@ -1,13 +1,9 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameDebug : MonoBehaviour
 {
-
-    public SceneInfo mapScene;
+    public PrebuiltMapData map;
 
     void Start()
     {
@@ -31,10 +27,10 @@ public class GameDebug : MonoBehaviour
     public void OnGameLoaded(Scene scene)
     {
         GameSettings gameSettings = new GameSettings
-            (
-            mapScene: mapScene.SceneName,
+        (
+            mapScene: map.MapData.GameSceneName,
             canUseFishingFrenzy: false
-            );
+        );
         scene.FindRootObject<GameBuilder>().Init(gameSettings);
     }
 }

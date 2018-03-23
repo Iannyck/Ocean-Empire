@@ -59,7 +59,7 @@ public class ItemDisplay2 : MonoBehaviour {
     {
         if (PlayerCurrency.GetCurrency(type) > displayableCategory.GetPrice(type))
         {
-            ConfirmBuy.OpenWindowAndConfirm(null, type, (hasConfirmed) =>
+            ConfirmBuy.OpenWindowAndConfirm(type, (hasConfirmed) =>
             {
                 if (hasConfirmed)
                 {

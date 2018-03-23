@@ -1,8 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-[System.Serializable]
-[CreateAssetMenu(menuName = "Ocean Empire/Fish Repartition")]
+[CreateAssetMenu(menuName = "Ocean Empire/Map/Fish Repartition")]
 public class FishRepartition : ScriptableObject
 {
     public GameObject prefab;

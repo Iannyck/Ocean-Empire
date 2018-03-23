@@ -129,7 +129,10 @@ public class SpriteKitCategoryEditor : TriColoredPreviewEditor
 
     void AddObjects()
     {
-        renderedObjects.Add(new RenderedSprite());
+        if (renderedObjects.Count > 1)
+            renderedObjects.RemoveRange(1, renderedObjects.Count - 1);
+        else if (renderedObjects.Count < 1)
+            renderedObjects.Add(new RenderedSprite());
     }
 
     protected override void OnNewColoredSprites()

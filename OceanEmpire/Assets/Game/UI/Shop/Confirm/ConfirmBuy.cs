@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System;
- 
+
 using CCC.UI;
 
 public class ConfirmBuy : WindowAnimation
@@ -14,48 +14,48 @@ public class ConfirmBuy : WindowAnimation
 
     Action<bool> boughtConfirm;
 
-  //  public Text itemName;
+    //  public Text itemName;
 
     private int price;
 
-  //  public Text cost;
-//public Image CurrencyImage;
+    //  public Text cost;
+    //public Image CurrencyImage;
 
-    public static void OpenWindowAndConfirm(ItemDescription item, CurrencyType currency, Action<bool> resultCallback)
+    public static void OpenWindowAndConfirm(CurrencyType currency, Action<bool> resultCallback)
     {
         PersistentLoader.LoadIfNotLoaded(() =>
         {
             if (Scenes.IsActive(SCENENAME))
             {
-                Scenes.GetActive(SCENENAME).FindRootObject<ConfirmBuy>().Init(item, currency, resultCallback);
+                Scenes.GetActive(SCENENAME).FindRootObject<ConfirmBuy>().Init(currency, resultCallback);
             }
             else
             {
                 Scenes.LoadAsync(SCENENAME, LoadSceneMode.Additive, delegate (Scene scene)
                 {
-                    scene.FindRootObject<ConfirmBuy>().Init(item, currency, resultCallback);
+                    scene.FindRootObject<ConfirmBuy>().Init(currency, resultCallback);
                 });
             }
         });
     }
 
-    
-    public void Init(ItemDescription itemD, CurrencyType currency, Action<bool> resultCallback)
+
+    public void Init(CurrencyType currency, Action<bool> resultCallback)
     {
         //itemName.text = itemD.GetName();
         boughtConfirm = resultCallback;
-       // if (coinCurrency)
-       // {
-       //     price = itemD.GetMoneyCost();
-       //     CurrencyImage.sprite = PlayerCurrency.GetMoneyIcon();
-       // }
-            
-      //  else
-      //  {
-      //      price = itemD.GetTicketCost();
-      //      CurrencyImage.sprite = PlayerCurrency.GetTicketIcon();
-      //  }
-      //  cost.text = price.ToString();
+        // if (coinCurrency)
+        // {
+        //     price = itemD.GetMoneyCost();
+        //     CurrencyImage.sprite = PlayerCurrency.GetMoneyIcon();
+        // }
+
+        //  else
+        //  {
+        //      price = itemD.GetTicketCost();
+        //      CurrencyImage.sprite = PlayerCurrency.GetTicketIcon();
+        //  }
+        //  cost.text = price.ToString();
     }
 
     public void OnConfirmClick()

@@ -156,17 +156,19 @@ public abstract class TriColoredPreviewEditor : Editor
         if (Event.current.type == EventType.Repaint)
         {
             _previewRenderUtility.BeginPreview(r, background);
-
+            
             for (int i = 0; i < renderedObjects.Count; i++)
             {
                 var obj = renderedObjects[i];
                 if (obj.mesh == null || obj.material == null || obj.propertyBlock == null)
                     continue;
+
                 _previewRenderUtility.DrawMesh(obj.mesh, obj.matrix, obj.material, 0, obj.propertyBlock);
             }
 
             _previewRenderUtility.camera.transform.position = Vector2.zero;
-            _previewRenderUtility.camera.transform.rotation = Quaternion.Euler(new Vector3(-_drag.y, -_drag.x, 0));
+            if (_drag.magnitude > 0)
+                _previewRenderUtility.camera.transform.rotation = Quaternion.Euler(new Vector3(-_drag.y, -_drag.x, 0));
             _previewRenderUtility.camera.transform.position = _previewRenderUtility.camera.transform.forward * -_distance;
             _previewRenderUtility.camera.Render();
 
