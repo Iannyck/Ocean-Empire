@@ -24,7 +24,9 @@ namespace CCC.Threading
         {
             if (action == null)
                 return;
-            
+
+            CheckInstance();
+
             if (GetRawInstance() == null)
             {
                 Debug.LogError("Aucune instance de MainThread");

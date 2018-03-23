@@ -13,20 +13,35 @@ public class DisplayActivities : MonoBehaviour {
     {
         anim.Open(delegate ()
         {
+            display.text = "Check console adb logcat -s Unity";
+            string originalText = "Hello World";
+            Debug.Log("------------------");
+            Debug.Log("Original : " + originalText);
+            string cryptedText = GoogleReader.Encrypt(originalText);
+            Debug.Log("Crypted : " + cryptedText);
+            Debug.Log("Decrypted : " + GoogleReader.Decrypt(cryptedText));
+            Debug.Log("------------------");
+            GoogleReader.LoadRawDocument(delegate (string rawDocument)
+            {
+                Debug.Log(rawDocument);
+                GoogleReader.LoadDocument(delegate (string document)
+                {
+                    Debug.Log(document);
+                    Debug.Log("------------------");
+                });
+            });
+
             MessagePopup.DisplayMessage("Showing The Activities");
             string allActivities = "";
-            List<GoogleReader.Activity> activities = GoogleActivities.instance.activities;
-            for (int i = 0; i < activities.Count; i++)
+            List<GoogleActivities.ActivityReport> records = GoogleActivities.instance.records;
+            Debug.Log("UNITY RECORDS COUNT : " + records.Count);
+            for (int i = 0; i < records.Count; i++)
             {
-                allActivities += activities[i].probabilities[0];
+                allActivities += records[i].best.type;
                 allActivities += "|";
-                allActivities += activities[i].probabilities[1];
+                allActivities += records[i].best.rate;
                 allActivities += "|";
-                allActivities += activities[i].probabilities[2];
-                allActivities += "|";
-                allActivities += "W/R/B|";
-                allActivities += "->";
-                allActivities += activities[i].time;
+                allActivities += records[i].time;
                 allActivities += "\n";
             }
             display.text = allActivities;

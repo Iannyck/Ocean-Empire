@@ -12,15 +12,25 @@ public class TUT_FirstMap : BaseTutorial {
     public float focusDuration = 5;
     public SceneInfo shackScene;
 
-    protected override void OnStart()
+    protected override void OnStart(Action onComplete = null)
     {
-        if (forceStart && !HasBeenCompleted(name, dataSaver))
+        if (forceStart || !HasBeenCompleted(name, dataSaver))
         {
-            Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = false;
+            if(Game.Instance != null)
+                Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = false;
+            else
+            {
+                modules.DelayedCall(delegate ()
+                {
+                    Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = false;
+                }, 1);
+            }
 
+            if (onComplete != null)
+            {
+                onComplete();
+            }
         }
-        else
-            Scenes.Load(shackScene);
     }
 
     public void FocusOnSubmarine(Action OnComplete)
@@ -66,7 +76,10 @@ public class TUT_FirstMap : BaseTutorial {
         spotlight.DelayedCall(delegate ()
         {
             modules.textDisplay.HideText();
-            spotlight.Off(() => { OnComplete(); });
+            spotlight.Off(() => {
+                OnComplete();
+                End(true);
+            });
             Game.Instance.gameRunning.Unlock("spotlight");
         }, focusDuration, true);
     }
