@@ -6,29 +6,20 @@ using CCC.Math.Graph;
 
 public class TestScript_Fred : MonoBehaviour
 {
-    public GraphDrawer graphDrawer;
-    public Rigidbody cube;
+    public DataSaver dataSaver;
 
-    private ColoredCurve curve = new ColoredCurve(Color.magenta);
+    private void Awake()
+    {
+        Debug.Log("awake script : " + dataSaver.name);
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("onEnable script" + dataSaver.name);
+    }
 
     void Start()
     {
         Debug.LogWarning("Je suis un test script, ne m'oublie pas (" + gameObject.name + ")");
-        graphDrawer.curves.Add(curve);
-    }
-
-    private void Update()
-    {
-        curve.Positions.Add(new Vector2(Time.timeSinceLevelLoad, cube.position.y));
-    }
-
-    void OnDrawGizmos()
-    {
-        graphDrawer.Draw();
-    }
-
-    void OnRenderObject()
-    {
-        graphDrawer.Draw();
     }
 }

@@ -16,9 +16,6 @@ EditorBuildSettings:
       Window.unity
     guid: 18157be7d1118fb45a87d59cad4847ee
   - enabled: 1
-    path: Assets/Game/Debug/Fred/Fred_TestScene.unity
-    guid: 7f58dff1951099e4ca2477b313e623bc
-  - enabled: 1
     path: Assets/Plugins/Scene Transition/LoadingScreen.unity
     guid: 2515ee5371940174f90bd274f9d478d0
   - enabled: 1
@@ -33,9 +30,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Region Selection/RegionSelection.unity
     guid: 54e304449a7866f40bee2b81594bbe22
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Game/Scripts/Recolte/InGame Systems/Exercice/Windows/Rating/Rating.unity
     guid: 5bc2be3cb9da2294ab6ae09d31e86ab4

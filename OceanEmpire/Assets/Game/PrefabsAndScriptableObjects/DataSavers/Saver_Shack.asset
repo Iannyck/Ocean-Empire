@@ -8,10 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584b9682b36211045bd18c8a7567399e, type: 3}
-  m_Name: SI_NewScene
+  m_Script: {fileID: 11500000, guid: d9b802cfbe3cac5498a6e65eef724cf2, type: 3}
+  m_Name: Saver_Shack
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 7f58dff1951099e4ca2477b313e623bc, type: 3}
-  sceneName: Fred_TestScene
-  loadMode: 1
-  allowMultiple: 0
+  fileName: shack

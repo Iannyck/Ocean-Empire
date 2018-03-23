@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateStateEveryFrame: 1
-  cooldown: 0.5
+  cooldown: 360
   duration: 0.1
   dataSaver: {fileID: 11400000, guid: 4570fe074b62a4a4685a6782160c6dd4, type: 2}
+  log: 1

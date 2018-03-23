@@ -58,6 +58,11 @@ namespace CCC.Serialization
         private void OnEnable()
         {
             lateSave = false;
+            HasEverLoaded = false;
+            OnReassignData = null;
+            rwoQueue.Clear();
+            pendingLateSaveCallbacks.Clear();
+            pendingLateLoadCallbacks.Clear();
         }
 
         /// <summary>

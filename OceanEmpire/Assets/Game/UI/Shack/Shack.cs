@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,14 +8,14 @@ public class Shack : MonoBehaviour
 {
     public const string SCENENAME = "Shack";
 
-    [Header("Components")]
+    [Header("Recolte")]
+    [SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
+    [SerializeField] Shack_CallToAction recolteCallToAction;
+    [SerializeField] Shack_MapManager shack_MapManager;
+
+    [Header("Calendar")]
     [SerializeField]
     SceneInfo calendarScene;
-    [SerializeField] Shack_CallToAction recolteCallToAction;
-    [SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
-
-    public PrebuiltMapData defaultMap;
-    public MapData MapData { get; private set; }
 
     public void OpenCalendar()
     {
@@ -44,7 +45,7 @@ public class Shack : MonoBehaviour
 
     public void LaunchGame()
     {
-        var mapData = MapData ?? defaultMap.MapData;
+        var mapData = shack_MapManager.GetMapData();
         GameSettings gameSettings = new GameSettings(mapData.GameSceneName, true);
 
         if(FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
