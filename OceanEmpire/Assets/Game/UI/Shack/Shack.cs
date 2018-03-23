@@ -8,9 +8,13 @@ public class Shack : MonoBehaviour
     public const string SCENENAME = "Shack";
 
     [Header("Components")]
-    [SerializeField] SceneInfo calendarScene;
+    [SerializeField]
+    SceneInfo calendarScene;
     [SerializeField] Shack_CallToAction recolteCallToAction;
     [SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
+
+    public PrebuiltMapData defaultMap;
+    public MapData MapData { get; private set; }
 
     public void OpenCalendar()
     {
@@ -36,5 +40,17 @@ public class Shack : MonoBehaviour
     void CheckFishingFrenzy()
     {
         recolteCallToAction.enabled = FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available;
+    }
+
+    public void LaunchGame()
+    {
+        var mapData = MapData ?? defaultMap.MapData;
+        GameSettings gameSettings = new GameSettings(mapData.GameSceneName, true);
+
+        if(FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
+        {
+            FishingFrenzy.Instance.Activate();
+        }
+        LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
     }
 }

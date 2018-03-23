@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class RegionDisplay : MonoBehaviour
 {
     [Header("Data")]
-    public MapDescription selectedMap;
+    //public MapDescription selectedMap;
 
     [Header("UI Links")]
     public Text titleName;
@@ -19,8 +19,8 @@ public class RegionDisplay : MonoBehaviour
 
     public void Init(bool isAvailable)
     {
-        titleName.text = selectedMap.GetName();
-        mapImage.sprite = selectedMap.mapIcon;
+        //titleName.text = selectedMap.GetName();
+        //mapImage.sprite = selectedMap.mapIcon;
         mapImage.color = isAvailable ? Color.white : lockedImageColor;
         goButton.interactable = isAvailable;
         lockImage.enabled = !isAvailable;
@@ -39,14 +39,14 @@ public class RegionDisplay : MonoBehaviour
                 FishingFrenzy.Instance.Activate();
         }
 
-        if (selectedMap != null)
-        {
-            GameSettings gameSettings = new GameSettings
-                (
-                mapScene: selectedMap.sceneToLoad,
-                canUseFishingFrenzy: true
-                );
-            LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
-        }
+        //if (selectedMap != null)
+        //{
+        //    GameSettings gameSettings = new GameSettings
+        //        (
+        //        mapScene: selectedMap.sceneToLoad,
+        //        canUseFishingFrenzy: true
+        //        );
+        //    LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
+        //}
     }
 }

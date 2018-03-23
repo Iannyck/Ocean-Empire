@@ -3617,7 +3617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9491cdc3eb5c443bee03442a3dcf99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapScene: {fileID: 11400000, guid: bf41f1cdd7792fe4e8b5f26a85b0a029, type: 2}
+  map: {fileID: 11400000, guid: ace93314860619d4dad7f07ae2612e13, type: 2}
 --- !u!114 &981076569
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -512,7 +512,6 @@ GameObject:
   - component: {fileID: 507791796}
   - component: {fileID: 507791798}
   - component: {fileID: 507791800}
-  - component: {fileID: 507791799}
   m_Layer: 5
   m_Name: Clicker
   m_TagString: Untagged
@@ -557,26 +556,6 @@ MonoBehaviour:
   releaseSpeed: 0.175
   pressEase: 2
   releaseEase: 24
---- !u!114 &507791799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 507791795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3523f1f9eb20a084e9fa6a3cfe9b4215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneInfo: {fileID: 11400000, guid: 1d4b874899f403142a8d9372ae7bf176, type: 2}
-  loadOnStart: 0
-  dontLoadDuplicate: 1
-  loadAsync: 0
-  onLoadComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: LoadScene+SceneEvent, Assembly-CSharp-firstpass, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &507791800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,8 +595,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 507791799}
-        m_MethodName: Load
+      - m_Target: {fileID: 1109020675}
+        m_MethodName: LaunchGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1912,6 +1891,7 @@ MonoBehaviour:
   calendarScene: {fileID: 11400000, guid: b272cda3de5b9024bbcc59b71a9b971c, type: 2}
   recolteCallToAction: {fileID: 1424573234}
   fishingFrenzyWidget: {fileID: 1053563334}
+  defaultMap: {fileID: 11400000, guid: ace93314860619d4dad7f07ae2612e13, type: 2}
 --- !u!1 &1153196196
 GameObject:
   m_ObjectHideFlags: 0
