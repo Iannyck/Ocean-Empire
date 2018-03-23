@@ -54,20 +54,16 @@ public class GoogleReader : MonoBehaviour
     const string filePath = "/data/user/0/com.UQAC.OceanEmpire/files/activities.txt";
 
     // Exemple d'un fichier
-    const string exempleFile = "60|0|0|Sun Feb 11 17:52:28 EST 2018\n\r" +
-                               "0|0|0|Sun Feb 11 17:52:32 EST 2018\n\r" +
-                               "70|0|0|Sun Feb 11 17:52:34 EST 2018\n\r" +
-                               "75|0|0|Sun Feb 11 17:52:36 EST 2018\n\r" +
-                               "80|0|0|Sun Feb 11 17:52:38 EST 2018\n\r" +
-                               "0|0|0|Sun Feb 11 17:52:40 EST 2018\n\r" +
-                               "90|0|0|Sun Feb 11 17:52:42 EST 2018\n\r" +
-                               "90|0|0|Sun Feb 11 17:52:50 EST 2018\n\r";
+    const string exempleFile = "60|0|0|Sun Feb 11 17:52:28 EST 2018~" +
+                               "0|0|0|Sun Feb 11 17:52:32 EST 2018~" +
+                               "70|0|0|Sun Feb 11 17:52:34 EST 2018~" +
+                               "75|0|0|Sun Feb 11 17:52:36 EST 2018~" +
+                               "80|0|0|Sun Feb 11 17:52:38 EST 2018~" +
+                               "0|0|0|Sun Feb 11 17:52:40 EST 2018~" +
+                               "90|0|0|Sun Feb 11 17:52:42 EST 2018~" +
+                               "90|0|0|Sun Feb 11 17:52:50 EST 2018~";
 
-    // Exemple Key
-    private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-    private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-    public static bool LogLesInfoDesThread = false;
+    public static bool LogLesInfoDesThread = true;
 
     public static void ReadDocument(Action<string> onComplete = null)
     {
@@ -88,7 +84,6 @@ public class GoogleReader : MonoBehaviour
             if (reader.BaseStream.CanRead)
             {
                 result = reader.ReadToEnd();
-                //Debug.Log("UNITY FILE : " + result);
             }
             reader.Close();
         }
@@ -102,7 +97,6 @@ public class GoogleReader : MonoBehaviour
     {
         Thread t = new Thread(new ThreadStart(() =>
         {
-            //Debug.Log("DELETING FILE");
             using (File.Create(filePath));
             FileInfo info = new FileInfo(filePath);
             if (info.Length > 0)
@@ -122,6 +116,50 @@ public class GoogleReader : MonoBehaviour
         t.Start();
     }
 
+    public static void LoadDocument(Action<string> onComplete = null)
+    {
+        // CODE EXECUTER QUAND ON EST SUR ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // Lecture du document sur un Thread
+        ReadDocument(delegate(string output){
+            string document = output; // output enregistre dans un seul string
+
+            if(document == null)
+            {
+                onComplete.Invoke(null);
+                return;
+            }
+
+            document = Decrypt(document);
+        
+            onComplete.Invoke(document);
+        });
+#else
+        onComplete.Invoke(exempleFile);
+#endif
+    }
+
+    public static void LoadRawDocument(Action<string> onComplete = null)
+    {
+        // CODE EXECUTER QUAND ON EST SUR ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // Lecture du document sur un Thread
+        ReadDocument(delegate(string output){
+            string document = output; // output enregistre dans un seul string
+
+            if(document == null)
+            {
+                onComplete.Invoke(null);
+                return;
+            }
+        
+            onComplete.Invoke(document);
+        });
+#else
+        onComplete.Invoke(exempleFile);
+#endif
+    }
+
     public static void LoadActivities(Action<List<Activity>> onComplete = null)
     {
         // CODE EXECUTER QUAND ON EST SUR ANDROID
@@ -138,11 +176,14 @@ public class GoogleReader : MonoBehaviour
 
             // Meme code que pour PC
             List<Activity> result = new List<Activity>();
-            if (string.IsNullOrEmpty(keyStr))
-                return;
+            if (string.IsNullOrEmpty(keyStr)){
+                Debug.Log("ERROR NO KEY");
+                onComplete.Invoke(null);
+            }
+                
 
             document = Decrypt(document);
-            Debug.Log("Document Decrypted : " + document);
+            Debug.Log("UNITY GOOGLEREADER DOCUMENT : " + document);
 
             bool readingDate = false;
             string probWalk = "";
@@ -154,7 +195,6 @@ public class GoogleReader : MonoBehaviour
 
             // Rappel structure d'un enregistrement : 0|0|0|Fri Nov 17 14:34:14 EST 2017\n\r
             //                                        marche|course|bicicle|date\FIN
-            //Debug.Log(document);
             for (int i = 0; i < document.Length; i++)
             {
                 char currentChar = document[i];
@@ -168,10 +208,10 @@ public class GoogleReader : MonoBehaviour
                     }
                     continue;
                 }
-                else if (currentChar == '\r')
+                else if (currentChar == '~')
                 {
                     readingDate = false;
-                    //Debug.Log(probWalk + "~" + probRun + "~" + probBicycle + "~" + currentDateTime);
+                    Debug.Log("UNITY : Found Result !");
                     result.Add(new Activity(IntParseFast(probWalk), IntParseFast(probRun), IntParseFast(probBicycle), ConvertStringToDate(currentDateTime)));
                     probWalk = "";
                     probRun = "";
@@ -179,8 +219,6 @@ public class GoogleReader : MonoBehaviour
                     exerciceRead = 0;
                     continue;
                 }
-                else if (currentChar == '\n')
-                    continue;
 
                 if (readingDate)
                 {
@@ -189,24 +227,35 @@ public class GoogleReader : MonoBehaviour
                 }
                 else
                 {
-                    switch (exerciceRead)
-                    {
-                        case 0:
-                            probWalk += currentChar;
-                            break;
-                        case 1:
-                            probRun += currentChar;
-                            break;
-                        case 2:
-                            probBicycle += currentChar;
-                            break;
-                        default:
-                            break;
+                    // Si c'est un chiffre, on enregistre, sinon c'est de la corruption (on skip)
+                    if(currentChar == '0' 
+                    || currentChar == '1' 
+                    || currentChar == '2' 
+                    || currentChar == '3' 
+                    || currentChar == '4' 
+                    || currentChar == '5' 
+                    || currentChar == '6' 
+                    || currentChar == '7' 
+                    || currentChar == '8' 
+                    || currentChar == '9'){
+                        switch (exerciceRead)
+                        {
+                            case 0:
+                                probWalk += currentChar;
+                                break;
+                            case 1:
+                                probRun += currentChar;
+                                break;
+                            case 2:
+                                probBicycle += currentChar;
+                                break;
+                            default:
+                                break;
+                        }
+                        continue;
                     }
-                    continue;
                 }
             }
-            //Debug.Log("ACTIVITIES LOADED");
             onComplete.Invoke(result);
         });
 #else
@@ -241,7 +290,7 @@ public class GoogleReader : MonoBehaviour
                 }
                 continue;
             }
-            else if (currentChar == '\r')
+            else if (currentChar == '~')
             {
                 readingDate = false;
                 result.Add(new Activity(IntParseFast(probWalk), IntParseFast(probRun), IntParseFast(probBicycle), ConvertStringToDate(currentDateTime)));
@@ -251,8 +300,6 @@ public class GoogleReader : MonoBehaviour
                 exerciceRead = 0;
                 continue;
             }
-            else if (currentChar == '\n')
-                continue;
 
             if (readingDate)
             {
@@ -297,6 +344,8 @@ public class GoogleReader : MonoBehaviour
                 return;
             }
 
+            document = Decrypt(document);
+
             // Rappel structure d'un enregistrement : 0|0|0|Fri Nov 17 14:34:14 EST 2017\n\r
             //                                        marche|course|bicicle|date\FIN
             
@@ -305,7 +354,7 @@ public class GoogleReader : MonoBehaviour
             for (int i = 0; i < document.Length; i++)
             {
                 char currentChar = document[i];
-                if (currentChar == '\r')
+                if (currentChar == '~')
                 {
                     currentLine += currentChar;
                     previousLine = currentLine;
@@ -327,7 +376,7 @@ public class GoogleReader : MonoBehaviour
         for (int i = 0; i < document.Length; i++)
         {
             char currentChar = document[i];
-            if (currentChar == '\r')
+            if (currentChar == '~')
             {
                 currentLine += currentChar;
                 previousLine = currentLine;
@@ -364,32 +413,70 @@ public class GoogleReader : MonoBehaviour
         return DateTime.ParseExact(modifiedValue, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
     }
 
-    private static string Decrypt(string CipherText)
+    // REFERENCE : https://csrc.nist.gov/csrc/media/publications/fips/197/final/documents/fips-197.pdf
+    public static string Decrypt(string text)
     {
+        if (string.IsNullOrEmpty(keyStr))
+            return "";
+
+        // Définition des paramètres d'encryption
         RijndaelManaged aes = new RijndaelManaged();
-        aes.BlockSize = 128;
-        aes.KeySize = 256;
+        
+        aes.Mode = CipherMode.ECB;
+        //aes.Padding = PaddingMode.None;
 
-        aes.Mode = CipherMode.CBC;
-        aes.Padding = PaddingMode.PKCS7;
-
+        // Convertir la clé pour qu'elle soit utilisable
         byte[] keyArr = Convert.FromBase64String(keyStr);
-        byte[] KeyArrBytes32Value = new byte[32];
-        Array.Copy(keyArr, KeyArrBytes32Value, 32);
+        aes.KeySize = keyArr.Length * 8;
 
-        // Initialization vector.   
-        // It could be any value or generated using a random number generator.
+        // Initialisation du iv et convertion
         byte[] ivArr = { 1, 2, 3, 4, 5, 6, 6, 5, 4, 3, 2, 1, 7, 7, 7, 7 };
-        byte[] IVBytes16Value = new byte[16];
-        Array.Copy(ivArr, IVBytes16Value, 16);
+        aes.BlockSize = ivArr.Length * 8;
 
-        aes.Key = KeyArrBytes32Value;
-        aes.IV = IVBytes16Value;
+        // On passe à l'encryption AES la clé et le IV
+        aes.Key = keyArr;
+        aes.IV = ivArr;
 
+        // Création de l'objet permettant de décrypter
         ICryptoTransform decrypto = aes.CreateDecryptor();
 
-        byte[] encryptedBytes = Convert.FromBase64CharArray(CipherText.ToCharArray(), 0, CipherText.Length);
+        // On va chercher les octets cryptés
+        byte[] encryptedBytes = Convert.FromBase64CharArray(text.ToCharArray(), 0, text.Length);
+
+        // On décrypte ces octets
         byte[] decryptedData = decrypto.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
-        return ASCIIEncoding.UTF8.GetString(decryptedData);
+
+        // On convertit le tout en string et on le retourne
+        return Encoding.UTF8.GetString(decryptedData);
+    }
+
+    public static string Encrypt(string text)
+    {
+        if (string.IsNullOrEmpty(keyStr))
+            return "";
+
+        // Définition des paramètres d'encryption
+        RijndaelManaged aes = new RijndaelManaged();
+
+        aes.Mode = CipherMode.ECB;
+        //aes.Padding = PaddingMode.None;
+
+        // Convertir la clé pour qu'elle soit utilisable
+        byte[] keyArr = Convert.FromBase64String(keyStr);
+        aes.KeySize = keyArr.Length * 8;
+
+        // Initialisation du iv et convertion
+        byte[] ivArr = { 1, 2, 3, 4, 5, 6, 6, 5, 4, 3, 2, 1, 7, 7, 7, 7 };
+        aes.BlockSize = ivArr.Length * 8;
+
+        // On passe à l'encryption AES la clé et le IV
+        aes.Key = keyArr;
+        aes.IV = ivArr;
+
+        ICryptoTransform encrypto = aes.CreateEncryptor();
+
+        byte[] plainTextByte = Encoding.UTF8.GetBytes(text);
+        byte[] CipherText = encrypto.TransformFinalBlock(plainTextByte, 0, plainTextByte.Length);
+        return Convert.ToBase64String(CipherText);
     }
 }

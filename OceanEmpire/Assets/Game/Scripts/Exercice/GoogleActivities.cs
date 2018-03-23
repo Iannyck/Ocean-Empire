@@ -51,8 +51,10 @@ public class GoogleActivities : MonoPersistent
         waitingForDataUpdate = true;
         AskForActivities(delegate (List<GoogleReader.Activity> activities)
         {
+            Debug.Log("ASKING FOR ACTIVITIES");
             if (activities != null)
             {
+                Debug.Log("GETTING ACTIVITIES");
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 CreateRecord();
@@ -83,7 +85,10 @@ public class GoogleActivities : MonoPersistent
 
     private void CreateRecord()
     {
+        if (activities == null)
+            return;
         records = new List<ActivityReport>();
+        Debug.Log("UNITY ACTIVITIES COUNT : " + activities.Count);
         for (int i = 0; i < activities.Count; i++)
         {
             GoogleReader.Activity currentActivity = activities[i];
@@ -121,6 +126,7 @@ public class GoogleActivities : MonoPersistent
             currentReport.time = currentActivity.time;
 
             records.Add(currentReport);
+            Debug.Log("ADDING REPORT : " + currentReport.best.type + "|" + currentReport.best.rate);
         }
     }
 
@@ -141,130 +147,6 @@ public class GoogleActivities : MonoPersistent
     public void ReceiveAndroidMessage(string message)
     {
         GoogleReader.keyStr = message;
-        Debug.Log(message);
+        Debug.Log("KEY RECEIVE : " + GoogleReader.keyStr);
     }
-
-    /*
-
-    private void FillReport(List<GoogleReader.Activity> activites, ref Report result)
-    {
-        if (result.probabilities == null)
-            result.probabilities = new List<float>(activites.Count);
-
-        int numberOfCompletion = 0;
-        bool firstExerciseDetected = false;
-        bool previousWasExercise = false;
-
-        //Default Values
-        result.complete = false;
-
-
-        for (int i = 0; i < activites.Count; i++)
-        {
-            float prob = activites[i].probability;
-
-            GoogleReader.Activity nowActivity = activites[i];
-            bool nowIsExercise = prob > achieveGap;
-
-            if (nowIsExercise)
-            {
-                //On compte la quantité d'entré d'exercice
-                numberOfCompletion++;
-
-                //A-t-on detecté la première ?
-                if (!firstExerciseDetected)
-                {
-                    result.firstExerciseDetection = nowActivity.time;
-                    firstExerciseDetected = true;
-                }
-            }
-
-            if (previousWasExercise)
-            {
-                //----------------------Ajout de temps----------------------//
-
-                GoogleReader.Activity firstActivity = activites[0];
-                GoogleReader.Activity previousActivity = activites[i - 1];
-
-                // Temps à ajouter en considérant le addFactor
-                long ticksSinceLastMesure = (nowActivity.time - previousActivity.time).Ticks;
-                TimeSpan timeToAdd = new TimeSpan((long)(ticksSinceLastMesure * generousMultiplier));
-
-                // On ajoute le temps de marche au temps total de marche
-                result.timeSpendingExercice += timeToAdd;
-
-                TimeSpan timeSinceStart = nowActivity.time - firstActivity.time;
-
-                // Si le nouveau temps est plus grand que le temps total entre le début de l'exercise jusqu'au dernier
-                if (result.timeSpendingExercice > timeSinceStart)
-                {
-                    // Le temps total doit être égal au temps temps total entre le début de l'exercise jusqu'au dernier
-                    result.timeSpendingExercice = timeSinceStart;
-                }// Sinon le temps total est correct on a pas dépassé le temps max de l'exercise
-
-
-                //----------------------A-t-on terminé ?----------------------//
-                TimeSpan objective = ((WalkTask)result.task.task).timeOfWalk;
-
-                if (result.timeSpendingExercice >= objective)
-                {
-                    result.complete = true;
-                    break;
-                }
-            }
-
-            previousWasExercise = nowIsExercise;
-            result.exerciceEnd = nowActivity.time;
-
-            result.probabilities.Add(prob);
-        }
-
-
-        result.activityRate = numberOfCompletion / (float)activities.Count;
-        result.produceTime = DateTime.Now;
-    }
-
-    public List<GoogleReader.Activity> GetAllActiviesInTimeStamp(DateTime start, DateTime end, ExerciseType type = ExerciseType.Walk)
-    {
-        if (start.CompareTo(end) >= 1)
-            return null;
-        if (end.CompareTo(DateTime.Now) >= 1)
-            return null;
-
-        List<GoogleReader.Activity> result = activities;
-        for (int i = 0; i < result.Count; i++)
-        {
-            if (result[i].time.CompareTo(start) <= -1 || result[i].time.CompareTo(end) >= 1)
-            {
-                result.Remove(result[i]);
-                i--;
-                if (result.Count <= 0)
-                    return result;
-                continue;
-            }
-            switch (result[i].type)
-            {
-                case GoogleReader.Activity.ActivityType.Walking:
-                    if (type != ExerciseType.Walk)
-                    {
-                        result.Remove(result[i]);
-                        i--;
-                        if (result.Count <= 0)
-                            return result;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-        return result;
-    }
-
-    public GoogleReader.Activity GetLast()
-    {
-        if (activities.Count > 1)
-            return activities.Last();
-        return null;
-    }
-    */
 }

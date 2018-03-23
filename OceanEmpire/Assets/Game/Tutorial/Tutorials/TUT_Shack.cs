@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Tutorial;
 using UnityEngine;
@@ -7,8 +8,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TUT_Shack", menuName = "Ocean Empire/Tutorial/Shack")]
 public class TUT_Shack : BaseTutorial
 {
-    protected override void OnStart()
+    protected override void OnStart(Action onComplete = null)
     {
-        
+        onComplete();      
     }
 }

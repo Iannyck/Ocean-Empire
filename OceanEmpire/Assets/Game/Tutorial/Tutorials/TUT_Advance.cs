@@ -12,10 +12,11 @@ public class TUT_Advance : BaseTutorial
     public GameObject sliderAnim_Prefab;
     private GameObject sliderAnim;
 
-    protected override void OnStart()
+    protected override void OnStart(Action onComplete = null)
     {
         sliderAnim = Instantiate(sliderAnim_Prefab, Scenes.GetActive(TutorialScene.SCENENAME).FindRootObject<TutorialScene>().transform);
         Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = true;
+        onComplete();
     }
 
     public void FocusOnFishInvincible(Action OnComplete)

@@ -16,6 +16,8 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +25,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.security.KeyStore;
+import java.security.PrivateKey;
 import java.util.Calendar;
+import java.util.Enumeration;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -38,13 +45,50 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
 
     public SecretKey key;
 
+    public KeyStore ks;
+
+    public char[] password = "1234567890".toCharArray();
+
     public void SendMessageToUnity(String msg){
         mUnityPlayer.UnitySendMessage("GoogleActivities(Clone)", "ReceiveAndroidMessage", msg);
     }
 
     void GenerateKey(){
         try {
+            // Get and Convert the Key
             key = KeyGenerator.getInstance("AES").generateKey();
+
+            SaveKey();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    void SaveKey(){
+        try{
+            // Save my secret key
+            KeyStore.SecretKeyEntry secretKeyEntry = new KeyStore.SecretKeyEntry(key);
+            ks.setEntry("SecretKeyAlias", secretKeyEntry,null);
+
+            // Save the keystore
+            FileOutputStream fos = new FileOutputStream(this.getFilesDir().getAbsolutePath() + "/OEKeyStore");
+            ks.store(fos, password);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    void LoadKey(){
+        try{
+            // Load Keystore
+            FileInputStream fis = new FileInputStream(this.getFilesDir().getAbsolutePath() + "/OEKeyStore");
+            ks.load(fis, password);
+
+            // Load the secret key
+            KeyStore.SecretKeyEntry secretKeyEntry = (KeyStore.SecretKeyEntry)ks.getEntry("SecretKeyAlias",null);
+            key = secretKeyEntry.getSecretKey();
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -59,16 +103,29 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
 
         getWindow().setFormat(PixelFormat.RGBX_8888); // <--- This makes xperia play happy
 
-        SharedPreferences wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
-        if (isFirstRun)
-        {
-            String dir = getFilesDir().getAbsolutePath();
-            File fileToDelete = new File(dir, "activities.txt");
-            boolean successful = fileToDelete.delete();
-            SharedPreferences.Editor editor = wmbPreference.edit();
-            editor.putBoolean("FIRSTRUN", false);
-            editor.commit();
+        try{
+            // Get Keystore
+            ks = KeyStore.getInstance(KeyStore.getDefaultType());
+
+            SharedPreferences wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
+            if (isFirstRun)
+            {
+                String dir = getFilesDir().getAbsolutePath();
+                File fileToDelete = new File(dir, "activities.txt");
+                boolean successful = fileToDelete.delete();
+                SharedPreferences.Editor editor = wmbPreference.edit();
+                editor.putBoolean("FIRSTRUN", false);
+                editor.commit();
+
+                ks.load(null, password);
+                GenerateKey();
+            } else {
+                LoadKey();
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
         }
 
         mUnityPlayer = new UnityPlayer(this);
@@ -81,9 +138,11 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        mApiClient.connect();
+        ActivityDetection.secretKey = key;
+        Log.e("KEY : ",Base64.encodeToString(key.getEncoded(),Base64.DEFAULT));
+        SendMessageToUnity(Base64.encodeToString(key.getEncoded(),Base64.DEFAULT));
 
-        GenerateKey();
+        mApiClient.connect();
 
         myInstance = this;
     }

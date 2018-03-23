@@ -151,6 +151,7 @@ MonoBehaviour:
   inputDisabler: {fileID: 1152341390}
   delayedAction: {fileID: 201091490}
   waitForInput: {fileID: 201091491}
+  hideBG: {fileID: 0}
 --- !u!114 &201091486
 MonoBehaviour:
   m_ObjectHideFlags: 0

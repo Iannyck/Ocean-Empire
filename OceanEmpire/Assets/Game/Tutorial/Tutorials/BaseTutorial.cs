@@ -60,33 +60,39 @@ namespace Tutorial
         /// </summary>
         public void Start()
         {
-            OnStart();
-
-            if (forceStart && !HasBeenCompleted(name, dataSaver))
+            dataSaver.Load(delegate ()
             {
-                // Avant meme de commencer a faire les events, on doit s'assurer que l'enchainement se fera comme il faut
-                for (int i = 0; i < tutorialEvents.Count; i++)
-                {
-                    TutorialEvent currentTutorialEvent = tutorialEvents[i];
-                    if (currentTutorialEvent.startAfterAnotherStep)
-                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () {
-                            Execute(currentTutorialEvent, currentTutorialEvent.useRealTime);
-                        };
-                }
+                OnStart(delegate () {
+                    if (Game.Instance != null)
+                    {
+                        if (forceStart || !HasBeenCompleted(name, dataSaver))
+                        {
+                            // Avant meme de commencer a faire les events, on doit s'assurer que l'enchainement se fera comme il faut
+                            for (int i = 0; i < tutorialEvents.Count; i++)
+                            {
+                                TutorialEvent currentTutorialEvent = tutorialEvents[i];
+                                if (currentTutorialEvent.startAfterAnotherStep)
+                                    tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () {
+                                        Execute(currentTutorialEvent, currentTutorialEvent.useRealTime);
+                                    };
+                            }
 
-                // On peut ensuite commencer les events qui sont start au debut
-                for (int i = 0; i < tutorialEvents.Count; i++)
-                {
-                    TutorialEvent currentEvent = tutorialEvents[i];
-                    if (currentEvent.alreadyExecute)
-                        continue;
-                    if (currentEvent.invokeOnGameStarted)
-                        Execute(currentEvent, currentEvent.useRealTime);
-                }
-            }
+                            // On peut ensuite commencer les events qui sont start au debut
+                            for (int i = 0; i < tutorialEvents.Count; i++)
+                            {
+                                TutorialEvent currentEvent = tutorialEvents[i];
+                                if (currentEvent.alreadyExecute)
+                                    continue;
+                                if (currentEvent.invokeOnGameStarted)
+                                    Execute(currentEvent, currentEvent.useRealTime);
+                            }
+                        }
+                    }
+                });
+            });
         }
 
-        protected abstract void OnStart();
+        protected abstract void OnStart(Action onComplete = null);
 
         public void ManuallyExecuteEvent(string eventId)
         {
@@ -105,7 +111,11 @@ namespace Tutorial
             if (markAsCompleted)
             {
                 dataSaver.SetBool(TUTORIALSAVE + name, true);
-                dataSaver.SaveAsync(Quit);
+                dataSaver.Save(delegate ()
+                {
+                    Quit();
+                });
+                return;
             }
             else
             {
@@ -132,8 +142,12 @@ namespace Tutorial
         public static bool HasBeenCompleted(string assetName, DataSaver tutorialSaver)
         {
             if (!tutorialSaver.ContainsBool(TUTORIALSAVE + assetName))
+            {
                 tutorialSaver.SetBool(TUTORIALSAVE + assetName, false);
-            return tutorialSaver.GetBool(TUTORIALSAVE + assetName);
+                tutorialSaver.SaveAsync();
+                return false;
+            } else 
+                return tutorialSaver.GetBool(TUTORIALSAVE + assetName);
         }
 
         public void Execute(TutorialEvent tutorialEvent, bool useTime)
