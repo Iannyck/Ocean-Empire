@@ -41,6 +41,9 @@ TagManager:
   - name: Background
     uniqueID: 4085584401
     locked: 0
+  - name: Water Layer
+    uniqueID: 2566107641
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

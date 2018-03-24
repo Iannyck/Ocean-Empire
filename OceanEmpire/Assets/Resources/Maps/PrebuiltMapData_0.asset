@@ -17,3 +17,6 @@ MonoBehaviour:
     GameSceneName: Map_Caraibe
     OverrideDepth: 0
     Depth: 0
+    OverrideColors: 1
+    ShallowColor: {r: 0.05060553, g: 0.8602941, b: 0.8602941, a: 1}
+    DeepColor: {r: 0, g: 0.4852941, b: 0.4852941, a: 1}

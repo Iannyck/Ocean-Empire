@@ -21,8 +21,8 @@ public class GameBuilder : MonoBehaviour
     void Build()
     {
         // Load All Scenes
-        if (!Scenes.IsActiveOrBeingLoaded(gameSettings.MapScene))
-            Scenes.LoadAsync(gameSettings.MapScene, LoadSceneMode.Additive, OnMapLoaded);
+        if (!Scenes.IsActiveOrBeingLoaded(gameSettings.MapData.GameSceneName))
+            Scenes.LoadAsync(gameSettings.MapData.GameSceneName, LoadSceneMode.Additive, OnMapLoaded);
         else
             OnMapLoaded();
 
@@ -36,6 +36,8 @@ public class GameBuilder : MonoBehaviour
     {
         Game.Instance.SetReference(scene.FindRootObject<MapInfo>());
         Game.Instance.SetReference(scene.FindRootObject<FishLottery>());
+        Game.Instance.SetReference(scene.FindRootObject<MapBuilder>());
+        Game.Instance.SetReference(scene.FindRootObject<Shack_Environment>());
 
         mapLoaded = true;
         CheckInitGame();
@@ -43,7 +45,7 @@ public class GameBuilder : MonoBehaviour
 
     void OnMapLoaded()
     {
-        OnMapLoaded(SceneManager.GetSceneByName(gameSettings.MapScene));
+        OnMapLoaded(SceneManager.GetSceneByName(gameSettings.MapData.GameSceneName));
     }
 
     void OnUILoaded(Scene scene)

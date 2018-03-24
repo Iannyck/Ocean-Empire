@@ -365,6 +365,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224753181752354062, guid: e0bd0c08969d1d348b0098ebc8b8eeae,
     type: 2}
   m_PrefabInternal: {fileID: 2136821215}
+--- !u!114 &236032336 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114742043385381400, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 780352023}
+  m_Script: {fileID: 11500000, guid: 796784f85423c1d479fc8845e009fcbe, type: 3}
 --- !u!1 &288719952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,7 +1187,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4878547196822306, guid: 70298f2df33247646a8c800090098aeb, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.12
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 4878547196822306, guid: 70298f2df33247646a8c800090098aeb, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2502,6 +2508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedbec9b4604ef54f80f4f0d68165c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shack_Environment: {fileID: 236032336}
   fishingFrenzyWidget: {fileID: 1053563334}
   recolteCallToAction: {fileID: 1424573234}
   shack_MapManager: {fileID: 1109020676}

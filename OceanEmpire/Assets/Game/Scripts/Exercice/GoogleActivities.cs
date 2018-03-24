@@ -51,10 +51,10 @@ public class GoogleActivities : MonoPersistent
         waitingForDataUpdate = true;
         AskForActivities(delegate (List<GoogleReader.Activity> activities)
         {
-            Debug.Log("ASKING FOR ACTIVITIES");
+            //Debug.Log("ASKING FOR ACTIVITIES");
             if (activities != null)
             {
-                Debug.Log("GETTING ACTIVITIES");
+                //Debug.Log("GETTING ACTIVITIES");
                 waitingForDataUpdate = false;
                 this.activities = activities;
                 CreateRecord();
@@ -88,7 +88,7 @@ public class GoogleActivities : MonoPersistent
         if (activities == null)
             return;
         records = new List<ActivityReport>();
-        Debug.Log("UNITY ACTIVITIES COUNT : " + activities.Count);
+        //Debug.Log("UNITY ACTIVITIES COUNT : " + activities.Count);
         for (int i = 0; i < activities.Count; i++)
         {
             GoogleReader.Activity currentActivity = activities[i];
@@ -126,7 +126,7 @@ public class GoogleActivities : MonoPersistent
             currentReport.time = currentActivity.time;
 
             records.Add(currentReport);
-            Debug.Log("ADDING REPORT : " + currentReport.best.type + "|" + currentReport.best.rate);
+            //Debug.Log("ADDING REPORT : " + currentReport.best.type + "|" + currentReport.best.rate);
         }
     }
 

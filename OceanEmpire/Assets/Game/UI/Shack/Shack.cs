@@ -8,6 +8,9 @@ public class Shack : MonoBehaviour
 {
     public const string SCENENAME = "Shack";
 
+    [Header("Environement")]
+    [SerializeField] Shack_Environment shack_Environment;
+
     [Header("Recolte")]
     [SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
     [SerializeField] Shack_CallToAction recolteCallToAction;
@@ -30,12 +33,22 @@ public class Shack : MonoBehaviour
         CheckFishingFrenzy();
         if (fishingFrenzyWidget != null)
             fishingFrenzyWidget.OnStateUpdated.AddListener(CheckFishingFrenzy);
+
+        shack_MapManager.OnChangeMap += OnMapChange;
+    }
+
+    private void OnMapChange(MapData obj)
+    {
+        shack_Environment.SetSeveral(obj);
     }
 
     void OnDisable()
     {
         if (fishingFrenzyWidget != null)
             fishingFrenzyWidget.OnStateUpdated.RemoveListener(CheckFishingFrenzy);
+
+        if (shack_MapManager != null)
+            shack_MapManager.OnChangeMap -= OnMapChange;
     }
 
     void CheckFishingFrenzy()
@@ -46,9 +59,9 @@ public class Shack : MonoBehaviour
     public void LaunchGame()
     {
         var mapData = shack_MapManager.GetMapData();
-        GameSettings gameSettings = new GameSettings(mapData.GameSceneName, true);
+        GameSettings gameSettings = new GameSettings(mapData, true);
 
-        if(FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
+        if (FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
         {
             FishingFrenzy.Instance.Activate();
         }

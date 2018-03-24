@@ -28,7 +28,7 @@ public class GameDebug : MonoBehaviour
     {
         GameSettings gameSettings = new GameSettings
         (
-            mapScene: map.MapData.GameSceneName,
+            mapData: map.MapData,
             canUseFishingFrenzy: false
         );
         scene.FindRootObject<GameBuilder>().Init(gameSettings);

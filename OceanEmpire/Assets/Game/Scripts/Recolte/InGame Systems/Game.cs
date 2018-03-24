@@ -25,10 +25,11 @@ public class Game : PublicSingleton<Game>
     public SubmarineMovement SubmarineMovement { get; private set; }
     public FishingReport FishingReport { get; private set; }
     public MapInfo MapInfo { get; private set; }
-    public MapData MapData { get; private set; }
     public FishLottery FishLottery { get; private set; }
     public PendingFishGPC PendingFishGPC { get; private set; }
     public Locker GameRunning { get; private set; }
+    public MapBuilder MapBuilder { get; private set; }
+    public Shack_Environment Shack_Environment { get; private set; }
 
     [SerializeField] private UnitInstantiator _instantiator;
     [SerializeField] private PlayerStats _playerStats;
@@ -108,6 +109,13 @@ public class Game : PublicSingleton<Game>
         //Spawn player
         SubmarineMovement = _playerSpawn.SpawnPlayer();
         SubmarineMovement.canAccelerate.Lock("game");
+
+        // Build map
+        if (MapBuilder != null)
+            MapBuilder.SetSeveral(GameSettings.MapData);
+        // TEMPORAIRE
+        if (Shack_Environment != null)
+            Shack_Environment.SetSeveral(GameSettings.MapData);
 
         //Ready up !
         ReadyGame();
@@ -190,6 +198,14 @@ public class Game : PublicSingleton<Game>
     public void SetReference(Recolte_UI recolte_UI)
     {
         Recolte_UI = recolte_UI;
+    }
+    public void SetReference(MapBuilder mapBuilder)
+    {
+        MapBuilder = mapBuilder;
+    }
+    public void SetReference(Shack_Environment shack_Environment)
+    {
+        Shack_Environment = shack_Environment;
     }
     #endregion
 }

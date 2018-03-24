@@ -14,6 +14,12 @@ public class MapData
     [ShowIf("OverrideDepth")]
     public float Depth;
 
+    public bool OverrideColors = false;
+    [ShowIf("OverrideColors")]
+    public Color ShallowColor;
+    [ShowIf("OverrideColors")]
+    public Color DeepColor;
+
     public MapData(string name)
     {
         Name = name;
