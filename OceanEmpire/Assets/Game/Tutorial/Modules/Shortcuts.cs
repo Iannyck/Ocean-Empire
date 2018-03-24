@@ -21,7 +21,7 @@ namespace Tutorial
         {
             if(Game.Instance != null)
             {
-                Game.Instance.gameRunning.LockUnique("tutsc"); // Short pour 'Tuto shorcuts'
+                Game.Instance.GameRunning.LockUnique("tutsc"); // Short pour 'Tuto shorcuts'
             }
         }
 
@@ -32,7 +32,7 @@ namespace Tutorial
         {
             if (Game.Instance != null)
             {
-                Game.Instance.gameRunning.UnlockAll("tutsc"); // Short pour 'Tuto shorcuts'
+                Game.Instance.GameRunning.UnlockAll("tutsc"); // Short pour 'Tuto shorcuts'
             }
         }
 

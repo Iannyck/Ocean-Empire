@@ -140,7 +140,7 @@ public class SlingshotControl : MonoBehaviour
         {
             if (Game.Instance != null)
             {
-                Game.Instance.ui.textPopups.SpawnText("En recharge", Color.white, (Vector2)tr.position + Vector2.up);
+                Game.Instance.Recolte_UI.textPopups.SpawnText("En recharge", Color.white, (Vector2)tr.position + Vector2.up);
             }
             return;
         }
@@ -180,7 +180,7 @@ public class SlingshotControl : MonoBehaviour
     {
         if (Game.Instance != null)
         {
-            return Game.GameCamera.cam;
+            return Game.Instance.GameCamera.CameraComponent;
         }
         else
         {

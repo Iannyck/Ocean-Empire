@@ -378,22 +378,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0770be719ccd4914989f6f69f8403843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instantiator: {fileID: 601328787}
-  cameraMouvement: {fileID: 1699934080}
-  playerStats: {fileID: 1311441150}
-  playerSpawn: {fileID: 1311441151}
-  gameCamera: {fileID: 1699934081}
-  sceneManager: {fileID: 1311441156}
-  palierManager: {fileID: 1532139182}
-  fishSpawner: {fileID: 1532139186}
-  gameBuilder: {fileID: 1311441152}
-  submarine: {fileID: 0}
-  map: {fileID: 0}
-  fishLottery: {fileID: 0}
-  ui: {fileID: 0}
-  gameStarted: 0
-  gameReady: 0
-  gameOver: 0
+  _instantiator: {fileID: 601328787}
+  _cameraMouvement: {fileID: 1699934080}
+  _playerStats: {fileID: 1311441150}
+  _playerSpawn: {fileID: 1311441151}
+  _gameCamera: {fileID: 1699934081}
+  _sceneManager: {fileID: 1311441156}
+  _palierManager: {fileID: 1532139182}
+  _fishSpawner: {fileID: 1532139186}
+  _gameBuilder: {fileID: 1311441152}
 --- !u!114 &1311441150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,7 +726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8cb106e034f7149be3154463151dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1586854660}
+  _cam: {fileID: 1586854660}
+  _movement: {fileID: 1699934080}
 --- !u!1 &1778498698
 GameObject:
   m_ObjectHideFlags: 0

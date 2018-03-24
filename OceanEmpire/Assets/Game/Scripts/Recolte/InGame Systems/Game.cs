@@ -2,68 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CCC.DesignPattern;
+using System;
 
 public delegate void SimpleEvent();
 
 public class Game : PublicSingleton<Game>
 {
     // GAME COMPONENT
-    public static CameraMouvement CameraMouvement { get { return instance.cameraMouvement; } }
-    public static PlayerStats PlayerStats { get { return instance.playerStats; } }
-    public static PlayerSpawn PlayerSpawn { get { return instance.playerSpawn; } }
-    public static FishingReport FishingReport { get { return instance.fishingReport; } }
-    public static UnitInstantiator UnitInstantiator { get { return instance.instantiator; } }
-    public static GameCamera GameCamera { get { return instance.gameCamera; } }
-    public static Recolte_UI Recolte_UI { get { return instance.ui; } }
-    public static SubmarineMovement SubmarineMouvement { get { return instance.submarine; } }
-    public static GameObject Submarine { get { return instance.submarine.gameObject; } }
-    public static SubmarinParts SubmarinParts { get { return (instance.submarine == null ? null : instance.submarine.gameObject.GetComponent<SubmarinParts>()); } }
-    public static GPComponents.SceneManager SceneManager { get { return instance.sceneManager; } }
-    public static PalierManager PalierManager { get { return instance.palierManager; } }
-    public static FishSpawner FishSpawner { get { return instance.fishSpawner; } }
-    public static GameBuilder GameBuilder { get { return instance.gameBuilder; } }
-    public static GameSettings GameSettings { get { return instance.gameSettings; } }
+    public GameBuilder GameBuilder { get { return _gameBuilder; } }
+    public FishSpawner FishSpawner { get { return _fishSpawner; } }
+    public PalierManager PalierManager_ { get { return _palierManager; } }
+    public GPComponents.SceneManager SceneManager { get { return _sceneManager; } }
+    public SubmarinParts SubmarinParts { get { return SubmarineMovement == null ? null : SubmarineMovement.GetComponent<SubmarinParts>(); } }
+    public PlayerStats PlayerStats { get { return _playerStats; } }
+    public PlayerSpawn PlayerSpawn { get { return _playerSpawn; } }
+    public UnitInstantiator UnitInstantiator { get { return _instantiator; } }
+    public GameCamera GameCamera { get { return _gameCamera; } }
+    public GameObject Submarine { get { return SubmarineMovement.gameObject; } }
 
-    [SerializeField] private UnitInstantiator instantiator;
-    [SerializeField] private CameraMouvement cameraMouvement;
-    [SerializeField] private PlayerStats playerStats;
-    [SerializeField] private PlayerSpawn playerSpawn;
-    [SerializeField] private GameCamera gameCamera;
-    [SerializeField] private GPComponents.SceneManager sceneManager;
-    [SerializeField] private PalierManager palierManager;
-    [SerializeField] private FishSpawner fishSpawner;
-    [SerializeField] private GameBuilder gameBuilder;
-
-    private GameSettings gameSettings;
-
-    [HideInInspector] public SubmarineMovement submarine;
-    [HideInInspector] public FishingReport fishingReport;
-    [HideInInspector] public MapInfo map;
-    [HideInInspector] public FishLottery fishLottery;
-    [HideInInspector] public Recolte_UI ui;
-
+    public GameSettings GameSettings { get; private set; }
+    public Recolte_UI Recolte_UI { get; private set; }
+    public SubmarineMovement SubmarineMovement { get; private set; }
+    public FishingReport FishingReport { get; private set; }
+    public MapInfo MapInfo { get; private set; }
+    public MapData MapData { get; private set; }
+    public FishLottery FishLottery { get; private set; }
     public PendingFishGPC PendingFishGPC { get; private set; }
+    public Locker GameRunning { get; private set; }
+
+    [SerializeField] private UnitInstantiator _instantiator;
+    [SerializeField] private PlayerStats _playerStats;
+    [SerializeField] private PlayerSpawn _playerSpawn;
+    [SerializeField] private GameCamera _gameCamera;
+    [SerializeField] private GPComponents.SceneManager _sceneManager;
+    [SerializeField] private PalierManager _palierManager;
+    [SerializeField] private FishSpawner _fishSpawner;
+    [SerializeField] private GameBuilder _gameBuilder;
 
     // GAME STATE
-    [HideInInspector]
-    public bool gameStarted = false;
-    [HideInInspector]
-    public bool gameReady = false;
-    [HideInInspector]
-    public bool gameOver = false;
-    [HideInInspector]
-    bool playerSpawned = false;
+    [NonSerialized] public bool gameStarted = false;
+    [NonSerialized] public bool gameReady = false;
+    [NonSerialized] public bool gameOver = false;
+    [NonSerialized] bool playerSpawned = false;
+
     static private event SimpleEvent onGameReady;
     static private event SimpleEvent onGameStart;
-
-    [HideInInspector]
-    public Locker gameRunning = new Locker();
-
 
     protected override void Awake()
     {
         base.Awake();
 
+        GameRunning = new Locker();
         PendingFishGPC = new PendingFishGPC();
     }
 
@@ -104,33 +93,33 @@ public class Game : PublicSingleton<Game>
 
     public void InitGame(GameSettings gameSettings)
     {
-        this.gameSettings = gameSettings;
+        this.GameSettings = gameSettings;
 
         if (DragThreashold.instance != null)
             DragThreashold.instance.SetDragType(DragThreashold.DragType.InGame);
 
-        cameraMouvement.followPlayer = false;
+        _gameCamera.CameraMovement.followPlayer = false;
         Time.timeScale = 1;
-        gameRunning.onLockStateChange += GameRunning_onLockStateChange;
+        GameRunning.onLockStateChange += GameRunning_onLockStateChange;
 
         //Create a fishingReport
-        fishingReport = new FishingReport();
+        FishingReport = new FishingReport();
 
         //Spawn player
-        submarine = playerSpawn.SpawnPlayer();
-        submarine.canAccelerate.Lock("game");
+        SubmarineMovement = _playerSpawn.SpawnPlayer();
+        SubmarineMovement.canAccelerate.Lock("game");
 
         //Ready up !
         ReadyGame();
 
         //Intro
-        playerSpawn.AnimatePlayerIntro(submarine,
+        _playerSpawn.AnimatePlayerIntro(SubmarineMovement,
             delegate ()
             {
-                cameraMouvement.followPlayer = true;
-                submarine.canAccelerate.Unlock("game");
+                _gameCamera.CameraMovement.followPlayer = true;
+                SubmarineMovement.canAccelerate.Unlock("game");
                 playerSpawned = true;
-                ui.feedbacks.ShowGo(null);
+                Recolte_UI.feedbacks.ShowGo(null);
                 StartGame();
             });
     }
@@ -181,11 +170,26 @@ public class Game : PublicSingleton<Game>
             return;
         gameOver = true;
 
-        cameraMouvement.followPlayer = false;
-        submarine.canAccelerate.Lock("end");
-        playerSpawn.AnimatePlayerExit(submarine, ()=>
+        _gameCamera.CameraMovement.followPlayer = false;
+        SubmarineMovement.canAccelerate.Lock("end");
+        _playerSpawn.AnimatePlayerExit(SubmarineMovement, () =>
         {
-            LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(fishingReport));
+            LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(FishingReport));
         });
     }
+
+    #region Other Scene Reference
+    public void SetReference(MapInfo mapInfo)
+    {
+        MapInfo = mapInfo;
+    }
+    public void SetReference(FishLottery fishLottery)
+    {
+        FishLottery = fishLottery;
+    }
+    public void SetReference(Recolte_UI recolte_UI)
+    {
+        Recolte_UI = recolte_UI;
+    }
+    #endregion
 }

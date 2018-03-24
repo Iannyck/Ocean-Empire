@@ -21,12 +21,12 @@ public class FishingFrenzyImplementor : MonoBehaviour
 
     void OnGameReady()
     {
-        if (Game.GameSettings.CanUseFishingFrenzy &&
+        if (Game.Instance.GameSettings.CanUseFishingFrenzy &&
             FishingFrenzy.Instance != null &&
             FishingFrenzy.Instance.State == FishingFrenzy.EffectState.CurrentlyActive)
         {
             Debug.Log("Fish density x" + densityMultiplier);
-            Game.Instance.fishLottery.densityMultiplier *= densityMultiplier;
+            Game.Instance.FishLottery.densityMultiplier *= densityMultiplier;
 
             this.DelayedCall(() => popupPrefab.DuplicateGO().Animate(), popupSpawnDelay);
         }

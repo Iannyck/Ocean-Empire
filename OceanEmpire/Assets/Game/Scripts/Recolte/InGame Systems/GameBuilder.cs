@@ -34,8 +34,8 @@ public class GameBuilder : MonoBehaviour
 
     void OnMapLoaded(Scene scene)
     {
-        Game.Instance.map = scene.FindRootObject<MapInfo>();
-        Game.Instance.fishLottery = scene.FindRootObject<FishLottery>();
+        Game.Instance.SetReference(scene.FindRootObject<MapInfo>());
+        Game.Instance.SetReference(scene.FindRootObject<FishLottery>());
 
         mapLoaded = true;
         CheckInitGame();
@@ -48,7 +48,7 @@ public class GameBuilder : MonoBehaviour
 
     void OnUILoaded(Scene scene)
     {
-        Game.Instance.ui = scene.FindRootObject<Recolte_UI>();
+        Game.Instance.SetReference(scene.FindRootObject<Recolte_UI>());
 
         uiLoaded = true;
         CheckInitGame();

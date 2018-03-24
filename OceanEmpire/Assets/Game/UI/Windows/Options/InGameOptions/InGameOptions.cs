@@ -31,7 +31,7 @@ public class InGameOptions : WindowAnimation
             Game.Instance.gameOver = true;
             UnlockTime();
 
-            var sceneMessage = new ToRecolteMessage(Game.GameSettings);
+            var sceneMessage = new ToRecolteMessage(Game.Instance.GameSettings);
             LoadingScreen.TransitionTo(GameBuilder.SCENENAME, sceneMessage, true);
         }
     }
@@ -84,11 +84,11 @@ public class InGameOptions : WindowAnimation
 
     static void Locktime()
     {
-        Game.Instance.gameRunning.Lock("option");
+        Game.Instance.GameRunning.Lock("option");
     }
 
     static void UnlockTime()
     {
-        Game.Instance.gameRunning.Unlock("option");
+        Game.Instance.GameRunning.Unlock("option");
     }
 }

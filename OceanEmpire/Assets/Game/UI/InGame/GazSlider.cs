@@ -28,7 +28,7 @@ public class GazSlider : MonoBehaviour
     public void UpdateMeter()
     {
         SubmarinParts parts;
-        if (Game.Instance != null && (parts = Game.SubmarinParts) != null && parts.GazTank != null)
+        if (Game.Instance != null && (parts = Game.Instance.SubmarinParts) != null && parts.GazTank != null)
         {
             gageMeter.value = parts.GazTank.GetGazRatio();
         }

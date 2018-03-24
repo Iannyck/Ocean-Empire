@@ -36,7 +36,7 @@ public class CoinsPopUp : MonoBehaviour
 
     private void SetPostion()
     {
-        Vector3 screenPostion = Game.GameCamera.cam.WorldToScreenPoint(worldPosition);
+        Vector3 screenPostion = Game.Instance.GameCamera.CameraComponent.WorldToScreenPoint(worldPosition);
         transform.position = screenPostion;
     }
 

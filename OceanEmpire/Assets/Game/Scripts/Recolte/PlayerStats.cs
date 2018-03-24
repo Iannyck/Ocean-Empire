@@ -17,6 +17,6 @@ public class PlayerStats : MonoBehaviour
         int fishWorth = info.description.baseMonetaryValue.RoundedToInt();
         Vector3 fishPostion = info.transform.position;
 
-        Game.Recolte_UI.GetComponent<SpawnCoinsPopUp>().SpawnPopUp(fishPostion, fishWorth);
+        Game.Instance.Recolte_UI.GetComponent<SpawnCoinsPopUp>().SpawnPopUp(fishPostion, fishWorth);
     }
 }

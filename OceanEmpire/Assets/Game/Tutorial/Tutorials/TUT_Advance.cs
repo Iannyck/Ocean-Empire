@@ -15,7 +15,7 @@ public class TUT_Advance : BaseTutorial
     protected override void OnStart(Action onComplete = null)
     {
         sliderAnim = Instantiate(sliderAnim_Prefab, Scenes.GetActive(TutorialScene.SCENENAME).FindRootObject<TutorialScene>().transform);
-        Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = true;
+        Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = true;
         onComplete();
     }
 
@@ -28,9 +28,9 @@ public class TUT_Advance : BaseTutorial
     public void FocusOnHarpoon(Action OnComplete)
     {
         Debug.Log("FOCUS ON HARPOON!!!");
-        Game.Instance.gameRunning.Lock("spotlight");
+        Game.Instance.GameRunning.Lock("spotlight");
         Spotlight spotlight = modules.spotlight;
-        spotlight.OnWorld(Game.Instance.submarine.transform.position);
+        spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
         sliderAnim.SetActive(true);
         sliderAnim.GetComponent<SlideAnimation>().Init(new Vector3(0, 0, 0)); // centre de l'ecran
         modules.textDisplay.DisplayText("Voici ton harpon! Utilise le pour capturer des gros poissons.", true);
@@ -42,7 +42,7 @@ public class TUT_Advance : BaseTutorial
                 sliderAnim.Destroy();
                 modules.textDisplay.HideText();
                 spotlight.Off(() => { OnComplete(); });
-                Game.Instance.gameRunning.Unlock("spotlight");
+                Game.Instance.GameRunning.Unlock("spotlight");
             }, TouchPhase.Moved);
         }, 0, true);
     }

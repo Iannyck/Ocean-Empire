@@ -24,13 +24,13 @@ namespace GPComponents
                     Debug.LogError("Failed to read \"" + tag + "\" within scene manager.");
                     return null;
                 case "player":
-                    return Game.Submarine;
+                    return Game.Instance.Submarine;
                 case "unit spawner":
-                    return Game.UnitInstantiator;
+                    return Game.Instance.UnitInstantiator;
                 case "pending fish gpc":
                     return Game.Instance.PendingFishGPC;
                 case "ui":
-                    return Game.Recolte_UI;
+                    return Game.Instance.Recolte_UI;
             }
         }
         public override T Read<T>(string tag)

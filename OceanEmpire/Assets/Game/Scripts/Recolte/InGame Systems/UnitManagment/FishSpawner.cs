@@ -13,8 +13,8 @@ public class FishSpawner : MonoBehaviour
     [Header("Settings"), SerializeField]
     private int fishPerPalier = 2;
 
-    private GameCamera Camera { get { return Game.GameCamera; } }
-    private FishLottery FishLottery { get { return Game.Instance.fishLottery; } }
+    private GameCamera Camera { get { return Game.Instance.GameCamera; } }
+    private FishLottery FishLottery { get { return Game.Instance.FishLottery; } }
     private PendingFishGPC PendingGPC { get { return Game.Instance.PendingFishGPC; } }
 
     void Start()
@@ -123,7 +123,7 @@ public class FishSpawner : MonoBehaviour
         var meleeCapturable = fishPrefab.GetComponent<MeleeCapturable>();
         if (meleeCapturable != null)
         {
-            PendingGPC.AddPendingFishGPC(new GPComponents.GPC_MeleeCapture(Game.SceneManager, meleeCapturable, position));
+            PendingGPC.AddPendingFishGPC(new GPComponents.GPC_MeleeCapture(Game.Instance.SceneManager, meleeCapturable, position));
             return;
         }
 
@@ -131,7 +131,7 @@ public class FishSpawner : MonoBehaviour
         var harpoonCapturable = fishPrefab.GetComponent<HarpoonCapturable>();
         if (harpoonCapturable != null)
         {
-            PendingGPC.AddPendingFishGPC(new GPComponents.GPC_HarpoonCapture(Game.SceneManager, harpoonCapturable, position));
+            PendingGPC.AddPendingFishGPC(new GPComponents.GPC_HarpoonCapture(Game.Instance.SceneManager, harpoonCapturable, position));
             return;
         }
 

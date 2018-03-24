@@ -447,9 +447,7 @@ MonoBehaviour:
   brakeDistance: 1.5
   currentTarget: {x: 0, y: 0}
   clampPosition: 1
-  distanceFromBound: 0.35
-  leftBound: -2.81
-  rightBound: 2.81
+  distanceFromBound: 0.45
 --- !u!114 &114379696085279956
 MonoBehaviour:
   m_ObjectHideFlags: 1

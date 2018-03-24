@@ -13,7 +13,7 @@ public class GPCTreeManager : MonoBehaviour
     private void Update()
     {
         //NOTE: la classe Game devrait contenir un element d'enum pour identifier sont gameState (et non plusieurs bools)
-        if (gameSystem.gameStarted && gameSystem.gameRunning && !gameSystem.gameOver)
+        if (gameSystem.gameStarted && gameSystem.GameRunning && !gameSystem.gameOver)
         {
             if (tree == null)
                 CreateTree();

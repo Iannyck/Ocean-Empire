@@ -22,6 +22,6 @@ public class SlideAnimation : MonoBehaviour {
 
     private void Update()
     {
-        transform.position = Game.GameCamera.cam.WorldToScreenPoint(Game.Instance.submarine.transform.position);
+        transform.position = Game.Instance.GameCamera.CameraComponent.WorldToScreenPoint(Game.Instance.SubmarineMovement.transform.position);
     }
 }

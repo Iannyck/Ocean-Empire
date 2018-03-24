@@ -117,12 +117,12 @@ public class WanderBrain : Brain
             v = -v;
             pos = v + rb.position;
 
-            pos.x = Mathf.Clamp(pos.x, MapInfo.MAP_LEFT, MapInfo.MAP_RIGHT);
+            pos.x = Mathf.Clamp(pos.x, MapInfo.BorderLeft, MapInfo.BorderRight);
         }
 
         // Clamp vertical
         MapInfo map;
-        if (Game.Instance != null && (map = Game.Instance.map) != null)
+        if (Game.Instance != null && (map = Game.Instance.MapInfo) != null)
         {
             pos.y = Mathf.Clamp(pos.y, map.mapBottom + 0.5f, map.mapTop - 0.5f);
         }

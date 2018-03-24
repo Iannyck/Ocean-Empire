@@ -6,8 +6,8 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class MapBuilder : MonoBehaviour {
-
+public class MapBuilder : MonoBehaviour
+{
     public SpriteRenderer WaterTop;
     public SpriteRenderer waterLayer;
     public SpriteRenderer Bottom;
@@ -36,7 +36,7 @@ public class MapBuilder : MonoBehaviour {
         BackgroundWater = new List<SpriteRenderer>();
         PrimeColors();
 
-        int numberOfLayer = Mathf.CeilToInt((StartPosition - FinishPostion ) / VerticalOffset);
+        int numberOfLayer = Mathf.CeilToInt((StartPosition - FinishPostion) / VerticalOffset);
         int layerPerTint = Mathf.CeilToInt((float)(numberOfLayer) / (amountOfTints - 1));
         if (layerPerTint % 2 == 0)
             layerPerTint++;
@@ -56,7 +56,7 @@ public class MapBuilder : MonoBehaviour {
             SpriteRenderer newLayer = Instantiate(waterLayer.gameObject, position, Quaternion.identity, parent).GetComponent<SpriteRenderer>();
             // int tintIterator = ( ((StartPosition - y) / (StartPosition - FinishPostion)) * (amountOfTints - 1) + (i+1) % 2).RoundedToInt().Capped(amountOfTints -1);
 
-            
+
             if (LayerInTintCoutner >= layerPerTint)
             {
                 LayerInTintCoutner = 0;
@@ -81,7 +81,7 @@ public class MapBuilder : MonoBehaviour {
             return;
         for (int i = 0; i < BackgroundWater.Count; ++i)
         {
-            if(BackgroundWater[i] != null)
+            if (BackgroundWater[i] != null)
                 DestroyImmediate(BackgroundWater[i].gameObject);
         }
 
@@ -122,7 +122,7 @@ public class MapBuilder : MonoBehaviour {
     private void SpawnBot()
     {
         Vector2 position = new Vector2(0, FinishPostion);
-          SpriteRenderer newLayer = Instantiate(Bottom.gameObject, position, Quaternion.identity, parent).GetComponent<SpriteRenderer>();
+        SpriteRenderer newLayer = Instantiate(Bottom.gameObject, position, Quaternion.identity, parent).GetComponent<SpriteRenderer>();
         newLayer.sortingOrder = Mathf.CeilToInt((StartPosition - FinishPostion) / VerticalOffset) + 10;
         BackgroundWater.Add(newLayer);
     }
@@ -136,7 +136,7 @@ public class MapBuilderEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if(GUILayout.Button("Build Water"))
+        if (GUILayout.Button("Build Water"))
         {
             ((MapBuilder)target)._BuildWater();
         }

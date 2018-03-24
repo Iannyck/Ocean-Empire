@@ -40,7 +40,7 @@ public class UnitPool : MonoBehaviour
 
         var capturable = unit.GetComponent<Capturable>();
         if (capturable != null)
-            Game.FishingReport.KeepTrack(capturable);
+            Game.Instance.FishingReport.KeepTrack(capturable);
 
         return unit;
     }

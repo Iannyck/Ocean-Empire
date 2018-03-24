@@ -26,8 +26,8 @@ public class PlayerSpawn : MonoBehaviour
 
     public void Init()
     {
-        BoatLocation = Game.Instance.map.PlayerSpawn.position;
-        WaterLocation = Game.Instance.map.PlayerStart_.position;
+        BoatLocation = Game.Instance.MapInfo.PlayerSpawn.position;
+        WaterLocation = Game.Instance.MapInfo.PlayerStart_.position;
         TopLocation = BoatLocation + Vector2.up * topHeightIncrease;
     }
 
@@ -36,12 +36,12 @@ public class PlayerSpawn : MonoBehaviour
         if (submarinePrefab == null)
             return null;
 
-        return Game.UnitInstantiator.Spawn(submarinePrefab, position);
+        return Game.Instance.UnitInstantiator.Spawn(submarinePrefab, position);
     }
 
     public SubmarineMovement SpawnPlayer()
     {
-        Vector3 defaultPosition = Game.GameCamera.transform.position;
+        Vector3 defaultPosition = Game.Instance.GameCamera.Tr.position;
         defaultPosition.z = 0;
 
         SubmarineMovement newPlayer = Spawn(defaultPosition);

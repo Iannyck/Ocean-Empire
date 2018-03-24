@@ -17,12 +17,12 @@ public class TUT_FirstMap : BaseTutorial {
         if (forceStart || !HasBeenCompleted(name, dataSaver))
         {
             if(Game.Instance != null)
-                Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = false;
+                Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = false;
             else
             {
                 modules.DelayedCall(delegate ()
                 {
-                    Game.Instance.submarine.GetComponent<SlingshotControl>().enabled = false;
+                    Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = false;
                 }, 1);
             }
 
@@ -36,9 +36,9 @@ public class TUT_FirstMap : BaseTutorial {
     public void FocusOnSubmarine(Action OnComplete)
     {
         Debug.Log("FOCUS ON SUBAMARINUUUU");
-        Game.Instance.gameRunning.Lock("spotlight");
+        Game.Instance.GameRunning.Lock("spotlight");
         Spotlight spotlight = modules.spotlight;
-        spotlight.OnWorld(Game.Instance.submarine.transform.position);
+        spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
         
         modules.textDisplay.DisplayText("Voici ton sous-marin! Contrôle le en tenant ton doigt enfoncer sur l'écran", true);
         modules.textDisplay.SetTop();
@@ -56,7 +56,7 @@ public class TUT_FirstMap : BaseTutorial {
     {
         Debug.Log("FOCUS ON gaz desu");
         Spotlight spotlight = modules.spotlight;
-        spotlight.On(Game.Instance.ui.gazSlider.transform.position);
+        spotlight.On(Game.Instance.Recolte_UI.gazSlider.transform.position);
         modules.textDisplay.DisplayText("Voici ton essence. Quand tu n'en as plus, la récolte est terminé.", true);
         modules.textDisplay.SetTop();
         spotlight.DelayedCall(delegate ()
@@ -70,7 +70,7 @@ public class TUT_FirstMap : BaseTutorial {
     {
         Debug.Log("FOCUS ON gaz desu");
         Spotlight spotlight = modules.spotlight;
-        spotlight.On(Game.Instance.ui.optionButton.transform.position);
+        spotlight.On(Game.Instance.Recolte_UI.optionButton.transform.position);
         modules.textDisplay.DisplayText("Voici le menu option. Par là, tu peux quitter la partie ou changer les paramètres du jeux comme le volume.", true);
         modules.textDisplay.SetTop();
         spotlight.DelayedCall(delegate ()
@@ -80,7 +80,7 @@ public class TUT_FirstMap : BaseTutorial {
                 OnComplete();
                 End(true);
             });
-            Game.Instance.gameRunning.Unlock("spotlight");
+            Game.Instance.GameRunning.Unlock("spotlight");
         }, focusDuration, true);
     }
 

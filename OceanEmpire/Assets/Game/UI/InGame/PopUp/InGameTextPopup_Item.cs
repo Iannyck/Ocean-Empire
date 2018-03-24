@@ -27,7 +27,7 @@ public class InGameTextPopup_Item : MonoBehaviour
         this.worldPosition = worldPosition;
 
         if (Game.Instance != null)
-            cam = Game.GameCamera.cam;
+            cam = Game.Instance.GameCamera.CameraComponent;
 
         var sq = DOTween.Sequence();
         sq.Append(text.DOColor(color, fadeInDuration));

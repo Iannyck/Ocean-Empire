@@ -100,7 +100,7 @@ public class DragDetection : MonoBehaviour
     Camera GetCamera()
     {
         if (Game.Instance != null)
-            return Game.GameCamera.cam;
+            return Game.Instance.GameCamera.CameraComponent;
         else
             return GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }

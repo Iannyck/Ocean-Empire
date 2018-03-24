@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMouvement : MonoBehaviour {
+public class CameraMovement : MonoBehaviour
+{
     private SubmarineMovement submarine;
     public bool followPlayer = true;
     public float acceleration = 1;
@@ -22,9 +23,11 @@ public class CameraMouvement : MonoBehaviour {
     }
 
 
-    void FixedUpdate () {
-        if (submarine == null && Game.Instance != null) { 
-            submarine = Game.Instance.submarine;
+    void FixedUpdate()
+    {
+        if (submarine == null && Game.Instance != null)
+        {
+            submarine = Game.Instance.SubmarineMovement;
             return;
         }
         if (followPlayer && submarine != null && submarine.gameObject.activeSelf)
@@ -54,5 +57,5 @@ public class CameraMouvement : MonoBehaviour {
     {
         tr.position = new Vector3(0, y, 0);
     }
-    
+
 }

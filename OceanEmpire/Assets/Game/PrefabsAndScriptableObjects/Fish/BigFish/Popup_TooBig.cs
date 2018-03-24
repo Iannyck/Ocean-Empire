@@ -12,7 +12,7 @@ public class Popup_TooBig : MonoBehaviour
         if (cooldown > 0)
             return;
 
-        Game.Recolte_UI.textPopups.SpawnText("Trop gros!", new Color(1, 0.8f, 0.8f, 1), hit.contacts[0].point);
+        Game.Instance.Recolte_UI.textPopups.SpawnText("Trop gros!", new Color(1, 0.8f, 0.8f, 1), hit.contacts[0].point);
         cooldown = resetCooldown;
     }
 

@@ -21,12 +21,24 @@ public class SubmarineMovement : MonoBehaviour
     [Header("Bounds")]
     public bool clampPosition = true;
     public float distanceFromBound;
-    public float leftBound;
-    public float rightBound;
 
 
-    private float upBound = float.MaxValue;
-    private float downBound = float.MinValue;
+    private float LeftBound { get { return MapInfo.BorderLeft + distanceFromBound; } }
+    private float RightBound { get { return MapInfo.BorderRight - distanceFromBound; } }
+    private float UpBound
+    {
+        get
+        {
+            return Game.Instance != null && Game.Instance.MapInfo != null ? Game.Instance.MapInfo.mapTop - distanceFromBound : float.PositiveInfinity;
+        }
+    }
+    private float DownBound
+    {
+        get
+        {
+            return Game.Instance != null && Game.Instance.MapInfo != null ? Game.Instance.MapInfo.mapBottom + distanceFromBound : float.NegativeInfinity;
+        }
+    }
 
     private Rigidbody2D rb;
     private float realBrakeDistance = -1;
@@ -39,22 +51,9 @@ public class SubmarineMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        slingshotControl = GetComponent<SlingshotControl>();
         tr = transform;
         realBrakeDistance = brakeDistance;
-    }
-
-    void Start()
-    {
-        Game.OnGameStart += OnGameStart;
-
-        slingshotControl = GetComponent<SlingshotControl>();
-    }
-
-    void OnGameStart()
-    {
-        MapInfo m = Game.Instance.map;
-        upBound = m.mapTop;
-        downBound = m.mapBottom;
     }
 
     void Update()
@@ -77,7 +76,7 @@ public class SubmarineMovement : MonoBehaviour
         var v = targetPos - myPos;
 
         // Visually flip the submarine
-        if(transformFlipper != null && v.x.Abs() > 0.1f)
+        if (transformFlipper != null && v.x.Abs() > 0.1f)
         {
             transformFlipper.FacingRight = v.x > 0;
         }
@@ -102,8 +101,8 @@ public class SubmarineMovement : MonoBehaviour
 
     protected Vector2 ClampPosition(Vector2 pos)
     {
-        pos.x = pos.x.Clamped(leftBound + distanceFromBound, rightBound - distanceFromBound);
-        pos.y = pos.y.Clamped(downBound + distanceFromBound, upBound - distanceFromBound);
+        pos.x = pos.x.Clamped(LeftBound, RightBound);
+        pos.y = pos.y.Clamped(DownBound, UpBound);
         return pos;
     }
 
