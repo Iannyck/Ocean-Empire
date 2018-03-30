@@ -65,6 +65,12 @@ public class GoogleReader : MonoBehaviour
 
     public static bool LogLesInfoDesThread = true;
 
+    public static void WriteData(string[] data)
+    {
+        var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "RESULTS.txt");
+        File.WriteAllLines(filename, data);
+    }
+
     public static void ReadDocument(Action<string> onComplete = null)
     {
         if (LogLesInfoDesThread)
