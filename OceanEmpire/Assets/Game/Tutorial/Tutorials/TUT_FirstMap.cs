@@ -14,28 +14,24 @@ public class TUT_FirstMap : BaseTutorial {
 
     protected override void OnStart(Action onComplete = null)
     {
-        if (forceStart || !HasBeenCompleted(name, dataSaver))
+        if(Game.Instance != null)
+            Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = false;
+        else
         {
-            if(Game.Instance != null)
+            modules.DelayedCall(delegate ()
+            {
                 Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = false;
-            else
-            {
-                modules.DelayedCall(delegate ()
-                {
-                    Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = false;
-                }, 1);
-            }
+            }, 1);
+        }
 
-            if (onComplete != null)
-            {
-                onComplete();
-            }
+        if (onComplete != null)
+        {
+            onComplete();
         }
     }
 
     public void FocusOnSubmarine(Action OnComplete)
     {
-        Debug.Log("FOCUS ON SUBAMARINUUUU");
         Game.Instance.GameRunning.Lock("spotlight");
         Spotlight spotlight = modules.spotlight;
         spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
@@ -54,7 +50,6 @@ public class TUT_FirstMap : BaseTutorial {
 
     public void FocusOnGaz(Action OnComplete)
     {
-        Debug.Log("FOCUS ON gaz desu");
         Spotlight spotlight = modules.spotlight;
         spotlight.On(Game.Instance.Recolte_UI.gazSlider.transform.position);
         modules.textDisplay.DisplayText("Voici ton essence. Quand tu n'en as plus, la récolte est terminé.", true);
@@ -68,7 +63,6 @@ public class TUT_FirstMap : BaseTutorial {
 
     public void FocusOnOption(Action OnComplete)
     {
-        Debug.Log("FOCUS ON gaz desu");
         Spotlight spotlight = modules.spotlight;
         spotlight.On(Game.Instance.Recolte_UI.optionButton.transform.position);
         modules.textDisplay.DisplayText("Voici le menu option. Par là, tu peux quitter la partie ou changer les paramètres du jeux comme le volume.", true);

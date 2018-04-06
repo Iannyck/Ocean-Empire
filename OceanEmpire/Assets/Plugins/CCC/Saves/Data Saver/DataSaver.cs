@@ -120,6 +120,7 @@ public class DataSaver : FileScriptableInterface, IPersistent// ScriptablePersis
     }
     public void SetBool(string key, bool value)
     {
+        Debug.Log("LE COUPABLE EST ICI");
         if (data.bools.ContainsKey(key))
             data.bools[key] = value;
         else

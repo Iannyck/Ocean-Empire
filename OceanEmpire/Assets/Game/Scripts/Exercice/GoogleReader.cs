@@ -67,8 +67,23 @@ public class GoogleReader : MonoBehaviour
 
     public static void WriteData(string[] data)
     {
-        var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "RESULTS.txt");
-        File.WriteAllLines(filename, data);
+        //var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "RESULTS.txt");
+        //File.WriteAllLines(filename, data);
+
+        var path = Application.persistentDataPath + "/results.dat";
+
+        if (!File.Exists(path))
+            File.Create(path).Dispose();
+
+        string fullStringData = string.Join("", data);
+
+        byte[] bytes = Encoding.ASCII.GetBytes(fullStringData);
+
+        FileStream file = File.Open(path, FileMode.Open);
+        file.Write(bytes, 0, bytes.Length);
+        file.Close();
+
+        MessagePopup.DisplayMessage("Result File Created");
     }
 
     public static void ReadDocument(Action<string> onComplete = null)
