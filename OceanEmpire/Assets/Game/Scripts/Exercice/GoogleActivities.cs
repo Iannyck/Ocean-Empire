@@ -149,4 +149,23 @@ public class GoogleActivities : MonoPersistent
         GoogleReader.keyStr = message;
         Debug.Log("KEY RECEIVE : " + GoogleReader.keyStr);
     }
+
+    public string[] GetAllData()
+    {
+        if (records.Count < 1)
+            return null;
+        string[] data = new string[records.Count];
+        for (int i = 0; i < records.Count; i++)
+        {
+            string newEntry = "|||";
+            newEntry += records[i].time + "-";
+            newEntry += records[i].best.type + " ~";
+            newEntry += " Enregistrement -> Courrier : " + records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.walk) +
+                " - Courrir : " + records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.run) +
+                " - Bicycle " + records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle) +
+                "\t\n";
+            data[i] = newEntry;
+        }
+        return data;
+    }
 }
