@@ -17,3 +17,6 @@ MonoBehaviour:
     GameSceneName: Map_Tutoriel
     OverrideDepth: 0
     Depth: 0
+    OverrideColors: 1
+    ShallowColor: {r: 0, g: 0.7529412, b: 1, a: 1}
+    DeepColor: {r: 0, g: 0.50980395, b: 0.6745098, a: 1}
