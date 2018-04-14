@@ -16,7 +16,7 @@ public class PalierSubscriber : MonoBehaviour
     void OnDisable()
     {
         // Si nous autoRevive == false OU que le component lui-même est disabled
-        if (Game.Instance != null && Game.Instance.PalierManager_ != null && (!AutoRevive || !enabled))
+        if (Game.Instance != null && Game.Instance.PalierManager != null && (!AutoRevive || !enabled))
         {
             Unsubscribe();
         }
@@ -29,7 +29,9 @@ public class PalierSubscriber : MonoBehaviour
 
     private void CheckPalier()
     {
-        var palierManager = Game.Instance.PalierManager_;
+        if (Game.Instance == null || Game.Instance.PalierManager == null)
+            return;
+        var palierManager = Game.Instance.PalierManager;
         var closestPalierIndex = palierManager.PalierPlans.GetClosestPalier(tr.position.y);
 
         if (currentPalier == null || closestPalierIndex != currentPalier.Index)
@@ -105,9 +107,9 @@ public class PalierSubscriber : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (Application.isPlaying && Game.Instance != null && Game.Instance.PalierManager_ != null && currentPalier != null && enabled)
+        if (Application.isPlaying && Game.Instance != null && Game.Instance.PalierManager != null && currentPalier != null && enabled)
         {
-            var center = new Vector3(0, Game.Instance.PalierManager_.PalierPlans.GetPalierCenter(currentPalier.Index), 0);
+            var center = new Vector3(0, Game.Instance.PalierManager.PalierPlans.GetPalierCenter(currentPalier.Index), 0);
             var color = Color.magenta;
             Gizmos.color = color;
             Gizmos.DrawLine(transform.position, center);

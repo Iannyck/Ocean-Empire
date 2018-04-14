@@ -5,21 +5,23 @@ using CCC;
 
 public class Electrify : CollisionEffect
 {
-    public float repulsionStrength = 2.5f;
-    public bool electrifiedOnStart = true;
-    // Animation temporaire
-    public SpriteRenderer fishSprite;
+    [SerializeField] protected float repulsionStrength = 2.5f;
+    [SerializeField] protected bool electrifiedOnStart = true;
 
+    [Header("Animation"), SerializeField] protected Animator electricAnimator;
+    [SerializeField] protected string animatorBoolName;
 
-    private Color originColor;
-    private bool isElectrified = false;
+    private bool _isElectrified = false;
     private const string LOCKCAPTURE_KEY = "elec";
-    private MeleeCapturable meleeCapturable;
+    private MeleeCapturable _meleeCapturable;
+    private int _electricId;
 
     protected override void Awake()
     {
         base.Awake();
-        originColor = fishSprite.color;
+
+        if (electricAnimator != null)
+            _electricId = Animator.StringToHash(animatorBoolName);
     }
 
     protected virtual void OnEnable()
@@ -29,11 +31,11 @@ public class Electrify : CollisionEffect
 
     public virtual bool Electrified
     {
-        get { return isElectrified; }
+        get { return _isElectrified; }
         set
         {
-            bool applyChanges = isElectrified != value;
-            isElectrified = value;
+            bool applyChanges = _isElectrified != value;
+            _isElectrified = value;
 
             if (applyChanges)
                 ApplyElectrify();
@@ -45,22 +47,19 @@ public class Electrify : CollisionEffect
         if (Electrified)
         {
             // Disable melee capture
-            meleeCapturable = GetComponent<MeleeCapturable>();
-            if (meleeCapturable != null)
-                meleeCapturable.canCapture.Lock(LOCKCAPTURE_KEY);
-
-            // Color change
-            fishSprite.color = Color.blue;
+            _meleeCapturable = GetComponent<MeleeCapturable>();
+            if (_meleeCapturable != null)
+                _meleeCapturable.canCapture.Lock(LOCKCAPTURE_KEY);
         }
         else
         {
             // Re-enable melee capture
-            if (meleeCapturable != null)
-                meleeCapturable.canCapture.Unlock(LOCKCAPTURE_KEY);
-
-            // Color change
-            fishSprite.color = originColor;
+            if (_meleeCapturable != null)
+                _meleeCapturable.canCapture.Unlock(LOCKCAPTURE_KEY);
         }
+
+        if (electricAnimator != null)
+            electricAnimator.SetBool(_electricId, Electrified);
     }
 
     protected override void OnCollisionEnterEvent(ColliderInfo info, Collision2D col)
@@ -83,7 +82,7 @@ public class Electrify : CollisionEffect
     {
         var repulsionVector = (target.position - myPosition).normalized * repulsionStrength;
         var subarmineBump = target.GetComponent<SubmarineBump>();
-        if(subarmineBump != null)
+        if (subarmineBump != null)
         {
             subarmineBump.Bump(repulsionVector);
         }

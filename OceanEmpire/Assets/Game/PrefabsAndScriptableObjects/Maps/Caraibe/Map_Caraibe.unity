@@ -661,7 +661,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4391991207605276, guid: 6f27a41520412cd45a213d180713102e, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6f27a41520412cd45a213d180713102e, type: 2}
@@ -1168,7 +1168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onStart: 1
+  onGameReady: 1
   tutorial: {fileID: 11400000, guid: c6f6060824b97e940b8bcee18cbd0842, type: 2}
+  tutorialSaver: {fileID: 0}
 --- !u!114 &981076570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,7 +1377,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1082231826
 GameObject:

@@ -11,7 +11,7 @@ public class Game : PublicSingleton<Game>
     // GAME COMPONENT
     public GameBuilder GameBuilder { get { return _gameBuilder; } }
     public FishSpawner FishSpawner { get { return _fishSpawner; } }
-    public PalierManager PalierManager_ { get { return _palierManager; } }
+    public PalierManager PalierManager { get { return _palierManager; } }
     public GPComponents.SceneManager SceneManager { get { return _sceneManager; } }
     public SubmarinParts SubmarinParts { get { return SubmarineMovement == null ? null : SubmarineMovement.GetComponent<SubmarinParts>(); } }
     public PlayerStats PlayerStats { get { return _playerStats; } }

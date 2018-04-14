@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 114232900695991004}
   - component: {fileID: 114052823660754578}
   m_Layer: 10
-  m_Name: Jellyfish
+  m_Name: WaterMine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -322,5 +322,5 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
