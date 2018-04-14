@@ -44,12 +44,14 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 904bc2933a9174547a4146ffc21d2c49, type: 3}
     - {fileID: 2800000, guid: 106e24b8b14b2d74591e40dcfc97ac8c, type: 3}
     - {fileID: 2800000, guid: 24819241435d38344a059b448d326d54, type: 3}
+    - {fileID: 2800000, guid: 4d05e41fcd6012444b2246273d849a97, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 18b9602c8a54bba4e9073617093bcdbf, type: 3}
   - {fileID: 21300000, guid: e2a4ec40ea43af8499ec9177939d9f73, type: 3}
   - {fileID: 21300000, guid: 7d94a1bc9257f3a4591cea3d199cf9e0, type: 3}
+  - {fileID: 21300000, guid: 4d05e41fcd6012444b2246273d849a97, type: 3}
   - {fileID: 21300000, guid: cb62951d12218cf47bf5a38b200f3711, type: 3}
   - {fileID: 21300000, guid: 2c0fb1066ba342342ba7b5a16f5a2023, type: 3}
   - {fileID: 21300000, guid: 106e24b8b14b2d74591e40dcfc97ac8c, type: 3}
@@ -67,6 +69,7 @@ SpriteAtlas:
   - gru
   - shop
   - cloud
+  - house
   - crate
   - fish_basket
   - shop_currency
