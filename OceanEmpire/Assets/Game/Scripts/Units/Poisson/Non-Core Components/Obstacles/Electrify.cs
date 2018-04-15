@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CCC;
+using UnityEditor;
 
 public class Electrify : CollisionEffect
 {
@@ -10,6 +11,8 @@ public class Electrify : CollisionEffect
 
     [Header("Animation"), SerializeField] protected Animator electricAnimator;
     [SerializeField] protected string animatorBoolName;
+    [SerializeField] protected GameObject victimVFX;
+    [SerializeField] protected float stunDuration = 1f;
 
     private bool _isElectrified = false;
     private const string LOCKCAPTURE_KEY = "elec";
@@ -84,11 +87,16 @@ public class Electrify : CollisionEffect
         var subarmineBump = target.GetComponent<SubmarineBump>();
         if (subarmineBump != null)
         {
-            subarmineBump.Bump(repulsionVector);
+            subarmineBump.Bump(repulsionVector, stunDuration);
         }
         else
         {
             target.AddForce(repulsionVector, ForceMode2D.Impulse);
+        }
+
+        if (victimVFX != null)
+        {
+            victimVFX.Duplicate(target.transform).AddComponent<SelfDestruct>().delay = stunDuration;
         }
     }
 }

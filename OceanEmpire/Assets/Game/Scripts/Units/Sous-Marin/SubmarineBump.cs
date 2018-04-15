@@ -11,7 +11,7 @@ public class SubmarineBump : MonoBehaviour
 
     [Header("Settings"), SerializeField] float bumpedLinearDrag = 5;
     [SerializeField] float reactivVelocity = 0.5f;
-    [SerializeField] float reactivMaxDelay = 2;
+    [SerializeField] float defaultDeactivatedDuration = 0;
 
     private const string CAN_ACCELERATE_KEY = "bmp";
 
@@ -23,47 +23,64 @@ public class SubmarineBump : MonoBehaviour
         standardDrag = rigidbody.drag;
     }
 
-    public void Bump(Vector2 force)
+    public void Bump(Vector2 force) { Bump(force, defaultDeactivatedDuration); }
+    public void Bump(Vector2 force, float deactivationDuration)
     {
-        rigidbody.drag = bumpedLinearDrag;
-        submarineMovement.canAccelerate.Lock(CAN_ACCELERATE_KEY);
-        submarineMovement.ClearTarget();
-        reactivationTimer = reactivMaxDelay;
-        if (transformTilter != null)
-            transformTilter.enabled = false;
-        if (transformFlipper != null)
-            transformFlipper.enabled = false;
-
+        reactivationTimer = deactivationDuration;
         rigidbody.AddForce(force, ForceMode2D.Impulse);
+
+        EnterBumpState();
     }
 
     void Update()
     {
         if (IsBumped)
         {
-            if (rigidbody.velocity.magnitude < reactivVelocity)
-                ReactivatePlayerMovement();
-
             reactivationTimer -= Time.deltaTime;
-            if (!IsBumped)
-                ReactivatePlayerMovement();
+            if(reactivationTimer <= 0 && rigidbody.velocity.magnitude < reactivVelocity)
+            {
+                ExitBumpState();
+            }
         }
     }
 
     public bool IsBumped
     {
-        get { return reactivationTimer > 0; }
+        get; private set;
     }
 
-    void ReactivatePlayerMovement()
+    void EnterBumpState()
     {
-        reactivationTimer = -1;
+        IsBumped = true;
 
+        // Lock movement
+        submarineMovement.canAccelerate.Lock(CAN_ACCELERATE_KEY);
+        submarineMovement.ClearTarget();
+
+        // Tilt animators
+        if (transformTilter != null)
+            transformTilter.enabled = false;
+        if (transformFlipper != null)
+            transformFlipper.enabled = false;
+
+        // Drag
+        rigidbody.drag = bumpedLinearDrag;
+    }
+
+    void ExitBumpState()
+    {
+        IsBumped = false;
+
+        // Unlock movement
+        submarineMovement.canAccelerate.Unlock(CAN_ACCELERATE_KEY);
+
+        // Tilt animators
         if (transformTilter != null)
             transformTilter.enabled = true;
         if (transformFlipper != null)
             transformFlipper.enabled = true;
+
+        // Drag
         rigidbody.drag = standardDrag;
-        submarineMovement.canAccelerate.Unlock(CAN_ACCELERATE_KEY);
     }
 }

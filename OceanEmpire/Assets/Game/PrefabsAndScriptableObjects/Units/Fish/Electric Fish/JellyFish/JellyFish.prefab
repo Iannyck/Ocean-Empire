@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1365461041918330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5407909, y: -4.3255224, z: 0}
+  m_LocalPosition: {x: -0.1188035, y: -6.5158157, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4012318686482576}
@@ -180,6 +180,8 @@ MonoBehaviour:
   electrifiedOnStart: 1
   electricAnimator: {fileID: 95890317065628166}
   animatorBoolName: electrified
+  victimVFX: {fileID: 1885595506031602, guid: c2d81efe46ad7d34c8743ad24c56d89b, type: 2}
+  stunDuration: 1
   electricInterval: 2.5
   electricDuration: 2.5
 --- !u!114 &114072663983940806
