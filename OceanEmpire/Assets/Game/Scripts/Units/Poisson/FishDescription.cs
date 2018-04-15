@@ -10,6 +10,9 @@ public class FishDescription : ScriptableObject
     public string fishName;
     public string description;
     public float baseMonetaryValue;
+    public FishId id;
+    [BitMask]
+    public FishFlags flags;
 
     public Sprite icon;
 }

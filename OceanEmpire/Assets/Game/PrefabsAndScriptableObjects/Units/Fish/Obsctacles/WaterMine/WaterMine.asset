@@ -14,4 +14,6 @@ MonoBehaviour:
   fishName: Jellyfish
   description: Always electri, can't catch it
   baseMonetaryValue: 0
+  id: 5
+  flags: 0
   icon: {fileID: 21300000, guid: 24819241435d38344a059b448d326d54, type: 3}

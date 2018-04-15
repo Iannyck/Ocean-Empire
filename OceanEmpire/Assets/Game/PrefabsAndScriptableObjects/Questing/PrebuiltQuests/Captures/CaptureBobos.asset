@@ -8,12 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a2826170cbc33488276e21dfe6527f, type: 3}
-  m_Name: JellyFish
+  m_Script: {fileID: 11500000, guid: bfb38f8fbbc14d442a93a617dfa2dc1d, type: 3}
+  m_Name: CaptureBobos
   m_EditorClassIdentifier: 
-  fishName: "M\xE9duse"
-  description: 
-  baseMonetaryValue: 5
-  id: 6
-  flags: 103
-  icon: {fileID: 21300000, guid: b57c4b16c8e6bc14880de618377b40b3, type: 3}
+  questContext:
+    description: Capturez 150 poissons bobo
+    trackingFlags: 1
+    captureGoal: 150
+    fishIds: 00000000

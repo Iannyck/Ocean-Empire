@@ -14,4 +14,6 @@ MonoBehaviour:
   fishName: Cayao
   description: C'est un poisson orange... c'est pas mal ca.
   baseMonetaryValue: 1
+  id: 1
+  flags: 99
   icon: {fileID: 21300000, guid: 92bd04c663244574eaec3b5454d09899, type: 3}

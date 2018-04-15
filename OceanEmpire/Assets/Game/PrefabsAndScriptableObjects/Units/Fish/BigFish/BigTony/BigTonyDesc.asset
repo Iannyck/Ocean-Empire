@@ -14,4 +14,6 @@ MonoBehaviour:
   fishName: Big Tony
   description: C'est UN GROS poisson. Rempli de chaine en or.
   baseMonetaryValue: 6
+  id: 9
+  flags: 114
   icon: {fileID: 21300000, guid: db4a5de0d76259a4e9a31f66801b226b, type: 3}

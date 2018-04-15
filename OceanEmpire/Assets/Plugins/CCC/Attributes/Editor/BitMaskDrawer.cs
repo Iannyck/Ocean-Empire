@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Reflection;
 
 [CustomPropertyDrawer(typeof(BitMaskAttribute))]
 public class BitMaskPropertyDrawer : PropertyDrawer
@@ -64,7 +65,25 @@ public class BitMaskPropertyDrawer : PropertyDrawer
     public static Type GetTypeOfProp(SerializedProperty property)
     {
         Type parentType = property.serializedObject.targetObject.GetType();
-        System.Reflection.FieldInfo fi = parentType.GetField(property.propertyPath);
+        FieldInfo fi = GetFieldViaPath(parentType, property.propertyPath);
         return fi.FieldType;
+    }
+
+    public static FieldInfo GetFieldViaPath(Type type, string path)
+    {
+        Type parentType = type;
+        FieldInfo fi = type.GetField(path);
+        string[] perDot = path.Split('.');
+        foreach (string fieldName in perDot)
+        {
+            fi = parentType.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (fi != null)
+                parentType = fi.FieldType;
+            else
+                return null;
+        }
+        if (fi != null)
+            return fi;
+        else return null;
     }
 }
