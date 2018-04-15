@@ -14,7 +14,4 @@ MonoBehaviour:
   fishName: Rojo
   description: C'est un poisson
   baseMonetaryValue: 4
-  populationValue: 1
-  icon:
-    spriteName: t_RedBobo
-    prefix: Images/Fish/
+  icon: {fileID: 21300000, guid: 2af488957f3ff1f41a3cc22210aa0e8f, type: 3}

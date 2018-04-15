@@ -14,7 +14,4 @@ MonoBehaviour:
   fishName: Barracuda
   description: "Il est tellement m\xE9chant qu'il mange des chattons"
   baseMonetaryValue: 10
-  populationValue: 1.5
-  icon:
-    spriteName: t_Barascuda
-    prefix: Images/Fish/
+  icon: {fileID: 21300000, guid: 9ad14fda1ed9a6c4e968bcfdbd147759, type: 3}

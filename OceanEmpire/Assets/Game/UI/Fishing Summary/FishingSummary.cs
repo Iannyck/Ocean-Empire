@@ -30,7 +30,7 @@ public class FishingSummary : MonoBehaviour
         foreach (KeyValuePair<FishDescription, int> entry in report.CapturedFish)
         {
             Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary(entry.Value, 
-                                                                                    entry.Key.icon.GetSprite(),
+                                                                                    entry.Key.icon,
                                                                                     (entry.Key.baseMonetaryValue * entry.Value).ToString());
 
             PlayerCurrency.AddCoins(entry.Value * (int)entry.Key.baseMonetaryValue);

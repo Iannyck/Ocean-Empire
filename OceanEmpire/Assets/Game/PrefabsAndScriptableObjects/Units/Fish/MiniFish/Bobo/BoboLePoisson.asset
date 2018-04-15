@@ -14,7 +14,4 @@ MonoBehaviour:
   fishName: Bobo
   description: C'est un poisson
   baseMonetaryValue: 3
-  populationValue: 1
-  icon:
-    spriteName: t_bobo 1
-    prefix: Images/Fish/
+  icon: {fileID: 21300000, guid: 58eb9a4b5c8441d498c56181ddbc5b11, type: 3}

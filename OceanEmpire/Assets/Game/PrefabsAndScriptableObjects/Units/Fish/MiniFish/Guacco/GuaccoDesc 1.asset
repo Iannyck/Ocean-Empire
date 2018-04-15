@@ -14,7 +14,4 @@ MonoBehaviour:
   fishName: Guacco
   description: C'est le cousin de Cayo
   baseMonetaryValue: 2
-  populationValue: 1
-  icon:
-    spriteName: t_CayoaBleu
-    prefix: Images/Fish/
+  icon: {fileID: 21300000, guid: 55d1bb8cfb488464a97e11c043f4c0df, type: 3}

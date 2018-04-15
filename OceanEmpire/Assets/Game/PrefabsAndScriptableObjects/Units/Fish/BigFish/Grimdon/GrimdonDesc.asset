@@ -14,7 +14,4 @@ MonoBehaviour:
   fishName: Grimdon
   description: Il n'aime pas les gens, c'est un poisson aigre
   baseMonetaryValue: 8
-  populationValue: 1.5
-  icon:
-    spriteName: t_Grimdon
-    prefix: Images/Fish/
+  icon: {fileID: 21300000, guid: e1989783be31eed4396703f1c4c13e69, type: 3}
