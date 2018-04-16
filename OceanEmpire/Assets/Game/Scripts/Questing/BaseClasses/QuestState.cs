@@ -3,6 +3,7 @@
 [Serializable]
 public enum QuestState
 {
+    NotStarted,
     Ongoing,
     Completed,
     Abandonned

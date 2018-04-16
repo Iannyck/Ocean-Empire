@@ -6,13 +6,7 @@ using UnityEngine;
 namespace Questing
 {
     [CreateAssetMenu(menuName = "Ocean Empire/Prebuilt Quests/Capture/By Tag", fileName = "New Quest")]
-    public class PBCaptureByTagQC : ScriptableObject
+    public class PrebuiltCaptureByTag : BasePrebuiltQuest<CaptureByTag, CaptureByTagQC>
     {
-        [SerializeField] CaptureByTagQC questContext;
-
-        void OnValidate()
-        {
-            questContext.trackingFlags = TrackingFlags.Recolte;
-        }
     }
 }

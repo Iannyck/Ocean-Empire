@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Questing
 {
-    public abstract class QuestProcessor
+    public class CaptureByTag : BaseCaptureQuest<CaptureByTagQC>
     {
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questContext:
     description: Capturez 150 poissons bobo
-    trackingFlags: 1
     captureGoal: 150
     fishIds: 00000000
+  duration: 72
