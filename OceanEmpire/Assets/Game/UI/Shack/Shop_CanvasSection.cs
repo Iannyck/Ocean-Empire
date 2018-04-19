@@ -16,6 +16,10 @@ public class Shop_CanvasSection : MonoBehaviour
     void Awake()
     {
         rectTr = GetComponent<RectTransform>();
+
+        // On se disable avant en attendant que PersistentLoader soit loadé
+        enabled = false;
+        PersistentLoader.LoadIfNotLoaded(() => enabled = true);
     }
 
     void Update()

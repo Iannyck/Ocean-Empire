@@ -1,19 +1,106 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Questing
 {
-    public abstract class BaseCaptureQuest<T> : Quest<T> where T : QuestContext
+    [Serializable]
+    public abstract class BaseCaptureQuest<T> : Quest<T> where T : CaptureQC
     {
-        public override void StartTracking()
+        [SerializeField] protected int capturedYet;
+
+        [NonSerialized] protected bool isListening;
+
+        public override void Launch()
         {
-            throw new System.NotImplementedException();
+            capturedYet = 0;
         }
 
         public override QuestState UpdateState()
         {
-            throw new System.NotImplementedException();
+            // Validate Listeners
+            UpdateListeners();
+
+            // TEST
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                state = QuestState.Abandoned;
+                return state;
+            }
+
+            // Update state according to goal
+            if (capturedYet >= context.captureGoal)
+            {
+                state = QuestState.Completed;
+            }
+            else
+            {
+                state = QuestState.Ongoing;
+            }
+            return state;
+        }
+
+        void UpdateListeners()
+        {
+            if (Game.Instance != null && state == QuestState.Ongoing)
+            {
+                Listen();
+            }
+            else
+            {
+                DontListen();
+            }
+        }
+
+        protected virtual void OnFishCaptured(Capturable capturable)
+        {
+            if (state != QuestState.Ongoing)
+                return;
+
+            if (IsValidFishCapture(capturable))
+            {
+                capturedYet++;
+                UpdateState();
+                UpdateListeners();
+
+                if (state == QuestState.Completed)
+                    DirtyState = DirtyState.UrgentDirty;
+                else
+                    DirtyState = DirtyState.Dirty;
+
+                Debug.Log("+1  -> " + capturedYet + "/" + context.captureGoal);
+            }
+        }
+
+        protected abstract bool IsValidFishCapture(Capturable capturable);
+
+        void Listen()
+        {
+            if (isListening)
+                return;
+            isListening = true;
+            Game.Instance.PlayerStats.OnCapture += OnFishCaptured;
+        }
+
+
+        void DontListen()
+        {
+            if (!isListening)
+                return;
+            isListening = false;
+            if (Game.Instance != null)
+                Game.Instance.PlayerStats.OnCapture -= OnFishCaptured;
+        }
+
+        public override string GetDisplayedProgressText()
+        {
+            return capturedYet + " / " + context.captureGoal;
+        }
+
+        public override float GetProgress01()
+        {
+            return capturedYet / (float)context.captureGoal;
         }
     }
 }

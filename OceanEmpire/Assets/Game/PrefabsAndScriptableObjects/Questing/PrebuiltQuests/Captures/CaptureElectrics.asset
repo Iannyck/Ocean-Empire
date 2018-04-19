@@ -14,6 +14,6 @@ MonoBehaviour:
   questContext:
     description: "Capturez 30 animals \xE9lectriques"
     captureGoal: 30
-    observedFishFlags: 040000002000000040000000
-    fishFlagsValue: 100
+    flagsFilter: 100
+    flagsValue: 100
   duration: 1

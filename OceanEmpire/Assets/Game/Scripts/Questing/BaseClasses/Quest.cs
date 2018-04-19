@@ -5,16 +5,23 @@ using UnityEngine;
 
 namespace Questing
 {
+    public enum DirtyState { Clean = 0, Dirty, UrgentDirty }
+
     [Serializable]
     public abstract class Quest
     {
         public TimeSlot timeSlot;
         public QuestState state = QuestState.NotStarted;
+        //public QuestReward reward;
 
+        public DirtyState DirtyState { get; set; }
         public abstract QuestContext Context { get; }
-        public abstract void StartTracking();
+        public abstract string GetDisplayedProgressText();
+        public abstract float GetProgress01();
+        public abstract void Launch();
         public abstract QuestState UpdateState();
     }
+
     [Serializable]
     public abstract class Quest<T> : Quest where T : QuestContext
     {

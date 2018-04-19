@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Questing
 {
     [Serializable]
     public class CaptureByIdQC : CaptureQC
     {
-        public FishId[] fishIds;
+        public List<FishId> fishIds;
     }
 }

@@ -13,7 +13,7 @@ namespace Questing
     {
         [Header("Quest")]
         public string description;
-        public virtual QuestReward Reward { get { return null; } }
+        public string iconResource;
 
         //[BitMask, ReadOnly]
         //public TrackingFlags trackingFlags;

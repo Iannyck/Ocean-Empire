@@ -6,5 +6,5 @@ public enum QuestState
     NotStarted,
     Ongoing,
     Completed,
-    Abandonned
+    Abandoned
 }
