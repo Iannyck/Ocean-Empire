@@ -454,6 +454,15 @@ MonoBehaviour:
   status: {fileID: 114480042252270560}
   icon: {fileID: 114010908817994720}
   slider: {fileID: 114259395356923286}
+  sliderFill: {fileID: 114243537823311888}
+  background: {fileID: 114083391427854812}
+  ongoingBackground: {fileID: 21300000, guid: a5d4ba8dd379f2c45bbfa34f306b4f06, type: 3}
+  completedBackground: {fileID: 21300000, guid: d7c8a67b67d0f7c4b8395bf1678f17d3,
+    type: 3}
+  ongoingSliderFill: {fileID: 21300000, guid: 8985f12833fc50042808e574a7bb0d25, type: 3}
+  completedSliderFill: {fileID: 21300000, guid: 6a013b84cddb0794c9ca7675256a6855,
+    type: 3}
+  completedIconAlpha: 0.5
 --- !u!114 &114800406752053502
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,13 +22,6 @@ namespace Questing
             // Validate Listeners
             UpdateListeners();
 
-            // TEST
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                state = QuestState.Abandoned;
-                return state;
-            }
-
             // Update state according to goal
             if (capturedYet >= context.captureGoal)
             {

@@ -14,7 +14,7 @@ namespace Questing
         public QuestState state = QuestState.NotStarted;
         //public QuestReward reward;
 
-        public DirtyState DirtyState { get; set; }
+        [NonSerialized] public DirtyState DirtyState = DirtyState.Clean;
         public abstract QuestContext Context { get; }
         public abstract string GetDisplayedProgressText();
         public abstract float GetProgress01();

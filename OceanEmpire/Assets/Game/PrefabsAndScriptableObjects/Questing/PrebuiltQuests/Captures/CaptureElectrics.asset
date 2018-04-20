@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questContext:
     description: "Capturez 30 animals \xE9lectriques"
+    iconResource: Sprites/Fish/jellyfish_spritesheet
     captureGoal: 30
     flagsFilter: 100
     flagsValue: 100

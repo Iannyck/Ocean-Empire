@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questContext:
     description: Capturez 10 poissons bobo
+    iconResource: Sprites/Fish/t_bobo
     captureGoal: 10
     fishIds: 00000000
   duration: 72

@@ -150,7 +150,6 @@ namespace Questing
 
         public void LateSave()
         {
-            print("save");
             ShipData();
             dataSaver.LateSave();
             CleanQuests();

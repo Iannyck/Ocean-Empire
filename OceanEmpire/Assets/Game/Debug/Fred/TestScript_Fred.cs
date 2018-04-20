@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using CCC.Math.Graph;
 using Questing;
 using System;
+using UnityEditor;
 
 public class TestScript_Fred : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class TestScript_Fred : MonoBehaviour
         {
             IQuestBuilder questBuilder = questBuilders[questBuilderIndex] as IQuestBuilder;
             QuestManager.Instance.AddQuest(questBuilder.BuildQuest(DateTime.Now));
-            Debug.Log("quest added");
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            QuestManager.Instance.RemoveQuest(QuestManager.Instance.ongoingQuests[0]);
         }
     }
 }
