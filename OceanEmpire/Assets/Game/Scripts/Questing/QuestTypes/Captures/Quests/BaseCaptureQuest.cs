@@ -46,12 +46,12 @@ namespace Questing
             }
         }
 
-        protected virtual void OnFishCaptured(Capturable capturable)
+        protected virtual void OnFishCaptured(Capturable capturable, CaptureTechnique captureTechnique)
         {
             if (state != QuestState.Ongoing)
                 return;
 
-            if (IsValidFishCapture(capturable))
+            if (IsValidFishCapture(capturable) && (captureTechnique & context.allowedTechniques) != 0)
             {
                 capturedYet++;
                 UpdateState();

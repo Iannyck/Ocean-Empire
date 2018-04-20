@@ -10,7 +10,8 @@ namespace Questing
     [Serializable]
     public abstract class Quest
     {
-        public TimeSlot timeSlot;
+        //public TimeSlot timeSlot;
+        public DateTime createdOn;
         public QuestState state = QuestState.NotStarted;
 
         //public QuestReward reward;

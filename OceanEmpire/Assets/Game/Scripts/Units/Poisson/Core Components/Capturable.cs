@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 [RequireComponent(typeof(FishInfo)), DisallowMultipleComponent]
@@ -9,7 +8,7 @@ public class Capturable : MonoBehaviour
 
     public event CapturableEvent OnAllCaptures;
     public event CapturableEvent OnNextCapture;
-    [System.NonSerialized] public FishInfo info;
+    [NonSerialized] public FishInfo info;
 
     void Awake()
     {

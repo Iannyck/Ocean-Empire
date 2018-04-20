@@ -15,5 +15,5 @@ MonoBehaviour:
     description: Capturez 10 poissons bobo
     iconResource: Sprites/Fish/t_bobo
     captureGoal: 10
+    allowedTechniques: -1
     fishIds: 00000000
-  duration: 72

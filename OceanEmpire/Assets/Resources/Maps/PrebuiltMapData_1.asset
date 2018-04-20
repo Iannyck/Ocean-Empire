@@ -17,3 +17,8 @@ MonoBehaviour:
     GameSceneName: Map_Pacifique
     OverrideDepth: 0
     Depth: 0
+    OverrideColors: 0
+    ShallowColor: {r: 0, g: 0, b: 0, a: 0}
+    DeepColor: {r: 0, g: 0, b: 0, a: 0}
+  relatedQuests:
+  - {fileID: 11400000, guid: e7e2ecc8965f455419b21b90629cdb3b, type: 2}
