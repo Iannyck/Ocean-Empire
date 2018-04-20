@@ -15,10 +15,10 @@ public class MapData
     public float Depth;
 
     public bool OverrideColors = false;
-    [ShowIf("OverrideColors")]
-    public Color ShallowColor;
-    [ShowIf("OverrideColors")]
-    public Color DeepColor;
+    //[ShowIf("OverrideColors")]
+    public SerializableColor ShallowColor;
+    //[ShowIf("OverrideColors")]
+    public SerializableColor DeepColor;
 
     public MapData(string name)
     {

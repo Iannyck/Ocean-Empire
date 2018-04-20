@@ -10,92 +10,91 @@ public class Shack_MapManager : MonoBehaviour
     [SerializeField] DataSaver dataSaver;
     [SerializeField] PrebuiltMapData _defaultMapData;
     [ReadOnly, SerializeField] int _mapIndex;
+    public int MapIndex { get { return _mapIndex; } private set { _mapIndex = value; } }
 
     private const string SAVEKEY_MAPDATA = "MapData";
     private const string SAVEKEY_MAPINDEX = "MapIndex";
     private const string PREBUILT_MAPDATA_NAME = "Maps/PrebuiltMapData_";
-    private MapData _mapData;
+    public MapData MapData { get; private set; }
 
-    public event Action<MapData> OnChangeMap = (x) => { };
+    public event Action<int, MapData> OnMapSet = (x, y) => { };
 
     void OnEnable()
     {
-        dataSaver.OnReassignData += FetchMapData;
+        dataSaver.OnReassignData += Pull;
 
         if (!dataSaver.HasEverLoaded)
             dataSaver.LateLoad();
         else
-            FetchMapData();
+            Pull();
     }
 
     void OnDisable()
     {
-        dataSaver.OnReassignData -= FetchMapData;
+        dataSaver.OnReassignData -= Pull;
     }
 
-    void FetchMapData()
+    #region Data Saver Interactions
+    void Pull()
     {
-        _mapData = (MapData)dataSaver.GetObjectClone(SAVEKEY_MAPDATA);
-        _mapIndex = dataSaver.GetInt(SAVEKEY_MAPINDEX);
+        MapIndex = dataSaver.GetInt(SAVEKEY_MAPINDEX);
+        MapData = (MapData)dataSaver.GetObjectClone(SAVEKEY_MAPDATA);
 
-        if (_mapData == null)
-            ChangeMap(_mapIndex);
-        else
-            ApplyMapData(_mapData);
+        if (MapData == null)
+            MapData = GetMapDataFromIndex(MapIndex);
+
+        OnMapSet(MapIndex, MapData);
     }
-
-    void ApplyMapData(MapData mapData)
+    void PushAndSave()
     {
+        dataSaver.SetObjectClone(SAVEKEY_MAPDATA, MapData);
+        dataSaver.SetInt(SAVEKEY_MAPINDEX, MapIndex);
+        dataSaver.LateSave();
+    }
+    #endregion
+    
+    public void SetMap(int mapIndex)
+    {
+        // Get Data
+        MapIndex = mapIndex;
+        MapData = GetMapDataFromIndex(MapIndex);
+
         if (mapNameText != null)
         {
-            mapNameText.text = mapData.Name;
+            mapNameText.text = MapData.Name;
             mapNameText.enabled = true;
         }
 
-        OnChangeMap(mapData);
+        // Save to disc
+        PushAndSave();
+
+        // Event
+        OnMapSet(MapIndex, MapData);
+    }
+    public void SetMap_Next()
+    {
+        SetMap(MapIndex + 1);
+    }
+    public void SetMap_Previous()
+    {
+        SetMap(MapIndex - 1);
     }
 
-    public MapData GetMapData()
+    private MapData GetMapDataFromIndex(int index)
     {
-        return _mapData ?? _defaultMapData.MapData;
-    }
+        // Load from path. If null, pick default
 
-    public void SetMapData(MapData mapData)
-    {
-        _mapData = mapData;
-        ApplyMapData(GetMapData());
-    }
-
-    public int MapIndex { get { return _mapIndex; } private set { _mapIndex = value; } }
-
-    private void LoadMap()
-    {
-        var path = PREBUILT_MAPDATA_NAME + MapIndex.ToString();
+        var path = PREBUILT_MAPDATA_NAME + index.ToString();
         var prebuiltMapData = Resources.Load<PrebuiltMapData>(path);
         if (prebuiltMapData == null)
         {
             Debug.LogWarning("Aucune ressource nommée: " + path + ". Normalement, on génèrerait une map avec un algo," +
                 " mais pour l'instant, nous allons prendre la map par défaut");
-            SetMapData(_defaultMapData.MapData);
+            return _defaultMapData.MapData;
         }
         else
         {
-            SetMapData(prebuiltMapData.MapData);
+            return prebuiltMapData.MapData;
         }
-    }
-
-    public void ChangeMap(int newMapIndex)
-    {
-        MapIndex = newMapIndex;
-        LoadMap();
-    }
-
-    public void ChangeMap_Next()
-    {
-        ChangeMap(MapIndex + 1);
-    }
-    public void ChangeMap_Previous()
-    {
-        ChangeMap(MapIndex - 1);
     }
 }

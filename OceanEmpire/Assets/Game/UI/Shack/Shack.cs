@@ -34,10 +34,10 @@ public class Shack : MonoBehaviour
         if (fishingFrenzyWidget != null)
             fishingFrenzyWidget.OnStateUpdated.AddListener(CheckFishingFrenzy);
 
-        shack_MapManager.OnChangeMap += OnMapChange;
+        shack_MapManager.OnMapSet += OnMapChange;
     }
 
-    private void OnMapChange(MapData obj)
+    private void OnMapChange(int mapIndex, MapData obj)
     {
         shack_Environment.SetSeveral(obj);
     }
@@ -48,7 +48,7 @@ public class Shack : MonoBehaviour
             fishingFrenzyWidget.OnStateUpdated.RemoveListener(CheckFishingFrenzy);
 
         if (shack_MapManager != null)
-            shack_MapManager.OnChangeMap -= OnMapChange;
+            shack_MapManager.OnMapSet -= OnMapChange;
     }
 
     void CheckFishingFrenzy()
@@ -58,8 +58,7 @@ public class Shack : MonoBehaviour
 
     public void LaunchGame()
     {
-        var mapData = shack_MapManager.GetMapData();
-        GameSettings gameSettings = new GameSettings(mapData, true);
+        GameSettings gameSettings = new GameSettings(shack_MapManager.MapData, true);
 
         if (FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
         {

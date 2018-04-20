@@ -997,7 +997,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1109020676}
-        m_MethodName: ChangeMap_Previous
+        m_MethodName: SetMap_Previous
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1677,7 +1677,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1109020676}
-        m_MethodName: ChangeMap_Next
+        m_MethodName: SetMap_Next
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
