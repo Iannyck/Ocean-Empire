@@ -13,6 +13,7 @@ namespace Questing
     {
         [Header("Quest")]
         public string description;
+        [ResourcePath]
         public string iconResource;
 
         //[BitMask, ReadOnly]
