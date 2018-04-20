@@ -16,6 +16,6 @@ public class HarpoonCapturable : HarpoonBlocker
 
         var capturable = GetComponent<Capturable>();
         if (capturable != null)
-            Game.Instance.PlayerStats.TryCapture(capturable);
+            Game.Instance.PlayerStats.TryCapture(capturable, CaptureTechnique.Harpoon);
     }
 }

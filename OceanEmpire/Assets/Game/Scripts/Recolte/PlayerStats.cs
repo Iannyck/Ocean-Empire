@@ -6,15 +6,15 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     private float depthRecord;
-    public event Action<Capturable> OnCapture;
+    public event Action<Capturable, CaptureTechnique> OnCapture;
 
-    public void TryCapture(Capturable fish)
+    public void TryCapture(Capturable fish, CaptureTechnique captureTechnique)
     {
         fish.Capture();
         CallCoinsPopUp(fish.info);
 
         if (OnCapture != null)
-            OnCapture(fish);
+            OnCapture(fish, captureTechnique);
     }
 
     private void CallCoinsPopUp(FishInfo info)

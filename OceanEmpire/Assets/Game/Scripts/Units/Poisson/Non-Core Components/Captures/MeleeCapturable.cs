@@ -27,6 +27,6 @@ public class MeleeCapturable : CollisionEffect
         // NB: LA LIGNE SUIVANT EST TEMPORAIRE. Ça fait beaucoup trop weird de passé par PlayerStats pour capturer quelque-chose
         var capturable = GetComponent<Capturable>();
         if(capturable != null && canCapture)
-            Game.Instance.PlayerStats.TryCapture(capturable);
+            Game.Instance.PlayerStats.TryCapture(capturable, CaptureTechnique.Melee);
     }
 }
