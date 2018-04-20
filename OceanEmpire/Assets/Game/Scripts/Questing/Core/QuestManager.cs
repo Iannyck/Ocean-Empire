@@ -16,13 +16,18 @@ namespace Questing
         public List<Quest> ongoingQuests = new List<Quest>();
         public static QuestManager Instance { get; private set; }
         public event Action OnListChange;
+        public event Action<Quest> OnQuestComplete;
 
         private float checkDirtyTimer;
         private const string ONGOINGQUEST_KEY = "ongoingQuests";
 
-        public override void Init(Action onComplete)
+        private void Awake()
         {
             Instance = this;
+        }
+
+        public override void Init(Action onComplete)
+        {
             dataSaver.OnReassignData += FetchData;
             if (!dataSaver.HasEverLoaded)
                 dataSaver.LateLoad(onComplete);
@@ -69,7 +74,9 @@ namespace Questing
 
         public void AddQuest(Quest quest, bool andLateSave = true)
         {
+            quest.onCompletion = OnQuestCompletion;
             ongoingQuests.Add(quest);
+
             if (andLateSave)
                 LateSave();
 
@@ -92,6 +99,12 @@ namespace Questing
             {
                 return false;
             }
+        }
+
+        void OnQuestCompletion(Quest quest)
+        {
+            if (OnQuestComplete != null)
+                OnQuestComplete(quest);
         }
 
         #region Dirty Quests Managment
@@ -170,6 +183,11 @@ namespace Questing
             else
             {
                 ongoingQuests = new List<Quest>();
+            }
+
+            foreach (var quest in ongoingQuests)
+            {
+                quest.onCompletion = OnQuestCompletion;  
             }
 
             if (OnListChange != null)

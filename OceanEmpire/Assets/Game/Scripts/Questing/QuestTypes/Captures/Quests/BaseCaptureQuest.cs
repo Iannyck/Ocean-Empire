@@ -57,12 +57,15 @@ namespace Questing
                 UpdateState();
                 UpdateListeners();
 
+                // Have we just completed the objective ?
                 if (state == QuestState.Completed)
+                {
                     DirtyState = DirtyState.UrgentDirty;
+                    if (onCompletion != null)
+                        onCompletion(this);
+                }
                 else
                     DirtyState = DirtyState.Dirty;
-
-                Debug.Log("+1  -> " + capturedYet + "/" + context.captureGoal);
             }
         }
 

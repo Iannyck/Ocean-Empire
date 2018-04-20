@@ -12,9 +12,12 @@ namespace Questing
     {
         public TimeSlot timeSlot;
         public QuestState state = QuestState.NotStarted;
+
         //public QuestReward reward;
 
+        [NonSerialized] public Action<Quest> onCompletion;
         [NonSerialized] public DirtyState DirtyState = DirtyState.Clean;
+
         public abstract QuestContext Context { get; }
         public abstract string GetDisplayedProgressText();
         public abstract float GetProgress01();
