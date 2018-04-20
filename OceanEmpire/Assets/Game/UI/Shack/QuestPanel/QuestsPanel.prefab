@@ -119,6 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224194290221283524}
   - component: {fileID: 114140619668561724}
+  - component: {fileID: 225252172298529452}
   m_Layer: 5
   m_Name: QuestsPanel
   m_TagString: Untagged
@@ -141,6 +142,13 @@ MonoBehaviour:
     type: 2}
   entries: []
   entriesContainer: {fileID: 224389799545802166}
+  canvasGroup: {fileID: 225252172298529452}
+  arrivalDelta: {x: 0, y: 700}
+  arrivalDelay: 0.5
+  arrivalEase: 6
+  moveDuration: 1.5
+  fadeInDuration: 1.5
+  showOnStart: 1
 --- !u!114 &114586712897136518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,3 +441,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225252172298529452
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1998811563192830}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
