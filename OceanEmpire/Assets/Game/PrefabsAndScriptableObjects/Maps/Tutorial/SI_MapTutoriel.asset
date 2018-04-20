@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene: {fileID: 102900000, guid: 0db00dd7820f2f348a4e2491189c2f4f, type: 3}
   sceneName: Map_Tutoriel
-  loadMode: 1
+  loadMode: 0
   allowMultiple: 0
