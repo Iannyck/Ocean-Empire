@@ -23,7 +23,7 @@ namespace Tutorial
         {
             //Check if completed ?
             bool hasBeenCompleted = BaseTutorial.HasBeenCompleted(tutorialAssetName, tutorialSaver); // BUG CECI RETOURNE TOUJOURS FAUX
-            Debug.Log("DO WE START TUTORIAL ? " + !hasBeenCompleted);
+            //Debug.Log("DO WE START TUTORIAL ? " + !hasBeenCompleted);
             if (hasBeenCompleted)
                 return false;
 

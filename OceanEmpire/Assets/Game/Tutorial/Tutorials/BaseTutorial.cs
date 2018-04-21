@@ -61,27 +61,24 @@ namespace Tutorial
         public void Start()
         {
             OnStart(delegate () {
-                if (Game.Instance != null)
+                // Avant meme de commencer a faire les events, on doit s'assurer que l'enchainement se fera comme il faut
+                for (int i = 0; i < tutorialEvents.Count; i++)
                 {
-                    // Avant meme de commencer a faire les events, on doit s'assurer que l'enchainement se fera comme il faut
-                    for (int i = 0; i < tutorialEvents.Count; i++)
-                    {
-                        TutorialEvent currentTutorialEvent = tutorialEvents[i];
-                        if (currentTutorialEvent.startAfterAnotherStep)
-                            tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () {
-                                Execute(currentTutorialEvent, currentTutorialEvent.useRealTime);
-                            };
-                    }
+                    TutorialEvent currentTutorialEvent = tutorialEvents[i];
+                    if (currentTutorialEvent.startAfterAnotherStep)
+                        tutorialEvents[currentTutorialEvent.startAfterTutorialStepIndex].onComplete += delegate () {
+                            Execute(currentTutorialEvent, currentTutorialEvent.useRealTime);
+                        };
+                }
 
-                    // On peut ensuite commencer les events qui sont start au debut
-                    for (int i = 0; i < tutorialEvents.Count; i++)
-                    {
-                        TutorialEvent currentEvent = tutorialEvents[i];
-                        if (currentEvent.alreadyExecute)
-                            continue;
-                        if (currentEvent.invokeOnGameStarted)
-                            Execute(currentEvent, currentEvent.useRealTime);
-                    }
+                // On peut ensuite commencer les events qui sont start au debut
+                for (int i = 0; i < tutorialEvents.Count; i++)
+                {
+                    TutorialEvent currentEvent = tutorialEvents[i];
+                    if (currentEvent.alreadyExecute)
+                        continue;
+                    if (currentEvent.invokeOnGameStarted)
+                        Execute(currentEvent, currentEvent.useRealTime);
                 }
             });
         }
@@ -136,7 +133,7 @@ namespace Tutorial
 
         public static bool HasBeenCompleted(string assetName, DataSaver tutorialSaver)
         {
-            Debug.Log("Checking if it has been completed..." + "(Saving in:" + tutorialSaver.name + ") at " + TUTORIALSAVE + assetName);
+            //Debug.Log("Checking if it has been completed..." + "(Saving in:" + tutorialSaver.name + ") at " + TUTORIALSAVE + assetName);
             if (!tutorialSaver.ContainsBool(TUTORIALSAVE + assetName))
             {
                 tutorialSaver.SetBool(TUTORIALSAVE + assetName, false);

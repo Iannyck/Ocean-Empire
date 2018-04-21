@@ -13,4 +13,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
-  tutorialEvents: []
+  forceStart: 0
+  tutorialEvents:
+  - eventID: FocusOnCash
+    functionName: FocusOnCash
+    useSpecificTime: 1
+    useRealTime: 0
+    when: 1
+    invokeOnGameStarted: 1
+    startAfterAnotherStep: 0
+    startAfterTutorialStepIndex: 0
+  - eventID: FocusOnSuperPeche
+    functionName: FocusOnSuperPeche
+    useSpecificTime: 0
+    useRealTime: 0
+    when: 0
+    invokeOnGameStarted: 0
+    startAfterAnotherStep: 1
+    startAfterTutorialStepIndex: 0
+  - eventID: FocusOnObjectives
+    functionName: FocusOnObjectives
+    useSpecificTime: 0
+    useRealTime: 0
+    when: 0
+    invokeOnGameStarted: 0
+    startAfterAnotherStep: 1
+    startAfterTutorialStepIndex: 1
+  - eventID: FocusOnCalendrier
+    functionName: FocusOnCalendrier
+    useSpecificTime: 0
+    useRealTime: 0
+    when: 0
+    invokeOnGameStarted: 0
+    startAfterAnotherStep: 1
+    startAfterTutorialStepIndex: 2
+  - eventID: FocusOnRecolte
+    functionName: FocusOnRecolte
+    useSpecificTime: 0
+    useRealTime: 0
+    when: 0
+    invokeOnGameStarted: 0
+    startAfterAnotherStep: 1
+    startAfterTutorialStepIndex: 3
+  - eventID: FocusOnMagasin
+    functionName: FocusOnMagasin
+    useSpecificTime: 1
+    useRealTime: 0
+    when: 1
+    invokeOnGameStarted: 0
+    startAfterAnotherStep: 1
+    startAfterTutorialStepIndex: 0
+  focusDuration: 1

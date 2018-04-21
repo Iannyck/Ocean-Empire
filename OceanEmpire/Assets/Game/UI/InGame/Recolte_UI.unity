@@ -1042,6 +1042,24 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224119920724746472, guid: 6f26d966849ef544c9b3eb647d4704b2,
     type: 2}
   m_PrefabInternal: {fileID: 1760227090}
+--- !u!1 &1760227092 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1308703839335730, guid: 6f26d966849ef544c9b3eb647d4704b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1760227090}
+--- !u!114 &1760227093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1760227092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 1b6ca38bd95e5ab428679abfcc008bb3, type: 2}
 --- !u!1 &1969962236
 GameObject:
   m_ObjectHideFlags: 0
