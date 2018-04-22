@@ -32,12 +32,9 @@ public class Shack_Environment : MonoBehaviour
         }
     }
 
-    public void SetSeveral(MapData mapData)
+    public void ApplyMapData(MapData mapData)
     {
-        if (mapData.OverrideColors)
-            SetWaterColor(mapData.ShallowColor);
-        else
-            SetWaterColor(defaultWaterColor);
+        SetWaterColor(mapData.ShallowColor);
     }
 
     void OnValidate()

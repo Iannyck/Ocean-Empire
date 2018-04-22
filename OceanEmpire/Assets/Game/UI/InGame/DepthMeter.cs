@@ -21,12 +21,12 @@ public class DepthMeter : MonoBehaviour {
 
         if (Game.Instance != null && (submarine == null))
         {
-            if (Game.Instance.MapInfo == null)
+            if (Game.Instance.MapLayout == null)
                 return;
 
             //MapInfo m = Game.instance.map;
             //depthStart = m.depthAtYZero;
-            depthScaling = MapInfo.DEPTHSCALING;
+            depthScaling = MapLayout.UNIT_TO_METERS;
             submarine = Game.Instance.SubmarineMovement;
             return;
 

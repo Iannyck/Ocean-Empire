@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class FishLottery : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private MapInfo mapInfo;
-    public MapInfo MapInfo { get { return mapInfo; } private set { mapInfo = value; } }
+    public MapLayout MapLayout { get; private set; }
 
     [Header("Settings")]
     public AnimationCurve generalDensity = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1));
@@ -20,6 +18,11 @@ public class FishLottery : MonoBehaviour
         RebuildLottery();
     }
 
+    public void Init(MapLayout mapLayout)
+    {
+        MapLayout = mapLayout;
+    }
+
     void RebuildLottery()
     {
         lottery = new Lottery<GameObject>(fishRepartitions.Count);
@@ -28,7 +31,7 @@ public class FishLottery : MonoBehaviour
 
     public GameObject DrawAtHeight(float height)
     {
-        return DrawAtPosition01(MapInfo.GetMapPosition01(height));
+        return DrawAtPosition01(MapLayout.GetMapPosition01(height));
     }
     public GameObject DrawAtPosition01(float pos01)
     {
@@ -57,7 +60,7 @@ public class FishLottery : MonoBehaviour
 
     public float GetDensityAt(float height)
     {
-        return GetDensityAt01(MapInfo.GetMapPosition01(height));
+        return GetDensityAt01(MapLayout.GetMapPosition01(height));
     }
 
     public float GetDensityAt01(float position01)

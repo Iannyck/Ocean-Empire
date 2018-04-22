@@ -19,26 +19,29 @@ public class Game : PublicSingleton<Game>
     public UnitInstantiator UnitInstantiator { get { return _instantiator; } }
     public GameCamera GameCamera { get { return _gameCamera; } }
     public GameObject Submarine { get { return SubmarineMovement.gameObject; } }
+    public MapBuilder MapBuilder { get { return _mapBuilder; } }
+    public Shack_Environment Shack_Environment { get { return _shack_Environment; } }
+    public MapLayout MapLayout { get { return _mapLayout; } }
 
     public GameSettings GameSettings { get; private set; }
     public Recolte_UI Recolte_UI { get; private set; }
     public SubmarineMovement SubmarineMovement { get; private set; }
     public FishingReport FishingReport { get; private set; }
-    public MapInfo MapInfo { get; private set; }
     public FishLottery FishLottery { get; private set; }
     public PendingFishGPC PendingFishGPC { get; private set; }
     public Locker GameRunning { get; private set; }
-    public MapBuilder MapBuilder { get; private set; }
-    public Shack_Environment Shack_Environment { get; private set; }
 
-    [SerializeField] private UnitInstantiator _instantiator;
-    [SerializeField] private PlayerStats _playerStats;
-    [SerializeField] private PlayerSpawn _playerSpawn;
-    [SerializeField] private GameCamera _gameCamera;
-    [SerializeField] private GPComponents.SceneManager _sceneManager;
-    [SerializeField] private PalierManager _palierManager;
-    [SerializeField] private FishSpawner _fishSpawner;
-    [SerializeField] private GameBuilder _gameBuilder;
+    [SerializeField] UnitInstantiator _instantiator;
+    [SerializeField] PlayerStats _playerStats;
+    [SerializeField] PlayerSpawn _playerSpawn;
+    [SerializeField] GameCamera _gameCamera;
+    [SerializeField] GPComponents.SceneManager _sceneManager;
+    [SerializeField] PalierManager _palierManager;
+    [SerializeField] FishSpawner _fishSpawner;
+    [SerializeField] GameBuilder _gameBuilder;
+    [SerializeField] MapBuilder _mapBuilder;
+    [SerializeField] Shack_Environment _shack_Environment;
+    [SerializeField] MapLayout _mapLayout;
 
     // GAME STATE
     [NonSerialized] public bool gameStarted = false;
@@ -112,10 +115,15 @@ public class Game : PublicSingleton<Game>
 
         // Build map
         if (MapBuilder != null)
-            MapBuilder.SetSeveral(GameSettings.MapData);
+            MapBuilder.ApplyMapData(GameSettings.MapData);
+
+        //Init fish lottery
+        if (FishLottery != null)
+            FishLottery.Init(MapLayout);
+
         // TEMPORAIRE
         if (Shack_Environment != null)
-            Shack_Environment.SetSeveral(GameSettings.MapData);
+            Shack_Environment.ApplyMapData(GameSettings.MapData);
 
         //Ready up !
         ReadyGame();
@@ -187,10 +195,6 @@ public class Game : PublicSingleton<Game>
     }
 
     #region Other Scene Reference
-    public void SetReference(MapInfo mapInfo)
-    {
-        MapInfo = mapInfo;
-    }
     public void SetReference(FishLottery fishLottery)
     {
         FishLottery = fishLottery;
@@ -198,14 +202,6 @@ public class Game : PublicSingleton<Game>
     public void SetReference(Recolte_UI recolte_UI)
     {
         Recolte_UI = recolte_UI;
-    }
-    public void SetReference(MapBuilder mapBuilder)
-    {
-        MapBuilder = mapBuilder;
-    }
-    public void SetReference(Shack_Environment shack_Environment)
-    {
-        Shack_Environment = shack_Environment;
     }
     #endregion
 }

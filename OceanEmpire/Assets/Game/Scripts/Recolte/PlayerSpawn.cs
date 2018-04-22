@@ -26,8 +26,8 @@ public class PlayerSpawn : MonoBehaviour
 
     public void Init()
     {
-        BoatLocation = Game.Instance.MapInfo.PlayerSpawn.position;
-        WaterLocation = Game.Instance.MapInfo.PlayerStart_.position;
+        BoatLocation = Game.Instance.MapLayout.PlayerSpawn.position;
+        WaterLocation = Game.Instance.MapLayout.PlayerStart_.position;
         TopLocation = BoatLocation + Vector2.up * topHeightIncrease;
     }
 

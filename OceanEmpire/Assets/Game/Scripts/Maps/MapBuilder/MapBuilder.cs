@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class MapBuilder : MonoBehaviour
 {
-    [SerializeField] bool _autoBuild;
-
     // References
-    [SerializeField] Transform _waterLayerContainer;
+    [Header("References"), SerializeField] Transform _waterLayerContainer;
     [SerializeField] SpriteRenderer _waterLayerPrefab;
     [SerializeField] Transform _oceanFloorInstance;
+    [SerializeField] MapLayout _mapLayout;
 
     // Settings
-    [SerializeField] float _depth = 50;
+    [Header("Settings")]
     [SerializeField] float _layersSpacing = 1.5f;
     [SerializeField] float _maxLateralOffset = 1;
     [SerializeField] Color _shallowColor;
@@ -23,13 +22,14 @@ public class MapBuilder : MonoBehaviour
 
     private float WaterLayerTop { get { return -2f; } }
 
-    public void SetSeveral(MapData mapData)
+    public void ApplyMapData(MapData mapData)
     {
-        if (mapData.OverrideDepth)
-            SetDepth(mapData.Depth);
+        SetColors(mapData.ShallowColor, mapData.DeepColor);
+    }
 
-        if (mapData.OverrideColors)
-            SetColors(mapData.ShallowColor, mapData.DeepColor);
+    public void UpdateAll()
+    {
+        SetDepth(_mapLayout.Depth);
     }
 
     public void SetLateralOffset(float offset)
@@ -107,7 +107,7 @@ public class MapBuilder : MonoBehaviour
     public void RebuildWater()
     {
         ClearWater();
-        SetDepth(_depth);
+        SetDepth(_mapLayout.Depth);
     }
 
 

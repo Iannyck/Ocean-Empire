@@ -10,14 +10,9 @@ public class MapData
     [ReadOnly]
     public string GameSceneName;
 
-    public bool OverrideDepth = false;
-    [ShowIf("OverrideDepth")]
+    [Header("Ocean Settings")]
     public float Depth;
-
-    public bool OverrideColors = false;
-    //[ShowIf("OverrideColors")]
     public SerializableColor ShallowColor;
-    //[ShowIf("OverrideColors")]
     public SerializableColor DeepColor;
 
     public MapData(string name)

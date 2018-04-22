@@ -110,21 +110,23 @@ public class WanderBrain : Brain
             v = -v;
 
         Vector2 pos = v + rb.position;
-        //Debug.Log("ID: " + rb.GetInstanceID() + "    rb: " + rb.position + "  v: " + v + "  =  " + pos);
-        if (MapInfo.IsOutOfHorizontalBounds(pos))
-        {
-            // Flip direction
-            v = -v;
-            pos = v + rb.position;
+        MapLayout map = Game.Instance != null ? Game.Instance.MapLayout : null;
 
-            pos.x = Mathf.Clamp(pos.x, MapInfo.BorderLeft, MapInfo.BorderRight);
-        }
-
-        // Clamp vertical
-        MapInfo map;
-        if (Game.Instance != null && (map = Game.Instance.MapInfo) != null)
+        // Clamp to map layout
+        if (map != null)
         {
-            pos.y = Mathf.Clamp(pos.y, map.mapBottom + 0.5f, map.mapTop - 0.5f);
+            // Clamp horizontal
+            if (pos.x < map.BorderLeft || pos.x > map.BorderRight)
+            {
+                // Flip direction
+                v = -v;
+                pos = v + rb.position;
+
+                pos.x = Mathf.Clamp(pos.x, map.BorderLeft, map.BorderRight);
+            }
+
+            // Clamp vertical
+            pos.y = Mathf.Clamp(pos.y, map.BorderBottom + 0.5f, map.BorderTop - 0.5f);
         }
 
         return pos;

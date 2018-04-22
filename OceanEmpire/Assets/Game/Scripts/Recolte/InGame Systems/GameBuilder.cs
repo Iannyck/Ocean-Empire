@@ -34,10 +34,10 @@ public class GameBuilder : MonoBehaviour
 
     void OnMapLoaded(Scene scene)
     {
-        Game.Instance.SetReference(scene.FindRootObject<MapInfo>());
+        //Game.Instance.SetReference(scene.FindRootObject<MapLayout>());
         Game.Instance.SetReference(scene.FindRootObject<FishLottery>());
-        Game.Instance.SetReference(scene.FindRootObject<MapBuilder>());
-        Game.Instance.SetReference(scene.FindRootObject<Shack_Environment>());
+        //Game.Instance.SetReference(scene.FindRootObject<MapBuilder>());
+        //Game.Instance.SetReference(scene.FindRootObject<Shack_Environment>());
 
         mapLoaded = true;
         CheckInitGame();

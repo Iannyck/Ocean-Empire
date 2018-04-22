@@ -39,7 +39,7 @@ public class Shack : MonoBehaviour
 
     private void OnMapChange(int mapIndex, MapData obj)
     {
-        shack_Environment.SetSeveral(obj);
+        shack_Environment.ApplyMapData(obj);
     }
 
     void OnDisable()
