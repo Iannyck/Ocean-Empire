@@ -17,8 +17,7 @@ public class Shack : MonoBehaviour
     [SerializeField] Shack_MapManager shack_MapManager;
 
     [Header("Calendar")]
-    [SerializeField]
-    SceneInfo calendarScene;
+    [SerializeField] SceneInfo calendarScene;
 
     public void OpenCalendar()
     {

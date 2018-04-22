@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Shack_MapManager : MonoBehaviour
 {
-    [SerializeField] Text mapNameText;
+    [SerializeField] bool logMapNames = false;
     [SerializeField] DataSaver dataSaver;
     [SerializeField] PrebuiltMapData _defaultMapData;
     [ReadOnly, SerializeField] int _mapIndex;
@@ -37,12 +37,19 @@ public class Shack_MapManager : MonoBehaviour
     #region Data Saver Interactions
     void Pull()
     {
+        // Pull from dataSaver
         MapIndex = dataSaver.GetInt(SAVEKEY_MAPINDEX);
         MapData = (MapData)dataSaver.GetObjectClone(SAVEKEY_MAPDATA);
 
+        // If map data is null, load/create one
         if (MapData == null)
             MapData = GetMapDataFromIndex(MapIndex);
 
+        // Log
+        if (logMapNames)
+            Debug.Log("Map: " + MapData.Name);
+
+        // Event
         OnMapSet(MapIndex, MapData);
     }
     void PushAndSave()
@@ -59,14 +66,12 @@ public class Shack_MapManager : MonoBehaviour
         MapIndex = mapIndex;
         MapData = GetMapDataFromIndex(MapIndex);
 
-        if (mapNameText != null)
-        {
-            mapNameText.text = MapData.Name;
-            mapNameText.enabled = true;
-        }
-
         // Save to disc
         PushAndSave();
+
+        // Log
+        if (logMapNames)
+            Debug.Log("Map: " + MapData.Name);
 
         // Event
         OnMapSet(MapIndex, MapData);
