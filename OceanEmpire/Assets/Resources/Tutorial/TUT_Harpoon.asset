@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fbd8048303b0ac4783b70c4b18b7693, type: 3}
-  m_Name: TUT_Advance
+  m_Name: TUT_Harpoon
   m_EditorClassIdentifier: 
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
