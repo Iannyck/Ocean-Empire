@@ -41,7 +41,14 @@ public class DataSaver : FileScriptableInterface, IPersistent// ScriptablePersis
     }
     protected override void OverwriteLocalData(object graph)
     {
-        data = (Data)graph;
+        if (graph == null)
+        {
+            SetDefaultLocalData();
+        }
+        else
+        {
+            data = (Data)graph;
+        }
     }
     protected override void SetDefaultLocalData()
     {
