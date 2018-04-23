@@ -9,7 +9,7 @@ public class TUT_Calendrier : BaseTutorial
 {
     public float focusDuration = 1f;
 
-    private const string showMagasinKey = "itstimetoexercice";
+    private const string showCalendrierKey = "itstimetoexercice";
 
     protected override void OnStart(Action onComplete = null)
     {
@@ -18,7 +18,7 @@ public class TUT_Calendrier : BaseTutorial
 
     public void FocusOnCalendrier(Action OnComplete)
     {
-        if (dataSaver.GetBool(showMagasinKey, false))
+        if (dataSaver.GetBool(showCalendrierKey, false))
         {
             Spotlight spotlight = modules.spotlight;
             spotlight.On(TutorialShackReference.instance.calendrier.position);

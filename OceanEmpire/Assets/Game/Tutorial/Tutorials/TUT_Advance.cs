@@ -12,38 +12,41 @@ public class TUT_Advance : BaseTutorial
     public GameObject sliderAnim_Prefab;
     private GameObject sliderAnim;
 
+    private const string showHarpoonKey = "itstimetoharpoon";
+
     protected override void OnStart(Action onComplete = null)
     {
         sliderAnim = Instantiate(sliderAnim_Prefab, Scenes.GetActive(TutorialScene.SCENENAME).FindRootObject<TutorialScene>().transform);
-        Game.Instance.SubmarineMovement.GetComponent<SlingshotControl>().enabled = true;
         onComplete();
-    }
-
-    public void FocusOnFishInvincible(Action OnComplete)
-    {
-        Debug.Log("a faire eventuellement si possible");
     }
 
     // A mettre dans un autre tutoriel eventuellement
     public void FocusOnHarpoon(Action OnComplete)
     {
-        Debug.Log("FOCUS ON HARPOON!!!");
-        Game.Instance.GameRunning.Lock("spotlight");
-        Spotlight spotlight = modules.spotlight;
-        spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
-        sliderAnim.SetActive(true);
-        sliderAnim.GetComponent<SlideAnimation>().Init(new Vector3(0, 0, 0)); // centre de l'ecran
-        modules.textDisplay.DisplayText("Voici ton harpon! Utilise le pour capturer des gros poissons.", true);
-        modules.textDisplay.SetTop();
-        spotlight.DelayedCall(delegate ()
+        if (dataSaver.GetBool(showHarpoonKey, false))
         {
-            modules.waitForInput.OnTouch(delegate ()
+            Debug.Log("FOCUS ON HARPOON!!!");
+            Game.Instance.GameRunning.Lock("spotlight");
+            Spotlight spotlight = modules.spotlight;
+            spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
+            sliderAnim.SetActive(true);
+            sliderAnim.GetComponent<SlideAnimation>().Init(new Vector3(0, 0, 0)); // centre de l'ecran
+            modules.textDisplay.DisplayText("Voici ton harpon! Utilise le pour capturer des gros poissons.", true);
+            modules.textDisplay.SetTop();
+            spotlight.DelayedCall(delegate ()
             {
-                sliderAnim.Destroy();
-                modules.textDisplay.HideText();
-                spotlight.Off(() => { OnComplete(); });
-                Game.Instance.GameRunning.Unlock("spotlight");
-            }, TouchPhase.Moved);
-        }, 0, true);
+                modules.waitForInput.OnTouch(delegate ()
+                {
+                    sliderAnim.Destroy();
+                    modules.textDisplay.HideText();
+                    spotlight.Off(() =>
+                    {
+                        OnComplete();
+                        End(true);
+                    });
+                    Game.Instance.GameRunning.Unlock("spotlight");
+                }, TouchPhase.Moved);
+            }, 0, true);
+        }
     }
 }
