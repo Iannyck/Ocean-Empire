@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using CCC.Persistence;
+using Questing;
+using System.Collections.Generic;
 
 public class MapManager : MonoPersistent
 {
@@ -66,11 +68,12 @@ public class MapManager : MonoPersistent
     }
     #endregion
 
-    public void SetMap(int mapIndex)
+    public void SetMap(int mapIndex, bool andAddRelatedQuests)
     {
         // Get Data
+        List<IQuestBuilder> relatedQuests;
         MapIndex = mapIndex;
-        MapData = GetMapDataFromIndex(MapIndex);
+        MapData = GetMapDataFromIndex(MapIndex, out relatedQuests);
 
         // Save to disc
         PushAndSave();
@@ -79,32 +82,49 @@ public class MapManager : MonoPersistent
         if (logMapNames)
             Debug.Log("Map Manager's map: " + MapData.Name);
 
+        if (andAddRelatedQuests && QuestManager.Instance != null && relatedQuests != null)
+        {
+            DateTime now = DateTime.Now;
+            foreach (var questBuilder in relatedQuests)
+            {
+                QuestManager.Instance.AddQuest(questBuilder.BuildQuest(now));
+            }
+        }
+
         // Event
         OnMapSet(MapIndex, MapData);
     }
-    public void SetMap_Next()
+    public void SetMap_Next(bool andAddRelatedQuests)
     {
-        SetMap(MapIndex + 1);
+        SetMap(MapIndex + 1, andAddRelatedQuests);
     }
-    public void SetMap_Previous()
+    public void SetMap_Previous(bool andAddRelatedQuests)
     {
-        SetMap(MapIndex - 1);
+        SetMap(MapIndex - 1, andAddRelatedQuests);
     }
 
     private MapData GetMapDataFromIndex(int index)
+    {
+        List<IQuestBuilder> dummy;
+        return GetMapDataFromIndex(index, out dummy);
+    }
+    private MapData GetMapDataFromIndex(int index, out List<IQuestBuilder> relatedQuests)
     {
         // Load from path. If null, pick default
 
         var path = PREBUILT_MAPDATA_NAME + index.ToString();
         var prebuiltMapData = Resources.Load<PrebuiltMapData>(path);
+
         if (prebuiltMapData == null)
         {
             Debug.LogWarning("Aucune ressource nommée: " + path + ". Normalement, on génèrerait une map avec un algo," +
                 " mais pour l'instant, nous allons prendre la map par défaut");
+            relatedQuests = null;
             return _defaultMapData.MapData;
         }
         else
         {
+            relatedQuests = prebuiltMapData.GetRelatedQuestBuilders();
             return prebuiltMapData.MapData;
         }
     }

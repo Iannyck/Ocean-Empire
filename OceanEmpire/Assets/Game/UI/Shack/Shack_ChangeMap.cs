@@ -19,11 +19,12 @@ public class Shack_ChangeMap : MonoBehaviour
         {
             questPanel.HideInstant();
             QuestManager.Instance.RemoveAllQuests();
+            MapManager.Instance.SetMap_Next(true);
 
             CoroutineLauncher.Instance.DelayedCall(() =>
             {
                 questPanel.Show();
-            }, 2);
-        }, 2);
+            }, 1);
+        }, 0.5f);
     }
 }

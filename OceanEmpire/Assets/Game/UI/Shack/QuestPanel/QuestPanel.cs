@@ -80,6 +80,7 @@ public class QuestPanel : MonoBehaviour
         sq.Append(rectTr.DOAnchorPos(normalAnchoredPosition, moveDuration).SetEase(arrivalEase));
         sq.Join(canvasGroup.DOFade(1, fadeInDuration));
         sq.SetId(this);
+        sq.onComplete = CheckIfShouldOfferNextMap;
         ongoingShowAnimation = sq;
     }
 
@@ -134,7 +135,7 @@ public class QuestPanel : MonoBehaviour
         isShown = false;
         gameObject.SetActive(false);
     }
-    
+
     public void UpdateContent()
     {
         QuestManager questManager = QuestManager.Instance;
@@ -143,7 +144,6 @@ public class QuestPanel : MonoBehaviour
             Debug.LogError("No quest manager");
             return;
         }
-        Debug.Log("update content");
 
         List<Quest> questList = questManager.ongoingQuests;
 
@@ -161,22 +161,58 @@ public class QuestPanel : MonoBehaviour
         }
 
 
+        CheckIfShouldOfferNextMap();
         // Every quest completed !
-        if (IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap)
-        {
-            if (isShown)
-            {
-                if (ongoingShowAnimation != null && ongoingShowAnimation.IsActive())
-                    ongoingShowAnimation.onComplete = OfferNextMap;
-                else
-                    OfferNextMap();
-            }
-            else
-            {
-                Show();
-                ongoingShowAnimation.onComplete = OfferNextMap;
-            }
+        //var shouldOfferNextMap = IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap;
+        //var shouldOMNButtonBeVisibleRightNow = shouldOfferNextMap && isShown && !ongoingShowAnimation.IsActive();
 
+        //if (shouldOfferNextMap)
+        //{
+        //    if (shouldOMNButtonBeVisibleRightNow)
+        //        OfferNextMap();
+        //    else
+        //        ongoingShowAnimation.onComplete = OfferNextMap;
+        //}
+
+        //onm_button.gameObject.SetActive(shouldOMNButtonBeVisibleRightNow);
+
+        //if (IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap)
+        //{
+        //    if (isShown)
+        //    {
+        //        if (ongoingShowAnimation != null && ongoingShowAnimation.IsActive())
+        //        {
+        //            ongoingShowAnimation.onComplete = OfferNextMap;
+        //            onm_button.gameObject.SetActive(false);
+        //        }
+        //        else
+        //            OfferNextMap();
+        //    }
+        //    else
+        //    {
+        //        OfferNextMap();
+        //    }
+        //}
+        //else
+        //{
+        //    onm_button.gameObject.SetActive(false);
+        //}
+    }
+
+    void CheckIfShouldOfferNextMap()
+    {
+        var shouldOfferNextMap = IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap;
+        var shouldOMNButtonBeVisibleRightNow = shouldOfferNextMap && isShown && !ongoingShowAnimation.IsActive();
+
+        if (IsEveryOngoingQuestCompleted()
+            && MapManager.Instance.MapData.Name != lastMap
+            && isShown && ongoingShowAnimation.IsComplete())
+        {
+            OfferNextMap();
+        }
+        else
+        {
+            onm_button.gameObject.SetActive(shouldOMNButtonBeVisibleRightNow);
         }
     }
 

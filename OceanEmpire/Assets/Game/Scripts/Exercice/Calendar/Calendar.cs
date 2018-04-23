@@ -29,7 +29,7 @@ public class Calendar : MonoPersistent
     public static Calendar instance;
 
     /// <summary>
-    /// Ordonné du plus vieux au plus récent
+    /// Ordonné du plus récent au plus lointain
     /// </summary>
     public ReadOnlyCollection<ScheduledBonus> GetPresentAndFutureBonifiedTimes() { return presentAndFutureBonifiedTimes.GetInternalList(); }
     /// <summary>

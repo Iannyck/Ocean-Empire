@@ -22,7 +22,8 @@ public class QuestPanelEntry : MonoBehaviour
     [SerializeField] float completedIconAlpha;
 
     [Header("Flash Away Animation")]
-    [SerializeField] float fa_fadeInDuration = 0.25f;
+    [SerializeField]
+    float fa_fadeInDuration = 0.25f;
     [SerializeField] Ease fa_fadeInEase = Ease.OutSine;
     [SerializeField] float fa_pause = 0;
     [SerializeField] float fa_fadeOutDuration = 0.25f;
@@ -30,6 +31,8 @@ public class QuestPanelEntry : MonoBehaviour
 
     public void Fill(Quest quest)
     {
+        ResetToNormal();
+
         description.text = quest.Context.description;
         if (quest.state == QuestState.Completed)
         {
@@ -83,5 +86,14 @@ public class QuestPanelEntry : MonoBehaviour
         sq.AppendInterval(fa_pause);
         sq.Append(whiteOverlay.DOFade(0, fa_fadeOutDuration).SetEase(fa_fadeOutEase));
         sq.onComplete = onComplete;
+    }
+
+    public void ResetToNormal()
+    {
+        var overlayTR = whiteOverlay.transform;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(child != overlayTR);
+        }
     }
 }
