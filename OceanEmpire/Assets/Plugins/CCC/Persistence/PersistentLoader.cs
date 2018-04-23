@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CCC.Persistence;
+using System;
 
 public class PersistentLoader : MonoBehaviour
 {
     [Reorderable]
-    public List<Object> persistentObjects;
+    public List<UnityEngine.Object> persistentObjects;
 
     public static PersistentLoader instance;
     private const string ASSETNAME = "CCC/Persistent Loader";
     static List<System.Action> callbacks = new List<System.Action>();
 
     private InitQueue queue;
+    private List<string> pendingObjects = new List<string>();
 
     static public void LoadIfNotLoaded(System.Action callback = null)
     {
@@ -56,14 +58,35 @@ public class PersistentLoader : MonoBehaviour
             IPersistent manager = persistentObjects[i] as IPersistent;
             if (manager != null)
             {
+                string name = persistentObjects[i].name;
+                pendingObjects.Add(name);
+
                 persistentObjects[i] = manager.DuplicationBehavior();
                 manager = persistentObjects[i] as IPersistent;
 
+                Action registeration = queue.Register();
+
                 //Init
-                manager.Init(queue.Register());
+                manager.Init(() =>
+                {
+                    pendingObjects.Remove(name);
+                    registeration();
+                });
             }
         }
         queue.MarkEnd();
+
+        this.DelayedCall(() =>
+        {
+            if (!queue.IsOver)
+            {
+                Debug.Log("A manager is taking an abnormally long time to initialize.");
+                for (int i = 0; i < pendingObjects.Count; i++)
+                {
+                    Debug.Log(pendingObjects[i] + " has not called 'onComplete' yet.");
+                }
+            }
+        }, 2);
     }
 
     void OnValidate()
@@ -76,7 +99,7 @@ public class PersistentLoader : MonoBehaviour
             GameObject gameObj = persistentObjects[i] as GameObject;
             if (gameObj != null)
             {
-                persistentObjects[i] = gameObj.GetComponent<IPersistent>() as Object;
+                persistentObjects[i] = gameObj.GetComponent<IPersistent>() as UnityEngine.Object;
             }
 
             if (!(persistentObjects[i] is IPersistent))

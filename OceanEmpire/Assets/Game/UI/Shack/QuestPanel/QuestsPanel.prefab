@@ -222,10 +222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba218278e462904d8c87b1464acbb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapManager: {fileID: 0}
   entryPrefab: {fileID: 114751648730295136, guid: 132bc99f402016e4cb0b9b6b33a23cc0,
     type: 2}
   entries: []
   entriesContainer: {fileID: 224389799545802166}
+  lastMap: Ocean 8
   canvasGroup: {fileID: 225252172298529452}
   arrivalDelta: {x: 0, y: 700}
   arrivalDelay: 0.25

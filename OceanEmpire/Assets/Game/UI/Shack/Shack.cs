@@ -14,26 +14,20 @@ public class Shack : MonoBehaviour
     [Header("Recolte")]
     [SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
     [SerializeField] Shack_CallToAction recolteCallToAction;
-    [SerializeField] Shack_MapManager shack_MapManager;
 
     [Header("Calendar")]
     [SerializeField] SceneInfo calendarScene;
 
-    public void OpenCalendar()
+    void OnStart()
     {
-        Scenes.Load(calendarScene, (scene) =>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
-            scene.FindRootObject<CalendarScroll_Controller>().OnEntranceComplete(() => Scenes.UnloadAsync(gameObject.scene));
+            CheckFishingFrenzy();
+            if (fishingFrenzyWidget != null)
+                fishingFrenzyWidget.OnStateUpdated.AddListener(CheckFishingFrenzy);
+
+            MapManager.Instance.OnMapSet += OnMapChange;
         });
-    }
-
-    void OnEnable()
-    {
-        CheckFishingFrenzy();
-        if (fishingFrenzyWidget != null)
-            fishingFrenzyWidget.OnStateUpdated.AddListener(CheckFishingFrenzy);
-
-        shack_MapManager.OnMapSet += OnMapChange;
     }
 
     private void OnMapChange(int mapIndex, MapData obj)
@@ -41,13 +35,13 @@ public class Shack : MonoBehaviour
         shack_Environment.ApplyMapData(obj);
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
         if (fishingFrenzyWidget != null)
             fishingFrenzyWidget.OnStateUpdated.RemoveListener(CheckFishingFrenzy);
 
-        if (shack_MapManager != null)
-            shack_MapManager.OnMapSet -= OnMapChange;
+        if (MapManager.Instance != null)
+            MapManager.Instance.OnMapSet -= OnMapChange;
     }
 
     void CheckFishingFrenzy()
@@ -57,12 +51,20 @@ public class Shack : MonoBehaviour
 
     public void LaunchGame()
     {
-        GameSettings gameSettings = new GameSettings(shack_MapManager.MapData, true);
+        GameSettings gameSettings = new GameSettings(MapManager.Instance.MapData, true);
 
         if (FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
         {
             FishingFrenzy.Instance.Activate();
         }
         LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
+    }
+
+    public void OpenCalendar()
+    {
+        Scenes.Load(calendarScene, (scene) =>
+        {
+            scene.FindRootObject<CalendarScroll_Controller>().OnEntranceComplete(() => Scenes.UnloadAsync(gameObject.scene));
+        });
     }
 }

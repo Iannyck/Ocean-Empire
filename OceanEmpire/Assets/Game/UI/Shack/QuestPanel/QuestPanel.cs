@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class QuestPanel : MonoBehaviour
 {
+    [Header("References")]
+    public string lastMap;
+
     [Header("Entries Managment")]
     public QuestPanelEntry entryPrefab;
     public List<QuestPanelEntry> entries = new List<QuestPanelEntry>();
@@ -30,11 +33,14 @@ public class QuestPanel : MonoBehaviour
 
     private Tween ongoingShowAnimation;
     private Vector2 normalAnchoredPosition;
+    private Vector2 normalSize;
     private bool isShown = false;
 
     private void Awake()
     {
-        normalAnchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+        var rectTr = GetComponent<RectTransform>();
+        normalAnchoredPosition = rectTr.anchoredPosition;
+        normalSize = rectTr.sizeDelta;
 
         PersistentLoader.LoadIfNotLoaded(() =>
         {
@@ -56,15 +62,18 @@ public class QuestPanel : MonoBehaviour
             HideInstant();
     }
 
-    void Show()
+    public void Show()
     {
         this.DOKill();
+
+        gameObject.SetActive(true);
 
         isShown = true;
         var rectTr = GetComponent<RectTransform>();
         var sq = DOTween.Sequence();
 
         canvasGroup.alpha = 0;
+        rectTr.sizeDelta = normalSize;
         rectTr.anchoredPosition = normalAnchoredPosition + arrivalDelta;
 
         sq.AppendInterval(arrivalDelay);
@@ -74,7 +83,7 @@ public class QuestPanel : MonoBehaviour
         ongoingShowAnimation = sq;
     }
 
-    void OfferNextMap()
+    public void OfferNextMap()
     {
         if (this == null || onm_button == null)
             return;
@@ -119,19 +128,13 @@ public class QuestPanel : MonoBehaviour
         }
     }
 
-    void HideInstant()
+    public void HideInstant()
     {
         this.DOKill();
         isShown = false;
         gameObject.SetActive(false);
     }
-
-    private void OnDestroy()
-    {
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.OnListChange -= UpdateContent;
-    }
-
+    
     public void UpdateContent()
     {
         QuestManager questManager = QuestManager.Instance;
@@ -140,6 +143,7 @@ public class QuestPanel : MonoBehaviour
             Debug.LogError("No quest manager");
             return;
         }
+        Debug.Log("update content");
 
         List<Quest> questList = questManager.ongoingQuests;
 
@@ -158,7 +162,7 @@ public class QuestPanel : MonoBehaviour
 
 
         // Every quest completed !
-        if (IsEveryOngoingQuestCompleted())
+        if (IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap)
         {
             if (isShown)
             {
@@ -174,6 +178,12 @@ public class QuestPanel : MonoBehaviour
             }
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (QuestManager.Instance != null)
+            QuestManager.Instance.OnListChange -= UpdateContent;
     }
 
     private bool IsEveryOngoingQuestCompleted()

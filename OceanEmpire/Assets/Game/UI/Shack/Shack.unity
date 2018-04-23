@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComp: {fileID: 291810435}
-  mapManager: {fileID: 1109020676}
+  mapManager: {fileID: 0}
   fadeInDuration: 0.5
   pauseDuration: 0.75
   fadeOutDuration: 0.75
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1109020676}
+      - m_Target: {fileID: 0}
         m_MethodName: SetMap_Previous
         m_Mode: 1
         m_Arguments:
@@ -1830,7 +1830,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1109020676}
+      - m_Target: {fileID: 0}
         m_MethodName: SetMap_Next
         m_Mode: 1
         m_Arguments:
@@ -2577,7 +2577,7 @@ GameObject:
   - component: {fileID: 1109020672}
   - component: {fileID: 1109020671}
   - component: {fileID: 1109020675}
-  - component: {fileID: 1109020676}
+  - component: {fileID: 1109020677}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2680,9 +2680,8 @@ MonoBehaviour:
   shack_Environment: {fileID: 236032336}
   fishingFrenzyWidget: {fileID: 1053563334}
   recolteCallToAction: {fileID: 1424573234}
-  shack_MapManager: {fileID: 1109020676}
   calendarScene: {fileID: 11400000, guid: b272cda3de5b9024bbcc59b71a9b971c, type: 2}
---- !u!114 &1109020676
+--- !u!114 &1109020677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2690,13 +2689,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109020670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa5b45c615f66f4aa81468497c9e35d, type: 3}
+  m_Script: {fileID: 11500000, guid: c6889d0716626da468e05b9314a55398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logMapNames: 1
-  dataSaver: {fileID: 11400000, guid: 2e39e744c6f66a64292150c84585944f, type: 2}
-  _defaultMapData: {fileID: 11400000, guid: 4285c4c446957ad43994d71151ef6e5a, type: 2}
-  _mapIndex: 0
+  questPanel: {fileID: 1545004479}
 --- !u!1 &1153196196
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,6 +3699,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1537795637}
+--- !u!114 &1545004479 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114140619668561724, guid: d70861b802cc9cf439c165c3bd81d56c,
+    type: 2}
+  m_PrefabInternal: {fileID: 2021797010}
+  m_Script: {fileID: 11500000, guid: 4ba218278e462904d8c87b1464acbb1a, type: 3}
 --- !u!1 &1585736091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4401,6 +4403,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1382558602}
     m_Modifications:
+    - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224194290221283524, guid: d70861b802cc9cf439c165c3bd81d56c,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -4490,6 +4497,36 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114140619668561724, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: mapManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1109020677}
+    - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TransitionToNextMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d70861b802cc9cf439c165c3bd81d56c, type: 2}

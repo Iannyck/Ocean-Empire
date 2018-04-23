@@ -9,23 +9,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 768796e0a893b4a43b5ed1d60fbd1f25, type: 3}
-  m_Name: PrebuiltMapData_0
+  m_Name: PrebuiltMapData_7
   m_EditorClassIdentifier: 
-  _gameScene: {fileID: 11400000, guid: bf41f1cdd7792fe4e8b5f26a85b0a029, type: 2}
+  _gameScene: {fileID: 11400000, guid: abdc00627385c9447b5975344efb61a5, type: 2}
   _mapData:
-    Name: Tutoriel Part 1
-    GameSceneName: Map_Caraibe
+    Name: Ocean 6
+    GameSceneName: Map_Pacifique
     Depth: 0
     ShallowColor:
-      r: 0.05060553
-      g: 0.8602941
-      b: 0.8602941
+      r: 0.2205882
+      g: 0.87099385
+      b: 1
       a: 1
     DeepColor:
-      r: 0
-      g: 0.4852941
-      b: 0.4852941
+      r: 1
+      g: 0
+      b: 0
       a: 1
   relatedQuests:
-  - {fileID: 11400000, guid: af0d13dd6ae3f70428654a806ea40ce3, type: 2}
-  - {fileID: 11400000, guid: cf9b6f9932048f04097285a80368d2c1, type: 2}
+  - {fileID: 11400000, guid: e7e2ecc8965f455419b21b90629cdb3b, type: 2}
