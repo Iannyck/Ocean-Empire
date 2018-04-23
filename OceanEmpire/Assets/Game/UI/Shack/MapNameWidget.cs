@@ -8,7 +8,7 @@ public class MapNameWidget : MonoBehaviour
 {
     [Header("References")]
     public Text textComp;
-    public Shack_MapManager mapManager;
+    public MapManager mapManager;
 
     [Header("Animation Settings")]
     public float fadeInDuration = 0.5f;

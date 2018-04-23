@@ -13,11 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameScene: {fileID: 11400000, guid: abdc00627385c9447b5975344efb61a5, type: 2}
   _mapData:
-    Name: Pacifique
+    Name: Tutorial Part 2
     GameSceneName: Map_Pacifique
-    OverrideDepth: 0
     Depth: 0
-    OverrideColors: 1
     ShallowColor:
       r: 0.2205882
       g: 0.87099385

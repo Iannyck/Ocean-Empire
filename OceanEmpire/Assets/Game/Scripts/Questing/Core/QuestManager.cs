@@ -86,19 +86,45 @@ namespace Questing
 
         public bool RemoveQuest(Quest quest, bool andLateSave = true)
         {
-            if (ongoingQuests.Remove(quest))
+            int index = ongoingQuests.IndexOf(quest);
+            if (index >= 0)
             {
-                if (andLateSave)
-                    LateSave();
-
-                if (OnListChange != null)
-                    OnListChange();
+                RemoveQuest(index, andLateSave);
                 return true;
             }
             else
             {
                 return false;
             }
+        }
+
+        public void RemoveQuest(int questIndex, bool andLateSave)
+        {
+            if (questIndex < 0 || questIndex >= ongoingQuests.Count)
+            {
+                Debug.LogError("Trying to remove out of range quest. Index: " + questIndex + "  vs.  QuestCount: " + ongoingQuests.Count);
+            }
+            ongoingQuests.RemoveAt(questIndex);
+
+            if (andLateSave)
+                LateSave();
+
+            if (OnListChange != null)
+                OnListChange();
+        }
+
+        public void RemoveAllQuests(bool andLateSave = true)
+        {
+            for (int i = ongoingQuests.Count - 1; i >= 0; i--)
+            {
+                ongoingQuests.RemoveLast();
+            }
+
+            if (andLateSave)
+                LateSave();
+
+            if (OnListChange != null)
+                OnListChange();
         }
 
         void OnQuestCompletion(Quest quest)
@@ -187,7 +213,7 @@ namespace Questing
 
             foreach (var quest in ongoingQuests)
             {
-                quest.onCompletion = OnQuestCompletion;  
+                quest.onCompletion = OnQuestCompletion;
             }
 
             if (OnListChange != null)

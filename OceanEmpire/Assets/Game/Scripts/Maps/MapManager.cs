@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using CCC.Persistence;
 
-public class Shack_MapManager : MonoBehaviour
+public class MapManager : MonoPersistent
 {
     [SerializeField] bool logMapNames = false;
     [SerializeField] DataSaver dataSaver;
@@ -18,20 +16,28 @@ public class Shack_MapManager : MonoBehaviour
     public MapData MapData { get; private set; }
 
     public event Action<int, MapData> OnMapSet = (x, y) => { };
+    public static MapManager Instance { get; private set; }
 
-    void OnEnable()
+
+    public override void Init(Action onComplete)
     {
+        Instance = this;
+
         dataSaver.OnReassignData += Pull;
 
         if (!dataSaver.HasEverLoaded)
-            dataSaver.LateLoad();
+            dataSaver.Load(onComplete);
         else
+        {
             Pull();
+            onComplete();
+        }
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
-        dataSaver.OnReassignData -= Pull;
+        if (dataSaver != null)
+            dataSaver.OnReassignData -= Pull;
     }
 
     #region Data Saver Interactions
@@ -59,7 +65,7 @@ public class Shack_MapManager : MonoBehaviour
         dataSaver.LateSave();
     }
     #endregion
-    
+
     public void SetMap(int mapIndex)
     {
         // Get Data
@@ -71,7 +77,7 @@ public class Shack_MapManager : MonoBehaviour
 
         // Log
         if (logMapNames)
-            Debug.Log("Map: " + MapData.Name);
+            Debug.Log("Map Manager's map: " + MapData.Name);
 
         // Event
         OnMapSet(MapIndex, MapData);
