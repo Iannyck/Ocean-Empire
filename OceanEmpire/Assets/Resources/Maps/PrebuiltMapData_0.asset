@@ -17,14 +17,14 @@ MonoBehaviour:
     GameSceneName: Map_Caraibe
     Depth: 0
     ShallowColor:
-      r: 0.2205882
-      g: 0.87099385
-      b: 1
+      r: 0.27205884
+      g: 1
+      b: 0.6084179
       a: 1
     DeepColor:
-      r: 1
-      g: 0
-      b: 0
+      r: 0.12262111
+      g: 0.3601651
+      b: 0.5955882
       a: 1
   relatedQuests:
   - {fileID: 11400000, guid: af0d13dd6ae3f70428654a806ea40ce3, type: 2}

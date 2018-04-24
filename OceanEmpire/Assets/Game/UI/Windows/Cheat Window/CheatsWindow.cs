@@ -4,9 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CheatsWindow : WindowAnimation
 {
+    [SerializeField] int mapIndex;
+    [SerializeField] Text setMapText;
+
     public const string SCENENAME = "CheatsWindow";
 
     public static void OpenWindow()
@@ -20,6 +24,13 @@ public class CheatsWindow : WindowAnimation
         PersistentLoader.LoadIfNotLoaded();
     }
 
+    private void Update()
+    {
+        if(setMapText != null)
+        {
+            setMapText.text = "Set Map (index: " + mapIndex + ')';
+        }
+    }
 
     public void ResetDataToDefault()
     {
@@ -53,5 +64,20 @@ public class CheatsWindow : WindowAnimation
             else
                 PlayerCurrency.AddTickets(amount);
         }
+    }
+
+    public void SetMap(bool withQuest)
+    {
+        MapManager.Instance.SetMap(mapIndex, withQuest);
+    }
+
+    public void NextMap(bool withQuests)
+    {
+        MapManager.Instance.SetMap_Next(withQuests);
+    }
+
+    public void PreviousMap(bool withQuests)
+    {
+        MapManager.Instance.SetMap_Previous(withQuests);
     }
 }
