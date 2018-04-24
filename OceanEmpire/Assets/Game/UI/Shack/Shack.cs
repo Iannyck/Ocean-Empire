@@ -8,18 +8,13 @@ public class Shack : MonoBehaviour
 {
     public const string SCENENAME = "Shack";
 
-    [Header("Environement")]
-    [SerializeField]
+    [Header("Environement"), SerializeField]
     Shack_Environment shack_Environment;
 
-    [Header("Recolte")]
-    [SerializeField]
-    FishingFrenzyWidget fishingFrenzyWidget;
+    [Header("Recolte"), SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
     [SerializeField] Shack_CallToAction recolteCallToAction;
 
-    [Header("Calendar")]
-    [SerializeField]
-    SceneInfo calendarScene;
+    [Header("Calendar"), SerializeField] SceneInfo calendarScene;
 
     void Start()
     {
