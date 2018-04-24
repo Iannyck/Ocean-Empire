@@ -59,5 +59,6 @@ public class MapNameWidget : MonoBehaviour
              if (textComp != null)
                  textComp.gameObject.SetActive(false);
          };
+        currentAnim = sq;
     }
 }

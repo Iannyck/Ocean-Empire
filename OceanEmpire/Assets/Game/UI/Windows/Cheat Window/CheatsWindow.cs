@@ -54,11 +54,4 @@ public class CheatsWindow : WindowAnimation
                 PlayerCurrency.AddTickets(amount);
         }
     }
-
-    public void UnlockAll()    //Cheat code StarCraft xD
-    {
-        MessagePopup.DisplayMessage("Not implemented");
-        //if (ItemsList.instance != null)
-        //    ItemsList.UnlockAll();
-    }
 }

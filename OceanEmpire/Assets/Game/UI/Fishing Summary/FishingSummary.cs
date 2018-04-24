@@ -14,7 +14,7 @@ public class FishingSummary : MonoBehaviour
     public GameObject fishSummaryPrefab;
     public Transform countainer;
 
-    public WidgetFishPop widgetFishPop;
+    //public WidgetFishPop widgetFishPop;
 
     private void Start()
     {
@@ -50,13 +50,13 @@ public class FishingSummary : MonoBehaviour
             CapturedValue += entry.Value;// * entry.Key.populationValue;
         }
         
-        if (widgetFishPop != null)
-        {
-            float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
-            widgetFishPop.DecrementRate(capturedRate);
-        }
-        else
-            FishPopulation.instance.UpdateOnFishing(CapturedValue);
+        //if (widgetFishPop != null)
+        //{
+        //    float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
+        //    widgetFishPop.DecrementRate(capturedRate);
+        //}
+        //else
+        //    FishPopulation.instance.UpdateOnFishing(CapturedValue);
     }
 
     public void GoBackToShack()
