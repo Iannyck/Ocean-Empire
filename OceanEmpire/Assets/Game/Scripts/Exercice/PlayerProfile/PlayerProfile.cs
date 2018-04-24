@@ -34,9 +34,9 @@ public class PlayerProfile : MonoPersistent
         //Get data from playerProfileSaver
     }
 
-    public static void Refetch()
+    public void Refetch()
     {
-        instance.FetchPlayerProfil();
+        FetchPlayerProfil();
     }
 }
 

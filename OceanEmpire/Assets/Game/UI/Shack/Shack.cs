@@ -9,14 +9,17 @@ public class Shack : MonoBehaviour
     public const string SCENENAME = "Shack";
 
     [Header("Environement")]
-    [SerializeField] Shack_Environment shack_Environment;
+    [SerializeField]
+    Shack_Environment shack_Environment;
 
     [Header("Recolte")]
-    [SerializeField] FishingFrenzyWidget fishingFrenzyWidget;
+    [SerializeField]
+    FishingFrenzyWidget fishingFrenzyWidget;
     [SerializeField] Shack_CallToAction recolteCallToAction;
 
     [Header("Calendar")]
-    [SerializeField] SceneInfo calendarScene;
+    [SerializeField]
+    SceneInfo calendarScene;
 
     void Start()
     {
@@ -26,13 +29,15 @@ public class Shack : MonoBehaviour
             if (fishingFrenzyWidget != null)
                 fishingFrenzyWidget.OnStateUpdated.AddListener(CheckFishingFrenzy);
 
-            MapManager.Instance.OnMapSet += OnMapChange;
+            ApplyMapChange(MapManager.Instance.MapData);
+            MapManager.Instance.OnMapSet += ApplyMapChange;
         });
     }
 
-    private void OnMapChange(int mapIndex, MapData obj)
+    private void ApplyMapChange(int mapIndex, MapData obj) { ApplyMapChange(obj); }
+    private void ApplyMapChange(MapData mapData)
     {
-        shack_Environment.ApplyMapData(obj);
+        shack_Environment.ApplyMapData(mapData);
     }
 
     void OnDestroy()
@@ -41,7 +46,7 @@ public class Shack : MonoBehaviour
             fishingFrenzyWidget.OnStateUpdated.RemoveListener(CheckFishingFrenzy);
 
         if (MapManager.Instance != null)
-            MapManager.Instance.OnMapSet -= OnMapChange;
+            MapManager.Instance.OnMapSet -= ApplyMapChange;
     }
 
     void CheckFishingFrenzy()

@@ -7,5 +7,10 @@ namespace CCC.Math.Graph
     {
         public Color color;
         public Vector2 position;
+        public ColoredPoint(Vector2 position, Color color)
+        {
+            this.position = position;
+            this.color = color;
+        }
     }
 }
