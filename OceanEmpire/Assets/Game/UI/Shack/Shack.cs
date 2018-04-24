@@ -18,7 +18,7 @@ public class Shack : MonoBehaviour
     [Header("Calendar")]
     [SerializeField] SceneInfo calendarScene;
 
-    void OnStart()
+    void Start()
     {
         PersistentLoader.LoadIfNotLoaded(() =>
         {
