@@ -25,6 +25,11 @@ public partial class DataSaverBank : ScriptablePersistent
         InitQueue queue = new InitQueue(onComplete);
         for (int i = 0; i < dataSavers.Length; i++)
         {
+            if (dataSavers[i] == null)
+            {
+                Debug.Log("Data saver (" + ((Type)i).ToString() + ") is null.");
+                continue;
+            }
             dataSavers[i].Load(queue.Register());
         }
         queue.MarkEnd();

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataSavers:
   - {fileID: 11400000, guid: 91b765acb2de1b840833439740cdbf3e, type: 2}
-  - {fileID: 11400000, guid: 4570fe074b62a4a4685a6782160c6dd4, type: 2}
   - {fileID: 11400000, guid: 81d221094b9bdbf41805451be7f2b23f, type: 2}
   - {fileID: 11400000, guid: 9b4e1f2a3f1761e4bac08ee5dc7f5b19, type: 2}
   - {fileID: 11400000, guid: a797dbb87b151f3458b1ca199620fb10, type: 2}

@@ -54,5 +54,5 @@ MonoBehaviour:
   updateStateEveryFrame: 1
   cooldown: 360
   duration: 0.1
-  dataSaver: {fileID: 11400000, guid: 4570fe074b62a4a4685a6782160c6dd4, type: 2}
+  dataSaver: {fileID: 11400000, guid: 746670aba0b981b40b941c7d4ad29909, type: 2}
   log: 1
