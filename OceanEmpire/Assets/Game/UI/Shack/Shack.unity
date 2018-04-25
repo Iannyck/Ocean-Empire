@@ -2273,22 +2273,22 @@ Prefab:
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 25.658987
+      value: 25.109358
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -63.7
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 64.14747
+      value: 62.77339
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 127.4
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2303,27 +2303,27 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 206.90645
+      value: 204.98274
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -63.7
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 64.14747
+      value: 62.77339
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 127.4
       objectReference: {fileID: 0}
     - target: {fileID: 224074558001833780, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 245.39493
+      value: 242.64676
       objectReference: {fileID: 0}
     - target: {fileID: 224742352635071524, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -3029,6 +3029,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1235333828}
+--- !u!4 &1263501566 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4085800705647658, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &1270150740
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,18 +3920,26 @@ MonoBehaviour:
   mainCanvas: {fileID: 1109020676}
   shackStructure: {fileID: 431734881}
   cameraController: {fileID: 1585736094}
+  cloudMover: {fileID: 1606469999}
+  clouds: {fileID: 1263501566}
   uiFadeInDuration: 1
   uiFadeOutDuration: 1
-  heightIncrease: 6
-  goUpDuration: 5
+  heightIncrease: 4
+  cloudsHeightIncrease: 2
+  goUpDuration: 4
   goUpEase: 7
   platformRotation: 9
   platformRotationDuration: 1.25
   platformRotationEase: 7
+  cloudInTimingOffset: -1
+  cloudSpeed: 0.75
+  cloudSpeedEaseIn: 2
+  cloudOutTimingOffset: -1
+  cloudSpeedEaseOut: 3
+  upPause: 3
   platformRotateBackDuration: 1
   platformRotateBackEase: 27
-  upPause: 3
-  goDownDuration: 5
+  goDownDuration: 4
   goDownEase: 7
 --- !u!4 &1606469998
 Transform:
@@ -3959,7 +3972,6 @@ MonoBehaviour:
   - {fileID: 360817487}
   - {fileID: 654682973}
   - {fileID: 1377456817}
-  cloudScaleSpeedMultiplier: 1
   minX: -9
   maxX: 9
 --- !u!1 &1648692947

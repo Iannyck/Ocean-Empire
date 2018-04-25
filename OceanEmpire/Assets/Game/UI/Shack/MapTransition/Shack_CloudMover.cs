@@ -11,9 +11,9 @@ public class Shack_CloudMover : MonoBehaviour
 
     private void Update()
     {
-        if(horizontalSpeed > 0)
+        if (horizontalSpeed != 0)
         {
-            Vector3 pos ;
+            Vector3 pos;
             for (int i = 0; i < clouds.Length; i++)
             {
                 pos = clouds[i].position;

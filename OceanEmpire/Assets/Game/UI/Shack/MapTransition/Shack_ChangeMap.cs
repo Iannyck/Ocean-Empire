@@ -16,19 +16,27 @@ public class Shack_ChangeMap : MonoBehaviour
     [Header("Animation References")]
     public Transform shackStructure;
     public Shack_CameraController cameraController;
+    public Shack_CloudMover cloudMover;
+    public Transform clouds;
 
     [Header("Animation")]
     public float uiFadeInDuration = 1;
     public float uiFadeOutDuration = 1;
     public float heightIncrease = 5;
+    public float cloudsHeightIncrease;
     public float goUpDuration = 6;
     public Ease goUpEase = Ease.InOutQuad;
     public float platformRotation;
     public float platformRotationDuration;
     public Ease platformRotationEase = Ease.InOutQuad;
-    public float platformRotateBackDuration = 0.75f;
-    public Ease platformRotateBackEase = Ease.OutBack; 
+    public float cloudInTimingOffset = -0.5f;
+    public float cloudSpeed;
+    public Ease cloudSpeedEaseIn;
+    public float cloudOutTimingOffset = -0.5f;
+    public Ease cloudSpeedEaseOut;
     public float upPause = 1;
+    public float platformRotateBackDuration = 0.75f;
+    public Ease platformRotateBackEase = Ease.OutBack;
     public float goDownDuration = 6;
     public Ease goDownEase = Ease.InOutQuad;
 
@@ -78,7 +86,8 @@ public class Shack_ChangeMap : MonoBehaviour
                 Sequence sq = DOTween.Sequence();
 
                 // Go up
-                sq.Append(tr.DOMoveY(heightIncrease, goUpDuration).SetEase(goUpEase));
+                sq.Append(tr.DOMoveY(heightIncrease, goUpDuration).SetRelative().SetEase(goUpEase));
+                sq.Join(clouds.DOMoveY(cloudsHeightIncrease, goUpDuration).SetRelative().SetEase(goUpEase));
                 sq.AppendCallback(() =>
                 {
                     Debug.Log("We're up in the sky!");
@@ -91,15 +100,26 @@ public class Shack_ChangeMap : MonoBehaviour
                 sq.Append(shackStructure.DORotate(Vector3.forward * platformRotation, platformRotationDuration)
                     .SetEase(platformRotationEase));
 
-                // Travel
-                sq.AppendInterval(upPause);
+                // Travel ! (Move clouds)
+                if (cloudMover != null)
+                {
+                    sq.Join(/*sq.Duration() + cloudInTimingOffset,  */DOTween.To(() => cloudMover.horizontalSpeed, (x) => cloudMover.horizontalSpeed = x, cloudSpeed, upPause / 2)
+                        .SetEase(cloudSpeedEaseIn));
+                    sq.Append(DOTween.To(() => cloudMover.horizontalSpeed, (x) => cloudMover.horizontalSpeed = x, 0, upPause / 2)
+                        .SetEase(cloudSpeedEaseOut));
+                }
+                else
+                {
+                    sq.AppendInterval(upPause);
+                }
 
                 // Rotate platform back to normal
-                sq.Append(shackStructure.DORotate(Vector3.zero, platformRotateBackDuration)
+                sq.Insert(sq.Duration() + cloudOutTimingOffset, shackStructure.DORotate(Vector3.zero, platformRotateBackDuration)
                     .SetEase(platformRotateBackEase));
 
                 // Move back down
-                sq.Append(tr.DOMoveY(0, goDownDuration).SetEase(goDownEase));
+                sq.Append(tr.DOMoveY(-heightIncrease, goDownDuration).SetRelative().SetEase(goDownEase));
+                sq.Join(clouds.DOLocalMoveY(-cloudsHeightIncrease, goDownDuration).SetRelative().SetEase(goDownEase));
 
                 // On complete
                 sq.onComplete = () =>
