@@ -14,6 +14,10 @@ public class FailureAsk : MonoBehaviour {
 
     public WindowAnimation adviceWindow;
 
+    public WindowAnimation askWindowAnim;
+
+    private ExerciseReport currentReport;
+
     [Serializable]
     public struct Choice
     {
@@ -23,8 +27,10 @@ public class FailureAsk : MonoBehaviour {
  
     public List<Choice> choixPossible = new List<Choice>();
 
-	void Start ()
+	public void Init(ExerciseReport report)
     {
+        currentReport = report;
+        PlannedExerciceRewarder.instance.keepAnalysing = false;
         for (int i = 0; i < choixPossible.Count; i++)
         {
             ChoiceButton currentButton = Instantiate(buttonPrefab, countainer).GetComponent<ChoiceButton>();
@@ -34,14 +40,14 @@ public class FailureAsk : MonoBehaviour {
         }
 	}
 
-    void DisplayAdvice(string advice)
+    void DisplayAdvice(string advice, string choice)
     {
-        WindowAnimation askWindowAnim = GetComponent<WindowAnimation>();
         if(askWindowAnim == null)
             Debug.Log("Pas de window anim sur la fenetre ASK");
         askWindowAnim.Close(delegate() {
             adviceWindow.GetComponent<FailureAdvice>().UpdateInfo(advice);
             adviceWindow.Open();
+            PlayerProfile.instance.LogReport(currentReport);
         });
     }
 
@@ -49,7 +55,7 @@ public class FailureAsk : MonoBehaviour {
     {
         if(choixPossible.Count >= maxChoiceAmount)
         {
-            Debug.Log("Trop de choix dans : FailureAsk");
+            //Debug.Log("Trop de choix dans : FailureAsk");
             choixPossible.RemoveRange(4, Mathf.Max(choixPossible.Count-4,0));
         }
     }

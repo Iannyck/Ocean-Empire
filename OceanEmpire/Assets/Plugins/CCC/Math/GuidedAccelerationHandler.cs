@@ -16,7 +16,7 @@ public class GuidedAccelerationHandler
     }
     public void UpdateAcceleration(float targetPosition, float currentPosition, float currentSpeed, float deltaTime)
     {
-        if (MaxTargetAcceleration <= 0)
+        if (MaxTargetAcceleration <= 0 || deltaTime <= 0)
             return;
 
         var d = targetPosition - currentPosition;

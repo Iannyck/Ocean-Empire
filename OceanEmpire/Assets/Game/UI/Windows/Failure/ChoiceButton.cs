@@ -10,11 +10,11 @@ public class ChoiceButton : MonoBehaviour {
     [SerializeField]
     private Text text;
 
-    public void UpdateButtonInfo(Action<string> onClick, string choiceText, string adviceText)
+    public void UpdateButtonInfo(Action<string,string> onClick, string choiceText, string adviceText)
     {
-        this.text.text = choiceText;
+        text.text = choiceText;
         button.onClick.AddListener(delegate() {
-            onClick.Invoke(adviceText);
+            onClick.Invoke(adviceText, choiceText);
         });
     }
 }

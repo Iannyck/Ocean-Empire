@@ -16,7 +16,9 @@ public class FailureAdvice : MonoBehaviour {
         text.text = advice;
         this.DelayedCall(delegate ()
         {
-            GetComponent<WindowAnimation>().Close();
-        }, closeDelay);
+            GetComponent<WindowAnimation>().Close(delegate() {
+                PlannedExerciceRewarder.instance.keepAnalysing = true;
+            });
+        }, closeDelay,true);
     }
 }

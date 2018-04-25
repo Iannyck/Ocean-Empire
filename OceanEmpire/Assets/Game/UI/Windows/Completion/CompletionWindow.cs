@@ -19,8 +19,10 @@ public class CompletionWindow : WindowAnimation {
 
 	public void ShowCompletionRewards(List<Rewards> rewards)
     {
+        PlannedExerciceRewarder.instance.keepAnalysing = false;
         exitButton.onClick.AddListener(delegate ()
         {
+            PlannedExerciceRewarder.instance.keepAnalysing = true;
             Close();
         });
         if (rewards.Count >= differentRewardMax)
