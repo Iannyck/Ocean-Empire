@@ -5,7 +5,7 @@ using UnityEngine;
 using CCC.Persistence;
 using CCC.Serialization;
 
-[CreateAssetMenu(menuName = "CCC/Other/Data Saver")]
+[CreateAssetMenu(menuName = "CCC/Saving/Data Saver")]
 public class DataSaver : FileScriptableInterface, IPersistent// ScriptablePersistent
 {
     [NonSerialized] private Data data = new Data();

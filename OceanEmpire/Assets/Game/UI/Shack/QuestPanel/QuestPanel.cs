@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Questing;
 using DG.Tweening;
+using System;
 
 public class QuestPanel : MonoBehaviour
 {
     [Header("References")]
     public string lastMap;
+    public ScriptableActionQueue shackAnimQueue;
 
     [Header("Entries Managment")]
     public QuestPanelEntry entryPrefab;
@@ -35,6 +37,7 @@ public class QuestPanel : MonoBehaviour
     private Vector2 normalAnchoredPosition;
     private Vector2 normalSize;
     private bool isShown = false;
+    private bool isOfferingNextMap = false;
 
     private void Awake()
     {
@@ -86,47 +89,54 @@ public class QuestPanel : MonoBehaviour
 
     public void OfferNextMap()
     {
-        if (this == null || onm_button == null)
+        if (this == null || onm_button == null || isOfferingNextMap)
             return;
+        isOfferingNextMap = true;
+        TweenCallback onCompletion = null;
 
-        this.DOKill();
-
-        TweenCallback onAllEntriesGone = () =>
+        // On met l'animation dans une file d'attente
+        shackAnimQueue.ActionQueue.AddAction(() =>
         {
-            if (this == null || onm_button == null)
-                return;
+            this.DOKill();
 
-            var sq = DOTween.Sequence();
-            onm_button.localScale = Vector3.one * 0.5f;
-
-            canvasGroup.blocksRaycasts = true;
-            canvasGroup.interactable = true;
-            // Resize
-            sq.Append(GetComponent<RectTransform>().DOSizeDelta(onm_targetSizeDelta, onm_sizeDuration).SetEase(onm_sizeEase));
-
-            // Enable button
-            sq.AppendCallback(() => onm_button.gameObject.SetActive(true));
-
-            // Scale up button
-            var scaleUp = onm_button.DOScale(1, onm_buttonScaleDuration).SetEase(onm_buttonScaleEase);
-            scaleUp.easeOvershootOrAmplitude = 0;
-            sq.Append(scaleUp);
-
-            sq.SetId(this);
-        };
-
-        if (entries.Count > 0)
-        {
-            entries[0].FlashAwayAnimation(onAllEntriesGone);
-            for (int i = 1; i < entries.Count; i++)
+            TweenCallback onAllEntriesGone = () =>
             {
-                entries[i].FlashAwayAnimation();
+                if (this == null || onm_button == null)
+                    return;
+
+                var sq = DOTween.Sequence();
+                onm_button.localScale = Vector3.one * 0.5f;
+
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.interactable = true;
+                // Resize
+                sq.Append(GetComponent<RectTransform>().DOSizeDelta(onm_targetSizeDelta, onm_sizeDuration).SetEase(onm_sizeEase));
+
+                // Enable button
+                sq.AppendCallback(() => onm_button.gameObject.SetActive(true));
+
+                // Scale up button
+                var scaleUp = onm_button.DOScale(1, onm_buttonScaleDuration).SetEase(onm_buttonScaleEase);
+                scaleUp.easeOvershootOrAmplitude = 0;
+                sq.Append(scaleUp);
+
+                sq.SetId(this);
+                sq.onComplete = onCompletion;
+            };
+
+            if (entries.Count > 0)
+            {
+                entries[0].FlashAwayAnimation(onAllEntriesGone);
+                for (int i = 1; i < entries.Count; i++)
+                {
+                    entries[i].FlashAwayAnimation();
+                }
             }
-        }
-        else
-        {
-            onAllEntriesGone();
-        }
+            else
+            {
+                onAllEntriesGone();
+            }
+        }, 0, out onCompletion);
     }
 
     public void HideInstant()
@@ -162,41 +172,6 @@ public class QuestPanel : MonoBehaviour
 
 
         CheckIfShouldOfferNextMap();
-        // Every quest completed !
-        //var shouldOfferNextMap = IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap;
-        //var shouldOMNButtonBeVisibleRightNow = shouldOfferNextMap && isShown && !ongoingShowAnimation.IsActive();
-
-        //if (shouldOfferNextMap)
-        //{
-        //    if (shouldOMNButtonBeVisibleRightNow)
-        //        OfferNextMap();
-        //    else
-        //        ongoingShowAnimation.onComplete = OfferNextMap;
-        //}
-
-        //onm_button.gameObject.SetActive(shouldOMNButtonBeVisibleRightNow);
-
-        //if (IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap)
-        //{
-        //    if (isShown)
-        //    {
-        //        if (ongoingShowAnimation != null && ongoingShowAnimation.IsActive())
-        //        {
-        //            ongoingShowAnimation.onComplete = OfferNextMap;
-        //            onm_button.gameObject.SetActive(false);
-        //        }
-        //        else
-        //            OfferNextMap();
-        //    }
-        //    else
-        //    {
-        //        OfferNextMap();
-        //    }
-        //}
-        //else
-        //{
-        //    onm_button.gameObject.SetActive(false);
-        //}
     }
 
     void CheckIfShouldOfferNextMap()

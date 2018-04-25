@@ -476,6 +476,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291810432}
+--- !u!4 &360817487 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4077112353565852, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &397217556
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +555,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 397217556}
+--- !u!4 &431734881 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4879717403645158, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &486960364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1206,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 637692892}
+--- !u!4 &654682973 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4016784336381752, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1001 &703714576
 Prefab:
   m_ObjectHideFlags: 0
@@ -2577,7 +2592,7 @@ GameObject:
   - component: {fileID: 1109020672}
   - component: {fileID: 1109020671}
   - component: {fileID: 1109020675}
-  - component: {fileID: 1109020677}
+  - component: {fileID: 1109020676}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2677,22 +2692,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eedbec9b4604ef54f80f4f0d68165c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hud: {fileID: 1328244362}
+  mainCanvas: {fileID: 1109020676}
   shack_Environment: {fileID: 236032336}
   fishingFrenzyWidget: {fileID: 1053563334}
   recolteCallToAction: {fileID: 1424573234}
   calendarScene: {fileID: 11400000, guid: b272cda3de5b9024bbcc59b71a9b971c, type: 2}
---- !u!114 &1109020677
-MonoBehaviour:
+--- !u!225 &1109020676
+CanvasGroup:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1109020670}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6889d0716626da468e05b9314a55398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questPanel: {fileID: 1545004479}
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1153196196
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,6 +3329,7 @@ GameObject:
   - component: {fileID: 1328244359}
   - component: {fileID: 1328244358}
   - component: {fileID: 1328244361}
+  - component: {fileID: 1328244362}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -3401,6 +3418,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &1328244362
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1328244357}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1370671735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3469,6 +3497,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1370671735}
+--- !u!4 &1377456817 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4983522910523978, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &1382558601
 GameObject:
   m_ObjectHideFlags: 0
@@ -3610,6 +3643,16 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!4 &1516670091 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4219819881531616, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
+--- !u!4 &1525271205 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4330449204572786, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &1537795637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3838,6 +3881,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1606469996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1606469998}
+  - component: {fileID: 1606469997}
+  - component: {fileID: 1606469999}
+  m_Layer: 0
+  m_Name: Map Change Anim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1606469997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1606469996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6889d0716626da468e05b9314a55398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questPanel: {fileID: 1545004479}
+  shackAnimQueue: {fileID: 11400000, guid: 3302be055f5a0364a936b508dc2879ae, type: 2}
+  hud: {fileID: 1328244362}
+  mainCanvas: {fileID: 1109020676}
+  shackStructure: {fileID: 431734881}
+  cameraController: {fileID: 1585736094}
+  uiFadeInDuration: 1
+  uiFadeOutDuration: 1
+  heightIncrease: 6
+  goUpDuration: 5
+  goUpEase: 7
+  platformRotation: 9
+  platformRotationDuration: 1.25
+  platformRotationEase: 7
+  platformRotateBackDuration: 1
+  platformRotateBackEase: 27
+  upPause: 3
+  goDownDuration: 5
+  goDownEase: 7
+--- !u!4 &1606469998
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1606469996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1606469999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1606469996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb57bef5759d914590599c429982317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  clouds:
+  - {fileID: 1525271205}
+  - {fileID: 1516670091}
+  - {fileID: 360817487}
+  - {fileID: 654682973}
+  - {fileID: 1377456817}
+  cloudScaleSpeedMultiplier: 1
+  minX: -9
+  maxX: 9
 --- !u!1 &1648692947
 GameObject:
   m_ObjectHideFlags: 0
@@ -4558,7 +4682,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1109020677}
+      objectReference: {fileID: 1606469997}
     - target: {fileID: 114361549043179092, guid: d70861b802cc9cf439c165c3bd81d56c,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

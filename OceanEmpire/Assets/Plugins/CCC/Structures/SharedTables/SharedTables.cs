@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CCC/Other/Shared Tables")]
+[CreateAssetMenu(menuName = "CCC/Structures/Shared Tables")]
 public class SharedTables : ScriptableObject
 {
     public class Table

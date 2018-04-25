@@ -28,11 +28,11 @@ namespace CCC.Math.Graph
 
         private float ScreenWidth
         {
-            get { return Camera.current.pixelWidth; }
+            get { return Camera.main.pixelWidth; }
         }
         private float ScreenHeight
         {
-            get { return Camera.current.pixelHeight; }
+            get { return Camera.main.pixelHeight; }
         }
         public float Width
         {
@@ -43,6 +43,9 @@ namespace CCC.Math.Graph
             get { return max.y - min.y; }
         }
 
+        /// <summary>
+        /// MUST be called from OnRenderObject
+        /// </summary>
         public void Draw()
         {
             if (GetMaterial() != null)

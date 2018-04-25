@@ -4,7 +4,7 @@ using UnityEngine;
 using CCC.Persistence;
 using System;
 
-[CreateAssetMenu(menuName = "CCC/Other/Data Saver Bank")]
+[CreateAssetMenu(menuName = "CCC/Saving/Data Saver Bank")]
 public partial class DataSaverBank : ScriptablePersistent
 {
     [SerializeField, HideInInspector] private DataSaver[] dataSavers = new DataSaver[Enum.GetValues(typeof(Type)).Length];
