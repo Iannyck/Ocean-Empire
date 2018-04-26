@@ -17,29 +17,29 @@ MonoBehaviour:
     GameSceneName: Map_Pacifique
     Depth: 0
     ShallowColor:
-      r: 0.13235295
-      g: 0.8204866
-      b: 1
+      r: 0
+      g: 0.8745099
+      b: 0.7294118
       a: 1
     DeepColor:
-      r: 0.1146194
-      g: 0.5598196
-      b: 0.7794118
+      r: 0
+      g: 0.666
+      b: 0.55549777
       a: 1
     SkyColorTop:
       r: 0
-      g: 0.69141436
-      b: 1
+      g: 0.6627451
+      b: 0.7960785
       a: 1
     SkyColorCenter:
       r: 0
-      g: 0.7910862
+      g: 0.9568628
       b: 1
       a: 1
     SkyColorBottom:
-      r: 0.8455882
-      g: 0.9738171
-      b: 1
+      r: 0.72156864
+      g: 1
+      b: 0.94117653
       a: 1
   relatedQuests:
   - {fileID: 11400000, guid: af0d13dd6ae3f70428654a806ea40ce3, type: 2}
