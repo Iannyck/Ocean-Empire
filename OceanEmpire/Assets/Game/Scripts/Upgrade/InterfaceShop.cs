@@ -1,34 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-
-public abstract class TestScript : MonoBehaviour, IShopDisplayable, IDescription
-{
-    public abstract bool Buy(CurrencyType type);
-
-    public string GetDescription()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Sprite GetShopIcon()
-    {
-        throw new NotImplementedException();
-    }
-
-    public int GetPrice(CurrencyType type)
-    {
-        throw new NotImplementedException();
-    }
-
-    public string GetTitle()
-    {
-        throw new NotImplementedException();
-    }
-}
 
 public interface IShopDisplayable : IBuyable
 {
@@ -51,4 +25,7 @@ public interface IDescription
 public interface IUpgradeDisplayable : IShopDisplayable
 {
     List<Statistic> GetStatistics();
+    int GetCurrentLevel();
+    UpgradeDescription GetCurrentUpgradeDescription();
+    UpgradeDescription GetNextUpgradeDescription();
 }

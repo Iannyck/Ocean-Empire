@@ -84,3 +84,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Windows/Completion/CompletionWindow.unity
     guid: 589e929fcabf754499932a1988832216
+  - enabled: 1
+    path: Assets/Game/UI/Shop2/Fred/UpgradeWindow.unity
+    guid: 3d7fb5f8160ee48449db8fce5d1e6a51

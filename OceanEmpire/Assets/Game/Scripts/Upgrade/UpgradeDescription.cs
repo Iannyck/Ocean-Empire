@@ -50,7 +50,7 @@ public abstract class UpgradeDescription
     {
         return itemIcon;
     }
-    private int GetUpgradeLevel()
+    public int GetUpgradeLevel()
     {
         return upgradeLevel;
     }

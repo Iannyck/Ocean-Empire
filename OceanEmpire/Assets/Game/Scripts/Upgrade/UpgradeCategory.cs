@@ -5,23 +5,12 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Category")]
-public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplayable
+public abstract class UpgradeCategory<B, D> : UpgradeCategory
     where B : UpgradeDescriptionBuilder<D>
     where D : UpgradeDescription
 {
-    public bool SavingMode = true;
 
     [SerializeField] private List<B> upgradeBuilders;
-
-    [SerializeField, ReadOnly] protected int ownedUpgrade = 0;
-    [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
-    [SerializeField, ReadOnly] protected string ownedUpgGenUpgrade = "";
-
-    protected abstract string OwnedUpgradeKey { get; }
-    protected abstract string NextUpgGenCodeKey { get; }
-    protected abstract string OwnedUpgGenKey { get; }
-
-    public DataSaver dataSaver;
 
     private D GetPrebuilt(int level)
     {
@@ -32,15 +21,14 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
             {
                 return item.BuildUpgradeDescription();
             }
-                
+
         }
         return null;
     }
 
     public D GetCurrentDescription()
     {
-
-        FetchDataFrom();
+        FetchData();
         D prebuilt = GetPrebuilt(ownedUpgrade);
         if (prebuilt != null)
             return prebuilt;
@@ -50,20 +38,19 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
                 MakeNextGenCode(ownedUpgrade + 1);
 
 
-            return GenerateNextDescription(ownedUpgGenUpgrade );
+            return GenerateNextDescription(ownedUpgGenUpgrade);
         }
     }
 
     public D GetNextDescription()
     {
-
-        FetchDataFrom();
+        FetchData();
         D prebuilt = GetPrebuilt(ownedUpgrade + 1);
         if (prebuilt != null)
             return prebuilt;
         else
         {
-            if (ownedUpgGenUpgrade == "") 
+            if (ownedUpgGenUpgrade == "")
                 MakeNextGenCode(ownedUpgrade + 1);
 
 
@@ -76,29 +63,73 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
 
     public bool Buy(CurrencyType type)
     {
-        if (PlayerCurrency.RemoveCurrentAmount(new CurrencyAmount(GetPrice(type), type)) == false)
+        if (PlayerCurrency.RemoveCurrentAmount(new CurrencyAmount(GetNextDescription().GetCost(type), type)) == false)
             return false;
 
         ownedUpgrade++;
 
-        ApplyDataTo();
+        ApplyData();
         return true;
     }
 
-    public int GetPrice(CurrencyType type)
+    //public int GetPrice(CurrencyType type)
+    //{
+    //    return GetNextDescription().GetCost(type);
+    //}
+
+    //public Sprite GetShopIcon()
+    //{
+    //    return GetNextDescription().GetShopIcon();
+    //}
+    //public string GetTitle()
+    //{
+    //    return GetNextDescription().GetTitle();
+    //}
+    //public string GetDescription()
+    //{
+    //    return GetNextDescription().GetDescription();
+    //}
+
+    //public List<Statistic> GetStatistics()
+    //{
+    //    return GetNextDescription().GetStatistics();
+    //}
+
+    public override UpgradeDescription GetCurrentUpgradeDescription()
     {
-        return GetNextDescription().GetCost(type);
+        return GetCurrentDescription();
     }
+
+    public override UpgradeDescription GetNextUpgradeDescription()
+    {
+        return GetNextDescription();
+    }
+}
+
+public abstract class UpgradeCategory : ScriptableObject
+{
+    public bool SavingMode = true;
+
+    [SerializeField, ReadOnly] protected int ownedUpgrade = 0;
+    [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
+    [SerializeField, ReadOnly] protected string ownedUpgGenUpgrade = "";
+
+    protected abstract string OwnedUpgradeKey { get; }
+    protected abstract string NextUpgGenCodeKey { get; }
+    protected abstract string OwnedUpgGenKey { get; }
+
+    public DataSaver dataSaver;
 
 
     public void OnEnable()
     {
-            ownedUpgrade = 0;
-            ownedUpgGenUpgrade = "";
-            nextUpgGenCode = "";
+        ownedUpgrade = 0;
+        ownedUpgGenUpgrade = "";
+        nextUpgGenCode = "";
     }
 
-    protected void FetchDataFrom()
+    #region Load/Save Data
+    protected void FetchData()
     {
         if (SavingMode)
         {
@@ -112,41 +143,25 @@ public abstract class UpgradeCategory<B, D> : ScriptableObject, IUpgradeDisplaya
                 nextUpgGenCode = dataSaver.GetString(NextUpgGenCodeKey, "");
         }
     }
-
-    protected void ApplyDataTo()
+    protected void ApplyData()
     {
         if (SavingMode)
-        { 
+        {
             dataSaver.SetInt(OwnedUpgradeKey, ownedUpgrade);
             dataSaver.SetString(OwnedUpgGenKey, ownedUpgGenUpgrade);
             dataSaver.SetString(NextUpgGenCodeKey, nextUpgGenCode);
         }
     }
-
-    public Sprite GetShopIcon()
-    {
-        return GetNextDescription().GetShopIcon();
-    }
-    public string GetTitle()
-    {
-        return GetNextDescription().GetTitle();
-    }
-    public string GetDescription()
-    {
-        return GetNextDescription().GetDescription();
-    }
-
-    public List<Statistic> GetStatistics()
-    {
-        return GetNextDescription().GetStatistics();
-    }
-
+    #endregion
 
     public void ResetData()
     {
         ownedUpgrade = 0;
         ownedUpgGenUpgrade = "";
         nextUpgGenCode = "";
-        ApplyDataTo();
+        ApplyData();
     }
+
+    public abstract UpgradeDescription GetCurrentUpgradeDescription();
+    public abstract UpgradeDescription GetNextUpgradeDescription();
 }
