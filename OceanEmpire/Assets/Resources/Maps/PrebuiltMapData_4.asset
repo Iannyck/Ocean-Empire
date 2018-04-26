@@ -17,14 +17,14 @@ MonoBehaviour:
     GameSceneName: Map_Pacifique
     Depth: 0
     ShallowColor:
-      r: 0.8000001
-      g: 0.42352945
-      b: 0.019607844
+      r: 0
+      g: 0.7137255
+      b: 0.15294118
       a: 1
     DeepColor:
-      r: 0.60294116
-      g: 0.3334623
-      b: 0.044333916
+      r: 0
+      g: 0.52205884
+      b: 0.11186983
       a: 1
     SkyColorTop:
       r: 0
