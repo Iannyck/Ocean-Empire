@@ -481,6 +481,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4077112353565852, guid: 70298f2df33247646a8c800090098aeb,
     type: 2}
   m_PrefabInternal: {fileID: 703714576}
+--- !u!4 &389556351 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4462524388206210, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &397217556
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +563,11 @@ CanvasRenderer:
 --- !u!4 &431734881 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4879717403645158, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
+--- !u!4 &444198339 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4296144943687388, guid: 70298f2df33247646a8c800090098aeb,
     type: 2}
   m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &486960364
@@ -1249,6 +1259,14 @@ Prefab:
     - target: {fileID: 4878547196822306, guid: 70298f2df33247646a8c800090098aeb, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733482645366954, guid: 70298f2df33247646a8c800090098aeb, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.946
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733482645366954, guid: 70298f2df33247646a8c800090098aeb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.8870433
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70298f2df33247646a8c800090098aeb, type: 2}
@@ -2278,7 +2296,7 @@ Prefab:
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -63.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2288,7 +2306,7 @@ Prefab:
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 127.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2308,7 +2326,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -63.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -2318,7 +2336,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 127.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224074558001833780, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -3921,22 +3939,27 @@ MonoBehaviour:
   shackStructure: {fileID: 431734881}
   cameraController: {fileID: 1585736094}
   cloudMover: {fileID: 1606469999}
+  shack_Environment: {fileID: 236032336}
   clouds: {fileID: 1263501566}
+  thrusters:
+  - {fileID: 389556351}
+  - {fileID: 444198339}
+  - {fileID: 1883285541}
   uiFadeInDuration: 1
   uiFadeOutDuration: 1
   heightIncrease: 4
   cloudsHeightIncrease: 2
   goUpDuration: 4
   goUpEase: 7
-  platformRotation: 9
+  platformRotation: -9
   platformRotationDuration: 1.25
   platformRotationEase: 7
   cloudInTimingOffset: -1
-  cloudSpeed: 0.75
+  cloudSpeed: -0.75
   cloudSpeedEaseIn: 2
+  upPause: 3
   cloudOutTimingOffset: -1
   cloudSpeedEaseOut: 3
-  upPause: 3
   platformRotateBackDuration: 1
   platformRotateBackEase: 27
   goDownDuration: 4
@@ -4275,6 +4298,11 @@ RectTransform:
   m_AnchoredPosition: {x: 132, y: -3}
   m_SizeDelta: {x: 350, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1883285541 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4540861330355004, guid: 70298f2df33247646a8c800090098aeb,
+    type: 2}
+  m_PrefabInternal: {fileID: 703714576}
 --- !u!1 &1894024475
 GameObject:
   m_ObjectHideFlags: 0

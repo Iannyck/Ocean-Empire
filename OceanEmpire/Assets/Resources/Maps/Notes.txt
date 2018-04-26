@@ -1,0 +1,11 @@
+Maps dont j'ai manuellement set des couleur uniques:
+PrebuildMapData_0 (fait)
+PrebuildMapData_1 (fait)
+PrebuildMapData_2
+PrebuildMapData_3 (fait)
+PrebuildMapData_4
+PrebuildMapData_5
+PrebuildMapData_6
+PrebuildMapData_7 (fait)
+PrebuildMapData_8
+PrebuildMapData_9

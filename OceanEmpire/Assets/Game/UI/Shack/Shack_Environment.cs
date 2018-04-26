@@ -11,10 +11,38 @@ public class Shack_Environment : MonoBehaviour
         public float ToWhiteLerpValue;
     }
 
-    [SerializeField] Color defaultWaterColor = new Color(0, 192f / 255f, 1);
-    [SerializeField] WaterLayer[] _waterLayers;
+    [Header("TEST MODE")]
+    public bool manualMode = false;
+
+    [Header("Sky")]
+    public Color manualSkyColorTop = new Color(7f / 255, 188f / 255f, 254 / 255f);
+    public Color manualSkyColorCenter = new Color(16f / 255, 204f / 255f, 242f / 255f);
+    public Color manualSkyColorBottom = new Color(1, 1, 1);
+
+    [Header("Water")]
+    public Color manualWaterColor = new Color(0, 192f / 255f, 1);
+
+    [Header("Components"), SerializeField] WaterLayer[] _waterLayers;
+    [SerializeField] TriColored skyColorizer;
+
+    void Awake()
+    {
+        manualMode = false;
+    }
+
+    public void ApplyMapData(MapData mapData)
+    {
+        SetWaterColor(mapData.ShallowColor);
+        SetSkyColor(mapData.SkyColorBottom, mapData.SkyColorCenter, mapData.SkyColorTop);
+    }
 
     public void SetWaterColor(Color color)
+    {
+        if (!manualMode)
+            ForceSetWaterColor(color);
+    }
+
+    private void ForceSetWaterColor(Color color)
     {
         if (_waterLayers == null)
             return;
@@ -32,14 +60,42 @@ public class Shack_Environment : MonoBehaviour
         }
     }
 
-    public void ApplyMapData(MapData mapData)
+    public void SetSkyColor(Color bottom, Color center, Color top)
     {
-        SetWaterColor(mapData.ShallowColor);
+        if (!manualMode)
+            ForceSetSkyColor(bottom, center, top);
+    }
+
+    private void ForceSetSkyColor(Color bottom, Color center, Color top)
+    {
+        skyColorizer.SetColors(top, center, bottom);
+        if (Application.isPlaying && PersistentCamera.GetCamera() != null)
+            PersistentCamera.GetCamera().backgroundColor = top;
+    }
+
+    void Update()
+    {
+        if (manualMode)
+            ApplyManualMode();
     }
 
     void OnValidate()
     {
         if (!Application.isPlaying)
-            SetWaterColor(defaultWaterColor);
+            ApplyManualMode();
+    }
+
+    public void CopyManualModeFromMapData(MapData mapData)
+    {
+        manualWaterColor = mapData.ShallowColor;
+        manualSkyColorTop = mapData.SkyColorTop;
+        manualSkyColorCenter = mapData.SkyColorCenter;
+        manualSkyColorBottom = mapData.SkyColorBottom;
+    }
+
+    public void ApplyManualMode()
+    {
+        ForceSetSkyColor(manualSkyColorBottom, manualSkyColorCenter, manualSkyColorTop);
+        ForceSetWaterColor(manualWaterColor);
     }
 }

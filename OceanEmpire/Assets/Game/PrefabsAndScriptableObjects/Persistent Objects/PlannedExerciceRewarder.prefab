@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4608e8309de232f4f864022d653cd76c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepAnalysing: 1
+  keepAnalysing: 0
   cooldown: 5
   failureWindow: {fileID: 11400000, guid: 25abfc1024e63dd4b9c46c81ff36108f, type: 2}
   completionWindow: {fileID: 11400000, guid: 4d08ff6ef6aca374fa1fd7e4afd555bc, type: 2}

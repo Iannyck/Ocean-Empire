@@ -45,6 +45,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 106e24b8b14b2d74591e40dcfc97ac8c, type: 3}
     - {fileID: 2800000, guid: 24819241435d38344a059b448d326d54, type: 3}
     - {fileID: 2800000, guid: 4d05e41fcd6012444b2246273d849a97, type: 3}
+    - {fileID: 2800000, guid: 06245e8a08fbe6d409b64a42e6a2c6e4, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -59,6 +60,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 904bc2933a9174547a4146ffc21d2c49, type: 3}
   - {fileID: 21300000, guid: 83f3498e071ad744184d71331567c819, type: 3}
   - {fileID: 21300000, guid: a2a4e61f1e7c2f54989c2343fcb18012, type: 3}
+  - {fileID: 21300002, guid: 06245e8a08fbe6d409b64a42e6a2c6e4, type: 3}
+  - {fileID: 21300000, guid: 06245e8a08fbe6d409b64a42e6a2c6e4, type: 3}
+  - {fileID: 21300006, guid: 06245e8a08fbe6d409b64a42e6a2c6e4, type: 3}
+  - {fileID: 21300004, guid: 06245e8a08fbe6d409b64a42e6a2c6e4, type: 3}
   - {fileID: 21300000, guid: 24819241435d38344a059b448d326d54, type: 3}
   - {fileID: 21300000, guid: e1af85feb921c70419395263cfd86ecb, type: 3}
   - {fileID: 21300000, guid: 9825de5ed6d788c48ba8515f333ef9c1, type: 3}
@@ -77,6 +82,10 @@ SpriteAtlas:
   - antenna
   - wooden_log
   - wooden_plank
+  - nitro_spritesheet_1
+  - nitro_spritesheet_0
+  - nitro_spritesheet_3
+  - nitro_spritesheet_2
   - seagull
   - sky
   - fish_blue1

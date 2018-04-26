@@ -14,12 +14,16 @@ public class SerializableColorDrawer : BitMaskPropertyDrawer
         var a = property.FindPropertyRelative("a");
 
         EditorGUI.BeginProperty(position, label, property);
+        EditorGUI.BeginChangeCheck();
 
         var newColor = EditorGUI.ColorField(position, label, new Color(r.floatValue, g.floatValue, b.floatValue, a.floatValue));
-        r.floatValue = newColor.r;
-        g.floatValue = newColor.g;
-        b.floatValue = newColor.b;
-        a.floatValue = newColor.a;
+        if (EditorGUI.EndChangeCheck())
+        {
+            r.floatValue = newColor.r;
+            g.floatValue = newColor.g;
+            b.floatValue = newColor.b;
+            a.floatValue = newColor.a;
+        }
 
         EditorGUI.EndProperty();
     }
