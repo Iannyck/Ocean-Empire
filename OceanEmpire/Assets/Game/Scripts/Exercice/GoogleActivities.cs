@@ -23,6 +23,8 @@ public class GoogleActivities : MonoPersistent
         }
     }
 
+    [SerializeField] private DataSaver playerProfileSaver;
+
     // Parametres
     public PrioritySheet priority;
     public float timeBetweenUpdate = 2f;
@@ -154,7 +156,7 @@ public class GoogleActivities : MonoPersistent
     {
         if (records.Count < 1)
             return null;
-        string[] data = new string[records.Count + 1];
+        string[] data = new string[records.Count + 2];
         data[0] = "Date,WalkProb,RunProb,BicycleProb";
         for (int i = 1; i < records.Count; i++)
         {
@@ -165,6 +167,7 @@ public class GoogleActivities : MonoPersistent
             records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle);
             data[i] = newEntry;
         }
+        data[records.Count + 2] = "\n" + PlayerProfile.instance.GetLogs() + "," + PlayerProfile.instance.GetReportLogs();
         return data;
     }
 }

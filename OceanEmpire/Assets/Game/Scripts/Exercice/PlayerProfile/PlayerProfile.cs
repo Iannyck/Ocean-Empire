@@ -52,5 +52,15 @@ public class PlayerProfile : MonoPersistent
         playerProfileSaver.SetString(SAVE_KEY_REPORT, report.GetString());
         playerProfileSaver.LateSave();
     }
+    
+    public string GetLogs()
+    {
+        return playerProfileSaver.GetString(SAVE_KEY_LOG);
+    }
+
+    public string GetReportLogs()
+    {
+        return playerProfileSaver.GetString(SAVE_KEY_REPORT);
+    }
 }
 

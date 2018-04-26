@@ -47,11 +47,11 @@ public class PlannedExerciceRewarder : MonoPersistent
 
             ExerciseReport lastNoExerciceReport = new ExerciseReport();
 
-            Debug.Log("Analyse des exercices passés");
+            //Debug.Log("Analyse des exercices passés");
 
             if (plannedExercice != null && plannedExercice.Count > 0)
             {
-                Debug.Log("Exercices passés trouvé !");
+                //Debug.Log("Exercices passés trouvé !");
                 for (int i = 0; i < plannedExercice.Count; i++)
                 {
                     MarketValue rewardValue = 0;
@@ -62,9 +62,15 @@ public class PlannedExerciceRewarder : MonoPersistent
                     if (VerifyCompletionOf(plannedExercice[i], activityVolume))
                         totalRewardValue += rewardValue;
 
-                    Debug.Log("Mettre la bonifiedtime comme ayant été géré ici.");
+                    plannedExercice[i].plannedExercice.ended = true;
 
-                    var report = new ExerciseReport(plannedExercice[i].timeSlot, activityVolume);
+                    ExerciseReport report = new ExerciseReport(plannedExercice[i].timeSlot, plannedExercice[i].plannedExercice, activityVolume);
+
+                    // Code degueu
+                    if(VerifyCompletionOf(plannedExercice[i], activityVolume))
+                        report.etat = ExerciseReport.Etat.reussi;
+                    else
+                        report.etat = ExerciseReport.Etat.echec;
 
                     if (activityVolume > 0)
                         PlayerProfile.instance.LogReport(report);
@@ -113,8 +119,7 @@ public class PlannedExerciceRewarder : MonoPersistent
 
     bool VerifyCompletionOf(BonifiedTime bonifiedTime, float activityVolume)
     {
-        Debug.Log("Ajuster la condition de si l'exercice planifié a été fait ou non ici");
-        if (activityVolume < 3)
+        if (activityVolume < bonifiedTime.plannedExercice.minAmount)
             return false;
         else
             return true;
