@@ -17,7 +17,7 @@ public class CompletionWindow : WindowAnimation {
     public Transform countainer;
     public Button exitButton;
 
-	public void ShowCompletionRewards(List<Rewards> rewards)
+    public void ShowCompletionRewards(List<Rewards> rewards)
     {
         PlannedExerciceRewarder.instance.keepAnalysing = false;
         exitButton.onClick.AddListener(delegate ()
