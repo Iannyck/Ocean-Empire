@@ -11,7 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3daf87bb26eddeb40b669d6067a654c8, type: 3}
   m_Name: HarpoonThrower4
   m_EditorClassIdentifier: 
-  upgradeLevel: 4
   data:
     itemName: Lanceur de harpon 4
     upgradeLevel: 4
@@ -19,7 +18,7 @@ MonoBehaviour:
     moneyCost: 500
     ticketCost: 5
     itemIcon: {fileID: 0}
-    harpoonSpeed: 5
-    cooldown: 2
-    harpoonNumber: 2
+    harpoonSpeed: 4
+    cooldown: 3
+    harpoonNumber: 1
   prebuiltSpriteKit: {fileID: 11400000, guid: 52c1a91832fef084d89ebedef983f278, type: 2}

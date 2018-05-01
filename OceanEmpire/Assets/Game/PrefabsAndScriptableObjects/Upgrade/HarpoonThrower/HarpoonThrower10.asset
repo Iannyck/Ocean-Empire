@@ -18,7 +18,7 @@ MonoBehaviour:
     moneyCost: 25000
     ticketCost: 250
     itemIcon: {fileID: 0}
-    harpoonSpeed: 100
-    cooldown: 100
-    harpoonNumber: 100
+    harpoonSpeed: 8
+    cooldown: 0
+    harpoonNumber: 1
   prebuiltSpriteKit: {fileID: 11400000, guid: 52c1a91832fef084d89ebedef983f278, type: 2}

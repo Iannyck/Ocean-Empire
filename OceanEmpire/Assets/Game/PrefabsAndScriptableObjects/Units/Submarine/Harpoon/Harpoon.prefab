@@ -121,7 +121,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61705733545416540
 BoxCollider2D:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d978da077167fc84d8f70a960f0bcc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 4
+  defaultSpeed: 3
   shootOnStart: 1
   killAfter: 5
   harpoonSpriteRenderer: {fileID: 212000747143019798}

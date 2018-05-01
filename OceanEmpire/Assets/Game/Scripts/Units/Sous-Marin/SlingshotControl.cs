@@ -30,6 +30,7 @@ public class SlingshotControl : MonoBehaviour
 
     public int HarpoonCount { get; set; }
     public float HarpoonCooldown { get; set; }
+    public float RemainingCooldown { get { return cooldownTimer; } }
 
     private float cooldownTimer = 0;
     private Transform tr;
@@ -124,7 +125,7 @@ public class SlingshotControl : MonoBehaviour
                 stillHarpoon.enabled = false;
         }
     }
-    private bool IsInCooldown()
+    public bool IsInCooldown()
     {
         return cooldownTimer > 0;
     }
