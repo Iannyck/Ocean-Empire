@@ -17,11 +17,10 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
         string t = OwnedUpgradeKey;
         foreach (var item in upgradeBuilders)
         {
-            if (level == item.upgradeLevel)
+            if (level == item.GetUpgradeLevel())
             {
                 return item.BuildUpgradeDescription();
             }
-
         }
         return null;
     }
@@ -30,52 +29,36 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
     {
         FetchData();
         D prebuilt = GetPrebuilt(ownedUpgrade);
-        if (prebuilt != null)
+        //if (prebuilt != null)
             return prebuilt;
-        else
-        {
-            if (nextUpgGenCode == "")
-                MakeNextGenCode(ownedUpgrade + 1);
+        //else
+        //{
+        //    if (nextUpgGenCode == "")
+        //        MakeNextGenCode(ownedUpgrade + 1);
 
 
-            return GenerateNextDescription(ownedUpgGenUpgrade);
-        }
+        //    return GenerateNextDescription(ownedUpgGenUpgrade);
+        //}
     }
 
     public D GetNextDescription()
     {
         FetchData();
         D prebuilt = GetPrebuilt(ownedUpgrade + 1);
-        if (prebuilt != null)
+        //if (prebuilt != null)
             return prebuilt;
-        else
-        {
-            if (ownedUpgGenUpgrade == "")
-                MakeNextGenCode(ownedUpgrade + 1);
+        //else
+        //{
+        //    if (ownedUpgGenUpgrade == "")
+        //        MakeNextGenCode(ownedUpgrade + 1);
 
 
-            return GenerateNextDescription(nextUpgGenCode);
-        }
+        //    return GenerateNextDescription(nextUpgGenCode);
+        //}
     }
 
     public abstract D GenerateNextDescription(string nextUpgGenCode);
     public abstract void MakeNextGenCode(int level);
-
-    public bool Buy(CurrencyType type)
-    {
-        if (PlayerCurrency.RemoveCurrentAmount(new CurrencyAmount(GetNextDescription().GetCost(type), type)) == false)
-            return false;
-
-        ownedUpgrade++;
-
-        ApplyData();
-        return true;
-    }
-
-    //public int GetPrice(CurrencyType type)
-    //{
-    //    return GetNextDescription().GetCost(type);
-    //}
 
     //public Sprite GetShopIcon()
     //{
@@ -106,13 +89,12 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
     }
 }
 
-public abstract class UpgradeCategory : ScriptableObject
+public abstract class UpgradeCategory : ScriptableObject, IBuyable
 {
-    public bool SavingMode = true;
-
     [SerializeField, ReadOnly] protected int ownedUpgrade = 0;
     [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
     [SerializeField, ReadOnly] protected string ownedUpgGenUpgrade = "";
+    [SerializeField] public string CategoryName;
 
     protected abstract string OwnedUpgradeKey { get; }
     protected abstract string NextUpgGenCodeKey { get; }
@@ -120,6 +102,22 @@ public abstract class UpgradeCategory : ScriptableObject
 
     public DataSaver dataSaver;
 
+    public bool Buy(CurrencyType type)
+    {
+        if (PlayerCurrency.RemoveCurrentAmount(new CurrencyAmount(GetNextUpgradeDescription().GetCost(type), type)) == false)
+            return false;
+
+        ownedUpgrade++;
+
+        ApplyData();
+        dataSaver.LateSave();
+        return true;
+    }
+
+    public int GetPrice(CurrencyType type)
+    {
+        return GetNextUpgradeDescription().GetCost(type);
+    }
 
     public void OnEnable()
     {
@@ -131,26 +129,15 @@ public abstract class UpgradeCategory : ScriptableObject
     #region Load/Save Data
     protected void FetchData()
     {
-        if (SavingMode)
-        {
-            if (ownedUpgrade == 0)
-                ownedUpgrade = dataSaver.GetInt(OwnedUpgradeKey, 0);
-
-            if (OwnedUpgGenKey == "")
-                ownedUpgGenUpgrade = dataSaver.GetString(OwnedUpgGenKey, "");
-
-            if (nextUpgGenCode == "")
-                nextUpgGenCode = dataSaver.GetString(NextUpgGenCodeKey, "");
-        }
+        ownedUpgrade = dataSaver.GetInt(OwnedUpgradeKey, 1);
+        ownedUpgGenUpgrade = dataSaver.GetString(OwnedUpgGenKey, "");
+        nextUpgGenCode = dataSaver.GetString(NextUpgGenCodeKey, "");
     }
     protected void ApplyData()
     {
-        if (SavingMode)
-        {
-            dataSaver.SetInt(OwnedUpgradeKey, ownedUpgrade);
-            dataSaver.SetString(OwnedUpgGenKey, ownedUpgGenUpgrade);
-            dataSaver.SetString(NextUpgGenCodeKey, nextUpgGenCode);
-        }
+        dataSaver.SetInt(OwnedUpgradeKey, ownedUpgrade);
+        dataSaver.SetString(OwnedUpgGenKey, ownedUpgGenUpgrade);
+        dataSaver.SetString(NextUpgGenCodeKey, nextUpgGenCode);
     }
     #endregion
 

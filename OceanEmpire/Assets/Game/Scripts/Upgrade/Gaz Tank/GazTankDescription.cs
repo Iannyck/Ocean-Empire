@@ -17,9 +17,14 @@ public class GazTankDescription : UpgradeDescription
     {
         List<Statistic> stats = new List<Statistic>
         {
-            new Statistic("Durée de plongée", diveDuration)
+            new Statistic("Durée de plongée", diveDuration, "s")
         };
 
         return stats;
     }
+
+    //public override string GetStats()
+    //{
+    //    return "Durée de plongé: <stat>" + diveDuration + "s</stat>";
+    //}
 }

@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ed5e5b1be679da4c8db648bbdce27ed, type: 3}
-  m_Name: GazTank2
+  m_Name: GazTank7
   m_EditorClassIdentifier: 
   data:
-    itemName: Reservoir 2
-    upgradeLevel: 2
+    itemName: Reservoir 7
+    upgradeLevel: 7
     itemDescription: "Augmente la capacit\xE9 d'essence, permettant de rester plus
       longtemps sous l'eau"
-    moneyCost: 100
-    ticketCost: 1
+    moneyCost: 4000
+    ticketCost: 40
     itemIcon: {fileID: 21300000, guid: 6f52f5fee94df764bb3b2f392f0abeb2, type: 3}
-    diveDuration: 35
+    diveDuration: 150
   prebuiltSpriteKit: {fileID: 0}

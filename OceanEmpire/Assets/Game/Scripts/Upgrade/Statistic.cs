@@ -7,10 +7,12 @@ public struct Statistic
 {
     public string name;
     public float value;
+    public string suffix;
 
-    public Statistic(string n, float v)
+    public Statistic(string name, float value, string suffix = "")
     {
-        name = n;
-        value = v;
+        this.name = name;
+        this.value = value;
+        this.suffix = suffix;
     }
 }

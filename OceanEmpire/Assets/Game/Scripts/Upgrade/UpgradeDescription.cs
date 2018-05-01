@@ -63,5 +63,6 @@ public abstract class UpgradeDescription
         return itemDescription;
     }
 
+    //abstract public string GetStats();
     abstract public List<Statistic> GetStatistics();
 }

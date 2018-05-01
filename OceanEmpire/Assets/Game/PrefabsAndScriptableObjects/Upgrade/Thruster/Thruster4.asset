@@ -16,10 +16,10 @@ MonoBehaviour:
     itemName: Moteur 4
     upgradeLevel: 4
     itemDescription: 
-    moneyCost: 4
-    ticketCost: 4
+    moneyCost: 2500
+    ticketCost: 15
     itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
     speed: 3.5
     acceleration: 3
-    deceleration: 1.5
+    deceleration: -1
   prebuiltSpriteKit: {fileID: 0}

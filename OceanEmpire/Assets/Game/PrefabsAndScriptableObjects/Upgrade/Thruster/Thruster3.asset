@@ -18,10 +18,10 @@ MonoBehaviour:
     itemDescription: 'Vitesse: 2
 
       Acceleration: 1.5'
-    moneyCost: 3
-    ticketCost: 3
+    moneyCost: 500
+    ticketCost: 5
     itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
     speed: 2
     acceleration: 2
-    deceleration: 1.5
+    deceleration: -1
   prebuiltSpriteKit: {fileID: 0}

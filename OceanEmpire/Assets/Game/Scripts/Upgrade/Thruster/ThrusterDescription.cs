@@ -28,13 +28,19 @@ public class ThrusterDescription : UpgradeDescription
     {
         List<Statistic> stats = new List<Statistic>
         {
-            new Statistic("speed", speed),
-            new Statistic("Accélération", acceleration),
-            new Statistic("décélération", deceleration)
+            new Statistic("Vitesse", speed),
+            new Statistic("Accélération", acceleration)/*,
+            new Statistic("décélération", deceleration)*/
         };
 
         return stats;
     }
+
+    //public override string GetStats()
+    //{
+    //    return "Vitesse: <stat>" + speed
+    //        + "</stat>\nAccélération: <stat>" + acceleration + "</stat>";
+    //}
 
 
     public ThrusterDescription(string nm, int lv, string desc, int coin, int tick, Sprite Icon, float Speed, float Acce, float Dece)

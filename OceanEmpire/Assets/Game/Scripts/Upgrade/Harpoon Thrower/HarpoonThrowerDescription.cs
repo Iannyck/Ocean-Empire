@@ -44,13 +44,19 @@ public class HarpoonThrowerDescription : UpgradeDescription
     {
         List<Statistic> stats = new List<Statistic>
         {
-            new Statistic("Vitesse des harpons", harpoonSpeed),
-            new Statistic("Temps de recharge", cooldown),
-            new Statistic("Nombre de harpons", harpoonNumber)
+            new Statistic("Vitesse", harpoonSpeed),
+            new Statistic("Recharge", cooldown, "s")/*,
+            new Statistic("Nombre de harpons", harpoonNumber)*/
         };
 
         return stats;
     }
+
+    //public override string GetStats()
+    //{
+    //    return "Vitesse: <stat>" + harpoonSpeed
+    //        + "</stat>\nRecharge: <stat>" + cooldown + "s</stat>";
+    //}
 }
 
 

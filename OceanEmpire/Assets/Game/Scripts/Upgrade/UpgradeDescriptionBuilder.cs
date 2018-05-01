@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class UpgradeDescriptionBuilder<T> : ScriptableObject where T : UpgradeDescription
 {
-    public int upgradeLevel;
+    public int GetUpgradeLevel() { return data.GetUpgradeLevel(); }
 
     [SerializeField]
     protected T data;

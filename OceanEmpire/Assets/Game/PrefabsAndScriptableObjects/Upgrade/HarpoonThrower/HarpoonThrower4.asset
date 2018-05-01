@@ -16,8 +16,8 @@ MonoBehaviour:
     itemName: Lanceur de harpon 4
     upgradeLevel: 4
     itemDescription: 
-    moneyCost: 2
-    ticketCost: 2
+    moneyCost: 500
+    ticketCost: 5
     itemIcon: {fileID: 0}
     harpoonSpeed: 5
     cooldown: 2
