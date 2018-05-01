@@ -110,6 +110,9 @@ public class FishSpawner : MonoBehaviour
 
     void SpawnAt(Vector2 position)
     {
+        if (position.y < Game.Instance.MapLayout.BorderBottom + 1)
+            return;
+
         var fish = FishLottery.DrawAtHeight(position.y);
         if (fish == null)
             return;

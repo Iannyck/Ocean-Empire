@@ -126,7 +126,7 @@ public class WanderBrain : Brain
             }
 
             // Clamp vertical
-            pos.y = Mathf.Clamp(pos.y, map.BorderBottom + 0.5f, map.BorderTop - 0.5f);
+            pos.y = Mathf.Clamp(pos.y, map.BorderBottom + 1.6f, map.BorderTop - 1f);
         }
 
         return pos;
