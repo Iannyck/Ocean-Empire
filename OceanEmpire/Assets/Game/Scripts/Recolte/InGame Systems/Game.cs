@@ -113,9 +113,16 @@ public class Game : PublicSingleton<Game>
         SubmarineMovement = _playerSpawn.SpawnPlayer();
         SubmarineMovement.canAccelerate.Lock("game");
 
+        // Map Layout
+        if (MapLayout != null)
+            MapLayout.ApplyMapData(GameSettings.MapData);
+
         // Build map
         if (MapBuilder != null)
+        {
             MapBuilder.ApplyMapData(GameSettings.MapData);
+            MapBuilder.UpdateAll();
+        }
 
         //Init fish lottery
         if (FishLottery != null)

@@ -11,7 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b846d6a4193c934ea8c4bfe3f0f6937, type: 3}
   m_Name: Thruster4
   m_EditorClassIdentifier: 
-  upgradeLevel: 4
   data:
     itemName: Moteur 4
     upgradeLevel: 4
@@ -20,6 +19,6 @@ MonoBehaviour:
     ticketCost: 15
     itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
     speed: 3.5
-    acceleration: 3
-    deceleration: -1
+    acceleration: 1
+    deceleration: 0
   prebuiltSpriteKit: {fileID: 0}

@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768796e0a893b4a43b5ed1d60fbd1f25, type: 3}
   m_Name: PrebuiltMapData_0
   m_EditorClassIdentifier: 
-  _gameScene: {fileID: 11400000, guid: bf41f1cdd7792fe4e8b5f26a85b0a029, type: 2}
+  _gameScene: {fileID: 11400000, guid: 8984e212659e6794b91e79d25d9464fc, type: 2}
   _mapData:
     Name: Tutoriel Part 1
-    GameSceneName: Map_Caraibe
-    Depth: 0
+    GameSceneName: Map_0 (tuto 1)
+    Depth: 50
     ShallowColor:
       r: 0.13235295
       g: 0.8204866

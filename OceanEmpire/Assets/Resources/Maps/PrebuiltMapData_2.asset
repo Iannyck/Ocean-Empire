@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768796e0a893b4a43b5ed1d60fbd1f25, type: 3}
   m_Name: PrebuiltMapData_2
   m_EditorClassIdentifier: 
-  _gameScene: {fileID: 11400000, guid: abdc00627385c9447b5975344efb61a5, type: 2}
+  _gameScene: {fileID: 11400000, guid: dd15587847c1598449e48afe29d63cac, type: 2}
   _mapData:
     Name: Ocean 1
-    GameSceneName: Map_Pacifique
-    Depth: 0
+    GameSceneName: Map_2
+    Depth: 85
     ShallowColor:
       r: 0
       g: 0.8745099

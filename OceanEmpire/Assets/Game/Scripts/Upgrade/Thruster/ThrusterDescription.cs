@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class ThrusterDescription : UpgradeDescription
 {
-    [SerializeField]
+    [SerializeField, Suffix("x 2")]
     private float speed = 1; // "speed"
-    [SerializeField]
+    [SerializeField, Suffix("x 10")]
     private float acceleration = 1; // "Accélération"
     [SerializeField]
     private float deceleration = 1; //"décélération"
@@ -28,8 +28,8 @@ public class ThrusterDescription : UpgradeDescription
     {
         List<Statistic> stats = new List<Statistic>
         {
-            new Statistic("Vitesse", speed),
-            new Statistic("Accélération", acceleration)/*,
+            new Statistic("Vitesse", speed * 2),
+            new Statistic("Accélération", acceleration * 10)/*,
             new Statistic("décélération", deceleration)*/
         };
 

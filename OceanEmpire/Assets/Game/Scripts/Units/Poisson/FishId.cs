@@ -10,5 +10,7 @@
     Chest = 7,
     Barracuda = 8,
     BigTony = 9,
-    Grimdon = 10
+    Grimdon = 10,
+    Grimdude = 11,
+    Rainbow = 12
 }

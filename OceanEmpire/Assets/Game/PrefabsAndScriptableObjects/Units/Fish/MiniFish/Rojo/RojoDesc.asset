@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Rojo
   description: C'est un poisson
-  baseMonetaryValue: 4
+  baseMonetaryValue: 2
   id: 3
   flags: 99
   icon: {fileID: 21300000, guid: 2af488957f3ff1f41a3cc22210aa0e8f, type: 3}

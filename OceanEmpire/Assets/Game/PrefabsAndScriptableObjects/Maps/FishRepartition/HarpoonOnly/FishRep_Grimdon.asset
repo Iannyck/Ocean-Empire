@@ -9,16 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4033c0f36230df447b561a226cbb9dd8, type: 3}
-  m_Name: Bottom Fish
+  m_Name: FishRep_Grimdon
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1365461041918330, guid: 1b2f9b83001ff014ab1603f7a682bb5c, type: 2}
-  weight: 1
+  prefab: {fileID: 1365461041918330, guid: df4becd1e9aba14479caae15c7992e42, type: 2}
+  weight: 0.75
   populationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

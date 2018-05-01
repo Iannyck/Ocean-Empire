@@ -9,12 +9,15 @@ public class SuffixDrawer : PropertyDrawer
         Suffix suffix = attribute as Suffix;
 
         var suffixWidth = EditorStyles.label.CalcSize(new GUIContent(suffix.text)).x;
-
         position.xMax -= suffixWidth;
         EditorGUI.PropertyField(position, property, true);
 
-        position.x += position.width;
+        position.x = position.xMax;
         position.width = suffixWidth;
+
+        var wasIndent = EditorGUI.indentLevel;
+        EditorGUI.indentLevel = 0;
         EditorGUI.LabelField(position, suffix.text);
+        EditorGUI.indentLevel = wasIndent;
     }
 }

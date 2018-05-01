@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Bobo
   description: C'est un poisson
-  baseMonetaryValue: 3
+  baseMonetaryValue: 1
   id: 0
   flags: 99
   icon: {fileID: 21300000, guid: 58eb9a4b5c8441d498c56181ddbc5b11, type: 3}
