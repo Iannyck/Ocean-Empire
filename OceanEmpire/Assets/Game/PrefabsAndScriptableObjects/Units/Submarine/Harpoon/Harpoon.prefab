@@ -201,10 +201,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d978da077167fc84d8f70a960f0bcc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 5
+  defaultSpeed: 4
   shootOnStart: 1
   killAfter: 5
   harpoonSpriteRenderer: {fileID: 212000747143019798}
+  triColored: {fileID: 114418199504386794}
+  collider: {fileID: 61705733545416540}
 --- !u!212 &212000747143019798
 SpriteRenderer:
   m_ObjectHideFlags: 1

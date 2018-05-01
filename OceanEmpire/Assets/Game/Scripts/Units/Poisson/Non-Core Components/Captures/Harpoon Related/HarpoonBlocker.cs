@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class HarpoonBlocker : MonoBehaviour
 {
-    public virtual void HarpoonHit()
+    public virtual void HarpoonHit(out bool repelHarpoon)
     {
+        repelHarpoon = true;
         //Do nothing
     }
 }

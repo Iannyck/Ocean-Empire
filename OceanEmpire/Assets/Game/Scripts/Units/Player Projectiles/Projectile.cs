@@ -34,6 +34,6 @@ public class Projectile : BaseKillableUnit
 
     protected override void OnDeath()
     {
-       //You're dead motherfucker
+
     }
 }

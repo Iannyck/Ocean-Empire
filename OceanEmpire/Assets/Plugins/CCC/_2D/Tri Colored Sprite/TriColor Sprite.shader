@@ -81,8 +81,10 @@ Shader "Ocean Empire/TriColor Sprite"
 				fixed4 frag(v2f IN) : SV_Target
 				{
 					fixed4 tex = SampleSpriteTexture(IN.texcoord);
-					fixed4 c = (tex.r * _ColorR) + (tex.g * _ColorG) + (tex.b * _ColorB);
-					c.a = tex.a;
+					//fixed4 c = (tex.r * _ColorR) + (tex.g * _ColorG) + (tex.b * _ColorB);
+					fixed4 c = (tex.r * _ColorR * _ColorR.a) + (tex.g * _ColorG * _ColorG.a) + (tex.b * _ColorB * _ColorB.a);
+					//fixed4 c = pc + half4(0,0,0,1);
+					c.a = tex.a * max(max(_ColorR.a, _ColorG.a), _ColorB.a);
 					c.rgb *= c.a;
 					return c;
 				}

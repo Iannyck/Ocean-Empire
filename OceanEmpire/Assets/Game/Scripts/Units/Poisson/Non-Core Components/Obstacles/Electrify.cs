@@ -17,6 +17,7 @@ public class Electrify : CollisionEffect
     private bool _isElectrified = false;
     private const string LOCKCAPTURE_KEY = "elec";
     private MeleeCapturable _meleeCapturable;
+    private HarpoonCapturable _harpoonCapturable;
     private int _electricId;
 
     protected override void Awake()
@@ -53,12 +54,21 @@ public class Electrify : CollisionEffect
             _meleeCapturable = GetComponent<MeleeCapturable>();
             if (_meleeCapturable != null)
                 _meleeCapturable.canCapture.Lock(LOCKCAPTURE_KEY);
+
+            // Disable harpoon capture
+            _harpoonCapturable = GetComponent<HarpoonCapturable>();
+            if (_harpoonCapturable != null)
+                _harpoonCapturable.canBeHarpooned.Lock(LOCKCAPTURE_KEY);
         }
         else
         {
             // Re-enable melee capture
             if (_meleeCapturable != null)
                 _meleeCapturable.canCapture.Unlock(LOCKCAPTURE_KEY);
+
+            // Re-enable harpoon capture
+            if (_harpoonCapturable != null)
+                _harpoonCapturable.canBeHarpooned.Unlock(LOCKCAPTURE_KEY);
         }
 
         if (electricAnimator != null)

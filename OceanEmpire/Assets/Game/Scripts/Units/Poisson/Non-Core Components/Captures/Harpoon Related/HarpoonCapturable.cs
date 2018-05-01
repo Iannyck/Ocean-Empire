@@ -9,10 +9,15 @@ public class HarpoonCapturable : HarpoonBlocker
 
     public Locker canBeHarpooned = new Locker();
 
-    public override void HarpoonHit()
+    public override void HarpoonHit(out bool repelHarpoon)
     {
         if (!canBeHarpooned)
+        {
+            repelHarpoon = true;
             return;
+        }
+
+        repelHarpoon = false;
 
         var capturable = GetComponent<Capturable>();
         if (capturable != null)
