@@ -27,7 +27,14 @@ public class OpenCategoryButton : MonoBehaviour
             scene.FindRootObject<UpgradeWindow>().FillContent(
                 categoryDisplay.category,
                 categoryDisplay.image.sprite,
-                categoryDisplay.UpdateDefaultContent);
+                () =>
+                {
+                    //On buy
+                    categoryDisplay.UpdateDefaultContent();
+                    var fireworks = GetComponent<BuyFireworks>();
+                    if (fireworks)
+                        fireworks.LaunchAnim();
+                });
             isLoading = false;
         });
     }
