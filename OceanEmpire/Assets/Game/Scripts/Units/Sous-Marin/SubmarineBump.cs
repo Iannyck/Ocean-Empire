@@ -54,7 +54,7 @@ public class SubmarineBump : MonoBehaviour
         IsBumped = true;
 
         // Lock movement
-        submarineMovement.canAccelerate.Lock(CAN_ACCELERATE_KEY);
+        submarineMovement.canAccelerate.LockUnique(CAN_ACCELERATE_KEY);
         submarineMovement.ClearTarget();
 
         // Tilt animators
@@ -72,7 +72,7 @@ public class SubmarineBump : MonoBehaviour
         IsBumped = false;
 
         // Unlock movement
-        submarineMovement.canAccelerate.Unlock(CAN_ACCELERATE_KEY);
+        submarineMovement.canAccelerate.UnlockAll(CAN_ACCELERATE_KEY);
 
         // Tilt animators
         if (transformTilter != null)
