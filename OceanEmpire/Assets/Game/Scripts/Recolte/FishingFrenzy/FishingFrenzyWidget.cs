@@ -38,6 +38,13 @@ public class FishingFrenzyWidget : MonoBehaviour
 
     void Start()
     {
+        // On se désactive si on a pas unlock le fishing frenzy dans le shop
+        PersistentLoader.LoadIfNotLoaded(() =>
+        {
+            if (FishingFrenzy.Instance)
+                gameObject.SetActive(FishingFrenzy.Instance.shopCategory.IsAvailable);
+        });
+
         if (autoUpdateState)
             AutoUpdateState();
     }
@@ -107,7 +114,7 @@ public class FishingFrenzyWidget : MonoBehaviour
 
         StringBuilder str = new StringBuilder(16);
         str.Append("ACTIVE (");
-        if(remainingMinutes > 0)
+        if (remainingMinutes > 0)
         {
             str.Append(remainingMinutes.ToString().PadLeft(2, '0'));
             str.Append('m');
@@ -144,14 +151,14 @@ public class FishingFrenzyWidget : MonoBehaviour
 
         StringBuilder str = new StringBuilder(16);
         str.Append("Dans ");
-        if(remainingHours > 0)
+        if (remainingHours > 0)
         {
             str.Append(remainingHours);
             str.Append('h');
             str.Append(' ');
             isFirst = false;
         }
-        if(remainingMinutes > 0)
+        if (remainingMinutes > 0)
         {
             str.Append(isFirst ? remainingMinutes.ToString() : remainingMinutes.ToString().PadLeft(2, '0'));
             str.Append('m');

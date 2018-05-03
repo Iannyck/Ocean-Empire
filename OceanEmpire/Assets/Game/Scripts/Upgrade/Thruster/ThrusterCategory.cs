@@ -15,28 +15,11 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
     [SerializeField]
     private List<Sprite> Icons;
 
-
-    protected override string OwnedUpgradeKey
-    {
-        get
-        {
-            return "tt1";
-        }
-    }
-    protected override string NextUpgGenCodeKey
-    {
-        get
-        {
-            return "tt2";
-        }
-    }
-    protected override string OwnedUpgGenKey
-    {
-        get
-        {
-            return "tt3";
-        }
-    }
+    protected override string OwnedUpgradeKey { get { return "t1"; } }
+    protected override string NextUpgGenCodeKey { get { return "t2"; } }
+    protected override string OwnedUpgGenKey { get { return "t3"; } }
+    protected override string AvailableSaveKey { get { return "tAvailable"; } }
+    protected override bool AvailableByDefault { get { return true; } }
 
     public ThrusterCategory()
     {
@@ -111,8 +94,8 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
         string[] stringSeparators = new string[] { "@" };
         string[] result = nextUpgGenCode.Split(stringSeparators, StringSplitOptions.None);
 
-        ThrusterDescription description = new ThrusterDescription(result[0], int.Parse(result[1]), result[2], int.Parse(result[3]), 
-            Convert.ToInt32(result[4]), Icons[ int.Parse(result[5]) ], float.Parse(result[6]), float.Parse(result[7]), float.Parse(result[8]));
+        ThrusterDescription description = new ThrusterDescription(result[0], int.Parse(result[1]), result[2], int.Parse(result[3]),
+            Convert.ToInt32(result[4]), Icons[int.Parse(result[5])], float.Parse(result[6]), float.Parse(result[7]), float.Parse(result[8]));
 
         return description;
     }

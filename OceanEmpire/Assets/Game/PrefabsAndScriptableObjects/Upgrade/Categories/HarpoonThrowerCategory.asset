@@ -17,6 +17,7 @@ MonoBehaviour:
   CategoryName: Harpon
   dataSaver: {fileID: 11400000, guid: 81d221094b9bdbf41805451be7f2b23f, type: 2}
   upgradeBuilders:
+  - {fileID: 0}
   - {fileID: 11400000, guid: c6abdaf4053667d4c981d779fbf215e9, type: 2}
   - {fileID: 11400000, guid: 526142dc39a5df94cb65aafa340fb72c, type: 2}
   - {fileID: 11400000, guid: f6b57bedbb171fa4a9caa9e7d06f5e3c, type: 2}

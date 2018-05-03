@@ -7,7 +7,7 @@ public class FishLottery : MonoBehaviour
     public MapLayout MapLayout { get; private set; }
 
     [Header("Settings")]
-    public AnimationCurve generalDensity = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1));
+    public AnimationCurve generalDensity = new AnimationCurve(new Keyframe(0, .7f), new Keyframe(1, .7f));
     public float densityMultiplier = 1;
     public List<FishRepartition> fishRepartitions = new List<FishRepartition>();
 

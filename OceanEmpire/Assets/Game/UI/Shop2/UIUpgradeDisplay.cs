@@ -11,6 +11,10 @@ public class UIUpgradeDisplay : MonoBehaviour
     public UpgradeCategory category;
     public TierColors tierColors;
 
+    [Header("Availability")]
+    public GameObject availableVisuals;
+    public GameObject notAvailableVisuals;
+
     [Header("UI")]
     public Text levelText;
     public Text statsText;
@@ -21,6 +25,34 @@ public class UIUpgradeDisplay : MonoBehaviour
     public GameObject canUpgradeContent;
     public GameObject cannotUpgradeContent;
     public Text titleText;
+    public RectTransform costsPanel;
+
+    [Header("Yet to be unlocked")]
+    public Color ytbuBGColor;
+    public Color ytbuImageColor;
+    public Sprite ytbuTitlePanelSprite;
+    public Sprite ytbuCostPanelLabelSprite;
+    public Sprite ytbuCostPanelBGSprite;
+    public Image ytbuTitlePanel;
+    public Image ytbuCostPanelLabel;
+    public Image ytbuCostPanelBG;
+    public GameObject ytbuBuyTextToEnable;
+    public GameObject ytbuBuyTextToDisable;
+    //public GameObject ytbu
+
+    private Sprite stdTitlePanelSprite;
+    private Sprite stdCostPanelLabelSprite;
+    private Sprite stdCostPanelBGSprite;
+
+    void Awake()
+    {
+        if (ytbuTitlePanel)
+            stdTitlePanelSprite = ytbuTitlePanel.sprite;
+        if (ytbuCostPanelLabel)
+            stdCostPanelLabelSprite = ytbuCostPanelLabel.sprite;
+        if (ytbuCostPanelBG)
+            stdCostPanelBGSprite = ytbuCostPanelBG.sprite;
+    }
 
     void Start()
     {
@@ -31,9 +63,17 @@ public class UIUpgradeDisplay : MonoBehaviour
     {
         if (category != null)
         {
-            FillTitle(category.CategoryName);
-            FillCurrentContent(category.GetCurrentUpgradeDescription());
-            FillNextContent(category.GetNextUpgradeDescription());
+            var available = category.IsAvailable;
+
+            availableVisuals.SetActive(available);
+            notAvailableVisuals.SetActive(!available);
+
+            if (availableVisuals.activeSelf)
+            {
+                FillTitle(category.CategoryName);
+                FillCurrentContent(category.GetCurrentUpgradeDescription());
+                FillNextContent(category.GetNextUpgradeDescription());
+            }
         }
     }
 
@@ -51,7 +91,7 @@ public class UIUpgradeDisplay : MonoBehaviour
             statsText.text = stats;
         }
     }
-    public void FillStats(List<Statistic> statistics, List<bool> colored, string coloredTextColor)
+    public void FillStats(List<Statistic> statistics, bool[] colored, string coloredTextColor)
     {
         if (statsText != null)
         {
@@ -110,15 +150,43 @@ public class UIUpgradeDisplay : MonoBehaviour
         {
             if (coloredBG != null)
                 coloredBG.color = tierColors.colors[currentUpgrade.GetUpgradeLevel() - 1];
-            if (levelText != null)
+
+            if (levelText)
+            {
+                levelText.transform.parent.gameObject.SetActive(true);
                 levelText.text = "Niv " + (currentUpgrade.GetUpgradeLevel());
+            }
+
+            if (ytbuCostPanelLabel)
+                ytbuCostPanelLabel.sprite = stdCostPanelLabelSprite;
+            if (ytbuCostPanelBG)
+                ytbuCostPanelBG.sprite = stdCostPanelBGSprite;
+            if (ytbuTitlePanel)
+                ytbuTitlePanel.sprite = stdTitlePanelSprite;
+
+            if (image)
+                image.color = Color.white;
+
+
+            if (ytbuBuyTextToEnable)
+                ytbuBuyTextToEnable.SetActive(false);
+            if (ytbuBuyTextToDisable)
+                ytbuBuyTextToDisable.SetActive(true);
         }
         else
         {
             if (levelText != null)
-                levelText.text = "Niv -";
-            if (statsText != null)
-                statsText.text = "--";
+                levelText.transform.parent.gameObject.SetActive(false);
+
+            // YET TO BE UNLOCKED !!
+            ytbuCostPanelLabel.sprite = ytbuCostPanelLabelSprite;
+            ytbuCostPanelBG.sprite = ytbuCostPanelBGSprite;
+            ytbuTitlePanel.sprite = ytbuTitlePanelSprite;
+            coloredBG.color = ytbuBGColor;
+            image.color = ytbuImageColor;
+
+            ytbuBuyTextToEnable.SetActive(true);
+            ytbuBuyTextToDisable.SetActive(false);
         }
     }
 
@@ -126,10 +194,24 @@ public class UIUpgradeDisplay : MonoBehaviour
     {
         if (nextUpgrade != null)
         {
+            var coinCost = nextUpgrade.GetCost(CurrencyType.Coin);
+            var ticketCost = nextUpgrade.GetCost(CurrencyType.Ticket);
+
+            if (coinCost == -1 || ticketCost == -1)
+                costsPanel.sizeDelta = new Vector2(costsPanel.sizeDelta.x, 92);
+            else
+                costsPanel.sizeDelta = new Vector2(costsPanel.sizeDelta.x, 146);
+
             if (coinCostText != null)
-                coinCostText.text = PriceToBeautifulString(nextUpgrade.GetCost(CurrencyType.Coin));
+            {
+                coinCostText.gameObject.SetActive(coinCost != -1);
+                coinCostText.text = PriceToBeautifulString(coinCost);
+            }
             if (ticketCostText != null)
-                ticketCostText.text = PriceToBeautifulString(nextUpgrade.GetCost(CurrencyType.Ticket));
+            {
+                ticketCostText.gameObject.SetActive(ticketCost != -1);
+                ticketCostText.text = PriceToBeautifulString(ticketCost);
+            }
 
             if (canUpgradeContent != null)
                 canUpgradeContent.SetActive(true);

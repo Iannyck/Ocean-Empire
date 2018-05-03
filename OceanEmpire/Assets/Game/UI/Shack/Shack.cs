@@ -51,14 +51,17 @@ public class Shack : MonoBehaviour
 
     void CheckFishingFrenzy()
     {
-        recolteCallToAction.enabled = FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available;
+        recolteCallToAction.enabled = FishingFrenzy.Instance.shopCategory.IsAvailable &&
+            FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available;
     }
 
     public void LaunchGame()
     {
         GameSettings gameSettings = new GameSettings(MapManager.Instance.MapData, true);
 
-        if (FishingFrenzy.Instance != null && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
+        if (FishingFrenzy.Instance != null
+            && FishingFrenzy.Instance.shopCategory.IsAvailable
+            && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
         {
             FishingFrenzy.Instance.Activate();
         }

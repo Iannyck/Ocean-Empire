@@ -14,10 +14,15 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
 
     private D GetPrebuilt(int level)
     {
-        string t = OwnedUpgradeKey;
+        //int index = level - 1;
+        //if (upgradeBuilders.Count <= index)
+        //    return null;
+        //else
+        //    return upgradeBuilders[index] != null ? upgradeBuilders[index].BuildUpgradeDescription() : null;
+
         foreach (var item in upgradeBuilders)
         {
-            if (level == item.GetUpgradeLevel())
+            if (item != null && level == item.GetUpgradeLevel())
             {
                 return item.BuildUpgradeDescription();
             }
@@ -30,7 +35,7 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
         FetchData();
         D prebuilt = GetPrebuilt(ownedUpgrade);
         //if (prebuilt != null)
-            return prebuilt;
+        return prebuilt;
         //else
         //{
         //    if (nextUpgGenCode == "")
@@ -46,7 +51,7 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
         FetchData();
         D prebuilt = GetPrebuilt(ownedUpgrade + 1);
         //if (prebuilt != null)
-            return prebuilt;
+        return prebuilt;
         //else
         //{
         //    if (ownedUpgGenUpgrade == "")
@@ -87,6 +92,17 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
     {
         return GetNextDescription();
     }
+
+    protected override int DefaultUnlockedLevel
+    {
+        get
+        {
+            if (upgradeBuilders.Count == 0 || upgradeBuilders[0] == null)
+                return 0;
+            else
+                return upgradeBuilders[0].GetUpgradeLevel();
+        }
+    }
 }
 
 public abstract class UpgradeCategory : ScriptableObject, IBuyable
@@ -99,8 +115,26 @@ public abstract class UpgradeCategory : ScriptableObject, IBuyable
     protected abstract string OwnedUpgradeKey { get; }
     protected abstract string NextUpgGenCodeKey { get; }
     protected abstract string OwnedUpgGenKey { get; }
+    protected abstract string AvailableSaveKey { get; }
+    protected abstract bool AvailableByDefault { get; }
+
 
     public DataSaver dataSaver;
+
+    public bool IsAvailable
+    {
+        get
+        {
+            return AvailableByDefault || dataSaver.GetBool(AvailableSaveKey);
+        }
+    }
+
+    public void MakeAvailable(bool andSave = true)
+    {
+        dataSaver.SetBool(AvailableSaveKey, true);
+        if (andSave)
+            dataSaver.LateSave();
+    }
 
     public bool Buy(CurrencyType type)
     {
@@ -129,7 +163,7 @@ public abstract class UpgradeCategory : ScriptableObject, IBuyable
     #region Load/Save Data
     protected void FetchData()
     {
-        ownedUpgrade = dataSaver.GetInt(OwnedUpgradeKey, 1);
+        ownedUpgrade = dataSaver.GetInt(OwnedUpgradeKey, DefaultUnlockedLevel);
         ownedUpgGenUpgrade = dataSaver.GetString(OwnedUpgGenKey, "");
         nextUpgGenCode = dataSaver.GetString(NextUpgGenCodeKey, "");
     }
@@ -151,4 +185,6 @@ public abstract class UpgradeCategory : ScriptableObject, IBuyable
 
     public abstract UpgradeDescription GetCurrentUpgradeDescription();
     public abstract UpgradeDescription GetNextUpgradeDescription();
+
+    protected abstract int DefaultUnlockedLevel { get; }
 }

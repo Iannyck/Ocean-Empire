@@ -198,9 +198,8 @@ public static class Scenes
 
     static void Execute(ScenePromise promise)
     {
-        promise.InvokeCallback();
-
         loadingScenes.Remove(promise);
+        promise.InvokeCallback();
     }
 
     #endregion

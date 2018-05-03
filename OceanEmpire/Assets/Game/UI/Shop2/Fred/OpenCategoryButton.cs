@@ -17,13 +17,14 @@ public class OpenCategoryButton : MonoBehaviour
 
     public void OpenItem()
     {
-        if (isLoading || categoryDisplay.category.GetNextUpgradeDescription() == null)
+        if (isLoading || categoryDisplay.category.GetNextUpgradeDescription() == null || !categoryDisplay.category.IsAvailable)
             return;
 
         isLoading = true;
         Scenes.Load(upgradeWindowScene, (scene) =>
         {
-            //...
+            isLoading = false;
+
             scene.FindRootObject<UpgradeWindow>().FillContent(
                 categoryDisplay.category,
                 categoryDisplay.image.sprite,
@@ -35,7 +36,6 @@ public class OpenCategoryButton : MonoBehaviour
                     if (fireworks)
                         fireworks.LaunchAnim();
                 });
-            isLoading = false;
         });
     }
 }

@@ -10,6 +10,7 @@ using UnityEditor;
 public class TestScript_Fred : MonoBehaviour
 {
     public int questBuilderIndex = 0;
+    public FishingFrenzyCategory frenzyCategory;
     public UnityEngine.Object[] questBuilders;
 
     void Start()
@@ -27,6 +28,12 @@ public class TestScript_Fred : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             QuestManager.Instance.RemoveQuest(QuestManager.Instance.ongoingQuests[0]);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            frenzyCategory.MakeAvailable();
+            Debug.Log("We've unlocked the fishing frenzy in the shop");
         }
     }
 }

@@ -22,8 +22,8 @@ public class FishRepartition : ScriptableObject
         get
         {
             return new AnimationCurve(
-                new Keyframe(0, 1),
-                new Keyframe(1, 1));
+                new Keyframe(0, .7f),
+                new Keyframe(1, .7f));
         }
     }
     public static AnimationCurve CURVE_CENTERED

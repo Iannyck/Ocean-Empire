@@ -53,30 +53,44 @@ public class UpgradeWindow : MonoBehaviour
         var current = upgradeCategory.GetCurrentUpgradeDescription();
         var next = upgradeCategory.GetNextUpgradeDescription();
 
-        buyWithCoinsButton.GetComponentInChildren<Text>().text = "Améliorer: " + next.GetCost(CurrencyType.Coin);
-        buyWithTicketButton.GetComponentInChildren<Text>().text = "Améliorer: " + next.GetCost(CurrencyType.Ticket);
+        var costCoin = next.GetCost(CurrencyType.Coin);
+        var costTicket = next.GetCost(CurrencyType.Ticket);
 
-        buyWithCoinsButton.interactable = next.GetCost(CurrencyType.Coin) <= PlayerCurrency.GetCoins();
-        buyWithTicketButton.interactable = next.GetCost(CurrencyType.Ticket) <= PlayerCurrency.GetTickets();
+        string buyPrefix = current == null ? "Débloquer: " : "Améliorer: ";
+
+        buyWithCoinsButton.GetComponentInChildren<Text>().text = buyPrefix + costCoin;
+        buyWithCoinsButton.interactable = costCoin <= PlayerCurrency.GetCoins();
+        buyWithCoinsButton.gameObject.SetActive(costCoin != -1);
+
+        buyWithTicketButton.GetComponentInChildren<Text>().text = buyPrefix + costTicket;
+        buyWithTicketButton.interactable = costTicket <= PlayerCurrency.GetTickets();
+        buyWithTicketButton.gameObject.SetActive(costTicket != -1);
 
         var nextStats = next.GetStatistics();
-        var currentStats = current.GetStatistics();
+        bool[] colored = new bool[nextStats.Count];
 
-        // List of colored stats
-        List<bool> colored = new List<bool>(nextStats.Count);
-
-        for (int i = 0; i < nextStats.Count && i < currentStats.Count; i++)
+        if (current != null)
         {
-            colored.Add(nextStats[i].value != currentStats[i].value);
+            var currentStats = current.GetStatistics();
+
+            // List of colored stats
+            for (int i = 0; i < nextStats.Count && i < currentStats.Count; i++)
+            {
+                colored[i] = nextStats[i].value != currentStats[i].value;
+            }
+            currentUIItem.FillStats(currentStats, colored, negativeColor);
+
+
+            currentUIItem.FillTitle(upgradeCategory.CategoryName);
+            currentUIItem.FillCurrentContent(current);
+            currentUIItem.FillIcon(icon);
+        }
+        else
+        {
+            currentUIItem.gameObject.SetActive(false);
         }
 
-        currentUIItem.FillTitle(upgradeCategory.CategoryName);
         nextUIItem.FillTitle(upgradeCategory.CategoryName);
-
-        currentUIItem.FillCurrentContent(current);
-        currentUIItem.FillIcon(icon);
-        currentUIItem.FillStats(currentStats, colored, negativeColor);
-
         nextUIItem.FillCurrentContent(next);
         nextUIItem.FillIcon(icon);
         nextUIItem.FillStats(nextStats, colored, positiveColor);

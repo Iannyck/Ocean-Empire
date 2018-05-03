@@ -413,12 +413,18 @@ MonoBehaviour:
   txt_title: {fileID: 114453767142938078}
   img_shine: {fileID: 114405796373371134}
   img_bg: {fileID: 114647134202184352}
+  shopCategory: {fileID: 11400000, guid: fba76a724ecd44a4e836d52535db680f, type: 2}
   autoUpdateState: 1
   updateEvery: 5
   col_activeShine: {r: 1, g: 1, b: 1, a: 1}
   col_availableShine: {r: 1, g: 1, b: 1, a: 0.572}
   col_inCooldownText: {r: 1, g: 1, b: 1, a: 0.74509805}
   col_inCooldownBG: {r: 0.95686275, g: 0.95686275, b: 0.95686275, a: 1}
+  OnStateUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!222 &222043122836468756
 CanvasRenderer:
   m_ObjectHideFlags: 1

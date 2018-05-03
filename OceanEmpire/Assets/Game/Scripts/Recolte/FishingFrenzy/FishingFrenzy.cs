@@ -8,6 +8,8 @@ public class FishingFrenzy : MonoPersistent
 {
     public enum EffectState { InCooldown, Available, CurrentlyActive }
 
+    public FishingFrenzyCategory shopCategory;
+
     [SerializeField] bool updateStateEveryFrame = true;
     [SerializeField, Suffix("minutes")] float cooldown;
     [SerializeField, Suffix("minutes")] float duration;
