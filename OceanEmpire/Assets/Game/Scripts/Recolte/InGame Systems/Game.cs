@@ -30,6 +30,7 @@ public class Game : PublicSingleton<Game>
     public FishLottery FishLottery { get; private set; }
     public PendingFishGPC PendingFishGPC { get; private set; }
     public Locker GameRunning { get; private set; }
+    public bool IsInFishingFrenzy { private set; get; }
 
     [SerializeField] UnitInstantiator _instantiator;
     [SerializeField] PlayerStats _playerStats;
@@ -132,6 +133,13 @@ public class Game : PublicSingleton<Game>
         if (Shack_Environment != null)
             Shack_Environment.ApplyMapData(GameSettings.MapData);
 
+
+        // Fish frenzy
+        IsInFishingFrenzy = GameSettings.CanUseFishingFrenzy
+            && FishingFrenzy.Instance != null
+            && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.CurrentlyActive;
+
+
         //Ready up !
         ReadyGame();
 
@@ -200,6 +208,7 @@ public class Game : PublicSingleton<Game>
             LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(FishingReport));
         });
     }
+
 
     #region Other Scene Reference
     public void SetReference(FishLottery fishLottery)

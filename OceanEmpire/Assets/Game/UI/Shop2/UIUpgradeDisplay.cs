@@ -119,11 +119,21 @@ public class UIUpgradeDisplay : MonoBehaviour
 
                 if (statistics[i].suffix == "s" && statistics[i].value >= 60)
                 {
-                    int minutes = Mathf.FloorToInt(statistics[i].value / 60f);
-                    int seconds = (int)statistics[i].value % 60;
-                    str.Append(minutes);
-                    str.Append("min ");
-                    if (seconds != 0)
+                    TimeSpan timeSpan = new TimeSpan(0, 0, Mathf.RoundToInt(statistics[i].value));
+                    int hours = timeSpan.Hours;
+                    int minutes = timeSpan.Minutes;
+                    int seconds = timeSpan.Seconds;
+                    if (hours > 0)
+                    {
+                        str.Append(hours);
+                        str.Append("h ");
+                    }
+                    if (minutes > 0)
+                    {
+                        str.Append(minutes);
+                        str.Append("min ");
+                    }
+                    if (seconds > 0)
                     {
                         str.Append(seconds);
                         str.Append('s');

@@ -55,6 +55,12 @@ public class Shack : MonoBehaviour
             FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available;
     }
 
+    public void ForceUpdateFishingFrenzyDisplay()
+    {
+        fishingFrenzyWidget.UpdateVisibility();
+        CheckFishingFrenzy();
+    }
+
     public void LaunchGame()
     {
         GameSettings gameSettings = new GameSettings(MapManager.Instance.MapData, true);

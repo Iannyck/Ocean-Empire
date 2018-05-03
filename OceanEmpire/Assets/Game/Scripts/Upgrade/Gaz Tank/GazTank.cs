@@ -3,6 +3,7 @@
 public class GazTank
 {
     public float GazTimeRemaining { private set; get; }
+    public float MaxGas { private set; get; }
     public GazTankDescription Description { private set; get; }
 
     public GazTank(GazTankDescription description)
@@ -18,11 +19,18 @@ public class GazTank
 
     public void FillGaz()
     {
-        GazTimeRemaining = Description.GetDiveDuration();
+        FishingFrenzyDescription desc;
+        if (Game.Instance.IsInFishingFrenzy
+            && (desc = FishingFrenzy.Instance.shopCategory.GetCurrentDescription()) != null)
+            MaxGas = desc.duration;
+        else
+            MaxGas = Description.GetDiveDuration();
+
+        GazTimeRemaining = MaxGas;
     }
 
     public float GetGazRatio()
     {
-        return GazTimeRemaining / Description.GetDiveDuration();
+        return GazTimeRemaining / MaxGas;
     }
 }

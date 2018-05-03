@@ -4,6 +4,7 @@
 public class FishingFrenzyDescription : UpgradeDescription
 {
     public float fishMultiplier = 2;
+    public float displayedfishMultiplier = 2;
 
     /// <summary>
     /// In minutes
@@ -11,11 +12,19 @@ public class FishingFrenzyDescription : UpgradeDescription
     [Suffix("minutes")]
     public float cooldown;
 
+    /// <summary>
+    /// In seconds
+    /// </summary>
+    [Suffix("seconds")]
+    public float duration;
+
     public override List<Statistic> GetStatistics()
     {
         List<Statistic> stats = new List<Statistic>
         {
-            new Statistic("Poissons bonus", fishMultiplier)
+            new Statistic("Extra-Poisson", displayedfishMultiplier, "x"),
+            new Statistic("Durée", duration, "s"),
+            new Statistic("Recharge", cooldown * 60, "s")
         };
 
         return stats;

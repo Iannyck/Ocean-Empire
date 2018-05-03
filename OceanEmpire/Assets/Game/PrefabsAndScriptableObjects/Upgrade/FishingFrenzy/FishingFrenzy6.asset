@@ -9,17 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3645a9371d1bad45be9f13acdc19ce5, type: 3}
-  m_Name: FishingFrenzy2
+  m_Name: FishingFrenzy6
   m_EditorClassIdentifier: 
   data:
     itemName: 
-    upgradeLevel: 2
+    upgradeLevel: 6
     itemDescription: 
     moneyCost: -1
-    ticketCost: 5
+    ticketCost: 35
     itemIcon: {fileID: 0}
-    fishMultiplier: 2.25
-    displayedfishMultiplier: 3
-    cooldown: 600
-    duration: 30
+    fishMultiplier: 2.75
+    displayedfishMultiplier: 4
+    cooldown: 360
+    duration: 60
   prebuiltSpriteKit: {fileID: 0}

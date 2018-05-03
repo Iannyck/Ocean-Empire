@@ -21,7 +21,15 @@ public class FishingFrenzy : MonoPersistent
     private DateTime nextAvailableTime_UTC;
     private DateTime lastActivation_UTC;
 
-    public TimeSpan Cooldown { get { return new TimeSpan(0, 0, Mathf.RoundToInt(cooldown * 60f)); } }
+    public TimeSpan Cooldown
+    {
+        get
+        {
+            var desc = shopCategory.GetCurrentDescription();
+            var dur = desc == null ? cooldown : desc.cooldown;
+            return new TimeSpan(0, 0, Mathf.RoundToInt(dur * 60f));
+        }
+    }
     public TimeSpan Duration { get { return new TimeSpan(0, 0, Mathf.RoundToInt(duration * 60f)); } }
     public EffectState State { get; private set; }
 
@@ -73,19 +81,19 @@ public class FishingFrenzy : MonoPersistent
         if (lastActivation_UTC + Duration > now_UTC)
         {
             State = EffectState.CurrentlyActive;
-            if(log && wasState != EffectState.CurrentlyActive)
+            if (log && wasState != EffectState.CurrentlyActive)
                 Debug.Log("Fishing Frenzy Activated");
         }
         else if (nextAvailableTime_UTC < now_UTC)
         {
             State = EffectState.Available;
-            if(log && wasState != EffectState.Available)
+            if (log && wasState != EffectState.Available)
                 Debug.Log("Fishing Frenzy Available");
         }
         else
         {
             State = EffectState.InCooldown;
-            if(log && wasState == EffectState.CurrentlyActive)
+            if (log && wasState == EffectState.CurrentlyActive)
                 Debug.Log("Fishing Frenzy Is Over");
         }
     }

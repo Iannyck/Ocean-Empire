@@ -21,12 +21,12 @@ public class FishingFrenzyImplementor : MonoBehaviour
 
     void OnGameReady()
     {
-        if (Game.Instance.GameSettings.CanUseFishingFrenzy &&
-            FishingFrenzy.Instance != null &&
-            FishingFrenzy.Instance.State == FishingFrenzy.EffectState.CurrentlyActive)
+        if (Game.Instance.IsInFishingFrenzy)
         {
-            Debug.Log("Fish density x" + densityMultiplier);
-            Game.Instance.FishLottery.densityMultiplier *= densityMultiplier;
+            FishingFrenzyDescription desc = FishingFrenzy.Instance.shopCategory.GetCurrentDescription();
+            var mult = desc != null ? desc.fishMultiplier : densityMultiplier;
+            Debug.Log("Fish density x" + mult);
+            Game.Instance.FishLottery.densityMultiplier *= mult;
 
             this.DelayedCall(() => popupPrefab.DuplicateGO().Animate(), popupSpawnDelay);
         }

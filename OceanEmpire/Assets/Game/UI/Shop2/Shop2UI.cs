@@ -66,6 +66,11 @@ public class Shop2UI : MonoBehaviour
         {
             isQuitting = false;
             Scenes.UnloadAsync(gameObject.scene);
+
+            if (Scenes.IsActive("Shack"))
+            {
+                Scenes.GetActive("Shack").FindRootObject<Shack>().ForceUpdateFishingFrenzyDisplay();
+            }
         });
     }
 }

@@ -39,14 +39,16 @@ public class FishingFrenzyWidget : MonoBehaviour
     void Start()
     {
         // On se désactive si on a pas unlock le fishing frenzy dans le shop
-        PersistentLoader.LoadIfNotLoaded(() =>
-        {
-            if (FishingFrenzy.Instance)
-                gameObject.SetActive(FishingFrenzy.Instance.shopCategory.IsAvailable);
-        });
+        PersistentLoader.LoadIfNotLoaded(UpdateVisibility);
 
         if (autoUpdateState)
             AutoUpdateState();
+    }
+
+    public void UpdateVisibility()
+    {
+        if (FishingFrenzy.Instance)
+            gameObject.SetActive(FishingFrenzy.Instance.shopCategory.IsAvailable);
     }
 
     void Update()

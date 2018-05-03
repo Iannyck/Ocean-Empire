@@ -18,6 +18,8 @@ MonoBehaviour:
     moneyCost: -1
     ticketCost: 15
     itemIcon: {fileID: 0}
-    fishMultiplier: 2
-    cooldown: 500
+    fishMultiplier: 2.25
+    displayedfishMultiplier: 3
+    cooldown: 480
+    duration: 60
   prebuiltSpriteKit: {fileID: 0}

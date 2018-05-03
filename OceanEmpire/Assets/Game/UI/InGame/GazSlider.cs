@@ -7,13 +7,29 @@ using DG.Tweening;
 public class GazSlider : MonoBehaviour
 {
     public Slider gageMeter;
+    public Image sliderFill;
     public Image bg;
+    public Image gasIcon;
+    public Image fishFrenzyIcon;
 
     private bool startAlert = false;
 
-    void Start()
+    void Awake()
+    {
+        Game.OnGameReady += Game_OnGameReady;
+    }
+
+    private void Game_OnGameReady()
     {
         UpdateMeter();
+
+        var fishFrenzy = Game.Instance.IsInFishingFrenzy;
+        gasIcon.enabled = !fishFrenzy;
+        fishFrenzyIcon.enabled = fishFrenzy;
+        if (fishFrenzy)
+        {
+            sliderFill.color = Color.white;
+        }
     }
 
     void Update()

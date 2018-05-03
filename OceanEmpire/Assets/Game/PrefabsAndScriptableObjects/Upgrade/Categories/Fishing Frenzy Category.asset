@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbba22e19469f634a806fa6e43011e0b, type: 3}
   m_Name: Fishing Frenzy Category
   m_EditorClassIdentifier: 
-  ownedUpgrade: 1
+  ownedUpgrade: 0
   nextUpgGenCode: 
   ownedUpgGenUpgrade: 
   CategoryName: "Super-p\xEAche"
@@ -22,3 +22,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7b72a7522e083a42b3ee309935fd3d8, type: 2}
   - {fileID: 11400000, guid: a1f6eb760fa284843a51e9a6d6617646, type: 2}
   - {fileID: 11400000, guid: aa5595edabbd95e4886d58257ecea678, type: 2}
+  - {fileID: 11400000, guid: e02ebd33a20d6b64393072d964d44615, type: 2}
+  - {fileID: 11400000, guid: 1cb2ce4d047067b4f990c45feb96ece5, type: 2}
+  - {fileID: 11400000, guid: a3922e0ce48fc714e93ea997cbc1c749, type: 2}
+  - {fileID: 11400000, guid: 3437bb06582ff9d418142d86e494ce62, type: 2}
+  - {fileID: 11400000, guid: bfdb2be2eec1e084faa60484f1efe261, type: 2}
+  - {fileID: 11400000, guid: 785813b2a1e756842aa9864bbb50cc31, type: 2}
