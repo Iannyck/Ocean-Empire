@@ -227,7 +227,7 @@ MonoBehaviour:
   fishSummaryPrefab: {fileID: 1924171844714458, guid: e06f49e11c46d7845b09f5799283c463,
     type: 2}
   countainer: {fileID: 1783320327}
-  widgetFishPop: {fileID: 0}
+  bonusGoldSprite: {fileID: 21300000, guid: fd87583a1687679448c5a3781173b44f, type: 3}
 --- !u!1 &356914073
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "R\xC9SULTAT DE R\xC9COLTE"
+  m_Text: "BILAN DE P\xCACHE"
 --- !u!222 &356914076
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -556,7 +556,7 @@ Prefab:
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 64.670654
+      value: 62.7666
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -576,7 +576,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 207.63892
+      value: 204.97325
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -586,7 +586,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 64.670654
+      value: 62.7666
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -596,12 +596,12 @@ Prefab:
     - target: {fileID: 224074558001833780, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 246.44131
+      value: 242.63321
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 25.868261
+      value: 25.106642
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 660fe2b1cf6ce8d428656980c7fe4314, type: 2}
@@ -721,7 +721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4, y: 61.7}
+  m_AnchoredPosition: {x: -4, y: 61.69995}
   m_SizeDelta: {x: 600, y: 225}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &951905019
@@ -975,8 +975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15, y: -9}
-  m_SizeDelta: {x: 104, y: 92}
+  m_AnchoredPosition: {x: -3.6500025, y: -9}
+  m_SizeDelta: {x: 86.5, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1777571393
 MonoBehaviour:

@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour
                 var position = fish.transform.position;
                 var offset = position.x > 0 ? Vector3.left * 0.75f : Vector3.right * 0.75f;
                 CallCoinsPopUp(harpoonThrowerDescription.bonusCoins, position + offset);
+                Game.Instance.FishingReport.harpoonBonusGold += harpoonThrowerDescription.bonusCoins;
+                Game.Instance.FishingReport.harpoonBonusCount++;
             }
         }
 

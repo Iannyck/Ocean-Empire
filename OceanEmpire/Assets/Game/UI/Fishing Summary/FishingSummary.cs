@@ -13,6 +13,7 @@ public class FishingSummary : MonoBehaviour
 
     public GameObject fishSummaryPrefab;
     public Transform countainer;
+    public Sprite bonusGoldSprite;
 
     //public WidgetFishPop widgetFishPop;
 
@@ -26,38 +27,46 @@ public class FishingSummary : MonoBehaviour
     {
         fishingReport = report;
 
-        int  fishes = 0;
+        int fishes = 0;
         foreach (KeyValuePair<FishDescription, int> entry in report.CapturedFish)
         {
-            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>().SetFishSummary(entry.Value, 
-                                                                                    entry.Key.icon,
-                                                                                    (entry.Key.baseMonetaryValue * entry.Value).ToString());
+            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>()
+                .SetFishSummary(
+                    entry.Value,
+                    entry.Key.icon,
+                    (entry.Key.baseMonetaryValue * entry.Value).ToString());
 
             PlayerCurrency.AddCoins(entry.Value * (int)entry.Key.baseMonetaryValue);
 
             fishes += entry.Value;
         }
+        if (report.harpoonBonusGold > 0)
+            Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>()
+                .SetFishSummary(
+                    report.harpoonBonusCount,
+                    bonusGoldSprite,
+                    report.harpoonBonusGold.ToString());
 
-        this.DelayedCall(UpdateFishPopulation, delayToShowPopulationChanges);
-        
+        //this.DelayedCall(UpdateFishPopulation, delayToShowPopulationChanges);
+
     }
 
-    public void UpdateFishPopulation()
-    {
-        float CapturedValue = 0;
-        foreach (KeyValuePair<FishDescription, int> entry in fishingReport.CapturedFish)
-        {
-            CapturedValue += entry.Value;// * entry.Key.populationValue;
-        }
-        
-        //if (widgetFishPop != null)
-        //{
-        //    float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
-        //    widgetFishPop.DecrementRate(capturedRate);
-        //}
-        //else
-        //    FishPopulation.instance.UpdateOnFishing(CapturedValue);
-    }
+    //public void UpdateFishPopulation()
+    //{
+    //    float CapturedValue = 0;
+    //    foreach (KeyValuePair<FishDescription, int> entry in fishingReport.CapturedFish)
+    //    {
+    //        CapturedValue += entry.Value;// * entry.Key.populationValue;
+    //    }
+
+    //    if (widgetFishPop != null)
+    //    {
+    //        float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
+    //        widgetFishPop.DecrementRate(capturedRate);
+    //    }
+    //    else
+    //        FishPopulation.instance.UpdateOnFishing(CapturedValue);
+    //}
 
     public void GoBackToShack()
     {
