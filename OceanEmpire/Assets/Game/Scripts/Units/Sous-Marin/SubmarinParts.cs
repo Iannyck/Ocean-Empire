@@ -65,10 +65,15 @@ public class SubmarinParts : MonoBehaviour
         if (slingshotControl != null)
         {
             HarpoonThrowerDescription desc = HarpoonThrower.Description;
-            slingshotControl.SetHarpoonVisuals(desc.GetCanonSprite(), desc.GetPullSprite(), desc.GetHarpoonSprite());
-            slingshotControl.SetHarpoonSpeed(desc.GetHarpoonSpeed());
-            slingshotControl.HarpoonCooldown = desc.GetCooldown();
-            slingshotControl.HarpoonCount = 1;
+            slingshotControl.enabled = desc != null;
+
+            if (desc != null)
+            {
+                slingshotControl.SetHarpoonVisuals(desc.GetCanonSprite(), desc.GetPullSprite(), desc.GetHarpoonSprite());
+                slingshotControl.SetHarpoonSpeed(desc.GetHarpoonSpeed());
+                slingshotControl.HarpoonCooldown = desc.GetCooldown();
+                slingshotControl.HarpoonCount = 1;
+            }
         }
     }
 
