@@ -96,8 +96,17 @@ public class UIUpgradeDisplay : MonoBehaviour
         if (statsText != null)
         {
             StringBuilder str = new StringBuilder();
+            bool isFirst = true;
             for (int i = 0; i < statistics.Count; i++)
             {
+                if (statistics[i].value == 0 && statistics[i].hideIfZero)
+                    continue;
+
+                if (!isFirst)
+                    str.Append('\n');
+                else
+                    isFirst = false;
+
                 str.Append(statistics[i].name);
                 str.Append(": ");
                 if (colored[i])
@@ -131,8 +140,6 @@ public class UIUpgradeDisplay : MonoBehaviour
                 {
                     str.Append("</color>");
                 }
-                if (i < statistics.Count - 1)
-                    str.Append('\n');
             }
 
             statsText.text = str.ToString();

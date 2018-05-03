@@ -18,6 +18,7 @@ MonoBehaviour:
     moneyCost: 4000
     ticketCost: 40
     itemIcon: {fileID: 0}
+    bonusCoins: 5
     harpoonSpeed: 6
     cooldown: 2
     harpoonNumber: 1

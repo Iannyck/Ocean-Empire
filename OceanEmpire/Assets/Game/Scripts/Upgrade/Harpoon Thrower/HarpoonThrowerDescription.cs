@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class HarpoonThrowerDescription : UpgradeDescription
 {
-    [SerializeField]
-    private float harpoonSpeed = 2;
-    [SerializeField]
-    private float cooldown = 5;
-    [SerializeField]
-    private int harpoonNumber = 0;
+    public int bonusCoins;
+    [SerializeField] float harpoonSpeed = 2;
+    [SerializeField]  float cooldown = 5;
+    [SerializeField] int harpoonNumber = 0;
 
     public float GetHarpoonSpeed()
     {
@@ -45,8 +43,8 @@ public class HarpoonThrowerDescription : UpgradeDescription
         List<Statistic> stats = new List<Statistic>
         {
             new Statistic("Vitesse", harpoonSpeed),
-            new Statistic("Recharge", cooldown, "s")/*,
-            new Statistic("Nombre de harpons", harpoonNumber)*/
+            new Statistic("Recharge", cooldown, "s"),
+            new Statistic("Bonus", bonusCoins, "$", true)
         };
 
         return stats;
