@@ -53,13 +53,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a75af67d201f004c8673c5864cd7a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questBuilderIndex: 3
+  questBuilderIndex: 4
   frenzyCategory: {fileID: 11400000, guid: fba76a724ecd44a4e836d52535db680f, type: 2}
   questBuilders:
   - {fileID: 11400000, guid: cf9b6f9932048f04097285a80368d2c1, type: 2}
   - {fileID: 11400000, guid: af828897fae99d448a5fb611c1df0df2, type: 2}
   - {fileID: 11400000, guid: af0d13dd6ae3f70428654a806ea40ce3, type: 2}
   - {fileID: 11400000, guid: 2e2c75b45082c99488854cbe1cd94dfb, type: 2}
+  - {fileID: 11400000, guid: 17c381844f04cdc4f82794561f94d87f, type: 2}
 --- !u!114 &114544965681487184
 MonoBehaviour:
   m_ObjectHideFlags: 1
