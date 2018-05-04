@@ -176,8 +176,6 @@ public class QuestPanel : MonoBehaviour
             entries[i].gameObject.SetActive(false);
         }
 
-        print("update content");
-
         CheckIfShouldOfferNextMap();
     }
 
