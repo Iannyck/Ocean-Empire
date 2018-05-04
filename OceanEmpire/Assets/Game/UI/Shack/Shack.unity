@@ -2712,6 +2712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud: {fileID: 1328244362}
   mainCanvas: {fileID: 1109020676}
+  questPanel: {fileID: 1545004479}
   shack_Environment: {fileID: 236032336}
   fishingFrenzyWidget: {fileID: 1053563334}
   recolteCallToAction: {fileID: 1424573234}
@@ -3976,6 +3977,7 @@ MonoBehaviour:
   _recolteDestination: {fileID: 290530830}
   _shopDestination: {fileID: 1072709906}
   startSection: 0
+  questPanel: {fileID: 1545004479}
 --- !u!4 &1585736095
 Transform:
   m_ObjectHideFlags: 0
@@ -4821,6 +4823,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114140619668561724, guid: d70861b802cc9cf439c165c3bd81d56c,
+        type: 2}
+      propertyPath: shackCamera
+      value: 
+      objectReference: {fileID: 1585736094}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d70861b802cc9cf439c165c3bd81d56c, type: 2}
   m_IsPrefabParent: 0

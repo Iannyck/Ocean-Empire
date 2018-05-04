@@ -13,6 +13,9 @@ public class Shack_CameraController : MonoBehaviour
     [SerializeField] private Transform _shopDestination;
     [SerializeField] Section startSection;
 
+    [Header("C'est le bordel!"), SerializeField]
+    QuestPanel questPanel;
+
     public const int SECTION_MAX = 1;
     public const int SECTION_MIN = -1;
     private Section _currentSection;
@@ -59,11 +62,19 @@ public class Shack_CameraController : MonoBehaviour
     void UpdateCameraDestination()
     {
         _currentDestination = GetSectionPosition(_currentSection);
+
+        if (_currentSection == Section.Hub)
+            questPanel.UpdateContent();
     }
 
     void InstantaneousMoveToDestination()
     {
         _cameraT.position = _currentDestination;
+    }
+
+    public Section CurrentSection
+    {
+        get { return _currentSection; }
     }
 
     public float CameraSectionPosition

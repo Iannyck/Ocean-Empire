@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CCC.Persistence;
 
 
 [CreateAssetMenu(menuName = "Ocean Empire/Shop/Upgrade Category")]
@@ -105,7 +106,7 @@ public abstract class UpgradeCategory<B, D> : UpgradeCategory
     }
 }
 
-public abstract class UpgradeCategory : ScriptableObject, IBuyable
+public abstract class UpgradeCategory : ScriptableObject, IBuyable, IPersistent
 {
     [SerializeField, ReadOnly] protected int ownedUpgrade = 0;
     [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
@@ -185,6 +186,18 @@ public abstract class UpgradeCategory : ScriptableObject, IBuyable
 
     public abstract UpgradeDescription GetCurrentUpgradeDescription();
     public abstract UpgradeDescription GetNextUpgradeDescription();
+
+    public void Init(Action onComplete)
+    {
+        onComplete();
+    }
+
+    public UnityEngine.Object DuplicationBehavior()
+    {
+        return this;
+    }
+
+    public int GetCurrentLevel() { return dataSaver.GetInt(OwnedUpgradeKey, DefaultUnlockedLevel); }
 
     protected abstract int DefaultUnlockedLevel { get; }
 }

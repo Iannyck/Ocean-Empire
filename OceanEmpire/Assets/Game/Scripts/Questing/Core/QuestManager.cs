@@ -28,11 +28,25 @@ namespace Questing
 
         public override void Init(Action onComplete)
         {
-            dataSaver.OnReassignData += FetchData;
             if (!dataSaver.HasEverLoaded)
                 dataSaver.LateLoad(onComplete);
             else
+            {
+                FetchData();
                 onComplete();
+            }
+        }
+
+        void Start()
+        {
+            if (dataSaver != null)
+                dataSaver.OnReassignData += FetchData;
+        }
+
+        void OnDestroy()
+        {
+            if (dataSaver != null)
+                dataSaver.OnReassignData -= FetchData;
         }
 
         void Update()

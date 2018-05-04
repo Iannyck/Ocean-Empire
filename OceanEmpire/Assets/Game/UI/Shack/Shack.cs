@@ -11,6 +11,9 @@ public class Shack : MonoBehaviour
     public CanvasGroup hud;
     public CanvasGroup mainCanvas;
 
+    [Header("Hub")]
+    public QuestPanel questPanel;
+
     [Header("Environement")]
     public Shack_Environment shack_Environment;
 
@@ -55,10 +58,11 @@ public class Shack : MonoBehaviour
             FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available;
     }
 
-    public void ForceUpdateFishingFrenzyDisplay()
+    public void OnReturnFromShop()
     {
         fishingFrenzyWidget.UpdateVisibility();
         CheckFishingFrenzy();
+        questPanel.UpdateContent();
     }
 
     public void LaunchGame()

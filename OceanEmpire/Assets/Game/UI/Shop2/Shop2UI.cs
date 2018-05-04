@@ -69,7 +69,7 @@ public class Shop2UI : MonoBehaviour
 
             if (Scenes.IsActive("Shack"))
             {
-                Scenes.GetActive("Shack").FindRootObject<Shack>().ForceUpdateFishingFrenzyDisplay();
+                Scenes.GetActive("Shack").FindRootObject<Shack>().OnReturnFromShop();
             }
         });
     }

@@ -24,6 +24,14 @@ namespace Questing
         public abstract float GetProgress01();
         public abstract void Launch();
         public abstract QuestState UpdateState();
+
+        protected void Complete()
+        {
+            state = QuestState.Completed;
+            if (onCompletion != null)
+                onCompletion(this);
+            DirtyState = DirtyState.UrgentDirty;
+        }
     }
 
     [Serializable]

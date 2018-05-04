@@ -10,6 +10,7 @@ public class QuestPanel : MonoBehaviour
     [Header("References")]
     public string lastMap;
     public ScriptableActionQueue shackAnimQueue;
+    public Shack_CameraController shackCamera;
 
     [Header("Entries Managment")]
     public QuestPanelEntry entryPrefab;
@@ -38,6 +39,7 @@ public class QuestPanel : MonoBehaviour
     private Vector2 normalSize;
     private bool isShown = false;
     private bool isOfferingNextMap = false;
+    private bool isOfferingNextMapComplete = false;
 
     private void Awake()
     {
@@ -121,7 +123,11 @@ public class QuestPanel : MonoBehaviour
                 sq.Append(scaleUp);
 
                 sq.SetId(this);
-                sq.onComplete = onCompletion;
+                sq.onComplete = () =>
+                {
+                    isOfferingNextMapComplete = true;
+                    onCompletion();
+                };
             };
 
             if (entries.Count > 0)
@@ -170,23 +176,27 @@ public class QuestPanel : MonoBehaviour
             entries[i].gameObject.SetActive(false);
         }
 
+        print("update content");
 
         CheckIfShouldOfferNextMap();
     }
 
     void CheckIfShouldOfferNextMap()
     {
-        var shouldOfferNextMap = IsEveryOngoingQuestCompleted() && MapManager.Instance.MapData.Name != lastMap;
-        var shouldOMNButtonBeVisibleRightNow = shouldOfferNextMap && isShown && !ongoingShowAnimation.IsActive();
-
-        if (IsEveryOngoingQuestCompleted()
+        var shouldOfferNextMap = IsEveryOngoingQuestCompleted()
             && MapManager.Instance.MapData.Name != lastMap
-            && isShown && ongoingShowAnimation.IsComplete())
+            && isShown
+            && (!ongoingShowAnimation.IsActive() || ongoingShowAnimation.IsComplete())
+            && (shackCamera == null || shackCamera.CurrentSection == Shack_CameraController.Section.Hub);
+        var shouldOMNButtonBeVisibleRightNow = shouldOfferNextMap && isOfferingNextMap;
+
+        if (shouldOfferNextMap && !shouldOMNButtonBeVisibleRightNow)
         {
             OfferNextMap();
         }
         else
         {
+            // pour couvrir les moments où on update ET qu'on est déjà entrain de montrer le bouton
             onm_button.gameObject.SetActive(shouldOMNButtonBeVisibleRightNow);
         }
     }

@@ -60,9 +60,7 @@ namespace Questing
                 // Have we just completed the objective ?
                 if (state == QuestState.Completed)
                 {
-                    DirtyState = DirtyState.UrgentDirty;
-                    if (onCompletion != null)
-                        onCompletion(this);
+                    Complete();
                 }
                 else
                     DirtyState = DirtyState.Dirty;
