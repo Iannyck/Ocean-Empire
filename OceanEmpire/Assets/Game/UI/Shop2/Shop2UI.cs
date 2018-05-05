@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class Shop2UI : MonoBehaviour
     public float hideDuration;
     public Ease hideEase;
     public Image blackBG;
+    public OpenCategoryButton[] categoryButtons;
+
+    public event Action<UpgradeCategory> OnBuyAnyUpgrade;
 
     Vector2 normalPosition;
     float normalBlackAlpha;
@@ -23,6 +27,17 @@ public class Shop2UI : MonoBehaviour
     {
         normalPosition = panel.anchoredPosition;
         normalBlackAlpha = blackBG.color.a;
+
+        for (int i = 0; i < categoryButtons.Length; i++)
+        {
+            categoryButtons[i].onConfirmBuy = _OnBuyAnyUpgrade;
+        }
+    }
+
+    void _OnBuyAnyUpgrade(OpenCategoryButton categoryButton)
+    {
+        if(OnBuyAnyUpgrade != null)
+            OnBuyAnyUpgrade(categoryButton.categoryDisplay.category);
     }
 
     void OnEnable()

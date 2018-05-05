@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class OpenCategoryButton : MonoBehaviour
 {
     public UIUpgradeDisplay categoryDisplay;
     public SceneInfo upgradeWindowScene;
+    public Action<OpenCategoryButton> onConfirmBuy;
 
     private bool isLoading = false;
 
@@ -35,6 +37,9 @@ public class OpenCategoryButton : MonoBehaviour
                     var fireworks = GetComponent<BuyFireworks>();
                     if (fireworks)
                         fireworks.LaunchAnim();
+
+                    if (onConfirmBuy != null)
+                        onConfirmBuy(this);
                 });
         });
     }

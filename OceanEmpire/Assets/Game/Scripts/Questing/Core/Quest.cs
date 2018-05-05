@@ -5,7 +5,20 @@ using UnityEngine;
 
 namespace Questing
 {
-    public enum DirtyState { Clean = 0, Dirty, UrgentDirty }
+    public enum DirtyState
+    {
+        Clean = 0,
+
+        /// <summary>
+        /// Will be saved in the following seconds (this helps batch the regular save calls)
+        /// </summary>
+        Dirty,
+
+        /// <summary>
+        /// Will be immediately saved
+        /// </summary>
+        UrgentDirty
+    }
 
     [Serializable]
     public abstract class Quest
