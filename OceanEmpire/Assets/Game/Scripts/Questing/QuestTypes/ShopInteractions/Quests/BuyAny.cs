@@ -32,7 +32,7 @@ namespace Questing
 
         public override QuestState UpdateState()
         {
-            if(state == QuestState.Ongoing)
+            if (state == QuestState.Ongoing)
             {
                 VerifyListening();
             }
@@ -41,9 +41,16 @@ namespace Questing
 
         private void Shop_OnAnyUpgrade(UpgradeCategory obj)
         {
-            progress++;
-            VerifyGoal();
-            DirtyState = DirtyState.UrgentDirty;
+            // Use filter ?
+            if (!context.useFilter
+                || context.filterOne == obj.name
+                || context.filterTwo == obj.name
+                || context.filterThree == obj.name)
+            {
+                progress++;
+                VerifyGoal();
+                DirtyState = DirtyState.UrgentDirty;
+            }
         }
 
         void VerifyGoal()

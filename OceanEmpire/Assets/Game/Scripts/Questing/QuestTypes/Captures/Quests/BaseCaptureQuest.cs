@@ -48,7 +48,7 @@ namespace Questing
 
         protected virtual void OnFishCaptured(Capturable capturable, CaptureTechnique captureTechnique)
         {
-            if (state != QuestState.Ongoing)
+            if (state != QuestState.Ongoing || (context.onlyInFishingFrenzy && !Game.Instance.IsInFishingFrenzy))
                 return;
 
             if (IsValidFishCapture(capturable) && (captureTechnique & context.allowedTechniques) != 0)

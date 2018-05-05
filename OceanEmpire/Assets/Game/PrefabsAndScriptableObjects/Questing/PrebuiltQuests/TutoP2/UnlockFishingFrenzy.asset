@@ -9,9 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 295fa1a0ecba0eb4fbbad17dcaf8438f, type: 3}
-  m_Name: UnlockHarpoon
+  m_Name: UnlockFishingFrenzy
   m_EditorClassIdentifier: 
   questContext:
-    description: "\xC9quipe-toi d'un harpon (voir magasin)"
-    iconResource: Sprites/QuestIcons/HarpoonIcon
-    shopCategory: HarpoonThrowerCategory
+    description: "D\xE9bloque la Super-p\xEAche (magasin)"
+    iconResource: Sprites/Fish/t_rainbow
+    shopCategory: Fishing Frenzy Category
+    upgradeLevelToReach: 1

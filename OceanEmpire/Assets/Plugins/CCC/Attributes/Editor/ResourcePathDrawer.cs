@@ -6,7 +6,7 @@ public class ResourcePathDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        if(property.propertyType != SerializedPropertyType.String)
+        if (property.propertyType != SerializedPropertyType.String)
         {
             Debug.LogError("The [ResourcePath] attribute can only be used on string fields.");
             return;
@@ -47,7 +47,7 @@ public class ResourcePathDrawer : PropertyDrawer
         }
 
         var wasGUIColor = GUI.color;
-        GUI.color = Resources.Load(property.stringValue) != null ? new Color(0.5f, 1, 0.5f) : new Color(1, 0.5f, 0.5f);
+        GUI.color = wasGUIColor * (Resources.Load(property.stringValue) != null ? new Color(0.5f, 1, 0.5f) : new Color(1, 0.5f, 0.5f));
 
         EditorGUI.PropertyField(position, property, label, true);
 

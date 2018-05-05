@@ -41,4 +41,7 @@ MonoBehaviour:
       g: 0.9607844
       b: 1
       a: 1
-  relatedQuests: []
+  relatedQuests:
+  - {fileID: 11400000, guid: f7c11d0a48be2c241be3e687f085ea6e, type: 2}
+  - {fileID: 11400000, guid: 6646b930e4eed854abc83e130568635d, type: 2}
+  - {fileID: 11400000, guid: 71d31761b5f3f7441aeb251e5ab38d77, type: 2}

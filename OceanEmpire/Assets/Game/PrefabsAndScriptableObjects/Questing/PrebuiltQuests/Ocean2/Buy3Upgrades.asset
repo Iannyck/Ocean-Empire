@@ -15,3 +15,7 @@ MonoBehaviour:
     description: "Ach\xE8tes 3 am\xE9liorations du magasin"
     iconResource: Sprites/QuestIcons/ShopIcon
     upgradeCount: 3
+    useFilter: 1
+    filterOne: GazTankCategory
+    filterTwo: ThrusterCategory
+    filterThree: 

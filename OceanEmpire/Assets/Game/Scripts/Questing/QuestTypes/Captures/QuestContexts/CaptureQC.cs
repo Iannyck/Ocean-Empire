@@ -9,6 +9,7 @@ namespace Questing
     {
         [Header("Capture")]
         public int captureGoal;
+        public bool onlyInFishingFrenzy = false;
 
         [BitMask]
         public CaptureTechnique allowedTechniques = CaptureTechnique.Harpoon | CaptureTechnique.Melee;

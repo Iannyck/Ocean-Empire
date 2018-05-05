@@ -9,9 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0f013b07f78fd944b3091e13420c71a, type: 3}
-  m_Name: Buy1Upgrade
+  m_Name: UpgradeFishingFrenzy
   m_EditorClassIdentifier: 
   questContext:
-    description: "Ach\xE8te 1 am\xE9lioration du magasin"
-    iconResource: Sprites/QuestIcons/ShopIcon
+    description: "Am\xE9liore la Super-p\xEAche (voir magasin)"
+    iconResource: Sprites/Fish/t_rainbow
     upgradeCount: 1
+    useFilter: 1
+    filterOne: Fishing Frenzy Category
+    filterTwo: 
+    filterThree: 
