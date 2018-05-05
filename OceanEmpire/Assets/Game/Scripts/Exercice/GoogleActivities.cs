@@ -154,17 +154,20 @@ public class GoogleActivities : MonoPersistent
 
     public string[] GetAllData()
     {
-        if (records.Count < 1)
+        if (records.Count < 1 || records == null)
             return null;
+
         string[] data = new string[records.Count + 2];
+
         data[0] = "Date,WalkProb,RunProb,BicycleProb";
-        for (int i = 1; i < records.Count+1; i++)
+
+        for (int i = 1; i < (records.Count+1); i++)
         {
             string newEntry = "";
-            newEntry += "\n" + records[i].time + ",";
-            newEntry += records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.walk) + "," +
-            records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.run) + "," +
-            records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle);
+            newEntry += "\n" + records[i-1].time + ",";
+            newEntry += records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.walk) + "," +
+            records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.run) + "," +
+            records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle);
             data[i] = newEntry;
         }
         data[records.Count + 1] = "\n" + PlayerProfile.instance.GetLogs() + "," + PlayerProfile.instance.GetReportLogs();
