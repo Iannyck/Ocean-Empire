@@ -158,7 +158,7 @@ public class GoogleActivities : MonoPersistent
             return null;
         string[] data = new string[records.Count + 2];
         data[0] = "Date,WalkProb,RunProb,BicycleProb";
-        for (int i = 1; i < records.Count; i++)
+        for (int i = 1; i < records.Count+1; i++)
         {
             string newEntry = "";
             newEntry += "\n" + records[i].time + ",";
@@ -167,7 +167,7 @@ public class GoogleActivities : MonoPersistent
             records[i].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle);
             data[i] = newEntry;
         }
-        data[records.Count + 2] = "\n" + PlayerProfile.instance.GetLogs() + "," + PlayerProfile.instance.GetReportLogs();
+        data[records.Count + 1] = "\n" + PlayerProfile.instance.GetLogs() + "," + PlayerProfile.instance.GetReportLogs();
         return data;
     }
 }

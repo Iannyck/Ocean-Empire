@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using CCC.Math.Graph;
 using Questing;
 using System;
-using UnityEditor;
 
 public class TestScript_Fred : MonoBehaviour
 {

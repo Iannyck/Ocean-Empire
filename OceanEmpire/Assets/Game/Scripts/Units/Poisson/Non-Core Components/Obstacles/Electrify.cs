@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CCC;
-using UnityEditor;
 
 public class Electrify : CollisionEffect
 {
