@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 977475063}
   - component: {fileID: 977475062}
   - component: {fileID: 977475061}
+  - component: {fileID: 977475065}
   m_Layer: 5
   m_Name: Cancel
   m_TagString: Untagged
@@ -730,6 +731,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 977475059}
+--- !u!114 &977475065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 977475059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
 --- !u!1 &1182411956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1258,7 @@ GameObject:
   - component: {fileID: 1745496718}
   - component: {fileID: 1745496717}
   - component: {fileID: 1745496721}
+  - component: {fileID: 1745496722}
   m_Layer: 5
   m_Name: Buy With Coins
   m_TagString: Untagged
@@ -1379,6 +1394,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1745496722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745496715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 3428b71228b1d704794fb71b59b1e4a4, type: 2}
 --- !u!1 &1759082798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1565,7 @@ GameObject:
   - component: {fileID: 1920877996}
   - component: {fileID: 1920877995}
   - component: {fileID: 1920877999}
+  - component: {fileID: 1920878000}
   m_Layer: 5
   m_Name: Buy With Tickets
   m_TagString: Untagged
@@ -1672,6 +1701,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1920878000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1920877993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 3428b71228b1d704794fb71b59b1e4a4, type: 2}
 --- !u!1 &1958326103
 GameObject:
   m_ObjectHideFlags: 0

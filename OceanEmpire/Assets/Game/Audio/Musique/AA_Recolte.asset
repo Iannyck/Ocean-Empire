@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: AA_Recolte
   m_EditorClassIdentifier: 
   cooldown: -1
-  clip: {fileID: 8300000, guid: 6faec8bb568d6ec45a369a4f1e3b6b24, type: 3}
+  clip: {fileID: 8300000, guid: eeb2ef7eac74c0b42a283731fde9dae0, type: 3}
   volume: 1

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: AA_Shack
   m_EditorClassIdentifier: 
   cooldown: -1
-  clip: {fileID: 8300000, guid: 3e38d8e3ab0958f4d97c7ecf8831cea3, type: 3}
+  clip: {fileID: 8300000, guid: 3f43fa554d392974689fea7f55d1f5e3, type: 3}
   volume: 1

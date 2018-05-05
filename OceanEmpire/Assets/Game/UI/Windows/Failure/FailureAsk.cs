@@ -16,6 +16,8 @@ public class FailureAsk : MonoBehaviour {
 
     public WindowAnimation askWindowAnim;
 
+    public Text exerciceDescription;
+
     private ExerciseReport currentReport;
 
     [Serializable]
@@ -27,10 +29,23 @@ public class FailureAsk : MonoBehaviour {
  
     public List<Choice> choixPossible = new List<Choice>();
 
+    void Start()
+    {
+        Init(null);
+    }
+
 	public void Init(ExerciseReport report)
     {
+        if (report != null)
+            exerciceDescription.text = report.exercice.minAmount + " minutes de " + report.exercice.type + " le " + report.timeSlot.start.DayOfWeek + "dernier.";
+        else
+            exerciceDescription.text = "Un exercice quelconque";
+
         currentReport = report;
-        PlannedExerciceRewarder.instance.keepAnalysing = false;
+
+        if(PlannedExerciceRewarder.instance != null)
+            PlannedExerciceRewarder.instance.keepAnalysing = false;
+
         for (int i = 0; i < choixPossible.Count; i++)
         {
             ChoiceButton currentButton = Instantiate(buttonPrefab, countainer).GetComponent<ChoiceButton>();

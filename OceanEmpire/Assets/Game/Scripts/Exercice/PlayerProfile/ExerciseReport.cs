@@ -6,7 +6,7 @@ public class ExerciseReport
 {
     public TimeSlot timeSlot;
     public float volume;
-    PossibleExercice.PlannedExercice exercice;
+    public PossibleExercice.PlannedExercice exercice;
     public Etat etat;
 
     public enum Etat
