@@ -2671,9 +2671,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayInspectorScene: {fileID: 11400000, guid: 4ad62bc390d3fbf46acd8cf1d1b7fd69, type: 2}
-  exitScene: {fileID: 11400000, guid: 65fc4546fb6b8444f8633c86e90cf493, type: 2}
   scroller: {fileID: 393997714}
   exitCalendarButton: {fileID: 1940203467}
   windowAnimation: {fileID: 510474693}
   clickBlocker: {fileID: 2018633617}
+  headerText: {fileID: 657658049}
   startingDayIndex: 1

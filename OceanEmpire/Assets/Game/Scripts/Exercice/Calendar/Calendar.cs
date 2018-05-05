@@ -31,11 +31,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus récent au plus lointain
     /// </summary>
-    public ReadOnlyCollection<ScheduledBonus> GetPresentAndFutureBonifiedTimes() { return presentAndFutureBonifiedTimes.GetInternalList(); }
+    public ReadOnlyCollection<ScheduledBonus> GetPresentAndFutureSchedules() { return presentAndFutureBonifiedTimes.GetInternalList(); }
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    public ReadOnlyCollection<ScheduledBonus> GetPastBonifiedTimes() { return pastBonifiedTimes.GetInternalList(); }
+    public ReadOnlyCollection<ScheduledBonus> GetPastSchedules() { return pastBonifiedTimes.GetInternalList(); }
 
     protected void Awake()
     {
@@ -87,9 +87,9 @@ public class Calendar : MonoPersistent
             ApplyDataToSaver(andSave);
     }
 
-    public bool AddBonifiedTime(ScheduledBonus bonifiedTime)
+    public bool AddSchedule(ScheduledBonus bonifiedTime)
     {
-        if (!IsTimeBonified(bonifiedTime.timeSlot))
+        if (!IsOverlappingWithSchedule(bonifiedTime.timeSlot))
         {
             if (bonifiedTime.timeSlot.IsInThePast())
                 pastBonifiedTimes.Add(bonifiedTime);
@@ -118,7 +118,7 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Retourne vrai si la timeslot overlap totalement ou partiellement avec un temps bonifié.
     /// </summary>
-    public bool IsTimeBonified(TimeSlot timeslot)
+    public bool IsOverlappingWithSchedule(TimeSlot timeslot)
     {
         for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
         {
@@ -146,7 +146,7 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Retourne vrai si la dateTime overlap avec un temps bonifié.
     /// </summary>
-    public bool IsTimeBonified(DateTime dateTime)
+    public bool IsOverlappingWithSchedule(DateTime dateTime)
     {
         for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
         {
@@ -189,7 +189,7 @@ public class Calendar : MonoPersistent
             pastBonifiedTimes = new AutoSortedList<ScheduledBonus>();
     }
 
-    public List<ScheduledBonus> GetAllBonifiedTimesStartingOn(Day day)
+    public List<ScheduledBonus> GetAllSchedulesStartingOn(Day day)
     {
         List<ScheduledBonus> result = new List<ScheduledBonus>();
 

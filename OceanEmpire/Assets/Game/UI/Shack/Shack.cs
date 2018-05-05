@@ -10,6 +10,7 @@ public class Shack : MonoBehaviour
 
     public CanvasGroup hud;
     public CanvasGroup mainCanvas;
+    public CanvasGroup alwayVisibleHud;
 
     [Header("Hub")]
     public QuestPanel questPanel;
@@ -82,7 +83,7 @@ public class Shack : MonoBehaviour
     {
         Scenes.Load(calendarScene, (scene) =>
         {
-            scene.FindRootObject<CalendarScroll_Controller>().OnEntranceComplete(() => Scenes.UnloadAsync(gameObject.scene));
+            //scene.FindRootObject<CalendarScroll_Controller>().OnEntranceComplete(() => Scenes.UnloadAsync(gameObject.scene));
         });
     }
 }

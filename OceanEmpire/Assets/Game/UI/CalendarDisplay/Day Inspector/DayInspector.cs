@@ -11,7 +11,6 @@ public class DayInspector : MonoBehaviour
 
     [Header("Assets"), SerializeField] DayInspector_Schedule schedulePrefab;
     [SerializeField] SceneInfo askForTimeWindow;
-    [SerializeField] SceneInfo exerciceSelectionWindow;
 
     [Header("Components"), SerializeField] Button exitButton;
     [SerializeField] RectTransform container;
@@ -19,6 +18,7 @@ public class DayInspector : MonoBehaviour
     [SerializeField] RectTransform schedulesContainer;
     [SerializeField] Text nothingPlannedText;
     [SerializeField] Button scheduleButton;
+    [SerializeField] Text scheduleButtonText;
 
     [Header("Header"), SerializeField] Text dateText;
     [SerializeField] Text dayOfWeekText;
@@ -34,6 +34,9 @@ public class DayInspector : MonoBehaviour
 
     Calendar.Day day;
 
+    public CalendarRequest.RequestHandle RequestHandle { get; set; }
+    public bool IsVisible { get; private set; }
+
     private void Awake()
     {
         HideInstant();
@@ -43,45 +46,31 @@ public class DayInspector : MonoBehaviour
 
     void Plan()
     {
-        Scenes.LoadAsync(exerciceSelectionWindow, (scene) =>
+        Scenes.LoadAsync(askForTimeWindow, (scene) =>
         {
-            var window = scene.FindRootObject<SelectionScript>();
-            window.Init();
-            window.SelectionEvent += delegate(PossibleExercice.PlannedExercice plannedExercice) {
-                Scenes.LoadAsync(askForTimeWindow, (scene2) =>
-                {
-                    var window1 = scene2.FindRootObject<AskForTimeWindow>();
-                    window1.currentPlannedExercice = plannedExercice;
-                    window1.AnswerEvent += ScheduleNewBonifiedTime;
-                });
-            };
+            var window = scene.FindRootObject<AskForTimeWindow>();
+            window.AnswerEvent += OnTimeSelected;
         });
     }
 
-    private void ScheduleNewBonifiedTime(bool confirmed, int hours, int minutes, PossibleExercice.PlannedExercice plannedExercice)
+    private void OnTimeSelected(bool confirmed, int hours, int minutes)
     {
+        // Le joueur a clické 'Cancel' ?
         if (!confirmed)
             return;
 
-        //TODO : TROUVER UNE FACON D'INTEGRER PLANNED EXERCICE ICI (D'HABITUDE IL VA DANS BONIFIED TIME)
-        Debug.Log("EXERCICE EST ICI : " + plannedExercice.type);
         DateTime date = new DateTime(day.year, day.monthOfYear, day.dayOfMonth, hours, minutes, 0);
-        TimeSlot timeSlot = new TimeSlot(date, ScheduledBonus.DefaultDuration());
-        ScheduledBonus bonifiedTime = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
 
-        if (!Calendar.instance.AddBonifiedTime(bonifiedTime))
-        {
-            MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
-        }
-        else
-        {
-            RefreshSchedules();
-        }
+        if (RequestHandle != null)
+            RequestHandle.onTimePicked(date);
+
+        RefreshSchedules();
     }
 
     public void ShowAndFill(Calendar.Day day) { ShowAndFill(day, null); }
     public void ShowAndFill(Calendar.Day day, TweenCallback onComplete)
     {
+        IsVisible = true;
         Fill(day);
         blackBG.Show();
 
@@ -100,6 +89,7 @@ public class DayInspector : MonoBehaviour
     public void Hide() { Hide(null); }
     public void Hide(TweenCallback onComplete)
     {
+        IsVisible = false;
         blackBG.Hide();
 
         container.DOKill();
@@ -108,6 +98,7 @@ public class DayInspector : MonoBehaviour
 
     public void ShowInstant()
     {
+        IsVisible = true;
         blackBG.ShowInstant();
 
         container.DOKill();
@@ -116,6 +107,7 @@ public class DayInspector : MonoBehaviour
 
     public void HideInstant()
     {
+        IsVisible = false;
         blackBG.HideInstant();
 
         container.DOKill();
@@ -136,16 +128,16 @@ public class DayInspector : MonoBehaviour
         EmptyTrash();
 
         bool enableNothingPlannedText = true;
-        var bonifiedTimes = Calendar.instance.GetAllBonifiedTimesStartingOn(day);
+        var schedules = Calendar.instance.GetAllSchedulesStartingOn(day);
 
-        if (bonifiedTimes.Count > 0)
+        if (schedules.Count > 0)
         {
             enableNothingPlannedText = false;
-            for (int i = 0; i < bonifiedTimes.Count; i++)
+            for (int i = 0; i < schedules.Count; i++)
             {
                 var scheduleDisplay = schedulePrefab.DuplicateGO(schedulesContainer);
-                var roundedStrength = bonifiedTimes[i].bonus.ticketMultiplier.Rounded(1);
-                scheduleDisplay.FillContent(bonifiedTimes[i].timeSlot,
+                var roundedStrength = schedules[i].bonus.ticketMultiplier.Rounded(1);
+                scheduleDisplay.FillContent(schedules[i].timeSlot,
                     "BONUS X" + roundedStrength
                     , "Faire de l'exercice vous rapportera " + roundedStrength + "x plus de tickets!");
                 trash.Add(scheduleDisplay.gameObject);
@@ -153,6 +145,11 @@ public class DayInspector : MonoBehaviour
         }
 
         nothingPlannedText.enabled = enableNothingPlannedText;
+    }
+
+    public void ApplySettings(CalendarRequest.Settings requestSettings)
+    {
+        scheduleButtonText.text = requestSettings.scheduleButtonText;
     }
 
     public void EmptyTrash()

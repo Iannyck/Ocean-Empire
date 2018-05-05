@@ -11,12 +11,13 @@ public class CalendarScroll_Controller : MonoBehaviour
     public const string SCENENAME = "CalendarScroll";
 
     [Header("Scenes"), SerializeField] SceneInfo dayInspectorScene;
-    [SerializeField] SceneInfo exitScene;
+    //[SerializeField] SceneInfo exitScene;
 
     [Header("Components"), SerializeField] CalendarScroll_Scroller scroller;
     [SerializeField] Button exitCalendarButton;
     [SerializeField] CalendarScroll_WindowAnimation windowAnimation;
     [SerializeField] Image clickBlocker;
+    [SerializeField] Text headerText;
 
     [Header("Settings"), SerializeField] int startingDayIndex = 1;
 
@@ -25,7 +26,13 @@ public class CalendarScroll_Controller : MonoBehaviour
     private bool everythingIsLoaded = false;
     private bool canAnimateEntrance = false;
     private bool entranceComplete = false;
-    private Action onEntranceComplete = null;
+
+    public Action OnEntranceComplete { get; set; }
+    public Action OnExitStarted { get; set; }
+    public Action OnExitComplete { get; set; }
+    public CalendarRequest.RequestHandle RequestHandle { get; private set; }
+    public CalendarRequest.Settings RequestSettings { get; private set; }
+
 
     private void Awake()
     {
@@ -55,6 +62,9 @@ public class CalendarScroll_Controller : MonoBehaviour
     {
         dayInspector = scene.FindRootObject<DayInspector>();
 
+        if (RequestHandle != null)
+            RequestHandle.dayInspector = dayInspector;
+
         // Fill data
         Refill();
 
@@ -77,18 +87,14 @@ public class CalendarScroll_Controller : MonoBehaviour
             {
                 clickBlocker.enabled = false;
                 entranceComplete = true;
-                if (onEntranceComplete != null)
-                    onEntranceComplete();
+
+                if (OnEntranceComplete != null)
+                    OnEntranceComplete();
+
+                if (RequestHandle != null)
+                    RequestHandle.onWindowIntroComplete();
             });
         });
-    }
-
-    public void OnEntranceComplete(Action callback)
-    {
-        if (entranceComplete)
-            callback();
-        else
-            onEntranceComplete = callback;
     }
 
     protected void OnDestroy()
@@ -97,23 +103,25 @@ public class CalendarScroll_Controller : MonoBehaviour
             Calendar.instance.OnBonifiedTimeAdded -= RefreshContent;
     }
 
-    private void ExitCalendar()
+    public void ExitCalendar()
     {
-        if (exitScene == null)
+        if (RequestHandle != null)
+            RequestHandle.onWindowExitStarted();
+
+        if (OnExitStarted != null)
+            OnExitStarted();
+
+        windowAnimation.Hide(() =>
         {
-            Debug.LogError("No exit scene specified.");
-        }
-        else
-        {
-            Scenes.Load(exitScene.SceneName, LoadSceneMode.Additive, (scene) =>
-            {
-                windowAnimation.Hide(() =>
-                {
-                    Scenes.UnloadAsync(dayInspector.gameObject.scene);
-                    Scenes.UnloadAsync(gameObject.scene);
-                });
-            });
-        }
+            if (RequestHandle != null)
+                RequestHandle.onWindowExitComplete();
+
+            if (OnExitComplete != null)
+                OnExitComplete();
+
+            Scenes.UnloadAsync(dayInspector.gameObject.scene);
+            Scenes.UnloadAsync(gameObject.scene);
+        });
     }
 
     private void Refill()
@@ -125,9 +133,30 @@ public class CalendarScroll_Controller : MonoBehaviour
         scroller.RefreshContent();
     }
 
+    public void SetRequestHandle(CalendarRequest.RequestHandle requestHandle)
+    {
+        RequestHandle = requestHandle;
+        requestHandle.scrollController = this;
+        if (dayInspector != null)
+            requestHandle.dayInspector = dayInspector;
+    }
+
+    public void ApplySettings(CalendarRequest.Settings settings)
+    {
+        RequestSettings = settings;
+        headerText.text = settings.windowHeaderTitle;
+    }
+
     public void OnDayClick(CalendarScroll_Day day)
     {
         dayInspector.ShowAndFill(day.GetDay());
+        dayInspector.RequestHandle = RequestHandle;
+
+        if (RequestSettings != null)
+            dayInspector.ApplySettings(RequestSettings);
+
+        if (RequestHandle != null)
+            RequestHandle.dayInspector = dayInspector;
     }
 
     public void BackToTop()

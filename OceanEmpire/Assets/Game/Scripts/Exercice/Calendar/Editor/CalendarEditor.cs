@@ -18,8 +18,8 @@ public class CalendarEditor : Editor
         base.OnInspectorGUI();
 
         EditorGUILayout.Space();
-        DrawBonifiedTimes("Past Bonified Times", calendar.GetPastBonifiedTimes());
-        DrawBonifiedTimes("Present and Future Bonified Times", calendar.GetPresentAndFutureBonifiedTimes());
+        DrawBonifiedTimes("Past Bonified Times", calendar.GetPastSchedules());
+        DrawBonifiedTimes("Present and Future Bonified Times", calendar.GetPresentAndFutureSchedules());
     }
 
     private void DrawBonifiedTimes(string label, ReadOnlyCollection<ScheduledBonus> bonifiedTimes)
