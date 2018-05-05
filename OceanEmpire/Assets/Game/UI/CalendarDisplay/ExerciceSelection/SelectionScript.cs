@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,9 +21,8 @@ public class SelectionScript : MonoBehaviour {
 
     private int currentLevelSelected = 1;
 
-    public void Init(int startAtLevel = 1)
+    public void Init(int startAtLevel = 1, Action<PossibleExercice.PlannedExercice> onSelection = null)
     {
-
         for (int i = 0; i < levelToSpawn; i++)
         {
             Button newButton = Instantiate(prefabDifficultyButton, countainer.transform);
@@ -33,7 +33,15 @@ public class SelectionScript : MonoBehaviour {
                 DifficultySelection(currentIndex+1);
             });
         }
-	}
+
+        if(onSelection != null)
+        {
+            SelectionEvent += delegate (PossibleExercice.PlannedExercice plannedExercice)
+            {
+                onSelection.Invoke(plannedExercice);
+            };
+        }
+    }
 	
     public void DifficultySelection(int level)
     {
@@ -82,7 +90,8 @@ public class SelectionScript : MonoBehaviour {
 
     public void ExerciceSelection(PossibleExercice.PlannedExercice.ExerciceType type)
     {
-        SelectionEvent.Invoke(PossibleExercice.CreateExercice(type,currentLevelSelected));
+        if(SelectionEvent != null)
+            SelectionEvent.Invoke(PossibleExercice.CreateExercice(type,currentLevelSelected));
         Scenes.UnloadAsync(selectionWindow);
     }
 
