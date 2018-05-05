@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Capture10WithHarpoon
   m_EditorClassIdentifier: 
   questContext:
-    description: Captures 10 poissons avec le harpon
+    description: Capture 10 poissons avec le harpon
     iconResource: Sprites/QuestIcons/HarpoonCaptureIcon
     captureGoal: 10
     allowedTechniques: 2

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: UnlockFishingFrenzy
   m_EditorClassIdentifier: 
   questContext:
-    description: "D\xE9bloques la Super-p\xEAche (magasin)"
+    description: "D\xE9bloque la Super-p\xEAche (magasin)"
     iconResource: Sprites/QuestIcons/HarpoonIcon
     shopCategory: Fishing Frenzy Category
     upgradeLevelToReach: 1

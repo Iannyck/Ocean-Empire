@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Buy1Upgrade
   m_EditorClassIdentifier: 
   questContext:
-    description: "Ach\xE8tes 1 am\xE9lioration du magasin"
+    description: "Ach\xE8te 1 am\xE9lioration du magasin"
     iconResource: Sprites/QuestIcons/ShopIcon
     upgradeCount: 1

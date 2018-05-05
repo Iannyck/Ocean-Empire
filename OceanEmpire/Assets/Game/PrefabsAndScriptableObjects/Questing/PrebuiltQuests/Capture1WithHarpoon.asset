@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Capture1WithHarpoon
   m_EditorClassIdentifier: 
   questContext:
-    description: "Captures 1 poisson \xE0 l'aide du harpon"
+    description: "Capture 1 poisson \xE0 l'aide du harpon"
     iconResource: Sprites/QuestIcons/HarpoonCaptureIcon
     captureGoal: 1
     allowedTechniques: 2

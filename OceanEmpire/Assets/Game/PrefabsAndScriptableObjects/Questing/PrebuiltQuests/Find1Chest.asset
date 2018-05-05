@@ -8,13 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d309c7c0d437aef4b94b79ab4353c7b9, type: 3}
-  m_Name: Capture50
+  m_Script: {fileID: 11500000, guid: bfb38f8fbbc14d442a93a617dfa2dc1d, type: 3}
+  m_Name: Find1Chest
   m_EditorClassIdentifier: 
   questContext:
-    description: Capture 50 poissons
-    iconResource: Sprites/QuestIcons/MeleeCaptureIcon
-    captureGoal: 50
+    description: "D\xE9couvre 1 tr\xE9sor au fond de l\u2019oc\xE9an"
+    iconResource: Sprites/Fish/t_chest
+    captureGoal: 1
     allowedTechniques: 3
-    flagsFilter: 64
-    flagsValue: 64
+    fishIds: 07000000

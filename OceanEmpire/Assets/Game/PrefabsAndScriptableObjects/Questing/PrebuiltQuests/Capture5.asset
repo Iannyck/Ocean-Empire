@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Capture5
   m_EditorClassIdentifier: 
   questContext:
-    description: "Captures 5 poissons \xE0 l'aide du sous-marin"
+    description: "Capture 5 poissons \xE0 l'aide du sous-marin"
     iconResource: Sprites/QuestIcons/MeleeCaptureIcon
     captureGoal: 5
     allowedTechniques: 1
