@@ -50,6 +50,7 @@ public class UnityPlayerActivity extends Activity implements GoogleApiClient.Con
     public char[] password = "1234567890".toCharArray();
 
     public void SendMessageToUnity(String msg){
+        Log.e("ANDROID-UNITY","SENDING MSG TO UNITY");
         mUnityPlayer.UnitySendMessage("GoogleActivities(Clone)", "ReceiveAndroidMessage", msg);
     }
 

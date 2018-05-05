@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using CCC.Math.Graph;
 using Questing;
 using System;
-using UnityEditor;
-using UnityEngine.SceneManagement;
 
 public class TestScript_Fred : MonoBehaviour
 {

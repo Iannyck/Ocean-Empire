@@ -15,9 +15,7 @@ public class SelectionScript : MonoBehaviour {
 
     public Button exerciceButton;
 
-    public delegate void ExerciceSelectionHandler(PossibleExercice.PlannedExercice plannedExercice);
-
-    public event ExerciceSelectionHandler SelectionEvent;
+    public event Action<PossibleExercice.PlannedExercice> SelectionEvent;
 
     private int currentLevelSelected = 1;
 
@@ -26,7 +24,7 @@ public class SelectionScript : MonoBehaviour {
         for (int i = 0; i < levelToSpawn; i++)
         {
             Button newButton = Instantiate(prefabDifficultyButton, countainer.transform);
-            newButton.GetComponentInChildren<Text>().text = "Level " + (i + 1);
+            newButton.GetComponentInChildren<Text>().text = "Niveau " + (i + 1);
             int currentIndex = i;
             newButton.onClick.AddListener(delegate()
             {

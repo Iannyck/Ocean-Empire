@@ -15,7 +15,7 @@ public class PossibleExercice {
 
         public ExerciceType type;
         public int difficulty;
-        public int minAmount;
+        public float minAmount;
         public bool ended;
 
         // Fin de session, on hardcore toute

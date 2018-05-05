@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 2459225}
   - component: {fileID: 2459224}
   - component: {fileID: 2459223}
+  - component: {fileID: 2459226}
   m_Layer: 5
   m_Name: X Button
   m_TagString: Untagged
@@ -235,6 +236,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2459221}
+--- !u!114 &2459226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2459221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
 --- !u!1 &38051590
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +994,24 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1072162415}
+--- !u!1 &1190417019 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1146103901893842, guid: 279f22f27ae4c0f41b45632127d3395c,
+    type: 2}
+  m_PrefabInternal: {fileID: 876184825}
+--- !u!114 &1190417020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190417019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
 --- !u!224 &1238588307 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224730015391976460, guid: 279f22f27ae4c0f41b45632127d3395c,
@@ -1131,6 +1163,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1345549753}
+--- !u!1 &1524284455 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1146103901893842, guid: 279f22f27ae4c0f41b45632127d3395c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1701278405}
+--- !u!114 &1524284456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1524284455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
+--- !u!1 &1546626422 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1146103901893842, guid: 279f22f27ae4c0f41b45632127d3395c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1747105904}
+--- !u!114 &1546626423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1546626422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
 --- !u!1001 &1701278405
 Prefab:
   m_ObjectHideFlags: 0
@@ -1252,6 +1320,24 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1701278405}
   m_Script: {fileID: 11500000, guid: 06848bdc9428def4488f399c4d201f0c, type: 3}
+--- !u!1 &1702743976 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1146103901893842, guid: 279f22f27ae4c0f41b45632127d3395c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1960615312}
+--- !u!114 &1702743977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1702743976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298432c73e6c1d14fb83ec3c23ea3460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
 --- !u!4 &1702969838 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4502192403008068, guid: 017805e9064057e48be316ca9325710c,

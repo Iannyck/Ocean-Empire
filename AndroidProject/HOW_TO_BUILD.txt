@@ -1,0 +1,7 @@
+1. Build Android Project sur Unity
+2. Ouvrir le projet Android et attendre qu'il build
+3. Copier tout ce qu'il y a dans le dossier ToCopy
+4. Coller dans le dossier racine du projet (il y a un build.gradle dedans)
+5. Retourner dans Android Studio et Re-Build
+6. Si ca marche pas s'assurer que dans File/ProjectStructure/Project, Gradle Version est à 4.1 et l'autre en dessou à 2.3.3
+7. Fini !

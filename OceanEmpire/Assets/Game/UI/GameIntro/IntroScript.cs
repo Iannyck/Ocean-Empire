@@ -16,6 +16,11 @@ public class IntroScript : MonoBehaviour {
 
     private const string firstRunKey = "";
 
+    void Awake()
+    {
+        PersistentLoader.LoadIfNotLoaded();
+    }
+
 	void Start ()
     {
         tutorialSaver.LoadAsync(delegate ()
