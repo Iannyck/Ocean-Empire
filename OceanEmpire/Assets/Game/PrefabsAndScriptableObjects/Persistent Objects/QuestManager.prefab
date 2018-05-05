@@ -56,7 +56,7 @@ MonoBehaviour:
   questBuilderIndex: 0
   frenzyCategory: {fileID: 11400000, guid: fba76a724ecd44a4e836d52535db680f, type: 2}
   questBuilders:
-  - {fileID: 11400000, guid: 6646b930e4eed854abc83e130568635d, type: 2}
+  - {fileID: 11400000, guid: b94ec8c26f74ffb46a6b6a2ffc07285e, type: 2}
 --- !u!114 &114544965681487184
 MonoBehaviour:
   m_ObjectHideFlags: 1

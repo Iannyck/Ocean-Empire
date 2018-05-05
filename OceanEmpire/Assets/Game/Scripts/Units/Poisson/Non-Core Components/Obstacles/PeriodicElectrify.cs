@@ -15,9 +15,9 @@ public class PeriodicElectrify : Electrify
         base.OnEnable();
 
         if (electrifiedOnStart)
-            toggleRoutine = StartCoroutine(InvertedToggleRoutine());
-        else
             toggleRoutine = StartCoroutine(ToggleRoutine());
+        else
+            toggleRoutine = StartCoroutine(InvertedToggleRoutine());
     }
 
     /// <summary>
@@ -25,6 +25,9 @@ public class PeriodicElectrify : Electrify
     /// </summary>
     IEnumerator ToggleRoutine()
     {
+        Electrified = true;
+        yield return new WaitForSeconds(Random.value * electricDuration);
+
         while (this != null)
         {
             Electrified = false;
@@ -39,6 +42,9 @@ public class PeriodicElectrify : Electrify
     /// </summary>
     IEnumerator InvertedToggleRoutine()
     {
+        Electrified = false;
+        yield return new WaitForSeconds(Random.value * electricInterval);
+
         while (this != null)
         {
             Electrified = true;
