@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d309c7c0d437aef4b94b79ab4353c7b9, type: 3}
-  m_Name: Capture1WithHarpoon
+  m_Name: Capture10WithHarpoon
   m_EditorClassIdentifier: 
   questContext:
-    description: "Captures 1 poisson \xE0 l'aide du harpon"
+    description: Captures 10 poissons avec le harpon
     iconResource: Sprites/QuestIcons/HarpoonCaptureIcon
-    captureGoal: 1
+    captureGoal: 10
     allowedTechniques: 2
-    flagsFilter: 66
-    flagsValue: 66
+    flagsFilter: 64
+    flagsValue: 64

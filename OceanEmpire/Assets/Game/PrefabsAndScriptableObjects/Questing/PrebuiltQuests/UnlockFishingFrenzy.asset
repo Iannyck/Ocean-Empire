@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: UnlockFishingFrenzy
   m_EditorClassIdentifier: 
   questContext:
-    description: "\xC9quipes-toi d'un harpon (voir magasin)"
+    description: "D\xE9bloques la Super-p\xEAche (magasin)"
     iconResource: Sprites/QuestIcons/HarpoonIcon
     shopCategory: Fishing Frenzy Category
     upgradeLevelToReach: 1
