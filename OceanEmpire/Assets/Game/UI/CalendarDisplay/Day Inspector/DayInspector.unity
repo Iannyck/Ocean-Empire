@@ -428,6 +428,8 @@ MonoBehaviour:
   schedulePrefab: {fileID: 114708869612451668, guid: 836437ac39205e74c9b6e6471632b384,
     type: 2}
   askForTimeWindow: {fileID: 11400000, guid: c209fa41f40244749a1d79ac77fe4fa0, type: 2}
+  exerciceSelectionWindow: {fileID: 11400000, guid: 24f31deb0d14b084383518dce3be8624,
+    type: 2}
   exitButton: {fileID: 789019411}
   container: {fileID: 44125699}
   blackBG: {fileID: 2049662506}

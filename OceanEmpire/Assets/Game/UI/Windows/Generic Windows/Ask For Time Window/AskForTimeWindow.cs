@@ -20,7 +20,7 @@ public class AskForTimeWindow : MonoBehaviour
     [SerializeField, Header("Texts")] private Text confirmButtonText;
     [SerializeField] private Text headerText;
 
-    public delegate void AnswerHandler(bool confirmed, int hours, int minutes);
+    public delegate void AnswerHandler(bool confirmed, int hours, int minutes, PossibleExercice.PlannedExercice plannedExercice);
     
     /// <summary>
     /// Callback {
@@ -30,6 +30,8 @@ public class AskForTimeWindow : MonoBehaviour
     /// <para />}
     /// </summary>
     public event AnswerHandler AnswerEvent;
+
+    public PossibleExercice.PlannedExercice currentPlannedExercice;
 
     public void SetHeader(string text)
     {
@@ -57,7 +59,7 @@ public class AskForTimeWindow : MonoBehaviour
         int minutes = minutesDisplay.GetNumberAt(middleElementIndex);
 
         if (AnswerEvent != null)
-            AnswerEvent(true, hours, minutes);
+            AnswerEvent(true, hours, minutes, currentPlannedExercice);
     }
 
     private void Cancel()
@@ -65,6 +67,6 @@ public class AskForTimeWindow : MonoBehaviour
         windowAnimation.Close();
 
         if (AnswerEvent != null)
-            AnswerEvent(false, -1, -1);
+            AnswerEvent(false, -1, -1, currentPlannedExercice);
     }
 }

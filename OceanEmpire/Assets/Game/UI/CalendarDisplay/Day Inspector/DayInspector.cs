@@ -11,6 +11,7 @@ public class DayInspector : MonoBehaviour
 
     [Header("Assets"), SerializeField] DayInspector_Schedule schedulePrefab;
     [SerializeField] SceneInfo askForTimeWindow;
+    [SerializeField] SceneInfo exerciceSelectionWindow;
 
     [Header("Components"), SerializeField] Button exitButton;
     [SerializeField] RectTransform container;
@@ -42,18 +43,28 @@ public class DayInspector : MonoBehaviour
 
     void Plan()
     {
-        Scenes.LoadAsync(askForTimeWindow, (scene) =>
+        Scenes.LoadAsync(exerciceSelectionWindow, (scene) =>
         {
-            var window = scene.FindRootObject<AskForTimeWindow>();
-            window.AnswerEvent += ScheduleNewBonifiedTime;
+            var window = scene.FindRootObject<SelectionScript>();
+            window.Init();
+            window.SelectionEvent += delegate(PossibleExercice.PlannedExercice plannedExercice) {
+                Scenes.LoadAsync(askForTimeWindow, (scene2) =>
+                {
+                    var window1 = scene2.FindRootObject<AskForTimeWindow>();
+                    window1.currentPlannedExercice = plannedExercice;
+                    window1.AnswerEvent += ScheduleNewBonifiedTime;
+                });
+            };
         });
     }
 
-    private void ScheduleNewBonifiedTime(bool confirmed, int hours, int minutes)
+    private void ScheduleNewBonifiedTime(bool confirmed, int hours, int minutes, PossibleExercice.PlannedExercice plannedExercice)
     {
         if (!confirmed)
             return;
 
+        //TODO : TROUVER UNE FACON D'INTEGRER PLANNED EXERCICE ICI (D'HABITUDE IL VA DANS BONIFIED TIME)
+        Debug.Log("EXERCICE EST ICI : " + plannedExercice.type);
         DateTime date = new DateTime(day.year, day.monthOfYear, day.dayOfMonth, hours, minutes, 0);
         TimeSlot timeSlot = new TimeSlot(date, ScheduledBonus.DefaultDuration());
         ScheduledBonus bonifiedTime = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
