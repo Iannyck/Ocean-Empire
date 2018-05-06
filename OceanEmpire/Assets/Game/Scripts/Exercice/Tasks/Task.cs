@@ -6,16 +6,11 @@ using UnityEngine;
 [Serializable]
 public class Task
 {
-    public float requiredExerciseVolume;
+    public int level;
+    public float minDuration;
+    public float advertisedDuration;
     public float maxDuration;
     public int ticketReward;
-
-    public Task(float requiredExerciseVolume, float taskMaxDuration, int ticketReward)
-    {
-        this.requiredExerciseVolume = requiredExerciseVolume;
-        this.maxDuration = taskMaxDuration;
-        this.ticketReward = ticketReward;
-    }
 
     public TimeSpan GetMaxDurationAsTimeSpan()
     {
@@ -24,6 +19,6 @@ public class Task
 
     public override string ToString()
     {
-        return "Task: volumeRequired(" + requiredExerciseVolume + ")  maxDuration(" + maxDuration + ")  ticketReward(" + ticketReward + ")";
+        return "Task: volumeRequired(" + minDuration + ")  maxDuration(" + maxDuration + ")  ticketReward(" + ticketReward + ")";
     }
 }

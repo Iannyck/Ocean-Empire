@@ -119,7 +119,7 @@ public class PlannedExerciceRewarder : MonoPersistent
 
     bool VerifyCompletionOf(ScheduledBonus schedule, float activityVolume)
     {
-        return activityVolume >= schedule.task.requiredExerciseVolume;
+        return activityVolume >= schedule.task.minDuration;
     }
 
     void GiveAdvice(ExerciseReport report)

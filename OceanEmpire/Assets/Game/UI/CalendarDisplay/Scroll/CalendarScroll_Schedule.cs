@@ -29,7 +29,7 @@ public class CalendarScroll_Schedule : MonoBehaviour
         string label = " - ";
         if (schedule.task != null)
         {
-            label = "<color=#f>" + schedule.task.requiredExerciseVolume + " à " + schedule.task.maxDuration + " min de marche</color>";
+            label = "<color=#f>" + schedule.task.minDuration + " à " + schedule.task.maxDuration + " min de marche</color>";
         }
 
         FillContent(slot, label);

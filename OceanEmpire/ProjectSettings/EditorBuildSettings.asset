@@ -49,6 +49,9 @@ EditorBuildSettings:
     path: Assets/Game/UI/Windows/Cheat Window/CheatsWindow.unity
     guid: 54efd1a1935fafa4f96034b56c2ad4a8
   - enabled: 1
+    path: Assets/Game/UI/Windows/InstantExerciseChoice/InstantExercise.unity
+    guid: 8086d1d941e49ff428c006903da0d19c
+  - enabled: 1
     path: Assets/Plugins/CCC/UI/Generic Windows/Message Popup/MessagePopup.unity
     guid: beb86ce867a9fa8468e6e7ce726c2539
   - enabled: 1
@@ -122,3 +125,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/CalendarDisplay/ExerciceSelection/ExerciceSelection.unity
     guid: 0437bb4e2d84d8f439e53a5ea630cfdd
+  - enabled: 1
+    path: Assets/Game/UI/Windows/InstantExerciseChoice/WhenToPlan/WhenToPlanWindow.unity
+    guid: e5c599fa64f1a1d42a44980ef71cdc7e

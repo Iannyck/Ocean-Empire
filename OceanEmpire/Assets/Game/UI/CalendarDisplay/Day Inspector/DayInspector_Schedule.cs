@@ -27,7 +27,7 @@ public class DayInspector_Schedule : MonoBehaviour
         string label = " - ";
         if (schedule.task != null)
         {
-            label = "Faites " + schedule.task.requiredExerciseVolume + " à " + schedule.task.maxDuration + " min de marche"
+            label = "Faites " + schedule.task.minDuration + " à " + schedule.task.maxDuration + " min de marche"
                 + " pour obtenir " + schedule.task.ticketReward + " tickets!";
         }
 

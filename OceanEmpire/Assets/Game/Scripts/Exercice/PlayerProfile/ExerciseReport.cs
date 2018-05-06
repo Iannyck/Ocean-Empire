@@ -33,6 +33,6 @@ public class ExerciseReport
 
     public string GetString()
     {
-        return "|" + timeSlot.ToString() + "-"+ task.requiredExerciseVolume + "-" + task.maxDuration + "-" + volume + "-" + state;
+        return "|" + timeSlot.ToString() + "-"+ task.minDuration + "-" + task.maxDuration + "-" + volume + "-" + state;
     }
 }

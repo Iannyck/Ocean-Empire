@@ -114,7 +114,14 @@ public class Shack : MonoBehaviour
         handle.onTimePicked = (date) =>
         {
             Debug.Log("DateTime picked: " + date);
-            Task task = new Task(5, 10, 25);
+            Task task = new Task()
+            {
+                minDuration = 3,
+                advertisedDuration = 4,
+                maxDuration = 5,
+                level = 4,
+                ticketReward = 10
+            };
 
             //TimeSpan FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
 

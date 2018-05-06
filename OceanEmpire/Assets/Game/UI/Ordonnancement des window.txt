@@ -8,6 +8,10 @@ Shop: 0
 Shop Upgrade: 1
 Shack Always Visible HUD (Currency): 5
 
+ChooseExercise: 6
+PlanNowOrLater?: 7
+
+
 // Calendar
 Calendar Scroll: 10
 Calendar Day Inspector: 11

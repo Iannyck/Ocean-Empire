@@ -87,14 +87,14 @@ public class Calendar : MonoPersistent
             ApplyDataToSaver(andSave);
     }
 
-    public bool AddSchedule(ScheduledBonus bonifiedTime)
+    public bool AddSchedule(ScheduledBonus newSchedule)
     {
-        if (!IsOverlappingWithSchedule(bonifiedTime.timeSlot))
+        if (!IsOverlappingWithSchedule(newSchedule.timeSlot))
         {
-            if (bonifiedTime.timeSlot.IsInThePast())
-                pastBonifiedTimes.Add(bonifiedTime);
+            if (newSchedule.timeSlot.IsInThePast())
+                pastBonifiedTimes.Add(newSchedule);
             else
-                presentAndFutureBonifiedTimes.Add(bonifiedTime);
+                presentAndFutureBonifiedTimes.Add(newSchedule);
 
             ApplyDataToSaver(true);
 
