@@ -37,7 +37,7 @@ public class FailureAsk : MonoBehaviour {
 	public void Init(ExerciseReport report)
     {
         if (report != null)
-            exerciceDescription.text = report.exercice.minAmount + " minutes de " + report.exercice.type + " le " + report.timeSlot.start.DayOfWeek + "dernier.";
+            exerciceDescription.text = report.task.requiredExerciseVolume + " minutes de marche le " + report.timeSlot.start.DayOfWeek + "dernier.";
         else
             exerciceDescription.text = "Un exercice quelconque";
 

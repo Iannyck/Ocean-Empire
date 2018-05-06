@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using Questing;
 using System;
 
@@ -45,11 +45,11 @@ public class TestScript_Fred : MonoBehaviour
             {
                 Debug.Log("DateTime picked: " + date);
                 TimeSlot timeSlot = new TimeSlot(date, ScheduledBonus.DefaultDuration());
-                ScheduledBonus bonifiedTime = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
+                ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
 
-                if (!Calendar.instance.AddSchedule(bonifiedTime))
+                if (!Calendar.instance.AddSchedule(schedule))
                 {
-                    MessagePopup.DisplayMessage("La plage horaire est dÈj‡ occupÈ.");
+                    MessagePopup.DisplayMessage("La plage horaire est d√©j√† occup√©.");
                 }
                 else
                 {

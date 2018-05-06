@@ -8,13 +8,11 @@ public class BonifiedTime
 {
     public TimeSlot timeSlot;
     public Bonus bonus;
-    public PossibleExercice.PlannedExercice plannedExercice;
 
     public BonifiedTime(TimeSlot timeSlot, Bonus bonus)
     {
         this.timeSlot = timeSlot;
         this.bonus = bonus;
-        plannedExercice = new PossibleExercice.PlannedExercice(PossibleExercice.PlannedExercice.ExerciceType.marche, 1);
     }
 
     /// <summary>

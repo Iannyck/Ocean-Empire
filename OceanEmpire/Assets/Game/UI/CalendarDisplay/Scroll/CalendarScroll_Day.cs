@@ -55,21 +55,22 @@ public class CalendarScroll_Day : MonoBehaviour
     {
         EmptyTrash();
 
-        var bonifiedTimesToday = Calendar.instance.GetAllSchedulesStartingOn(day);
+        var schedulesToday = Calendar.instance.GetAllSchedulesStartingOn(day);
 
         bool enableThreeDots = false;
-        for (int i = 0; i < bonifiedTimesToday.Count; i++)
+        for (int i = 0; i < schedulesToday.Count; i++)
         {
             if (i >= potentialSchedules.Length)
             {
                 enableThreeDots = true;
                 break;
             }
-            var bonifiedTimeUI = bonifiedTimePrefab.DuplicateGO(potentialSchedules[i]);
-            bonifiedTimeUI.FillContent(
-                bonifiedTimesToday[i].timeSlot,
-                "BONUS X" + bonifiedTimesToday[i].bonus.ticketMultiplier.Rounded(1));
-            trash.Add(bonifiedTimeUI.gameObject);
+            var scheduleUI = bonifiedTimePrefab.DuplicateGO(potentialSchedules[i]);
+            scheduleUI.FillContent(schedulesToday[i]);
+            //bonifiedTimeUI.FillContent(
+            //    schedulesToday[i].timeSlot,
+            //    "BONUS X" + schedulesToday[i].bonus.ticketMultiplier.Rounded(1));
+            trash.Add(scheduleUI.gameObject);
         }
 
         threeDots.enabled = enableThreeDots;

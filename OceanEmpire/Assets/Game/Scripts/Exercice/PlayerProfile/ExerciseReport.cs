@@ -6,33 +6,33 @@ public class ExerciseReport
 {
     public TimeSlot timeSlot;
     public float volume;
-    public PossibleExercice.PlannedExercice exercice;
-    public Etat etat;
+    public Task task;
+    public State state;
 
-    public enum Etat
+    public enum State
     {
-        reussi = 0,
-        echec = 1
+        Completed = 0,
+        Failed = 1
     }
 
-    public ExerciseReport(TimeSlot timeSlot, PossibleExercice.PlannedExercice exercice, float volume)
+    public ExerciseReport(TimeSlot timeSlot, Task exercice, float volume)
     {
         this.timeSlot = timeSlot;
         this.volume = volume;
-        this.exercice = exercice;
-        etat = Etat.echec;
+        this.task = exercice;
+        state = State.Failed;
     }
 
     public ExerciseReport()
     {
         timeSlot = new TimeSlot();
         volume = 0;
-        etat = Etat.echec;
-        exercice = null;
+        state = State.Failed;
+        task = null;
     }
 
     public string GetString()
     {
-        return "|" + timeSlot.ToString() + "-" + exercice.type + "-" + exercice.difficulty + "-" + exercice.minAmount + "-" + volume + "-" + etat;
+        return "|" + timeSlot.ToString() + "-"+ task.requiredExerciseVolume + "-" + task.maxDuration + "-" + volume + "-" + state;
     }
 }

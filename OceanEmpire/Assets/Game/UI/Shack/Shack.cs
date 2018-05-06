@@ -79,11 +79,69 @@ public class Shack : MonoBehaviour
         LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
     }
 
+    public bool IsInCalendar { get; private set; }
+
     public void OpenCalendar()
     {
-        Scenes.Load(calendarScene, (scene) =>
+        if (IsInCalendar)
+            return;
+        IsInCalendar = true;
+
+        // Request settings
+        CalendarRequest.Settings settings = new CalendarRequest.Settings()
         {
-            //scene.FindRootObject<CalendarScroll_Controller>().OnEntranceComplete(() => Scenes.UnloadAsync(gameObject.scene));
-        });
+            windowHeaderTitle = "Quel jour?",
+            scheduleButtonText = "Plannifier l'exercice"
+        };
+
+        // Launch request
+        var handle = CalendarRequest.LaunchRequest(settings);
+        handle.onWindowExitStarted = () =>
+        {
+            mainCanvas.alpha = 1;
+            hud.alpha = 1;
+            alwayVisibleHud.alpha = 1;
+        };
+        handle.onWindowIntroComplete = () =>
+        {
+            mainCanvas.alpha = 0;
+            hud.alpha = 0;
+            alwayVisibleHud.alpha = 0;
+        };
+        handle.onWindowExitComplete = () => IsInCalendar = false;
+
+        // When the player picks a time in the calendar
+        handle.onTimePicked = (date) =>
+        {
+            Debug.Log("DateTime picked: " + date);
+            Task task = new Task(5, 10, 25);
+
+            //TimeSpan FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
+
+            //DateTime now = DateTime.Now;
+            DateTime scheduleStart = date;
+            //if (scheduleStart < now)
+            //    scheduleStart = now;
+
+            DateTime scheduleEnd = scheduleStart + task.GetMaxDurationAsTimeSpan();
+            
+            TimeSlot timeSlot = new TimeSlot(scheduleStart, scheduleEnd);
+
+            ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus())
+            {
+                task = task,
+                displayPadding = true,
+                minutesOfPadding = 15
+            };
+
+            if (!Calendar.instance.AddSchedule(schedule))
+            {
+                MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
+            }
+            else
+            {
+                handle.CloseWindow();
+            }
+        };
     }
 }

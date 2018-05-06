@@ -41,48 +41,48 @@ public class PlannedExerciceRewarder : MonoPersistent
     {
         if (keepAnalysing)
         {
-            List<BonifiedTime> plannedExercice = CheckPlannedExercice();
+            //List<BonifiedTime> plannedExercice = CheckPlannedExercice();
 
-            MarketValue totalRewardValue = 0;
+            //MarketValue totalRewardValue = 0;
 
-            ExerciseReport lastNoExerciceReport = new ExerciseReport();
+            //ExerciseReport lastNoExerciceReport = new ExerciseReport();
 
-            //Debug.Log("Analyse des exercices passés");
+            ////Debug.Log("Analyse des exercices passés");
 
-            if (plannedExercice != null && plannedExercice.Count > 0)
-            {
-                //Debug.Log("Exercices passés trouvé !");
-                for (int i = 0; i < plannedExercice.Count; i++)
-                {
-                    MarketValue rewardValue = 0;
+            //if (plannedExercice != null && plannedExercice.Count > 0)
+            //{
+            //    //Debug.Log("Exercices passés trouvé !");
+            //    for (int i = 0; i < plannedExercice.Count; i++)
+            //    {
+            //        MarketValue rewardValue = 0;
 
-                    float activityVolume = GetActivityVolumeIn(plannedExercice[i]);
-                    rewardValue.floatValue = activityVolume;
+            //        float activityVolume = GetActivityVolumeIn(plannedExercice[i]);
+            //        rewardValue.floatValue = activityVolume;
 
-                    if (VerifyCompletionOf(plannedExercice[i], activityVolume))
-                        totalRewardValue += rewardValue;
+            //        if (VerifyCompletionOf(plannedExercice[i], activityVolume))
+            //            totalRewardValue += rewardValue;
 
-                    plannedExercice[i].plannedExercice.ended = true;
+            //        //plannedExercice[i].plannedExercice.ended = true;
 
-                    ExerciseReport report = new ExerciseReport(plannedExercice[i].timeSlot, plannedExercice[i].plannedExercice, activityVolume);
+            //        ExerciseReport report = new ExerciseReport(plannedExercice[i].timeSlot, plannedExercice[i].plannedExercice, activityVolume);
 
-                    // Code degueu
-                    if(VerifyCompletionOf(plannedExercice[i], activityVolume))
-                        report.etat = ExerciseReport.Etat.reussi;
-                    else
-                        report.etat = ExerciseReport.Etat.echec;
+            //        // Code degueu
+            //        if(VerifyCompletionOf(plannedExercice[i], activityVolume))
+            //            report.state = ExerciseReport.State.Completed;
+            //        else
+            //            report.state = ExerciseReport.State.Failed;
 
-                    if (activityVolume > 0)
-                        PlayerProfile.instance.LogReport(report);
-                    else
-                        lastNoExerciceReport = report;
-                }
+            //        if (activityVolume > 0)
+            //            PlayerProfile.instance.LogReport(report);
+            //        else
+            //            lastNoExerciceReport = report;
+            //    }
 
-                if (totalRewardValue.floatValue > 0)
-                    GiveRewards(totalRewardValue.floatValue);
-                else
-                    GiveAdvice(lastNoExerciceReport);
-            }
+            //    if (totalRewardValue.floatValue > 0)
+            //        GiveRewards(totalRewardValue.floatValue);
+            //    else
+            //        GiveAdvice(lastNoExerciceReport);
+            //}
         }
 
         this.DelayedCall(Analyse, cooldown);
@@ -117,12 +117,9 @@ public class PlannedExerciceRewarder : MonoPersistent
         return volume;
     }
 
-    bool VerifyCompletionOf(BonifiedTime bonifiedTime, float activityVolume)
+    bool VerifyCompletionOf(ScheduledBonus schedule, float activityVolume)
     {
-        if (activityVolume < bonifiedTime.plannedExercice.minAmount)
-            return false;
-        else
-            return true;
+        return activityVolume >= schedule.task.requiredExerciseVolume;
     }
 
     void GiveAdvice(ExerciseReport report)
@@ -141,9 +138,11 @@ public class PlannedExerciceRewarder : MonoPersistent
             PlayerCurrency.AddCurrencyAmount(reward);
 
         List<CompletionWindow.Rewards> rewards = new List<CompletionWindow.Rewards>();
-        CompletionWindow.Rewards newReward = new CompletionWindow.Rewards();
-        newReward.amount = Mathf.RoundToInt(rewardAmount);
-        newReward.icon = ticketIcon;
+        CompletionWindow.Rewards newReward = new CompletionWindow.Rewards
+        {
+            amount = Mathf.RoundToInt(rewardAmount),
+            icon = ticketIcon
+        };
         rewards.Add(newReward);
 
         Scenes.Load(completionWindow,delegate(Scene scene) {

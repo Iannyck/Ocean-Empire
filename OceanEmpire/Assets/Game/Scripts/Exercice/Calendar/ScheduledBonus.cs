@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Un plan de temps bonifié. Généralement stocké dans le calendrier
@@ -7,8 +8,11 @@
 public class ScheduledBonus : IComparable
 {
     public TimeSlot timeSlot;
-    public Bonus bonus;
     public DateTime createdOn;
+    public Bonus bonus;
+    public Task task;
+    public bool displayPadding;
+    public float minutesOfPadding;
 
     public ScheduledBonus(TimeSlot timeSlot, Bonus bonus)
     {
