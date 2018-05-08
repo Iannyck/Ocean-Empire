@@ -34,32 +34,36 @@ public class TestScript_Fred : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            CalendarRequest.Settings settings = new CalendarRequest.Settings()
-            {
-                windowHeaderTitle = "Quel jour?",
-                scheduleButtonText = "Plannifier l'exercice"
-            };
-            var handle = CalendarRequest.LaunchRequest(settings);
-
-            handle.onTimePicked = (date) =>
-            {
-                Debug.Log("DateTime picked: " + date);
-                TimeSlot timeSlot = new TimeSlot(date, ScheduledBonus.DefaultDuration());
-                ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
-
-                if (!Calendar.instance.AddSchedule(schedule))
-                {
-                    MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
-                }
-                else
-                {
-                    handle.CloseWindow();
-                }
-            };
-            handle.onWindowLoaded = (scene) => Debug.Log("On Window Loaded: " + scene.name);
-            handle.onWindowIntroComplete = () => Debug.Log("On Window Intro Complete");
-            handle.onWindowExitStarted = () => Debug.Log("On Window Exit Started");
-            handle.onWindowExitComplete = () => Debug.Log("On Window Exit Complete");
+            GetComponent<TaskPanel_ReadyToCreate>().LaunchTaskCreation(() => Debug.Log("finito"));
         }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    CalendarRequest.Settings settings = new CalendarRequest.Settings()
+        //    {
+        //        windowHeaderTitle = "Quel jour?",
+        //        scheduleButtonText = "Plannifier l'exercice"
+        //    };
+        //    var handle = CalendarRequest.LaunchRequest(settings);
+
+        //    handle.onTimePicked = (date) =>
+        //    {
+        //        Debug.Log("DateTime picked: " + date);
+        //        TimeSlot timeSlot = new TimeSlot(date, ScheduledBonus.DefaultDuration());
+        //        ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus());
+
+        //        if (!Calendar.instance.AddSchedule(schedule))
+        //        {
+        //            MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
+        //        }
+        //        else
+        //        {
+        //            handle.CloseWindow();
+        //        }
+        //    };
+        //    handle.onWindowLoaded = (scene) => Debug.Log("On Window Loaded: " + scene.name);
+        //    handle.onWindowIntroComplete = () => Debug.Log("On Window Intro Complete");
+        //    handle.onWindowExitStarted = () => Debug.Log("On Window Exit Started");
+        //    handle.onWindowExitComplete = () => Debug.Log("On Window Exit Complete");
+        //}
     }
 }

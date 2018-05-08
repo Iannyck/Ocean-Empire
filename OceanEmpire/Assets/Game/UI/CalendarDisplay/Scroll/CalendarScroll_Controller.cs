@@ -25,7 +25,7 @@ public class CalendarScroll_Controller : MonoBehaviour
 
     private bool everythingIsLoaded = false;
     private bool canAnimateEntrance = false;
-    private bool entranceComplete = false;
+    //private bool entranceComplete = false;
 
     public Action OnEntranceComplete { get; set; }
     public Action OnExitStarted { get; set; }
@@ -86,7 +86,7 @@ public class CalendarScroll_Controller : MonoBehaviour
             windowAnimation.Show(() =>
             {
                 clickBlocker.enabled = false;
-                entranceComplete = true;
+                //entranceComplete = true;
 
                 if (OnEntranceComplete != null)
                     OnEntranceComplete();

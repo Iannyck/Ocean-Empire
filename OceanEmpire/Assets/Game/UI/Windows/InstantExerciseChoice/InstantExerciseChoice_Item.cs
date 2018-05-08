@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class InstantExerciseChoice_Item : MonoBehaviour
 {
+    public bool updateInRealTime = true;
+
     [Header("UI Links")]
     //public Text taskText;
     public Text ticketText;
@@ -45,7 +47,7 @@ public class InstantExerciseChoice_Item : MonoBehaviour
 
     void OnValidate()
     {
-        if (assignedTask != null)
+        if (assignedTask != null && updateInRealTime)
             FillContent(assignedTask);
     }
 }

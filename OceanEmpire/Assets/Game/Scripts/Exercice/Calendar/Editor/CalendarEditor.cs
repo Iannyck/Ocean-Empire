@@ -22,36 +22,46 @@ public class CalendarEditor : Editor
         DrawBonifiedTimes("Present and Future Bonified Times", calendar.GetPresentAndFutureSchedules());
     }
 
-    private void DrawBonifiedTimes(string label, ReadOnlyCollection<ScheduledBonus> bonifiedTimes)
+    private void DrawBonifiedTimes(string label, ReadOnlyCollection<Schedule> schedule)
     {
         EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
 
         EditorGUI.indentLevel++;
-        if (bonifiedTimes.Count == 0)
+        if (schedule.Count == 0)
         {
             EditorGUILayout.LabelField("none", EditorStyles.centeredGreyMiniLabel);
         }
         else
         {
-            for (int i = 0; i < bonifiedTimes.Count; i++)
+            for (int i = 0; i < schedule.Count; i++)
             {
                 EditorGUILayout.Space();
-                DrawBonifiedTime(bonifiedTimes[i]);
+                DrawSchedule(schedule[i]);
             }
         }
         EditorGUI.indentLevel--;
     }
 
-    private void DrawBonifiedTime(ScheduledBonus bonifiedTime)
+    private void DrawSchedule(Schedule schedule)
     {
         EditorGUILayout.LabelField("Time Slot", EditorStyles.boldLabel);
         EditorGUI.indentLevel++;
-        EditorGUILayout.LabelField(bonifiedTime.timeSlot.ToString());
+        EditorGUILayout.LabelField(schedule.timeSlot.ToString());
         EditorGUI.indentLevel--;
 
-        EditorGUILayout.LabelField("Bonus Strength", EditorStyles.label);
+        EditorGUILayout.LabelField("Level", EditorStyles.label);
         EditorGUI.indentLevel++;
-        EditorGUILayout.LabelField(bonifiedTime.bonus.ToString());
+        EditorGUILayout.LabelField(schedule.task.level.ToString());
+        EditorGUI.indentLevel--;
+
+        EditorGUILayout.LabelField("Min Duration", EditorStyles.label);
+        EditorGUI.indentLevel++;
+        EditorGUILayout.LabelField(schedule.task.minDuration.ToString());
+        EditorGUI.indentLevel--;
+
+        EditorGUILayout.LabelField("Reward", EditorStyles.label);
+        EditorGUI.indentLevel++;
+        EditorGUILayout.LabelField(schedule.task.ticketReward + " tickets");
         EditorGUI.indentLevel--;
     }
 }

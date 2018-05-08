@@ -5,26 +5,24 @@ using UnityEngine;
 /// Un plan de temps bonifié. Généralement stocké dans le calendrier
 /// </summary>
 [Serializable]
-public class ScheduledBonus : IComparable
+public class Schedule : IComparable
 {
     public TimeSlot timeSlot;
     public DateTime createdOn;
-    public Bonus bonus;
     public Task task;
-    public bool displayPadding;
-    public float minutesOfPadding;
+    public bool requiresConculsion;
 
-    public ScheduledBonus(TimeSlot timeSlot, Bonus bonus)
+    public Schedule(TimeSlot timeSlot)
     {
         this.timeSlot = timeSlot;
-        this.bonus = bonus;
         createdOn = DateTime.Now;
     }
 
     /// <summary>
     /// Construit une nouvelle instance de temps bonifié.
     /// </summary>
-    public BonifiedTime GetBonifiedTime() { return new BonifiedTime(timeSlot, bonus); }
+    public BonifiedTime GetBonifiedTime() { return new BonifiedTime(timeSlot, new Bonus(1)); }
+
 
     public static TimeSpan DefaultDuration()
     {
@@ -37,7 +35,7 @@ public class ScheduledBonus : IComparable
 
     public int CompareTo(object obj)
     {
-        ScheduledBonus castedObj = obj as ScheduledBonus;
+        Schedule castedObj = obj as Schedule;
         if (castedObj != null)
         {
             return timeSlot.start.CompareTo(castedObj.timeSlot.start);

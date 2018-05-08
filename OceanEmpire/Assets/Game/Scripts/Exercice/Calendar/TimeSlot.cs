@@ -177,11 +177,11 @@ public struct TimeSlot
     public override string ToString()
     {
         return "Start: " + start.ToString()
-            + "\nEnd: " + end.ToString();
+            + " - End: " + end.ToString();
     }
 
     public string ToCondensedDayOfTimeString()
     {
-        return start.ToCondensedDayOfTimeString() + " - " + end.ToCondensedDayOfTimeString();
+        return start.ToCondensedTimeOfDayString() + " - " + end.ToCondensedTimeOfDayString();
     }
 }

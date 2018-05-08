@@ -83,72 +83,75 @@ public class Shack : MonoBehaviour
 
     public void OpenCalendar()
     {
-        if (IsInCalendar)
-            return;
-        IsInCalendar = true;
+        //if (IsInCalendar)
+        //    return;
+        //IsInCalendar = true;
 
-        // Request settings
-        CalendarRequest.Settings settings = new CalendarRequest.Settings()
-        {
-            windowHeaderTitle = "Quel jour?",
-            scheduleButtonText = "Plannifier l'exercice"
-        };
+        //// Request settings
+        //CalendarRequest.Settings settings = new CalendarRequest.Settings()
+        //{
+        //    windowHeaderTitle = "Quel jour?",
+        //    scheduleButtonText = "Plannifier l'exercice"
+        //};
 
-        // Launch request
-        var handle = CalendarRequest.LaunchRequest(settings);
-        handle.onWindowExitStarted = () =>
-        {
-            mainCanvas.alpha = 1;
-            hud.alpha = 1;
-            alwayVisibleHud.alpha = 1;
-        };
-        handle.onWindowIntroComplete = () =>
-        {
-            mainCanvas.alpha = 0;
-            hud.alpha = 0;
-            alwayVisibleHud.alpha = 0;
-        };
-        handle.onWindowExitComplete = () => IsInCalendar = false;
+        //// Launch request
+        //var handle = CalendarRequest.LaunchRequest(settings);
+        //handle.onWindowExitStarted = () =>
+        //{
+        //    mainCanvas.alpha = 1;
+        //    hud.alpha = 1;
+        //    alwayVisibleHud.alpha = 1;
+        //};
+        //handle.onWindowIntroComplete = () =>
+        //{
+        //    mainCanvas.alpha = 0;
+        //    hud.alpha = 0;
+        //    alwayVisibleHud.alpha = 0;
+        //};
+        //handle.onWindowExitComplete = () => IsInCalendar = false;
 
-        // When the player picks a time in the calendar
-        handle.onTimePicked = (date) =>
-        {
-            Debug.Log("DateTime picked: " + date);
-            Task task = new Task()
-            {
-                minDuration = 3,
-                advertisedDuration = 4,
-                maxDuration = 5,
-                level = 4,
-                ticketReward = 10
-            };
+        //// When the player picks a time in the calendar
+        //handle.onTimePicked = (date) =>
+        //{
+        //    Debug.Log("DateTime picked: " + date);
+        //    Task task = new Task()
+        //    {
+        //        minDuration = 3,
+        //        advertisedDuration = 4,
+        //        maxDuration = 5,
+        //        level = 4,
+        //        ticketReward = 10
+        //    };
 
-            //TimeSpan FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
+        //    //TimeSpan FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
 
-            //DateTime now = DateTime.Now;
-            DateTime scheduleStart = date;
-            //if (scheduleStart < now)
-            //    scheduleStart = now;
+        //    //DateTime now = DateTime.Now;
+        //    DateTime scheduleStart = date;
+        //    //if (scheduleStart < now)
+        //    //    scheduleStart = now;
 
-            DateTime scheduleEnd = scheduleStart + task.GetMaxDurationAsTimeSpan();
+        //    DateTime scheduleEnd = scheduleStart + task.GetMaxDurationAsTimeSpan();
             
-            TimeSlot timeSlot = new TimeSlot(scheduleStart, scheduleEnd);
+        //    TimeSlot timeSlot = new TimeSlot(scheduleStart, scheduleEnd);
 
-            ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus())
-            {
-                task = task,
-                displayPadding = true,
-                minutesOfPadding = 15
-            };
+        //    ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus())
+        //    {
+        //        task = task,
+        //        displayPadding = true,
 
-            if (!Calendar.instance.AddSchedule(schedule))
-            {
-                MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
-            }
-            else
-            {
-                handle.CloseWindow();
-            }
-        };
+        //        // Padding de 15min avant et après l'exercice
+        //        forwardPadding = new TimeSpan(0,15,0),
+        //        backwardPadding = new TimeSpan(0,15,0)
+        //    };
+
+        //    if (!Calendar.instance.AddSchedule(schedule))
+        //    {
+        //        MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
+        //    }
+        //    else
+        //    {
+        //        handle.CloseWindow();
+        //    }
+        //};
     }
 }

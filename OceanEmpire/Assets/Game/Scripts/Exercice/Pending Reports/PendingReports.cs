@@ -18,7 +18,7 @@ public class PendingReports : MonoPersistent
     [SerializeField]
     private List<PendingReport> pendingReports = new List<PendingReport>();
     public bool log = true;
-    public event SimpleEvent onReportConcluded;
+    //public event SimpleEvent onReportConcluded;
 
     public static PendingReports instance;
 

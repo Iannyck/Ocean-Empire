@@ -2,151 +2,283 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlannedExerciceRewarder : MonoPersistent
 {
-    public static PlannedExerciceRewarder instance = null;
+    public static PlannedExerciceRewarder Instance { get; private set; }
 
-    public bool keepAnalysing = true;
+    [Serializable]
+    public class Report
+    {
+        public State state;
+        public Schedule schedule;
+        public float recordedExerciseVolume;
 
-    [SerializeField] private float cooldown = 5f;
 
-    [SerializeField] private SceneInfo failureWindow;
-    [SerializeField] private SceneInfo completionWindow;
+        public enum State { Ongoing, Completed, Failed }
+        public float GetCompletionRate01() { return Mathf.Clamp01(recordedExerciseVolume / schedule.task.minDuration); }
+    }
 
-    [SerializeField] private Sprite ticketIcon;
+    public Report LatestPendingReport { get; private set; }
+    public event Action OnLatestPendingReportUpdated;
 
-    [SerializeField] private AnalyserGroup analyserGroup;
+    [SerializeField] float analysisCooldown = 5.1f;
+    [SerializeField] SceneInfo failureWindow;
+    [SerializeField] SceneInfo completionWindow;
+    [SerializeField] AnalyserGroup analyserGroup;
+    [SerializeField] DataSaver dataSaver;
 
-    DateTime lastTimeChecked = new DateTime();
-
-    private CurrencyType rewardCurrency = CurrencyType.Ticket;
+    float analysisTimer = 0;
+    List<Report> previousReports;
+    public ReadOnlyCollection<Report> GetPreviousReports() { return previousReports.AsReadOnly(); }
 
     public override void Init(Action onComplete)
     {
-        if (instance == null)
-            instance = this;
-        onComplete();
+        Instance = this;
+
+        dataSaver.OnReassignData += FetchData;
+
+        if (dataSaver.HasEverLoaded)
+        {
+            FetchData();
+            onComplete();
+        }
+        else
+        {
+            dataSaver.LateLoad(onComplete);
+        }
     }
 
-    void Start()
+    void Update()
     {
-        if (keepAnalysing)
-            this.DelayedCall(Analyse, cooldown);
+        if (analysisTimer <= 0)
+        {
+            CheckAnalyse();
+            analysisTimer = analysisCooldown;
+        }
+        analysisTimer -= Time.unscaledDeltaTime;
     }
 
+    public bool CanOverwriteThePendingReport
+    {
+        get
+        {
+            return LatestPendingReport == null || LatestPendingReport.state == Report.State.Ongoing;
+        }
+    }
+
+    #region Analyse
+    public void ForceAnalyseCheck() { CheckAnalyse(); }
+    void CheckAnalyse()
+    {
+        if (CanOverwriteThePendingReport)
+            Analyse();
+    }
     void Analyse()
     {
-        if (keepAnalysing)
+        if (!CanOverwriteThePendingReport)
         {
-            //List<BonifiedTime> plannedExercice = CheckPlannedExercice();
-
-            //MarketValue totalRewardValue = 0;
-
-            //ExerciseReport lastNoExerciceReport = new ExerciseReport();
-
-            ////Debug.Log("Analyse des exercices passés");
-
-            //if (plannedExercice != null && plannedExercice.Count > 0)
-            //{
-            //    //Debug.Log("Exercices passés trouvé !");
-            //    for (int i = 0; i < plannedExercice.Count; i++)
-            //    {
-            //        MarketValue rewardValue = 0;
-
-            //        float activityVolume = GetActivityVolumeIn(plannedExercice[i]);
-            //        rewardValue.floatValue = activityVolume;
-
-            //        if (VerifyCompletionOf(plannedExercice[i], activityVolume))
-            //            totalRewardValue += rewardValue;
-
-            //        //plannedExercice[i].plannedExercice.ended = true;
-
-            //        ExerciseReport report = new ExerciseReport(plannedExercice[i].timeSlot, plannedExercice[i].plannedExercice, activityVolume);
-
-            //        // Code degueu
-            //        if(VerifyCompletionOf(plannedExercice[i], activityVolume))
-            //            report.state = ExerciseReport.State.Completed;
-            //        else
-            //            report.state = ExerciseReport.State.Failed;
-
-            //        if (activityVolume > 0)
-            //            PlayerProfile.instance.LogReport(report);
-            //        else
-            //            lastNoExerciceReport = report;
-            //    }
-
-            //    if (totalRewardValue.floatValue > 0)
-            //        GiveRewards(totalRewardValue.floatValue);
-            //    else
-            //        GiveAdvice(lastNoExerciceReport);
-            //}
+            Debug.LogError("Should not be analysing because we already have a " +
+                "pending report in this state: " + LatestPendingReport.state);
         }
 
-        this.DelayedCall(Analyse, cooldown);
-    }
-
-    List<BonifiedTime> CheckPlannedExercice()
-    {
-        List<BonifiedTime> plannedExercice = null;
-
-        TimeSlot timeSlot = new TimeSlot(lastTimeChecked, DateTime.Now);
-        plannedExercice = Calendar.instance.GetAllBonifiedTimesInTimeSlot(timeSlot);
-
-        lastTimeChecked = DateTime.Now;
-
-        return plannedExercice;
-    }
-
-    float GetActivityVolumeIn(BonifiedTime bonifiedTime)
-    {
-        float volume = 0;
-
-        if (bonifiedTime.timeSlot.duration.TotalSeconds != 0)
+        // Regardons s'il n'y a pas un Schedule du passé qui nécéssiterait encore une analyse
+        var past = Calendar.instance.GetPastSchedules();
+        for (int i = 0; i < past.Count; i++)
         {
-            AnalyserGroupReport groupReport = analyserGroup.GetExerciseVolume(bonifiedTime.timeSlot);
-
-            foreach (AnalyserReport individualReport in groupReport.individualReports)
+            if (past[i].requiresConculsion)
             {
-                volume += individualReport.volume.volume;
+                LatestPendingReport = Analyse(past[i]);
+                if (LatestPendingReport != null)
+                    break;
+                else
+                {
+                    Debug.LogError("This should never happen");
+                    past[i].requiresConculsion = false; // NE DEVRAIS JAMAIS ARRIVER
+                }
             }
         }
 
-        return volume;
-    }
-
-    bool VerifyCompletionOf(ScheduledBonus schedule, float activityVolume)
-    {
-        return activityVolume >= schedule.task.minDuration;
-    }
-
-    void GiveAdvice(ExerciseReport report)
-    {
-        Scenes.Load(failureWindow,delegate(Scene scene) {
-            scene.FindRootObject<FailureAsk>().Init(report);
-        });
-    }
-
-    void GiveRewards(float rewardAmount)
-    {
-        // Give reward
-        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardAmount);
-
-        if (reward.amount > 0)
-            PlayerCurrency.AddCurrencyAmount(reward);
-
-        List<CompletionWindow.Rewards> rewards = new List<CompletionWindow.Rewards>();
-        CompletionWindow.Rewards newReward = new CompletionWindow.Rewards
+        // Si nous n'avons pas de nouveau Rapport, regardons si nous avons un exercice en-cours
+        if (CanOverwriteThePendingReport)
         {
-            amount = Mathf.RoundToInt(rewardAmount),
-            icon = ticketIcon
-        };
-        rewards.Add(newReward);
+            var presentAndFuture = Calendar.instance.GetPresentAndFutureSchedules();
+            if (presentAndFuture.Count > 0 && presentAndFuture[0].requiresConculsion)
+            {
+                var now = DateTime.Now;
+                if (presentAndFuture[0].timeSlot.start <= now)
+                {
+                    LatestPendingReport = Analyse(presentAndFuture[0], now);
+                }
+            }
+        }
 
-        Scenes.Load(completionWindow,delegate(Scene scene) {
-            scene.FindRootObject<CompletionWindow>().ShowCompletionRewards(rewards);
-        });
+        if (OnLatestPendingReportUpdated != null)
+            OnLatestPendingReportUpdated();
+
+
+
+        // Avons nous un rapport à conclure ?
+        if (LatestPendingReport != null && LatestPendingReport.state != Report.State.Ongoing)
+        {
+            switch (LatestPendingReport.state)
+            {
+                case Report.State.Completed:
+                    {
+                        // Congrats window !
+                        Debug.Log("bravoooooo !!!");
+                        FinalizeLatestReport();
+                        break;
+                    }
+                case Report.State.Failed:
+                    {
+                        // Failure window
+                        Debug.Log("Exercise failed ಥ_ಥ");
+                        FinalizeLatestReport();
+                        break;
+                    }
+            }
+        }
     }
+    Report Analyse(Schedule schedule) { return Analyse(schedule, DateTime.Now); }
+    Report Analyse(Schedule schedule, DateTime now)
+    {
+        if (schedule.timeSlot.start > now)
+        {
+            // L'exercice est dans le futur
+            return null;
+        }
+
+
+        //---------DÉBUT DE L'ANALYSE---------//
+
+        var report = new Report()
+        {
+            schedule = schedule
+        };
+
+        // Ça nous sert à rien d'analyser le futur
+        var timeSlotToAnalyse = schedule.timeSlot;
+        if (timeSlotToAnalyse.end > now)
+            timeSlotToAnalyse.end = now;
+
+        // Analyse Group Report
+        var analyserGroupReport = analyserGroup.GetExerciseVolume(timeSlotToAnalyse);
+
+        // Sum up the exercise volume
+        float recordedExerciseVolume = 0;
+        foreach (AnalyserReport individualReport in analyserGroupReport.individualReports)
+        {
+            recordedExerciseVolume += individualReport.volume.volume;
+        }
+
+        report.recordedExerciseVolume = recordedExerciseVolume;
+
+
+        //---------Verdict---------//
+
+        bool forceCalendarUpdate = false;
+        if (recordedExerciseVolume >= schedule.task.minDuration)
+        {
+            report.state = Report.State.Completed;
+            forceCalendarUpdate = true;
+        }
+        else
+        {
+            if (schedule.timeSlot.end > now)
+            {
+                report.state = Report.State.Ongoing;
+            }
+            else
+            {
+                report.state = Report.State.Failed;
+                forceCalendarUpdate = true;
+            }
+        }
+
+        // Truncate the schedule's timeslot early, if necessary
+        if (report.state != Report.State.Ongoing && schedule.timeSlot.end > now)
+            schedule.timeSlot.end = now - new TimeSpan(1);
+
+        if (forceCalendarUpdate)
+            Calendar.instance.ForceSchedulesUpdate();
+
+        return report;
+    }
+    #endregion
+
+    void FinalizeLatestReport()
+    {
+        // Reward player
+        PlayerCurrency.AddTickets(LatestPendingReport.schedule.task.ticketReward);
+
+        // Mark schedule as concluded
+        LatestPendingReport.schedule.requiresConculsion = false;
+        Calendar.instance.ForceSave();
+
+        // Add report to archive
+        previousReports.Add(LatestPendingReport);
+
+        // Remove pending report
+        LatestPendingReport = null;
+
+        // Raise event
+        if (OnLatestPendingReportUpdated != null)
+            OnLatestPendingReportUpdated();
+
+        // Save
+        Save();
+    }
+
+
+    #region Load/Save
+    private const string PREVIOUS_REPORTS_KEY = "previousRep";
+    void FetchData()
+    {
+        var obj = dataSaver.GetObjectClone(PREVIOUS_REPORTS_KEY);
+        if (obj != null)
+            previousReports = (List<Report>)obj;
+        else
+            previousReports = new List<Report>();
+    }
+
+    void Save()
+    {
+        dataSaver.SetObjectClone(PREVIOUS_REPORTS_KEY, previousReports);
+        dataSaver.LateSave();
+    }
+    #endregion
+
+    //void GiveAdvice(ExerciseReport report)
+    //{
+    //    Scenes.Load(failureWindow, delegate (Scene scene)
+    //    {
+    //        scene.FindRootObject<FailureAsk>().Init(report);
+    //    });
+    //}
+
+    //void GiveRewards(MarketValue rewardValue)
+    //{
+    //    // Give reward
+    //    CurrencyAmount reward = Market.GetCurrencyAmountFromValue(CurrencyType.Ticket, rewardValue);
+
+    //    if (reward.amount > 0)
+    //        PlayerCurrency.AddCurrencyAmount(reward);
+
+    //    List<CompletionWindow.Rewards> rewards = new List<CompletionWindow.Rewards>();
+    //    CompletionWindow.Rewards newReward = new CompletionWindow.Rewards
+    //    {
+    //        amount = Mathf.RoundToInt(rewardValue.floatValue),
+    //        icon = PlayerCurrency.GetTicketIcon()
+    //    };
+    //    rewards.Add(newReward);
+
+    //    Scenes.Load(completionWindow, delegate (Scene scene)
+    //    {
+    //        scene.FindRootObject<CompletionWindow>().ShowCompletionRewards(rewards);
+    //    });
+    //}
 }

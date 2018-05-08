@@ -39,7 +39,7 @@ public class QuestPanel : MonoBehaviour
     private Vector2 normalSize;
     private bool isShown = false;
     private bool isOfferingNextMap = false;
-    private bool isOfferingNextMapComplete = false;
+    //private bool isOfferingNextMapComplete = false;
 
     private void Awake()
     {
@@ -125,7 +125,7 @@ public class QuestPanel : MonoBehaviour
                 sq.SetId(this);
                 sq.onComplete = () =>
                 {
-                    isOfferingNextMapComplete = true;
+                    //isOfferingNextMapComplete = true;
                     onCompletion();
                 };
             };

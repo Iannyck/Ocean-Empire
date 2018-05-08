@@ -17,11 +17,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    private AutoSortedList<ScheduledBonus> presentAndFutureBonifiedTimes = new AutoSortedList<ScheduledBonus>();
+    private AutoSortedList<Schedule> presentAndFutureBonifiedTimes = new AutoSortedList<Schedule>();
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    private AutoSortedList<ScheduledBonus> pastBonifiedTimes = new AutoSortedList<ScheduledBonus>();
+    private AutoSortedList<Schedule> pastBonifiedTimes = new AutoSortedList<Schedule>();
     [SerializeField] private DataSaver dataSaver;
 
     public bool log = true;
@@ -31,11 +31,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus récent au plus lointain
     /// </summary>
-    public ReadOnlyCollection<ScheduledBonus> GetPresentAndFutureSchedules() { return presentAndFutureBonifiedTimes.GetInternalList(); }
+    public ReadOnlyCollection<Schedule> GetPresentAndFutureSchedules() { return presentAndFutureBonifiedTimes.GetInternalList(); }
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    public ReadOnlyCollection<ScheduledBonus> GetPastSchedules() { return pastBonifiedTimes.GetInternalList(); }
+    public ReadOnlyCollection<Schedule> GetPastSchedules() { return pastBonifiedTimes.GetInternalList(); }
 
     protected void Awake()
     {
@@ -55,39 +55,42 @@ public class Calendar : MonoPersistent
     {
         while (true)
         {
-            CheckBonifiedTimes();
+            CheckSchedules();
             yield return new WaitForSecondsRealtime(checkConcludeEvery);
         }
     }
 
-    private void CheckBonifiedTimes()
+    public void ForceSchedulesUpdate() { CheckSchedules(); }
+
+    private void CheckSchedules()
     {
         DateTime now = DateTime.Now;
+        bool dirty = false;
         for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
         {
             int timeslotRelation = presentAndFutureBonifiedTimes[i].timeSlot.IsOverlappingWith(now);
 
-            //The bonifiedTime is in the future
+            //The schedule is in the future
             if (timeslotRelation == 1)
                 return;
 
-            //The bonifiedTime is in the past
+            //The schedule is in the past
             if (timeslotRelation == -1)
-                ConcludeBonifiedTime(i);
+            {
+                dirty = true;
+                pastBonifiedTimes.Add(presentAndFutureBonifiedTimes[i]);
+                presentAndFutureBonifiedTimes.RemoveAt(i);
+                i--;
+                if (log)
+                    Debug.Log("Bonified Time concluded: " + i);
+            }
         }
+
+        if(dirty)
+            ApplyDataToSaver(true);
     }
 
-    private void ConcludeBonifiedTime(int index, bool andSave = true)
-    {
-        pastBonifiedTimes.Add(presentAndFutureBonifiedTimes[index]);
-        presentAndFutureBonifiedTimes.RemoveAt(index);
-        if (log)
-            Debug.Log("Bonified Time concluded: " + index);
-        if (andSave)
-            ApplyDataToSaver(andSave);
-    }
-
-    public bool AddSchedule(ScheduledBonus newSchedule)
+    public bool AddSchedule(Schedule newSchedule)
     {
         if (!IsOverlappingWithSchedule(newSchedule.timeSlot))
         {
@@ -167,6 +170,11 @@ public class Calendar : MonoPersistent
         return false;
     }
 
+    public void ForceSave()
+    {
+        ApplyDataToSaver(true);
+    }
+
     private void ApplyDataToSaver(bool andSave)
     {
         dataSaver.SetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES, presentAndFutureBonifiedTimes);
@@ -180,18 +188,18 @@ public class Calendar : MonoPersistent
 
     private void FetchDataFromSaver()
     {
-        presentAndFutureBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as AutoSortedList<ScheduledBonus>;
+        presentAndFutureBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as AutoSortedList<Schedule>;
         if (presentAndFutureBonifiedTimes == null)
-            presentAndFutureBonifiedTimes = new AutoSortedList<ScheduledBonus>();
+            presentAndFutureBonifiedTimes = new AutoSortedList<Schedule>();
 
-        pastBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as AutoSortedList<ScheduledBonus>;
+        pastBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as AutoSortedList<Schedule>;
         if (pastBonifiedTimes == null)
-            pastBonifiedTimes = new AutoSortedList<ScheduledBonus>();
+            pastBonifiedTimes = new AutoSortedList<Schedule>();
     }
 
-    public List<ScheduledBonus> GetAllSchedulesStartingOn(Day day)
+    public List<Schedule> GetAllSchedulesStartingOn(Day day)
     {
-        List<ScheduledBonus> result = new List<ScheduledBonus>();
+        List<Schedule> result = new List<Schedule>();
 
         for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
         {

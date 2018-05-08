@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shack_TaskPanel : MonoBehaviour
+public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
 {
     public CanvasGroup[] canvasToHide;
     public SceneInfo whenToPlanScene;
@@ -20,12 +20,28 @@ public class Shack_TaskPanel : MonoBehaviour
     private Tween currentAnim;
     private Task latestTask;
 
-    public void LaunchTaskCreation()
+
+    public void Enter(Action onComplete)
     {
-        if (State != PanelState.ReadyToCreate)
-            return;
+        gameObject.SetActive(true);
+        if (onComplete != null)
+            onComplete();
+    }
 
+    public void Exit(Action onComplete)
+    {
+        gameObject.SetActive(false);
+        if (onComplete != null)
+            onComplete();
+    }
 
+    public void FillContent(object data)
+    {
+    }
+
+    public void LaunchTaskCreation() { LaunchTaskCreation(null); }
+    public void LaunchTaskCreation(Action onComplete)
+    {
         State = PanelState.Creation_SelectingTask;
 
         // Fade out all canvas
@@ -40,9 +56,8 @@ public class Shack_TaskPanel : MonoBehaviour
                     if (task == null)
                     {
                         // Player has cancelled
-                        ShowShackUI();
-                        State = PanelState.ReadyToCreate;
                         listController.CloseWindow();
+                        BackToNormal(onComplete);
                     }
                     else
                     {
@@ -53,29 +68,27 @@ public class Shack_TaskPanel : MonoBehaviour
                             whenToPlanController.OnNowClick = () =>
                             {
                                 // Schedule now!
-                                if(ScheduleTaskAt(task, new TimeSlot(DateTime.Now, task.GetMaxDurationAsTimeSpan())))
+                                var now = DateTime.Now;
+                                if (ScheduleTaskAt(task, now, ref now))
                                 {
-                                    State = PanelState.ReadyToCreate;
                                     listController.CloseWindow();
+                                    BackToNormal(onComplete);
                                 }
                             };
                             whenToPlanController.OnLaterClick = () =>
                             {
                                 // Open calendar en schedule later
-                                SelectTimeSlotForTask(latestTask,
-                                    (selectedTimeSlot) =>
+                                SelectDateTimeForTask(latestTask,
+                                    (date) =>
                                     {
                                         // On result selected
-                                        if(ScheduleTaskAt(latestTask, selectedTimeSlot))
-                                        {
-                                            State = PanelState.ReadyToCreate;
-                                        }
+                                        ScheduleTaskAt(latestTask, date);
+                                        BackToNormal(onComplete);
                                     },
                                     () =>
                                     {
                                         // On cancel
-                                        ShowShackUI();
-                                        State = PanelState.ReadyToCreate;
+                                        BackToNormal(onComplete);
                                     });
                                 listController.CloseWindow();
                             };
@@ -85,32 +98,81 @@ public class Shack_TaskPanel : MonoBehaviour
         });
     }
 
-    private bool ScheduleTaskAt(Task task, TimeSlot selectedTimeSlot)
+    private void BackToNormal(Action onComplete)
     {
+        State = PanelState.ReadyToCreate;
+        ShowShackUI();
+        if (onComplete != null)
+            onComplete();
+    }
+
+    private bool ScheduleTaskAt(Task task, DateTime startTime)
+    {
+        var now = DateTime.Now;
+        return ScheduleTaskAt(task, startTime, ref now);
+    }
+    private bool ScheduleTaskAt(Task task, DateTime startTime, ref DateTime now)
+    {
+        // 1 - Nous voulons, si possible, paddé de 15 min à l'avance au cas où les bond de 15 min du calendrier
+        //      ne satisfont pas le plan du joueur.
+        //      Ex: Il veut débuter sa marche à 4h25, alors il la planifie à 4h30
+        // 2 - Nous voulons assurer que le joueur a AU MOINS 2x le temps minimal pour accomplir sa tache
+        //      au cas où il prendrait des pauses régulièrements
+        //      Ex: s'il a faire une marche de 20 à 30 min, il doit avoir AU MOINS 40 min pour la faire
+        // 3 - Nous voulons assurer un MINIMUM de 5 min pour compenser avec le temps de préparation.
+        //      (ex: mettre ces chaussure, son manteau, sortir de l'immeuble, etc.)
+        //      Ex: le joueur prend 6 min pour terminer ses affaires, changer d'habit, sortir dehors etc.
+        //          Si sa tâche était de faire entre 7 et 10 min de marche et qu'elle était booked sur 15 min,
+        //          il n'aura peut-être pas le temps de finir l'exercice
+
+        var FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
+        var FIVE_MINUTES = new TimeSpan(0, 5, 0);
+
+        // 1
+        var bookedStart = startTime - FIFTEEN_MINUTES;
+
+        // 3
+        var remainingPadding = TimeSpan.Zero;
+        if (bookedStart < now)
+        {
+            remainingPadding = now - bookedStart;
+            if (remainingPadding > FIVE_MINUTES)
+                remainingPadding = FIVE_MINUTES;
+            bookedStart = now;
+        }
+
+        // 2
+        var minBookedDuration = task.GetMinDurationAsTimeSpan();
+        minBookedDuration += minBookedDuration; // 2x
+
+        // 2 & 3
+        var bookedEnd = (startTime + minBookedDuration + remainingPadding).Ceiled(FIFTEEN_MINUTES);
+
+        TimeSlot bookedTimeslot = new TimeSlot(bookedStart, bookedEnd);
+
+
+
+
         // On result selected
-        ScheduledBonus schedule = new ScheduledBonus(selectedTimeSlot, ScheduledBonus.DefaultBonus())
+        Schedule schedule = new Schedule(bookedTimeslot)
         {
             task = task,
-            displayPadding = true,
-            minutesOfPadding = 15
+            requiresConculsion = true
         };
         if (Calendar.instance.AddSchedule(schedule))
         {
             // Yay ! C'est fini
-            ShowShackUI();
-            State = PanelState.ReadyToCreate;
+            PlannedExerciceRewarder.Instance.ForceAnalyseCheck();
             return true;
         }
         else
         {
             MessagePopup.DisplayMessage("Plage horaire déjà occupé.");
-            State = PanelState.ReadyToCreate;
             return false;
         }
     }
 
-
-    private void SelectTimeSlotForTask(Task task, Action<TimeSlot> resultCallback, Action cancelCallback)
+    private void SelectDateTimeForTask(Task task, Action<DateTime> resultCallback, Action cancelCallback)
     {
         if (State == PanelState.Creation_InCalendar)
             return;
@@ -139,31 +201,11 @@ public class Shack_TaskPanel : MonoBehaviour
         handle.onTimePicked = (date) =>
         {
             Debug.Log("DateTime picked: " + date);
-
-            //TimeSpan FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
-
-            //DateTime now = DateTime.Now;
-            DateTime scheduleStart = date;
-            //if (scheduleStart < now)
-            //    scheduleStart = now;
-
-            DateTime scheduleEnd = scheduleStart + task.GetMaxDurationAsTimeSpan();
-
-            TimeSlot timeSlot = new TimeSlot(scheduleStart, scheduleEnd);
-
-            if (Calendar.instance.IsOverlappingWithSchedule(timeSlot))
-            {
-                MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
-            }
-            else
-            {
-                resultCallback(timeSlot);
-                hasSentResult = true;
-                handle.CloseWindow();
-            }
+            resultCallback(date);
+            hasSentResult = true;
+            handle.CloseWindow();
         };
     }
-
 
 
     #region FadeIn / FadeOut des canvas du Shack

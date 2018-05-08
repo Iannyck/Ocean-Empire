@@ -16,6 +16,10 @@ public class Task
     {
         return new TimeSpan(0, 0, Mathf.RoundToInt(maxDuration * 60));
     }
+    public TimeSpan GetMinDurationAsTimeSpan()
+    {
+        return new TimeSpan(0, 0, Mathf.RoundToInt(minDuration * 60));
+    }
 
     public override string ToString()
     {

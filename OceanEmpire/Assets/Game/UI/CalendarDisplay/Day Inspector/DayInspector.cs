@@ -136,7 +136,7 @@ public class DayInspector : MonoBehaviour
             for (int i = 0; i < schedules.Count; i++)
             {
                 var scheduleDisplay = schedulePrefab.DuplicateGO(schedulesContainer);
-                var roundedStrength = schedules[i].bonus.ticketMultiplier.Rounded(1);
+                //var roundedStrength = schedules[i].bonus.ticketMultiplier.Rounded(1);
 
                 scheduleDisplay.FillContent(schedules[i]);
                 //scheduleDisplay.FillContent(schedules[i].timeSlot,

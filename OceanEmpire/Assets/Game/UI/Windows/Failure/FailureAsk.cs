@@ -43,8 +43,8 @@ public class FailureAsk : MonoBehaviour {
 
         currentReport = report;
 
-        if(PlannedExerciceRewarder.instance != null)
-            PlannedExerciceRewarder.instance.keepAnalysing = false;
+        //if(PlannedExerciceRewarder.Instance != null)
+        //    PlannedExerciceRewarder.Instance.keepAnalysing = false;
 
         for (int i = 0; i < choixPossible.Count; i++)
         {

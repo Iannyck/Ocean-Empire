@@ -10,7 +10,7 @@ public class LoadingScreenAnimation : MonoBehaviour
     public Image bg;
     public bool handleCameras = true;
     public Camera cam;
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem;
     public RawImage particleTexture;
     public float transitionDuration = 5f;
     public float waitTime = 5f;
