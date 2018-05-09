@@ -72,22 +72,23 @@ namespace CCC.UI
         public virtual void Open(TweenCallback onComplete)
         {
             isOpen = true;
-            bgTr.gameObject.SetActive(true);
+            if (bgTr)
+                bgTr.gameObject.SetActive(true);
 
-            if (bgImage != null)
+            if (bgImage)
             {
                 bgImage.DOKill();
                 bgImage.DOFade(bgImageAlpha, openTime * 0.75f).SetUpdate(true);
             }
 
-            if (backBg != null)
+            if (backBg)
             {
                 backBg.gameObject.SetActive(true);
                 backBg.DOKill();
                 backBg.DOFade(backBgAlpha, openTime).SetUpdate(true);
             }
 
-            if (content != null)
+            if (content)
             {
                 content.gameObject.SetActive(true);
 

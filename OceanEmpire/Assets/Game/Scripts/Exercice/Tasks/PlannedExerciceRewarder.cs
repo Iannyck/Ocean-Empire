@@ -16,7 +16,7 @@ public class PlannedExerciceRewarder : MonoPersistent
         public State state;
         public Schedule schedule;
         public float recordedExerciseVolume;
-
+        public string playerConclusion = "null";
 
         public enum State { Ongoing, Completed, Failed }
         public float GetCompletionRate01() { return Mathf.Clamp01(recordedExerciseVolume / schedule.task.minDuration); }
@@ -30,6 +30,7 @@ public class PlannedExerciceRewarder : MonoPersistent
     [SerializeField] SceneInfo completionWindow;
     [SerializeField] AnalyserGroup analyserGroup;
     [SerializeField] DataSaver dataSaver;
+    [SerializeField] ScriptableActionQueue shackAnimQueue;
 
     float analysisTimer = 0;
     List<Report> previousReports;
@@ -129,15 +130,49 @@ public class PlannedExerciceRewarder : MonoPersistent
                 case Report.State.Completed:
                     {
                         // Congrats window !
-                        Debug.Log("bravoooooo !!!");
-                        FinalizeLatestReport();
+                        Action onAnimComplete = null;
+                        Shack_Canvas shackCanvases = Scenes.IsActive("Shack") ?
+                            Scenes.GetActive("Shack").FindRootObject<Shack_Canvas>() :
+                            null;
+                        shackAnimQueue.ActionQueue.AddAction(() =>
+                        {
+                            if (shackCanvases)
+                                shackCanvases.HideAll();
+                            Scenes.Load(completionWindow, (scene) =>
+                            {
+                                scene.FindRootObject<CompletionWindow>().FillContent(LatestPendingReport, () =>
+                                {
+                                    if (shackCanvases)
+                                        shackCanvases.ShowAll();
+                                    onAnimComplete();
+                                    FinalizeLatestReport();
+                                });
+                            });
+                        }, 2, out onAnimComplete);
                         break;
                     }
                 case Report.State.Failed:
                     {
                         // Failure window
-                        Debug.Log("Exercise failed ಥ_ಥ");
-                        FinalizeLatestReport();
+                        Action onAnimComplete = null;
+                        Shack_Canvas shackCanvases = Scenes.IsActive("Shack") ?
+                            Scenes.GetActive("Shack").FindRootObject<Shack_Canvas>() :
+                            null;
+                        shackAnimQueue.ActionQueue.AddAction(() =>
+                        {
+                            if (shackCanvases)
+                                shackCanvases.HideAll();
+                            Scenes.Load(failureWindow, (scene) =>
+                            {
+                                scene.FindRootObject<FailureAsk>().FillContent(LatestPendingReport, () =>
+                                {
+                                    if (shackCanvases)
+                                        shackCanvases.ShowAll();
+                                    onAnimComplete();
+                                    FinalizeLatestReport();
+                                });
+                            });
+                        }, 2, out onAnimComplete);
                         break;
                     }
             }
@@ -212,8 +247,10 @@ public class PlannedExerciceRewarder : MonoPersistent
 
     void FinalizeLatestReport()
     {
+        Debug.Log("Finalizing report...");
         // Reward player
-        PlayerCurrency.AddTickets(LatestPendingReport.schedule.task.ticketReward);
+        if (LatestPendingReport.state == Report.State.Completed)
+            PlayerCurrency.AddTickets(LatestPendingReport.schedule.task.ticketReward);
 
         // Mark schedule as concluded
         LatestPendingReport.schedule.requiresConculsion = false;
@@ -231,6 +268,7 @@ public class PlannedExerciceRewarder : MonoPersistent
 
         // Save
         Save();
+        Debug.Log("Report finalized");
     }
 
 

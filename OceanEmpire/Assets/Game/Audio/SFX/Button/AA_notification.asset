@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: -1
   clip: {fileID: 8300000, guid: bd87b7f9a3ab6134fb68a989f73e79fa, type: 3}
-  volume: 0.134
+  volume: 0.459

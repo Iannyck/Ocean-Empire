@@ -17,8 +17,8 @@ Calendar Scroll: 10
 Calendar Day Inspector: 11
 
 // Exercise
-Tracking Panel: 20
-Task Conclusion (Reward): 30
+Task Conclusion (Completion): 30
+Task Conclusion (Failure): 30
 
 //Generic Windows
 Ask For Time Window: 35

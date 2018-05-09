@@ -5,73 +5,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FailureAsk : MonoBehaviour {
-
-    private int maxChoiceAmount = 4;
-
-    public ChoiceButton buttonPrefab;
-    public Transform countainer;
-
+public class FailureAsk : MonoBehaviour
+{
+    [Header("Windows")]
+    public WindowAnimation choiceWindow;
     public WindowAnimation adviceWindow;
 
-    public WindowAnimation askWindowAnim;
+    [Header("Schedule UI")]
+    public InstantExerciseChoice_Item taskUI;
+    public Text timeslotText;
+    public Text dateText;
 
-    public Text exerciceDescription;
+    [Header("Choices")]
+    public Transform choiceContainer;
 
-    private ExerciseReport currentReport;
-
-    [Serializable]
-    public struct Choice
-    {
-        public string choiceText;
-        public string advice;
-    }
- 
-    public List<Choice> choixPossible = new List<Choice>();
+    Action onReportFilled;
+    PlannedExerciceRewarder.Report report;
 
     void Start()
     {
-        Init(null);
+        var choices = choiceContainer.GetComponentsInChildren<ChoiceButton>();
+        foreach (var choice in choices)
+        {
+            choice.OnClick = OnChoiceSelected;
+        }
     }
 
-	public void Init(ExerciseReport report)
+    public void FillContent(PlannedExerciceRewarder.Report report, Action onReportFilled)
     {
-        if (report != null)
-            exerciceDescription.text = report.task.minDuration + " minutes de marche le " + report.timeSlot.start.DayOfWeek + "dernier.";
+        this.onReportFilled = onReportFilled;
+        this.report = report;
+
+        var start = report.schedule.timeSlot.start;
+        var end = report.schedule.timeSlot.end;
+
+        taskUI.FillContent(report.schedule.task);
+        dateText.text = "" +
+            Calendar.GetDayOfTheWeekName(start.DayOfWeek) + ", " +
+            start.Day + " " +
+            Calendar.GetMonthAbbreviation(start.Month);
+        timeslotText.text = "Entre <color=#f>" + start.ToCondensedTimeOfDayString() + "</color>\net <color=#f>"
+            + end.ToCondensedTimeOfDayString() + "</color>";
+    }
+
+    void OnChoiceSelected(ChoiceButton choiceButton)
+    {
+        var advice = choiceButton.choice.advice;
+
+        report.playerConclusion = choiceButton.choice.choiceText;
+
+        // Y a-t-il un conseil ?
+        if (advice == "")
+        {
+            choiceWindow.Close(UnloadScene);
+        }
         else
-            exerciceDescription.text = "Un exercice quelconque";
-
-        currentReport = report;
-
-        //if(PlannedExerciceRewarder.Instance != null)
-        //    PlannedExerciceRewarder.Instance.keepAnalysing = false;
-
-        for (int i = 0; i < choixPossible.Count; i++)
         {
-            ChoiceButton currentButton = Instantiate(buttonPrefab, countainer).GetComponent<ChoiceButton>();
-            if (currentButton == null)
-                Debug.Log("ChoiceButton Inexistant lors de sa creation");
-            currentButton.UpdateButtonInfo(DisplayAdvice, choixPossible[i].choiceText, choixPossible[i].advice);
+            choiceWindow.Close(delegate ()
+            {
+                adviceWindow.GetComponent<FailureAdvice>().Display(choiceButton.choice.advice, UnloadScene);
+            });
         }
-	}
-
-    void DisplayAdvice(string advice, string choice)
-    {
-        if(askWindowAnim == null)
-            Debug.Log("Pas de window anim sur la fenetre ASK");
-        askWindowAnim.Close(delegate() {
-            adviceWindow.GetComponent<FailureAdvice>().UpdateInfo(advice);
-            adviceWindow.Open();
-            PlayerProfile.instance.LogReport(currentReport);
-        });
     }
 
-    private void OnValidate()
+    void UnloadScene()
     {
-        if(choixPossible.Count >= maxChoiceAmount)
-        {
-            //Debug.Log("Trop de choix dans : FailureAsk");
-            choixPossible.RemoveRange(4, Mathf.Max(choixPossible.Count-4,0));
-        }
+        if (onReportFilled != null)
+            onReportFilled();
+
+        // Unload scene
+        Scenes.UnloadAsync(gameObject.scene);
     }
 }

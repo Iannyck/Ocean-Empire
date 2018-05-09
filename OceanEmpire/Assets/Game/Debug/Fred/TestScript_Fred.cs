@@ -36,6 +36,46 @@ public class TestScript_Fred : MonoBehaviour
         {
             GetComponent<TaskPanel_ReadyToCreate>().LaunchTaskCreation(() => Debug.Log("finito"));
         }
+
+
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift))
+        //        GetComponent<Shack_Canvas>().HideAll(Shack_Canvas.Filter.Sections);
+        //    else
+        //        GetComponent<Shack_Canvas>().ShowAll(Shack_Canvas.Filter.Sections);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift))
+        //        GetComponent<Shack_Canvas>().HideAll(Shack_Canvas.Filter.HUD);
+        //    else
+        //        GetComponent<Shack_Canvas>().ShowAll(Shack_Canvas.Filter.HUD);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift))
+        //        GetComponent<Shack_Canvas>().HideAll(Shack_Canvas.Filter.AlwaysVisibleHUD);
+        //    else
+        //        GetComponent<Shack_Canvas>().ShowAll(Shack_Canvas.Filter.AlwaysVisibleHUD);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift))
+        //        GetComponent<Shack_Canvas>().HideAll(Shack_Canvas.Filter.None);
+        //    else
+        //        GetComponent<Shack_Canvas>().ShowAll(Shack_Canvas.Filter.None);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    if (Input.GetKey(KeyCode.LeftShift))
+        //        GetComponent<Shack_Canvas>().HideAll(Shack_Canvas.Filter.Sections | Shack_Canvas.Filter.HUD);
+        //    else
+        //        GetComponent<Shack_Canvas>().ShowAll(Shack_Canvas.Filter.Sections | Shack_Canvas.Filter.HUD);
+        //}
+
+
+
         //if (Input.GetKeyDown(KeyCode.C))
         //{
         //    CalendarRequest.Settings settings = new CalendarRequest.Settings()

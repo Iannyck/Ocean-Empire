@@ -89,6 +89,8 @@ public class ActionQueue
 
     public object OngoingTarget { get { return ongoingAction != null ? ongoingAction.Target : null; } }
 
+    public int PendingCount { get { return pendingActions.Count; } }
+
     public bool IsAnActionOngoing
     {
         get { return ongoingAction != null; }

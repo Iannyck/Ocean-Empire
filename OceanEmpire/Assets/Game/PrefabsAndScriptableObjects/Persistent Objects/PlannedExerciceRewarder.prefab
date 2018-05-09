@@ -56,3 +56,5 @@ MonoBehaviour:
   completionWindow: {fileID: 11400000, guid: 4d08ff6ef6aca374fa1fd7e4afd555bc, type: 2}
   analyserGroup: {fileID: 11400000, guid: fa0255cbbcaccda4d8f8e7923dabe376, type: 2}
   dataSaver: {fileID: 11400000, guid: 9b4e1f2a3f1761e4bac08ee5dc7f5b19, type: 2}
+  shackAnimQueue: {fileID: 11400000, guid: 3302be055f5a0364a936b508dc2879ae, type: 2}
+  shackCanvases: []

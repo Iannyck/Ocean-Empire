@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
 {
-    public CanvasGroup[] canvasToHide;
+    public Shack_Canvas shack_Canvas;
     public SceneInfo whenToPlanScene;
+    public ScriptableActionQueue shackAnimQueue;
 
     public PanelState State { get; private set; }
     public enum PanelState
@@ -42,60 +43,73 @@ public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
     public void LaunchTaskCreation() { LaunchTaskCreation(null); }
     public void LaunchTaskCreation(Action onComplete)
     {
+        if (State != PanelState.ReadyToCreate)
+            return;
+
         State = PanelState.Creation_SelectingTask;
-
-        // Fade out all canvas
-        HideShackUI(() =>
+        Action completeAnim = null;
+        Action completionAction = () =>
         {
-            InstantExerciseChoice.ProposeTasks(
-                (listController, task) =>
-                {
-                    // PLAYER HAS CHOSEN A TASK   (or cancelled)
-                    latestTask = task;
+            completeAnim();
+            if (onComplete != null)
+                onComplete();
+        };
 
-                    if (task == null)
+        shackAnimQueue.ActionQueue.AddAction(() =>
+        {
+            // Fade out all canvas
+            HideShackUI(() =>
+            {
+                InstantExerciseChoice.ProposeTasks(
+                    (listController, task) =>
                     {
-                        // Player has cancelled
-                        listController.CloseWindow();
-                        BackToNormal(onComplete);
-                    }
-                    else
-                    {
-                        // Task chosen! When to plan?
-                        Scenes.LoadAsync(whenToPlanScene, (s) =>
+                        // PLAYER HAS CHOSEN A TASK   (or cancelled)
+                        latestTask = task;
+
+                        if (task == null)
                         {
-                            var whenToPlanController = s.FindRootObject<WhenToPlanWindow>();
-                            whenToPlanController.OnNowClick = () =>
-                            {
-                                // Schedule now!
-                                var now = DateTime.Now;
-                                if (ScheduleTaskAt(task, now, ref now))
+                            // Player has cancelled
+                            listController.CloseWindow();
+                            BackToNormal(completionAction);
+                        }
+                        else
+                        {
+                            // Task chosen! When to plan?
+                            Scenes.LoadAsync(whenToPlanScene, (s) =>
                                 {
-                                    listController.CloseWindow();
-                                    BackToNormal(onComplete);
-                                }
-                            };
-                            whenToPlanController.OnLaterClick = () =>
-                            {
-                                // Open calendar en schedule later
-                                SelectDateTimeForTask(latestTask,
-                                    (date) =>
+                                    var whenToPlanController = s.FindRootObject<WhenToPlanWindow>();
+                                    whenToPlanController.OnNowClick = () =>
                                     {
-                                        // On result selected
-                                        ScheduleTaskAt(latestTask, date);
-                                        BackToNormal(onComplete);
-                                    },
-                                    () =>
-                                    {
-                                        // On cancel
-                                        BackToNormal(onComplete);
-                                    });
-                                listController.CloseWindow();
-                            };
-                        });
-                    }
-                });
-        });
+                                        // Schedule now!
+                                        var now = DateTime.Now;
+                                        if (ScheduleTaskAt(task, now, ref now))
+                                        {
+                                            listController.CloseWindow();
+                                            BackToNormal(completionAction);
+                                        }
+                                    };
+                                    whenToPlanController.OnLaterClick = () =>
+                                        {
+                                            // Open calendar en schedule later
+                                            SelectDateTimeForTask(latestTask,
+                                                (date) =>
+                                                {
+                                                    // On result selected
+                                                    ScheduleTaskAt(latestTask, date);
+                                                    BackToNormal(completionAction);
+                                                },
+                                                () =>
+                                                {
+                                                    // On cancel
+                                                    BackToNormal(completionAction);
+                                                });
+                                            listController.CloseWindow();
+                                        };
+                                });
+                        }
+                    });
+            });
+        }, 0, out completeAnim);
     }
 
     private void BackToNormal(Action onComplete)
@@ -211,57 +225,20 @@ public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
     #region FadeIn / FadeOut des canvas du Shack
     private void HideShackUIInstant()
     {
-        KillAnim();
-        SetAlpha(0);
+        shack_Canvas.HideAllInstant(Shack_Canvas.Filter.None);
     }
     private void HideShackUI(TweenCallback onComplete = null)
     {
-        KillAnim();
-
-        float alpha = 1;
-        currentAnim = DOTween.To(() => alpha, (x) =>
-        {
-            alpha = x;
-            SetAlpha(alpha);
-        }, 0, 0.35f).OnComplete(onComplete);
+        shack_Canvas.HideAll(Shack_Canvas.Filter.None, onComplete);
     }
 
     private void ShowShackUIInstant()
     {
-        KillAnim();
-        SetAlpha(1);
+        shack_Canvas.ShowAllInstant(Shack_Canvas.Filter.None);
     }
     private void ShowShackUI(TweenCallback onComplete = null)
     {
-        KillAnim();
-
-        float alpha = 0;
-        currentAnim = DOTween.To(() => alpha, (x) =>
-        {
-            alpha = x;
-            SetAlpha(alpha);
-        }, 1, 0.35f).OnComplete(onComplete);
-    }
-
-    private void SetAlpha(float alpha)
-    {
-        for (int i = 0; i < canvasToHide.Length; i++)
-        {
-            canvasToHide[i].alpha = alpha;
-        }
-    }
-
-    void KillAnim()
-    {
-        if (currentAnim != null && currentAnim.IsActive())
-        {
-            currentAnim.Kill();
-        }
-    }
-
-    void OnDestroy()
-    {
-        KillAnim();
+        shack_Canvas.ShowAll(Shack_Canvas.Filter.None, onComplete);
     }
     #endregion
 }

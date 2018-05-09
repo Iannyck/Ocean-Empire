@@ -1,36 +1,42 @@
 ﻿using CCC.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CompletionWindow : WindowAnimation {
+public class CompletionWindow : WindowAnimation
+{
+    public InstantExerciseChoice_Item taskUI;
+    public Text dateText;
+    public Text timeSlotText;
+    public Text rewardText;
 
-    public class Rewards
+    Action onComplete;
+
+    public void FillContent(PlannedExerciceRewarder.Report report, Action onComplete)
     {
-        public int amount;
-        public Sprite icon;
+        this.onComplete = onComplete;
+
+        var start = report.schedule.timeSlot.start;
+        var end = report.schedule.timeSlot.end;
+
+        taskUI.FillContent(report.schedule.task);
+        dateText.text = "" +
+            Calendar.GetDayOfTheWeekName(start.DayOfWeek) + ", " +
+            start.Day + " " +
+            Calendar.GetMonthAbbreviation(start.Month);
+        timeSlotText.text = "Entre <color=#f>" + start.ToCondensedTimeOfDayString() + "</color>\net <color=#f>"
+            + end.ToCondensedTimeOfDayString() + "</color>";
+
+        rewardText.text = "+ " + report.schedule.task.ticketReward;
     }
 
-    public int differentRewardMax = 4;
-    public RewardDisplay rewardPrefab;
-    public Transform countainer;
-    public Button exitButton;
-
-    public void ShowCompletionRewards(List<Rewards> rewards)
+    public void ContinueClick()
     {
-        //PlannedExerciceRewarder.Instance.keepAnalysing = false;
-        exitButton.onClick.AddListener(delegate ()
-        {
-            //PlannedExerciceRewarder.Instance.keepAnalysing = true;
-            Close();
-        });
-        if (rewards.Count >= differentRewardMax)
-            return;
-        for (int i = 0; i < rewards.Count; i++)
-        {
-            Instantiate(rewardPrefab, countainer).GetComponent<RewardDisplay>().UpdateRewardInfo(rewards[i].amount, rewards[i].icon);
-        }
-        Open();
+        if (onComplete != null)
+            onComplete();
+
+        Close();
     }
 }
