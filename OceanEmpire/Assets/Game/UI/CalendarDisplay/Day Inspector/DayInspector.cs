@@ -36,6 +36,7 @@ public class DayInspector : MonoBehaviour
 
     public CalendarRequest.RequestHandle RequestHandle { get; set; }
     public bool IsVisible { get; private set; }
+    public bool CanPlanInPast { get; private set; }
 
     private void Awake()
     {
@@ -60,6 +61,18 @@ public class DayInspector : MonoBehaviour
             return;
 
         DateTime date = new DateTime(day.year, day.monthOfYear, day.dayOfMonth, hours, minutes, 0);
+
+
+        if (!CanPlanInPast)
+        {
+            DateTime now = DateTime.Now;
+            if (date < now)
+            {
+                MessagePopup.DisplayMessage("Vous ne pouvez pas plannifer dans le passé.");
+                return;
+            }
+        }
+
 
         if (RequestHandle != null)
             RequestHandle.onTimePicked(date);
@@ -127,6 +140,8 @@ public class DayInspector : MonoBehaviour
     {
         EmptyTrash();
 
+        scheduleButton.gameObject.SetActive(CanPlanInPast || day.ToDateTime() > DateTime.Now.AddDays(-1));
+
         bool enableNothingPlannedText = true;
         var schedules = Calendar.instance.GetAllSchedulesStartingOn(day);
 
@@ -152,6 +167,7 @@ public class DayInspector : MonoBehaviour
     public void ApplySettings(CalendarRequest.Settings requestSettings)
     {
         scheduleButtonText.text = requestSettings.scheduleButtonText;
+        CanPlanInPast = requestSettings.canPlanInPast;
     }
 
     public void EmptyTrash()

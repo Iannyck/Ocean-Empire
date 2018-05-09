@@ -86,7 +86,7 @@ public class Calendar : MonoPersistent
             }
         }
 
-        if(dirty)
+        if (dirty)
             ApplyDataToSaver(true);
     }
 
@@ -295,7 +295,7 @@ public class Calendar : MonoPersistent
             monthOfYear = around.Month;
             year = around.Year;
         }
-        public DateTime ToDateTime() { return new DateTime(year, monthOfYear, dayOfMonth); }
+        public DateTime ToDateTime() { return new DateTime(year, monthOfYear, dayOfMonth, 0, 0, 0); }
 
         /// <summary>
         /// -1 = day  ->  time

@@ -32,6 +32,7 @@ public class CalendarScroll_Controller : MonoBehaviour
     public Action OnExitComplete { get; set; }
     public CalendarRequest.RequestHandle RequestHandle { get; private set; }
     public CalendarRequest.Settings RequestSettings { get; private set; }
+    public bool CanClickInPast { get; private set; }
 
 
     private void Awake()
@@ -145,10 +146,14 @@ public class CalendarScroll_Controller : MonoBehaviour
     {
         RequestSettings = settings;
         headerText.text = settings.windowHeaderTitle;
+        CanClickInPast = settings.canViewPast;
     }
 
     public void OnDayClick(CalendarScroll_Day day)
     {
+        if (!CanClickInPast && day.GetDay().ToDateTime() < DateTime.Now.AddDays(-1))
+            return;
+
         dayInspector.ShowAndFill(day.GetDay());
         dayInspector.RequestHandle = RequestHandle;
 
