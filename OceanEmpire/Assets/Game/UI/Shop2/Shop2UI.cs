@@ -16,6 +16,10 @@ public class Shop2UI : MonoBehaviour
     public Image blackBG;
     public OpenCategoryButton[] categoryButtons;
 
+    [Header("HARPOON TUTO")]
+    public UpgradeCategory harpoonCategory;
+    public DataSaver tutoSaver;
+
     public event Action<UpgradeCategory> OnBuyAnyUpgrade;
 
     Vector2 normalPosition;
@@ -36,7 +40,13 @@ public class Shop2UI : MonoBehaviour
 
     void _OnBuyAnyUpgrade(OpenCategoryButton categoryButton)
     {
-        if(OnBuyAnyUpgrade != null)
+        if(categoryButton.categoryDisplay.category == harpoonCategory && !tutoSaver.GetBool(TUT_Advance.SHOW_HARPOON_KEY))
+        {
+            tutoSaver.SetBool(TUT_Advance.SHOW_HARPOON_KEY, true);
+            tutoSaver.LateSave();
+        }
+
+        if (OnBuyAnyUpgrade != null)
             OnBuyAnyUpgrade(categoryButton.categoryDisplay.category);
     }
 

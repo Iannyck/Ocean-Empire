@@ -12,7 +12,7 @@ public class TUT_Advance : BaseTutorial
     public GameObject sliderAnim_Prefab;
     private GameObject sliderAnim;
 
-    public const string showHarpoonKey = "itstimetoharpoon";
+    public const string SHOW_HARPOON_KEY = "itstimetoharpoon";
 
     protected override void OnStart(Action onComplete = null)
     {
@@ -23,7 +23,7 @@ public class TUT_Advance : BaseTutorial
     // A mettre dans un autre tutoriel eventuellement
     public void FocusOnHarpoon(Action OnComplete)
     {
-        if (dataSaver.GetBool(showHarpoonKey, false))
+        if (dataSaver.GetBool(SHOW_HARPOON_KEY, false))
         {
             Debug.Log("FOCUS ON HARPOON!!!");
             Game.Instance.GameRunning.Lock("spotlight");
