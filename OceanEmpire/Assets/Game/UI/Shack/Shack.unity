@@ -1519,6 +1519,7 @@ GameObject:
   - component: {fileID: 548014115}
   - component: {fileID: 548014114}
   - component: {fileID: 548014117}
+  - component: {fileID: 548014118}
   m_Layer: 5
   m_Name: Go Left
   m_TagString: Untagged
@@ -1643,6 +1644,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 0}
   audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
+--- !u!114 &548014118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548014112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe842e6c0700d7348860a231a330f944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downSize: 0.93
+  pressSpeed: 4
+  releaseSpeed: 0.175
+  pressEase: 2
+  releaseEase: 24
 --- !u!1 &594275331
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,6 +5266,7 @@ GameObject:
   - component: {fileID: 1287141113}
   - component: {fileID: 1287141112}
   - component: {fileID: 1287141115}
+  - component: {fileID: 1287141116}
   m_Layer: 5
   m_Name: Go Right
   m_TagString: Untagged
@@ -5373,6 +5391,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clip: {fileID: 0}
   audioAsset: {fileID: 11400000, guid: 600e3b2cadea1d64eab7a69d3202a833, type: 2}
+--- !u!114 &1287141116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287141110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe842e6c0700d7348860a231a330f944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downSize: 0.93
+  pressSpeed: 4
+  releaseSpeed: 0.175
+  pressEase: 2
+  releaseEase: 24
 --- !u!224 &1295237299 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224742069660052502, guid: d70861b802cc9cf439c165c3bd81d56c,
@@ -6621,6 +6655,10 @@ MonoBehaviour:
   _shopDestination: {fileID: 1072709906}
   startSection: 0
   questPanel: {fileID: 1545004479}
+  leftButton: {fileID: 548014112}
+  rightButton: {fileID: 1287141110}
+  SECTION_MAX: 1
+  SECTION_MIN: -1
 --- !u!4 &1585736095
 Transform:
   m_ObjectHideFlags: 0
