@@ -47,11 +47,17 @@ public class Shack_CallToAction : MonoBehaviour
     {
         if (_images != null)
             foreach (var image in _images)
-                image.enabled = state;
+            {
+                if (image)
+                    image.enabled = state;
+            }
 
         if (_gameObjects != null)
             foreach (var gameObj in _gameObjects)
-                gameObj.SetActive(state);
+            {
+                if (gameObj)
+                    gameObj.SetActive(state);
+            }
 
         if (_floatingAnimation)
             _floatingAnimation.enabled = state;

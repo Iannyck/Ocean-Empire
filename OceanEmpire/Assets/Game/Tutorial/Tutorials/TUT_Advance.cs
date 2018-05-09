@@ -12,7 +12,7 @@ public class TUT_Advance : BaseTutorial
     public GameObject sliderAnim_Prefab;
     private GameObject sliderAnim;
 
-    private const string showHarpoonKey = "itstimetoharpoon";
+    public const string showHarpoonKey = "itstimetoharpoon";
 
     protected override void OnStart(Action onComplete = null)
     {

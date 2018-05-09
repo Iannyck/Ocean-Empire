@@ -14,7 +14,7 @@ public class IntroScript : MonoBehaviour {
 
     public DataSaver tutorialSaver;
 
-    private const string firstRunKey = "";
+    private const string firstRunKey = "firstRun";
 
     void Awake()
     {
@@ -31,9 +31,9 @@ public class IntroScript : MonoBehaviour {
             sq.OnComplete(delegate ()
             {
                 // First run
-                if (tutorialSaver.GetInt(firstRunKey, 0) == 0)
+                if (tutorialSaver.GetBool(firstRunKey, true))
                 {
-                    tutorialSaver.SetInt(firstRunKey, 1);
+                    tutorialSaver.SetBool(firstRunKey, false);
                     tutorialSaver.Save();
                     Scenes.Load(tutorialMap);
                 }

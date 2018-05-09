@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Tutorial;
 using UnityEngine;
 
-public class TutorialInit : MonoBehaviour {
+public class TutorialInit : MonoBehaviour
+{
 
     public bool onStart = false;
     public bool onGameReady = true;
@@ -12,9 +13,9 @@ public class TutorialInit : MonoBehaviour {
 
     private bool hasBeenInit = false;
 
-    void Start ()
+    void Start()
     {
-        if(onStart)
+        if (onStart)
             Init();
     }
 
@@ -41,7 +42,8 @@ public class TutorialInit : MonoBehaviour {
             {
                 TutorialScene.StartTutorial(tutorial.name, tutorial.dataSaver);
             });
-        }else
+        }
+        else
         {
             TutorialScene.StartTutorial(tutorial.name, tutorial.dataSaver);
         }
