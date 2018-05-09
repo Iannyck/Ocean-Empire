@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
+using Questing;
 
-public class IntroScript : MonoBehaviour {
+public class IntroScript : MonoBehaviour
+{
 
     public Image uqacLogo;
     public float animDuration;
@@ -14,14 +17,18 @@ public class IntroScript : MonoBehaviour {
 
     public DataSaver tutorialSaver;
 
+    [Header("Start quests")]
+    public PrebuiltMapData firstMap;
+
+
     private const string firstRunKey = "firstRun";
 
     void Awake()
     {
-        PersistentLoader.LoadIfNotLoaded();
+        PersistentLoader.LoadIfNotLoaded(Go);
     }
 
-	void Start ()
+    void Go()
     {
         tutorialSaver.LoadAsync(delegate ()
         {
@@ -35,6 +42,18 @@ public class IntroScript : MonoBehaviour {
                 {
                     tutorialSaver.SetBool(firstRunKey, false);
                     tutorialSaver.Save();
+
+                    if (firstMap)
+                    {
+                        var now = DateTime.Now;
+                        foreach (var quest in firstMap.GetRelatedQuestBuilders())
+                        {
+                            if (quest != null)
+                                QuestManager.Instance.AddQuest(quest.BuildQuest(now), false);
+                        }
+                        QuestManager.Instance.LateSave();
+                    }
+
                     Scenes.Load(tutorialMap);
                 }
                 else
