@@ -572,8 +572,8 @@ MonoBehaviour:
   blackFade: {fileID: 896480583}
   fadeDuration: 0.5
   fadeEase: 1
-  topPosition: {x: 0, y: 297.7}
-  middlePosition: {x: 0, y: -69.4}
+  topPosition: {x: 0, y: 502.4}
+  middlePosition: {x: 0, y: -20}
   bottomPosition: {x: 0, y: -471.3}
 --- !u!225 &599988724
 CanvasGroup:

@@ -5,7 +5,7 @@ using Tutorial;
 using UnityEngine;
 
 // Tutoriel #1 base du jeu
-[CreateAssetMenu(fileName = "TUT_FirstMap", menuName = "Ocean Empire/Tutorial/Gaz")]
+[CreateAssetMenu(fileName = "TUT_Gaz", menuName = "Ocean Empire/Tutorial/Gaz")]
 public class TUT_Gaz : BaseTutorial
 {
 
@@ -24,7 +24,7 @@ public class TUT_Gaz : BaseTutorial
         spotlight.On(Game.Instance.Recolte_UI.gazSlider.transform.position);
 
         modules.textDisplay.SetMiddle();
-        modules.textDisplay.DisplayText("Voici ta jauge à essence." +
+        modules.textDisplay.DisplayText("Voici ta jauge d'essence." +
             "\n<size=55>Lorsqu'elle devient vide, ta récolte de poisson se termine.</size>", true);
 
         modules.okButton.PromptOk(2f, () =>

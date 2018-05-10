@@ -40,9 +40,9 @@ public class Shop2UI : MonoBehaviour
 
     void _OnBuyAnyUpgrade(OpenCategoryButton categoryButton)
     {
-        if(categoryButton.categoryDisplay.category == harpoonCategory && !tutoSaver.GetBool(TUT_Advance.SHOW_HARPOON_KEY))
+        if(categoryButton.categoryDisplay.category == harpoonCategory && !tutoSaver.GetBool(TUT_Harpoon.SHOW_HARPOON_KEY))
         {
-            tutoSaver.SetBool(TUT_Advance.SHOW_HARPOON_KEY, true);
+            tutoSaver.SetBool(TUT_Harpoon.SHOW_HARPOON_KEY, true);
             tutoSaver.LateSave();
         }
 

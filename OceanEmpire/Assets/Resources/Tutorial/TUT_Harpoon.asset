@@ -13,23 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
-  forceStart: 1
-  tutorialEvents:
-  - eventID: FocusOnFishInvincible
-    functionName: FocusOnFishInvincible
-    useSpecificTime: 1
-    useRealTime: 0
-    when: 0
-    invokeOnGameStarted: 0
-    startAfterAnotherStep: 0
-    startAfterTutorialStepIndex: 0
-  - eventID: FocusOnHarpoon
-    functionName: FocusOnHarpoon
-    useSpecificTime: 1
-    useRealTime: 0
-    when: 3
-    invokeOnGameStarted: 1
-    startAfterAnotherStep: 0
-    startAfterTutorialStepIndex: 0
-  sliderAnim_Prefab: {fileID: 1298547634821562, guid: c02b368fe6cc8c940864f62db81adf15,
+  forceStart: 0
+  tutorialEvents: []
+  explanationImage: {fileID: 225256294406765210, guid: 314749c60dbec664aaf9c806bc4c767b,
     type: 2}

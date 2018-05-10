@@ -32,16 +32,16 @@ namespace Tutorial
         /// </summary>
         public static bool StartTutorial(string tutorialAssetName, DataSaver tutorialSaver)
         {
+            //Check if completed ?
+            bool hasBeenCompleted = BaseTutorial.HasBeenCompleted(tutorialAssetName, tutorialSaver);
+            if (hasBeenCompleted)
+                return false;
+
             if (IsInTutorial)
             {
                 Debug.LogWarning("Cannot start \"" + tutorialAssetName + "\". Already in a tutorial");
                 return false;
             }
-
-            //Check if completed ?
-            bool hasBeenCompleted = BaseTutorial.HasBeenCompleted(tutorialAssetName, tutorialSaver);
-            if (hasBeenCompleted)
-                return false;
 
             IsInTutorial = true;
 
