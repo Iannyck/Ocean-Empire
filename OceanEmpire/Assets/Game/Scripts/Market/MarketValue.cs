@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public struct MarketValue
 {
     public float floatValue;
@@ -10,7 +12,7 @@ public struct MarketValue
     {
         this.floatValue = floatValue;
     }
-    public static MarketValue Zero { get { return new MarketValue(0); } }
+    public readonly static MarketValue Zero = new MarketValue(0);
 
     #region Standard struc overrides
     public override string ToString()

@@ -4430,7 +4430,6 @@ GameObject:
   - component: {fileID: 1109020675}
   - component: {fileID: 1109020676}
   - component: {fileID: 1109020677}
-  - component: {fileID: 1109020678}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4565,20 +4564,6 @@ MonoBehaviour:
   - {fileID: 1328244362}
   - {fileID: 1449571620}
   transitionDuration: 0.5
---- !u!114 &1109020678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1109020670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a75af67d201f004c8673c5864cd7a85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questBuilderIndex: 0
-  frenzyCategory: {fileID: 0}
-  questBuilders: []
 --- !u!1 &1129659464
 GameObject:
   m_ObjectHideFlags: 0

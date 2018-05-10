@@ -11,15 +11,20 @@ using System;
 public class ContinuousRewarder : MonoPersistent
 {
     private const string SAVEKEY_LASTUPDATE = "CR_lastUpdate";
+    private const string SAVEKEY_REMAINING_MARKETVALUE = "CR_remainingMrktVal";
+
     [SerializeField] private AnalyserGroup analyserGroup;
     [SerializeField] private DataSaver dataSaver;
 
     [SerializeField, Suffix("seconds")] private int updateEvery = 5;
 
     [SerializeField] private CurrencyType rewardCurrency = CurrencyType.Ticket;
+    [SerializeField] ScriptableActionQueue shackAnimationQueue;
+    [SerializeField] SceneInfo rewardScene;
 
     private DateTime lastUpdate;
     private DateTime nextUpdate;
+    private MarketValue remainingMarketValue;
 
     private float nextCheckTimer = 0;
 
@@ -34,6 +39,7 @@ public class ContinuousRewarder : MonoPersistent
             lastUpdate = DateTimeNow;
         else
             lastUpdate = (DateTime)lastUpdateOBJ;
+        remainingMarketValue = new MarketValue(dataSaver.GetFloat(SAVEKEY_REMAINING_MARKETVALUE));
     }
 
     DateTime DateTimeNow
@@ -45,7 +51,7 @@ public class ContinuousRewarder : MonoPersistent
     {
         nextCheckTimer -= Time.unscaledDeltaTime;
 
-        if(nextCheckTimer < 0)
+        if (nextCheckTimer < 0)
         {
             CheckIfNeedToUpdate();
             nextCheckTimer = updateEvery / 10;
@@ -70,10 +76,11 @@ public class ContinuousRewarder : MonoPersistent
         {
             lastUpdate = now;
 
-            dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
-            dataSaver.LateSave();
-
             AnalyseAndRewardTimeSlot(timeslotToAnalyse);
+
+            dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
+            dataSaver.SetFloat(SAVEKEY_REMAINING_MARKETVALUE, remainingMarketValue.floatValue);
+            dataSaver.LateSave();
         }
     }
 
@@ -102,12 +109,38 @@ public class ContinuousRewarder : MonoPersistent
         var finalTs = new TimeSlot(previous, timeslotToAnalyse.end);
         rewardValue += GetMarketValueOfTimeSlot(finalTs, null);
 
+        // Le change qui restait de la dernière fois
+        rewardValue += remainingMarketValue;
 
         // Give reward
-        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue);
+        CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue, out remainingMarketValue);
 
         if (reward.amount > 0)
+        {
             PlayerCurrency.AddCurrencyAmount(reward);
+
+            // On fait pop un message de "bravo!! 10 ticket pour avoir marché"
+            // si ça fait plus de 2 min qu'on a analysé
+            if (timeslotToAnalyse.duration > new TimeSpan(0, 0, 2))
+            {
+                Action onAnimComplete = null;
+                shackAnimationQueue.ActionQueue.AddAction(() =>
+                {
+                    Shack_Canvas shack_Canvas = null;
+                    if (Scenes.IsActive("Shack") && (shack_Canvas = Scenes.GetActive("Shack").FindRootObject<Shack_Canvas>()))
+                        shack_Canvas.HideAll();
+                    Scenes.Load(rewardScene, (s) =>
+                    {
+                        s.FindRootObject<ContinuousRewardWindow>().FillContent(reward.amount, () =>
+                        {
+                            if (shack_Canvas)
+                                shack_Canvas.ShowAll();
+                            onAnimComplete();
+                        });
+                    });
+                }, 0, out onAnimComplete);
+            }
+        }
     }
 
     MarketValue GetMarketValueOfTimeSlot(TimeSlot timeSlot, Bonus bonus)

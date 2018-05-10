@@ -1,19 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
-[ExecuteInEditMode]
-public class HiddenTrashSceneCleaner : MonoBehaviour
-{
-    [Reorderable]
-    public GameObject[] hiddenGameobjects;
-}
 
 [CustomEditor(typeof(HiddenTrashSceneCleaner))]
 public class HiddenTrashSceneCleanerEditor : Editor
 {
-
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

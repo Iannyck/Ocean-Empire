@@ -6,10 +6,13 @@ public static class Market
 {
     // NB: Pour l'instant, les valeurs sont hardcodé, mais elles devraient éventuellement varier en fonction de plusieurs paramètres.
 
-    public static CurrencyAmount GetCurrencyAmountFromValue(CurrencyType type, MarketValue desiredValue)
+    public static CurrencyAmount GetCurrencyAmountFromValue(CurrencyType type, MarketValue desiredValue, out MarketValue excessValue)
     {
-        int currencyAmount = (desiredValue / GetCurrencyValue(type)).floatValue.RoundedToInt();
-        return new CurrencyAmount(currencyAmount, type);
+        float floatingCoins = (desiredValue / GetCurrencyValue(type)).floatValue;
+        int roundedCoins = Mathf.FloorToInt(floatingCoins);
+        excessValue = (floatingCoins - roundedCoins) * GetCurrencyValue(type);
+
+        return new CurrencyAmount(roundedCoins, type);
     }
 
     public static MarketValue GetCurrencyValue(CurrencyType type)
@@ -35,13 +38,13 @@ public static class Market
         switch (type)
         {
             case ExerciseType.Walk:
-                return 1;
+                return 0.33f;
             case ExerciseType.Run:
-                return 2;
+                return 0.33f;
             case ExerciseType.Stairs:
-                return 2;
+                return 0.33f;
             case ExerciseType.PressKey:
-                return 10;
+                return 0.33f;
             default:
                 return -1;
         }

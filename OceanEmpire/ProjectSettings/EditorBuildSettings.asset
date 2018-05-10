@@ -128,3 +128,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Windows/InstantExerciseChoice/WhenToPlan/WhenToPlanWindow.unity
     guid: e5c599fa64f1a1d42a44980ef71cdc7e
+  - enabled: 1
+    path: Assets/Game/UI/Windows/ContinuousReward/ContinuousRewardWindow.unity
+    guid: 8c01d3b993002024795e2cd2ab4be03a

@@ -11,3 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8893d73f42223174387b6321657ae934, type: 3}
   m_Name: Press Key Analyser
   m_EditorClassIdentifier: 
+  volumePerPress: 1

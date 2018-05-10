@@ -55,3 +55,6 @@ MonoBehaviour:
   dataSaver: {fileID: 11400000, guid: 91b765acb2de1b840833439740cdbf3e, type: 2}
   updateEvery: 5
   rewardCurrency: 1
+  shackAnimationQueue: {fileID: 11400000, guid: 3302be055f5a0364a936b508dc2879ae,
+    type: 2}
+  rewardScene: {fileID: 11400000, guid: 59b6e92c17d493c41b3c1d0c29f05636, type: 2}
