@@ -8,7 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TUT_Shack1", menuName = "Ocean Empire/Tutorial/Shack 1")]
 public class TUT_Shack1 : BaseTutorial
 {
-    public override bool StartCondition()
+    public override bool LaunchCondition()
     {
         return Scenes.IsActive("Shack");
     }

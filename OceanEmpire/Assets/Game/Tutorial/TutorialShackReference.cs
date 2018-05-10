@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class TutorialShackReference : MonoBehaviour
 {
-    public RectTransform cash;
     public RectTransform superPeche;
-    public RectTransform calendrier;
     public RectTransform plonger;
     public Button shopButton;
     public RectTransform objectifTitle;
 
+    public Button newTaskButton;
+    public RectTransform cash;
+    public RectTransform tickets;
     public Shack_CameraController cameraController;
+    public QuestPanel questPanel;
+    public TaskPanel taskPanel;
     public Button goRightButton;
     public Button goLeftButton;
 

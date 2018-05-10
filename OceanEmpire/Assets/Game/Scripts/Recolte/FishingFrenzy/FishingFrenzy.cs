@@ -41,6 +41,8 @@ public class FishingFrenzy : MonoPersistent
         Instance = this;
     }
 
+    public bool IsUnlocked { get { return shopCategory.GetCurrentLevel() >= 1; } }
+
     void Update()
     {
         if (updateStateEveryFrame)

@@ -18,10 +18,15 @@ public class TaskPanel : MonoBehaviour
 
     void Awake()
     {
-        PersistentLoader.LoadIfNotLoaded(()=>
+        PersistentLoader.LoadIfNotLoaded(() =>
         {
             UpdateState();
             PlannedExerciceRewarder.Instance.OnLatestPendingReportUpdated += UpdateState;
+
+            if (MapManager.Instance.MapIndex < 1)
+            {
+                gameObject.SetActive(false);
+            }
         });
     }
 

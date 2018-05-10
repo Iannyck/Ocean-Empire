@@ -70,7 +70,7 @@ public class TUT_Harpoon : BaseTutorial
         });
     }
 
-    public override bool StartCondition()
+    public override bool LaunchCondition()
     {
         return dataSaver.GetBool(SHOW_HARPOON_KEY, false);
     }

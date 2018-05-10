@@ -48,7 +48,7 @@ public class FishingFrenzyWidget : MonoBehaviour
     public void UpdateVisibility()
     {
         if (FishingFrenzy.Instance)
-            gameObject.SetActive(FishingFrenzy.Instance.shopCategory.IsAvailable);
+            gameObject.SetActive(FishingFrenzy.Instance.IsUnlocked);
     }
 
     void Update()

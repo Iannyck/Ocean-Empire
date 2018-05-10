@@ -21,7 +21,7 @@ public class TUT_Calendrier : BaseTutorial
         if (dataSaver.GetBool(showCalendrierKey, false))
         {
             Spotlight spotlight = modules.spotlight;
-            spotlight.On(TutorialShackReference.Instance.calendrier.position);
+            spotlight.On(TutorialShackReference.Instance.newTaskButton.transform.position);
 
             modules.textDisplay.DisplayText("Grâce au calendrier, on peut planifier des exercices. Lorsque ceux-ci sont effectués, ils donneront beaucoup plus de récompense qu'un exercice normal.", true);
             modules.textDisplay.SetBottom();

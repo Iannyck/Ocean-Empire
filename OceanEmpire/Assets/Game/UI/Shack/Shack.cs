@@ -55,7 +55,7 @@ public class Shack : MonoBehaviour
 
     void CheckFishingFrenzy()
     {
-        recolteCallToAction.enabled = FishingFrenzy.Instance.shopCategory.IsAvailable &&
+        recolteCallToAction.enabled = FishingFrenzy.Instance.IsUnlocked &&
             FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available;
     }
 
@@ -71,87 +71,11 @@ public class Shack : MonoBehaviour
         GameSettings gameSettings = new GameSettings(MapManager.Instance.MapData, true);
 
         if (FishingFrenzy.Instance != null
-            && FishingFrenzy.Instance.shopCategory.IsAvailable
+            && FishingFrenzy.Instance.IsUnlocked
             && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.Available)
         {
             FishingFrenzy.Instance.Activate();
         }
         LoadingScreen.TransitionTo(GameBuilder.SCENENAME, new ToRecolteMessage(gameSettings), true);
-    }
-
-    public bool IsInCalendar { get; private set; }
-
-    public void OpenCalendar()
-    {
-        //if (IsInCalendar)
-        //    return;
-        //IsInCalendar = true;
-
-        //// Request settings
-        //CalendarRequest.Settings settings = new CalendarRequest.Settings()
-        //{
-        //    windowHeaderTitle = "Quel jour?",
-        //    scheduleButtonText = "Plannifier l'exercice"
-        //};
-
-        //// Launch request
-        //var handle = CalendarRequest.LaunchRequest(settings);
-        //handle.onWindowExitStarted = () =>
-        //{
-        //    mainCanvas.alpha = 1;
-        //    hud.alpha = 1;
-        //    alwayVisibleHud.alpha = 1;
-        //};
-        //handle.onWindowIntroComplete = () =>
-        //{
-        //    mainCanvas.alpha = 0;
-        //    hud.alpha = 0;
-        //    alwayVisibleHud.alpha = 0;
-        //};
-        //handle.onWindowExitComplete = () => IsInCalendar = false;
-
-        //// When the player picks a time in the calendar
-        //handle.onTimePicked = (date) =>
-        //{
-        //    Debug.Log("DateTime picked: " + date);
-        //    Task task = new Task()
-        //    {
-        //        minDuration = 3,
-        //        advertisedDuration = 4,
-        //        maxDuration = 5,
-        //        level = 4,
-        //        ticketReward = 10
-        //    };
-
-        //    //TimeSpan FIFTEEN_MINUTES = new TimeSpan(0, 15, 0);
-
-        //    //DateTime now = DateTime.Now;
-        //    DateTime scheduleStart = date;
-        //    //if (scheduleStart < now)
-        //    //    scheduleStart = now;
-
-        //    DateTime scheduleEnd = scheduleStart + task.GetMaxDurationAsTimeSpan();
-            
-        //    TimeSlot timeSlot = new TimeSlot(scheduleStart, scheduleEnd);
-
-        //    ScheduledBonus schedule = new ScheduledBonus(timeSlot, ScheduledBonus.DefaultBonus())
-        //    {
-        //        task = task,
-        //        displayPadding = true,
-
-        //        // Padding de 15min avant et après l'exercice
-        //        forwardPadding = new TimeSpan(0,15,0),
-        //        backwardPadding = new TimeSpan(0,15,0)
-        //    };
-
-        //    if (!Calendar.instance.AddSchedule(schedule))
-        //    {
-        //        MessagePopup.DisplayMessage("La plage horaire est déjà occupé.");
-        //    }
-        //    else
-        //    {
-        //        handle.CloseWindow();
-        //    }
-        //};
     }
 }

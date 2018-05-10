@@ -47,7 +47,7 @@ public class TUT_Gaz : BaseTutorial
         });
     }
 
-    public override bool StartCondition()
+    public override bool LaunchCondition()
     {
         return Game.Instance != null && Game.Instance.ElapsedPlayTime > 16;
     }

@@ -58,13 +58,16 @@ public class QuestPanel : MonoBehaviour
     {
         onm_button.gameObject.SetActive(false);
 
-        if (showOnStart)
+        CoroutineLauncher.Instance.DelayedCall(() =>
         {
-            if (!isShown)
-                Show();
-        }
-        else
-            HideInstant();
+            if (showOnStart)
+            {
+                if (!isShown)
+                    Show();
+            }
+        }, arrivalDelay);
+
+        HideInstant();
     }
 
     public void Show()
@@ -81,7 +84,7 @@ public class QuestPanel : MonoBehaviour
         rectTr.sizeDelta = normalSize;
         rectTr.anchoredPosition = normalAnchoredPosition + arrivalDelta;
 
-        sq.AppendInterval(arrivalDelay);
+        //sq.AppendInterval(arrivalDelay);
         sq.Append(rectTr.DOAnchorPos(normalAnchoredPosition, moveDuration).SetEase(arrivalEase));
         sq.Join(canvasGroup.DOFade(1, fadeInDuration));
         sq.SetId(this);

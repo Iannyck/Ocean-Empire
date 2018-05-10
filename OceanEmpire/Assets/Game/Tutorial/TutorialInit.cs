@@ -38,7 +38,7 @@ public class TutorialInit : MonoBehaviour
         if (HasLaunched)
             return;
 
-        if (tutorial.StartCondition())
+        if (tutorial.LaunchCondition())
         {
             Launch();
         }

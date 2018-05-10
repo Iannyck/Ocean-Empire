@@ -176,6 +176,6 @@ namespace Tutorial
             }
         }
 
-        public virtual bool StartCondition() { return true; }
+        public virtual bool LaunchCondition() { return true; }
     }
 }
