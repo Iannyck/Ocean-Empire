@@ -9,6 +9,7 @@ public class MapManager : MonoPersistent
     [SerializeField] bool logMapNames = false;
     [SerializeField] DataSaver dataSaver;
     [SerializeField] PrebuiltMapData _defaultMapData;
+
     [ReadOnly, SerializeField] int _mapIndex;
     public int MapIndex { get { return _mapIndex; } private set { _mapIndex = value; } }
 

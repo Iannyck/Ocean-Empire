@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4229115702662548}
   - component: {fileID: 114662544385821532}
+  - component: {fileID: 114557255844969798}
   m_Layer: 0
   m_Name: Map Manager
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114557255844969798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796983651421376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b155e0a1191874b8eb06e7ecb34dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishingFrenzyCategory: {fileID: 11400000, guid: fba76a724ecd44a4e836d52535db680f,
+    type: 2}
 --- !u!114 &114662544385821532
 MonoBehaviour:
   m_ObjectHideFlags: 1
