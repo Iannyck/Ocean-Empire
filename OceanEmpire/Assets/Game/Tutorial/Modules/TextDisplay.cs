@@ -11,7 +11,6 @@ namespace Tutorial
         public CanvasGroup fade;
         public Text text;
         public Image blackFade;
-        public Image characterImage;
 
         [Header("Fade settings")]
         public float fadeDuration;
@@ -76,6 +75,10 @@ namespace Tutorial
             {
                 fade.DOKill();
                 fade.gameObject.SetActive(true);
+
+                var recttr = fade.GetComponent<RectTransform>();
+                recttr.anchoredPosition = new Vector2(1920, recttr.anchoredPosition.y);
+                recttr.DOAnchorPosX(0, fadeDuration).SetEase(Ease.OutQuint).SetUpdate(true);
                 Tweener fadeTween = fade.DOFade(1, fadeDuration).SetEase(fadeEase).SetUpdate(true);
 
                 text.text = message;
@@ -93,6 +96,7 @@ namespace Tutorial
         public void HideText(TweenCallback onComplete = null)
         {
             fade.DOKill();
+            fade.GetComponent<RectTransform>().DOAnchorPosX(-1920, fadeDuration).SetEase(Ease.Linear).SetUpdate(true);
             fade.DOFade(0, fadeDuration).SetEase(fadeEase).SetUpdate(true).OnComplete(delegate ()
             {
                 InstantHide();
@@ -100,16 +104,6 @@ namespace Tutorial
                 if (onComplete != null)
                     onComplete();
             });
-        }
-
-        public void SetCharacterSprite(Sprite character)
-        {
-            characterImage.enabled = true;
-            characterImage.sprite = character;
-        }
-        public void DisableCharacterSprite()
-        {
-            characterImage.enabled = false;
         }
     }
 }

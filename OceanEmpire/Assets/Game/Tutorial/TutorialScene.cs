@@ -15,17 +15,38 @@ namespace Tutorial
         public Shortcuts shorcuts;
         public DelayedAction delayedAction;
         public WaitForInput waitForInput;
+        public OkButton okButton;
+
+        [SerializeField] Camera cam;
+
+        public static bool IsInTutorial { get; private set; }
+
+        void Awake()
+        {
+            if (cam)
+                cam.gameObject.SetActive(false);
+        }
 
         /// <summary>
         /// Retourne faux si le tutoriel a deja ete completer
         /// </summary>
         public static bool StartTutorial(string tutorialAssetName, DataSaver tutorialSaver)
         {
+            if (IsInTutorial)
+            {
+                Debug.LogWarning("Cannot start \"" + tutorialAssetName + "\". Already in a tutorial");
+                return false;
+            }
+
             //Check if completed ?
             bool hasBeenCompleted = BaseTutorial.HasBeenCompleted(tutorialAssetName, tutorialSaver);
-            //Debug.Log("DO WE START TUTORIAL ? " + !hasBeenCompleted);
             if (hasBeenCompleted)
                 return false;
+
+            IsInTutorial = true;
+
+
+            Debug.Log("Starting tutorial: " + tutorialAssetName);
 
             // Load la scene + lance le tuto
             ResourceRequest resourceRequest = Resources.LoadAsync<BaseTutorial>("Tutorial/" + tutorialAssetName);
@@ -37,7 +58,7 @@ namespace Tutorial
                 });
             };
             return true;
-         }
+        }
 
         /// <summary>
         /// Force le tutoriel a être exécuté
@@ -65,6 +86,12 @@ namespace Tutorial
             tutorial.Init(this);
 
             return true;
+        }
+
+        public void QuitTuto()
+        {
+            IsInTutorial = false;
+            Scenes.UnloadAsync(SCENENAME);
         }
     }
 

@@ -127,8 +127,8 @@ namespace Tutorial
         private void Quit()
         {
             Cleanup();
+            modules.QuitTuto();
             modules = null;
-            Scenes.UnloadAsync(TutorialScene.SCENENAME);
         }
 
         public static bool HasBeenCompleted(string assetName, DataSaver tutorialSaver)
@@ -175,5 +175,7 @@ namespace Tutorial
                 theMethod.Invoke(this, parameters);
             }
         }
+
+        public virtual bool StartCondition() { return true; }
     }
 }

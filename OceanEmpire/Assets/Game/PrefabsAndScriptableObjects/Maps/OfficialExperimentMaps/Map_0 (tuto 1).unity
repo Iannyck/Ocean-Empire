@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 1682293349}
   - component: {fileID: 1682293348}
   - component: {fileID: 1682293350}
+  - component: {fileID: 1682293351}
   m_Layer: 0
   m_Name: Tutorial Loader
   m_TagString: Untagged
@@ -141,8 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b04f50f5668b94ea92ffa3f4d95aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onStart: 0
-  onGameReady: 1
+  tryLaunchOnStart: 0
+  tryLaunchOnGameStart: 1
+  tryLaunchEveryFrame: 0
   tutorial: {fileID: 11400000, guid: c6f6060824b97e940b8bcee18cbd0842, type: 2}
   tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
 --- !u!4 &1682293349
@@ -169,9 +171,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b04f50f5668b94ea92ffa3f4d95aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onStart: 0
-  onGameReady: 1
+  tryLaunchOnStart: 0
+  tryLaunchOnGameStart: 1
+  tryLaunchEveryFrame: 0
   tutorial: {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
+  tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
+--- !u!114 &1682293351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1682293347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b04f50f5668b94ea92ffa3f4d95aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tryLaunchOnStart: 0
+  tryLaunchOnGameStart: 0
+  tryLaunchEveryFrame: 1
+  tutorial: {fileID: 11400000, guid: 921b4dfa3e7464a438b80a6051526c16, type: 2}
   tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
 --- !u!1001 &1891798692
 Prefab:

@@ -41,13 +41,13 @@ public class ClickAnimation : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private Tween DownAnim()
     {
         currentTween.Kill();
-        return currentTween = tr.DOScale(Vector3.one * downSize, 0.1f / (pressSpeed + 0.001f)).SetEase(pressEase);
+        return currentTween = tr.DOScale(Vector3.one * downSize, 0.1f / (pressSpeed + 0.001f)).SetEase(pressEase).SetUpdate(true);
     }
 
     private Tween UpAnim()
     {
         currentTween.Kill();
-        return currentTween = tr.DOScale(Vector3.one, 0.1f / (releaseSpeed + 0.001f)).SetEase(releaseEase);
+        return currentTween = tr.DOScale(Vector3.one, 0.1f / (releaseSpeed + 0.001f)).SetEase(releaseEase).SetUpdate(true);
     }
 
     public void OnPointerDown(PointerEventData eventData)

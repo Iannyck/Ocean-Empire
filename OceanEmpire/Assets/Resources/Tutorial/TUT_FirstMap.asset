@@ -14,30 +14,4 @@ MonoBehaviour:
   dataSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
   startTutorialOnInit: 1
   forceStart: 0
-  tutorialEvents:
-  - eventID: FocusOnSubmarine
-    functionName: FocusOnSubmarine
-    useSpecificTime: 1
-    useRealTime: 0
-    when: 3
-    invokeOnGameStarted: 1
-    startAfterAnotherStep: 0
-    startAfterTutorialStepIndex: 0
-  - eventID: FocusOnGaz
-    functionName: FocusOnGaz
-    useSpecificTime: 0
-    useRealTime: 0
-    when: 0
-    invokeOnGameStarted: 0
-    startAfterAnotherStep: 1
-    startAfterTutorialStepIndex: 0
-  - eventID: FocusOnOption
-    functionName: FocusOnOption
-    useSpecificTime: 0
-    useRealTime: 0
-    when: 0
-    invokeOnGameStarted: 0
-    startAfterAnotherStep: 1
-    startAfterTutorialStepIndex: 1
-  focusDuration: 5
-  shackScene: {fileID: 11400000, guid: 65fc4546fb6b8444f8633c86e90cf493, type: 2}
+  tutorialEvents: []

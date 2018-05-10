@@ -18,35 +18,41 @@ public class TUT_Advance : BaseTutorial
     {
         sliderAnim = Instantiate(sliderAnim_Prefab, Scenes.GetActive(TutorialScene.SCENENAME).FindRootObject<TutorialScene>().transform);
         onComplete();
+
+        modules.delayedAction.Do(3, FocusOnHarpoon);
     }
 
-    // A mettre dans un autre tutoriel eventuellement
-    public void FocusOnHarpoon(Action OnComplete)
+    void FocusOnHarpoon()
     {
-        if (dataSaver.GetBool(SHOW_HARPOON_KEY, false))
+        Debug.Log("FOCUS ON HARPOON!!!");
+
+        Game.Instance.GameRunning.Lock("spotlight");
+
+        modules.spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
+
+        sliderAnim.SetActive(true);
+        sliderAnim.GetComponent<SlideAnimation>().Init(new Vector3(0, 0, 0)); // centre de l'ecran
+
+        modules.textDisplay.SetTop();
+        modules.textDisplay.DisplayText("Voici ton harpon! Utilise le pour capturer des gros poissons.", true);
+
+        modules.spotlight.DelayedCall(delegate ()
         {
-            Debug.Log("FOCUS ON HARPOON!!!");
-            Game.Instance.GameRunning.Lock("spotlight");
-            Spotlight spotlight = modules.spotlight;
-            spotlight.OnWorld(Game.Instance.SubmarineMovement.transform.position);
-            sliderAnim.SetActive(true);
-            sliderAnim.GetComponent<SlideAnimation>().Init(new Vector3(0, 0, 0)); // centre de l'ecran
-            modules.textDisplay.DisplayText("Voici ton harpon! Utilise le pour capturer des gros poissons.", true);
-            modules.textDisplay.SetTop();
-            spotlight.DelayedCall(delegate ()
+            modules.waitForInput.OnTouch(delegate ()
             {
-                modules.waitForInput.OnTouch(delegate ()
+                sliderAnim.Destroy();
+                modules.textDisplay.HideText();
+                modules.spotlight.Off(() =>
                 {
-                    sliderAnim.Destroy();
-                    modules.textDisplay.HideText();
-                    spotlight.Off(() =>
-                    {
-                        OnComplete();
-                        End(true);
-                    });
-                    Game.Instance.GameRunning.Unlock("spotlight");
-                }, TouchPhase.Moved);
-            }, 0, true);
-        }
+                    End(true);
+                });
+                Game.Instance.GameRunning.Unlock("spotlight");
+            }, TouchPhase.Moved);
+        }, 0, true);
+    }
+
+    public override bool StartCondition()
+    {
+        return dataSaver.GetBool(SHOW_HARPOON_KEY, false);
     }
 }

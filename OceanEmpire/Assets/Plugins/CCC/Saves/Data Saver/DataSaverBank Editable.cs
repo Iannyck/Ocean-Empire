@@ -10,6 +10,7 @@ public partial class DataSaverBank
         Items = 3,
         Calendar = 4,
         History = 5,
-        PlayerProfile = 6
+        PlayerProfile = 6,
+        Tutorial = 7
     }
 }

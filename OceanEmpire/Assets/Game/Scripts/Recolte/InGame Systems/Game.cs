@@ -31,6 +31,7 @@ public class Game : PublicSingleton<Game>
     public PendingFishGPC PendingFishGPC { get; private set; }
     public Locker GameRunning { get; private set; }
     public bool IsInFishingFrenzy { private set; get; }
+    public float ElapsedPlayTime { get; private set; }
 
     [SerializeField] UnitInstantiator _instantiator;
     [SerializeField] PlayerStats _playerStats;
@@ -207,6 +208,14 @@ public class Game : PublicSingleton<Game>
         {
             LoadingScreen.TransitionTo(FishingSummary.SCENENAME, new ToFishingSummaryMessage(FishingReport));
         });
+    }
+
+    void Update()
+    {
+        if(gameStarted)
+        {
+            ElapsedPlayTime += Time.deltaTime;
+        }
     }
 
 

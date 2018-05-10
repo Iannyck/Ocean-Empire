@@ -5,47 +5,55 @@ using UnityEngine;
 
 public class TutorialInit : MonoBehaviour
 {
-
-    public bool onStart = false;
-    public bool onGameReady = true;
+    public bool tryLaunchOnStart = true;
+    public bool tryLaunchOnGameStart = false;
+    public bool tryLaunchEveryFrame = false;
     public BaseTutorial tutorial;
     public DataSaver tutorialSaver;
 
-    private bool hasBeenInit = false;
+    public bool HasLaunched { get; private set; }
+
+    void Awake()
+    {
+        if (!tutorialSaver.HasEverLoaded)
+            tutorialSaver.Load();
+    }
 
     void Start()
     {
-        if (onStart)
-            Init();
+        if (tryLaunchOnStart && !HasLaunched)
+            TryToLaunch();
     }
 
     void Update()
     {
-        if (onGameReady)
+        if (tryLaunchEveryFrame && !HasLaunched)
+            TryToLaunch();
+
+        if (tryLaunchOnGameStart && !HasLaunched && Game.Instance != null && Game.Instance.gameStarted)
         {
-            if (!hasBeenInit)
-            {
-                if (Game.Instance != null)
-                {
-                    Game.OnGameReady += Init;
-                    hasBeenInit = true;
-                }
-            }
+            TryToLaunch();
+            tryLaunchOnGameStart = false;
         }
     }
 
-    private void Init()
+    public void TryToLaunch()
     {
-        if (!tutorialSaver.HasEverLoaded)
+        if (tutorial.StartCondition())
         {
-            tutorialSaver.Load(delegate ()
-            {
-                TutorialScene.StartTutorial(tutorial.name, tutorial.dataSaver);
-            });
+            Launch();
         }
-        else
+    }
+
+    private void Launch()
+    {
+        if (HasLaunched)
         {
-            TutorialScene.StartTutorial(tutorial.name, tutorial.dataSaver);
+            Debug.LogError("Cannot launch a tutorial twice");
+            return;
         }
+
+        HasLaunched = true;
+        TutorialScene.StartTutorial(tutorial.name, tutorial.dataSaver);
     }
 }
