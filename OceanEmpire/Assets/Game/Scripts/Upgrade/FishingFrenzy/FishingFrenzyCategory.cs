@@ -8,7 +8,6 @@ public class FishingFrenzyCategory : UpgradeCategory<FishingFrenzyDescBuilder, F
     protected override string NextUpgGenCodeKey { get { return "ff2"; } }
     protected override string OwnedUpgGenKey { get { return "ff3"; } }
     protected override string AvailableSaveKey { get { return "ffAvailable"; } }
-    protected override bool AvailableByDefault { get { return false; } }
 
     public override FishingFrenzyDescription GenerateNextDescription(string nextUpgGenCode)
     {

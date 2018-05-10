@@ -19,7 +19,6 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
     protected override string NextUpgGenCodeKey { get { return "t2"; } }
     protected override string OwnedUpgGenKey { get { return "t3"; } }
     protected override string AvailableSaveKey { get { return "tAvailable"; } }
-    protected override bool AvailableByDefault { get { return true; } }
 
     public ThrusterCategory()
     {

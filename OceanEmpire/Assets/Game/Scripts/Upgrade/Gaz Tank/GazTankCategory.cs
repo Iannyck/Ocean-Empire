@@ -9,7 +9,6 @@ public class GazTankCategory : UpgradeCategory<GazTankDescBuilder, GazTankDescri
     protected override string NextUpgGenCodeKey { get { return "gt2"; } }
     protected override string OwnedUpgGenKey { get { return "gt3"; } }
     protected override string AvailableSaveKey { get { return "gtAvailable"; } }
-    protected override bool AvailableByDefault { get { return true; } }
 
     public override GazTankDescription GenerateNextDescription(string nextUpgGenCode)
     {

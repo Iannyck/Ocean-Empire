@@ -31,7 +31,7 @@ public class TUT_Gaz : BaseTutorial
         modules.okButton.PromptOk(2f, () =>
         {
             
-            modules.textDisplay.DisplayText("Si tu désire remonter à la surface plus tôt, tu peut toujours appuyer sur ce bouton.", true,
+            modules.textDisplay.DisplayText("Si tu désire remonter à la surface plus tôt, tu peux toujours appuyer sur ce bouton.", true,
                 ()=> spotlight.On(Game.Instance.Recolte_UI.optionButton.transform.position));
             modules.okButton.PromptOk(2f, () =>
             {

@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 149208878}
   - component: {fileID: 149208877}
   - component: {fileID: 149208881}
+  - component: {fileID: 149208882}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -228,6 +229,19 @@ MonoBehaviour:
     type: 2}
   countainer: {fileID: 1783320327}
   bonusGoldSprite: {fileID: 21300000, guid: fd87583a1687679448c5a3781173b44f, type: 3}
+--- !u!114 &149208882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 149208876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01db145f72d3f764b894c2972c0510f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstMap: {fileID: 11400000, guid: ace93314860619d4dad7f07ae2612e13, type: 2}
+  saver: {fileID: 11400000, guid: aaa312bfc9b544344a96ad2a4dd88016, type: 2}
 --- !u!1 &356914073
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +570,7 @@ Prefab:
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 62.7666
+      value: 62.765533
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -576,7 +590,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 204.97325
+      value: 204.97176
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -586,7 +600,7 @@ Prefab:
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 62.7666
+      value: 62.765533
       objectReference: {fileID: 0}
     - target: {fileID: 224948260686012058, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
@@ -596,12 +610,12 @@ Prefab:
     - target: {fileID: 224074558001833780, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 242.63321
+      value: 242.63107
       objectReference: {fileID: 0}
     - target: {fileID: 224307115512849180, guid: 660fe2b1cf6ce8d428656980c7fe4314,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 25.106642
+      value: 25.106215
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 660fe2b1cf6ce8d428656980c7fe4314, type: 2}

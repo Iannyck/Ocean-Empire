@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class MapUnlocks : MonoBehaviour
 {
-    [SerializeField] UpgradeCategory fishingFrenzyCategory;
+    [SerializeField] FishingFrenzyCategory fishingFrenzyCategory;
+    [SerializeField] GazTankCategory gazTankCategory;
+    [SerializeField] ThrusterCategory thrusterCategory;
 
 
     void OnEnable()
@@ -23,7 +25,14 @@ public class MapUnlocks : MonoBehaviour
 
     private void OnMapSet(int arg1, MapData arg2)
     {
-        if (arg1 == 1 && !fishingFrenzyCategory.IsAvailable)
-            fishingFrenzyCategory.MakeAvailable(true);
+        if (arg1 == 1)
+        {
+            if (!fishingFrenzyCategory.IsAvailable)
+                fishingFrenzyCategory.MakeAvailable(true);
+            if (!gazTankCategory.IsAvailable)
+                gazTankCategory.MakeAvailable(true);
+            if (!thrusterCategory.IsAvailable)
+                thrusterCategory.MakeAvailable(true);
+        }
     }
 }

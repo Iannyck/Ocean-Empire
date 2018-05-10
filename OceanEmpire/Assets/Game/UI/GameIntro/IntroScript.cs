@@ -11,14 +11,9 @@ public class IntroScript : MonoBehaviour
 
     public Image uqacLogo;
     public float animDuration;
-
     public SceneInfo tutorialMap;
     public SceneInfo shack;
-
     public DataSaver tutorialSaver;
-
-    [Header("Start quests")]
-    public PrebuiltMapData firstMap;
 
 
     private const string firstRunKey = "firstRun";
@@ -42,17 +37,6 @@ public class IntroScript : MonoBehaviour
                 {
                     tutorialSaver.SetBool(firstRunKey, false);
                     tutorialSaver.Save();
-
-                    if (firstMap)
-                    {
-                        var now = DateTime.Now;
-                        foreach (var quest in firstMap.GetRelatedQuestBuilders())
-                        {
-                            if (quest != null)
-                                QuestManager.Instance.AddQuest(quest.BuildQuest(now), false);
-                        }
-                        QuestManager.Instance.LateSave();
-                    }
 
                     Scenes.Load(tutorialMap);
                 }

@@ -9,7 +9,6 @@ public class HarpoonThrowerCategory : UpgradeCategory<HarpoonThrowerDescBuilder,
     protected override string NextUpgGenCodeKey { get { return "ht2"; } }
     protected override string OwnedUpgGenKey { get { return "ht3"; } }
     protected override string AvailableSaveKey { get { return "htAvailable"; } }
-    protected override bool AvailableByDefault { get { return true; } }
 
 
     public override HarpoonThrowerDescription GenerateNextDescription(string nextUpgGenCode)

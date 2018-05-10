@@ -112,12 +112,12 @@ public abstract class UpgradeCategory : ScriptableObject, IBuyable, IPersistent
     [SerializeField, ReadOnly] protected string nextUpgGenCode = "";
     [SerializeField, ReadOnly] protected string ownedUpgGenUpgrade = "";
     [SerializeField] public string CategoryName;
+    [SerializeField] protected bool AvailableByDefault = true;
 
     protected abstract string OwnedUpgradeKey { get; }
     protected abstract string NextUpgGenCodeKey { get; }
     protected abstract string OwnedUpgGenKey { get; }
     protected abstract string AvailableSaveKey { get; }
-    protected abstract bool AvailableByDefault { get; }
 
 
     public DataSaver dataSaver;
