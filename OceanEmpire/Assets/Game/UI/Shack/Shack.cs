@@ -12,6 +12,8 @@ public class Shack : MonoBehaviour
     public CanvasGroup mainCanvas;
     public CanvasGroup alwayVisibleHud;
 
+    public TutorialInit fishingFrenzyTuto;
+
     [Header("Hub")]
     public QuestPanel questPanel;
 
@@ -64,6 +66,7 @@ public class Shack : MonoBehaviour
         fishingFrenzyWidget.UpdateVisibility();
         CheckFishingFrenzy();
         questPanel.UpdateContent();
+        fishingFrenzyTuto.TryToLaunch();
     }
 
     public void LaunchGame()

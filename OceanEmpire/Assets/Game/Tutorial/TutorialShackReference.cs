@@ -18,6 +18,7 @@ public class TutorialShackReference : MonoBehaviour
     public TaskPanel taskPanel;
     public Button goRightButton;
     public Button goLeftButton;
+    public Shack_Canvas shack_Canvas;
 
     public static TutorialShackReference Instance { get; private set; }
 

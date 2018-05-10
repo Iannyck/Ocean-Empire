@@ -3213,12 +3213,12 @@ Prefab:
     - target: {fileID: 224330667620388298, guid: a720a19a29b0b7c41b65cc44f4c09b69,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 20
+      value: 194.99994
       objectReference: {fileID: 0}
     - target: {fileID: 224330667620388298, guid: a720a19a29b0b7c41b65cc44f4c09b69,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -20
+      value: -93.66974
       objectReference: {fileID: 0}
     - target: {fileID: 224330667620388298, guid: a720a19a29b0b7c41b65cc44f4c09b69,
         type: 2}
@@ -3253,12 +3253,12 @@ Prefab:
     - target: {fileID: 224330667620388298, guid: a720a19a29b0b7c41b65cc44f4c09b69,
         type: 2}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224330667620388298, guid: a720a19a29b0b7c41b65cc44f4c09b69,
         type: 2}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a720a19a29b0b7c41b65cc44f4c09b69, type: 2}
@@ -3391,6 +3391,7 @@ GameObject:
   - component: {fileID: 865249127}
   - component: {fileID: 865249128}
   - component: {fileID: 865249129}
+  - component: {fileID: 865249130}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -3421,6 +3422,7 @@ MonoBehaviour:
   taskPanel: {fileID: 1822719140}
   goRightButton: {fileID: 1287141112}
   goLeftButton: {fileID: 548014114}
+  shack_Canvas: {fileID: 1109020677}
 --- !u!4 &865249126
 Transform:
   m_ObjectHideFlags: 0
@@ -3479,6 +3481,21 @@ MonoBehaviour:
   tryLaunchOnGameStart: 0
   tryLaunchEveryFrame: 0
   tutorial: {fileID: 11400000, guid: c4352a474dc25a74da4f2c331bc29c5f, type: 2}
+--- !u!114 &865249130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 865249124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b04f50f5668b94ea92ffa3f4d95aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tryLaunchOnStart: 1
+  tryLaunchOnGameStart: 0
+  tryLaunchEveryFrame: 0
+  tutorial: {fileID: 11400000, guid: bb1a5b351cfafcc4b982ea917259be6e, type: 2}
 --- !u!1 &875729710
 GameObject:
   m_ObjectHideFlags: 0
@@ -4588,6 +4605,7 @@ MonoBehaviour:
   hud: {fileID: 1328244362}
   mainCanvas: {fileID: 1109020676}
   alwayVisibleHud: {fileID: 1449571620}
+  fishingFrenzyTuto: {fileID: 865249130}
   questPanel: {fileID: 1545004479}
   shack_Environment: {fileID: 236032336}
   fishingFrenzyWidget: {fileID: 1053563334}

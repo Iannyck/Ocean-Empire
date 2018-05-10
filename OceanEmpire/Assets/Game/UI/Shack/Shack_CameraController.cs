@@ -70,12 +70,27 @@ public class Shack_CameraController : MonoBehaviour
             questPanel.UpdateContent();
     }
 
+    private bool _forceHideButtons = false; 
+
+    public bool ForceHideButtons
+    {
+        get
+        {
+            return _forceHideButtons;
+        }
+        set
+        {
+            _forceHideButtons = value;
+            UpdateButtons();
+        }
+    }
+
     public void UpdateButtons()
     {
         if (rightButton)
-            rightButton.SetActive(_currentSection < (Section)SECTION_MAX);
+            rightButton.SetActive(_currentSection < (Section)SECTION_MAX && !_forceHideButtons);
         if (leftButton)
-            leftButton.SetActive(_currentSection > (Section)SECTION_MIN);
+            leftButton.SetActive(_currentSection > (Section)SECTION_MIN && !_forceHideButtons);
     }
 
     void InstantaneousMoveToDestination()
