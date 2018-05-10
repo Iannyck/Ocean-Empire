@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +26,16 @@ public class Shack_Environment : MonoBehaviour
     [Header("Components"), SerializeField] WaterLayer[] _waterLayers;
     [SerializeField] TriColored skyColorizer;
 
+    [Header("Submarine wiggle")]
+    [SerializeField] Transform submarinAnchor;
+    [SerializeField] float sumarineWiggleDuration;
+
     void Awake()
     {
         manualMode = false;
+
+        if (submarinAnchor)
+            submarinAnchor.DORotate(Vector3.forward * 5, sumarineWiggleDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void ApplyMapData(MapData mapData)

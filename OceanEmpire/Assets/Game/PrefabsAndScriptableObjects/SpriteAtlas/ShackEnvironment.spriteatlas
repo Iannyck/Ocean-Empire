@@ -46,6 +46,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 24819241435d38344a059b448d326d54, type: 3}
     - {fileID: 2800000, guid: 4d05e41fcd6012444b2246273d849a97, type: 3}
     - {fileID: 2800000, guid: 06245e8a08fbe6d409b64a42e6a2c6e4, type: 3}
+    - {fileID: 2800000, guid: a82731e658dc64b4d853444d3a1d1adf, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -54,6 +55,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7d94a1bc9257f3a4591cea3d199cf9e0, type: 3}
   - {fileID: 21300000, guid: 4d05e41fcd6012444b2246273d849a97, type: 3}
   - {fileID: 21300000, guid: cb62951d12218cf47bf5a38b200f3711, type: 3}
+  - {fileID: 21300000, guid: a82731e658dc64b4d853444d3a1d1adf, type: 3}
   - {fileID: 21300000, guid: 2c0fb1066ba342342ba7b5a16f5a2023, type: 3}
   - {fileID: 21300000, guid: 106e24b8b14b2d74591e40dcfc97ac8c, type: 3}
   - {fileID: 21300000, guid: baebb790fb7fbfb4a9bf973349bcc613, type: 3}
@@ -76,6 +78,7 @@ SpriteAtlas:
   - cloud
   - house
   - crate
+  - t_submarin
   - fish_basket
   - shop_currency
   - water_wave
