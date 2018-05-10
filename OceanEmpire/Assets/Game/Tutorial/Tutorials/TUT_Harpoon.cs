@@ -20,6 +20,7 @@ public class TUT_Harpoon : BaseTutorial
     {
         onComplete();
 
+        modules.inputDisabler.DisableInput();
         modules.delayedAction.Do(1.5f, Step1_YouHaveAHarpoon);
     }
 

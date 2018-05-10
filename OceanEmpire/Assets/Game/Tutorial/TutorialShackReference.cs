@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialShackReference : MonoBehaviour {
-
+public class TutorialShackReference : MonoBehaviour
+{
     public RectTransform cash;
     public RectTransform superPeche;
     public RectTransform calendrier;
-    public Button changeSectionToPlonger;
     public RectTransform plonger;
-    public Button changeSectionToMagasin;
-    public RectTransform magasin;
+    public Button shopButton;
     public RectTransform objectifTitle;
 
-    public static TutorialShackReference instance;
+    public Shack_CameraController cameraController;
+    public Button goRightButton;
+    public Button goLeftButton;
 
-    void Start()
+    public static TutorialShackReference Instance { get; private set; }
+
+    void OnEnable()
     {
-        if(instance == null)
-            instance = this;
+        Instance = this;
+    }
+
+    void OnDisable()
+    {
+        Instance = null;
     }
 }

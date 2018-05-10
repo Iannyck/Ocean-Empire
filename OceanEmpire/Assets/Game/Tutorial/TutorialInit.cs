@@ -9,28 +9,24 @@ public class TutorialInit : MonoBehaviour
     public bool tryLaunchOnGameStart = false;
     public bool tryLaunchEveryFrame = false;
     public BaseTutorial tutorial;
-    public DataSaver tutorialSaver;
 
     public bool HasLaunched { get; private set; }
 
-    void Awake()
-    {
-        if (!tutorialSaver.HasEverLoaded)
-            tutorialSaver.Load();
-    }
-
     void Start()
     {
-        if (tryLaunchOnStart && !HasLaunched)
-            TryToLaunch();
+        PersistentLoader.LoadIfNotLoaded(() =>
+        {
+            if (tryLaunchOnStart)
+                TryToLaunch();
+        });
     }
 
     void Update()
     {
-        if (tryLaunchEveryFrame && !HasLaunched)
+        if (tryLaunchEveryFrame)
             TryToLaunch();
 
-        if (tryLaunchOnGameStart && !HasLaunched && Game.Instance != null && Game.Instance.gameStarted)
+        if (tryLaunchOnGameStart && Game.Instance != null && Game.Instance.gameStarted)
         {
             TryToLaunch();
             tryLaunchOnGameStart = false;
@@ -39,6 +35,9 @@ public class TutorialInit : MonoBehaviour
 
     public void TryToLaunch()
     {
+        if (HasLaunched)
+            return;
+
         if (tutorial.StartCondition())
         {
             Launch();

@@ -11,6 +11,7 @@ public class TUT_FirstMap : BaseTutorial
     protected override void OnStart(Action onComplete = null)
     {
         onComplete();
+        modules.inputDisabler.DisableInput();
         modules.delayedAction.Do(2, FocusOnSubmarine);
     }
 

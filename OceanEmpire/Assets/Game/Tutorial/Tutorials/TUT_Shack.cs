@@ -23,7 +23,7 @@ public class TUT_Shack : BaseTutorial
         {
             Debug.Log("On commence le premier tutoriel");
             Spotlight spotlight = modules.spotlight;
-            spotlight.On(TutorialShackReference.instance.superPeche.position);
+            spotlight.On(TutorialShackReference.Instance.superPeche.position);
 
             modules.textDisplay.DisplayText("Ici, c'est l'indicateur de super pèche. Quand il est disponible, lors de la prochain récolte les océans seront beaucoup plus remplis que d'habitude.", true);
             modules.textDisplay.SetBottom();
@@ -41,7 +41,7 @@ public class TUT_Shack : BaseTutorial
     public void FocusOnObjectives(Action OnComplete)
     {
         Spotlight spotlight = modules.spotlight;
-        spotlight.On(TutorialShackReference.instance.objectifTitle.position);
+        spotlight.On(TutorialShackReference.Instance.objectifTitle.position);
 
         modules.textDisplay.DisplayText("Les objectifs en cours sont affichés dans cet écran. En les complètant on obtient des récompenses.", true);
         modules.textDisplay.SetBottom();
@@ -65,7 +65,7 @@ public class TUT_Shack : BaseTutorial
         if (dataSaver.GetBool(showMagasinKey, false))
         {
             Spotlight spotlight = modules.spotlight;
-            spotlight.On(TutorialShackReference.instance.cash.position);
+            spotlight.On(TutorialShackReference.Instance.cash.position);
 
             modules.textDisplay.DisplayText("Voici tes ressources. Elles sont utiles de pleins de facon, surtout pour débloquer des améliorations.", true);
             modules.textDisplay.SetBottom();
@@ -83,17 +83,17 @@ public class TUT_Shack : BaseTutorial
     public void FocusOnMagasin(Action OnComplete)
     {
         Spotlight spotlight = modules.spotlight;
-        spotlight.On(TutorialShackReference.instance.changeSectionToMagasin.transform.position);
+        spotlight.On(TutorialShackReference.Instance.goRightButton.transform.position);
 
         modules.textDisplay.DisplayText("Il faut appuyer ici pour aller à la section de votre quai dédié au Magasin", true);
         modules.textDisplay.SetBottom();
 
-        modules.proxyButton.Proxy(TutorialShackReference.instance.changeSectionToMagasin.transform.position, delegate ()
+        modules.proxyButton.Proxy(TutorialShackReference.Instance.goRightButton.transform.position, delegate ()
         {
             spotlight.Off(delegate ()
             {
-                TutorialShackReference.instance.changeSectionToMagasin.onClick.Invoke();
-                spotlight.On(TutorialShackReference.instance.magasin.position);
+                TutorialShackReference.Instance.goRightButton.onClick.Invoke();
+                spotlight.On(TutorialShackReference.Instance.shopButton.transform.position);
                 modules.textDisplay.DisplayText("En appuyant sur ce bouton, on ouvre le magasin. Dans celui-ci, on retrouve plein d'améliorations pouvant aider à progresser dans le jeu", true);
                 modules.textDisplay.SetTop();
 
@@ -117,17 +117,17 @@ public class TUT_Shack : BaseTutorial
     public void FocusOnRecolte(Action OnComplete)
     {
         Spotlight spotlight = modules.spotlight;
-        spotlight.On(TutorialShackReference.instance.changeSectionToPlonger.transform.position);
+        spotlight.On(TutorialShackReference.Instance.goLeftButton.transform.position);
 
         modules.textDisplay.DisplayText("Pour aller capturer d'autres poissons, il faut passer par ici", true);
         modules.textDisplay.SetBottom();
 
-        modules.proxyButton.Proxy(TutorialShackReference.instance.changeSectionToPlonger.transform.position, delegate ()
+        modules.proxyButton.Proxy(TutorialShackReference.Instance.goLeftButton.transform.position, delegate ()
         {
             spotlight.Off(delegate ()
             {
-                TutorialShackReference.instance.changeSectionToPlonger.onClick.Invoke();
-                spotlight.On(TutorialShackReference.instance.plonger.position);
+                TutorialShackReference.Instance.goLeftButton.onClick.Invoke();
+                spotlight.On(TutorialShackReference.Instance.plonger.position);
                 modules.textDisplay.DisplayText("Il suffit d'appuyer sur ce bouton pour lancer le sous-marin dans l'océan et commencer la pêche!", true);
                 modules.textDisplay.SetTop();
 

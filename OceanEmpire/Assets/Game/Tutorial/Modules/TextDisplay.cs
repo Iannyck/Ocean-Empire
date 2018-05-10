@@ -22,6 +22,7 @@ namespace Tutorial
         public Vector2 bottomPosition;
 
         private bool isOn = false;
+        public enum Position { Ignore, Top, Middle, Bottom }
 
         void Awake()
         {
@@ -62,17 +63,36 @@ namespace Tutorial
             isOn = false;
         }
 
-        public void DisplayText(string message, bool blackBackground, TweenCallback onComplete = null)
+        public void DisplayText(string message,
+            bool blackBackground = true,
+            TweenCallback onComplete = null,
+            Position position = Position.Ignore)
         {
             if (isOn)
             {
                 HideText(delegate ()
                 {
-                    DisplayText(message, blackBackground, onComplete);
+                    DisplayText(message, blackBackground, onComplete, position);
                 });
             }
             else
             {
+                switch (position)
+                {
+                    default:
+                    case Position.Ignore:
+                        break;
+                    case Position.Top:
+                        SetTop();
+                        break;
+                    case Position.Middle:
+                        SetMiddle();
+                        break;
+                    case Position.Bottom:
+                        SetBottom();
+                        break;
+                }
+
                 fade.DOKill();
                 fade.gameObject.SetActive(true);
 

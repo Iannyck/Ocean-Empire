@@ -49,19 +49,15 @@ namespace Tutorial
             image.enabled = true;
         }
 
-        public void Proxy(Button button)
+        public void Proxy(Button button, Action onClick = null)
         {
             Proxy(button.transform.position, delegate ()
             {
                 button.onClick.Invoke();
-            });
-        }
+                ClickAnimation clickAnim;
+                if (clickAnim = button.GetComponent<ClickAnimation>())
+                    clickAnim.ManualClickAnim();
 
-        public void Proxy(Button button, Action onClick)
-        {
-            Proxy(button.transform.position, delegate ()
-            {
-                button.onClick.Invoke();
                 if (onClick != null)
                     onClick();
             });

@@ -97,6 +97,10 @@ namespace Tutorial
             }
         }
 
+        public void OnButOffScreenLeft(TweenCallback onComplete = null) { On(new Vector2(-Screen.width, Screen.height / 2), onComplete); }
+        public void OnButOffScreenRight(TweenCallback onComplete = null) { On(new Vector2(Screen.width * 2, Screen.height / 2), onComplete); }
+        public void OnButOffScreenDown(TweenCallback onComplete = null) { On(new Vector2(Screen.width / 2, -Screen.height*0.5f), onComplete); }
+        public void OnButOffScreenUp(TweenCallback onComplete = null) { On(new Vector2(Screen.width / 2, Screen.height * 1.5f), onComplete); }
         public void On(Vector2 absolutePosition, TweenCallback onComplete = null)
         {
             if (moveTween != null)

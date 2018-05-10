@@ -12,6 +12,7 @@ public class TUT_Gaz : BaseTutorial
     protected override void OnStart(Action onComplete = null)
     {
         FocusOnSubmarine();
+        modules.inputDisabler.DisableInput();
     }
 
     void FocusOnSubmarine()
