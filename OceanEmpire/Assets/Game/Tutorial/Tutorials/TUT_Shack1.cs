@@ -38,7 +38,7 @@ public class TUT_Shack1 : BaseTutorial
 
     void Step2_HeresYourCash()
     {
-        modules.textDisplay.DisplayText("Tous les jetons que tu as obtenue au cours de ta récolte se retrouve ici.",
+        modules.textDisplay.DisplayText("Tous les jetons que tu as obtenue au cours de ta récolte se retrouvent ici.",
             position: TextDisplay.Position.Middle);
         modules.spotlight.On(TutorialShackReference.Instance.cash.position);
         modules.okButton.PromptOk(2f, Step3_LetsGoRight);
@@ -101,7 +101,7 @@ public class TUT_Shack1 : BaseTutorial
     {
         modules.spotlight.On();
         modules.textDisplay.DisplayText("Voici ton magasin!\n<size=50>" +
-            "C'est ici que tu pourra dépenser tes jetons et tes tickets pour améliorer ton sous-marin.</size>",
+            "C'est ici que tu pourras dépenser tes jetons et tes tickets pour améliorer ton sous-marin.</size>",
             position: TextDisplay.Position.Top);
         modules.okButton.SetTopPosition();
 
