@@ -168,6 +168,7 @@ public class DayInspector : MonoBehaviour
     {
         scheduleButtonText.text = requestSettings.scheduleButtonText;
         CanPlanInPast = requestSettings.canPlanInPast;
+        RefreshSchedules();
     }
 
     public void EmptyTrash()

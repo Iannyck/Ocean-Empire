@@ -119,6 +119,7 @@ namespace Questing
             {
                 Debug.LogError("Trying to remove out of range quest. Index: " + questIndex + "  vs.  QuestCount: " + ongoingQuests.Count);
             }
+            ongoingQuests[questIndex].onCompletion = null;
             ongoingQuests.RemoveAt(questIndex);
 
             if (andLateSave)

@@ -14,5 +14,8 @@ MonoBehaviour:
   questContext:
     description: "\xC9quipes-toi d'un harpon (voir magasin)"
     iconResource: Sprites/QuestIcons/HarpoonIcon
-    shopCategory: HarpoonThrowerCategory
+    shopCategory1: HarpoonThrowerCategory
+    shopCategory2: 
+    shopCategory3: 
+    shopCategory4: 
     upgradeLevelToReach: 1

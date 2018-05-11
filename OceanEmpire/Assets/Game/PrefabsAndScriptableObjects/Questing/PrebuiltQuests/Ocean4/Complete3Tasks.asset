@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505679b8c233a3349bba55750b6d7b0c, type: 3}
+  m_Name: Complete3Tasks
+  m_EditorClassIdentifier: 
+  questContext:
+    description: "R\xE9ussis 3 exercices planifi\xE9s"
+    iconResource: Sprites/QuestIcons/TaskPlanningIcon
+    completeCount: 3
+    inARow: 0

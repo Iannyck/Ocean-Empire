@@ -14,5 +14,8 @@ MonoBehaviour:
   questContext:
     description: "Am\xE9liore la Super-p\xEAche jusqu'au niveau 5 "
     iconResource: Sprites/Fish/t_rainbow
-    shopCategory: Fishing Frenzy Category
+    shopCategory1: Fishing Frenzy Category
+    shopCategory2: 
+    shopCategory3: 
+    shopCategory4: 
     upgradeLevelToReach: 5

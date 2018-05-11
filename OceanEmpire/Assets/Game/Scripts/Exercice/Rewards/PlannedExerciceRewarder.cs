@@ -24,6 +24,7 @@ public class PlannedExerciceRewarder : MonoPersistent
 
     public Report LatestPendingReport { get; private set; }
     public event Action OnLatestPendingReportUpdated;
+    public event Action<Report> OnReportFinalized;
 
     [SerializeField] float analysisCooldown = 5.1f;
     [SerializeField] SceneInfo failureWindow;
@@ -256,6 +257,8 @@ public class PlannedExerciceRewarder : MonoPersistent
         LatestPendingReport.schedule.requiresConculsion = false;
         Calendar.instance.ForceSave();
 
+        var report = LatestPendingReport;
+
         // Add report to archive
         previousReports.Add(LatestPendingReport);
 
@@ -265,6 +268,9 @@ public class PlannedExerciceRewarder : MonoPersistent
         // Raise event
         if (OnLatestPendingReportUpdated != null)
             OnLatestPendingReportUpdated();
+
+        if (OnReportFinalized != null)
+            OnReportFinalized(report);
 
         // Save
         Save();
@@ -289,34 +295,4 @@ public class PlannedExerciceRewarder : MonoPersistent
         dataSaver.LateSave();
     }
     #endregion
-
-    //void GiveAdvice(ExerciseReport report)
-    //{
-    //    Scenes.Load(failureWindow, delegate (Scene scene)
-    //    {
-    //        scene.FindRootObject<FailureAsk>().Init(report);
-    //    });
-    //}
-
-    //void GiveRewards(MarketValue rewardValue)
-    //{
-    //    // Give reward
-    //    CurrencyAmount reward = Market.GetCurrencyAmountFromValue(CurrencyType.Ticket, rewardValue);
-
-    //    if (reward.amount > 0)
-    //        PlayerCurrency.AddCurrencyAmount(reward);
-
-    //    List<CompletionWindow.Rewards> rewards = new List<CompletionWindow.Rewards>();
-    //    CompletionWindow.Rewards newReward = new CompletionWindow.Rewards
-    //    {
-    //        amount = Mathf.RoundToInt(rewardValue.floatValue),
-    //        icon = PlayerCurrency.GetTicketIcon()
-    //    };
-    //    rewards.Add(newReward);
-
-    //    Scenes.Load(completionWindow, delegate (Scene scene)
-    //    {
-    //        scene.FindRootObject<CompletionWindow>().ShowCompletionRewards(rewards);
-    //    });
-    //}
 }

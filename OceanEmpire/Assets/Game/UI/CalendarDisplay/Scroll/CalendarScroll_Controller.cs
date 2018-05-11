@@ -70,7 +70,7 @@ public class CalendarScroll_Controller : MonoBehaviour
         Refill();
 
         //Add listeners
-        Calendar.instance.OnBonifiedTimeAdded += RefreshContent;
+        Calendar.instance.OnScheduleAdded += RefreshContent;
 
         everythingIsLoaded = true;
 
@@ -101,7 +101,7 @@ public class CalendarScroll_Controller : MonoBehaviour
     protected void OnDestroy()
     {
         if (Calendar.instance != null)
-            Calendar.instance.OnBonifiedTimeAdded -= RefreshContent;
+            Calendar.instance.OnScheduleAdded -= RefreshContent;
     }
 
     public void ExitCalendar()

@@ -25,7 +25,7 @@ public class Calendar : MonoPersistent
     [SerializeField] private DataSaver dataSaver;
 
     public bool log = true;
-    public event SimpleEvent OnBonifiedTimeAdded;
+    public event SimpleEvent OnScheduleAdded;
     public static Calendar instance;
 
     /// <summary>
@@ -104,8 +104,8 @@ public class Calendar : MonoPersistent
             if (log)
                 Debug.Log("BonifiedTime ajouté au calendrier avec succès.");
 
-            if (OnBonifiedTimeAdded != null)
-                OnBonifiedTimeAdded();
+            if (OnScheduleAdded != null)
+                OnScheduleAdded();
 
             return true;
         }

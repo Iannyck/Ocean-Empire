@@ -15,7 +15,7 @@ public static class CalendarRequest
         //public bool unloadOtherScenesAfterEntrance = false;
         public string windowHeaderTitle = "Calendrier";
         public string scheduleButtonText = "Choisir l'heure";
-        public bool canViewPast = true;
+        public bool canViewPast = false;
         public bool canPlanInPast = false;
     }
     public class RequestHandle
