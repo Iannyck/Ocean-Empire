@@ -39,14 +39,14 @@ public class SceneInfo : ScriptableObject
     [OnOpenAsset(1)]
     public static bool OnOpenAsset(int instanceID, int line)
     {
-        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-
         UnityEngine.Object obj = EditorUtility.InstanceIDToObject(instanceID);
         SceneInfo sceneInfo = obj as SceneInfo;
         if (sceneInfo != null)
         {
             if (sceneInfo.Editor_GetScene() != null)
             {
+                if (!Application.isPlaying)
+                    EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 EditorSceneManager.OpenScene(AssetDatabase.GetAssetOrScenePath(sceneInfo.Editor_GetScene()));
                 return true;
             }

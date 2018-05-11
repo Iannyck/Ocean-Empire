@@ -51,7 +51,17 @@ public class QuestPanel : MonoBehaviour
         {
             UpdateContent();
             QuestManager.Instance.OnListChange += UpdateContent;
+            QuestManager.Instance.OnQuestComplete += OnQuestComplete;
         });
+    }
+
+    private void OnDestroy()
+    {
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.OnListChange -= UpdateContent;
+            QuestManager.Instance.OnQuestComplete -= OnQuestComplete;
+        }
     }
 
     private void Start()
@@ -68,6 +78,11 @@ public class QuestPanel : MonoBehaviour
         }, arrivalDelay);
 
         HideInstant();
+    }
+
+    private void OnQuestComplete(Quest obj)
+    {
+        UpdateContent();
     }
 
     public void Show()
@@ -96,6 +111,7 @@ public class QuestPanel : MonoBehaviour
     {
         if (this == null || onm_button == null || isOfferingNextMap)
             return;
+
         isOfferingNextMap = true;
         TweenCallback onCompletion = null;
 
@@ -153,6 +169,7 @@ public class QuestPanel : MonoBehaviour
         this.DOKill();
         isShown = false;
         gameObject.SetActive(false);
+        isOfferingNextMap = false;
     }
 
     public void UpdateContent()
@@ -200,12 +217,6 @@ public class QuestPanel : MonoBehaviour
             // pour couvrir les moments où on update ET qu'on est déjà entrain de montrer le bouton
             onm_button.gameObject.SetActive(shouldOMNButtonBeVisibleRightNow);
         }
-    }
-
-    private void OnDestroy()
-    {
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.OnListChange -= UpdateContent;
     }
 
     private bool IsEveryOngoingQuestCompleted()

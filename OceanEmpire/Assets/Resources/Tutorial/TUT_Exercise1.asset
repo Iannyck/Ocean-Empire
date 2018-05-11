@@ -17,3 +17,4 @@ MonoBehaviour:
   tutorialEvents: []
   ticketDisplay: {fileID: 225561638770199704, guid: 7d1d6749e1229894ebafdcc8b9376b2d,
     type: 2}
+  shackAnimQueue: {fileID: 11400000, guid: 3302be055f5a0364a936b508dc2879ae, type: 2}

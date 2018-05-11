@@ -40,6 +40,7 @@ namespace Questing
 
         protected void Complete()
         {
+            //Debug.Log("Quest completed: " + ToString());
             state = QuestState.Completed;
             if (onCompletion != null)
                 onCompletion(this);

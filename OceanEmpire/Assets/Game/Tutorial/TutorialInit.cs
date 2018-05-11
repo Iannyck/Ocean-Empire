@@ -8,6 +8,7 @@ public class TutorialInit : MonoBehaviour
     public bool tryLaunchOnStart = true;
     public bool tryLaunchOnGameStart = false;
     public bool tryLaunchEveryFrame = false;
+    public bool tryLaunchOnMapChange = false;
     public BaseTutorial tutorial;
 
     public bool HasLaunched { get; private set; }
@@ -18,7 +19,21 @@ public class TutorialInit : MonoBehaviour
         {
             if (tryLaunchOnStart)
                 TryToLaunch();
+
+            if (tryLaunchOnMapChange)
+                MapManager.Instance.OnMapSet += OnMapSet;
         });
+    }
+
+    void OnDestroy()
+    {
+        if (MapManager.Instance != null)
+            MapManager.Instance.OnMapSet -= OnMapSet;
+    }
+
+    private void OnMapSet(int arg1, MapData arg2)
+    {
+        TryToLaunch();
     }
 
     void Update()

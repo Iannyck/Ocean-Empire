@@ -9,6 +9,7 @@ using DG.Tweening;
 public class TUT_Exercise1 : BaseTutorial
 {
     [SerializeField] CanvasGroup ticketDisplay;
+    [SerializeField] ScriptableActionQueue shackAnimQueue;
 
     [NonSerialized] CanvasGroup ticketDisplayInstance;
 
@@ -24,13 +25,20 @@ public class TUT_Exercise1 : BaseTutorial
         modules.inputDisabler.DisableInput();
 
 
-        TutorialShackReference.Instance.taskPanel.gameObject.SetActive(false);
+        Action action = null;
+        TutorialShackReference.Instance.cameraController.ForceHideButtons = true;
 
-        TutorialShackReference.Instance.questPanel.showOnStart = false;
-        TutorialShackReference.Instance.questPanel.HideInstant();
-        TutorialShackReference.Instance.cameraController.GoTo(Shack_CameraController.Section.Hub);
+        shackAnimQueue.ActionQueue.AddAction(() =>
+        {
+            action();
+            TutorialShackReference.Instance.taskPanel.gameObject.SetActive(false);
 
-        modules.delayedAction.Do(1, Step1_Bienvenido);
+            TutorialShackReference.Instance.questPanel.showOnStart = false;
+            TutorialShackReference.Instance.questPanel.HideInstant();
+            TutorialShackReference.Instance.cameraController.GoTo(Shack_CameraController.Section.Hub);
+
+            modules.delayedAction.Do(1, Step1_Bienvenido);
+        }, 1, out action);
     }
 
     void Step1_Bienvenido()
@@ -76,7 +84,7 @@ public class TUT_Exercise1 : BaseTutorial
             position: TextDisplay.Position.Middle);
 
 
-        modules.delayedAction.Do(0.5f, ()=> TutorialShackReference.Instance.taskPanel.gameObject.SetActive(true));
+        modules.delayedAction.Do(0.5f, () => TutorialShackReference.Instance.taskPanel.gameObject.SetActive(true));
         modules.spotlight.On(TutorialShackReference.Instance.newTaskButton.transform.position);
 
         //modules.delayedAction.Do(1, () => modules.okButton.SetTopPosition());
@@ -93,7 +101,7 @@ public class TUT_Exercise1 : BaseTutorial
     void Step_Conclusion()
     {
         modules.spotlight.On();
-        modules.textDisplay.DisplayText("Nous t'invitons à jumeler tes sessions de jeu avec de l'activité physique pour" +
+        modules.textDisplay.DisplayText("Nous t'invitons à alterner tes sessions de jeu avec de l'activité physique pour" +
             " progresser plus vite :)");
 
         modules.okButton.PromptOk(1.5f, () =>
@@ -104,6 +112,7 @@ public class TUT_Exercise1 : BaseTutorial
 
     void Step_End()
     {
+        TutorialShackReference.Instance.cameraController.ForceHideButtons = false;
         InitQueue initQueue = new InitQueue(() =>
         {
             End(true);
