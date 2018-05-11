@@ -28,8 +28,11 @@ public class ContinuousRewarder : MonoPersistent
 
     private float nextCheckTimer = 0;
 
+    public ContinuousRewarder Instance { get; private set; }
+
     public override void Init(Action onComplete)
     {
+        Instance = this;
         onComplete();
 
         nextUpdate = DateTimeNow;

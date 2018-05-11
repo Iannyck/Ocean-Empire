@@ -51,6 +51,7 @@ public class QuestPanel : MonoBehaviour
         {
             UpdateContent();
             QuestManager.Instance.OnListChange += UpdateContent;
+            QuestManager.Instance.OnImportantQuestChange += UpdateContent;
             QuestManager.Instance.OnQuestComplete += OnQuestComplete;
         });
     }
@@ -60,6 +61,7 @@ public class QuestPanel : MonoBehaviour
         if (QuestManager.Instance != null)
         {
             QuestManager.Instance.OnListChange -= UpdateContent;
+            QuestManager.Instance.OnImportantQuestChange -= UpdateContent;
             QuestManager.Instance.OnQuestComplete -= OnQuestComplete;
         }
     }

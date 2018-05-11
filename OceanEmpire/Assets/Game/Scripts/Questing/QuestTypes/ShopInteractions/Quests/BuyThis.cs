@@ -12,12 +12,14 @@ namespace Questing
 
         public override string GetDisplayedProgressText()
         {
-            return GetProgress01() + " / 1";
+            FetchShopCategory();
+            return upgradeCategory.GetCurrentLevel() + " / " + context.upgradeLevelToReach;
         }
 
         public override float GetProgress01()
         {
-            return state == QuestState.Completed ? 1 : 0;
+            FetchShopCategory();
+            return Mathf.Clamp01(upgradeCategory.GetCurrentLevel() / (float)context.upgradeLevelToReach);
         }
 
         public override void Launch()

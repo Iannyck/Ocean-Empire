@@ -17,6 +17,7 @@ namespace Questing
         public static QuestManager Instance { get; private set; }
         public event Action OnListChange;
         public event Action<Quest> OnQuestComplete;
+        public event Action OnImportantQuestChange;
 
         private float checkDirtyTimer;
         private const string ONGOINGQUEST_KEY = "ongoingQuests";
@@ -157,6 +158,8 @@ namespace Questing
             if (highestDirtyState == DirtyState.UrgentDirty)
             {
                 LateSave();
+                if (OnImportantQuestChange != null)
+                    OnImportantQuestChange();
             }
             else
             {

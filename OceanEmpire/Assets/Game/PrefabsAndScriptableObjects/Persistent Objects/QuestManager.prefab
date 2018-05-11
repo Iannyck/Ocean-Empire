@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4915563736326472}
   - component: {fileID: 114544965681487184}
   - component: {fileID: 114887441579173288}
+  - component: {fileID: 114291709320167612}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -41,6 +42,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114291709320167612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442628193112808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a75af67d201f004c8673c5864cd7a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questBuilderIndex: 0
+  frenzyCategory: {fileID: 0}
+  questBuilders:
+  - {fileID: 11400000, guid: 720dae8968a67d44f8680ab7d21e1f67, type: 2}
 --- !u!114 &114544965681487184
 MonoBehaviour:
   m_ObjectHideFlags: 1

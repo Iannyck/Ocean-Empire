@@ -41,6 +41,9 @@ namespace Questing
 
         private void Shop_OnAnyUpgrade(UpgradeCategory obj)
         {
+            if (state != QuestState.Ongoing)
+                return;
+
             // Use filter ?
             if (!context.useFilter
                 || context.filterOne == obj.name
