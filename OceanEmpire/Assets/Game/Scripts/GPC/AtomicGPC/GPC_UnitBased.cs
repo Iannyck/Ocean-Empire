@@ -9,9 +9,8 @@ namespace GPComponents
         protected readonly SceneManager sceneManager;
 
         protected GameObject unit;
-
-        #region TEMPORAIRE
-        protected GameObject unitReference;
+        
+        private GameObject unitReference;
         protected Vector2 referencePosition;
 
         public GPC_UnitBased(SceneManager sceneManager, GameObject unitPrefab, Vector2 referencePosition)
@@ -26,7 +25,6 @@ namespace GPComponents
             this.sceneManager = sceneManager;
             this.unit = unit;
         }
-        #endregion
 
         public GPC_UnitBased(SceneManager sceneManager)
         {

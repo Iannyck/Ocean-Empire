@@ -30,4 +30,9 @@ public class Capturable : MonoBehaviour
         if (killable != null)
             killable.Kill();
     }
+
+    public void ClearLifeEvents()
+    {
+        OnNextCapture = null;
+    }
 }

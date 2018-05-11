@@ -23,11 +23,19 @@ public abstract class BaseKillableUnit : MonoBehaviour
 
         if (OnNextDeath != null)
             OnNextDeath(this);
-
         OnNextDeath = null;
 
         if (OnAllDeaths != null)
             OnAllDeaths(this);
+
+        Capturable cap;
+        if (cap = GetComponent<Capturable>())
+            cap.ClearLifeEvents();
+    }
+
+    public void ClearLifeEvents()
+    {
+        OnNextDeath = null;
     }
 
     protected abstract void OnDeath();

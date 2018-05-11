@@ -12,7 +12,7 @@ namespace GPComponents
         public GPC_FishSpawnFunction(SceneManager sceneManager)
         {
             this.sceneManager = sceneManager;
-            
+
             Rebuild();
         }
 
@@ -26,10 +26,10 @@ namespace GPComponents
                 List<IGPComponent> fishGPCs = null;
 
                 // Get ongoing fish GPCs
-                if(parall.GetChildren().Count >= 2)
+                if (parall.GetChildren().Count >= 2)
                 {
                     var list = parall.GetChildren()[1] as ParallelAND;
-                    if(list != null)
+                    if (list != null)
                     {
                         fishGPCs = list.GetOngoingChildren();
                     }
@@ -38,19 +38,28 @@ namespace GPComponents
                 if (fishGPCs == null)
                     fishGPCs = new List<IGPComponent>();
 
+                // Remove failed GPCs
+                // NB: This is important to prevent huge memory-allocations over a long play-session
+                for (int i = fishGPCs.Count - 1; i >= 0; i--)
+                {
+                    if (((Ignore)fishGPCs[i]).child.Eval() == GPCState.FAILURE)
+                        fishGPCs.RemoveAt(i);
+                }
+
+
                 // Get new fish GPCs
                 var pendingGPCs = sceneManager.Read<PendingFishGPC>("pending fish gpc");
-                if(pendingGPCs != null)
+                if (pendingGPCs != null)
                 {
                     var pendingList = pendingGPCs.List;
                     int newBeginIndex = fishGPCs.Count;
 
                     // Update capacity
-                    if(fishGPCs.Capacity < fishGPCs.Count + pendingList.Count)
+                    if (fishGPCs.Capacity < fishGPCs.Count + pendingList.Count)
                     {
                         fishGPCs.Capacity = fishGPCs.Count + pendingList.Count;
                     }
-                    
+
                     // Add new GPCs
                     for (int i = 0; i < pendingList.Count; i++)
                     {
@@ -59,7 +68,7 @@ namespace GPComponents
 
                     // Clear pending list
                     pendingList.Clear();
-                    
+
                     // Launch new GPCs
                     for (int i = newBeginIndex; i < fishGPCs.Count; i++)
                     {

@@ -43,6 +43,8 @@ namespace GPComponents
         public override void Launch()
         {
             base.Launch();
+            if (state == CapturableState.ONGOING)
+                return;
 
             State = CapturableState.ONGOING;
 

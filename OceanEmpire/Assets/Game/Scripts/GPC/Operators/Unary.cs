@@ -6,7 +6,7 @@ namespace GPComponents
 {
 	public abstract class Unary : IGPComponent
 	{
-		protected IGPComponent child;
+		public IGPComponent child { get; private set; }
 
         protected Unary(IGPComponent child)
         {
