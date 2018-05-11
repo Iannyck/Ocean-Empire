@@ -121,7 +121,7 @@ public class ContinuousRewarder : MonoPersistent
 
             // On fait pop un message de "bravo!! 10 ticket pour avoir marché"
             // si ça fait plus de 2 min qu'on a analysé
-            if (timeslotToAnalyse.duration > new TimeSpan(0, 0, 2))
+            if (timeslotToAnalyse.duration > new TimeSpan(0, 2, 0))
             {
                 Action onAnimComplete = null;
                 shackAnimationQueue.ActionQueue.AddAction(() =>
