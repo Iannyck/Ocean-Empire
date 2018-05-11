@@ -68,7 +68,7 @@ public class DayInspector : MonoBehaviour
             DateTime now = DateTime.Now;
             if (date < now)
             {
-                MessagePopup.DisplayMessage("Vous ne pouvez pas plannifer dans le passé.");
+                MessagePopup.DisplayMessage("Vous ne pouvez pas planifer dans le passé.");
                 return;
             }
         }

@@ -198,7 +198,7 @@ public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
         CalendarRequest.Settings settings = new CalendarRequest.Settings()
         {
             windowHeaderTitle = "Quel jour?",
-            scheduleButtonText = "Plannifier l'exercice"
+            scheduleButtonText = "Planifier l'exercice"
         };
 
         // Launch request

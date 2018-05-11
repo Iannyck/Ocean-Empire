@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "F\xE9licitation! Vous avez compl\xE9t\xE9 cet exercice:"
+  m_Text: "F\xE9licitations! Vous avez compl\xE9t\xE9 cet exercice:"
 --- !u!222 &31516889
 CanvasRenderer:
   m_ObjectHideFlags: 0
