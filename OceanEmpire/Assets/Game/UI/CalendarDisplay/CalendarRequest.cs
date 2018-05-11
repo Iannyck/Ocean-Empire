@@ -9,10 +9,6 @@ public static class CalendarRequest
 {
     public class Settings
     {
-        //public LoadSceneMode sceneLoadingMode = LoadSceneMode.Additive;
-        //public bool loadSceneOnExitCalendar;
-        //public string exitSceneName;
-        //public bool unloadOtherScenesAfterEntrance = false;
         public string windowHeaderTitle = "Calendrier";
         public string scheduleButtonText = "Choisir l'heure";
         public bool canViewPast = false;

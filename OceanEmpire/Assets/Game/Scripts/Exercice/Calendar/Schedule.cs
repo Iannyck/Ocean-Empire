@@ -45,4 +45,10 @@ public class Schedule : IComparable
             return -1;
         }
     }
+
+    public override string ToString()
+    {
+        return /*"CreatedOn(" + createdOn + */"TimeSlot(" + timeSlot.ToEfficientString()
+            + ") task(" + (task == null ? "null" : task.ToString()) + ")";
+    }
 }

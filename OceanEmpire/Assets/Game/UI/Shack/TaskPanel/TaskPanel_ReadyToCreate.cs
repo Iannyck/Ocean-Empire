@@ -173,8 +173,11 @@ public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
             task = task,
             requiresConculsion = true
         };
+
         if (Calendar.instance.AddSchedule(schedule))
         {
+            Logger.Log(Logger.Category.PlannedExercise, "Planned: " + schedule.ToString());
+
             // Yay ! C'est fini
             PlannedExerciceRewarder.Instance.ForceAnalyseCheck();
             return true;

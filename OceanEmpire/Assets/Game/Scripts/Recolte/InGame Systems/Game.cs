@@ -139,7 +139,7 @@ public class Game : PublicSingleton<Game>
         IsInFishingFrenzy = GameSettings.CanUseFishingFrenzy
             && FishingFrenzy.Instance != null
             && FishingFrenzy.Instance.State == FishingFrenzy.EffectState.CurrentlyActive;
-
+        FishingReport.wasFishingFrenzy = IsInFishingFrenzy;
 
         //Ready up !
         ReadyGame();

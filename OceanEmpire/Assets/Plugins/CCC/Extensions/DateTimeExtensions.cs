@@ -1,7 +1,19 @@
 ﻿using System;
+using System.Text;
 
 public static class DateTimeExtensions
 {
+    public static string ToEfficientString(this TimeSpan dur)
+    {
+        StringBuilder txt = new StringBuilder(8)
+            .Append(dur.Hours.ToString())
+            .Append(':')
+            .Append(dur.Minutes.ToString().PadLeft(2, '0'))
+            .Append(':')
+            .Append(dur.Seconds.ToString().PadLeft(2, '0'));
+
+        return txt.ToString();
+    }
     public static DateTime AddWeeks(this DateTime date, int weeks)
     {
         return date.AddDays(weeks * 7);

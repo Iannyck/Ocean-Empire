@@ -9,8 +9,7 @@ public partial class DataSaverBank
         Currency = 0,
         Items = 3,
         Calendar = 4,
-        History = 5,
-        PlayerProfile = 6,
+        Logs = 6,
         Tutorial = 7
     }
 }

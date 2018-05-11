@@ -1,4 +1,4 @@
- 
+
 using CCC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +8,10 @@ using UnityEngine.UI;
 
 public class CheatsWindow : WindowAnimation
 {
+    [Header("CHEATS")]
     [SerializeField] int mapIndex;
     [SerializeField] Text setMapText;
+    [SerializeField] DataSaver[] dataSavers;
 
     public const string SCENENAME = "CheatsWindow";
 
@@ -26,22 +28,24 @@ public class CheatsWindow : WindowAnimation
 
     private void Update()
     {
-        if(setMapText != null)
+        if (setMapText != null)
         {
             setMapText.text = "Set Map (index: " + mapIndex + ')';
         }
     }
 
-    public void ResetDataToDefault()
+    public void ClearSave()
     {
-        var dataSavers = DataSaverBank.Instance.GetDataSavers();
         foreach (DataSaver saver in dataSavers)
         {
-            saver.ClearSave();
+            if (saver != null)
+                saver.ClearSave();
         }
 
         GoogleReader.ResetActivitiesSave();
         GoogleActivities.instance.ResetActivities();
+
+        Scenes.Load("Intro", LoadSceneMode.Single);
     }
 
 

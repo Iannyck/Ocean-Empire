@@ -17,6 +17,7 @@ public class UpgradeWindow : MonoBehaviour
 
     private UpgradeCategory upgradeCategory;
     private Action buyCallback;
+    private UpgradeDescription nextDesc;
 
     void Awake()
     {
@@ -31,6 +32,11 @@ public class UpgradeWindow : MonoBehaviour
         {
             MessagePopup.DisplayMessage("Pas assez de tickets");
         }
+        Logger.Log(Logger.Category.Shop, 
+            "Purchase: " + upgradeCategory.name
+            + " lvl" + nextDesc.GetUpgradeLevel()
+            + " cost(" + nextDesc.GetCost(CurrencyType.Ticket) + "tkt)");
+
         buyCallback();
         CloseWindow();
     }
@@ -41,6 +47,10 @@ public class UpgradeWindow : MonoBehaviour
         {
             MessagePopup.DisplayMessage("Pas assez de pièces bleus");
         }
+        Logger.Log(Logger.Category.Shop,
+            "Purchase: " + upgradeCategory.name
+            + " lvl" + nextDesc.GetUpgradeLevel()
+            + " cost(" + nextDesc.GetCost(CurrencyType.Coin) + "coin)");
         buyCallback();
         CloseWindow();
     }
@@ -51,7 +61,7 @@ public class UpgradeWindow : MonoBehaviour
         this.buyCallback = buyCallback;
 
         var current = upgradeCategory.GetCurrentUpgradeDescription();
-        var next = upgradeCategory.GetNextUpgradeDescription();
+        var next = nextDesc = upgradeCategory.GetNextUpgradeDescription();
 
         var costCoin = next.GetCost(CurrencyType.Coin);
         var costTicket = next.GetCost(CurrencyType.Ticket);

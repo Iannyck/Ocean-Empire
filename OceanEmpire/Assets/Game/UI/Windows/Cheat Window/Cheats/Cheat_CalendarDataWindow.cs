@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.ObjectModel;
 using UnityEngine.UI;
+using System.Text;
 
 public class Cheat_CalendarDataWindow : MonoBehaviour
 {
@@ -13,15 +14,22 @@ public class Cheat_CalendarDataWindow : MonoBehaviour
         if (Calendar.instance == null)
             return;
 
-        //ReadOnlyCollection<ScheduledTask> tasks = Calendar.instance.GetScheduledTasks();
+        var past = Calendar.instance.GetPastSchedules();
+        var presentAndFuture = Calendar.instance.GetPresentAndFutureSchedules();
 
-        //string completeText = "Tasks:\n\n";
-        //for (int i = tasks.Count - 1; i >= 0; i--)
-        //{
-        //    completeText += tasks[i].ToString() + "\n\n\n";
-        //}
+        StringBuilder completeText = new StringBuilder("PAST SCHEDULES:\n\n");
+        for (int i = past.Count - 1; i >= 0; i--)
+        {
+            completeText.Append(past[i].ToString()).Append("\n\n\n");
+        }
 
-        displayText.text = "FIX DAT SHIT BOI";
+        completeText.Append("\n\nPRESENT AND FUTURE SCHEDULES:\n\n");
+        for (int i = presentAndFuture.Count - 1; i >= 0; i--)
+        {
+            completeText.Append(presentAndFuture[i].ToString()).Append("\n\n\n");
+        }
+
+        displayText.text = completeText.ToString();
     }
 
     void OnDisable()

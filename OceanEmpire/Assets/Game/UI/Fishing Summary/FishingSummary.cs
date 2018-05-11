@@ -27,7 +27,8 @@ public class FishingSummary : MonoBehaviour
     {
         fishingReport = report;
 
-        int fishes = 0;
+        int totalFish = 0;
+        int totalCoins = 0;
         foreach (KeyValuePair<FishDescription, int> entry in report.CapturedFish)
         {
             Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>()
@@ -36,10 +37,15 @@ public class FishingSummary : MonoBehaviour
                     entry.Key.icon,
                     (entry.Key.baseMonetaryValue * entry.Value).ToString());
 
-            PlayerCurrency.AddCoins(entry.Value * (int)entry.Key.baseMonetaryValue);
-
-            fishes += entry.Value;
+            totalCoins += entry.Value * (int)entry.Key.baseMonetaryValue;
+            totalFish += entry.Value;
         }
+        PlayerCurrency.AddCoins(totalCoins);
+
+        Logger.Log(Logger.Category.GameEvent, 
+            (report.wasFishingFrenzy ? "Super-peche" : "Peche") +
+            ": fish(" + totalFish + ") coins(" + totalCoins + ")");
+
         if (report.harpoonBonusGold > 0)
             Instantiate(fishSummaryPrefab, countainer).GetComponent<FishSummary>()
                 .SetFishSummary(
@@ -47,26 +53,7 @@ public class FishingSummary : MonoBehaviour
                     bonusGoldSprite,
                     report.harpoonBonusGold.ToString());
 
-        //this.DelayedCall(UpdateFishPopulation, delayToShowPopulationChanges);
-
     }
-
-    //public void UpdateFishPopulation()
-    //{
-    //    float CapturedValue = 0;
-    //    foreach (KeyValuePair<FishDescription, int> entry in fishingReport.CapturedFish)
-    //    {
-    //        CapturedValue += entry.Value;// * entry.Key.populationValue;
-    //    }
-
-    //    if (widgetFishPop != null)
-    //    {
-    //        float capturedRate = FishPopulation.instance.FishNumberToRate(CapturedValue);
-    //        widgetFishPop.DecrementRate(capturedRate);
-    //    }
-    //    else
-    //        FishPopulation.instance.UpdateOnFishing(CapturedValue);
-    //}
 
     public void GoBackToShack()
     {

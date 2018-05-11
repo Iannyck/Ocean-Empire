@@ -122,6 +122,9 @@ public class ContinuousRewarder : MonoPersistent
         {
             PlayerCurrency.AddCurrencyAmount(reward);
 
+            Logger.Log(Logger.Category.ContinuousReward, "analysed(" + timeslotToAnalyse.ToEfficientString()
+                + ") reward(" + reward.amount + ")");
+
             // On fait pop un message de "bravo!! 10 ticket pour avoir marché"
             // si ça fait plus de 2 min qu'on a analysé
             if (timeslotToAnalyse.duration > new TimeSpan(0, 2, 0))

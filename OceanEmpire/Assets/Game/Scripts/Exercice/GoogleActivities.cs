@@ -170,7 +170,7 @@ public class GoogleActivities : MonoPersistent
             records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle);
             data[i] = newEntry;
         }
-        data[records.Count + 1] = "\n" + PlayerProfile.instance.GetLogs() + "," + PlayerProfile.instance.GetReportLogs();
+        data[records.Count + 1] = "\n\n" + Logger.Instance.GetTotalLogWithHeader();
         return data;
     }
 }

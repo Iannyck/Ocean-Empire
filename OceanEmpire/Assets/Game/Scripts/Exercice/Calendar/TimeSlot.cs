@@ -180,6 +180,11 @@ public struct TimeSlot
             + " - End: " + end.ToString();
     }
 
+    public string ToEfficientString()
+    {
+        return start.ToString() + "-" + end.ToString();
+    }
+
     public string ToCondensedDayOfTimeString()
     {
         return start.ToCondensedTimeOfDayString() + " - " + end.ToCondensedTimeOfDayString();

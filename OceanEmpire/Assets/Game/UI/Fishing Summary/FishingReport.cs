@@ -7,6 +7,7 @@ public class FishingReport
     public Dictionary<FishDescription, int> CapturedFish = new Dictionary<FishDescription, int>();
     public int harpoonBonusGold = 0;
     public int harpoonBonusCount;
+    public bool wasFishingFrenzy = false;
 
     public void AddToReport(Capturable capturable)
     {

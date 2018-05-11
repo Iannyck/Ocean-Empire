@@ -20,6 +20,14 @@ public class PlannedExerciceRewarder : MonoPersistent
 
         public enum State { Ongoing, Completed, Failed }
         public float GetCompletionRate01() { return Mathf.Clamp01(recordedExerciseVolume / schedule.task.minDuration); }
+
+        public override string ToString()
+        {
+            return "state(" + state +
+                ") recordedVolume(" + recordedExerciseVolume +
+                ") conclusion(" + playerConclusion +
+                ") schedule(" + schedule;
+        }
     }
 
     public Report LatestPendingReport { get; private set; }
@@ -271,6 +279,8 @@ public class PlannedExerciceRewarder : MonoPersistent
 
         if (OnReportFinalized != null)
             OnReportFinalized(report);
+
+        Logger.Log(Logger.Category.PlannedExercise, "Finalized: " + report.ToString());
 
         // Save
         Save();

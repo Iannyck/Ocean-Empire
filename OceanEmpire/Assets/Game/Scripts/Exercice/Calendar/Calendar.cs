@@ -281,6 +281,28 @@ public class Calendar : MonoPersistent
 
 
 
+    #region DateTime.Now Optimsation
+    private static DateTime latestNow;
+    private static bool validNow;
+    public static DateTime Now
+    {
+        get
+        {
+            if (validNow)
+                return latestNow;
+            else
+            {
+                validNow = true;
+                return latestNow = DateTime.Now;
+            }
+        }
+    }
+    void LateUpdate()
+    {
+        validNow = false;
+    }
+    #endregion
+
     public struct Day
     {
         public int dayOfMonth;

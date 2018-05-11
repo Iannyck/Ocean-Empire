@@ -1294,7 +1294,7 @@ GameObject:
   - component: {fileID: 356754340}
   - component: {fileID: 356754339}
   m_Layer: 5
-  m_Name: Reset
+  m_Name: ClearSave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1378,7 +1378,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1217391657}
-        m_MethodName: ResetDataToDefault
+        m_MethodName: ClearSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1864,7 +1864,7 @@ GameObject:
   - component: {fileID: 513973678}
   - component: {fileID: 513973677}
   m_Layer: 5
-  m_Name: History Window
+  m_Name: Logs Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2038,7 +2038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &523513944
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2053,10 +2053,10 @@ RectTransform:
   m_Father: {fileID: 1767084727}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20, y: -175}
+  m_SizeDelta: {x: 866, y: 175}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &523513945
 MonoBehaviour:
@@ -3501,12 +3501,12 @@ GameObject:
   - component: {fileID: 992821650}
   - component: {fileID: 992821649}
   m_Layer: 5
-  m_Name: Show Scheduled Tasks
+  m_Name: Show Schedules
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &992821648
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3521,10 +3521,10 @@ RectTransform:
   m_Father: {fileID: 1767084727}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -1735}
-  m_SizeDelta: {x: 866, y: 175}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &992821649
 MonoBehaviour:
@@ -3880,7 +3880,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 48.688522}
+  m_SizeDelta: {x: 0, y: 47.61523}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1155222816
 MonoBehaviour:
@@ -3962,6 +3962,15 @@ MonoBehaviour:
   exitSceneOnHide: 1
   mapIndex: 0
   setMapText: {fileID: 146554952}
+  dataSavers:
+  - {fileID: 11400000, guid: 91b765acb2de1b840833439740cdbf3e, type: 2}
+  - {fileID: 11400000, guid: 9b4e1f2a3f1761e4bac08ee5dc7f5b19, type: 2}
+  - {fileID: 11400000, guid: 81d221094b9bdbf41805451be7f2b23f, type: 2}
+  - {fileID: 11400000, guid: 7e61d0176af1dc5429dab10f3e7705be, type: 2}
+  - {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
+  - {fileID: 11400000, guid: 746670aba0b981b40b941c7d4ad29909, type: 2}
+  - {fileID: 11400000, guid: 2e39e744c6f66a64292150c84585944f, type: 2}
+  - {fileID: 11400000, guid: aaa312bfc9b544344a96ad2a4dd88016, type: 2}
 --- !u!114 &1217391659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4696,7 +4705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000042038904}
+  m_AnchoredPosition: {x: 0, y: -0.00018693556}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1380978865
@@ -5178,8 +5187,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 476.5, y: -24.344261}
-  m_SizeDelta: {x: 953, y: 48.688522}
+  m_AnchoredPosition: {x: 476.5, y: -23.807615}
+  m_SizeDelta: {x: 953, y: 47.61523}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524956227
 MonoBehaviour:
@@ -5287,7 +5296,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Show Task reports (history)
+  m_Text: Show Logs
 --- !u!222 &1530715311
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5416,8 +5425,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 48.688522}
+  m_AnchoredPosition: {x: 0, y: -0.000121727004}
+  m_SizeDelta: {x: 0, y: 47.61523}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1696580441
 MonoBehaviour:
@@ -5536,7 +5545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Show Scheduled Tasks(calendar)
+  m_Text: Show Schedules (calendar)
 --- !u!222 &1734227269
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5909,8 +5918,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 476.5, y: -24.344261}
-  m_SizeDelta: {x: 953, y: 48.688522}
+  m_AnchoredPosition: {x: 476.5, y: -23.807615}
+  m_SizeDelta: {x: 953, y: 47.61523}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1850540495
 GameObject:
@@ -5987,8 +5996,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 918626492}
   m_HandleRect: {fileID: 918626491}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6183,12 +6192,12 @@ GameObject:
   - component: {fileID: 1894158922}
   - component: {fileID: 1894158921}
   m_Layer: 5
-  m_Name: Show History
+  m_Name: Show Logs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1894158920
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6203,10 +6212,10 @@ RectTransform:
   m_Father: {fileID: 1767084727}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -1735}
-  m_SizeDelta: {x: 866, y: 175}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1894158921
 MonoBehaviour:

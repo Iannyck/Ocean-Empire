@@ -21,7 +21,7 @@ public class Cheat_SendEmail : MonoBehaviour
             + "\nSupport Gyroscope: " + SystemInfo.supportsGyroscope
             + "\nSupport Accelerometer: " + SystemInfo.supportsAccelerometer;
 
-        completeText += "\n\n" + History.instance.GetDataToString();
+        completeText += "\n\n" + Logger.Instance.GetTotalLogWithHeader();
 
         SendEmail(completeText);
     }

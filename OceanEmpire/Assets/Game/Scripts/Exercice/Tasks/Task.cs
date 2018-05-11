@@ -23,6 +23,6 @@ public class Task
 
     public override string ToString()
     {
-        return "Task: volumeRequired(" + minDuration + ")  maxDuration(" + maxDuration + ")  ticketReward(" + ticketReward + ")";
+        return "lvl(" + level + ") min(" + minDuration + ") max(" + maxDuration + ") reward(" + ticketReward + ")";
     }
 }

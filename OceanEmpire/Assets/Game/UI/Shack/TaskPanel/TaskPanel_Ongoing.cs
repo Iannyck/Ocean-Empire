@@ -17,11 +17,6 @@ public class TaskPanel_Ongoing : MonoBehaviour, ITaskPanelState
     public InstantExerciseChoice_Item taskUI;
 
     private Sprite sliderFillStdSprite;
-    private bool isListening = false;
-
-    void Awake()
-    {
-    }
 
     public void Enter(Action onComplete)
     {
