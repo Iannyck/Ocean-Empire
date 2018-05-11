@@ -27,7 +27,7 @@ public class TUT_FirstMap : BaseTutorial
 
         modules.okButton.PromptOk(2f, () =>
         {
-            modules.textDisplay.DisplayText("Essai de capturer des poissons en les touchant!", true);
+            modules.textDisplay.DisplayText("Essaie de capturer les poissons en te déplaçant!", true);
             modules.okButton.PromptOk(2f, () =>
             {
                 InitQueue initQueue = new InitQueue(() =>

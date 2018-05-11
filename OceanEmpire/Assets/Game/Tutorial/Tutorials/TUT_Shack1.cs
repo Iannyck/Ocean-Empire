@@ -38,7 +38,7 @@ public class TUT_Shack1 : BaseTutorial
 
     void Step2_HeresYourCash()
     {
-        modules.textDisplay.DisplayText("Tous les jetons que tu as obtenue au cours de ta récolte se retrouvent ici.",
+        modules.textDisplay.DisplayText("Tous les jetons que tu as obtenus au cours de ta récolte se retrouvent ici.",
             position: TextDisplay.Position.Middle);
         modules.spotlight.On(TutorialShackReference.Instance.cash.position);
         modules.okButton.PromptOk(2f, Step3_LetsGoRight);
@@ -46,7 +46,7 @@ public class TUT_Shack1 : BaseTutorial
 
     void Step3_LetsGoRight()
     {
-        modules.textDisplay.DisplayText("Allons voir le reste du quai.\nAppuie sur ce bouton te déplacer.",
+        modules.textDisplay.DisplayText("Allons voir le reste du quai.\nAppuie sur ce bouton pour te déplacer.",
             position: TextDisplay.Position.Top);
 
         modules.delayedAction.Do(1, () => modules.spotlight.On(TutorialShackReference.Instance.goRightButton.transform.position));
@@ -61,7 +61,7 @@ public class TUT_Shack1 : BaseTutorial
 
     void Step4_HereAreYourObjectives()
     {
-        modules.textDisplay.DisplayText("Voici ton panneau d'objectif.",
+        modules.textDisplay.DisplayText("Voici ton panneau d'objectifs.",
             position: TextDisplay.Position.Bottom);
 
         modules.spotlight.On();

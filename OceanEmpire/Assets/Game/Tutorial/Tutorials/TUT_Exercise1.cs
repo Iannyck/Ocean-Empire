@@ -57,7 +57,7 @@ public class TUT_Exercise1 : BaseTutorial
     }
     void Step3_WhatTheyAre()
     {
-        modules.textDisplay.DisplayText("Il s'agit d'une monnaie de luxe que tu peux obtenir en faisant de l'exercice physique.");
+        modules.textDisplay.DisplayText("Il s'agit d'une monnaie de luxe que tu peux obtenir en réalisant de l'exercice physique.");
         modules.okButton.PromptOk(3, Step4_HowToGain);
     }
     void Step4_HowToGain()
@@ -72,7 +72,7 @@ public class TUT_Exercise1 : BaseTutorial
     void Step_YouCanAlsoPlan()
     {
         ticketDisplayInstance.DOFade(0, 0.5f).OnComplete(ticketDisplayInstance.DestroyGO);
-        modules.textDisplay.DisplayText("Pour faire encore plus de tickets, tu peux te planifier un exercice!",
+        modules.textDisplay.DisplayText("Pour obtenir encore plus de tickets, tu peux te planifier un exercice!",
             position: TextDisplay.Position.Middle);
 
 
@@ -93,7 +93,7 @@ public class TUT_Exercise1 : BaseTutorial
     void Step_Conclusion()
     {
         modules.spotlight.On();
-        modules.textDisplay.DisplayText("Nous t'invitons à entremêler tes sessions de jeu avec de l'activité physique pour" +
+        modules.textDisplay.DisplayText("Nous t'invitons à jumeler tes sessions de jeu avec de l'activité physique pour" +
             " progresser plus vite :)");
 
         modules.okButton.PromptOk(1.5f, () =>

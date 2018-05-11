@@ -26,12 +26,12 @@ public class TUT_Gaz : BaseTutorial
 
         modules.textDisplay.SetMiddle();
         modules.textDisplay.DisplayText("Voici ta jauge d'essence." +
-            "\n<size=55>Lorsqu'elle devient vide, ta récolte de poisson se termine.</size>", true);
+            "\n<size=55>Lorsqu'elle est vide, ta récolte de poissons se termine.</size>", true);
 
         modules.okButton.PromptOk(2f, () =>
         {
             
-            modules.textDisplay.DisplayText("Si tu désire remonter à la surface plus tôt, tu peux toujours appuyer sur ce bouton.", true,
+            modules.textDisplay.DisplayText("Si tu désires remonter à la surface plus tôt, tu peux toujours appuyer sur ce bouton.", true,
                 ()=> spotlight.On(Game.Instance.Recolte_UI.optionButton.transform.position));
             modules.okButton.PromptOk(2f, () =>
             {

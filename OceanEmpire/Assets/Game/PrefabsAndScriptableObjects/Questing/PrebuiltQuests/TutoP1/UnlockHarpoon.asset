@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: UnlockHarpoon
   m_EditorClassIdentifier: 
   questContext:
-    description: "\xC9quipe-toi d'un harpon (voir magasin)"
+    description: "\xC9quipes-toi d'un harpon (voir magasin)"
     iconResource: Sprites/QuestIcons/HarpoonIcon
     shopCategory: HarpoonThrowerCategory
     upgradeLevelToReach: 1

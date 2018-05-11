@@ -46,7 +46,7 @@ public class TUT_FishingFrenzy : BaseTutorial
         TutorialShackReference.Instance.shack_Canvas.ShowAll(Shack_Canvas.Filter.None);
 
         modules.spotlight.OnButOffScreenUp();
-        modules.textDisplay.DisplayText("Lorsqu'elle est active, elle remplira l'océan d'une multitude de poissons additionels lors" +
+        modules.textDisplay.DisplayText("Lorsqu'elle est active, elle remplira l'océan d'une multitude de poissons additionnels lors" +
             " de ta prochaine pêche.", position: TextDisplay.Position.Middle);
 
         modules.delayedAction.Do(1, modules.okButton.SetMiddlePosition);
