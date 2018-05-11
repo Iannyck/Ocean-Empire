@@ -832,7 +832,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Nous avons d\xE9tect\xE9 de l'exercice depuis votre derni\xE8re connection."
+  m_Text: "Nous avons d\xE9tect\xE9 de l'exercice depuis votre derni\xE8re connexion."
 --- !u!222 &1286243888
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1078,7 +1078,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "F\xE9licitation !"
+  m_Text: "F\xE9licitations !"
 --- !u!222 &1734778469
 CanvasRenderer:
   m_ObjectHideFlags: 0
