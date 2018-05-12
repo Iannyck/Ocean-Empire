@@ -36,16 +36,21 @@ public class CheatsWindow : WindowAnimation
 
     public void ClearSave()
     {
-        foreach (DataSaver saver in dataSavers)
+        if (Application.isEditor)
+            MessagePopup.DisplayMessage("Pas supporté sur editeur. Delete les fichier et relance le jeu manuellement");
+        else
         {
-            if (saver != null)
-                saver.ClearSave();
+            foreach (DataSaver saver in dataSavers)
+            {
+                if (saver != null)
+                    saver.ClearSave();
+            }
+
+            //GoogleReader.ResetActivitiesSave();
+            //GoogleActivities.instance.ResetActivities();
+
+            Application.Quit();
         }
-
-        GoogleReader.ResetActivitiesSave();
-        GoogleActivities.instance.ResetActivities();
-
-        Scenes.Load("Intro", LoadSceneMode.Single);
     }
 
 

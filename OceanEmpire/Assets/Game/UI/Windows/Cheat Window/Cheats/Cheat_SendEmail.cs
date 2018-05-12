@@ -14,48 +14,40 @@ public class Cheat_SendEmail : MonoBehaviour
 
     public void SendHistoryByEmail()
     {
-        string completeText = "Device info:\n"
-            + "ID: " + SystemInfo.deviceUniqueIdentifier
-            + "\nName: " + SystemInfo.deviceName
-            + "\nModel: " + SystemInfo.deviceModel
-            + "\nSupport Gyroscope: " + SystemInfo.supportsGyroscope
-            + "\nSupport Accelerometer: " + SystemInfo.supportsAccelerometer;
-
-        completeText += "\n\n" + Logger.Instance.GetTotalLogWithHeader();
-
-        SendEmail(completeText);
+        SendEmail(StartExtractingProcess.GetAllExtractableData());
     }
 
     public static void SendEmail(string body)
     {
         try
         {
-            MailMessage mail = new MailMessage();
-
-            mail.From = new MailAddress(email);
+            MailMessage mail = new MailMessage
+            {
+                From = new MailAddress(email)
+            };
             mail.To.Add(email);
-            mail.Subject = "Jeu de poisson - Device: " + SystemInfo.deviceUniqueIdentifier;
+            mail.Subject = "Super-marin - Device: " + SystemInfo.deviceUniqueIdentifier;
             mail.Body = body;
 
             SmtpClient smtpServer = new SmtpClient()
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
-                Credentials = new System.Net.NetworkCredential(email, password) as ICredentialsByHost,
+                Credentials = new NetworkCredential(email, password) as ICredentialsByHost,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false                
+                UseDefaultCredentials = false
             };
             ServicePointManager.ServerCertificateValidationCallback =
                 delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
                 { return true; };
             smtpServer.Send(mail);
 
-            MessagePopup.DisplayMessage("Courriel envoy\u00E9!");
+            MessagePopup.DisplayMessage("Courriel envoyé!");
         }
         catch (Exception e)
         {
-            MessagePopup.DisplayMessage("Erreur lors de l'envoie du courriel.\n\n" + e.Message);
+            MessagePopup.DisplayMessage(e.Message);
         }
     }
 }

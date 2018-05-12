@@ -65,19 +65,15 @@ public class GoogleReader : MonoBehaviour
 
     public static bool LogLesInfoDesThread = true;
 
-    public static void WriteData(string[] data)
+    public static void WriteData(string[] data) { WriteData(string.Join("", data)); }
+    public static void WriteData(string data)
     {
-        //var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "RESULTS.txt");
-        //File.WriteAllLines(filename, data);
-
-        var path = Application.persistentDataPath + "/results.dat";
+        var path = Application.persistentDataPath + "/results.csv";
 
         if (!File.Exists(path))
             File.Create(path).Dispose();
 
-        string fullStringData = string.Join("", data);
-
-        byte[] bytes = Encoding.ASCII.GetBytes(fullStringData);
+        byte[] bytes = Encoding.Unicode.GetBytes(data);
 
         FileStream file = File.Open(path, FileMode.Open);
         file.Write(bytes, 0, bytes.Length);
@@ -118,7 +114,7 @@ public class GoogleReader : MonoBehaviour
     {
         Thread t = new Thread(new ThreadStart(() =>
         {
-            using (File.Create(filePath));
+            using (File.Create(filePath)) ;
             FileInfo info = new FileInfo(filePath);
             if (info.Length > 0)
             {
@@ -128,7 +124,8 @@ public class GoogleReader : MonoBehaviour
             {
                 MessagePopup.DisplayMessageFromThread("File Deleted - Good job !");
             }
-            LoadLastActivityString(delegate(string lastLine) {
+            LoadLastActivityString(delegate (string lastLine)
+            {
                 StreamWriter writer = new StreamWriter(filePath, true);
                 writer.WriteLine(lastLine);
                 writer.Close();
@@ -285,7 +282,7 @@ public class GoogleReader : MonoBehaviour
         string document = exempleFile;
 
         // On desire decoupe le string pour trouver tous les activites
-        List <Activity> result = new List<Activity>();
+        List<Activity> result = new List<Activity>();
 
         bool readingDate = false;
         string probWalk = "";
@@ -442,7 +439,7 @@ public class GoogleReader : MonoBehaviour
 
         // Définition des paramètres d'encryption
         RijndaelManaged aes = new RijndaelManaged();
-        
+
         aes.Mode = CipherMode.ECB;
         //aes.Padding = PaddingMode.None;
 

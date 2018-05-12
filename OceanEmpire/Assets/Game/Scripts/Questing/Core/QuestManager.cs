@@ -91,7 +91,7 @@ namespace Questing
         {
             quest.onCompletion = OnQuestCompletion;
             ongoingQuests.Add(quest);
-
+            Debug.Log("quest added");
             Logger.Log(Logger.Category.Questing, "QuestAdded: " + quest.Context.description);
 
             if (andLateSave)

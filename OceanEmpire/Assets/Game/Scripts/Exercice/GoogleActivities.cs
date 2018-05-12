@@ -1,9 +1,10 @@
-﻿ 
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CCC.Persistence;
+using System.Text;
 
 public class GoogleActivities : MonoPersistent
 {
@@ -111,13 +112,15 @@ public class GoogleActivities : MonoPersistent
                     currentBest.rate = currentProb;
                     currentBest.type = currentType;
                 }
-                else if (currentBest.rate < currentProb){
+                else if (currentBest.rate < currentProb)
+                {
                     currentBest.rate = currentProb;
                     currentBest.type = currentType;
                 }
-                else if(currentBest.rate == currentProb) {
+                else if (currentBest.rate == currentProb)
+                {
                     int result = priority.Compare(currentBest.type, currentType);
-                    if(result == 1)
+                    if (result == 1)
                     {
                         currentBest.rate = currentProb;
                         currentBest.type = currentType;
@@ -152,25 +155,26 @@ public class GoogleActivities : MonoPersistent
         Debug.Log("KEY RECEIVE : " + GoogleReader.keyStr);
     }
 
-    public string[] GetAllData()
+    public string GetAllData()
     {
-        if (records.Count < 1 || records == null)
-            return null;
+        if (records == null)
+            records = new List<ActivityReport>();
 
-        string[] data = new string[records.Count + 2];
+        StringBuilder text = new StringBuilder();
 
-        data[0] = "Date,WalkProb,RunProb,BicycleProb";
-
-        for (int i = 1; i < (records.Count+1); i++)
+        text.Append("Date,WalkProb,RunProb,BicycleProb");
+        for (int i = 1; i < (records.Count + 1); i++)
         {
-            string newEntry = "";
-            newEntry += "\n" + records[i-1].time + ",";
-            newEntry += records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.walk) + "," +
-            records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.run) + "," +
-            records[i-1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle);
-            data[i] = newEntry;
+            text.Append('\n')
+                .Append(records[i - 1].time.ToString())
+                .Append(',')
+                .Append(records[i - 1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.walk))
+                .Append(',')
+                .Append(records[i - 1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.run))
+                .Append(',')
+                .Append(records[i - 1].backupActivity.GetActivityProbability(PrioritySheet.ExerciseTypes.bicycle));
         }
-        data[records.Count + 1] = "\n\n" + Logger.Instance.GetTotalLogWithHeader();
-        return data;
+
+        return text.ToString();
     }
 }
