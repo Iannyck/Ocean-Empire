@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class TaskPanel_Planned : MonoBehaviour, ITaskPanelState
 {
     public Text dateText;
+    public TaskPanel taskPanel;
 
     // On réutilise des bout de code, hehehe \(• ◡ •)/
     public InstantExerciseChoice_Item uiDisplay;
+
+    private Schedule schedule;
 
     public void Enter(Action onComplete)
     {
@@ -27,7 +30,7 @@ public class TaskPanel_Planned : MonoBehaviour, ITaskPanelState
 
     public void FillContent(object data)
     {
-        var schedule = data as Schedule;
+        schedule = data as Schedule;
         if (schedule == null)
         {
             Debug.LogError("Could not fill TaskPanel_Planned with data");
@@ -44,5 +47,22 @@ public class TaskPanel_Planned : MonoBehaviour, ITaskPanelState
             start.Day + " " +
             Calendar.GetMonthAbbreviation(start.Month) + "  -  <color=#f>Entre " +
             timeslot.ToCondensedDayOfTimeString() + "</color>";
+    }
+
+    public void OfferToStartNow()
+    {
+        if (Calendar.instance.CouldMoveScheduleToNow(schedule))
+        {
+            Debug.Log("Fenetre de confirmation");
+
+            YesNoWindow.AskYesNoQuestion("Débuter l'exercice maintenant?", (yes) =>
+            {
+                if (yes)
+                {
+                    Debug.Log("Moved early: " + Calendar.instance.MoveScheduleToNow(schedule));
+                    PlannedExerciceRewarder.Instance.ForceAnalyseCheck();
+                }
+            });
+        }
     }
 }

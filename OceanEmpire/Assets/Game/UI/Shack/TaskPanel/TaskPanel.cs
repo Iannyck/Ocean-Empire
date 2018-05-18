@@ -36,16 +36,21 @@ public class TaskPanel : MonoBehaviour
             PlannedExerciceRewarder.Instance.OnLatestPendingReportUpdated -= UpdateState;
     }
 
-    //void Update()
-    //{
-    //    if (updateTimer <= 0)
-    //    {
-    //        UpdateState();
-    //        updateTimer += updateStateEvery;
-    //    }
+    public void ForceUpdate()
+    {
+        UpdateState();
+    }
 
-    //    updateTimer -= Time.deltaTime;
-    //}
+    void Update()
+    {
+        if (updateTimer <= 0)
+        {
+            UpdateState();
+            updateTimer += updateStateEvery;
+        }
+
+        updateTimer -= Time.deltaTime;
+    }
 
     void UpdateState()
     {

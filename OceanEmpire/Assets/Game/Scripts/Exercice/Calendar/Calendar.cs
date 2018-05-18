@@ -17,11 +17,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    private AutoSortedList<Schedule> presentAndFutureBonifiedTimes = new AutoSortedList<Schedule>();
+    private AutoSortedList<Schedule> presentAndFutureSchedules = new AutoSortedList<Schedule>();
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    private AutoSortedList<Schedule> pastBonifiedTimes = new AutoSortedList<Schedule>();
+    private AutoSortedList<Schedule> pastSchedules = new AutoSortedList<Schedule>();
     [SerializeField] private DataSaver dataSaver;
 
     public bool log = true;
@@ -31,11 +31,11 @@ public class Calendar : MonoPersistent
     /// <summary>
     /// Ordonné du plus récent au plus lointain
     /// </summary>
-    public ReadOnlyCollection<Schedule> GetPresentAndFutureSchedules() { return presentAndFutureBonifiedTimes.GetInternalList(); }
+    public ReadOnlyCollection<Schedule> GetPresentAndFutureSchedules() { return presentAndFutureSchedules.GetInternalList(); }
     /// <summary>
     /// Ordonné du plus vieux au plus récent
     /// </summary>
-    public ReadOnlyCollection<Schedule> GetPastSchedules() { return pastBonifiedTimes.GetInternalList(); }
+    public ReadOnlyCollection<Schedule> GetPastSchedules() { return pastSchedules.GetInternalList(); }
 
     protected void Awake()
     {
@@ -66,9 +66,9 @@ public class Calendar : MonoPersistent
     {
         DateTime now = DateTime.Now;
         bool dirty = false;
-        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        for (int i = 0; i < presentAndFutureSchedules.Count; i++)
         {
-            int timeslotRelation = presentAndFutureBonifiedTimes[i].timeSlot.IsOverlappingWith(now);
+            int timeslotRelation = presentAndFutureSchedules[i].timeSlot.IsOverlappingWith(now);
 
             //The schedule is in the future
             if (timeslotRelation == 1)
@@ -78,8 +78,8 @@ public class Calendar : MonoPersistent
             if (timeslotRelation == -1)
             {
                 dirty = true;
-                pastBonifiedTimes.Add(presentAndFutureBonifiedTimes[i]);
-                presentAndFutureBonifiedTimes.RemoveAt(i);
+                pastSchedules.Add(presentAndFutureSchedules[i]);
+                presentAndFutureSchedules.RemoveAt(i);
                 i--;
                 if (log)
                     Debug.Log("Bonified Time concluded: " + i);
@@ -95,9 +95,9 @@ public class Calendar : MonoPersistent
         if (!IsOverlappingWithSchedule(newSchedule.timeSlot))
         {
             if (newSchedule.timeSlot.IsInThePast())
-                pastBonifiedTimes.Add(newSchedule);
+                pastSchedules.Add(newSchedule);
             else
-                presentAndFutureBonifiedTimes.Add(newSchedule);
+                presentAndFutureSchedules.Add(newSchedule);
 
             ApplyDataToSaver(true);
 
@@ -123,9 +123,9 @@ public class Calendar : MonoPersistent
     /// </summary>
     public bool IsOverlappingWithSchedule(TimeSlot timeslot)
     {
-        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        for (int i = pastSchedules.Count - 1; i >= 0; i--)
         {
-            int result = pastBonifiedTimes[i].timeSlot.IsOverlappingWith(timeslot);
+            int result = pastSchedules[i].timeSlot.IsOverlappingWith(timeslot);
             if (result == 0)
                 return true;
 
@@ -133,9 +133,9 @@ public class Calendar : MonoPersistent
             if (result == -1)
                 break;
         }
-        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        for (int i = 0; i < presentAndFutureSchedules.Count; i++)
         {
-            int result = presentAndFutureBonifiedTimes[i].timeSlot.IsOverlappingWith(timeslot);
+            int result = presentAndFutureSchedules[i].timeSlot.IsOverlappingWith(timeslot);
             if (result == 0)
                 return true;
 
@@ -151,17 +151,17 @@ public class Calendar : MonoPersistent
     /// </summary>
     public bool IsOverlappingWithSchedule(DateTime dateTime)
     {
-        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        for (int i = pastSchedules.Count - 1; i >= 0; i--)
         {
-            int result = pastBonifiedTimes[i].timeSlot.IsOverlappingWith(dateTime);
+            int result = pastSchedules[i].timeSlot.IsOverlappingWith(dateTime);
             if (result == 0)
                 return true;
             else if (result == -1)
                 return false;
         }
-        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        for (int i = 0; i < presentAndFutureSchedules.Count; i++)
         {
-            int result = presentAndFutureBonifiedTimes[i].timeSlot.IsOverlappingWith(dateTime);
+            int result = presentAndFutureSchedules[i].timeSlot.IsOverlappingWith(dateTime);
             if (result == 0)
                 return true;
             else if (result == 1)
@@ -177,8 +177,8 @@ public class Calendar : MonoPersistent
 
     private void ApplyDataToSaver(bool andSave)
     {
-        dataSaver.SetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES, presentAndFutureBonifiedTimes);
-        dataSaver.SetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES, pastBonifiedTimes);
+        dataSaver.SetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES, presentAndFutureSchedules);
+        dataSaver.SetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES, pastSchedules);
 
         if (andSave)
         {
@@ -188,22 +188,22 @@ public class Calendar : MonoPersistent
 
     private void FetchDataFromSaver()
     {
-        presentAndFutureBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as AutoSortedList<Schedule>;
-        if (presentAndFutureBonifiedTimes == null)
-            presentAndFutureBonifiedTimes = new AutoSortedList<Schedule>();
+        presentAndFutureSchedules = dataSaver.GetObjectClone(SAVEKEY_FUTURE_BONIFIEDTIMES) as AutoSortedList<Schedule>;
+        if (presentAndFutureSchedules == null)
+            presentAndFutureSchedules = new AutoSortedList<Schedule>();
 
-        pastBonifiedTimes = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as AutoSortedList<Schedule>;
-        if (pastBonifiedTimes == null)
-            pastBonifiedTimes = new AutoSortedList<Schedule>();
+        pastSchedules = dataSaver.GetObjectClone(SAVEKEY_PAST_BONIFIEDTIMES) as AutoSortedList<Schedule>;
+        if (pastSchedules == null)
+            pastSchedules = new AutoSortedList<Schedule>();
     }
 
     public List<Schedule> GetAllSchedulesStartingOn(Day day)
     {
         List<Schedule> result = new List<Schedule>();
 
-        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        for (int i = pastSchedules.Count - 1; i >= 0; i--)
         {
-            DateTime entry = pastBonifiedTimes[i].timeSlot.start;
+            DateTime entry = pastSchedules[i].timeSlot.start;
 
             int entryIsInThePast = day.IsInTheSameDay(entry);
 
@@ -215,13 +215,13 @@ public class Calendar : MonoPersistent
 
             // Same day
             if (entryIsInThePast == 0)
-                result.Add(pastBonifiedTimes[i]);
+                result.Add(pastSchedules[i]);
         }
         result.Reverse();
 
-        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        for (int i = 0; i < presentAndFutureSchedules.Count; i++)
         {
-            DateTime entry = presentAndFutureBonifiedTimes[i].timeSlot.start;
+            DateTime entry = presentAndFutureSchedules[i].timeSlot.start;
 
             int entryIsInThePast = day.IsInTheSameDay(entry);
 
@@ -233,7 +233,7 @@ public class Calendar : MonoPersistent
 
             // Same day
             if (entryIsInThePast == 0)
-                result.Add(presentAndFutureBonifiedTimes[i]);
+                result.Add(presentAndFutureSchedules[i]);
         }
 
         return result;
@@ -243,9 +243,9 @@ public class Calendar : MonoPersistent
     {
         List<BonifiedTime> list = new List<BonifiedTime>();
 
-        for (int i = pastBonifiedTimes.Count - 1; i >= 0; i--)
+        for (int i = pastSchedules.Count - 1; i >= 0; i--)
         {
-            var bonifiedTime = pastBonifiedTimes[i].GetBonifiedTime();
+            var bonifiedTime = pastSchedules[i].GetBonifiedTime();
             int compareResult;
             var result = BonifiedTime.Cross(bonifiedTime, timeSlot, out compareResult);
 
@@ -260,9 +260,9 @@ public class Calendar : MonoPersistent
         }
         list.Reverse();
 
-        for (int i = 0; i < presentAndFutureBonifiedTimes.Count; i++)
+        for (int i = 0; i < presentAndFutureSchedules.Count; i++)
         {
-            var bonifiedTime = presentAndFutureBonifiedTimes[i].GetBonifiedTime();
+            var bonifiedTime = presentAndFutureSchedules[i].GetBonifiedTime();
             int compareResult;
             var result = BonifiedTime.Cross(bonifiedTime, timeSlot, out compareResult);
 
@@ -279,7 +279,50 @@ public class Calendar : MonoPersistent
         return list;
     }
 
+    public bool MoveScheduleToNow(Schedule schedule)
+    {
+        TimeSlot newTimeSlot;
+        if(!CouldMoveScheduleToNow(schedule, out newTimeSlot))
+        {
+            return false;
+        }
 
+        presentAndFutureSchedules.Remove(schedule);
+        schedule.timeSlot = newTimeSlot;
+        presentAndFutureSchedules.Add(schedule);
+        ApplyDataToSaver(true);
+
+        Logger.Log(Logger.Category.PlannedExercise, "Exercice démaré plus tôt");
+        return true;
+    }
+    public bool CouldMoveScheduleToNow(Schedule schedule)
+    {
+        TimeSlot dummy;
+        return CouldMoveScheduleToNow(schedule, out dummy);
+    }
+    private bool CouldMoveScheduleToNow(Schedule schedule, out TimeSlot newTimeSlot)
+    {
+        if (schedule == null || schedule.timeSlot.start <= Now)
+        {
+            newTimeSlot = new TimeSlot();
+            return false;
+        }
+
+        var presentAndFuture = GetPresentAndFutureSchedules();
+
+        newTimeSlot = new TimeSlot(Now, schedule.timeSlot.duration);
+
+        // Check if colliding with other
+        foreach (var sc in presentAndFuture)
+        {
+            if (sc == schedule)
+                continue;
+            if (sc.timeSlot.IsOverlappingWith(newTimeSlot) == 0)
+                return false;
+        }
+
+        return true;
+    }
 
     #region DateTime.Now Optimsation
     private static DateTime latestNow;
