@@ -1,0 +1,465 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:1-26:12
+	package
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:70-100
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:148-171
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:101-147
+	android:versionCode
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:172-195
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:11-69
+	android:installLocation
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:196-236
+uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:3:3-92
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:3:20-89
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:4:3-78
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:4:20-76
+uses-permission#android.permission.INTERNET
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:5:3-64
+MERGED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:20:5-66
+MERGED from [com.google.android.gms:play-services-analytics:9.0.0] C:\Users\alexa\.android\build-cache\43a04d518b956c473577449282f934bbc27f510d\output\AndroidManifest.xml:21:5-67
+MERGED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:19:5-67
+MERGED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:20:5-66
+MERGED from [com.google.android.gms:play-services-gcm:9.0.0] C:\Users\alexa\.android\build-cache\c668c21b031a2949b5f96ac9ea01a0a579f0ba98\output\AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-iid:9.0.0] C:\Users\alexa\.android\build-cache\88ec70e70d2da03d039bb85d25df7bdb376146d8\output\AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\2795e6b910b6de088a01b5f53f9a1dc9ad70cb5b\output\AndroidManifest.xml:21:5-67
+MERGED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:21:5-67
+MERGED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:21:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:21:5-67
+MERGED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:21:5-67
+MERGED from [com.google.android.gms:play-services-maps:9.0.0] C:\Users\alexa\.android\build-cache\5783c42b2597b380977406330cee19cceb31019f\output\AndroidManifest.xml:21:5-66
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:5:20-62
+supports-screens
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:6:3-163
+	android:largeScreens
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:6:78-105
+	android:smallScreens
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:6:21-48
+	android:normalScreens
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:6:49-77
+	android:xlargeScreens
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:6:106-134
+	android:anyDensity
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:6:135-160
+application
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:7:3-17:17
+MERGED from [com.google.firebase:firebase-core:9.0.0] C:\Users\alexa\.android\build-cache\de28bebed214bdd6913daad05ee276b4cfc69f7c\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services:9.0.0] C:\Users\alexa\.android\build-cache\18274940f41fe935b525ac37f8830901a71e6063\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:24:5-32:19
+MERGED from [com.google.android.gms:play-services-analytics:9.0.0] C:\Users\alexa\.android\build-cache\43a04d518b956c473577449282f934bbc27f510d\output\AndroidManifest.xml:27:5-20
+MERGED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:20:5-30:19
+MERGED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:20:5-32:19
+MERGED from [com.google.android.gms:play-services-cast:9.0.0] C:\Users\alexa\.android\build-cache\91af6abef81e62eacd6a9e18c82c9e5d53dd5b4c\output\AndroidManifest.xml:19:5-20
+MERGED from [com.android.support:mediarouter-v7:23.0.0] C:\Users\alexa\.android\build-cache\886a1f3e2df05840df417787eb5345de27800ad6\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.0.0] C:\Users\alexa\.android\build-cache\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\output\AndroidManifest.xml:22:5-20
+MERGED from [com.google.firebase:firebase-config:9.0.0] C:\Users\alexa\.android\build-cache\39305c0b2db98fb878c447bb5dcdccc9d553e619\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:24:5-32:19
+MERGED from [com.google.firebase:firebase-auth:9.0.0] C:\Users\alexa\.android\build-cache\86e7766be253c3b728484e677144e083ccf1d0a8\output\AndroidManifest.xml:20:5-21:19
+MERGED from [com.google.firebase:firebase-auth-common:9.0.0] C:\Users\alexa\.android\build-cache\44dc0570aa36d5c8a22bbc80afb1c88976e32cbf\output\AndroidManifest.xml:20:5-21:19
+MERGED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:20:5-32:19
+MERGED from [com.google.android.gms:play-services-fitness:9.0.0] C:\Users\alexa\.android\build-cache\229de69d5f0b64e93c6cad5d48a01e769a212b4c\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-games:9.0.0] C:\Users\alexa\.android\build-cache\b5a8a4fd10444b8f08fbbb261feb0d0e7fbc64e6\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-drive:9.0.0] C:\Users\alexa\.android\build-cache\be8a1f51bb495e63121e7a7be49fd27527b137fa\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-gcm:9.0.0] C:\Users\alexa\.android\build-cache\c668c21b031a2949b5f96ac9ea01a0a579f0ba98\output\AndroidManifest.xml:24:5-20
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.0] C:\Users\alexa\.android\build-cache\1dc44affb88a68ebd21745703ed8ee4fa3f29a1e\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-iid:9.0.0] C:\Users\alexa\.android\build-cache\88ec70e70d2da03d039bb85d25df7bdb376146d8\output\AndroidManifest.xml:24:5-20
+MERGED from [com.google.android.gms:play-services-location:9.0.0] C:\Users\alexa\.android\build-cache\abaabecb0b55736e80845366dc567a7e1204eeab\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-nearby:9.0.0] C:\Users\alexa\.android\build-cache\dd375db7e74c5df7483cf53234444953eb8220f1\output\AndroidManifest.xml:20:5-20
+MERGED from [com.google.android.gms:play-services-panorama:9.0.0] C:\Users\alexa\.android\build-cache\7eefcd81c2a05cd42f3bd8c4b4136be298566431\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-plus:9.0.0] C:\Users\alexa\.android\build-cache\605312fb54c1fce0ff60f3ca4ed326a581566d47\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-safetynet:9.0.0] C:\Users\alexa\.android\build-cache\d8ca7dfa818bfb437ae48914dc495746ad94ecc3\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\2795e6b910b6de088a01b5f53f9a1dc9ad70cb5b\output\AndroidManifest.xml:27:5-20
+MERGED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:24:5-38:19
+MERGED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:26:5-41:19
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:26:5-41:19
+MERGED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:30:5-59:19
+MERGED from [com.google.android.gms:play-services-vision:9.0.0] C:\Users\alexa\.android\build-cache\d09a7519d8c577f5526c34943e43e555cd06f199\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-identity:9.0.0] C:\Users\alexa\.android\build-cache\84367597b152f8a37816a3330c9e59ea9bdb6003\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-maps:9.0.0] C:\Users\alexa\.android\build-cache\5783c42b2597b380977406330cee19cceb31019f\output\AndroidManifest.xml:27:5-20
+MERGED from [com.google.android.gms:play-services-wearable:9.0.0] C:\Users\alexa\.android\build-cache\9e665d9c052c47942d80017ba3e4f1fa6f78f7d1\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:9.0.0] C:\Users\alexa\.android\build-cache\6bc7eb831ff24104471b99114f32e7bb90f3a311\output\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:5:5-12:19
+MERGED from [com.google.android.gms:play-services-tasks:9.0.0] C:\Users\alexa\.android\build-cache\f0ff5a899e4f6a34e04860c0e7e03f0f36e1e787\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:9.0.0] C:\Users\alexa\.android\build-cache\036a50790ba4289aeafac8b818938b61f06beaa6\output\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:23.0.0] C:\Users\alexa\.android\build-cache\699ce1a04a2b6b7bb4c08be3fb112883613b7abb\output\AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:7:92-124
+	android:icon
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:7:58-91
+	android:banner
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:7:147-184
+	android:theme
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:7:16-57
+	android:isGame
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:7:125-146
+activity#com.UQAC.OceanEmpire.UnityPlayerActivity
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:8:5-15:16
+	android:screenOrientation
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:8:48-86
+	android:label
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:8:15-47
+	android:launchMode
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:8:87-118
+	android:configChanges
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:8:119-292
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:8:293-348
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER+android.intent.category.LEANBACK_LAUNCHER
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:9:7-13:23
+action#android.intent.action.MAIN
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:10:9-61
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:10:17-58
+category#android.intent.category.LAUNCHER
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:11:9-69
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:11:19-66
+category#android.intent.category.LEANBACK_LAUNCHER
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:12:9-78
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:12:19-75
+meta-data#unityplayer.UnityActivity
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:14:7-82
+	android:value
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:14:59-79
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:14:18-58
+service#com.UQAC.OceanEmpire.ActivityDetection
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:16:5-50
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:16:14-47
+uses-sdk
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:18:3-72
+MERGED from [com.google.firebase:firebase-core:9.0.0] C:\Users\alexa\.android\build-cache\de28bebed214bdd6913daad05ee276b4cfc69f7c\output\AndroidManifest.xml:4:5-42
+MERGED from [com.google.android.gms:play-services:9.0.0] C:\Users\alexa\.android\build-cache\18274940f41fe935b525ac37f8830901a71e6063\output\AndroidManifest.xml:4:5-42
+MERGED from [com.google.android.gms:play-services-ads:9.0.0] C:\Users\alexa\.android\build-cache\30dec4e80d53fb2b065bb9a80c2bca3dec7f60ab\output\AndroidManifest.xml:19:5-42
+MERGED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:23:5-42
+MERGED from [com.google.android.gms:play-services-analytics:9.0.0] C:\Users\alexa\.android\build-cache\43a04d518b956c473577449282f934bbc27f510d\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-cast:9.0.0] C:\Users\alexa\.android\build-cache\91af6abef81e62eacd6a9e18c82c9e5d53dd5b4c\output\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:mediarouter-v7:23.0.0] C:\Users\alexa\.android\build-cache\886a1f3e2df05840df417787eb5345de27800ad6\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.0.0] C:\Users\alexa\.android\build-cache\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\output\AndroidManifest.xml:20:5-43
+MERGED from [com.google.firebase:firebase-config:9.0.0] C:\Users\alexa\.android\build-cache\39305c0b2db98fb878c447bb5dcdccc9d553e619\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:22:5-42
+MERGED from [com.google.firebase:firebase-auth:9.0.0] C:\Users\alexa\.android\build-cache\86e7766be253c3b728484e677144e083ccf1d0a8\output\AndroidManifest.xml:18:5-43
+MERGED from [com.google.firebase:firebase-auth-common:9.0.0] C:\Users\alexa\.android\build-cache\44dc0570aa36d5c8a22bbc80afb1c88976e32cbf\output\AndroidManifest.xml:18:5-43
+MERGED from [com.google.firebase:firebase-auth-module:9.0.0] C:\Users\alexa\.android\build-cache\1511c1af19f14b679eaa783ee23f638d510500e4\output\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-database:9.0.0] C:\Users\alexa\.android\build-cache\728d388451a4d7796e6d4826f456f358f293d8f4\output\AndroidManifest.xml:5:5-43
+MERGED from [com.google.firebase:firebase-database-connection:9.0.0] C:\Users\alexa\.android\build-cache\31f4f1273efea08a97fda3ae8a37d1dcda6d48da\output\AndroidManifest.xml:5:5-43
+MERGED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.firebase:firebase-storage:9.0.0] C:\Users\alexa\.android\build-cache\b4e1aa6392c75e119e3142f826b6947c1d350c03\output\AndroidManifest.xml:5:5-43
+MERGED from [com.google.firebase:firebase-storage-common:9.0.0] C:\Users\alexa\.android\build-cache\640fbeeae4243bb77f98142dd52e85b6329be230\output\AndroidManifest.xml:5:5-43
+MERGED from [com.google.android.gms:play-services-fitness:9.0.0] C:\Users\alexa\.android\build-cache\229de69d5f0b64e93c6cad5d48a01e769a212b4c\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-games:9.0.0] C:\Users\alexa\.android\build-cache\b5a8a4fd10444b8f08fbbb261feb0d0e7fbc64e6\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-drive:9.0.0] C:\Users\alexa\.android\build-cache\be8a1f51bb495e63121e7a7be49fd27527b137fa\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-gcm:9.0.0] C:\Users\alexa\.android\build-cache\c668c21b031a2949b5f96ac9ea01a0a579f0ba98\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.0] C:\Users\alexa\.android\build-cache\1dc44affb88a68ebd21745703ed8ee4fa3f29a1e\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-iid:9.0.0] C:\Users\alexa\.android\build-cache\88ec70e70d2da03d039bb85d25df7bdb376146d8\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-location:9.0.0] C:\Users\alexa\.android\build-cache\abaabecb0b55736e80845366dc567a7e1204eeab\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-nearby:9.0.0] C:\Users\alexa\.android\build-cache\dd375db7e74c5df7483cf53234444953eb8220f1\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-panorama:9.0.0] C:\Users\alexa\.android\build-cache\7eefcd81c2a05cd42f3bd8c4b4136be298566431\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-plus:9.0.0] C:\Users\alexa\.android\build-cache\605312fb54c1fce0ff60f3ca4ed326a581566d47\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-auth-base:9.0.0] C:\Users\alexa\.android\build-cache\5e4856ddd8ef7b9d626427d39f8cb787811e458e\output\AndroidManifest.xml:5:5-43
+MERGED from [com.google.android.gms:play-services-safetynet:9.0.0] C:\Users\alexa\.android\build-cache\d8ca7dfa818bfb437ae48914dc495746ad94ecc3\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-tagmanager:9.0.0] C:\Users\alexa\.android\build-cache\a60af05dff504e7c8566510299059dbf7040a0e5\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\2795e6b910b6de088a01b5f53f9a1dc9ad70cb5b\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-vision:9.0.0] C:\Users\alexa\.android\build-cache\d09a7519d8c577f5526c34943e43e555cd06f199\output\AndroidManifest.xml:4:5-42
+MERGED from [com.google.android.gms:play-services-wallet:9.0.0] C:\Users\alexa\.android\build-cache\a5e615bbc2bfa37f3eb92b7836db542070587eb0\output\AndroidManifest.xml:19:5-42
+MERGED from [com.google.android.gms:play-services-identity:9.0.0] C:\Users\alexa\.android\build-cache\84367597b152f8a37816a3330c9e59ea9bdb6003\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-maps:9.0.0] C:\Users\alexa\.android\build-cache\5783c42b2597b380977406330cee19cceb31019f\output\AndroidManifest.xml:26:5-42
+MERGED from [com.google.android.gms:play-services-wearable:9.0.0] C:\Users\alexa\.android\build-cache\9e665d9c052c47942d80017ba3e4f1fa6f78f7d1\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:9.0.0] C:\Users\alexa\.android\build-cache\6bc7eb831ff24104471b99114f32e7bb90f3a311\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:9.0.0] C:\Users\alexa\.android\build-cache\f0ff5a899e4f6a34e04860c0e7e03f0f36e1e787\output\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:9.0.0] C:\Users\alexa\.android\build-cache\036a50790ba4289aeafac8b818938b61f06beaa6\output\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:23.0.0] C:\Users\alexa\.android\build-cache\699ce1a04a2b6b7bb4c08be3fb112883613b7abb\output\AndroidManifest.xml:20:5-43
+	android:targetSdkVersion
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:18:40-69
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:18:13-39
+uses-feature#0x00020000
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:19:3-52
+MERGED from [com.google.android.gms:play-services-maps:9.0.0] C:\Users\alexa\.android\build-cache\5783c42b2597b380977406330cee19cceb31019f\output\AndroidManifest.xml:22:5-24:33
+	android:glEsVersion
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:19:17-49
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:9.0.0] C:\Users\alexa\.android\build-cache\5783c42b2597b380977406330cee19cceb31019f\output\AndroidManifest.xml:24:8-31
+uses-feature#android.hardware.vulkan
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:20:3-83
+	android:required
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:20:56-80
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:20:17-55
+uses-feature#android.hardware.sensor.accelerometer
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:22:3-97
+	android:required
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:22:70-94
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:22:17-69
+uses-feature#android.hardware.touchscreen
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:23:3-88
+	android:required
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:23:61-85
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:23:17-60
+uses-feature#android.hardware.touchscreen.multitouch
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:24:3-99
+	android:required
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:24:72-96
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:24:17-71
+uses-feature#android.hardware.touchscreen.multitouch.distinct
+ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:25:3-108
+	android:required
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:25:81-105
+	android:name
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:25:17-80
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:21:5-78
+MERGED from [com.google.android.gms:play-services-analytics:9.0.0] C:\Users\alexa\.android\build-cache\43a04d518b956c473577449282f934bbc27f510d\output\AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-nearby:9.0.0] C:\Users\alexa\.android\build-cache\dd375db7e74c5df7483cf53234444953eb8220f1\output\AndroidManifest.xml:19:5-79
+MERGED from [com.google.android.gms:play-services-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\2795e6b910b6de088a01b5f53f9a1dc9ad70cb5b\output\AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:20:5-79
+MERGED from [com.google.android.gms:play-services-maps:9.0.0] C:\Users\alexa\.android\build-cache\5783c42b2597b380977406330cee19cceb31019f\output\AndroidManifest.xml:20:5-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:21:22-76
+activity#com.google.android.gms.ads.AdActivity
+ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:26:9-29:64
+	android:configChanges
+		ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:28:13-122
+	android:theme
+		ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:29:13-61
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:27:13-65
+activity#com.google.android.gms.ads.purchase.InAppPurchaseActivity
+ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:30:9-31:52
+	android:theme
+		ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:31:13-50
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:9.0.0] C:\Users\alexa\.android\build-cache\46af5e68b1dacf756947bf8169f1966e9af839fd\output\AndroidManifest.xml:30:19-91
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.android.gms:play-services-analytics:9.0.0] C:\Users\alexa\.android\build-cache\43a04d518b956c473577449282f934bbc27f510d\output\AndroidManifest.xml:25:5-67
+MERGED from [com.google.android.gms:play-services-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\2795e6b910b6de088a01b5f53f9a1dc9ad70cb5b\output\AndroidManifest.xml:25:5-67
+MERGED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:24:5-67
+MERGED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:22:5-68
+	android:name
+		ADDED from [com.google.android.gms:play-services-analytics:9.0.0] C:\Users\alexa\.android\build-cache\43a04d518b956c473577449282f934bbc27f510d\output\AndroidManifest.xml:25:22-65
+activity#com.google.android.gms.appinvite.PreviewActivity
+ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:21:9-29:20
+	android:exported
+		ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:23:17-40
+	android:theme
+		ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:24:17-63
+	android:name
+		ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:22:17-48
+intent-filter#android.intent.category.DEFAULT+com.google.android.gms.appinvite.ACTION_PREVIEW
+ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:25:13-28:29
+action#com.google.android.gms.appinvite.ACTION_PREVIEW
+ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:26:17-89
+	android:name
+		ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:26:25-87
+category#android.intent.category.DEFAULT
+ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:27:17-75
+	android:name
+		ADDED from [com.google.android.gms:play-services-appinvite:9.0.0] C:\Users\alexa\.android\build-cache\5b28352623f02bf68c404c35ef2c8a770ce5c583\output\AndroidManifest.xml:27:27-73
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:21:9-24:46
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:23:19-52
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:24:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:22:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:21:19-68
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:28:9-31:110
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:30:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:31:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:9.0.0] C:\Users\alexa\.android\build-cache\ac499da399c95bbb8da74052b3d33157adb93e05\output\AndroidManifest.xml:29:13-58
+service#com.google.firebase.crash.internal.service.FirebaseCrashReceiverService
+ADDED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:26:9-27:50
+	android:process
+		ADDED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:27:13-48
+	android:name
+		ADDED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:26:18-79
+service#com.google.firebase.crash.internal.service.FirebaseCrashSenderService
+ADDED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:29:9-30:50
+	android:process
+		ADDED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:30:13-48
+	android:name
+		ADDED from [com.google.firebase:firebase-crash:9.0.0] C:\Users\alexa\.android\build-cache\0e0746e731c11026078369bf38f1dc45d7cbc520\output\AndroidManifest.xml:29:18-77
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:24:9-30:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:26:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:25:13-82
+intent-filter#com.google.firebase.MESSAGING_EVENT
+ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:27:13-29:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:27:28-51
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:28:17-78
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:9.0.0] C:\Users\alexa\.android\build-cache\3e69bb7a1c6e7a10e691e2dfd0d7c8e64ca51dd8\output\AndroidManifest.xml:28:25-75
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.android.gms:play-services-gcm:9.0.0] C:\Users\alexa\.android\build-cache\c668c21b031a2949b5f96ac9ea01a0a579f0ba98\output\AndroidManifest.xml:21:5-82
+MERGED from [com.google.android.gms:play-services-iid:9.0.0] C:\Users\alexa\.android\build-cache\88ec70e70d2da03d039bb85d25df7bdb376146d8\output\AndroidManifest.xml:21:5-82
+MERGED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:23:5-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-gcm:9.0.0] C:\Users\alexa\.android\build-cache\c668c21b031a2949b5f96ac9ea01a0a579f0ba98\output\AndroidManifest.xml:21:22-79
+service#com.google.android.gms.tagmanager.TagManagerService
+ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:25:9-27:42
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:27:17-39
+	android:exported
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:26:17-41
+	android:name
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:25:18-84
+activity#com.google.android.gms.tagmanager.TagManagerPreviewActivity
+ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:28:9-37:20
+	android:noHistory
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:29:13-87
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:31:13-36:29
+data
+ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:32:17-72
+	android:scheme
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:32:23-69
+action#android.intent.action.VIEW
+ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:33:17-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:33:25-66
+category#android.intent.category.BROWSABLE
+ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:35:17-77
+	android:name
+		ADDED from [com.google.android.gms:play-services-tagmanager-api:9.0.0] C:\Users\alexa\.android\build-cache\87d39477792e8f2ca36cc2c9d32fc3caa2101c39\output\AndroidManifest.xml:35:27-75
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:28:7-34:18
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:28:7-34:18
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:30:11-33
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:29:11-83
+intent-filter#com.google.android.gms.measurement.UPLOAD
+ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:31:9-33:25
+action#com.google.android.gms.measurement.UPLOAD
+ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:32:11-77
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:32:19-75
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:36:7-39:37
+MERGED from [com.google.firebase:firebase-analytics-impl:9.0.0] C:\Users\alexa\.android\build-cache\1c4fa55e27d2d943414a8cdb1b83a3e22e6880b5\output\AndroidManifest.xml:36:7-39:37
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:38:11-33
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:39:11-35
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:9.0.0] C:\Users\alexa\.android\build-cache\f27cefb62a6be519eb43731e9efb214636cd9922\output\AndroidManifest.xml:37:11-82
+permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:25:5-26:47
+	android:protectionLevel
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:26:9-44
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:25:17-71
+uses-permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:28:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:28:22-76
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:32:9-41:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:34:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:35:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:33:13-78
+intent-filter#${applicationId}+com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:36:13-40:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:37:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:37:25-78
+action#com.google.android.c2dm.intent.REGISTRATION
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:38:17-86
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:38:25-83
+category#${applicationId}
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:39:17-61
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:39:27-58
+receiver#com.google.firebase.iid.FirebaseInstanceIdInternalReceiver
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:45:9-47:40
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:46:13-86
+service#com.google.firebase.iid.FirebaseInstanceIdService
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:51:9-57:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:53:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:52:13-77
+intent-filter#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:54:13-56:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:54:28-51
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:55:17-80
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:9.0.0] C:\Users\alexa\.android\build-cache\5cb4cc19a0d8150b8aab3da02b65c34a8cdb4bb0\output\AndroidManifest.xml:55:25-77
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:9.0.0] C:\Users\alexa\.android\build-cache\6bc7eb831ff24104471b99114f32e7bb90f3a311\output\AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:9.0.0] C:\Users\alexa\.android\build-cache\6bc7eb831ff24104471b99114f32e7bb90f3a311\output\AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:9.0.0] C:\Users\alexa\.android\build-cache\6bc7eb831ff24104471b99114f32e7bb90f3a311\output\AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:9.0.0] C:\Users\alexa\.android\build-cache\6bc7eb831ff24104471b99114f32e7bb90f3a311\output\AndroidManifest.xml:20:19-85
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:7:9-11:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:8:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:10:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:11:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:9.0.0] C:\Users\alexa\.android\build-cache\3f5c9eb19b14f6635eb876ca8f81144608a19c0b\output\AndroidManifest.xml:9:13-58
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:9.0.0] C:\Users\alexa\.android\build-cache\036a50790ba4289aeafac8b818938b61f06beaa6\output\AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:9.0.0] C:\Users\alexa\.android\build-cache\036a50790ba4289aeafac8b818938b61f06beaa6\output\AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:9.0.0] C:\Users\alexa\.android\build-cache\036a50790ba4289aeafac8b818938b61f06beaa6\output\AndroidManifest.xml:22:13-58

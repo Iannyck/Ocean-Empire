@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\libs\unity-classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="997bed8c5290bdbae5c8767ba09af501f19e1c08">
+        <dex dex="D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\build\intermediates\pre-dexed\debug\unity-classes_ff2105d131033182245d2f2d4dc63e802da614f5.jar" />
+    </item>
+
+</items>

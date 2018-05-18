@@ -11,7 +11,7 @@ public class BikeAnalyser : BaseAnalyser
     public override float CalculateExerciceVolume(GoogleActivities.ActivityReport previous, GoogleActivities.ActivityReport now)
     {
         // Nombre de minute a faire du bicycle
-        return now.time.Subtract(previous.time).Seconds * multiplier;
+        return (now.time.Subtract(previous.time).Seconds * multiplier) / 60;
     }
 
     public override AnalyserReport GetExerciseVolume(TimeSlot analysedTimeslot)

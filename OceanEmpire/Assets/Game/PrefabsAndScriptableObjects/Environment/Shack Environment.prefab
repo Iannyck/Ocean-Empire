@@ -3312,8 +3312,8 @@ MonoBehaviour:
     - {fileID: 212822223391971454}
     ToWhiteLerpValue: 0.4
   skyColorizer: {fileID: 114903601364818578}
-  submarinAnchor: {fileID: 4447470667192896}
-  sumarineWiggleDuration: 1
+  submarinAnchor: {fileID: 0}
+  sumarineWiggleDuration: 0
 --- !u!114 &114903601364818578
 MonoBehaviour:
   m_ObjectHideFlags: 1

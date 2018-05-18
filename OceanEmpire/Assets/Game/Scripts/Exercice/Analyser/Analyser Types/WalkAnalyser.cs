@@ -11,7 +11,7 @@ public class WalkAnalyser : BaseAnalyser
     public override float CalculateExerciceVolume(GoogleActivities.ActivityReport previous, GoogleActivities.ActivityReport now)
     {
         // Nombre de secondes marcher
-        return now.time.Subtract(previous.time).Seconds * multiplier;
+        return (now.time.Subtract(previous.time).Seconds * multiplier) / 60;
     }
 
     public override AnalyserReport GetExerciseVolume(TimeSlot analysedTimeslot)
