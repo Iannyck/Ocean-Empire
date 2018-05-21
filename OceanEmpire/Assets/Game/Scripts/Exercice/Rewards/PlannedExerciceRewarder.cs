@@ -95,6 +95,9 @@ public class PlannedExerciceRewarder : MonoPersistent
                 "pending report in this state: " + LatestPendingReport.state);
         }
 
+        if (!Scenes.IsActive("Shack"))
+            return;
+
         // Regardons s'il n'y a pas un Schedule du passé qui nécéssiterait encore une analyse
         var past = Calendar.instance.GetPastSchedules();
         for (int i = 0; i < past.Count; i++)

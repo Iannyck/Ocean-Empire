@@ -37,6 +37,8 @@ public class Shack : MonoBehaviour
 
             ApplyMapChange(MapManager.Instance.MapData);
             MapManager.Instance.OnMapSet += ApplyMapChange;
+
+            PlannedExerciceRewarder.Instance.ForceAnalyseCheck();
         });
     }
 
