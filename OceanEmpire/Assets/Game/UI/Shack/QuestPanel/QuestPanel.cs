@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Questing;
 using DG.Tweening;
-using System;
 
 public class QuestPanel : MonoBehaviour
 {

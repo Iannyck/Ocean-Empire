@@ -147,8 +147,7 @@ MonoBehaviour:
   animDuration: 1
   tutorialMap: {fileID: 11400000, guid: 205083bb0b9ccbb42a0e77dd9f89bf7f, type: 2}
   shack: {fileID: 11400000, guid: 65fc4546fb6b8444f8633c86e90cf493, type: 2}
-  tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
-  firstMap: {fileID: 11400000, guid: ace93314860619d4dad7f07ae2612e13, type: 2}
+  firstRunSaver: {fileID: 11400000, guid: aaa312bfc9b544344a96ad2a4dd88016, type: 2}
 --- !u!114 &439301653
 MonoBehaviour:
   m_ObjectHideFlags: 0

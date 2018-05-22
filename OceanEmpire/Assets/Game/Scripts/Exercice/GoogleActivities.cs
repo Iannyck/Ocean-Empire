@@ -24,8 +24,6 @@ public class GoogleActivities : MonoPersistent
         }
     }
 
-    [SerializeField] private DataSaver playerProfileSaver;
-
     // Parametres
     public PrioritySheet priority;
     public float timeBetweenUpdate = 2f;
@@ -45,7 +43,7 @@ public class GoogleActivities : MonoPersistent
         UpdateRecord();
         onComplete();
     }
-
+    
     private void UpdateRecord()
     {
         if (waitingForDataUpdate)
@@ -58,14 +56,12 @@ public class GoogleActivities : MonoPersistent
             if (activities != null)
             {
                 //Debug.Log("GETTING ACTIVITIES");
-                waitingForDataUpdate = false;
                 this.activities = activities;
                 CreateRecord();
             }
-            else
-            {
-                waitingForDataUpdate = true;
-            }
+
+            waitingForDataUpdate = false;
+
             this.DelayedCall(UpdateRecord, Mathf.Max(timeBetweenUpdate, minTimeBetweenUpdate));
         });
     }

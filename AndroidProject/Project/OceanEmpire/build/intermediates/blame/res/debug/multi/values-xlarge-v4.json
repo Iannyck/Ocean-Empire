@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
+        "outputFile": "D:\\Documents\\GitHub\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 127
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 191
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 258
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 325
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 391
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -106,7 +106,7 @@
                     "endOffset": 457
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -125,7 +125,7 @@
                     "endOffset": 512
                 },
                 "from": {
-                    "file": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\values-xlarge\\values-xlarge.xml",
+                    "file": "C:\\Users\\msfre_000\\.android\\build-cache\\bd0f112c7eb640d2b0f78938538f002d64fb581a\\output\\res\\values-xlarge\\values-xlarge.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,

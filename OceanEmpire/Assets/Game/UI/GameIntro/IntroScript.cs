@@ -13,10 +13,11 @@ public class IntroScript : MonoBehaviour
     public float animDuration;
     public SceneInfo tutorialMap;
     public SceneInfo shack;
-    public DataSaver tutorialSaver;
+
+    public DataSaver firstRunSaver;
 
 
-    private const string firstRunKey = "firstRun";
+    //private const string firstRunKey = "firstRun";
 
     void Awake()
     {
@@ -25,24 +26,24 @@ public class IntroScript : MonoBehaviour
 
     void Go()
     {
-        tutorialSaver.LoadAsync(delegate ()
+        firstRunSaver.LoadAsync(delegate ()
         {
             var sq = DOTween.Sequence();
             sq.Append(uqacLogo.DOFade(1, animDuration));
             sq.Append(uqacLogo.DOFade(0, animDuration));
             sq.OnComplete(delegate ()
             {
-                // First run
-                if (tutorialSaver.GetBool(firstRunKey, true))
+                // FIRST_QUESTS_GIVEN ?
+                if (firstRunSaver.GetBool(FirstQuestsGiver.FIRST_QUESTS_GIVEN, false))
                 {
-                    tutorialSaver.SetBool(firstRunKey, false);
-                    tutorialSaver.Save();
-
-                    Scenes.Load(tutorialMap);
+                    Scenes.Load(shack);
                 }
                 else
                 {
-                    Scenes.Load(shack);
+                    //tutorialSaver.SetBool(firstRunKey, false);
+                    //tutorialSaver.Save();
+
+                    Scenes.Load(tutorialMap);
                 }
             });
         });
