@@ -26,7 +26,6 @@ public class GoogleActivities : MonoPersistent
 
     // Parametres
     public PrioritySheet priority;
-    public float timeBetweenUpdate = 2f;
     private float minTimeBetweenUpdate = 0.5f;
     private bool waitingForDataUpdate = false;
 
@@ -37,13 +36,21 @@ public class GoogleActivities : MonoPersistent
     // Instance
     static public GoogleActivities instance;
 
+    public float TimeBetweenUpdate
+    {
+        get
+        {
+            return 10;
+        }
+    }
+
     public override void Init(Action onComplete)
     {
         instance = this;
         UpdateRecord();
         onComplete();
     }
-    
+
     private void UpdateRecord()
     {
         if (waitingForDataUpdate)
@@ -62,7 +69,7 @@ public class GoogleActivities : MonoPersistent
 
             waitingForDataUpdate = false;
 
-            this.DelayedCall(UpdateRecord, Mathf.Max(timeBetweenUpdate, minTimeBetweenUpdate));
+            this.DelayedCall(UpdateRecord, Mathf.Max(TimeBetweenUpdate, minTimeBetweenUpdate));
         });
     }
 
