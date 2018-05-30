@@ -44,8 +44,8 @@ android {
 	}
 
 	signingConfigs { release {
-		storeFile file('D:/Documents/GitHub/Ocean Empire/Key/oceanEmpireKey.keystore')
-		storePassword ''
+		storeFile file('D:/Game Projects/Ocean Empire/Key/oceanEmpireKey.keystore')
+		storePassword 'chaton'
 		keyAlias 'ocean empire'
 		keyPassword 'chaton'
 	} }
