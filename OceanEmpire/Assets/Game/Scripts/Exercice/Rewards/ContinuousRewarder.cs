@@ -52,6 +52,9 @@ public class ContinuousRewarder : MonoPersistent
 
     private void Update()
     {
+        if (!Scenes.IsActive("Shack"))
+            return;
+
         nextCheckTimer -= Time.unscaledDeltaTime;
 
         if (nextCheckTimer < 0)
@@ -118,12 +121,13 @@ public class ContinuousRewarder : MonoPersistent
         // Give reward
         CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue, out remainingMarketValue);
 
+
         if (reward.amount > 0)
         {
             PlayerCurrency.AddCurrencyAmount(reward);
 
             Logger.Log(Logger.Category.ContinuousReward, "analysed(" + timeslotToAnalyse.ToEfficientString()
-                + ") reward(" + reward.amount + ")");
+                + ") reward(" + reward.amount + ") remains(" + remainingMarketValue.floatValue + ")");
 
             // On fait pop un message de "bravo!! 10 ticket pour avoir marché"
             // si ça fait plus de 2 min qu'on a analysé

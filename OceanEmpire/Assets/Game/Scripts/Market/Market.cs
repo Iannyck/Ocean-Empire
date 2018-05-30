@@ -38,13 +38,13 @@ public static class Market
         switch (type)
         {
             case ExerciseType.Walk:
-                return 0.33f;
+                return 1f;
             case ExerciseType.Run:
-                return 0.33f;
+                return 1f;
             case ExerciseType.Stairs:
-                return 0.33f;
+                return 1f;
             case ExerciseType.PressKey:
-                return 0.33f;
+                return 1f;
             default:
                 return -1;
         }

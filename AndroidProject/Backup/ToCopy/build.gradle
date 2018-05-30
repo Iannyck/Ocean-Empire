@@ -44,10 +44,10 @@ android {
 	}
 
 	signingConfigs { release {
-		storeFile file('C:/Users/etudiant/Documents/Ocean-Empire/Key/oceanEmpireKey.keystore')
+		storeFile file('D:/Documents/GitHub/Ocean Empire/Key/oceanEmpireKey.keystore')
 		storePassword ''
 		keyAlias 'ocean empire'
-		keyPassword ''
+		keyPassword 'chaton'
 	} }
 
 	buildTypes {

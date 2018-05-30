@@ -10,7 +10,7 @@ namespace Questing
         [SerializeField] PrebuiltMapData firstMap;
         [SerializeField] DataSaver saver;
 
-        private const string FIRST_QUESTS_GIVEN = "firstQuestsGiven";
+        public const string FIRST_QUESTS_GIVEN = "firstQuestsGiven";
 
         void Start()
         {

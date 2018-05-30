@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.security.Key;
+import java.security.KeyStore;
 import java.util.Calendar;
 import java.util.List;
 import javax.crypto.Cipher;
@@ -40,6 +41,8 @@ public class ActivityDetection extends IntentService {
 
     public static SecretKey secretKey;
     public static String key;
+
+    public char[] password = "1234567890".toCharArray();
 
     public static String Crypt(String text)
     {
@@ -89,6 +92,9 @@ public class ActivityDetection extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if(secretKey == null)
+            LoadKey();
 
         key = Base64.encodeToString(secretKey.getEncoded(),Base64.DEFAULT);
 
@@ -205,5 +211,22 @@ public class ActivityDetection extends IntentService {
         Log.e( "ActivityRecogition", "Biking : " + bikeConfidence);
 
         writeToFile(walkConfidence+"|"+runConfidence+"|"+bikeConfidence+"|");
+    }
+
+    void LoadKey(){
+        try{
+            // Load Keystore
+            FileInputStream fis = new FileInputStream(this.getFilesDir().getAbsolutePath() + "/OEKeyStore");
+
+            KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
+            ks.load(fis, password);
+
+            // Load the secret key
+            KeyStore.SecretKeyEntry secretKeyEntry = (KeyStore.SecretKeyEntry)ks.getEntry("SecretKeyAlias",null);
+            secretKey = secretKeyEntry.getSecretKey();
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

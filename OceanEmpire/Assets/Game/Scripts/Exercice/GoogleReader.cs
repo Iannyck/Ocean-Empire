@@ -103,6 +103,8 @@ public class GoogleReader : MonoBehaviour
                 result = reader.ReadToEnd();
             }
             reader.Close();
+            if (LogLesInfoDesThread)
+                Debug.Log("UL Reading Read - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
         }
         MainThread.AddActionFromThread(delegate ()
         {
