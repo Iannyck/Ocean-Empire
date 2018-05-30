@@ -124,7 +124,7 @@ public class GoogleReader : MonoBehaviour
             }
             else
             {
-                MessagePopup.DisplayMessageFromThread("File Deleted - Good job !");
+                MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
             }
             LoadLastActivityString(delegate (string lastLine)
             {

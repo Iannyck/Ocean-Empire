@@ -288,6 +288,9 @@ public class PlannedExerciceRewarder : MonoPersistent
         // Save
         Save();
         Debug.Log("Report finalized");
+
+        if (Application.isMobilePlatform)
+            GoogleActivities.instance.ClearAllActivitiesSave();
     }
 
 
