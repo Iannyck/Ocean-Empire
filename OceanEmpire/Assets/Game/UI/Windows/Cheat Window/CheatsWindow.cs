@@ -46,11 +46,14 @@ public class CheatsWindow : WindowAnimation
                     saver.ClearSave();
             }
 
-            //GoogleReader.ResetActivitiesSave();
-            //GoogleActivities.instance.ResetActivities();
-
             Application.Quit();
         }
+    }
+
+    public void ClearActivities()
+    {
+        GoogleReader.ResetActivitiesSave();
+        GoogleActivities.instance.ResetActivities();
     }
 
 
