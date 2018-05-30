@@ -51,5 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26342d6b70d6bad498e6db538931a56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerProfileSaver: {fileID: 0}
   priority: {fileID: 11400000, guid: 3409ffba47f149047ae7c5f2a64e080b, type: 2}
-  timeBetweenUpdate: 2
+  timeBetweenUpdate: 30

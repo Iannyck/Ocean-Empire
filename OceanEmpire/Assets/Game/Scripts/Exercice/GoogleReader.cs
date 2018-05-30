@@ -201,7 +201,7 @@ public class GoogleReader : MonoBehaviour
                 
 
             document = Decrypt(document);
-            Debug.Log("UNITY GOOGLEREADER DOCUMENT : " + document);
+            //Debug.Log("UNITY GOOGLEREADER DOCUMENT : " + document);
 
             bool readingDate = false;
             string probWalk = "";
@@ -229,7 +229,7 @@ public class GoogleReader : MonoBehaviour
                 else if (currentChar == '~')
                 {
                     readingDate = false;
-                    Debug.Log("UNITY : Found Result !");
+                    //Debug.Log("UNITY : Found Result !");
                     result.Add(new Activity(IntParseFast(probWalk), IntParseFast(probRun), IntParseFast(probBicycle), ConvertStringToDate(currentDateTime)));
                     probWalk = "";
                     probRun = "";
