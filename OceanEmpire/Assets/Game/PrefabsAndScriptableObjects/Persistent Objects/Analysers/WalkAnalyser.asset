@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: WalkAnalyser
   m_EditorClassIdentifier: 
   multiplier: 1
-  minimumValidation: 50
+  minimumValidation: 35
