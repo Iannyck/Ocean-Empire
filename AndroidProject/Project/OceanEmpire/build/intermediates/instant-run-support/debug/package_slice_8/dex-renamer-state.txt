@@ -1,4 +1,0 @@
-#Mon May 21 20:07:32 EDT 2018
-base.0=D\:\\Documents\\GitHub\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_8
-renamed.0=classes.dex
-file.0=D\:\\Documents\\GitHub\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_8\\classes.dex

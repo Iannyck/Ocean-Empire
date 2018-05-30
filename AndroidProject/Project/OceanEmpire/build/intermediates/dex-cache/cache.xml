@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="D:\Documents\GitHub\Ocean Empire\AndroidProject\Project\OceanEmpire\libs\unity-classes.jar"
+        jar="D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\libs\unity-classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.2"
         sha1="997bed8c5290bdbae5c8767ba09af501f19e1c08">
-        <dex dex="D:\Documents\GitHub\Ocean Empire\AndroidProject\Project\OceanEmpire\build\intermediates\pre-dexed\debug\unity-classes_b48f8df06184fc8f36841a10a9353470e9c85ac8.jar" />
+        <dex dex="D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\build\intermediates\pre-dexed\debug\unity-classes_ff2105d131033182245d2f2d4dc63e802da614f5.jar" />
     </item>
 
 </items>
