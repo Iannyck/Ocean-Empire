@@ -47,8 +47,8 @@ public class GoogleActivities : MonoPersistent
     public override void Init(Action onComplete)
     {
         instance = this;
-        UpdateRecord();
         onComplete();
+        this.DelayedCall(UpdateRecord, 1.5f);
     }
 
     private void UpdateRecord()
