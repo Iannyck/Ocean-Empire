@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b846d6a4193c934ea8c4bfe3f0f6937, type: 3}
+  m_Name: Thruster1
+  m_EditorClassIdentifier: 
+  data:
+    itemName: Moteur 1
+    upgradeLevel: 1
+    itemDescription: MOTEUR FANTASTIQUE
+    moneyCost: 0
+    ticketCost: 0
+    itemIcon: {fileID: 21300000, guid: e5ef46382a5c7844d8ff8254e0dc314a, type: 3}
+    speed: 2
+    acceleration: 0.3
+    deceleration: 0
+  prebuiltSpriteKit: {fileID: 0}

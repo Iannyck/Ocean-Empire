@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874674115299a2649846086ff48b1c96, type: 3}
+  m_Name: 3DaysOfTasksInARow
+  m_EditorClassIdentifier: 
+  questContext:
+    description: "R\xE9ussie un exercice 3 jours d'affil\xE9e"
+    iconResource: Sprites/QuestIcons/TaskPlanningIcon
+    countInADay: 0
+    amountRequired: 3

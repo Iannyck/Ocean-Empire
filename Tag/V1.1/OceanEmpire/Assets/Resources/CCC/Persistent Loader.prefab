@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1056252920610246}
+  m_IsPrefabParent: 1
+--- !u!1 &1056252920610246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4708772372880884}
+  - component: {fileID: 114331226706513050}
+  - component: {fileID: 114991176186273250}
+  - component: {fileID: 114191208945978696}
+  - component: {fileID: 114726317407778572}
+  m_Layer: 0
+  m_Name: Persistent Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4708772372880884
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114191208945978696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6dbd859558019439fe6652b237f27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 114331226706513050}
+  inMenuDragSize: 0.01
+  inGameDragSize: 0.001
+--- !u!114 &114331226706513050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!114 &114726317407778572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681101cc194b4334da55d231df63d8dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentObjects:
+  - {fileID: 11400000, guid: 1c6328201a8e2e842b9fc53029948653, type: 2}
+  - {fileID: 11400000, guid: 1f4fff66ef3c4a94d831b8a419f2fb0f, type: 2}
+  - {fileID: 114467485633564090, guid: 060e12aa357e85f4cb7ad09b4b602ccc, type: 2}
+  - {fileID: 114091529778875312, guid: 143ded45916896e45ad6147aaf0a475f, type: 2}
+  - {fileID: 114169703373621136, guid: df86fa405b660c94f8611de34f83d419, type: 2}
+  - {fileID: 114632337948739566, guid: 55a96d455e32ec24099da346e46d2807, type: 2}
+  - {fileID: 114243737419199046, guid: ab68b8e7aea309f4cb40f3914d0eba79, type: 2}
+  - {fileID: 114359059685867110, guid: b43e959def812434faa1b0602eff30fd, type: 2}
+  - {fileID: 114775806542873548, guid: 4029bb876c0b8d344a80528ba3c9cd9c, type: 2}
+  - {fileID: 114778969502845246, guid: 0abf55214c4dfa341b0fc66c80fc4b0f, type: 2}
+  - {fileID: 114544965681487184, guid: 8cf78fbd8048f9c4092c430c5889f1fd, type: 2}
+  - {fileID: 114662544385821532, guid: 06f982d3a50391a4fb76d48ca5370802, type: 2}
+  - {fileID: 114247982919729320, guid: 0f663089835d04f41aabecdb6bda45d6, type: 2}
+  - {fileID: 11400000, guid: fba76a724ecd44a4e836d52535db680f, type: 2}
+  - {fileID: 11400000, guid: 77693d811e0af7f40a9e995791827ddc, type: 2}
+  - {fileID: 11400000, guid: aacd2a64bb8412c4eb115bc1e208bddb, type: 2}
+  - {fileID: 11400000, guid: 407c5076b304cd24ebc2c1eed6009095, type: 2}
+--- !u!114 &114991176186273250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056252920610246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0

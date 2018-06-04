@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a644c05101277449ab2d1a8600ca1b, type: 3}
+  m_Name: Continuous Analyser Group
+  m_EditorClassIdentifier: 
+  analysers:
+  - {fileID: 11400000, guid: b3f0242c94d772d46a6ab81bb6f190fe, type: 2}
+  - {fileID: 11400000, guid: 03941505a620e664ea2695fec7056330, type: 2}
+  - {fileID: 11400000, guid: 96cec3aed30a1e34cad1a976e0340a9b, type: 2}
+  - {fileID: 11400000, guid: 9e612841c3bad234bb432dd11c3af474, type: 2}
