@@ -1,0 +1,38 @@
+******** IN MENU ********
+
+// Shack
+Shack: -10
+Region Selection: -7
+Shack HUD (Fish Frenzy): -2
+Shop: 0
+Shop Upgrade: 1
+Shack Always Visible HUD (Currency): 5
+
+ChooseExercise: 6
+PlanNowOrLater?: 7
+
+
+// Calendar
+Calendar Scroll: 10
+Calendar Day Inspector: 11
+
+// Exercise
+Task Conclusion (Completion): 30
+Task Conclusion (Failure): 30
+
+//Generic Windows
+Ask For Time Window: 35
+
+// Cheats
+CheatsWindow: 50
+
+
+******** INGAME ********
+ProposeRefill: 5
+
+Fishing Frenzy is ACTIVATED !!: 7
+
+
+
+******** BOTH ********
+Loading Screen: 10000

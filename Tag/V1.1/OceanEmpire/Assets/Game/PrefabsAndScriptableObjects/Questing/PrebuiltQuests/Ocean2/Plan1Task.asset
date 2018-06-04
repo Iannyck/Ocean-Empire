@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841765b1abb62b746b9b4aaaa468497c, type: 3}
+  m_Name: Plan1Task
+  m_EditorClassIdentifier: 
+  questContext:
+    description: Planifie 1 exercice
+    iconResource: Sprites/QuestIcons/TaskPlanningIcon
+    planCount: 1

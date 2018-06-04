@@ -1,0 +1,11 @@
+Maps dont j'ai manuellement set des couleur uniques:
+PrebuildMapData_0 (fait) (clair et coloré)
+PrebuildMapData_1 (fait) (clair et bleu clair)
+PrebuildMapData_2 (fait) (clair, teinte turquoise-verdatre)
+PrebuildMapData_3 (fait) (sombre, bleu avec un couché de soleil jaune)
+PrebuildMapData_4 (fait) (ciel clair habituel, eau orangé)*
+PrebuildMapData_5 (fait) (clair, peu saturé, comme un brouillard)
+PrebuildMapData_6 (fait) (normal)
+PrebuildMapData_7 (fait) (sombre et orangé)
+PrebuildMapData_8 (fait) (ensoleilé de dessus, comme steins gate)
+PrebuildMapData_9 (fait) (mauve-rose)

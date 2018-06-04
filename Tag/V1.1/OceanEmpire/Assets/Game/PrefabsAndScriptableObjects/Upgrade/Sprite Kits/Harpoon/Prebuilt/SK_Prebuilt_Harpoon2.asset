@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9d623b4ace1334fb0791665b163718, type: 3}
+  m_Name: SK_Prebuilt_Harpoon2
+  m_EditorClassIdentifier: 
+  triColoredSprites:
+  - sprite: {fileID: 21300000, guid: 46f5649952f976b4a84cb8decd309085, type: 3}
+    colorR: {r: 0.5514706, g: 0.4460424, b: 0.4460424, a: 0}
+    colorG: {r: 0, g: 0, b: 0, a: 0}
+    colorB: {r: 0.027249139, g: 0.15583053, b: 0.20588237, a: 0}
+  - sprite: {fileID: 21300000, guid: 78caf0b10e9aa074cbebb2a9551fed8c, type: 3}
+    colorR: {r: 0.29411763, g: 0.29411763, b: 0.29411763, a: 0}
+    colorG: {r: 0.45588237, g: 0.3584179, b: 0.040224925, a: 0}
+    colorB: {r: 0.08823532, g: 0.03397865, b: 0.004541523, a: 0}
+  - sprite: {fileID: 21300000, guid: ad2ba20052850cc45a6026943eee0877, type: 3}
+    colorR: {r: 1, g: 1, b: 1, a: 0}
+    colorG: {r: 0.3455882, g: 0.3455882, b: 0.3455882, a: 0}
+    colorB: {r: 0.095155686, g: 0.45007765, b: 0.58823526, a: 0}

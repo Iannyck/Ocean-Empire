@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a2826170cbc33488276e21dfe6527f, type: 3}
+  m_Name: ChestDesc
+  m_EditorClassIdentifier: 
+  fishName: Coffre
+  description: Ce n'est pas un poisson
+  baseMonetaryValue: 15
+  id: 7
+  flags: 89
+  icon: {fileID: 21300000, guid: 083a50ef68dd7884b957598ab3619939, type: 3}

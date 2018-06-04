@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768796e0a893b4a43b5ed1d60fbd1f25, type: 3}
+  m_Name: PrebuiltMapData_7
+  m_EditorClassIdentifier: 
+  _gameScene: {fileID: 11400000, guid: 8a8add6f5f6f3774a82a384f4615d10f, type: 2}
+  _mapData:
+    Name: Ocean 6
+    GameSceneName: Map_7
+    Depth: 350
+    ShallowColor:
+      r: 0.23529413
+      g: 0.49411768
+      b: 0.7137255
+      a: 1
+    DeepColor:
+      r: 0.027450982
+      g: 0.37254903
+      b: 0.6627451
+      a: 1
+    SkyColorTop:
+      r: 0.32156864
+      g: 0.3372549
+      b: 0.18039216
+      a: 1
+    SkyColorCenter:
+      r: 1
+      g: 0.5176471
+      b: 0
+      a: 1
+    SkyColorBottom:
+      r: 0.9843138
+      g: 1
+      b: 0
+      a: 1
+  relatedQuests:
+  - {fileID: 11400000, guid: 43f914d2071b8d1478ba1e4eb3020030, type: 2}
+  - {fileID: 11400000, guid: efa6982a67770ee48b3226a2bc0b92a7, type: 2}
+  - {fileID: 11400000, guid: ec967fe76bfe5d741a9833ad5fb3c6de, type: 2}
