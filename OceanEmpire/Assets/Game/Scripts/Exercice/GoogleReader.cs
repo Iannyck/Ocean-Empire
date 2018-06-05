@@ -117,6 +117,7 @@ public class GoogleReader : MonoBehaviour
         try
         {
             File.Delete(filePath);
+            MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
         }
         catch
         {

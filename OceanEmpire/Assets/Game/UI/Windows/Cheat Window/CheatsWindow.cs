@@ -53,7 +53,7 @@ public class CheatsWindow : WindowAnimation
     public void ClearActivities()
     {
         //GoogleReader.ResetActivitiesSave();
-        GoogleActivities.instance.ResetActivities();
+        GoogleActivities.instance.ClearAllActivitiesSave();
     }
 
 
