@@ -114,26 +114,35 @@ public class GoogleReader : MonoBehaviour
 
     public static void ResetActivitiesSave()
     {
-        Thread t = new Thread(new ThreadStart(() =>
+        try
         {
-            using (File.Create(filePath)) ;
-            FileInfo info = new FileInfo(filePath);
-            if (info.Length > 0)
-            {
-                MainThread.AddActionFromThread(ResetActivitiesSave);
-            }
-            else
-            {
-                MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
-            }
-            LoadLastActivityString(delegate (string lastLine)
-            {
-                StreamWriter writer = new StreamWriter(filePath, true);
-                writer.WriteLine(lastLine);
-                writer.Close();
-            });
-        }));
-        t.Start();
+            File.Delete(filePath);
+            MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
+        }
+        catch
+        {
+            Debug.Log("ERROR DELETING FILE : " + filePath);
+        }
+        //Thread t = new Thread(new ThreadStart(() =>
+        //{
+        //    //using (File.Create(filePath)) ;
+        //    //FileInfo info = new FileInfo(filePath);
+        //    //if (info.Length > 0)
+        //    //{
+        //    //    MainThread.AddActionFromThread(ResetActivitiesSave);
+        //    //}
+        //    //else
+        //    //{
+        //    //    MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
+        //    //}
+        //    //LoadLastActivityString(delegate (string lastLine)
+        //    //{
+        //    //    StreamWriter writer = new StreamWriter(filePath, true);
+        //    //    writer.WriteLine(lastLine);
+        //    //    writer.Close();
+        //    //});
+        //}));
+        //t.Start();
     }
 
     public static void LoadDocument(Action<string> onComplete = null)

@@ -144,12 +144,6 @@ public class GoogleActivities : MonoPersistent
         }
     }
 
-    public void ResetActivities()
-    {
-        activities = new List<GoogleReader.Activity>();
-        records = new List<ActivityReport>();
-    }
-
     public void ClearAllActivitiesSave()
     {
         activities.Clear();
