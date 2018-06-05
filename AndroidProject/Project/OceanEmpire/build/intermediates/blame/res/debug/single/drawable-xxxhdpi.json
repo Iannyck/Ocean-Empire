@@ -72,11 +72,11 @@
         "source": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\drawable-xxxhdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\drawable-xxxhdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi\\app_icon.png",
         "source": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\src\\main\\res\\drawable-xxxhdpi\\app_icon.png"
+    },
+    {
+        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\drawable-xxxhdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
     }
 ]

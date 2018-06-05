@@ -8,6 +8,6 @@ public final class BuildConfig {
   public static final String APPLICATION_ID = "com.UQAC.OceanEmpire";
   public static final String BUILD_TYPE = "release";
   public static final String FLAVOR = "";
-  public static final int VERSION_CODE = 10;
-  public static final String VERSION_NAME = "10";
+  public static final int VERSION_CODE = 12;
+  public static final String VERSION_NAME = "12";
 }
