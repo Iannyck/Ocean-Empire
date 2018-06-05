@@ -60,6 +60,10 @@ public class Game : PublicSingleton<Game>
 
         GameRunning = new Locker();
         PendingFishGPC = new PendingFishGPC();
+
+        // Do not analyse activities while playing
+        if (GoogleActivities.instance != null)
+            GoogleActivities.instance.AutoUpdate = false;
     }
 
 
@@ -92,6 +96,9 @@ public class Game : PublicSingleton<Game>
         base.OnDestroy();
         onGameReady = null;
         onGameStart = null;
+
+        if (GoogleActivities.instance != null)
+            GoogleActivities.instance.AutoUpdate = true;
 
         if (DragThreashold.instance != null)
             DragThreashold.instance.SetDragType(DragThreashold.DragType.InMenu);
