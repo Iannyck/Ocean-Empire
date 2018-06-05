@@ -35,14 +35,19 @@ public class GoogleActivities : MonoPersistent
 
     // Instance
     static public GoogleActivities instance;
-
-    public float TimeBetweenUpdate
+    private bool autoUpdate = false;
+    public bool AutoUpdate
     {
-        get
+        get { return autoUpdate; }
+        set
         {
-            return 10;
+            autoUpdate = value;
+            if (autoUpdate)
+                UpdateRecord();
         }
     }
+
+    public float TimeBetweenUpdate { get { return 10; } }
 
     public override void Init(Action onComplete)
     {
@@ -69,7 +74,8 @@ public class GoogleActivities : MonoPersistent
 
             waitingForDataUpdate = false;
 
-            this.DelayedCall(UpdateRecord, Mathf.Max(TimeBetweenUpdate, minTimeBetweenUpdate));
+            if (autoUpdate)
+                this.DelayedCall(UpdateRecord, Mathf.Max(TimeBetweenUpdate, minTimeBetweenUpdate));
         });
     }
 
