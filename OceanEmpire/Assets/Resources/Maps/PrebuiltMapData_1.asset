@@ -17,29 +17,29 @@ MonoBehaviour:
     GameSceneName: Map_1 (tuto 2)
     Depth: 75
     ShallowColor:
-      r: 0.2784314
-      g: 0.6313726
-      b: 1
+      r: 0
+      g: 0.8745099
+      b: 0.7294118
       a: 1
     DeepColor:
-      r: 0.24248484
-      g: 0.53748107
-      b: 0.8455882
+      r: 0
+      g: 0.6666667
+      b: 0.5568628
       a: 1
     SkyColorTop:
       r: 0
-      g: 0.54509807
-      b: 1
+      g: 0.6627451
+      b: 0.7960785
       a: 1
     SkyColorCenter:
-      r: 0.10980393
-      g: 0.7058824
+      r: 0
+      g: 0.9568628
       b: 1
       a: 1
     SkyColorBottom:
-      r: 0.62352943
-      g: 0.9058824
-      b: 1
+      r: 0.72156864
+      g: 1
+      b: 0.94117653
       a: 1
   relatedQuests:
   - {fileID: 11400000, guid: b70f1d4b3a22cb7489820e0ce2723270, type: 2}
