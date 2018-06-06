@@ -112,16 +112,17 @@ public class GoogleReader : MonoBehaviour
         });
     }
 
-    public static void ResetActivitiesSave()
+    public static void ResetActivitiesSave(bool withMessage = true)
     {
         try
         {
             File.Delete(filePath);
-            MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
+            if (withMessage)
+                MessagePopup.DisplayMessageFromThread("Nouvel exercice de disponible!");
         }
-        catch
+        catch (Exception e)
         {
-            Debug.Log("ERROR DELETING FILE : " + filePath);
+            Debug.Log("ERROR DELETING FILE : " + e.Message);
         }
         //Thread t = new Thread(new ThreadStart(() =>
         //{

@@ -145,11 +145,11 @@ public class GoogleActivities : MonoPersistent
         }
     }
 
-    public void ClearAllActivitiesSave()
+    public void ClearAllActivitiesSave(bool withMessage = true)
     {
         activities.Clear();
         records.Clear();
-        GoogleReader.ResetActivitiesSave();
+        GoogleReader.ResetActivitiesSave( withMessage );
     }
 
     // TODO : Pourrait etre deplacer dans un autre singleton
