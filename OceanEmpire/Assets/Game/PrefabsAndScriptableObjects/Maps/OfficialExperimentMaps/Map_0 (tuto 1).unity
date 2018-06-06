@@ -145,8 +145,8 @@ MonoBehaviour:
   tryLaunchOnStart: 0
   tryLaunchOnGameStart: 1
   tryLaunchEveryFrame: 0
+  tryLaunchOnMapChange: 0
   tutorial: {fileID: 11400000, guid: c6f6060824b97e940b8bcee18cbd0842, type: 2}
-  tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
 --- !u!4 &1682293349
 Transform:
   m_ObjectHideFlags: 0
@@ -174,8 +174,8 @@ MonoBehaviour:
   tryLaunchOnStart: 0
   tryLaunchOnGameStart: 1
   tryLaunchEveryFrame: 0
+  tryLaunchOnMapChange: 0
   tutorial: {fileID: 11400000, guid: cdc8f722868da924599c85fdbb342fd3, type: 2}
-  tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
 --- !u!114 &1682293351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,8 +190,8 @@ MonoBehaviour:
   tryLaunchOnStart: 0
   tryLaunchOnGameStart: 0
   tryLaunchEveryFrame: 1
+  tryLaunchOnMapChange: 0
   tutorial: {fileID: 11400000, guid: 921b4dfa3e7464a438b80a6051526c16, type: 2}
-  tutorialSaver: {fileID: 11400000, guid: a52c271db07c1e843aeb6635dc4804b6, type: 2}
 --- !u!1001 &1891798692
 Prefab:
   m_ObjectHideFlags: 0
@@ -293,10 +293,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  densityMultiplier: 1
+  densityMultiplier: 1.2
   fishRepartitions:
   - {fileID: 11400000, guid: ed53b59e28e175446852722ebdb64722, type: 2}
-  - {fileID: 11400000, guid: 1a2ba7d9ffabe724292d08a259c48b97, type: 2}
+  - {fileID: 11400000, guid: e2ddfde690f49dc4baa853c85149fa04, type: 2}
 --- !u!114 &2131864734
 MonoBehaviour:
   m_ObjectHideFlags: 0
