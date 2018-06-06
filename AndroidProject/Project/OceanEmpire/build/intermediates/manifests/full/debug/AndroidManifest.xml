@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.UQAC.OceanEmpire"
     android:installLocation="preferExternal"
-    android:versionCode="10"
-    android:versionName="10" >
+    android:versionCode="12"
+    android:versionName="12" >
 
     <uses-sdk
         android:minSdkVersion="16"
