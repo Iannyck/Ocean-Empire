@@ -47,7 +47,7 @@ public class ContinuousRewarder : MonoPersistent
 
     DateTime DateTimeNow
     {
-        get { return DateTime.Now; }
+        get { return Calendar.Now; }
     }
 
     private void Update()
@@ -77,16 +77,19 @@ public class ContinuousRewarder : MonoPersistent
         var now = DateTimeNow;
         nextUpdate = now + new TimeSpan(0, 0, updateEvery);
 
-        var timeslotToAnalyse = new TimeSlot(lastUpdate, now);
-        if (timeslotToAnalyse.duration.Seconds > 1)
+        if (Scenes.IsActive("Shack")) // Hack pour slmt update lorsqu'on est dans le shack
         {
-            lastUpdate = now;
+            var timeslotToAnalyse = new TimeSlot(lastUpdate, now);
+            if (timeslotToAnalyse.duration.TotalSeconds > 1)
+            {
+                lastUpdate = now;
 
-            AnalyseAndRewardTimeSlot(timeslotToAnalyse);
+                AnalyseAndRewardTimeSlot(timeslotToAnalyse);
 
-            dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
-            dataSaver.SetFloat(SAVEKEY_REMAINING_MARKETVALUE, remainingMarketValue.floatValue);
-            dataSaver.LateSave();
+                dataSaver.SetObjectClone(SAVEKEY_LASTUPDATE, lastUpdate);
+                dataSaver.SetFloat(SAVEKEY_REMAINING_MARKETVALUE, remainingMarketValue.floatValue);
+                dataSaver.LateSave();
+            }
         }
     }
 

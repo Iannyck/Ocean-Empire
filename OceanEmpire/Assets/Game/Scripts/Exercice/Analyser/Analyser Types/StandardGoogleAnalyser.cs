@@ -29,9 +29,9 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
             return 0;
 
         // Nombre de secondes marcher
-        return (rightmost.Subtract(leftmost).Seconds * multiplier) / 60;
+        return ((float)rightmost.Subtract(leftmost).TotalSeconds * multiplier) / 60;
     }
-
+    
     public override AnalyserReport GetExerciseVolume(TimeSlot analysedTimeslot)
     {
         // Informations sur les exercices fait
@@ -43,15 +43,19 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
             volume = 0
         };
 
-        // Temps premier et dernier exercice pour rapport
-        bool firstExericeEncounter = true;
+
+        bool firstExericeEncounter = false;
+        bool hasExitedTheTimeslot = false;
         DateTime firstExerciceTime = new DateTime();
         DateTime lastExerciceTime = new DateTime();
+        GoogleActivities.ActivityReport currentRecord = null;
+        GoogleActivities.ActivityReport previousRecord = null;
 
         for (int i = 0; i < activities.Count; i++)
         {
-            GoogleActivities.ActivityReport currentRecord = activities[i];
-            GoogleActivities.ActivityReport previousRecord = null;
+            previousRecord = currentRecord;
+            currentRecord = activities[i];
+
             if (i != 0)
                 previousRecord = activities[i - 1];
 
@@ -69,11 +73,12 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
                     if (IsRecordValid(currentRecord))
                     {
                         volume.volume += CalculateExerciceVolume(analysedTimeslot.start, currentRecord.time);
+                        lastExerciceTime = currentRecord.time;
 
-                        if (firstExericeEncounter)
+                        if (!firstExericeEncounter)
                         {
-                            firstExericeEncounter = false;
-                            firstExerciceTime = previousRecord.time;
+                            firstExericeEncounter = true;
+                            firstExerciceTime = currentRecord.time;
                         }
                     }
                 }
@@ -88,10 +93,11 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
                         DateTime latest = analysedTimeslot.start < previousRecord.time ? previousRecord.time : analysedTimeslot.start;
                         float vol = CalculateExerciceVolume(latest, inbetween);
                         volume.volume += vol;
+                        lastExerciceTime = inbetween;
 
-                        if (vol > 0 && firstExericeEncounter)
+                        if (vol > 0 && !firstExericeEncounter)
                         {
-                            firstExericeEncounter = false;
+                            firstExericeEncounter = true;
                             firstExerciceTime = latest;
                         }
                     }
@@ -101,10 +107,11 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
                         // On compte la moitié de gauche du record courant
                         DateTime latest = analysedTimeslot.start < inbetween ? inbetween : analysedTimeslot.start;
                         volume.volume += CalculateExerciceVolume(latest, currentRecord.time);
+                        lastExerciceTime = currentRecord.time;
 
-                        if (firstExericeEncounter)
+                        if (!firstExericeEncounter)
                         {
-                            firstExericeEncounter = false;
+                            firstExericeEncounter = true;
                             firstExerciceTime = latest;
                         }
                     }
@@ -129,6 +136,7 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
                         DateTime left = analysedTimeslot.start < previousRecord.time ? previousRecord.time : analysedTimeslot.start;
                         volume.volume += CalculateExerciceVolume(left, right);
                         lastExerciceTime = right;
+                        hasExitedTheTimeslot = true;
                     }
 
                     if (IsRecordValid(currentRecord))
@@ -137,6 +145,7 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
                         DateTime left = analysedTimeslot.start < inbetween ? inbetween : analysedTimeslot.start;
                         volume.volume += CalculateExerciceVolume(left, analysedTimeslot.end);
                         lastExerciceTime = analysedTimeslot.end;
+                        hasExitedTheTimeslot = true;
                     }
                 }
 
@@ -144,11 +153,16 @@ public abstract class StandardGoogleAnalyser : BaseAnalyser
             }
         }
 
-        // construction du rapport
-        //Debug.Log("Volume | " + volume + "(" + analysedTimeslot.start + "-" + analysedTimeslot.end + ")");
-        AnalyserReport report = new AnalyserReport(volume, analysedTimeslot, firstExerciceTime, lastExerciceTime);
+        if (!hasExitedTheTimeslot && IsRecordValid(currentRecord))
+        {
+            DateTime right = analysedTimeslot.end;
+            DateTime left = analysedTimeslot.start < currentRecord.time ? currentRecord.time : analysedTimeslot.start;
+            volume.volume += CalculateExerciceVolume(left, right);
+            lastExerciceTime = right;
+        }
 
-        // envoie du rapport
+        AnalyserReport report = new AnalyserReport(volume, analysedTimeslot, firstExerciceTime, lastExerciceTime);
+        
         return report;
     }
 

@@ -31,6 +31,7 @@ public class GoogleActivities : MonoPersistent
 
     // Data
     public List<GoogleReader.Activity> activities = new List<GoogleReader.Activity>();
+    [NonSerialized]
     public List<ActivityReport> records = new List<ActivityReport>();
 
     // Instance
