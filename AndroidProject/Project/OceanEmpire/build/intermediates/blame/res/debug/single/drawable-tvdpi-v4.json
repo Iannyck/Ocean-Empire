@@ -12,12 +12,12 @@
         "source": "C:\\Users\\alexa\\.android\\build-cache\\6bc7eb831ff24104471b99114f32e7bb90f3a311\\output\\res\\drawable-tvdpi-v4\\common_full_open_on_phone.png"
     },
     {
-        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi-v4\\common_plus_signin_btn_text_light_pressed.9.png",
-        "source": "C:\\Users\\alexa\\.android\\build-cache\\6bc7eb831ff24104471b99114f32e7bb90f3a311\\output\\res\\drawable-tvdpi-v4\\common_plus_signin_btn_text_light_pressed.9.png"
-    },
-    {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi-v4\\ic_plusone_standard_off_client.png",
         "source": "C:\\Users\\alexa\\.android\\build-cache\\605312fb54c1fce0ff60f3ca4ed326a581566d47\\output\\res\\drawable-tvdpi-v4\\ic_plusone_standard_off_client.png"
+    },
+    {
+        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi-v4\\common_plus_signin_btn_text_light_pressed.9.png",
+        "source": "C:\\Users\\alexa\\.android\\build-cache\\6bc7eb831ff24104471b99114f32e7bb90f3a311\\output\\res\\drawable-tvdpi-v4\\common_plus_signin_btn_text_light_pressed.9.png"
     },
     {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi-v4\\common_google_signin_btn_text_light_focused.9.png",

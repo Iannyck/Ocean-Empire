@@ -176,12 +176,12 @@
         "source": "C:\\Users\\alexa\\.android\\build-cache\\886a1f3e2df05840df417787eb5345de27800ad6\\output\\res\\drawable-mdpi\\ic_media_route_on_2_mono_dark.png"
     },
     {
-        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\release\\drawable-mdpi\\ic_cast_on_0_light.png",
-        "source": "C:\\Users\\alexa\\.android\\build-cache\\886a1f3e2df05840df417787eb5345de27800ad6\\output\\res\\drawable-mdpi\\ic_cast_on_0_light.png"
-    },
-    {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\release\\drawable-mdpi\\abc_btn_rating_star_on_mtrl_alpha.png",
         "source": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\drawable-mdpi\\abc_btn_rating_star_on_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\release\\drawable-mdpi\\ic_cast_on_0_light.png",
+        "source": "C:\\Users\\alexa\\.android\\build-cache\\886a1f3e2df05840df417787eb5345de27800ad6\\output\\res\\drawable-mdpi\\ic_cast_on_0_light.png"
     },
     {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\release\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png",
