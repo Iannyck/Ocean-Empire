@@ -63,7 +63,7 @@ public class GoogleActivities : MonoPersistent
             return;
 
         waitingForDataUpdate = true;
-        AskForActivities(delegate (List<GoogleReader.Activity> activities)
+        GoogleReader.LoadActivities(delegate (List<GoogleReader.Activity> activities)
         {
             //Debug.Log("ASKING FOR ACTIVITIES");
             if (activities != null)
@@ -77,22 +77,6 @@ public class GoogleActivities : MonoPersistent
 
             if (autoUpdate)
                 this.DelayedCall(UpdateRecord, Mathf.Max(TimeBetweenUpdate, minTimeBetweenUpdate));
-        });
-    }
-
-    private void AskForActivities(Action<List<GoogleReader.Activity>> onComplete = null)
-    {
-        List<GoogleReader.Activity> result = null;
-
-        GoogleReader.LoadActivities(delegate (List<GoogleReader.Activity> outputActivities)
-        {
-            result = outputActivities;
-            if (result == null)
-            {
-                onComplete.Invoke(null);
-                return;
-            }
-            onComplete.Invoke(result);
         });
     }
 

@@ -122,7 +122,7 @@ public class ContinuousRewarder : MonoPersistent
         CurrencyAmount reward = Market.GetCurrencyAmountFromValue(rewardCurrency, rewardValue, out remainingMarketValue);
 
         // TEMPORAIRE
-        Logger.Log(Logger.Category.ContinuousReward, "remains: " + remainingMarketValue.floatValue);
+        //Logger.Log(Logger.Category.ContinuousReward, "remains: " + remainingMarketValue.floatValue);
 
         if (reward.amount > 0)
         {

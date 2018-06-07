@@ -95,19 +95,31 @@ public class GoogleReader : MonoBehaviour
         string result = null;
         if (LogLesInfoDesThread)
             Debug.Log("UL Reading File - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
-        if (File.Exists(filePath))
+
+        try
         {
-            StreamReader reader = new StreamReader(filePath);
-            if (reader.BaseStream.CanRead)
+            if (File.Exists(filePath))
             {
-                result = reader.ReadToEnd();
+                StreamReader reader = new StreamReader(filePath);
+                if (reader.BaseStream.CanRead)
+                {
+                    result = reader.ReadToEnd();
+                }
+                reader.Close();
+                if (LogLesInfoDesThread)
+                    Debug.Log("UL File Read - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
             }
-            reader.Close();
             if (LogLesInfoDesThread)
-                Debug.Log("UL Reading Read - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
+                Debug.Log("UL Reading Complete - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to read document: " + e.Message);
         }
         MainThread.AddActionFromThread(delegate ()
         {
+            if (LogLesInfoDesThread)
+                Debug.Log("UL Exiting Reading Thread - ThreadName: " + Thread.CurrentThread.Name + "   ThreadID: " + Thread.CurrentThread.ManagedThreadId);
             onComplete.Invoke(result);
         });
     }
@@ -195,10 +207,11 @@ public class GoogleReader : MonoBehaviour
         // CODE EXECUTER QUAND ON EST SUR ANDROID
 #if UNITY_ANDROID && !UNITY_EDITOR
         // Lecture du document sur un Thread
-        ReadDocument(delegate(string output){
+        ReadDocument(delegate (string output)
+        {
             string document = output; // output enregistre dans un seul string
 
-            if(document == null)
+            if (document == null)
             {
                 onComplete.Invoke(null);
                 return;
@@ -206,13 +219,23 @@ public class GoogleReader : MonoBehaviour
 
             // Meme code que pour PC
             List<Activity> result = new List<Activity>();
-            if (string.IsNullOrEmpty(keyStr)){
+            if (string.IsNullOrEmpty(keyStr))
+            {
                 Debug.Log("ERROR NO KEY");
                 onComplete.Invoke(null);
+                return;
             }
-                
 
-            document = Decrypt(document);
+            try
+            {
+                document = Decrypt(document);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("Failed to decrypt: " + e.Message);
+                onComplete.Invoke(null);
+                return;
+            }
             //Debug.Log("UNITY GOOGLEREADER DOCUMENT : " + document);
 
             bool readingDate = false;
@@ -258,16 +281,17 @@ public class GoogleReader : MonoBehaviour
                 else
                 {
                     // Si c'est un chiffre, on enregistre, sinon c'est de la corruption (on skip)
-                    if(currentChar == '0' 
-                    || currentChar == '1' 
-                    || currentChar == '2' 
-                    || currentChar == '3' 
-                    || currentChar == '4' 
-                    || currentChar == '5' 
-                    || currentChar == '6' 
-                    || currentChar == '7' 
-                    || currentChar == '8' 
-                    || currentChar == '9'){
+                    if (currentChar == '0'
+                    || currentChar == '1'
+                    || currentChar == '2'
+                    || currentChar == '3'
+                    || currentChar == '4'
+                    || currentChar == '5'
+                    || currentChar == '6'
+                    || currentChar == '7'
+                    || currentChar == '8'
+                    || currentChar == '9')
+                    {
                         switch (exerciceRead)
                         {
                             case 0:
@@ -289,7 +313,7 @@ public class GoogleReader : MonoBehaviour
             onComplete.Invoke(result);
         });
 #else
-
+//#if UNITY_ANDROID && !UNITY_EDITOR
         // CODE EXECUTER QUAND ON EST SUR PC
         string document = exempleFile;
 
@@ -450,10 +474,10 @@ public class GoogleReader : MonoBehaviour
             return "";
 
         // Définition des paramètres d'encryption
-        RijndaelManaged aes = new RijndaelManaged();
-
-        aes.Mode = CipherMode.ECB;
-        //aes.Padding = PaddingMode.None;
+        RijndaelManaged aes = new RijndaelManaged
+        {
+            Mode = CipherMode.ECB
+        };
 
         // Convertir la clé pour qu'elle soit utilisable
         byte[] keyArr = Convert.FromBase64String(keyStr);
