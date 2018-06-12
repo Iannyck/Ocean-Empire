@@ -6,19 +6,19 @@ ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\
 		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
 		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:148-171
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:148-172
 		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
 		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:101-147
 	android:versionCode
-		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:172-195
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:173-197
 		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
 		INJECTED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:11-69
 	android:installLocation
-		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:196-236
+		ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:2:198-238
 uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
 ADDED from D:\Game Projects\Ocean Empire\AndroidProject\Project\OceanEmpire\src\main\AndroidManifest.xml:3:3-92
 	android:name
