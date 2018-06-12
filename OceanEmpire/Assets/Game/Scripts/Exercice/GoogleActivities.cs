@@ -27,7 +27,7 @@ public class GoogleActivities : MonoPersistent
     // Parametres
     public PrioritySheet priority;
     private float minTimeBetweenUpdate = 0.5f;
-    private bool waitingForDataUpdate = false;
+    private bool waitingForActivityLoad = false;
 
     // Data
     public List<GoogleReader.Activity> activities = new List<GoogleReader.Activity>();
@@ -36,7 +36,7 @@ public class GoogleActivities : MonoPersistent
 
     // Instance
     static public GoogleActivities instance;
-    private bool autoUpdate = false;
+    private bool autoUpdate = true;
     public bool AutoUpdate
     {
         get { return autoUpdate; }
@@ -59,12 +59,14 @@ public class GoogleActivities : MonoPersistent
 
     private void UpdateRecord()
     {
-        if (waitingForDataUpdate)
+        if (waitingForActivityLoad)
             return;
 
-        waitingForDataUpdate = true;
+        waitingForActivityLoad = true;
         GoogleReader.LoadActivities(delegate (List<GoogleReader.Activity> activities)
         {
+            waitingForActivityLoad = false;
+
             //Debug.Log("ASKING FOR ACTIVITIES");
             if (activities != null)
             {
@@ -73,7 +75,6 @@ public class GoogleActivities : MonoPersistent
                 CreateRecord();
             }
 
-            waitingForDataUpdate = false;
 
             if (autoUpdate)
                 this.DelayedCall(UpdateRecord, Mathf.Max(TimeBetweenUpdate, minTimeBetweenUpdate));
@@ -85,6 +86,7 @@ public class GoogleActivities : MonoPersistent
         if (activities == null)
             return;
         records = new List<ActivityReport>();
+
         //Debug.Log("UNITY ACTIVITIES COUNT : " + activities.Count);
         for (int i = 0; i < activities.Count; i++)
         {
@@ -133,7 +135,7 @@ public class GoogleActivities : MonoPersistent
     {
         activities.Clear();
         records.Clear();
-        GoogleReader.ResetActivitiesSave( withMessage );
+        GoogleReader.ResetActivitiesSave(withMessage);
     }
 
     // TODO : Pourrait etre deplacer dans un autre singleton
