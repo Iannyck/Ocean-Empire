@@ -164,12 +164,12 @@
         "source": "C:\\Users\\alexa\\.android\\build-cache\\886a1f3e2df05840df417787eb5345de27800ad6\\output\\res\\drawable-hdpi\\ic_cast_light.png"
     },
     {
-        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\drawable-hdpi\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\app_icon.png",
         "source": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\src\\main\\res\\drawable-hdpi\\app_icon.png"
+    },
+    {
+        "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "C:\\Users\\alexa\\.android\\build-cache\\e278c1cb1a66f6ac0b7ecbcdac7500fd86c104bb\\output\\res\\drawable-hdpi\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "D:\\Game Projects\\Ocean Empire\\AndroidProject\\Project\\OceanEmpire\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_pause_dark.png",
