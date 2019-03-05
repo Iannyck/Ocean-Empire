@@ -16,7 +16,14 @@ public class TaskPanel_Ongoing : MonoBehaviour, ITaskPanelState
     public Sprite sliderFillAltSprite;
     public InstantExerciseChoice_Item taskUI;
 
+    public GameObject feedback;
+
     private Sprite sliderFillStdSprite;
+
+    private float sliderValue = 0;
+    private float sliderValueNow = 0;
+
+    
 
     public void Enter(Action onComplete)
     {
@@ -25,6 +32,7 @@ public class TaskPanel_Ongoing : MonoBehaviour, ITaskPanelState
         // Animate
         label.DOFade(0.1f, 0.6f).SetLoops(-1, LoopType.Yoyo);
         sliderBg.DOColor(sliderBgAltColor, 0.6f).SetLoops(-1, LoopType.Yoyo);
+        
 
         if (onComplete != null)
             onComplete();
@@ -57,11 +65,35 @@ public class TaskPanel_Ongoing : MonoBehaviour, ITaskPanelState
         taskUI.FillContent(report.schedule.task);
         timeLimit.text = "Heure limite\n" + report.schedule.timeSlot.end.ToCondensedTimeOfDayString(true);
         SetSliderValue(report.GetCompletionRate01());
+        sliderValueNow = slider.value;
+
+        if(sliderValue != sliderValueNow)
+        {
+            ActivateDesactivateFeedBack();
+            sliderValue = sliderValueNow;
+        }
+        else if(feedback.activeSelf){
+            ActivateDesactivateFeedBack();
+        }
     }
 
     void AutoUpdateContent()
+    {        
+        FillContent(PlannedExerciceRewarder.Instance.LatestPendingReport);        
+    }
+
+    public void ActivateDesactivateFeedBack()
     {
-        FillContent(PlannedExerciceRewarder.Instance.LatestPendingReport);
+         
+        if (feedback.activeSelf == false)
+        {
+            feedback.SetActive(true);
+        }
+        else
+        {
+            feedback.SetActive(false);
+            
+        }
     }
 
 

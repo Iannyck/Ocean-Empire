@@ -11,6 +11,7 @@ public class Task
     public float advertisedDuration;
     public float maxDuration;
     public int ticketReward;
+    public int nbUtilisation = 1;
 
     public TimeSpan GetMaxDurationAsTimeSpan()
     {

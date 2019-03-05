@@ -73,7 +73,7 @@ public class Calendar : MonoPersistent
             //The schedule is in the future
             if (timeslotRelation == 1)
                 return;
-
+                
             //The schedule is in the past
             if (timeslotRelation == -1)
             {

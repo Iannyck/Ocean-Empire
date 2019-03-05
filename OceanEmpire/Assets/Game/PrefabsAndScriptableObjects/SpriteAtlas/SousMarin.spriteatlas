@@ -3,10 +3,12 @@
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: SousMarin
   m_EditorData:
+    serializedVersion: 2
     textureSettings:
       serializedVersion: 2
       anisoLevel: 1
@@ -18,8 +20,19 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
-    packingParameters:
+    platformSettings:
+    - serializedVersion: 2
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+    packingSettings:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
@@ -34,21 +47,22 @@ SpriteAtlas:
     - {fileID: 2800000, guid: a82731e658dc64b4d853444d3a1d1adf, type: 3}
     - {fileID: 2800000, guid: dd4884a83a0980e4389924e80d947052, type: 3}
     - {fileID: 2800000, guid: 816e6b195194f654a9db17f3655f9689, type: 3}
+    totalSpriteSurfaceArea: 213148
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: ad2ba20052850cc45a6026943eee0877, type: 3}
   - {fileID: 21300000, guid: 78caf0b10e9aa074cbebb2a9551fed8c, type: 3}
   - {fileID: 21300000, guid: a82731e658dc64b4d853444d3a1d1adf, type: 3}
   - {fileID: 21300000, guid: dd4884a83a0980e4389924e80d947052, type: 3}
-  - {fileID: 21300000, guid: 46f5649952f976b4a84cb8decd309085, type: 3}
   - {fileID: 21300000, guid: 816e6b195194f654a9db17f3655f9689, type: 3}
-  - {fileID: 21300000, guid: ad2ba20052850cc45a6026943eee0877, type: 3}
+  - {fileID: 21300000, guid: 46f5649952f976b4a84cb8decd309085, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Harpoon Rod 1
   - Harpoon Canon 1
   - t_submarin
   - Slingshot Arrow Big
-  - Harpoon Pull 1
   - Slingshot Anchor Big
-  - Harpoon Rod 1
+  - Harpoon Pull 1
   m_Tag: SousMarin
   m_IsVariant: 0

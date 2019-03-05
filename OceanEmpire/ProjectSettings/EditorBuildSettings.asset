@@ -131,3 +131,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/UI/Windows/YesNoWindow/YesNoWindow.unity
     guid: 0c639257ebd4cdd4c86e14da499104ae
+  - enabled: 1
+    path: Assets/Game/UI/Windows/Reminder/ReminderWindow.unity
+    guid: e5cafc00fb848a84aab97491aacabd57
+  m_configObjects: {}

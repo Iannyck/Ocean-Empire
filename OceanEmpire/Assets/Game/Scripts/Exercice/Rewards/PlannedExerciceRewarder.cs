@@ -37,6 +37,7 @@ public class PlannedExerciceRewarder : MonoPersistent
     [SerializeField] float analysisCooldown = 5.1f;
     [SerializeField] SceneInfo failureWindow;
     [SerializeField] SceneInfo completionWindow;
+    [SerializeField] SceneInfo reminderWindow;
     [SerializeField] AnalyserGroup analyserGroup;
     [SerializeField] DataSaver dataSaver;
     [SerializeField] ScriptableActionQueue shackAnimQueue;
@@ -115,6 +116,8 @@ public class PlannedExerciceRewarder : MonoPersistent
             }
         }
 
+
+
         // Si nous n'avons pas de nouveau Rapport, regardons si nous avons un exercice en-cours
         if (CanOverwriteThePendingReport)
         {
@@ -126,6 +129,40 @@ public class PlannedExerciceRewarder : MonoPersistent
                 {
                     LatestPendingReport = Analyse(presentAndFuture[0], now);
                 }
+                /*
+                else if(presentAndFuture[0].timeSlot.start <= now.AddMinutes(5.0)){
+                    var report = new Report()
+                    {
+                        schedule = presentAndFuture[0]
+                    };
+                    //lancer la fenêtre de reminder
+                     Action onAnimComplete = null;
+                        Shack_Canvas shackCanvases = Scenes.IsActive("Shack") ?
+                            Scenes.GetActive("Shack").FindRootObject<Shack_Canvas>() :
+                            null;
+                        shackAnimQueue.ActionQueue.AddAction(() =>
+                        {
+                            Debug.Log("Lucas : test entrée dans l'animQueue");
+                            if (shackCanvases)
+                                shackCanvases.HideAll();
+                            Scenes.Load(reminderWindow, (scene) =>
+                            {
+                                Debug.Log("Lucas : test entrée dans la window");
+                                scene.FindRootObject<ReminderWindow>().FillContent(report, () =>
+                                {
+                                    if (shackCanvases)
+                                        Debug.Log("Lucas : test show du shack canvas");
+                                        shackCanvases.ShowAll();
+                                    onAnimComplete();
+                                });
+                            });
+                            if (shackCanvases)
+                                shackCanvases.ShowAll();
+                        }, 0, out onAnimComplete);
+                        return;
+                }
+                */
+
             }
         }
 
@@ -193,11 +230,19 @@ public class PlannedExerciceRewarder : MonoPersistent
     Report Analyse(Schedule schedule) { return Analyse(schedule, DateTime.Now); }
     Report Analyse(Schedule schedule, DateTime now)
     {
+        //si elle commence dans + 5min = osef
+
+        //
         if (schedule.timeSlot.start > now)
         {
+            
             // L'exercice est dans le futur
-            return null;
+            //return null;
+
+            //lancer la scène de rappel
+            
         }
+
 
 
         //---------DÉBUT DE L'ANALYSE---------//

@@ -5,8 +5,10 @@ public class ScriptableActionQueue : ScriptableObject, ISerializationCallbackRec
 {
     public ActionQueue ActionQueue { get; private set; }
 
+
     public void OnAfterDeserialize()
     {
+        Debug.Log("Lucas : Test Action queue");
         ActionQueue = new ActionQueue();
     }
 

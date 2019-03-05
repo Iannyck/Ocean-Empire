@@ -224,7 +224,7 @@ public class TaskPanel_ReadyToCreate : MonoBehaviour, ITaskPanelState
         };
     }
 
-
+ 
     #region FadeIn / FadeOut des canvas du Shack
     private void HideShackUIInstant()
     {

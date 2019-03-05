@@ -3,10 +3,12 @@
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: OptionsMenu
   m_EditorData:
+    serializedVersion: 2
     textureSettings:
       serializedVersion: 2
       anisoLevel: 1
@@ -18,8 +20,19 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
-    packingParameters:
+    platformSettings:
+    - serializedVersion: 2
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+    packingSettings:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
@@ -31,15 +44,16 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 0e3c1636d8f6b624e84525a2bf2dcb26, type: 3}
     - {fileID: 2800000, guid: e9c206f0f6951aa45ade230911f61f4f, type: 3}
     - {fileID: 2800000, guid: fe1e2b515f25c964dbdf725a22974c77, type: 3}
+    totalSpriteSurfaceArea: 196608
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 0e3c1636d8f6b624e84525a2bf2dcb26, type: 3}
   - {fileID: 21300000, guid: e9c206f0f6951aa45ade230911f61f4f, type: 3}
   - {fileID: 21300000, guid: fe1e2b515f25c964dbdf725a22974c77, type: 3}
+  - {fileID: 21300000, guid: 0e3c1636d8f6b624e84525a2bf2dcb26, type: 3}
   m_PackedSpriteNamesToIndex:
-  - SFX Icon
   - Music Icon
   - Off icon
+  - SFX Icon
   m_Tag: OptionsMenu
   m_IsVariant: 0
