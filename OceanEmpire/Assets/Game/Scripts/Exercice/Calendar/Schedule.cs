@@ -11,6 +11,7 @@ public class Schedule : IComparable
     public DateTime createdOn;
     public Task task;
     public bool requiresConculsion;
+    public bool reminded = false;
 
     public Schedule(TimeSlot timeSlot)
     {

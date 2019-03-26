@@ -116,8 +116,6 @@ public class PlannedExerciceRewarder : MonoPersistent
             }
         }
 
-
-
         // Si nous n'avons pas de nouveau Rapport, regardons si nous avons un exercice en-cours
         if (CanOverwriteThePendingReport)
         {
@@ -129,40 +127,6 @@ public class PlannedExerciceRewarder : MonoPersistent
                 {
                     LatestPendingReport = Analyse(presentAndFuture[0], now);
                 }
-                /*
-                else if(presentAndFuture[0].timeSlot.start <= now.AddMinutes(5.0)){
-                    var report = new Report()
-                    {
-                        schedule = presentAndFuture[0]
-                    };
-                    //lancer la fenêtre de reminder
-                     Action onAnimComplete = null;
-                        Shack_Canvas shackCanvases = Scenes.IsActive("Shack") ?
-                            Scenes.GetActive("Shack").FindRootObject<Shack_Canvas>() :
-                            null;
-                        shackAnimQueue.ActionQueue.AddAction(() =>
-                        {
-                            Debug.Log("Lucas : test entrée dans l'animQueue");
-                            if (shackCanvases)
-                                shackCanvases.HideAll();
-                            Scenes.Load(reminderWindow, (scene) =>
-                            {
-                                Debug.Log("Lucas : test entrée dans la window");
-                                scene.FindRootObject<ReminderWindow>().FillContent(report, () =>
-                                {
-                                    if (shackCanvases)
-                                        Debug.Log("Lucas : test show du shack canvas");
-                                        shackCanvases.ShowAll();
-                                    onAnimComplete();
-                                });
-                            });
-                            if (shackCanvases)
-                                shackCanvases.ShowAll();
-                        }, 0, out onAnimComplete);
-                        return;
-                }
-                */
-
             }
         }
 
@@ -172,7 +136,7 @@ public class PlannedExerciceRewarder : MonoPersistent
 
 
         // Avons nous un rapport à conclure ?
-        if (LatestPendingReport != null && LatestPendingReport.state != Report.State.Ongoing)
+        if (LatestPendingReport != null)
         {
             switch (LatestPendingReport.state)
             {
@@ -224,6 +188,31 @@ public class PlannedExerciceRewarder : MonoPersistent
                         }, 2, out onAnimComplete);
                         break;
                     }
+                case Report.State.Ongoing:
+                    {
+                        if(LatestPendingReport.schedule.reminded) break;
+                        LatestPendingReport.schedule.reminded = true;
+                        // Reminder window
+                        Action onAnimComplete = null;
+                        Shack_Canvas shackCanvases = Scenes.IsActive("Shack") ? Scenes.GetActive("Shack").FindRootObject<Shack_Canvas>() : null;
+                        shackAnimQueue.ActionQueue.AddAction(() =>
+                        {
+                            if (shackCanvases)
+                                shackCanvases.HideAll();
+                            Scenes.Load(reminderWindow, (scene) =>
+                            {
+                                scene.FindRootObject<ReminderWindow>().FillContent(LatestPendingReport, () =>
+                                {
+                                    if (shackCanvases)
+                                        shackCanvases.ShowAll();
+                                    onAnimComplete();
+                                });
+                            });
+                        }, 2, out onAnimComplete);                  
+                        break;
+                    }
+                default:
+                    break;
             }
         }
     }
@@ -237,7 +226,7 @@ public class PlannedExerciceRewarder : MonoPersistent
         {
             
             // L'exercice est dans le futur
-            //return null;
+            return null;
 
             //lancer la scène de rappel
             
