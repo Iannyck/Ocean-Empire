@@ -1,5 +1,6 @@
 
 using CCC.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,7 +38,7 @@ public class CheatsWindow : WindowAnimation
     public void ClearSave()
     {
         if (Application.isEditor)
-            MessagePopup.DisplayMessage("Pas supporté sur editeur. Delete les fichier et relance le jeu manuellement");
+            MessagePopup.DisplayMessage("Pas supportï¿½ sur editeur. Delete les fichier et relance le jeu manuellement");
         else
         {
             foreach (DataSaver saver in dataSavers)
@@ -56,6 +57,14 @@ public class CheatsWindow : WindowAnimation
         GoogleActivities.instance.ClearAllActivitiesSave();
     }
 
+    public void EndExercise()
+    {
+        var latestReport = PlannedExerciceRewarder.Instance.LatestPendingReport;
+        //latestReport.schedule.timeSlot.end = DateTime.Now;
+        //latestReport.state = PlannedExerciceRewarder.Report.State.Completed;
+        //latestReport.recordedExerciseVolume = float.MaxValue;
+        latestReport.schedule.cheated = true;
+    }
 
     public void ShowMeTheMoney(int amount)    //Cheat code StarCraft xD
     {

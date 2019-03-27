@@ -219,20 +219,11 @@ public class PlannedExerciceRewarder : MonoPersistent
     Report Analyse(Schedule schedule) { return Analyse(schedule, DateTime.Now); }
     Report Analyse(Schedule schedule, DateTime now)
     {
-        //si elle commence dans + 5min = osef
-
-        //
         if (schedule.timeSlot.start > now)
         {
-            
             // L'exercice est dans le futur
             return null;
-
-            //lancer la scène de rappel
-            
         }
-
-
 
         //---------DÉBUT DE L'ANALYSE---------//
 
@@ -240,6 +231,7 @@ public class PlannedExerciceRewarder : MonoPersistent
         {
             schedule = schedule
         };
+
 
         // Ça nous sert à rien d'analyser le futur
         var timeSlotToAnalyse = schedule.timeSlot;
@@ -251,6 +243,7 @@ public class PlannedExerciceRewarder : MonoPersistent
 
         // Sum up the exercise volume
         float recordedExerciseVolume = 0;
+        if(schedule.cheated) recordedExerciseVolume = float.MaxValue;
         foreach (AnalyserReport individualReport in analyserGroupReport.individualReports)
         {
             recordedExerciseVolume += individualReport.volume.volume;

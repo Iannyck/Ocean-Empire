@@ -12,6 +12,7 @@ public class Schedule : IComparable
     public Task task;
     public bool requiresConculsion;
     public bool reminded = false;
+    public bool cheated = false;
 
     public Schedule(TimeSlot timeSlot)
     {
