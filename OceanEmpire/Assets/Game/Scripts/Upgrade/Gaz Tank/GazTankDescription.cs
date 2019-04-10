@@ -13,6 +13,11 @@ public class GazTankDescription : UpgradeDescription
         return diveDuration;
     }
 
+    public float SetDiveDuration(float duree)
+    {
+        return duree;
+    }
+
     public override List<Statistic> GetStatistics()
     {
         List<Statistic> stats = new List<Statistic>

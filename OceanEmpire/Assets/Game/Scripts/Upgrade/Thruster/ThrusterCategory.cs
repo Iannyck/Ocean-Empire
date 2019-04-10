@@ -41,11 +41,11 @@ public class ThrusterCategory : UpgradeCategory<ThrusterDescBuilder, ThrusterDes
 
     private int GenCoinCost(int level)
     {
-        return level * level * 15;
+        return level * level * 150;
     }
     private int GenTicketCost(int level)
     {
-        return level * level * 3;
+        return level * level * 30;
     }
 
     //Gen Code:

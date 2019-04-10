@@ -2,7 +2,7 @@
 
 public class GazTank
 {
-    public float GazTimeRemaining { private set; get; }
+    public float GazTimeRemaining {  set; get; }
     public float MaxGas { private set; get; }
     public GazTankDescription Description { private set; get; }
 
@@ -32,5 +32,10 @@ public class GazTank
     public float GetGazRatio()
     {
         return GazTimeRemaining / MaxGas;
+    }
+
+    public void degat(float penality)
+    {
+        GazTimeRemaining -= penality;
     }
 }

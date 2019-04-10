@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -15,8 +16,8 @@ MonoBehaviour:
     itemName: Lanceur de harpon 2
     upgradeLevel: 2
     itemDescription: 
-    moneyCost: 100
-    ticketCost: 1
+    moneyCost: 197
+    ticketCost: 43
     itemIcon: {fileID: 0}
     bonusCoins: 0
     harpoonSpeed: 4
