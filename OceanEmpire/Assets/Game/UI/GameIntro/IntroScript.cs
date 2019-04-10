@@ -15,17 +15,21 @@ public class IntroScript : MonoBehaviour
     public SceneInfo shack;
 
     public DataSaver firstRunSaver;
-
+    
 
     //private const string firstRunKey = "firstRun";
 
     void Awake()
     {
         PersistentLoader.LoadIfNotLoaded(Go);
+        NotificationManager.Cancel(4242);
+        NotificationManager.SendWithAppIcon(new TimeSpan(0, 7, 0, 0, 0), "test", "Lancement d'ocean empire", Color.blue, id:4242);
+
     }
 
     void Go()
     {
+        
         firstRunSaver.LoadAsync(delegate ()
         {
             var sq = DOTween.Sequence();

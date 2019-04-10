@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584b9682b36211045bd18c8a7567399e, type: 3}
   m_Name: SI_ReminderWindow
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: e5cafc00fb848a84aab97491aacabd57, type: 3}
+  scene: {fileID: 102900000, guid: fa1f7e13ea5214e4b89900b198d71ac4, type: 3}
   sceneName: ReminderWindow
   loadMode: 1
   allowMultiple: 0

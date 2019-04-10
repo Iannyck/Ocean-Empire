@@ -96,6 +96,8 @@ public class PlannedExerciceRewarder : MonoPersistent
                 "pending report in this state: " + LatestPendingReport.state);
         }
 
+          
+
         if (!Scenes.IsActive("Shack"))
             return;
 

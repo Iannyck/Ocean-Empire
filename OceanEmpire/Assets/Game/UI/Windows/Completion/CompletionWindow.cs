@@ -40,7 +40,7 @@ public class CompletionWindow : WindowAnimation
             return;
         }
         GameObject buttonRestart = GameObject.Find("Restart");
-        if(latestTask!=null){
+        if(latestTask!=null && !jobDone){
             if(latestTask.nbUtilisation >= maxUtilisation){  
             buttonRestart.SetActive(false);
             jobDone = true;
@@ -86,22 +86,18 @@ public class CompletionWindow : WindowAnimation
 
         State = PanelState.Creation_SelectingTask;
 
-        Action completeAnim = null;
+        /* Action completeAnim = null;
         Action completionAction = () =>
         {
-            completeAnim();
+            //completeAnim();
             if (onComplete != null)
                 onComplete();
+            
         };
-
+*/
         //Récupérer le bouton restart
         GameObject buttonRestart = GameObject.Find("Restart");
         buttonRestart.SetActive(false);
-
-        //Changer la couleur du bouton
-        //buttonRestart.GetComponentInChildren<Image>().color = new Color(106,71,71,255);
-        
-
         
         HideCompletionUI();
         InstantExerciseChoice.ProposeTasks(
@@ -113,7 +109,7 @@ public class CompletionWindow : WindowAnimation
                 {
                     // Player has cancelled
                     listController.CloseWindow();
-                    BackToNormal(completionAction);
+                    BackToNormal();
                 }
                 else
                 {
@@ -130,7 +126,7 @@ public class CompletionWindow : WindowAnimation
                             {
                                 task.nbUtilisation += latestTask.nbUtilisation;
                                 listController.CloseWindow();
-                                BackToNormal(completionAction);
+                                BackToNormal();
                             }
                         };
                         whenToPlanController.OnLaterClick = () =>
@@ -141,28 +137,29 @@ public class CompletionWindow : WindowAnimation
                                 {
                                     // On result selected
                                     ScheduleTaskAt(latestTask, date);
-                                    BackToNormal(completionAction);
+                                    BackToNormal();
                                 },
                                 () =>
                                 {
                                     // On cancel
-                                    BackToNormal(completionAction);
+                                    buttonRestart.SetActive(true);
+                                    BackToNormal();
                                 });
                             listController.CloseWindow();
                         };
                     });
                 }
-            });
+            }
+        );
         
     }
     
-
-    private void BackToNormal(Action onComplete)
+    private void BackToNormal()
     {
         State = PanelState.ReadyToCreate;
         ShowCompletionUI();
-        if (onComplete != null)
-            onComplete();
+        //if (onComplete != null)
+        //    onComplete();
     }
 
     private bool ScheduleTaskAt(Task task, DateTime startTime)
@@ -190,7 +187,15 @@ public class CompletionWindow : WindowAnimation
 
         // 1
         var bookedStart = startTime - FIFTEEN_MINUTES;
-
+        if (DateTime.Now < bookedStart)
+        {
+            Debug.Log("notif test");
+            NotificationManager.SendWithAppIcon((bookedStart-DateTime.Now),
+                        "Rappel",
+                        "Marche de " + task.minDuration + " à " + task.maxDuration + " min",
+                        new Color(0, 0.6f, 1),
+                        NotificationIcon.Message);
+        }
         // 3
         var remainingPadding = TimeSpan.Zero;
         if (bookedStart < now)

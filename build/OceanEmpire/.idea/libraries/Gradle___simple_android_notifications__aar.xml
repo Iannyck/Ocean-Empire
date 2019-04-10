@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: :simple-android-notifications:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/simple-android-notifications.aar/10ea322ab75320051bd16d0606661953/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/simple-android-notifications.aar/10ea322ab75320051bd16d0606661953/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -13,6 +13,7 @@ public class Schedule : IComparable
     public bool requiresConculsion;
     public bool reminded = false;
     public bool cheated = false;
+    public bool remindedNotif = false;
 
     public Schedule(TimeSlot timeSlot)
     {

@@ -158,7 +158,15 @@ public class ReminderWindow : WindowAnimation
                 remainingPadding = FIVE_MINUTES;
             bookedStart = now;
         }
-
+        if (DateTime.Now < bookedStart)
+        {
+            Debug.Log("notif test");
+            NotificationManager.SendWithAppIcon((bookedStart - DateTime.Now),
+                        "Rappel",
+                        "Marche de " + task.minDuration + " à " + task.maxDuration + " min",
+                        new Color(0, 0.6f, 1),
+                        NotificationIcon.Message);
+        }
         // 2
         var minBookedDuration = task.GetMinDurationAsTimeSpan();
         minBookedDuration += minBookedDuration; // 2x

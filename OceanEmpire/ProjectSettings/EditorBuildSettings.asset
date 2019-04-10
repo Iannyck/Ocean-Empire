@@ -132,6 +132,9 @@ EditorBuildSettings:
     path: Assets/Game/UI/Windows/YesNoWindow/YesNoWindow.unity
     guid: 0c639257ebd4cdd4c86e14da499104ae
   - enabled: 1
+    path: Assets/SimpleAndroidNotifications/DemoScene.unity
+    guid: 04bafa369dbac00478feecb96bf71f90
+  - enabled: 1
     path: Assets/Game/UI/Windows/Reminder/ReminderWindow.unity
-    guid: e5cafc00fb848a84aab97491aacabd57
+    guid: fa1f7e13ea5214e4b89900b198d71ac4
   m_configObjects: {}
