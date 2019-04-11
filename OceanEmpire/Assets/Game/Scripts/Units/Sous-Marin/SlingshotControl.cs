@@ -44,6 +44,10 @@ public class SlingshotControl : MonoBehaviour
             handleRestScale = handleTransform.localScale;
         if (handleRenderer != null)
             handleRestSize = handleRenderer.size;
+        if(PlayerCurrency.GetHarpoons()<=0){
+            stillHarpoon.enabled = false;
+        }
+
     }
 
     private void OnDisable()
@@ -225,10 +229,25 @@ public class SlingshotControl : MonoBehaviour
     }
     void ShootHarpoon(Quaternion direction)
     {
-        Harpoon harpoon = HarpoonPrefab.DuplicateGO(tr.position, direction);
-        harpoon.shootOnStart = true;
-
-        PutInCooldown();
+        if(PlayerCurrency.GetHarpoons() <= 0){
+            //avertir joueur racheter harpon
+            if (Game.Instance != null) 
+                Game.Instance.Recolte_UI.textPopups.SpawnText("Achetez plus de harpons", Color.white, (Vector2)tr.position + Vector2.up);
+            return;
+        }
+        else{
+            Harpoon harpoon = HarpoonPrefab.DuplicateGO(tr.position, direction);
+            harpoon.shootOnStart = true;
+            PlayerCurrency.RemoveHarpoons(1);
+            if(PlayerCurrency.GetHarpoons() <= 0){
+                stillHarpoon.enabled = false;
+            }
+            else{
+                PutInCooldown();
+            }
+            
+        }
+        
     }
     #endregion
 }

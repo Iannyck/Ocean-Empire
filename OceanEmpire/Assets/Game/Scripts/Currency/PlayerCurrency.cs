@@ -88,6 +88,7 @@ public class PlayerCurrency : MonoPersistent
     /// (ex: apres lecture de sauvegarde, apres ajout de tickets/coins, etc.)
     /// </summary>
     public static event SimpleEvent CurrencyUpdate;
+
     /// <summary>
     /// Triggered lors que le joueur gagne/perd des coins
     /// </summary>
@@ -98,8 +99,14 @@ public class PlayerCurrency : MonoPersistent
     /// </summary>
     public static event CurrencyEvent TicketChange;
 
+    /// <summary>
+    /// Triggered lors que le joueur gagne/perd des harpon
+    /// </summary>
+    public static event CurrencyEvent HarpoonChange;
+
     [SerializeField] private Sprite moneyIcon;
     [SerializeField] private Sprite ticketIcon;
+    [SerializeField] private Sprite harpoonIcon;
 
     [NonSerialized]
     private Currency coins = new Currency("Coin",
@@ -115,6 +122,14 @@ public class PlayerCurrency : MonoPersistent
         {
             if (TicketChange != null)
                 TicketChange(delta, e);
+        });
+
+    [NonSerialized]
+    private Currency harpoons = new Currency("Harpoon",
+        (delta, e) =>
+        {
+            if (HarpoonChange != null)
+                HarpoonChange(delta, e);
         });
 
     [SerializeField]
@@ -137,13 +152,24 @@ public class PlayerCurrency : MonoPersistent
 
     #region Seen
     /// <summary>
-    /// Le gain/perte de tickets que le joueur n'a pas encore vue
-    /// </summary>
-    public static int GetUnseenDeltaTickets() { return instance.tickets.UnseenDelta; }
-    /// <summary>
     /// Le gain/perte de coins que le joueur n'a pas encore vue
     /// </summary>
     public static int GetUnseenDeltaCoins() { return instance.coins.UnseenDelta; }
+
+    /// <summary>
+    /// Indique que le joueur a vue les récents gains/pertes de coins
+    /// </summary>
+    public static void SeeDeltaCoins()
+    {
+        instance.coins.SeeDelta();
+        if (AutoSave)
+            instance.SetDirty();
+    }
+
+    /// <summary>
+    /// Le gain/perte de tickets que le joueur n'a pas encore vue
+    /// </summary>
+    public static int GetUnseenDeltaTickets() { return instance.tickets.UnseenDelta; }
 
     /// <summary>
     /// Indique que le joueur a vue les récents gains/pertes de ticket
@@ -154,12 +180,18 @@ public class PlayerCurrency : MonoPersistent
         if (AutoSave)
             instance.SetDirty();
     }
+
     /// <summary>
-    /// Indique que le joueur a vue les récents gains/pertes de coins
+    /// Le gain/perte de harpon que le joueur n'a pas encore vue
     /// </summary>
-    public static void SeeDeltaCoins()
+    public static int GetUnseenDeltaHarpoon() { return instance.harpoons.UnseenDelta; }
+
+    /// <summary>
+    /// Indique que le joueur a vue les récents gains/pertes de harpon
+    /// </summary>
+    public static void SeeDeltaHarpoon()
     {
-        instance.coins.SeeDelta();
+        instance.harpoons.SeeDelta();
         if (AutoSave)
             instance.SetDirty();
     }
@@ -175,15 +207,13 @@ public class PlayerCurrency : MonoPersistent
                 return instance.coins.Amount;
             case CurrencyType.Ticket:
                 return instance.tickets.Amount;
+            case CurrencyType.Harpoon:
+                return instance.harpoons.Amount;
             default:
-                return int.MaxValue;
+                return -1;
         }
     }
-    public static int GetCoins() { return instance.coins.Amount; }
-    public static int GetTickets() { return instance.tickets.Amount; }
 
-    public static Sprite GetMoneyIcon() { return instance.moneyIcon; }
-    public static Sprite GetTicketIcon() { return instance.ticketIcon; }
     public static Sprite GetIcon( CurrencyType type)
     {
         switch (type)
@@ -192,10 +222,20 @@ public class PlayerCurrency : MonoPersistent
                 return instance.moneyIcon;
             case CurrencyType.Ticket:
                 return instance.ticketIcon;
+            case CurrencyType.Harpoon:
+                return instance.harpoonIcon;
             default:
                 return null;
         }
     }
+    
+    public static int GetCoins() { return instance.coins.Amount; }
+    public static int GetTickets() { return instance.tickets.Amount; }
+    public static int GetHarpoons() { return instance.harpoons.Amount; }
+
+    public static Sprite GetMoneyIcon() { return instance.moneyIcon; }
+    public static Sprite GetTicketIcon() { return instance.ticketIcon; }
+    public static Sprite GetHarpoonIcon() { return instance.harpoonIcon; }
     #endregion
 
 
@@ -208,6 +248,8 @@ public class PlayerCurrency : MonoPersistent
                 return AddCoins(montant.amount);
             case CurrencyType.Ticket:
                 return AddTickets(montant.amount);
+            case CurrencyType.Harpoon:
+                return AddHarpoons(montant.amount);
         }
         return false;
     }
@@ -219,6 +261,8 @@ public class PlayerCurrency : MonoPersistent
                 return RemoveCoins(montant.amount);
             case CurrencyType.Ticket:
                 return RemoveTickets(montant.amount);
+            case CurrencyType.Harpoon:
+                return RemoveHarpoons(montant.amount);
         }
         return false;
     }
@@ -260,6 +304,25 @@ public class PlayerCurrency : MonoPersistent
         return true;
     }
     public static bool RemoveTickets(int amount) { return AddTickets(-amount); }
+
+    public static bool AddHarpoons(int amount)
+    {
+        //On empeche le joueur d'aller dans les tickets négatif
+        if (amount < 0 && amount.Abs() > GetHarpoons())
+            return false;
+
+        //On ne fait rien si le montant a ajouté == 0
+        if (amount == 0)
+            return true;
+
+        instance.harpoons.Amount += amount;
+
+        if (AutoSave)
+            instance.SetDirty();
+
+        return true;
+    }
+    public static bool RemoveHarpoons(int amount) { return AddHarpoons(-amount); }
     #endregion
 
 
@@ -269,6 +332,7 @@ public class PlayerCurrency : MonoPersistent
     {
         coins.ApplyDataTo(dataSaver);
         tickets.ApplyDataTo(dataSaver);
+        harpoons.ApplyDataTo(dataSaver);
     }
     private void SetDirty()
     {
@@ -281,14 +345,17 @@ public class PlayerCurrency : MonoPersistent
         //Disable event triggering
         coins.TriggerUpdateEvent = false;
         tickets.TriggerUpdateEvent = false;
+        harpoons.TriggerUpdateEvent = false;
 
         //Fetch data
         coins.FetchDataFrom(dataSaver);
         tickets.FetchDataFrom(dataSaver);
+        harpoons.FetchDataFrom(dataSaver);
 
         //Enable event triggering
         coins.TriggerUpdateEvent = true;
         tickets.TriggerUpdateEvent = true;
+        harpoons.TriggerUpdateEvent = true;
 
         if (CurrencyUpdate != null)
         {
